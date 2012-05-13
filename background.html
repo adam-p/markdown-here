@@ -3,8 +3,9 @@
   chrome.contextMenus.create({
     contexts: ['editable'],
     title: "Markdown Here",
+    type: "checkbox",
     onclick: function(info, tab) {
-      chrome.tabs.sendRequest(tab.id, 'markdown-here');
+      chrome.tabs.sendRequest(tab.id, {convert: info.checked});
     }
   });
 </script>

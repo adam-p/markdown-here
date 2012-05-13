@@ -35,9 +35,13 @@ Go to the [Chrome Web Store page for *Markdown Here*](https://chrome.google.com/
 
 ### Revert to Markdown
 
-Right now, the only way to switch back to Markdown after rendering with the "Markdown Here" command is to use the browser's Undo command (ctrl+z/cmd+z, or from the Edit menu). Unfortunately, this only works for Gmail.
+After rendering your Markdown to pretty HTML, you can still get back to your original Markdown. Simply follow the same instructions as above -- your email compose body will change back to the Markdown you had written.
 
-Note: Sometimes you'll lose the last few letters you typed when you do this.
+Note that any changes you make to the pretty HTML will be lost when you revert to Markdown.
+
+Caveat: In Gmail, another way to revert to Markdown is to use the browser's Undo command (ctrl+z/cmd+z, or from the Edit menu). But there's a big problem with this: The next time you try to use the *Markdown Here* command, it'll think you're reverting and cause you to lose your changes.
+
+**TODO**: Fix that caveat. Maybe detect the Undo action? Or have a magical hidden element that indicates the render state?
 
 ## Notes
 
@@ -47,7 +51,7 @@ Note: Sometimes you'll lose the last few letters you typed when you do this.
 
 ### Replies
 
-Replies don't work very well. New Markdown (at the top, say), gets parsed fine, but the body of the previous email gets messed (stripped of formatting, usually).
+Replies don't work very well. New Markdown (at the top, say) gets parsed fine, but the body of the previous email gets messed up (stripped of formatting, usually).
 
 Some ideas for better behaviour:
 
@@ -73,21 +77,15 @@ Rendering works well. Some styling (like background colors; maybe all styling?) 
 
 May be that all styles are getting stripped?
 
-Undo works to revert.
-
 ### Hotmail
 
-Rendering works very well. Undo doesn't work.
+Rendering works very well, both composing and viewing sent email. 
 
 ### Yahoo
 
 Works okay. Paragraphs get turned into `<div>`, so they don't separate properly. This occurs both for email sent and received.
 
-Undo doesn't work.
-
 ## Next Steps
-
-* Add a revert command. Undo works fairly well for Gmail, but it often undoes more than just the Markdown conversion -- often a few keystrokes also disappear. And it only works for Gmail.
 
 * Make replies not busted.
 

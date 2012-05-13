@@ -18,40 +18,78 @@ function findFocusedElem() {
   return focusedElem;
 }
 
-// Get the plaintext representation of the given element's inner HTML.
-function extractTextFromElem(elem) {
-  var extractedHtml, extractedText;
-
-  extractedHtml = $(elem).html();
+// Get the plaintext representation of the given HTML.
+function plaintextFromHtml(html) {
+  var extractedText;
 
   function tagreplacement(text) {
     var replaced =
       text
         .replace(/<div[^>]*>/ig, '<br>') // opening <div> --> <br>
-        .replace(/<\/div>/ig, '')           // closing </div> --> nothing
-        .replace(/&nbsp;/ig, ' ');         // &nbsp; --> space
+        .replace(/<\/div>/ig, '')        // closing </div> --> nothing
+        .replace(/&nbsp;/ig, ' ');       // &nbsp; --> space
     return replaced;
   }
 
-  extractedText = htmlToText(extractedHtml, {tagreplacement: tagreplacement});
+  extractedText = htmlToText(html, {tagreplacement: tagreplacement});
   return extractedText;
 }
 
 // Uses marked.js
-function markedToHtml(md) {
+function markdownToHtml(md) {
   var html = marked(md);
   return html;
 }
 
-// The cotext menu handler.
-chrome.extension.onRequest.addListener(function(event) {
-  var $focusedElem, md, mdHtml;
+// Render the Markdown found in `$elem` into pretty HTML and put it back into `$elem`.
+function renderMarkdown($elem) {
+  var extractedHtml, md, mdHtml;
 
-  if (event != 'markdown-here') return;
+  // Get the HTML containing the Markdown from the compose element.
+  extractedHtml = $elem.html();
+
+  // Extract the plaintext Markdown from the HTML.
+  md = plaintextFromHtml(extractedHtml);
+
+  // Render the Markdown to pretty HTML.
+  mdHtml = markdownToHtml(md);
+
+  // Store the original Markdown-in-HTML to a data attribute on the compose
+  // element. We'll use this later if we need to unrender back to Markdown.
+  $elem.data('markdown-here-original', extractedHtml);
+
+  // Output the styling and rendered Markdown back into the compose element.
+  // `styles` comes from our JS'd CSS file.
+  $elem.html(styles + mdHtml);
+}
+
+// Revert the rendered-from-Markdown HTML found in `$elem` back into Markdown and
+// put it back into `$elem`.
+function unrenderMarkdown($elem) {
+  var originalHtml;
+
+  // Get the original Markdown-in-HTML that we stored when rendering.
+  originalHtml = $elem.data('markdown-here-original');
+  if (!originalHtml) {
+    alert('Unable to revert to Markdown. Original not found.');
+  }
+
+  // Replace the contents of the element with the original Markdown.
+  $elem.html(originalHtml);
+}
+
+// The context menu handler.
+chrome.extension.onRequest.addListener(function(event) {
+  var $focusedElem;
 
   $focusedElem = $(findFocusedElem());
-  md = extractTextFromElem($focusedElem);
-  mdHtml = markedToHtml(md);
+  if (!$focusedElem) return;
 
-  $focusedElem.html(styles+mdHtml);
+  // Are we rendering or reverting?
+  if (event.convert) {
+    renderMarkdown($focusedElem);
+  }
+  else {
+    unrenderMarkdown($focusedElem);
+  }
 });
