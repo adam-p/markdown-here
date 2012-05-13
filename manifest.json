@@ -1,7 +1,7 @@
 {
   "name": "Markdown Here",
   "version": "1.0",
-  "description": "Write your email in markdown, then make it pretty.",
+  "description": "Write your email in Markdown, then make it pretty.",
   "permissions": ["contextMenus"],
   "minimum_chrome_version": "6",
   "background_page": "background.html",

@@ -1,10 +1,14 @@
 # Markdown Here
 
-**Markdown Here** is a Google Chrome extension that lets you write email in Markdown and render it before sending.
+*Markdown Here* is a Google Chrome extension that lets you write email in Markdown and render it before sending.
 
 Writing email with code in it pretty tedious. Writing Markdown with code in it is easy. I found myself writing email in Markdown in the Github in-browser editor, then copying the preview into email. This is a pretty absurd workflow, so I decided create a tool to write and render Markdown right in the email.
 
 ## Installation
+
+### Via the Chrome Web Store
+
+Go to the [Chrome Web Store page for *Markdown Here*](https://chrome.google.com/webstore/detail/bonncgjadmfcadjlopgmclakggdgpdnm) and install normally.
 
 ### Manual/Development
 
@@ -12,11 +16,8 @@ Writing email with code in it pretty tedious. Writing Markdown with code in it i
 2. In Chrome, open the Extensions settings. (Wrench button, Tools, Extensions.)
 3. On the Extensions settings page, click the "Developer Mode" checkbox.
 4. Click the now-visible "Load unpacked extension…" button. Navigate to the directory where you cloned the repo.
-5. The **Markdown Here** extension should now be visible in your extensions list.
-
-### Via the Chrome Store
-
-TBD
+5. The *Markdown Here* extension should now be visible in your extensions list.
+6. Reload your webmail page before trying to convert an email.
 
 ## Use
 
@@ -40,7 +41,7 @@ Note: Sometimes you'll lose the last few letters you typed when you do this.
 
 ## Notes
 
-* **Markdown Here** uses [Github Flavored Markdown](http://github.github.com/github-flavored-markdown/).
+* *Markdown Here* uses [Github Flavored Markdown](http://github.github.com/github-flavored-markdown/).
 
 * Even though the extension is only known to work (to varying degrees )with Gmail, Yahoo, and Hotmail, we're not restricting what URLs the extension applies to. The hope is that it'll work in unexpected places. Reports of good (or bad) functionality is appreciated (create an issue). In the future the set of target URLs should be restricted.
 
@@ -96,6 +97,8 @@ Undo doesn't work.
     * Maybe it's not difficult? Insert the `<style>` block and the html, then walk the DOM, enumerating the styles for each element? (Ugh.)
       * Maybe there's code out there to help.
 
+* Support embedded images? That will certainly deviate from straight Markdown, but maybe okay.
+
 * Better CSS.
 
 * Syntax hightlighting!
@@ -112,7 +115,7 @@ Undo doesn't work.
 
 ## Credits
 
-**Markdown Here** was coded on the shoulders of giants.
+*Markdown Here* was coded on the shoulders of giants.
 
 * Based on the Chrome extension pattern described in [antimatter15 / hideelements](https://github.com/antimatter15/hideelements).
 * Markdown-to-HTML: [chjj / marked](https://github.com/chjj/marked)
@@ -126,6 +129,11 @@ Undo doesn't work.
   * [evilstreak / markdown-js](https://github.com/evilstreak/markdown-js) (There's currently a GFM dialect that seems almost finished. See [issue #41](https://github.com/evilstreak/markdown-js/issues/41).)
   * [Pagedown](https://code.google.com/p/pagedown/)
   * [isaacs / github-flavored-markdown](https://github.com/isaacs/github-flavored-markdown) (A Showdown derivative)
+  * [Showdown](https://github.com/coreyti/showdown)
+
+* CSS:
+  * [Mou.app](http://mouapp.com/)'s CSS looks pretty good. It can be found [here](https://github.com/borismus/markdown-preview/issues/16). I'm hesitant to use it because Mou isn't FOSS. 
+  * This [Github theme for Mou](https://github.com/gcollazo/mou-theme-github2) might be good, though.
 
 ## Feedback
 
