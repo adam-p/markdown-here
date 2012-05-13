@@ -1,7 +1,8 @@
 {
   "name": "Markdown Here",
-  "version": "1.0",
+  "version": "1.0.1",
   "description": "Write your email in Markdown, then make it pretty.",
+  "homepage_url": "https://chrome.google.com/webstore/detail/bonncgjadmfcadjlopgmclakggdgpdnm",
   "permissions": ["contextMenus"],
   "minimum_chrome_version": "6",
   "background_page": "background.html",
