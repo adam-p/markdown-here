@@ -6,11 +6,11 @@
   "minimum_chrome_version": "6",
   "background_page": "background.html",
   "icons": {
-    "16": "butterfly16.png",
-    "32": "butterfly32.png",
-    "48": "butterfly48.png",
-    "128": "butterfly128.png",
-    "512": "butterfly512.png"
+    "16": "images/butterfly16.png",
+    "32": "images/butterfly32.png",
+    "48": "images/butterfly48.png",
+    "128": "images/butterfly128.png",
+    "512": "images/butterfly512.png"
   },
   "content_scripts": [
     {
