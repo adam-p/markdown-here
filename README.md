@@ -1,29 +1,65 @@
 # Markdown Here
 
-**Markdown Here** is a Google Chrome extension that lets you write email in markdown and render it before sending.
+**Markdown Here** is a Google Chrome extension that lets you write email in Markdown and render it before sending.
 
-Writing email with code in it pretty tedious. Writing markdown with code in it is easy. I found myself writing email in markdown in the Github in-browser editor, then copying the preview into email. This is a pretty absurd workflow, so I decided create a tool to write and render markdown right in the email.
+Writing email with code in it pretty tedious. Writing Markdown with code in it is easy. I found myself writing email in Markdown in the Github in-browser editor, then copying the preview into email. This is a pretty absurd workflow, so I decided create a tool to write and render Markdown right in the email.
+
+## Installation
+
+### Manual/Development
+
+1. Clone this repo.
+2. In Chrome, open the Extensions settings. (Wrench button, Tools, Extensions.)
+3. On the Extensions settings page, click the "Developer Mode" checkbox.
+4. Click the now-visible "Load unpacked extension…" button. Navigate to the directory where you cloned the repo.
+5. The **Markdown Here** extension should now be visible in your extensions list.
+
+### Via the Chrome Store
+
+TBD
+
+## Use
+
+1. In Chrome, log into your Gmail, Hotmail, or Yahoo account and start a new email.
+2. Make sure you're using the rich editor. (In Gmail, click the "Rich formatting" link, if it's visible.)
+3. Compose an email in Markdown. For example:
+
+    ```
+    **Hello** `world`.
+    ```
+
+4. Right-click in the compose box and choose the "Markdown Here" item from the context menu.
+5. You should see your email rendered correctly from Markdown into rich HTML.
+6. Send your awesome email to everyone you know. It will appear to them the same way it looks to you.
+
+### Revert to Markdown
+
+Right now, the only way to switch back to Markdown after rendering with the "Markdown Here" command is to use the browser's Undo command (ctrl+z/cmd+z, or from the Edit menu). Unfortunately, this only works for Gmail.
+
+Note: Sometimes you'll lose the last few letters you typed when you do this.
 
 ## Notes
+
+* **Markdown Here** uses [Github Flavored Markdown](http://github.github.com/github-flavored-markdown/).
 
 * Even though the extension is only known to work (to varying degrees )with Gmail, Yahoo, and Hotmail, we're not restricting what URLs the extension applies to. The hope is that it'll work in unexpected places. Reports of good (or bad) functionality is appreciated (create an issue). In the future the set of target URLs should be restricted.
 
 ### Replies
 
-Replies don't work very well. New markdown (at the top, say), gets parsed fine, but the body of the previous email gets messed (stripped of formatting, usually).
+Replies don't work very well. New Markdown (at the top, say), gets parsed fine, but the body of the previous email gets messed (stripped of formatting, usually).
 
 Some ideas for better behaviour:
 
-* Add a command to convert the original email to markdown. Then it can be converted back to HTML along with the new stuff.
-  * Check out [to-markdown](https://github.com/domchristie/to-markdown), a HTML-to-markdown converter.
+* Add a command to convert the original email to Markdown. Then it can be converted back to HTML along with the new stuff.
+  * Check out [to-markdown](https://github.com/domchristie/to-markdown), a HTML-to-Markdown converter.
   * This approach will surely be flaky.
-  * Will need to accommodate users who only realize after writing some markdown that they need to convert HTML to MD. So either let them convert a selection, or don't destroy their new MD while converting.
+  * Will need to accommodate users who only realize after writing some Markdown that they need to convert HTML to MD. So either let them convert a selection, or don't destroy their new MD while converting.
   
-* Introduce a delimiter so that the user can indicate the extent of the markdown conversion. So they can exclude the original email from the conversion.
+* Introduce a delimiter so that the user can indicate the extent of the Markdown conversion. So they can exclude the original email from the conversion.
   * Or maybe we can detect it, based on the "on this date, this person sent this email" line.
   * If there are start and end delimiters, it could be used for inline replies.
   
-* Add ability to only do the markdown conversion on a selection. 
+* Add ability to only do the Markdown conversion on a selection. 
   * Slightly mouse-y and fiddly, but maybe not bad.
   * Possibly a good general feature.
   * Can be used for inline replies as well.
@@ -32,19 +68,25 @@ Some ideas for better behaviour:
 
 ### Gmail
 
-Works well. Some styling (like background colors; maybe all styling?) is lost when viewing a from-markdown email. (But not when sending such an email. For example, sending from Gmail to Hotmail retains styles.)
+Rendering works well. Some styling (like background colors; maybe all styling?) is lost when viewing a from-Markdown email. (But not when sending such an email. For example, sending from Gmail to Hotmail retains styles.)
 
 May be that all styles are getting stripped?
 
+Undo works to revert.
+
 ### Hotmail
 
-Works very well.
+Rendering works very well. Undo doesn't work.
 
 ### Yahoo
 
 Works okay. Paragraphs get turned into `<div>`, so they don't separate properly. This occurs both for email sent and received.
 
-## Roadmap
+Undo doesn't work.
+
+## Next Steps
+
+* Add a revert command. Undo works fairly well for Gmail, but it often undoes more than just the Markdown conversion -- often a few keystrokes also disappear. And it only works for Gmail.
 
 * Make replies not busted.
 
@@ -60,15 +102,13 @@ Works okay. Paragraphs get turned into `<div>`, so they don't separate properly.
 
 * Add user option to create custom CSS.
 
-* Add an undo command. ctrl+z/cmd+z works fairly well, but it often undoes more than just the markdown conversion -- often a few keystrokes also disappear.
-
 * Add a configurable hotkey.
 
 * Minify? Is there any advantage in extensions?
 
-* Add user option to specify markdown dialect?
+* Add user option to specify Markdown dialect?
 
-* Maybe use [to-markdown](https://github.com/domchristie/to-markdown) to convert rich-edited email to markdown. This seems kind of dumb, but it might help with replies to already-rich emails.
+* Maybe use [to-markdown](https://github.com/domchristie/to-markdown) to convert rich-edited email to Markdown. This seems kind of dumb, but it might help with replies to already-rich emails.
 
 ## Credits
 
