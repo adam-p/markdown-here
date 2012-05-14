@@ -43,7 +43,7 @@ function markdownToHtml(md) {
 
 // Render the Markdown found in `$elem` into pretty HTML and put it back into `$elem`.
 function renderMarkdown($elem) {
-  var extractedHtml, md, mdHtml;
+  var extractedHtml, md, mdHtml, marker;
 
   // Get the HTML containing the Markdown from the compose element.
   extractedHtml = $elem.html();
@@ -58,9 +58,12 @@ function renderMarkdown($elem) {
   // element. We'll use this later if we need to unrender back to Markdown.
   $elem.data('markdown-here-original', extractedHtml);
 
+  // We'll add a non-visible marker to indicate that we're in a rendered state.
+  marker = '<div id="markdown-here-rendered" style="display:none;"></div>';
+
   // Output the styling and rendered Markdown back into the compose element.
   // `styles` comes from our JS'd CSS file.
-  $elem.html(styles + mdHtml);
+  $elem.html(styles + mdHtml + marker);
 }
 
 // Revert the rendered-from-Markdown HTML found in `$elem` back into Markdown and
@@ -78,15 +81,21 @@ function unrenderMarkdown($elem) {
   $elem.html(originalHtml);
 }
 
+function inRenderedState($elem) {
+  return $elem.find('#markdown-here-rendered').length > 0;
+}
+
 // The context menu handler.
 chrome.extension.onRequest.addListener(function(event) {
-  var $focusedElem;
+  var $focusedElem, initiallyRendered;
 
   $focusedElem = $(findFocusedElem());
   if (!$focusedElem) return;
 
-  // Are we rendering or reverting?
-  if (event.convert) {
+  initiallyRendered = inRenderedState($focusedElem);
+
+  // Toggle our rendered state.
+  if (!initiallyRendered) {
     renderMarkdown($focusedElem);
   }
   else {
