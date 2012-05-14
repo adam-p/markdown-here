@@ -1,7 +1,7 @@
 /* Based on: https://gist.github.com/1082608 */
 
 var styles = ' \
-<style> \
+<style id="markdown-here-styles" title="markdown-here-styles"> \
 /*  \
    Some simple Github-like styles, with syntax highlighting CSS via Pygments. \
 */ \
