@@ -1,0 +1,27 @@
+Markdown Here is a Google Chrome extension that lets you write email in Markdown and render it before sending.
+
+This is great for anyone who doesn't like fiddling around with formatting buttons while write an email. It's especially good for anyone who writes email with code in them.
+
+Totally simple to use:
+1. Write your email in your webmail's rich editor using Markdown.
+2. Right-click in the compose area and then click "Markdown Toggle".
+3. Your email is now pretty. (That is, it's been rendered to HTML.)
+4. If you like the way it looks, just send it. If you want to change or add something, click "Markdown Toggle" again to get back to your original Markdown. Rinse and repeat.
+
+Primarily targeted to work with Gmail, but also works pretty well with Yahoo! and Hotmail.
+
+This is an open source project. See links for full instructions, more information, bug reports, or to contribute.
+
+https://github.com/adam-p/markdown-here
+
+
+Change Log
+
+2011-05-12: v1.1
+
+Added ability to revert rendered HTML back to Markdown.
+
+
+2011-05-12: v1.0
+
+Initial release.
