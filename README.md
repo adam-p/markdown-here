@@ -39,9 +39,7 @@ After rendering your Markdown to pretty HTML, you can still get back to your ori
 
 Note that any changes you make to the pretty HTML will be lost when you revert to Markdown.
 
-Caveat: In Gmail, another way to revert to Markdown is to use the browser's Undo command (ctrl+z/cmd+z, or from the Edit menu). But there's a big problem with this: The next time you try to use the *Markdown Here* command, it'll think you're reverting and cause you to lose your changes.
-
-**TODO**: Fix that caveat. Maybe detect the Undo action? Or have a magical hidden element that indicates the render state?
+In Gmail, you can also use the browser's Undo command (ctrl+z/cmd+z, or from the Edit menu). Be warned that you might also use the last few characters you entered.
 
 ## Notes
 
