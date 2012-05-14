@@ -69,29 +69,48 @@ Some ideas for better behaviour:
 
 ## Compatibility
 
-### Gmail
+Short answer: Gmail is great.
 
-Rendering works well. Some styling (like background colors; maybe all styling?) is lost when viewing a from-Markdown email. (But not when sending such an email. For example, sending from Gmail to Hotmail retains styles.)
+<table>
+  <tr>
+    <th></th>
+    <th>Compose</th>
+    <th>Send</th>
+    <th>Receive</th>
+  </tr>
+  <tr>
+    <th>Gmail</th>
+    <td>Perfect</td>
+    <td>Perfect</td>
+    <td>Perfect</td>
+  </tr>
+  <tr>
+    <th>Hotmail</th>
+    <td>Perfect</td>
+    <td>Paragraph tags are lost.</td>
+    <td>Perfect</td>
+  </tr>
+  <tr>
+    <th>Yahoo</th>
+    <td>Perfect</td>
+    <td>Paragraph tags are lost (or replaced?). Font is lost (or changed?).</td>
+    <td>Paragraph tags are lost (or replaced?).</td>
+  </tr>
+</table>
 
-May be that all styles are getting stripped?
+*Compose*
+> How *Markdown Here* behaves when composing an email. E.g., if rendering and reverting looks correct, styling is good, etc.
 
-### Hotmail
+*Send*
+> Negative effect that may occur when sending a rendered email from this webmail client. E.g., stripped tags and styles.
 
-Rendering works very well, both composing and viewing sent email. 
-
-### Yahoo
-
-Works okay. Paragraphs get turned into `<div>`, so they don't separate properly. This occurs both for email sent and received.
+*Receive*
+> How well this webmail client displays rendered email that it receives (assuming the sender is perfect).
 
 ## Next Steps
 
 * Make replies not busted.
-
-* Use a lot more explicit CSS. For example, Yahoo overrides `<code>` tag styling with `display: block;`, so explicit styling was required to defeat that. There are probably a lot more instances where that's needed. 
-  * Or maybe use CSS-reset/clear code? Should try that…
-  * Maybe put all styles directly on tags. Gmail seems to strip the `<style>` block, but it leaves inline `style=` attributes intact.
-    * Maybe it's not difficult? Insert the `<style>` block and the html, then walk the DOM, enumerating the styles for each element? (Ugh.)
-      * Maybe there's code out there to help.
+  * See notes in [Replies section](#replies).
 
 * Support embedded images? That will certainly deviate from straight Markdown, but maybe okay.
 
