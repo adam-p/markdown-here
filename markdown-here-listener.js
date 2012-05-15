@@ -82,16 +82,17 @@ function renderMarkdown($elem) {
   // Render the Markdown to pretty HTML.
   mdHtml = markdownToHtml(md);
 
+  // Wrap our pretty HTML in a <div> that we can put body styles onto.
+  // We'll also use the wrapper as a marker to indicate that we're in a rendered state.
+  mdHtml = '<div id="markdown-here-wrapper">' + mdHtml + '</div>';
+
   // Store the original Markdown-in-HTML to a data attribute on the compose
   // element. We'll use this later if we need to unrender back to Markdown.
   $elem.data('markdown-here-original', extractedHtml);
 
-  // We'll add a non-visible marker to indicate that we're in a rendered state.
-  marker = '<div id="markdown-here-rendered" style="display:none;"></div>';
-
   // Output the styling and rendered Markdown back into the compose element.
   // `styles` comes from our JS'd CSS file.
-  $elem.html(styles + mdHtml + marker);
+  $elem.html(styles + mdHtml);
 
   // Some webmail (Gmail) strips off any external style block. So we need to go
   // through our styles, explicitly applying them to matching elements.
@@ -114,7 +115,7 @@ function unrenderMarkdown($elem) {
 }
 
 function inRenderedState($elem) {
-  return $elem.find('#markdown-here-rendered').length > 0;
+  return $elem.find('#markdown-here-wrapper').length > 0;
 }
 
 // The context menu handler.

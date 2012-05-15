@@ -5,7 +5,8 @@ var styles = ' \
 /*  \
    Some simple Github-like styles, with syntax highlighting CSS via Pygments. \
 */ \
-body{ \
+/* This is the overall wrapper, it should be treated as the `body` section. */ \
+#markdown-here-wrapper{ \
     font-family: helvetica, arial, freesans, clean, sans-serif; \
     color: #333; \
     background-color: #fff; \
