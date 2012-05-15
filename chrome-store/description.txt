@@ -17,6 +17,11 @@ https://github.com/adam-p/markdown-here
 
 Change Log
 
+xxxxxxxxx
+
+Fixed issue with fonts sent and received by Yahoo.
+
+
 2011-05-14: v1.1.1
 
 Fixed Gmail display of received rendered-from-Markdown email. Gmail was killing the <style> block, so styles are now also set explicitly on each element. Gmail works great now.
