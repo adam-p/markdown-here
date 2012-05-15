@@ -112,8 +112,6 @@ Short answer: Gmail is great.
 * Make replies not busted.
   * See notes in [Replies section](#replies).
 
-* Get rid of jQuery? Barely use it, probably don't have to use it at all, and it's the biggest JS file.
-
 * Support embedded images? That will certainly deviate from straight Markdown, but maybe okay.
 
 * Better CSS.
