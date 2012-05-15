@@ -93,7 +93,7 @@ Short answer: Gmail is great.
   <tr>
     <th>Yahoo</th>
     <td>Perfect</td>
-    <td>Paragraph tags are lost (or replaced?). Font is lost (or changed?).</td>
+    <td>Paragraph tags are lost (or replaced?).</td>
     <td>Paragraph tags are lost (or replaced?).</td>
   </tr>
 </table>
