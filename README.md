@@ -1,10 +1,10 @@
-# <img src="https://github.com/adam-p/markdown-here/raw/master/images/butterfly48.png" /> Markdown Here
+# <img src="//github.com/adam-p/markdown-here/raw/master/images/butterfly48.png" /> Markdown Here
 
 *Markdown Here* is a Google Chrome extension that lets you write email in Markdown and render it before sending.
 
 Writing email with code in it pretty tedious. Writing Markdown with code in it is easy. I found myself writing email in Markdown in the Github in-browser editor, then copying the preview into email. This is a pretty absurd workflow, so I decided create a tool to write and render Markdown right in the email.
 
-<img width="700px" src="https://github.com/adam-p/markdown-here/raw/master/chrome-store/markdown-here-image1.gimp.png" />
+<img width="700px" src="//github.com/adam-p/markdown-here/raw/master/chrome-store/markdown-here-image1.gimp.png" />
 
 ## Installation
 
