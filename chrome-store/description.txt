@@ -17,7 +17,7 @@ https://github.com/adam-p/markdown-here
 
 Change Log
 
-xxxxxxxxx
+2011-05-15: v1.1.2
 
 Fixed issue with fonts sent and received by Yahoo.
 
