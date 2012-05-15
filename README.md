@@ -119,6 +119,7 @@ Short answer: Gmail is great.
 * Better CSS.
 
 * Syntax hightlighting!
+  * Use [Highlight.js](http://softwaremaniacs.org/soft/highlight/en/)?
 
 * Add user option to create custom CSS.
 
