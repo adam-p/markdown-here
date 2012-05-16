@@ -5,13 +5,13 @@ var MARKDOWN_HERE_STYLES = ' \
    Some simple Github-like styles, with syntax highlighting CSS via Pygments. \
 */ \
 /* This is the overall wrapper, it should be treated as the `body` section. */ \
-.markdown-here-wrapper{ \
+.markdown-here-wrapper{ /* adam-p: changed from body */ \
     font-family: helvetica, arial, freesans, clean, sans-serif; \
     color: #333; \
     background-color: #fff; \
     border: none; \
     line-height: 1.5; \
-    margin: 2em 3em; \
+    /* margin: 2em 3em; adam-p: removed */ \
     text-align:left; \
 } \
 pre{ \
