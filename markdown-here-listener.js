@@ -3,6 +3,8 @@
  * MIT License : http://adampritchard.mit-license.org/
  */
 
+'use strict';
+
 // Finds and returns the page element that currently has focus. Drills down into
 // iframes if necessary.
 function findFocusedElem() {
@@ -10,19 +12,76 @@ function findFocusedElem() {
 
   // If the focus is within an iframe, we'll have to drill down to get to the
   // actual element.
-  while (focusedElem['contentDocument'])
-  {
-      focusedElem = focusedElem.contentDocument.activeElement;
+  while (focusedElem.contentDocument != null) {
+    focusedElem = focusedElem.contentDocument.activeElement;
   }
 
   return focusedElem;
 }
 
+// Get the currectly selected range, or an expanded version thereof.
+// The selection may start or end in text nodes, which is isn't what we want. So
+// we'll expand the selection to include only whole element nodes.
+function getSelectedRange(contentDocument) {
+  var selection, range;
+
+  selection = contentDocument.getSelection();
+  range = selection.getRangeAt(0);
+  if (range.collapsed) {
+    return null;
+  }
+
+  if (range.startContainer.nodeType === range.startContainer.TEXT_NODE) {
+    range.setStartBefore(range.startContainer.parentNode);
+  }
+
+  if (range.endContainer.nodeType === range.endContainer.TEXT_NODE) {
+    range.setEndAfter(range.endContainer.parentNode);
+  }
+
+  return range;
+}
+
+// Get the HTML from `selectedRange`.
+function getSelectedHtml(selectedRange) {
+  var selectedHtml = '', rangeContents, i;
+
+  // We're basically just concatenating the outerHTML of the top-level elements.
+
+  rangeContents = selectedRange.cloneContents();
+
+  for (i = 0; i < rangeContents.childNodes.length; i++) {
+    selectedHtml += rangeContents.childNodes[i].outerHTML;
+  }
+
+  return selectedHtml;
+}
+
+// Replaces the contents of `range` with the HTML string in `html`.
+// Returns the element that is created from `html`.
+function replaceRange(range, html) {
+  var documentFragment, newElement;
+
+  range.deleteContents();
+
+  // Create a DocumentFragment to insert and populate it with HTML
+  documentFragment = range.createContextualFragment(html);
+
+  // After inserting the node contents, the node is empty. So we need to save a
+  // reference to the element that we need to return.
+  newElement = documentFragment.firstChild;
+
+  range.insertNode(documentFragment);
+
+  return newElement;
+}
+
 // Get the plaintext representation of the given HTML.
+// Uses jsHtmlToText.js
 function plaintextFromHtml(html) {
   var extractedText;
 
-  function tagreplacement(text) {
+  function tagReplacement(text) {
     var replaced =
       text
         .replace(/<div[^>]*>/ig, '<br>') // opening <div> --> <br>
@@ -31,50 +90,92 @@ function plaintextFromHtml(html) {
     return replaced;
   }
 
-  extractedText = htmlToText(html, {tagreplacement: tagreplacement});
+  extractedText = htmlToText(html, {tagreplacement: tagReplacement});
   return extractedText;
 }
 
+// Convert the Markdown in `md` to HTML.
 // Uses marked.js
 function markdownToHtml(md) {
   var html = marked(md);
   return html;
 }
 
-// Applies our styling explicitly to the elements under `elem`.
-function makeStylesExplicit(elem) {
-  var stylesheet, elemDocument;
+// Returns the stylesheet for our styles.
+function getMarkdownStylesheet(elem) {
+  var styleElem, stylesheet, i;
 
-  elemDocument = elem.ownerDocument;
+  // Create a style element under elem
+  styleElem = elem.ownerDocument.createElement('style');
+  styleElem.setAttribute('title', 'markdown-here-styles');
+  styleElem.appendChild(document.createTextNode(MARKDOWN_HERE_STYLES));
 
-  for (var i = 0; i < elemDocument.styleSheets.length; i++) {
-    if (elemDocument.styleSheets[i].title == 'markdown-here-styles') {
-      stylesheet = elemDocument.styleSheets[i];
+  elem.appendChild(styleElem);
+
+  // Find the stylesheet that we just created
+  for (i = 0; i < elem.ownerDocument.styleSheets.length; i++) {
+    if (elem.ownerDocument.styleSheets[i].title === 'markdown-here-styles') {
+      stylesheet = elem.ownerDocument.styleSheets[i];
       break;
     }
   }
 
-  if (!stylesheet) {
-    console.log('Unable to find our stylesheet!');
-    return;
+  if (stylesheet == null) {
+    throw 'Markdown Here stylesheet not found!';
   }
 
-  for (var i = 0; i < stylesheet.rules.length; i++) {
-    var rule = stylesheet.rules[i];
+  // Take the stylesheet element out of the DOM
+  elem.removeChild(styleElem);
 
-    var selectorMatches = elemDocument.querySelectorAll(rule.selectorText);
-    for (var j = 0; j < selectorMatches.length; j++) {
-      selectorMatches[j].setAttribute('style', rule.style.cssText);
+  return stylesheet;
+}
+
+// Applies our styling explicitly to the elements under `elem`.
+function makeStylesExplicit(wrapperElem) {
+  var stylesheet, rule, selectorMatches, i, j;
+
+  stylesheet = getMarkdownStylesheet(wrapperElem);
+
+  for (i = 0; i < stylesheet.rules.length; i++) {
+    rule = stylesheet.rules[i];
+
+    // Special case for the selector: If the selector is '.markdown-here-wrapper'
+    // or 'body', then we want to apply the rules to the wrapper (not just to
+    // its ancestors, which is what querySelectorAll gives us).
+
+    if (rule.selectorText === '.markdown-here-wrapper'
+        || rule.selectorText === 'body') {
+      wrapperElem.setAttribute('style', rule.style.cssText);
+    }
+    else {
+      selectorMatches = wrapperElem.querySelectorAll(rule.selectorText);
+      for (j = 0; j < selectorMatches.length; j++) {
+        selectorMatches[j].setAttribute('style', rule.style.cssText);
+      }
     }
   }
 }
 
-// Render the Markdown found in `elem` into pretty HTML and put it back into `elem`.
-function renderMarkdown(elem) {
-  var extractedHtml, md, mdHtml, marker;
+// Converts the Markdown in the user's compose element to HTML and replaces it.
+function renderMarkdown() {
+  var selectedRange, extractedHtml, md, mdHtml, replacingSelection, wrapper, focusedElem;
 
-  // Get the HTML containing the Markdown from the compose element.
-  extractedHtml = elem.innerHTML;
+  focusedElem = findFocusedElem();
+  if (!focusedElem || !focusedElem.ownerDocument) {
+    return;
+  }
+
+  selectedRange = getSelectedRange(focusedElem.ownerDocument);
+  replacingSelection = !!selectedRange;
+
+  // Get the HTML containing the Markdown from either the selection or compose element.
+
+  if (replacingSelection) {
+    extractedHtml = getSelectedHtml(selectedRange);
+  }
+  else {
+    extractedHtml = focusedElem.innerHTML;
+  }
 
   // Extract the plaintext Markdown from the HTML.
   md = plaintextFromHtml(extractedHtml);
@@ -82,57 +183,74 @@ function renderMarkdown(elem) {
   // Render the Markdown to pretty HTML.
   mdHtml = markdownToHtml(md);
 
-  // Wrap our pretty HTML in a <div> that we can put body styles onto.
-  // We'll also use the wrapper as a marker to indicate that we're in a rendered state.
-  mdHtml = '<div id="markdown-here-wrapper">' + mdHtml + '</div>';
-
-  // Output the styling and rendered Markdown back into the compose element.
-  // `styles` comes from our JS'd CSS file.
-  elem.innerHTML = styles + mdHtml;
-
-  // Some webmail (Gmail) strips off any external style block. So we need to go
-  // through our styles, explicitly applying them to matching elements.
-  makeStylesExplicit(elem);
+  // Wrap our pretty HTML in a <div> wrapper.
+  // We'll use the wrapper as a marker to indicate that we're in a rendered state.
+  mdHtml = '<div class="markdown-here-wrapper">' + mdHtml + '</div>';
 
   // Store the original Markdown-in-HTML to a data attribute on the wrapper
   // element. We'll use this later if we need to unrender back to Markdown.
-  elem.querySelector('#markdown-here-wrapper').setAttribute('data-md-original', extractedHtml);
+
+  if (replacingSelection) {
+    wrapper = replaceRange(selectedRange, mdHtml);
+    wrapper.setAttribute('data-md-original', extractedHtml);
+  }
+  else {
+    focusedElem.innerHTML = mdHtml;
+    focusedElem.firstChild.setAttribute('data-md-original', extractedHtml);
+    wrapper = focusedElem.firstChild;
+  }
+
+  // Some webmail (Gmail) strips off any external style block. So we need to go
+  // through our styles, explicitly applying them to matching elements.
+  makeStylesExplicit(wrapper);
 }
 
-// Revert the rendered-from-Markdown HTML found in `elem` back into Markdown and
-// put it back into `elem`.
-function unrenderMarkdown(elem) {
-  var originalHtml;
+// Revert the rendered Markdown wrapperElem back to its original form.
+function unrenderMarkdown(wrapperElem) {
+  wrapperElem.outerHTML = wrapperElem.getAttribute('data-md-original');
+}
 
-  // Get the original Markdown-in-HTML that we stored when rendering.
-  originalHtml = elem.querySelector('#markdown-here-wrapper').getAttribute('data-md-original');
-  if (!originalHtml) {
-    alert('Unable to revert to Markdown. Original not found.');
+// Find the wrapper element that's above the current cursor position and returns
+// it. Returns falsy if there is no wrapper.
+function findMarkdownHereWrapper() {
+  var focusedElem, selection, range, wrapper, match, i;
+
+  focusedElem = findFocusedElem();
+  if (!focusedElem) {
     return;
   }
 
-  // Replace the contents of the element with the original Markdown.
-  elem.innerHTML = originalHtml;
-}
+  selection = focusedElem.ownerDocument.getSelection();
+  range = selection.getRangeAt(0);
 
-function inRenderedState(elem) {
-  return !!elem.querySelector('#markdown-here-wrapper');
+  wrapper = range.commonAncestorContainer;
+  while (wrapper) {
+    match = false;
+    for (i = 0; wrapper.attributes && i < wrapper.attributes.length; i++) {
+      if (wrapper.attributes[i].nodeValue === 'markdown-here-wrapper') {
+        match = true;
+        break;
+      }
+    }
+
+    if (match) break;
+
+    wrapper = wrapper.parentNode;
+  }
+
+  return wrapper;
 }
 
 // The context menu handler.
 chrome.extension.onRequest.addListener(function(event) {
-  var focusedElem, initiallyRendered;
+  var wrapperElem = findMarkdownHereWrapper();
 
-  focusedElem = findFocusedElem();
-  if (!focusedElem) return;
-
-  initiallyRendered = inRenderedState(focusedElem);
-
-  // Toggle our rendered state.
-  if (!initiallyRendered) {
-    renderMarkdown(focusedElem);
+  // If there's a wrapper above our current cursor position, then we're reverting.
+  // Otherwise, we're rendering.
+  if (!wrapperElem) {
+    renderMarkdown();
   }
   else {
-    unrenderMarkdown(focusedElem);
+    unrenderMarkdown(wrapperElem);
   }
 });

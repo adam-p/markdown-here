@@ -1,12 +1,11 @@
 /* Based on: https://gist.github.com/1082608 */
 
-var styles = ' \
-<style id="markdown-here-styles" title="markdown-here-styles"> \
+var MARKDOWN_HERE_STYLES = ' \
 /*  \
    Some simple Github-like styles, with syntax highlighting CSS via Pygments. \
 */ \
 /* This is the overall wrapper, it should be treated as the `body` section. */ \
-#markdown-here-wrapper{ \
+.markdown-here-wrapper{ \
     font-family: helvetica, arial, freesans, clean, sans-serif; \
     color: #333; \
     background-color: #fff; \
@@ -127,5 +126,4 @@ h3{ \
 .vg { color: #dd7700 } /* Name.Variable.Global */ \
 .vi { color: #3333bb } /* Name.Variable.Instance */ \
 .il { color: #0000DD; font-weight: bold } /* Literal.Number.Integer.Long */ \
-</style> \
 ';

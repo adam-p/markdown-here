@@ -130,6 +130,7 @@ Short answer: Gmail is great.
 * Add a configurable hotkey.
 
 * Minify? Is there any advantage in extensions?
+  * Orthogonal, but: Can Browserling be used?
 
 * Add user option to specify Markdown dialect?
 
