@@ -19,6 +19,11 @@ https://github.com/adam-p/markdown-here
 
 Change Log
 
+2011-05-17: v1.2.1
+
+Bug fix: Rendering and reverting same selection (rather than reverting a point or selection within the original selection) would result in a loss of original Markdown.
+
+
 2011-05-16: v1.2.0
 
 New feature: You can convert only part of an email by selected a region before clicking "Markdown Toggle". This is great for replies. To revert back to Markdown, right-click in the converted block and click "Markdown Toggle" again.
