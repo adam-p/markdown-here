@@ -51,6 +51,8 @@ To convert only part of the email, select the text (with your mouse or keyboard)
 
 To revert back to Markdown, just put your cursor anywhere in the block of converted text, right click, and click the "Markdown Toggle" menu item again. Now it's magically back to the original Markdown.
 
+<img width="700px" src="//github.com/adam-p/markdown-here/raw/master/chrome-store/markdown-here-image2.gimp.png" />
+
 #### Things to know about converting a selection
 
 * If you select only part of a block of text, the entire block will rendered and replaced.
