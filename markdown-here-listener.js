@@ -5,6 +5,9 @@
 
 'use strict';
 
+// Used to create unique IDs for each Markdown Here wrapper.
+var markdownHereWrapperIdCounter = 1;
+
 // Finds and returns the page element that currently has focus. Drills down into
 // iframes if necessary.
 function findFocusedElem() {
@@ -156,60 +159,6 @@ function makeStylesExplicit(wrapperElem) {
   }
 }
 
-// Converts the Markdown in the user's compose element to HTML and replaces it.
-function renderMarkdown() {
-  var selectedRange, extractedHtml, md, mdHtml, replacingSelection, wrapper, focusedElem;
-
-  focusedElem = findFocusedElem();
-  if (!focusedElem || !focusedElem.ownerDocument) {
-    return;
-  }
-
-  selectedRange = getSelectedRange(focusedElem.ownerDocument);
-  replacingSelection = !!selectedRange;
-
-  // Get the HTML containing the Markdown from either the selection or compose element.
-
-  if (replacingSelection) {
-    extractedHtml = getSelectedHtml(selectedRange);
-  }
-  else {
-    extractedHtml = focusedElem.innerHTML;
-  }
-
-  // Extract the plaintext Markdown from the HTML.
-  md = plaintextFromHtml(extractedHtml);
-
-  // Render the Markdown to pretty HTML.
-  mdHtml = markdownToHtml(md);
-
-  // Wrap our pretty HTML in a <div> wrapper.
-  // We'll use the wrapper as a marker to indicate that we're in a rendered state.
-  mdHtml = '<div class="markdown-here-wrapper">' + mdHtml + '</div>';
-
-  // Store the original Markdown-in-HTML to a data attribute on the wrapper
-  // element. We'll use this later if we need to unrender back to Markdown.
-
-  if (replacingSelection) {
-    wrapper = replaceRange(selectedRange, mdHtml);
-    wrapper.setAttribute('data-md-original', extractedHtml);
-  }
-  else {
-    focusedElem.innerHTML = mdHtml;
-    focusedElem.firstChild.setAttribute('data-md-original', extractedHtml);
-    wrapper = focusedElem.firstChild;
-  }
-
-  // Some webmail (Gmail) strips off any external style block. So we need to go
-  // through our styles, explicitly applying them to matching elements.
-  makeStylesExplicit(wrapper);
-}
-
-// Revert the rendered Markdown wrapperElem back to its original form.
-function unrenderMarkdown(wrapperElem) {
-  wrapperElem.outerHTML = wrapperElem.getAttribute('data-md-original');
-}
-
 // Find the wrapper element that's above the current cursor position and returns
 // it. Returns falsy if there is no wrapper.
 function findMarkdownHereWrapper() {
@@ -241,16 +190,124 @@ function findMarkdownHereWrapper() {
   return wrapper;
 }
 
-// The context menu handler.
-chrome.extension.onRequest.addListener(function(event) {
-  var wrapperElem = findMarkdownHereWrapper();
+// Finds all Markdown Here wrappers in the given range. Returns an array of the
+// wrapper elements, or null if no wrappers found.
+function findMarkdownHereWrappersInRange(range) {
+  var documentFragment, cloneWrappers, wrappers, selection, i;
 
-  // If there's a wrapper above our current cursor position, then we're reverting.
-  // Otherwise, we're rendering.
-  if (!wrapperElem) {
-    renderMarkdown();
+  // Finding elements in a range isn't very simple...
+
+  documentFragment = range.cloneContents();
+
+  cloneWrappers = documentFragment.querySelectorAll('.markdown-here-wrapper');
+
+  if (cloneWrappers && cloneWrappers.length > 0) {
+    // Now we have an array of *copies* of the wrappers in the DOM. Find them in
+    // the DOM from their IDs.
+    wrappers = [];
+    for (i = 0; i < cloneWrappers.length; i++) {
+      wrappers.push(range.commonAncestorContainer.ownerDocument.getElementById(cloneWrappers[i].id));
+    }
+
+    return wrappers;
   }
   else {
-    unrenderMarkdown(wrapperElem);
+    return null;
+  }
+}
+
+// Converts the Markdown in the user's compose element to HTML and replaces it.
+function renderMarkdown() {
+  var selectedRange, extractedHtml, md, mdHtml, replacingSelection, wrapper, focusedElem;
+
+  focusedElem = findFocusedElem();
+  if (!focusedElem || !focusedElem.ownerDocument) {
+    return;
+  }
+
+  selectedRange = getSelectedRange(focusedElem.ownerDocument);
+  replacingSelection = !!selectedRange;
+
+  // Get the HTML containing the Markdown from either the selection or compose element.
+
+  if (replacingSelection) {
+    extractedHtml = getSelectedHtml(selectedRange);
+  }
+  else {
+    extractedHtml = focusedElem.innerHTML;
+  }
+
+  // Extract the plaintext Markdown from the HTML.
+  md = plaintextFromHtml(extractedHtml);
+
+  // Render the Markdown to pretty HTML.
+  mdHtml = markdownToHtml(md);
+
+  // Wrap our pretty HTML in a <div> wrapper.
+  // We'll use the wrapper as a marker to indicate that we're in a rendered state.
+  mdHtml =
+    '<div class="markdown-here-wrapper" id="markdown-here-wrapper-' + (markdownHereWrapperIdCounter++) + '">'
+    + mdHtml
+    + '</div>';
+
+  // Store the original Markdown-in-HTML to a data attribute on the wrapper
+  // element. We'll use this later if we need to unrender back to Markdown.
+
+  if (replacingSelection) {
+    wrapper = replaceRange(selectedRange, mdHtml);
+    wrapper.setAttribute('data-md-original', extractedHtml);
+  }
+  else {
+    focusedElem.innerHTML = mdHtml;
+    focusedElem.firstChild.setAttribute('data-md-original', extractedHtml);
+    wrapper = focusedElem.firstChild;
+  }
+
+  // Some webmail (Gmail) strips off any external style block. So we need to go
+  // through our styles, explicitly applying them to matching elements.
+  makeStylesExplicit(wrapper);
+}
+
+// Revert the rendered Markdown wrapperElem back to its original form.
+function unrenderMarkdown(wrapperElem) {
+  wrapperElem.outerHTML = wrapperElem.getAttribute('data-md-original');
+}
+
+// The context menu handler.
+chrome.extension.onRequest.addListener(function(event) {
+
+  // If the cursor (or current selection) is in a Markdown Here wrapper, then
+  // we're reverting that wrapper back to Markdown. If there's a selection that
+  // contains one or more wrappers, then we're reverting those wrappers back to
+  // Markdown.
+  // Otherwise, we're rendering. If there's a selection, then we're rendering
+  // the selection. If not, then we're rendering the whole email.
+
+  var wrappers, outerWrapper, focusedElem, range, i;
+
+  outerWrapper = findMarkdownHereWrapper();
+  if (outerWrapper) {
+    wrappers = [outerWrapper];
+  }
+  else {
+    focusedElem = findFocusedElem();
+    if (focusedElem) {
+      range = getSelectedRange(focusedElem.ownerDocument);
+    }
+
+    if (range) {
+      wrappers = findMarkdownHereWrappersInRange(range);
+    }
+  }
+
+  // If we've found wrappers, then we're reverting.
+  // Otherwise, we're rendering.
+  if (wrappers && wrappers.length > 0) {
+    for (i = 0; i < wrappers.length; i++) {
+      unrenderMarkdown(wrappers[i]);
+    }
+  }
+  else {
+    renderMarkdown();
   }
 });
