@@ -31,7 +31,7 @@ Go to the [Chrome Web Store page for *Markdown Here*](https://chrome.google.com/
     **Hello** `world`.
     ```
 
-4. Right-click in the compose box and choose the "Markdown Here" item from the context menu.
+4. Right-click in the compose box and choose the "Markdown Toggle" item from the context menu.
 5. You should see your email rendered correctly from Markdown into rich HTML.
 6. Send your awesome email to everyone you know. It will appear to them the same way it looks to you.
 
@@ -43,31 +43,29 @@ Note that any changes you make to the pretty HTML will be lost when you revert t
 
 In Gmail, you can also use the browser's Undo command (ctrl+z/cmd+z, or from the Edit menu). Be warned that you might also use the last few characters you entered.
 
+### Replies and Piecemeal Conversion
+
+Sometimes you don't want to convert the entire email; sometimes your email isn't entirely Markdown. The primary example of this is when you're writing a reply to an email: what you wrote -- either at the top or inline -- may be in Markdown, but no part of the original is. If you convert the entire email, the original will lose all formatting (at best).
+
+To convert only part of the email, select the text (with your mouse or keyboard), right-click on it, and click the "Markdown Toggle" menu item. Your selection is magically rendered into pretty HTML. 
+
+To revert back to Markdown, just put your cursor anywhere in the block of converted text, right click, and click the "Markdown Toggle" menu item again. Now it's magically back to the original Markdown.
+
+#### Things to know about converting a selection
+
+* If you select only part of a block of text, the entire block will rendered and replaced.
+  * In technical terms: if the selected range begins or ends in a text node, it will be expanded to the full element.
+
+* Be aware that on Mac OS X (only >= Lion?), right clicking a word will cause that word to be selected, and that triggers *Markdown Here*'s selection-convert mode. So if you want to convert the whole email, right-click where there's no text.
+  * It's okay to have a selection when reverting back to Markdown, so don't worry about right-clicking on text when doing that.
+
+* You don't have to revert selections back to Markdown in the same order that you rendered them. Just right-click in a rendered block of text, click the menu item, and only that block will be reverted.
+
 ## Notes
 
 * *Markdown Here* uses [Github Flavored Markdown](http://github.github.com/github-flavored-markdown/).
 
 * Even though the extension is only known to work (to varying degrees )with Gmail, Yahoo, and Hotmail, we're not restricting what URLs the extension applies to. The hope is that it'll work in unexpected places. Reports of good (or bad) functionality is appreciated (create an issue). In the future the set of target URLs should be restricted.
-
-### Replies
-
-Replies don't work very well. New Markdown (at the top, say) gets parsed fine, but the body of the previous email gets messed up (stripped of formatting, usually).
-
-Some ideas for better behaviour:
-
-* Add a command to convert the original email to Markdown. Then it can be converted back to HTML along with the new stuff.
-  * Check out [to-markdown](https://github.com/domchristie/to-markdown), a HTML-to-Markdown converter.
-  * This approach will surely be flaky.
-  * Will need to accommodate users who only realize after writing some Markdown that they need to convert HTML to MD. So either let them convert a selection, or don't destroy their new MD while converting.
-  
-* Introduce a delimiter so that the user can indicate the extent of the Markdown conversion. So they can exclude the original email from the conversion.
-  * Or maybe we can detect it, based on the "on this date, this person sent this email" line.
-  * If there are start and end delimiters, it could be used for inline replies.
-  
-* Add ability to only do the Markdown conversion on a selection. 
-  * Slightly mouse-y and fiddly, but maybe not bad.
-  * Possibly a good general feature.
-  * Can be used for inline replies as well.
 
 ## Compatibility
 
@@ -111,12 +109,9 @@ Short answer: Gmail is great.
 
 ## Next Steps
 
-* Make replies not busted.
-  * See notes in [Replies section](#replies).
+* Look into also making a Firefox extension.
 
-* Support embedded images? That will certainly deviate from straight Markdown, but maybe okay.
-
-* Better CSS.
+* Test cases.
 
 * Syntax hightlighting!
   * [SyntaxHighlighter](http://alexgorbatchev.com/SyntaxHighlighter/)
@@ -134,7 +129,7 @@ Short answer: Gmail is great.
 
 * Add user option to specify Markdown dialect?
 
-* Maybe use [to-markdown](https://github.com/domchristie/to-markdown) to convert rich-edited email to Markdown. This seems kind of dumb, but it might help with replies to already-rich emails.
+* Support images embedded in the Markdown (like, not hand-rolled image tags)? That will certainly deviate from straight Markdown, but maybe okay.
 
 ## Credits
 
