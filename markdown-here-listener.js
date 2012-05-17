@@ -136,8 +136,8 @@ function makeStylesExplicit(wrapperElem) {
 
   stylesheet = getMarkdownStylesheet(wrapperElem);
 
-  for (i = 0; i < stylesheet.rules.length; i++) {
-    rule = stylesheet.rules[i];
+  for (i = 0; i < stylesheet.cssRules.length; i++) {
+    rule = stylesheet.cssRules[i];
 
     // Special case for the selector: If the selector is '.markdown-here-wrapper',
     // then we want to apply the rules to the wrapper (not just to its ancestors,
@@ -227,7 +227,7 @@ function findMarkdownHereWrapper() {
   while (wrapper) {
     match = false;
     for (i = 0; wrapper.attributes && i < wrapper.attributes.length; i++) {
-      if (wrapper.attributes[i].nodeValue === 'markdown-here-wrapper') {
+      if (wrapper.attributes[i].value === 'markdown-here-wrapper') {
         match = true;
         break;
       }
