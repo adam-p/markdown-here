@@ -139,12 +139,12 @@ function makeStylesExplicit(wrapperElem) {
   for (i = 0; i < stylesheet.rules.length; i++) {
     rule = stylesheet.rules[i];
 
-    // Special case for the selector: If the selector is '.markdown-here-wrapper'
-    // or 'body', then we want to apply the rules to the wrapper (not just to
-    // its ancestors, which is what querySelectorAll gives us).
+    // Special case for the selector: If the selector is '.markdown-here-wrapper',
+    // then we want to apply the rules to the wrapper (not just to its ancestors,
+    // which is what querySelectorAll gives us).
+    // Note that the CSS should not have any rules that use "body" or "html".
 
-    if (rule.selectorText === '.markdown-here-wrapper'
-        || rule.selectorText === 'body') {
+    if (rule.selectorText === '.markdown-here-wrapper') {
       wrapperElem.setAttribute('style', rule.style.cssText);
     }
     else {
