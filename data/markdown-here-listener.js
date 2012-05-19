@@ -34,6 +34,7 @@ function getSelectedRange(contentDocument) {
     return null;
   }
 
+  /*
   if (range.startContainer.nodeType === range.startContainer.TEXT_NODE) {
     range.setStartBefore(range.startContainer.parentNode);
   }
@@ -41,6 +42,12 @@ function getSelectedRange(contentDocument) {
   if (range.endContainer.nodeType === range.endContainer.TEXT_NODE) {
     range.setEndAfter(range.endContainer.parentNode);
   }
+  */
+
+  /*
+  var rangeWrapper = contentDocument.createElement('span');
+  range.surroundContents(rangeWrapper);
+  */
 
   return range;
 }
@@ -51,11 +58,22 @@ function getSelectedHtml(selectedRange) {
 
   // We're basically just concatenating the outerHTML of the top-level elements.
 
+  /*
   rangeContents = selectedRange.cloneContents();
 
   for (i = 0; i < rangeContents.childNodes.length; i++) {
     selectedHtml += rangeContents.childNodes[i].outerHTML;
   }
+  */
+
+  **** NOTE SIDE-EFFECT ON DOM or move to calling function
+
+  var doc = selectedRange.commonAncestorContainer.ownerDocument;
+
+  var rangeWrapper = doc.createElement('span');
+  selectedRange.surroundContents(rangeWrapper);
+
+  selectedHtml = rangeWrapper.innerHTML;
 
   return selectedHtml;
 }
@@ -217,15 +235,14 @@ function findMarkdownHereWrappersInRange(range) {
 }
 
 // Converts the Markdown in the user's compose element to HTML and replaces it.
-function renderMarkdown() {
-  var selectedRange, extractedHtml, replacingSelection, focusedElem;
+function renderMarkdown(selectedRange) {
+  var extractedHtml, replacingSelection, focusedElem;
 
   focusedElem = findFocusedElem();
   if (!focusedElem || !focusedElem.ownerDocument) {
     return;
   }
 
-  selectedRange = getSelectedRange(focusedElem.ownerDocument);
   replacingSelection = !!selectedRange;
 
   // Get the HTML containing the Markdown from either the selection or compose element.
@@ -307,6 +324,6 @@ function doMarkdownHereToggle() {
     }
   }
   else {
-    renderMarkdown();
+    renderMarkdown(range);
   }
 }
