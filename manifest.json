@@ -5,7 +5,7 @@
   "homepage_url": "https://chrome.google.com/webstore/detail/bonncgjadmfcadjlopgmclakggdgpdnm",
   "permissions": ["contextMenus"],
   "minimum_chrome_version": "6",
-  "background_page": "background.html",
+  "background_page": "lib/background.html",
   "icons": {
     "16": "images/butterfly16.png",
     "32": "images/butterfly32.png",
@@ -16,7 +16,7 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["markdown-here-listener.js", "chrome-contentscript.js"]
+      "js": ["data/markdown-here-listener.js", "data/chrome-contentscript.js"]
     }
   ]
 }

@@ -1,7 +1,7 @@
-<script src="jsHtmlToText.js"></script>
-<script src="marked.js"></script>
-<script src="github.css.js"></script>
-<script src="markdown-render.js"></script>
+<script src="../data/jsHtmlToText.js"></script>
+<script src="../data/marked.js"></script>
+<script src="../data/github.css.js"></script>
+<script src="../data/markdown-render.js"></script>
 
 <script>
   /*
@@ -23,7 +23,7 @@
     function(html, sender, sendResponse) {
       sendResponse({
         html: markdownRender(htmlToText, marked, html),
-        css: MARKDOWN_HERE_STYLES
+        css: markdownHereCss
       });
     });
 </script>
