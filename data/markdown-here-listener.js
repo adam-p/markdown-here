@@ -180,11 +180,13 @@ function renderMarkdown(selectedRange) {
   // Get the HTML containing the Markdown from either the selection or compose element.
 
   if (replacingSelection) {
-    rangeWrapper = focusedElem.ownerDocument.createElement('div');
-
+    // Wrap the selection in a new element so that we can better extract the HTML.
     // This modifies the DOM, but that's okay, since we're going to replace the
     // new element in a moment.
-    selectedRange.surroundContents(rangeWrapper);
+    rangeWrapper = focusedElem.ownerDocument.createElement('div');
+    rangeWrapper.appendChild(selectedRange.extractContents());
+    selectedRange.insertNode(rangeWrapper);
+    selectedRange.selectNode(rangeWrapper);
 
     extractedHtml = rangeWrapper.innerHTML;
   }
