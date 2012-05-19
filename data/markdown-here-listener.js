@@ -15,16 +15,14 @@ function findFocusedElem() {
 
   // If the focus is within an iframe, we'll have to drill down to get to the
   // actual element.
-  while (focusedElem && focusedElem.contentDocument != null) {
+  while (focusedElem && focusedElem.contentDocument) {
     focusedElem = focusedElem.contentDocument.activeElement;
   }
 
   return focusedElem;
 }
 
-// Get the currectly selected range, or an expanded version thereof.
-// The selection may start or end in text nodes, which is isn't what we want. So
-// we'll expand the selection to include only whole element nodes.
+// Get the currectly selected range.
 function getSelectedRange(contentDocument) {
   var selection, range;
 
@@ -34,48 +32,7 @@ function getSelectedRange(contentDocument) {
     return null;
   }
 
-  /*
-  if (range.startContainer.nodeType === range.startContainer.TEXT_NODE) {
-    range.setStartBefore(range.startContainer.parentNode);
-  }
-
-  if (range.endContainer.nodeType === range.endContainer.TEXT_NODE) {
-    range.setEndAfter(range.endContainer.parentNode);
-  }
-  */
-
-  /*
-  var rangeWrapper = contentDocument.createElement('span');
-  range.surroundContents(rangeWrapper);
-  */
-
   return range;
-}
-
-// Get the HTML from `selectedRange`.
-function getSelectedHtml(selectedRange) {
-  var selectedHtml = '', rangeContents, i;
-
-  // We're basically just concatenating the outerHTML of the top-level elements.
-
-  /*
-  rangeContents = selectedRange.cloneContents();
-
-  for (i = 0; i < rangeContents.childNodes.length; i++) {
-    selectedHtml += rangeContents.childNodes[i].outerHTML;
-  }
-  */
-
-  **** NOTE SIDE-EFFECT ON DOM or move to calling function
-
-  var doc = selectedRange.commonAncestorContainer.ownerDocument;
-
-  var rangeWrapper = doc.createElement('span');
-  selectedRange.surroundContents(rangeWrapper);
-
-  selectedHtml = rangeWrapper.innerHTML;
-
-  return selectedHtml;
 }
 
 // Replaces the contents of `range` with the HTML string in `html`.
@@ -97,31 +54,6 @@ function replaceRange(range, html) {
   return newElement;
 }
 
-// Get the plaintext representation of the given HTML.
-// Uses jsHtmlToText.js
-function plaintextFromHtml(html) {
-  var extractedText;
-
-  function tagReplacement(text) {
-    var replaced =
-      text
-        .replace(/<div[^>]*>/ig, '<br>') // opening <div> --> <br>
-        .replace(/<\/div>/ig, '')        // closing </div> --> nothing
-        .replace(/&nbsp;/ig, ' ');       // &nbsp; --> space
-    return replaced;
-  }
-
-  extractedText = htmlToText(html, {tagreplacement: tagReplacement});
-  return extractedText;
-}
-
-// Convert the Markdown in `md` to HTML.
-// Uses marked.js
-function markdownToHtml(md) {
-  var html = marked(md);
-  return html;
-}
-
 // Returns the stylesheet for our styles.
 function getMarkdownStylesheet(elem, css) {
   var styleElem, stylesheet, i;
@@ -141,7 +73,7 @@ function getMarkdownStylesheet(elem, css) {
     }
   }
 
-  if (stylesheet == null) {
+  if (!stylesheet) {
     throw 'Markdown Here stylesheet not found!';
   }
 
@@ -236,7 +168,7 @@ function findMarkdownHereWrappersInRange(range) {
 
 // Converts the Markdown in the user's compose element to HTML and replaces it.
 function renderMarkdown(selectedRange) {
-  var extractedHtml, replacingSelection, focusedElem;
+  var extractedHtml, replacingSelection, focusedElem, rangeWrapper;
 
   focusedElem = findFocusedElem();
   if (!focusedElem || !focusedElem.ownerDocument) {
@@ -248,7 +180,13 @@ function renderMarkdown(selectedRange) {
   // Get the HTML containing the Markdown from either the selection or compose element.
 
   if (replacingSelection) {
-    extractedHtml = getSelectedHtml(selectedRange);
+    rangeWrapper = focusedElem.ownerDocument.createElement('div');
+
+    // This modifies the DOM, but that's okay, since we're going to replace the
+    // new element in a moment.
+    selectedRange.surroundContents(rangeWrapper);
+
+    extractedHtml = rangeWrapper.innerHTML;
   }
   else {
     extractedHtml = focusedElem.innerHTML;
@@ -261,9 +199,9 @@ function renderMarkdown(selectedRange) {
     // Wrap our pretty HTML in a <div> wrapper.
     // We'll use the wrapper as a marker to indicate that we're in a rendered state.
     mdHtml =
-      '<div class="markdown-here-wrapper" id="markdown-here-wrapper-' + (markdownHereWrapperIdCounter++) + '">'
-      + mdHtml
-      + '</div>';
+      '<div class="markdown-here-wrapper" id="markdown-here-wrapper-' + (markdownHereWrapperIdCounter++) + '">' +
+      mdHtml +
+      '</div>';
 
     // Store the original Markdown-in-HTML to a data attribute on the wrapper
     // element. We'll use this later if we need to unrender back to Markdown.
