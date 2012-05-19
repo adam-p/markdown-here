@@ -16,7 +16,7 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["marked.js","jsHtmlToText.js","github.css.js","markdown-here-listener.js"]
+      "js": ["markdown-here-listener.js", "chrome-contentscript.js"]
     }
   ]
 }

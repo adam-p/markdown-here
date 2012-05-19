@@ -105,13 +105,13 @@ function markdownToHtml(md) {
 }
 
 // Returns the stylesheet for our styles.
-function getMarkdownStylesheet(elem) {
+function getMarkdownStylesheet(elem, css) {
   var styleElem, stylesheet, i;
 
   // Create a style element under elem
   styleElem = elem.ownerDocument.createElement('style');
   styleElem.setAttribute('title', 'markdown-here-styles');
-  styleElem.appendChild(document.createTextNode(MARKDOWN_HERE_STYLES));
+  styleElem.appendChild(document.createTextNode(css));
 
   elem.appendChild(styleElem);
 
@@ -134,10 +134,10 @@ function getMarkdownStylesheet(elem) {
 }
 
 // Applies our styling explicitly to the elements under `elem`.
-function makeStylesExplicit(wrapperElem) {
+function makeStylesExplicit(wrapperElem, css) {
   var stylesheet, rule, selectorMatches, i, j;
 
-  stylesheet = getMarkdownStylesheet(wrapperElem);
+  stylesheet = getMarkdownStylesheet(wrapperElem, css);
 
   for (i = 0; i < stylesheet.cssRules.length; i++) {
     rule = stylesheet.cssRules[i];
@@ -218,7 +218,7 @@ function findMarkdownHereWrappersInRange(range) {
 
 // Converts the Markdown in the user's compose element to HTML and replaces it.
 function renderMarkdown() {
-  var selectedRange, extractedHtml, md, mdHtml, replacingSelection, wrapper, focusedElem;
+  var selectedRange, extractedHtml, replacingSelection, focusedElem;
 
   focusedElem = findFocusedElem();
   if (!focusedElem || !focusedElem.ownerDocument) {
@@ -237,35 +237,34 @@ function renderMarkdown() {
     extractedHtml = focusedElem.innerHTML;
   }
 
-  // Extract the plaintext Markdown from the HTML.
-  md = plaintextFromHtml(extractedHtml);
+  // Call to the extension main code to actually do the md->html conversion.
+  requestMarkdownConversion(extractedHtml, function(mdHtml, mdCss) {
+    var wrapper;
 
-  // Render the Markdown to pretty HTML.
-  mdHtml = markdownToHtml(md);
+    // Wrap our pretty HTML in a <div> wrapper.
+    // We'll use the wrapper as a marker to indicate that we're in a rendered state.
+    mdHtml =
+      '<div class="markdown-here-wrapper" id="markdown-here-wrapper-' + (markdownHereWrapperIdCounter++) + '">'
+      + mdHtml
+      + '</div>';
 
-  // Wrap our pretty HTML in a <div> wrapper.
-  // We'll use the wrapper as a marker to indicate that we're in a rendered state.
-  mdHtml =
-    '<div class="markdown-here-wrapper" id="markdown-here-wrapper-' + (markdownHereWrapperIdCounter++) + '">'
-    + mdHtml
-    + '</div>';
+    // Store the original Markdown-in-HTML to a data attribute on the wrapper
+    // element. We'll use this later if we need to unrender back to Markdown.
 
-  // Store the original Markdown-in-HTML to a data attribute on the wrapper
-  // element. We'll use this later if we need to unrender back to Markdown.
+    if (selectedRange) {
+      wrapper = replaceRange(selectedRange, mdHtml);
+      wrapper.setAttribute('data-md-original', extractedHtml);
+    }
+    else {
+      focusedElem.innerHTML = mdHtml;
+      focusedElem.firstChild.setAttribute('data-md-original', extractedHtml);
+      wrapper = focusedElem.firstChild;
+    }
 
-  if (replacingSelection) {
-    wrapper = replaceRange(selectedRange, mdHtml);
-    wrapper.setAttribute('data-md-original', extractedHtml);
-  }
-  else {
-    focusedElem.innerHTML = mdHtml;
-    focusedElem.firstChild.setAttribute('data-md-original', extractedHtml);
-    wrapper = focusedElem.firstChild;
-  }
-
-  // Some webmail (Gmail) strips off any external style block. So we need to go
-  // through our styles, explicitly applying them to matching elements.
-  makeStylesExplicit(wrapper);
+    // Some webmail (Gmail) strips off any external style block. So we need to go
+    // through our styles, explicitly applying them to matching elements.
+    makeStylesExplicit(wrapper, mdCss);
+  });
 }
 
 // Revert the rendered Markdown wrapperElem back to its original form.
@@ -274,7 +273,7 @@ function unrenderMarkdown(wrapperElem) {
 }
 
 // The context menu handler.
-chrome.extension.onRequest.addListener(function(event) {
+function doMarkdownHereToggle() {
 
   // If the cursor (or current selection) is in a Markdown Here wrapper, then
   // we're reverting that wrapper back to Markdown. If there's a selection that
@@ -310,4 +309,4 @@ chrome.extension.onRequest.addListener(function(event) {
   else {
     renderMarkdown();
   }
-});
+}
