@@ -19,5 +19,6 @@ This is great for anyone who doesn&#39;t like fiddling around with formatting bu
                 <em:maxVersion>15.0a1</em:maxVersion>
             </Description>
         </em:targetApplication>
+        <em:iconURL>resource://common/images/icon128.png</em:iconURL>
     </Description>
 </RDF>
