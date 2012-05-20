@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+
     <Description about="urn:mozilla:install-manifest">
         <em:type>2</em:type> <!-- 2 : Extension -->
         <em:id>markdown-here@adam.pritchard</em:id>
         <em:version>2.0.0</em:version>
-        <em:name>Markdown Here</em:name>
-        <em:description>Markdown Here lets you write email in Markdown and render it before sending.
 
-This is great for anyone who doesn&#39;t like fiddling around with formatting buttons while write an email. It&#39;s especially good for programmers who write email with code in them.
-</em:description>
-        <em:creator>Adam Pritchard</em:creator>
         <em:targetApplication>
             <Description>
                 <!-- Firefox -->
@@ -19,6 +15,13 @@ This is great for anyone who doesn&#39;t like fiddling around with formatting bu
                 <em:maxVersion>15.0a1</em:maxVersion>
             </Description>
         </em:targetApplication>
+
+        <em:name>Markdown Here</em:name>
+        <em:description>Write email in Markdown and render it before sending.</em:description>
+        <em:creator>Adam Pritchard</em:creator>
+
         <em:iconURL>resource://common/images/icon128.png</em:iconURL>
+        <em:homepageURL>https://github.com/adam-p/markdown-here</em:homepageURL>
+
     </Description>
 </RDF>
