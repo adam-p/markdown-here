@@ -131,6 +131,8 @@ Short answer: Gmail is great.
 
 * Add user option to specify Markdown dialect?
 
+* Make render-whole-email less of a special case? Just select the contents of the compose element and follow the render-selection code path?
+
 * Support images embedded in the Markdown (like, not hand-rolled image tags)? That will certainly deviate from straight Markdown, but maybe okay.
 
 ## Credits

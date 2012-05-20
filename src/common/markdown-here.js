@@ -3,6 +3,12 @@
  * MIT License : http://adampritchard.mit-license.org/
  */
 
+/*
+ * This file is the heart of Markdown Here. It decides whether we're rendering
+ * or revert; whether we're doing a selection or the whole thing; and actually
+ * does it (calling out for the final render).
+ */
+
 ;(function() {
 
 // Used to create unique IDs for each Markdown Here wrapper.
@@ -51,6 +57,11 @@ function replaceRange(range, html) {
 
   range.insertNode(documentFragment);
 
+  // Make sure the replacement is selected. This isn't strictly necessary, but
+  // in order to make Chrome and Firefox consistent, we either need to remove
+  // the selection in Chrome, or set it in Firefox. We'll do the latter.
+  range.selectNode(newElement);
+
   return newElement;
 }
 
@@ -58,11 +69,17 @@ function replaceRange(range, html) {
 function getMarkdownStylesheet(elem, css) {
   var styleElem, stylesheet, i;
 
-  // Create a style element under elem
+  // We have to actually create a style element in the document, then pull the
+  // stylesheet out of it (and remove the element).
+
+  // Create a style element
   styleElem = elem.ownerDocument.createElement('style');
   styleElem.setAttribute('title', 'markdown-here-styles');
+
+  // Set the CSS in the style element
   styleElem.appendChild(elem.ownerDocument.createTextNode(css));
 
+  // Put the style element in the DOM under `elem`
   elem.appendChild(styleElem);
 
   // Find the stylesheet that we just created
@@ -148,7 +165,7 @@ function findMarkdownHereWrappersInRange(range) {
 
   if (cloneWrappers && cloneWrappers.length > 0) {
     // Now we have an array of *copies* of the wrappers in the DOM. Find them in
-    // the DOM from their IDs.
+    // the DOM from their IDs. This is why we need unique IDs for our wrappers.
     wrappers = [];
     for (i = 0; i < cloneWrappers.length; i++) {
       wrappers.push(range.commonAncestorContainer.ownerDocument.getElementById(cloneWrappers[i].id));
@@ -162,6 +179,7 @@ function findMarkdownHereWrappersInRange(range) {
 }
 
 // Converts the Markdown in the user's compose element to HTML and replaces it.
+// If `selectedRange` is null, then the entire email is being rendered.
 function renderMarkdown(focusedElem, selectedRange, markdownRenderer) {
   var extractedHtml, replacingSelection, rangeWrapper;
 
@@ -219,7 +237,15 @@ function unrenderMarkdown(wrapperElem) {
   wrapperElem.outerHTML = wrapperElem.getAttribute('data-md-original');
 }
 
-// The context menu handler.
+// Exported function.
+// The context menu handler. Does the rendering or unrendering, depending on the
+// state of the email compose element and the current selection.
+// @param `document`  The document object containg the email compose element.
+//        (Actually, it can be any document above the compose element. We'll
+//        drill down to find the correct element and document.)
+// @param `markdownRenderer`  The function that provides raw-Markdown-in-HTML
+//                            to pretty-Markdown-in-HTML rendering service.
+//                            See markdown-render.js for information.
 function markdownHere(document, markdownRenderer) {
 
   // If the cursor (or current selection) is in a Markdown Here wrapper, then
@@ -236,13 +262,15 @@ function markdownHere(document, markdownRenderer) {
     return;
   }
 
+  // Look for existing rendered-Markdown wrapper to revert.
   outerWrapper = findMarkdownHereWrapper(focusedElem);
   if (outerWrapper) {
+    // There's a wrapper above us.
     wrappers = [outerWrapper];
   }
   else {
+    // Are there wrappers in our selection?
     range = getSelectedRange(focusedElem.ownerDocument);
-
     if (range) {
       wrappers = findMarkdownHereWrappersInRange(range);
     }

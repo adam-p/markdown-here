@@ -1,13 +1,14 @@
+<!--
+ * Copyright Adam Pritchard 2012
+ * MIT License : http://adampritchard.mit-license.org/
+ -->
+
 <script src="../common/jsHtmlToText.js"></script>
 <script src="../common/marked.js"></script>
 <script src="../common/github.css.js"></script>
 <script src="../common/markdown-render.js"></script>
 
 <script>
-  /*
-   * Copyright Adam Pritchard 2012
-   * MIT License : http://adampritchard.mit-license.org/
-   */
 
   // Create the context menu that will signal our main code.
   chrome.contextMenus.create({
@@ -18,7 +19,8 @@
     }
   });
 
-
+  // Handle rendering requests from the content script.
+  // See the comment in markdown-render.js for why we do this.
   chrome.extension.onRequest.addListener(
     function renderRequest(html, sender, sendResponse) {
       sendResponse({

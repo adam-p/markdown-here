@@ -3,7 +3,14 @@
  * MIT License : http://adampritchard.mit-license.org/
  */
 
+/*
+ * Firefox-specific code for responding to the context menu item and providing
+ * rendering services.
+ */
+
 var markdown_here = {
+
+  // Handle the menu-item click
   onMenuItemCommand: function(e) {
     Components.utils.import("resource://common/markdown-here.js");
 
@@ -11,7 +18,7 @@ var markdown_here = {
   },
 
   onToolbarButtonCommand: function(e) {
-    // just reuse the function above.  you can change this, obviously!
+    // We don't have a toolbar button, but if we did...
     markdown_here.onMenuItemCommand(e);
   },
 
@@ -27,7 +34,9 @@ var markdown_here = {
   },
 
   showFirefoxContextMenu: function(event) {
-    // show or hide the menuitem based on what the context menu is on
+    // Hide the context menuitem if it's not on a message compose box.
+    // See here for more info about what we're checking:
+    // http://stackoverflow.com/a/3333679/729729
     var focusedElem, showItem;
     focusedElem = gContextMenu.target;
     showItem =
@@ -45,7 +54,10 @@ var markdown_here = {
     consoleService.logStringMessage(aMessage);
   },
 
+  // The rendering service provided to the content script.
+  // See the comment in markdown-render.js for why we do this.
   markdownRender: function(html, callback) {
+
     Components.utils.import("resource://common/markdown-render.js");
     Components.utils.import("resource://common/marked.js");
     Components.utils.import("resource://common/jsHtmlToText.js");

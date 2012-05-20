@@ -17,7 +17,7 @@
         </em:targetApplication>
 
         <em:name>Markdown Here</em:name>
-        <em:description>Write email in Markdown and render it before sending.</em:description>
+        <em:description>Write your email in Markdown, then make it pretty.</em:description>
         <em:creator>Adam Pritchard</em:creator>
 
         <em:iconURL>resource://common/images/icon128.png</em:iconURL>
