@@ -130,10 +130,13 @@ h3{ \
 .il { color: #0000DD; font-weight: bold } /* Literal.Number.Integer.Long */ \
 ';
 
+var EXPORTED_SYMBOLS = ['markdownHereCss'];
+
 if (typeof module !== 'undefined') {
   module.exports = markdownHereCss;
 } else {
   this.markdownHereCss = markdownHereCss;
+  this.EXPORTED_SYMBOLS = EXPORTED_SYMBOLS;
 }
 
 }).call(function() {

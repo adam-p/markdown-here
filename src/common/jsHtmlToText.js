@@ -250,10 +250,13 @@ var ENTITIES_MAP = {
   'euro' : 8364
 };
 
+var EXPORTED_SYMBOLS = ['htmlToText'];
+
 if (typeof module !== 'undefined') {
   module.exports = htmlToText;
 } else {
   this.htmlToText = htmlToText;
+  this.EXPORTED_SYMBOLS = EXPORTED_SYMBOLS;
 }
 
 }).call(function() {

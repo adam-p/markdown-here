@@ -2,15 +2,14 @@
 
 function clickRequest(event) {
   if (event && event.action === 'context-click') {
-    doMarkdownHereToggle();
+    markdownHere(document, requestMarkdownConversion);
   }
 }
-
-chrome.extension.onRequest.addListener(clickRequest);
-
 
 function requestMarkdownConversion(html, callback) {
   chrome.extension.sendRequest(html, function(response) {
     callback(response.html, response.css);
   });
 }
+
+chrome.extension.onRequest.addListener(clickRequest);

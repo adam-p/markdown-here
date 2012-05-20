@@ -1,0 +1,21 @@
+/* This is just an example.  You shouldn't do this. */
+#markdown_here-hello
+{
+}
+#markdown_here-toolbar-button
+{
+  list-style-image: url("chrome://markdown_here/skin/toolbar-button.png");
+  -moz-image-region: rect(0px 24px 24px 0px);
+}
+#markdown_here-toolbar-button:hover
+{
+  -moz-image-region: rect(24px 24px 48px  0px);
+}
+[iconsize="small"] #markdown_here-toolbar-button
+{
+  -moz-image-region: rect( 0px 40px 16px 24px);
+}
+[iconsize="small"] #markdown_here-toolbar-button:hover
+{
+  -moz-image-region: rect(24px 40px 40px 24px);
+}

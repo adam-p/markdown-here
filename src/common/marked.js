@@ -780,10 +780,13 @@ marked.lexer = function(src, opt) {
 
 marked.parse = marked;
 
+var EXPORTED_SYMBOLS = ['marked'];
+
 if (typeof module !== 'undefined') {
   module.exports = marked;
 } else {
   this.marked = marked;
+  this.EXPORTED_SYMBOLS = EXPORTED_SYMBOLS;
 }
 
 }).call(function() {

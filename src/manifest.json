@@ -5,18 +5,18 @@
   "homepage_url": "https://chrome.google.com/webstore/detail/bonncgjadmfcadjlopgmclakggdgpdnm",
   "permissions": ["contextMenus"],
   "minimum_chrome_version": "6",
-  "background_page": "lib/background.html",
+  "background_page": "chrome/background.html",
   "icons": {
-    "16": "images/butterfly16.png",
-    "32": "images/butterfly32.png",
-    "48": "images/butterfly48.png",
-    "128": "images/butterfly128.png",
-    "512": "images/butterfly512.png"
+    "16": "common/images/butterfly16.png",
+    "32": "common/images/butterfly32.png",
+    "48": "common/images/butterfly48.png",
+    "128": "common/images/butterfly128.png",
+    "512": "common/images/butterfly512.png"
   },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["data/markdown-here-listener.js", "data/chrome-contentscript.js"]
+      "js": ["common/markdown-here.js", "chrome/chrome-contentscript.js"]
     }
   ]
 }

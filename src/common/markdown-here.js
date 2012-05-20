@@ -3,14 +3,14 @@
  * MIT License : http://adampritchard.mit-license.org/
  */
 
-'use strict';
+;(function() {
 
 // Used to create unique IDs for each Markdown Here wrapper.
 var markdownHereWrapperIdCounter = 1;
 
 // Finds and returns the page element that currently has focus. Drills down into
 // iframes if necessary.
-function findFocusedElem() {
+function findFocusedElem(document) {
   var focusedElem = document.activeElement;
 
   // If the focus is within an iframe, we'll have to drill down to get to the
@@ -61,7 +61,7 @@ function getMarkdownStylesheet(elem, css) {
   // Create a style element under elem
   styleElem = elem.ownerDocument.createElement('style');
   styleElem.setAttribute('title', 'markdown-here-styles');
-  styleElem.appendChild(document.createTextNode(css));
+  styleElem.appendChild(elem.ownerDocument.createTextNode(css));
 
   elem.appendChild(styleElem);
 
@@ -111,13 +111,8 @@ function makeStylesExplicit(wrapperElem, css) {
 
 // Find the wrapper element that's above the current cursor position and returns
 // it. Returns falsy if there is no wrapper.
-function findMarkdownHereWrapper() {
-  var focusedElem, selection, range, wrapper, match, i;
-
-  focusedElem = findFocusedElem();
-  if (!focusedElem) {
-    return;
-  }
+function findMarkdownHereWrapper(focusedElem) {
+  var selection, range, wrapper, match, i;
 
   selection = focusedElem.ownerDocument.getSelection();
   range = selection.getRangeAt(0);
@@ -167,13 +162,8 @@ function findMarkdownHereWrappersInRange(range) {
 }
 
 // Converts the Markdown in the user's compose element to HTML and replaces it.
-function renderMarkdown(selectedRange) {
-  var extractedHtml, replacingSelection, focusedElem, rangeWrapper;
-
-  focusedElem = findFocusedElem();
-  if (!focusedElem || !focusedElem.ownerDocument) {
-    return;
-  }
+function renderMarkdown(focusedElem, selectedRange, markdownRenderer) {
+  var extractedHtml, replacingSelection, rangeWrapper;
 
   replacingSelection = !!selectedRange;
 
@@ -195,7 +185,7 @@ function renderMarkdown(selectedRange) {
   }
 
   // Call to the extension main code to actually do the md->html conversion.
-  requestMarkdownConversion(extractedHtml, function(mdHtml, mdCss) {
+  markdownRenderer(extractedHtml, function(mdHtml, mdCss) {
     var wrapper;
 
     // Wrap our pretty HTML in a <div> wrapper.
@@ -230,7 +220,7 @@ function unrenderMarkdown(wrapperElem) {
 }
 
 // The context menu handler.
-function doMarkdownHereToggle() {
+function markdownHere(document, markdownRenderer) {
 
   // If the cursor (or current selection) is in a Markdown Here wrapper, then
   // we're reverting that wrapper back to Markdown. If there's a selection that
@@ -241,15 +231,17 @@ function doMarkdownHereToggle() {
 
   var wrappers, outerWrapper, focusedElem, range, i;
 
-  outerWrapper = findMarkdownHereWrapper();
+  focusedElem = findFocusedElem(document);
+  if (!focusedElem || !focusedElem.ownerDocument) {
+    return;
+  }
+
+  outerWrapper = findMarkdownHereWrapper(focusedElem);
   if (outerWrapper) {
     wrappers = [outerWrapper];
   }
   else {
-    focusedElem = findFocusedElem();
-    if (focusedElem) {
-      range = getSelectedRange(focusedElem.ownerDocument);
-    }
+    range = getSelectedRange(focusedElem.ownerDocument);
 
     if (range) {
       wrappers = findMarkdownHereWrappersInRange(range);
@@ -264,6 +256,19 @@ function doMarkdownHereToggle() {
     }
   }
   else {
-    renderMarkdown(range);
+    renderMarkdown(focusedElem, range, markdownRenderer);
   }
 }
+
+var EXPORTED_SYMBOLS = ['markdownHere'];
+
+if (typeof module !== 'undefined') {
+  module.exports = markdownHere;
+} else {
+  this.markdownHere = markdownHere;
+  this.EXPORTED_SYMBOLS = EXPORTED_SYMBOLS;
+}
+
+}).call(function() {
+  return this || (typeof window !== 'undefined' ? window : global);
+}());

@@ -22,10 +22,13 @@
     return markdownToHtml(extractedText);
   }
 
+  var EXPORTED_SYMBOLS = ['markdownRender'];
+
   if (typeof module !== 'undefined') {
     module.exports = markdownRender;
   } else {
     this.markdownRender = markdownRender;
+    this.EXPORTED_SYMBOLS = EXPORTED_SYMBOLS;
   }
 
 }).call(function() {
