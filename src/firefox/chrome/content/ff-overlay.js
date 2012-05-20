@@ -35,17 +35,27 @@ var markdown_here = {
 
   showFirefoxContextMenu: function(event) {
     // Hide the context menuitem if it's not on a message compose box.
-    // See here for more info about what we're checking:
-    // http://stackoverflow.com/a/3333679/729729
-    var focusedElem, showItem;
+    var focusedElem, showItem = false;
+
+    function testElem(elem) {
+      // See here for more info about what we're checking:
+      // http://stackoverflow.com/a/3333679/729729
+      return elem.contentEditable === true || elem.contentEditable === 'true'
+             || elem.contenteditable === true || elem.contenteditable === 'true'
+             || (elem.ownerDocument && elem.ownerDocument.designMode === 'on');
+    }
+
     focusedElem = gContextMenu.target;
-    showItem =
-      focusedElem &&
-      (focusedElem.contentEditable === true || focusedElem.contentEditable === 'true'
-       || focusedElem.contenteditable === true || focusedElem.contenteditable === 'true'
-       || (focusedElem.ownerDocument && focusedElem.ownerDocument.designMode === 'on'));
+
+    // Test all the way up to the parent <body> (needed for Hotmail on Firefox).
+    while (focusedElem) {
+      showItem = testElem(focusedElem);
+      if (showItem) break;
+      focusedElem = focusedElem.parentElement;
+    }
 
     document.getElementById("context-markdown_here").hidden = !showItem;
+    document.getElementById("context-markdown_here-separator").hidden = !showItem;
   },
 
   log: function(aMessage) {
