@@ -12,12 +12,23 @@ If only part of your email is Markdown (like if you're writing a reply and the o
 
 Markdown Here is primarily targeted to work with Gmail, but it also works pretty well with Yahoo! and Hotmail.
 
+Privacy: Markdown Here accesses and modifies the content of your email. It can, in theory, access other web content, but does not. It also makes no Internet requests itself whatsoever. You data is modified when and where you choose, and does not leave your browser.
+
+Available as both a Chrome and Firefox extension.
+
 This is an open source project. See links for full instructions, more information, bug reports, or to contribute.
 
 https://github.com/adam-p/markdown-here
 
 
 Change Log
+
+2011-05-20: v2.0.0
+
+Added Firefox extension.
+
+Chrome version: Moved most rendering code out of content scripts and into background scripts. This means less code needs to be loaded with each page. (The Firefox version also more or less behaves like this.)
+
 
 2011-05-17: v1.2.1
 
