@@ -1,4 +1,4 @@
-Markdown Here is a Google Chrome extension that lets you write email in Markdown and render it before sending.
+Markdown Here lets you write email in Markdown and render it before sending.
 
 This is great for anyone who doesn't like fiddling around with formatting buttons while write an email. It's especially good for programmers who write email with code in them.
 

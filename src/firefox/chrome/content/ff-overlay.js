@@ -1,20 +1,9 @@
+/*
+ * Copyright Adam Pritchard 2012
+ * MIT License : http://adampritchard.mit-license.org/
+ */
 
 var markdown_here = {
-  log: function(aMessage) {
-    var consoleService = Components.classes["@mozilla.org/consoleservice;1"]
-                                   .getService(Components.interfaces.nsIConsoleService);
-    consoleService.logStringMessage(aMessage);
-  },
-
-  markdownRender: function(html, callback) {
-    Components.utils.import("resource://common/markdown-render.js");
-    Components.utils.import("resource://common/marked.js");
-    Components.utils.import("resource://common/jsHtmlToText.js");
-    Components.utils.import("resource://common/github.css.js");
-
-    callback(markdownRender(htmlToText, marked, html), markdownHereCss);
-  },
-
   onMenuItemCommand: function(e) {
     Components.utils.import("resource://common/markdown-here.js");
 
@@ -48,6 +37,21 @@ var markdown_here = {
        || (focusedElem.ownerDocument && focusedElem.ownerDocument.designMode === 'on'));
 
     document.getElementById("context-markdown_here").hidden = !showItem;
+  },
+
+  log: function(aMessage) {
+    var consoleService = Components.classes["@mozilla.org/consoleservice;1"]
+                                   .getService(Components.interfaces.nsIConsoleService);
+    consoleService.logStringMessage(aMessage);
+  },
+
+  markdownRender: function(html, callback) {
+    Components.utils.import("resource://common/markdown-render.js");
+    Components.utils.import("resource://common/marked.js");
+    Components.utils.import("resource://common/jsHtmlToText.js");
+    Components.utils.import("resource://common/github.css.js");
+
+    callback(markdownRender(htmlToText, marked, html), markdownHereCss);
   }
 };
 

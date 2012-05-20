@@ -1,8 +1,2 @@
-<!ENTITY markdown_here.label "Your localized menuitem">
 <!ENTITY markdown_hereContext.label "Markdown Toggle">
-<!ENTITY markdown_hereContext.accesskey "Y">
-<!ENTITY markdown_hereToolbarButton.label "Your Toolbar Button">
-<!ENTITY markdown_hereToolbarButton.tooltip "This is your toolbar button!">
-<!ENTITY markdown_hereSidebar.label "Your Sidebar">
-<!ENTITY markdown_hereToolbar.name  "example">
-<!ENTITY markdown_hereToolbar.label "This is an example toolbar. You can hide it under View &gt; toolbars &gt; &markdown_hereToolbar.name;">
+<!ENTITY markdown_hereContext.accesskey "M">

@@ -6,7 +6,7 @@
         <em:id>markdown-here@adam.pritchard</em:id>
         <em:version>2.0.0</em:version>
         <em:name>Markdown Here</em:name>
-        <em:description>Markdown Here is a Firefox extension that lets you write email in Markdown and render it before sending.
+        <em:description>Markdown Here lets you write email in Markdown and render it before sending.
 
 This is great for anyone who doesn&#39;t like fiddling around with formatting buttons while write an email. It&#39;s especially good for programmers who write email with code in them.
 </em:description>
