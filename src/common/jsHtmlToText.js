@@ -24,7 +24,7 @@ adam-p: modified to be a module
 
 
 function htmlToText(html, extensions) {
-    var text = html;
+    var text = html, i;
 
     if (extensions && extensions['preprocessing'])
         text = extensions['preprocessing'](text);
