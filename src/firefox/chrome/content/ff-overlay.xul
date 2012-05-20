@@ -2,7 +2,7 @@
 <?xml-stylesheet href="chrome://markdown_here/skin/overlay.css" type="text/css"?>
 <!DOCTYPE overlay SYSTEM "chrome://markdown_here/locale/overlay.dtd">
 <overlay id="markdown_here-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-  <script src="ff-overlay.js"/>
+  <script src="chrome://markdown_here/content/ff-overlay.js"/>
   <stringbundleset id="stringbundleset">
     <stringbundle id="markdown_here-strings" src="chrome://markdown_here/locale/overlay.properties"/>
   </stringbundleset>
