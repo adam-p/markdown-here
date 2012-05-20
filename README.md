@@ -1,6 +1,6 @@
 # <img src="//github.com/adam-p/markdown-here/raw/master/images/butterfly48.png" /> Markdown Here
 
-*Markdown Here* is a Google Chrome extension that lets you write email in Markdown and render it before sending.
+*Markdown Here* is a Google Chrome and Firefox extension that lets you write email in Markdown and render it before sending.
 
 Writing email with code in it pretty tedious. Writing Markdown with code in it is easy. I found myself writing email in Markdown in the Github in-browser editor, then copying the preview into email. This is a pretty absurd workflow, so I decided create a tool to write and render Markdown right in the email.
 
@@ -8,11 +8,13 @@ Writing email with code in it pretty tedious. Writing Markdown with code in it i
 
 ## Installation
 
-### Via the Chrome Web Store
+### Chrome
+
+#### Chrome Web Store
 
 Go to the [Chrome Web Store page for *Markdown Here*](https://chrome.google.com/webstore/detail/bonncgjadmfcadjlopgmclakggdgpdnm) and install normally.
 
-### Manual/Development
+#### Manual/Development
 
 1. Clone this repo.
 2. In Chrome, open the Extensions settings. (Wrench button, Tools, Extensions.)
@@ -21,9 +23,22 @@ Go to the [Chrome Web Store page for *Markdown Here*](https://chrome.google.com/
 5. The *Markdown Here* extension should now be visible in your extensions list.
 6. Reload your webmail page before trying to convert an email.
 
+### Firefox
+
+#### Firefox Add-ons site
+
+TBD
+
+#### Manual/Development
+
+1. Clone this repo.
+2. Follow the instructions in the MDN ["Setting up an extension development environment"](https://developer.mozilla.org/en/Setting_up_extension_development_environment) article.
+
 ## Use
 
-1. In Chrome, log into your Gmail, Hotmail, or Yahoo account and start a new email.
+[Install](#installation), and then:
+
+1. In Chrome or Firefox, log into your Gmail, Hotmail, or Yahoo account and start a new email.
 2. Make sure you're using the rich editor. (In Gmail, click the "Rich formatting" link, if it's visible.)
 3. Compose an email in Markdown. For example:
 
@@ -37,7 +52,7 @@ Go to the [Chrome Web Store page for *Markdown Here*](https://chrome.google.com/
 
 ### Revert to Markdown
 
-After rendering your Markdown to pretty HTML, you can still get back to your original Markdown. Simply follow the same instructions as above -- your email compose body will change back to the Markdown you had written.
+After rendering your Markdown to pretty HTML, you can still get back to your original Markdown. Just right-click anywhere in the newly rendered Markdown and click "Markdown Toggle" -- your email compose body will change back to the Markdown you had written.
 
 Note that any changes you make to the pretty HTML will be lost when you revert to Markdown.
 
@@ -45,7 +60,7 @@ In Gmail, you can also use the browser's Undo command (ctrl+z/cmd+z, or from the
 
 ### Replies and Piecemeal Conversion
 
-Sometimes you don't want to convert the entire email; sometimes your email isn't entirely Markdown. The primary example of this is when you're writing a reply to an email: what you wrote -- either at the top or inline -- may be in Markdown, but no part of the original is. If you convert the entire email, the original will lose all formatting (at best).
+Sometimes you don't want to convert the entire email; sometimes your email isn't entirely Markdown. The primary example of this is when you're writing a reply to an email: what you wrote -- either at the top or inline -- may be in Markdown, but no part of the original is. If you convert the entire email, the original will lose all formatting (or get otherwise messed up).
 
 To convert only part of the email, select the text (with your mouse or keyboard), right-click on it, and click the "Markdown Toggle" menu item. Your selection is magically rendered into pretty HTML. 
 
@@ -55,19 +70,14 @@ To revert back to Markdown, just put your cursor anywhere in the block of conver
 
 #### Things to know about converting a selection
 
-* If you select only part of a block of text, the entire block will rendered and replaced.
-  * In technical terms: if the selected range begins or ends in a text node, it will be expanded to the full element.
+* If you select only part of a block of text, only that text will be converted. The converted block will be wrapped in a paragraph element, so the original line will be broken up. You probably don't want to ever do this.
 
 * Be aware that on Mac OS X (only >= Lion?), right clicking a word will cause that word to be selected, and that triggers *Markdown Here*'s selection-convert mode. So if you want to convert the whole email, right-click where there's no text.
   * It's okay to have a selection when reverting back to Markdown, so don't worry about right-clicking on text when doing that.
 
-* You don't have to revert selections back to Markdown in the same order that you rendered them. Just right-click in a rendered block of text, click the menu item, and only that block will be reverted.
+* You don't have to revert selections back to Markdown in the same order that you converted them. Just right-click in a converted block of text, click the menu item, and only that block will be reverted.
 
-## Notes
-
-* *Markdown Here* uses [Github Flavored Markdown](http://github.github.com/github-flavored-markdown/).
-
-* Even though the extension is only known to work (to varying degrees )with Gmail, Yahoo, and Hotmail, we're not restricting what URLs the extension applies to. The hope is that it'll work in unexpected places. Reports of good (or bad) functionality is appreciated (create an issue). In the future the set of target URLs should be restricted.
+* You can select and revert multiple converted blocks at the same time. One upshot of this is that you can select your entire email, click "Markdown Toggle", and all portions of it that you had converted will be reverted.
 
 ## Compatibility
 
@@ -109,9 +119,13 @@ Short answer: Gmail is great.
 *Receive*
 > How well this webmail client displays rendered email that it receives (assuming the sender is perfect).
 
-## Next Steps
+## Notes
 
-* Look into also making a Firefox extension.
+* *Markdown Here* uses [Github Flavored Markdown](http://github.github.com/github-flavored-markdown/).
+
+* Even though the extension is only known to work (to varying degrees )with Gmail, Yahoo, and Hotmail, we're not restricting what URLs the extension applies to. The hope is that it'll work in unexpected places. Reports of good (or bad) functionality is appreciated (create an issue). In the future the set of target URLs should be restricted.
+
+## Next Steps
 
 * Test cases.
 
