@@ -39,7 +39,15 @@ var markdown_here = {
 
   showFirefoxContextMenu: function(event) {
     // show or hide the menuitem based on what the context menu is on
-    document.getElementById("context-markdown_here").hidden = gContextMenu.onImage;
+    var focusedElem, showItem;
+    focusedElem = gContextMenu.target;
+    showItem =
+      focusedElem &&
+      (focusedElem.contentEditable === true || focusedElem.contentEditable === 'true'
+       || focusedElem.contenteditable === true || focusedElem.contenteditable === 'true'
+       || (focusedElem.ownerDocument && focusedElem.ownerDocument.designMode === 'on'));
+
+    document.getElementById("context-markdown_here").hidden = !showItem;
   }
 };
 
