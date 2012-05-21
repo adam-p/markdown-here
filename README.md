@@ -139,8 +139,6 @@ Short answer: Gmail is great. So is Thunderbird.
 
 * Retrict domains for both Chrome and Firefox to just Gmail+Hotmail+Yahoo. Having the extension be loaded on all domains is pretty dumb (basically just a debug tool so I can see where else it can be used -- but it shouldn't stay like that).
 
-* Chrome: Figure out how to only have our menu-item show when focus is in an email compose element (like with Firefox).
-
 * Test cases.
 
 * Syntax hightlighting!
