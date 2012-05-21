@@ -17,27 +17,21 @@ function makeChromeExtension() {
   manifest = JSON.parse(fs.readFileSync('manifest.json', 'utf8'));
 
   files.push({name: 'manifest.json', path: 'manifest.json'});
-  files.push({name: manifest.background_page, path: manifest.background_page});
 
   for (iconsize in manifest.icons) {
     files.push({name: manifest.icons[iconsize], path: manifest.icons[iconsize]});
   }
 
-  for (i in manifest.content_scripts) {
-    for (j in manifest.content_scripts[i].js) {
+  for (i = 0; i < manifest.content_scripts.length; i++) {
+    for (j = 0; j < manifest.content_scripts[i].js.length; j++) {
       scriptfile = manifest.content_scripts[i].js[j];
       files.push({name: scriptfile, path: scriptfile});
     }
   }
 
-  // background.html has script tags in it
-  backgroundLines = fs.readFileSync(manifest.background_page, 'utf8').split('\n');
-  for (i = 0; i < backgroundLines.length; i++) {
-    match = backgroundLines[i].match(/(<script src=\")(.*)\"><\/script>/);
-    if (!match || match.length < 3) continue;
-    // Paths are relative to the file
-    match = path.relative(__dirname, path.resolve(path.dirname(manifest.background_page), match[2]));
-    files.push({name: match, path: match});
+  for (i = 0; i < manifest.background.scripts.length; i++) {
+    scriptfile = manifest.background.scripts[i];
+    files.push({name: scriptfile, path: scriptfile});
   }
 
   console.log('--- makeChromeExtension ---');
@@ -97,8 +91,8 @@ function makeFirefoxExtension() {
       pathMap['resource://'+line[1]+'/'] = line[line.length-1];
     }
     else if (line[0] === 'overlay') {
-      // Assume the overlay line comes last in the manifest
-      paths.push(convertURItoPath(line[line.length-1]));
+      // Assume the overlay lines come last in the manifest
+      paths.push(convertURItoPath(line[2]));
     }
     else {
       pathMap['chrome://'+line[1]+'/'+line[0]+'/'] = line[line.length-1];
@@ -141,7 +135,12 @@ function makeFirefoxExtension() {
   paths = paths.concat(deeplyProcessFiles(paths));
 
   paths.forEach(function(path) {
-    files.push({name: path, path: path});
+    var duplicate = files.some(function(element) {
+      return element.name === path;
+    });
+    if (!duplicate) {
+      files.push({name: path, path: path});
+    }
   });
 
   console.log('--- makeFirefoxExtension ---');
