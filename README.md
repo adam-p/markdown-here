@@ -129,6 +129,16 @@ Short answer: Gmail is great. So is Thunderbird.
 *Receive*
 > How well this email client displays rendered email that it receives (assuming the sender is perfect).
 
+## Building the Extension Bundles
+
+"Building" is really just zipping. Run the script to create the bundles:
+
+    > node store-assets/makezip.js
+
+Two files will be written to the `src` directory: `markdown-here.zip` (Chrome bundle) and `markdown_here.xpi` (Mozilla bundle).
+
+(Note that there are one or more dependencies required for the node script. I should create a `package.json`, but for now just examine the errors when you try to run it.)
+
 ## Notes
 
 * *Markdown Here* uses [Github Flavored Markdown](http://github.github.com/github-flavored-markdown/).
