@@ -288,6 +288,7 @@ function markdownHere(document, markdownRenderer) {
   }
 }
 
+
 var EXPORTED_SYMBOLS = ['markdownHere'];
 
 if (typeof module !== 'undefined') {

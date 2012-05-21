@@ -3,29 +3,37 @@
  * MIT License : http://adampritchard.mit-license.org/
  -->
 
-<script src="../common/jsHtmlToText.js"></script>
-<script src="../common/marked.js"></script>
-<script src="../common/github.css.js"></script>
-<script src="../common/markdown-render.js"></script>
+<script src='../common/jsHtmlToText.js'></script>
+<script src='../common/marked.js'></script>
+<script src='../common/github.css.js'></script>
+<script src='../common/markdown-render.js'></script>
 
 <script>
 
-  // Create the context menu that will signal our main code.
-  chrome.contextMenus.create({
-    contexts: ['editable'],
-    title: 'Markdown Toggle',
-    onclick: function(info, tab) {
-      chrome.tabs.sendRequest(tab.id, {action: 'context-click'});
+  chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
+    if (request.action === 'create-menu') {
+        chrome.contextMenus.removeAll(function() {
+          // Create the context menu that will signal our main code.
+          chrome.contextMenus.create({
+            contexts: ['editable'],
+            title: 'Markdown Toggle',
+            onclick: function(info, tab) {
+              chrome.tabs.sendRequest(tab.id, {action: 'context-click'});
+            }
+          });
+        });
+    }
+    else if (request.action === 'delete-menu') {
+        chrome.contextMenus.removeAll();
+    }
+    else if (request.action === 'render-markdown') {
+      // Handle rendering requests from the content script.
+      // See the comment in markdown-render.js for why we do this.
+      sendResponse({
+        html: markdownRender(htmlToText, marked, request.html),
+        css: markdownHereCss
+      });
     }
   });
 
-  // Handle rendering requests from the content script.
-  // See the comment in markdown-render.js for why we do this.
-  chrome.extension.onRequest.addListener(
-    function renderRequest(html, sender, sendResponse) {
-      sendResponse({
-        html: markdownRender(htmlToText, marked, html),
-        css: markdownHereCss
-      });
-    });
 </script>
