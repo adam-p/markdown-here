@@ -5,7 +5,16 @@
     <Description about="urn:mozilla:install-manifest">
         <em:type>2</em:type> <!-- 2 : Extension -->
         <em:id>markdown-here@adam.pritchard</em:id>
-        <em:version>2.0.0</em:version>
+        <em:version>2.1.0</em:version>
+
+        <!-- Any suitably modern toolkit application -->
+        <em:targetApplication>
+          <Description>
+            <em:id>toolkit@mozilla.org</em:id>
+            <em:minVersion>5.0</em:minVersion>
+            <em:maxVersion>13.*</em:maxVersion>
+          </Description>
+        </em:targetApplication>
 
         <em:targetApplication>
             <Description>

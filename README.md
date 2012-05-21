@@ -1,6 +1,6 @@
 # <img src="//github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png" /> Markdown Here
 
-*Markdown Here* is a Google Chrome and Firefox extension that lets you write email in Markdown and render it before sending.
+*Markdown Here* is a Google Chrome, Firefox, and Thunderbird extension that lets you write email in Markdown and render it before sending.
 
 Writing email with code in it is pretty tedious. Writing Markdown with code in it is easy. I found myself writing email in Markdown in the Github in-browser editor, then copying the preview into email. This is a pretty absurd workflow, so I decided create a tool to write and render Markdown right in the email.
 
@@ -21,13 +21,15 @@ Go to the [Chrome Web Store page for *Markdown Here*](https://chrome.google.com/
 3. On the Extensions settings page, click the "Developer Mode" checkbox.
 4. Click the now-visible "Load unpacked extension…" button. Navigate to the directory where you cloned the repo.
 5. The *Markdown Here* extension should now be visible in your extensions list.
-6. Reload your webmail page before trying to convert an email.
+6. Reload your webmail page (and maybe application) before trying to convert an email.
 
-### Firefox
+### Firefox and Thunderbird
 
-#### Firefox Add-ons site
+#### Mozilla Add-ons site
 
 Go to the [Firefox Add-ons page for *Markdown Here*](https://addons.mozilla.org/en-US/firefox/addon/markdown-here/) and install normally.
+
+Or go to the "Tools > Add-ons" menu and then search for "Markdown Here". 
 
 #### Manual/Development
 
@@ -36,10 +38,12 @@ Go to the [Firefox Add-ons page for *Markdown Here*](https://addons.mozilla.org/
 
 ## Use
 
-[Install](#installation), and then:
+[Install](#installation) it, and then…
 
-1. In Chrome or Firefox, log into your Gmail, Hotmail, or Yahoo account and start a new email.
-2. Make sure you're using the rich editor. (In Gmail, click the "Rich formatting" link, if it's visible.)
+1. In Chrome or Firefox, log into your Gmail, Hotmail, or Yahoo account and start a new email. In Thunderbird, start a new message.
+2. Make sure you're using the rich editor. 
+   * In Gmail, click the "Rich formatting" link, if it's visible.
+   * In Thunderbird, make sure "Compose messages in HTML format" is enabled in your "Account Settings", "Composition & Addressing" pane. 
 3. Compose an email in Markdown. For example:
 
     ```
@@ -72,7 +76,7 @@ To revert back to Markdown, just put your cursor anywhere in the block of conver
 
 * If you select only part of a block of text, only that text will be converted. The converted block will be wrapped in a paragraph element, so the original line will be broken up. You probably don't want to ever do this.
 
-* Be aware that on Mac OS X (only >= Lion?), right clicking a word will cause that word to be selected, and that triggers *Markdown Here*'s selection-convert mode. So if you want to convert the whole email, right-click where there's no text.
+* Be aware that on Mac OS X (only >= Lion?), right clicking a word (only in Chrome?) will cause that word to be selected, and that triggers *Markdown Here*'s selection-convert mode. So if you want to convert the whole email, right-click where there's no text.
   * It's okay to have a selection when reverting back to Markdown, so don't worry about right-clicking on text when doing that.
 
 * You don't have to revert selections back to Markdown in the same order that you converted them. Just right-click in a converted block of text, click the menu item, and only that block will be reverted.
@@ -81,7 +85,7 @@ To revert back to Markdown, just put your cursor anywhere in the block of conver
 
 ## Compatibility
 
-Short answer: Gmail is great.
+Short answer: Gmail is great. So is Thunderbird.
 
 <table>
   <tr>
@@ -108,26 +112,30 @@ Short answer: Gmail is great.
     <td>Paragraph tags are lost (or replaced?).</td>
     <td>Paragraph tags are lost (or replaced?).</td>
   </tr>
+  <tr>
+    <th>Thunderbird</th>
+    <td>Perfect</td>
+    <td>Perfect</td>
+    <td>Perfect</td>
+  </tr>
 </table>
 
 *Compose*
 > How *Markdown Here* behaves when composing an email. E.g., if rendering and reverting looks correct, styling is good, etc.
 
 *Send*
-> Negative effect that may occur when sending a rendered email from this webmail client. E.g., stripped tags and styles.
+> Negative effect that may occur when sending a rendered email from this email client. E.g., stripped tags and styles.
 
 *Receive*
-> How well this webmail client displays rendered email that it receives (assuming the sender is perfect).
+> How well this email client displays rendered email that it receives (assuming the sender is perfect).
 
 ## Notes
 
 * *Markdown Here* uses [Github Flavored Markdown](http://github.github.com/github-flavored-markdown/).
 
-* Even though the extension is only known to work (to varying degrees )with Gmail, Yahoo, and Hotmail, we're not restricting what URLs the extension applies to. The hope is that it'll work in unexpected places. Reports of good (or bad) functionality is appreciated (create an issue). In the future the set of target URLs should be restricted.
+* Even though the extension is only known to work (to varying degrees) with Gmail, Yahoo, and Hotmail, we're not restricting what URLs the extension applies to. The hope is that it'll work in unexpected places. Reports of good (or bad) functionality is appreciated (create an issue). In the future the set of target URLs should be restricted.
 
 ## Next Steps
-
-* Look into making Firefox extension work with Thunderbird. (Deprioritized if difficult.)
 
 * Retrict domains for both Chrome and Firefox to just Gmail+Hotmail+Yahoo. Having the extension be loaded on all domains is pretty dumb (basically just a debug tool so I can see where else it can be used -- but it shouldn't stay like that).
 

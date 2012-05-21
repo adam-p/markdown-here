@@ -23,35 +23,45 @@ var markdown_here = {
   },
 
   onLoad: function() {
+    var contextMenu;
+
     // initialization code
     this.initialized = true;
     this.strings = document.getElementById("markdown_here-strings");
 
-    document.getElementById("contentAreaContextMenu")
-            .addEventListener("popupshowing", function (e) {
-      markdown_here.showFirefoxContextMenu(e);
+    contextMenu = document.getElementById("contentAreaContextMenu");
+    if (!contextMenu) contextMenu = document.getElementById("msgComposeContext");
+    contextMenu.addEventListener("popupshowing", function (e) {
+      markdown_here.contextMenuShowing(e);
     }, false);
   },
 
-  showFirefoxContextMenu: function(event) {
+  contextMenuShowing: function(event) {
     // Hide the context menuitem if it's not on a message compose box.
     var focusedElem, showItem = false;
 
-    function testElem(elem) {
-      // See here for more info about what we're checking:
-      // http://stackoverflow.com/a/3333679/729729
-      return elem.contentEditable === true || elem.contentEditable === 'true'
-             || elem.contenteditable === true || elem.contenteditable === 'true'
-             || (elem.ownerDocument && elem.ownerDocument.designMode === 'on');
+    // Are we running in Thunderbird?
+    if (GetCurrentEditorType) {
+      // Are we rich-editing?
+      showItem = (GetCurrentEditorType().indexOf('html') >= 0);
     }
+    else { // Firefox
+      function testElem(elem) {
+        // See here for more info about what we're checking:
+        // http://stackoverflow.com/a/3333679/729729
+        return elem.contentEditable === true || elem.contentEditable === 'true'
+               || elem.contenteditable === true || elem.contenteditable === 'true'
+               || (elem.ownerDocument && elem.ownerDocument.designMode === 'on');
+      }
 
-    focusedElem = gContextMenu.target;
+      focusedElem = gContextMenu.target;
 
-    // Test all the way up to the parent <body> (needed for Hotmail on Firefox).
-    while (focusedElem) {
-      showItem = testElem(focusedElem);
-      if (showItem) break;
-      focusedElem = focusedElem.parentElement;
+      // Test all the way up to the parent <body> (needed for Hotmail on Firefox).
+      while (focusedElem) {
+        showItem = testElem(focusedElem);
+        if (showItem) break;
+        focusedElem = focusedElem.parentElement;
+      }
     }
 
     document.getElementById("context-markdown_here").hidden = !showItem;
