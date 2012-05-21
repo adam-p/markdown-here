@@ -2,7 +2,7 @@
 
 *Markdown Here* is a Google Chrome and Firefox extension that lets you write email in Markdown and render it before sending.
 
-Writing email with code in it pretty tedious. Writing Markdown with code in it is easy. I found myself writing email in Markdown in the Github in-browser editor, then copying the preview into email. This is a pretty absurd workflow, so I decided create a tool to write and render Markdown right in the email.
+Writing email with code in it is pretty tedious. Writing Markdown with code in it is easy. I found myself writing email in Markdown in the Github in-browser editor, then copying the preview into email. This is a pretty absurd workflow, so I decided create a tool to write and render Markdown right in the email.
 
 <img width="700px" src="//github.com/adam-p/markdown-here/raw/master/chrome-store/markdown-here-image1.gimp.png" />
 
@@ -27,7 +27,7 @@ Go to the [Chrome Web Store page for *Markdown Here*](https://chrome.google.com/
 
 #### Firefox Add-ons site
 
-TBD
+Go to the [Firefox Add-ons page for *Markdown Here*](https://addons.mozilla.org/en-US/firefox/addon/markdown-here/) and install normally.
 
 #### Manual/Development
 
