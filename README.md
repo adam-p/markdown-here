@@ -115,7 +115,7 @@ Short answer: Gmail is great. So is Thunderbird.
   <tr>
     <th>Thunderbird</th>
     <td>Perfect</td>
-    <td>Perfect</td>
+    <td>Embedded image tags lose correct src</td>
     <td>Perfect</td>
   </tr>
 </table>
