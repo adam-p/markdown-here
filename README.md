@@ -12,7 +12,7 @@ Writing email with code in it is pretty tedious. Writing Markdown with code in i
 
 #### Chrome Web Store
 
-Go to the [Chrome Web Store page for *Markdown Here*](https://chrome.google.com/webstore/detail/bonncgjadmfcadjlopgmclakggdgpdnm) and install normally.
+Go to the [Chrome Web Store page for *Markdown Here*](https://chrome.google.com/webstore/detail/elifhakcjgalahccnjkneoccemfahfoa) and install normally.
 
 #### Manual/Development
 
@@ -29,7 +29,7 @@ Go to the [Chrome Web Store page for *Markdown Here*](https://chrome.google.com/
 
 Go to the [Firefox Add-ons page for *Markdown Here*](https://addons.mozilla.org/en-US/firefox/addon/markdown-here/) and install normally.
 
-Or go to the "Tools > Add-ons" menu and then search for "Markdown Here". 
+Or go to the "Tools > Add-ons" menu and then search for "Markdown Here".
 
 #### Manual/Development
 
@@ -41,9 +41,9 @@ Or go to the "Tools > Add-ons" menu and then search for "Markdown Here".
 [Install](#installation) it, and then…
 
 1. In Chrome or Firefox, log into your Gmail, Hotmail, or Yahoo account and start a new email. In Thunderbird, start a new message.
-2. Make sure you're using the rich editor. 
+2. Make sure you're using the rich editor.
    * In Gmail, click the "Rich formatting" link, if it's visible.
-   * In Thunderbird, make sure "Compose messages in HTML format" is enabled in your "Account Settings", "Composition & Addressing" pane. 
+   * In Thunderbird, make sure "Compose messages in HTML format" is enabled in your "Account Settings", "Composition & Addressing" pane.
 3. Compose an email in Markdown. For example:
 
     ```
@@ -66,7 +66,7 @@ In Gmail, you can also use the browser's Undo command (ctrl+z/cmd+z, or from the
 
 Sometimes you don't want to convert the entire email; sometimes your email isn't entirely Markdown. The primary example of this is when you're writing a reply to an email: what you wrote -- either at the top or inline -- may be in Markdown, but no part of the original is. If you convert the entire email, the original will lose all formatting (or get otherwise messed up).
 
-To convert only part of the email, select the text (with your mouse or keyboard), right-click on it, and click the "Markdown Toggle" menu item. Your selection is magically rendered into pretty HTML. 
+To convert only part of the email, select the text (with your mouse or keyboard), right-click on it, and click the "Markdown Toggle" menu item. Your selection is magically rendered into pretty HTML.
 
 To revert back to Markdown, just put your cursor anywhere in the block of converted text, right click, and click the "Markdown Toggle" menu item again. Now it's magically back to the original Markdown.
 
@@ -180,14 +180,14 @@ Two files will be written to the `src` directory: `markdown-here.zip` (Chrome bu
 
 ### Other stuff not used, but to keep an eye on
 
-* Markdown-to-HTML: 
+* Markdown-to-HTML:
   * [evilstreak / markdown-js](https://github.com/evilstreak/markdown-js) (There's currently a GFM dialect that seems almost finished. See [issue #41](https://github.com/evilstreak/markdown-js/issues/41).)
   * [Pagedown](https://code.google.com/p/pagedown/)
   * [isaacs / github-flavored-markdown](https://github.com/isaacs/github-flavored-markdown) (A Showdown derivative)
   * [Showdown](https://github.com/coreyti/showdown)
 
 * CSS:
-  * [Mou.app](http://mouapp.com/)'s CSS looks pretty good. It can be found [here](https://github.com/borismus/markdown-preview/issues/16). I'm hesitant to use it because Mou isn't FOSS. 
+  * [Mou.app](http://mouapp.com/)'s CSS looks pretty good. It can be found [here](https://github.com/borismus/markdown-preview/issues/16). I'm hesitant to use it because Mou isn't FOSS.
   * This [Github theme for Mou](https://github.com/gcollazo/mou-theme-github2) might be good, though.
 
 ## Feedback
