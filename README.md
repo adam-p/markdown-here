@@ -1,4 +1,4 @@
-# <img src="//github.com/adam-p/markdown-here/raw/master/src/common/images/butterfly48.png" /> Markdown Here
+# <img src="//github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png" /> Markdown Here
 
 *Markdown Here* is a Google Chrome and Firefox extension that lets you write email in Markdown and render it before sending.
 
