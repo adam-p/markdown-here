@@ -156,9 +156,6 @@ Short answer: Gmail is great. So is Thunderbird.
 
 * Support images embedded in the Markdown (like, not hand-rolled image tags)? That will certainly deviate from straight Markdown, but maybe okay.
 
-* Retrict domains for both Chrome and Firefox to just Gmail+Hotmail+Yahoo. Having the extension be loaded on all domains is pretty dumb (basically just a debug tool so I can see where else it can be used -- but it shouldn't stay like that).
-  * *Update*: Tried and failed to get this working in Chrome. Also, getting Chrome to only show the menuitem when in a compose element. Capturing contextmenu and mousedown events is difficult in dynamically created iframes. Firefox is only showing the element when in a compose element, so that's good enough there for now.  
-
 ## Credits
 
 *Markdown Here* was coded on the shoulders of giants.
