@@ -1,11 +1,11 @@
 {
+  "manifest_version": 2,
   "name": "Markdown Here",
   "version": "2.1.0",
   "description": "Write your email in Markdown, then make it pretty.",
   "homepage_url": "https://chrome.google.com/webstore/detail/bonncgjadmfcadjlopgmclakggdgpdnm",
-  "permissions": ["contextMenus"],
   "minimum_chrome_version": "6",
-  "background_page": "chrome/background.html",
+  "content_security_policy": "default-src 'self'",
   "icons": {
     "16": "common/images/icon16.png",
     "32": "common/images/icon32.png",
@@ -13,10 +13,17 @@
     "128": "common/images/icon128.png",
     "512": "common/images/icon512.png"
   },
+  "permissions": ["contextMenus"],
+  "background": {"scripts": [
+                    "common/jsHtmlToText.js",
+                    "common/marked.js",
+                    "common/github.css.js",
+                    "common/markdown-render.js",
+                    "chrome/backgroundscript.js"]},
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["common/markdown-here.js", "chrome/chrome-contentscript.js"]
+      "js": ["common/markdown-here.js", "chrome/contentscript.js"]
     }
   ]
 }
