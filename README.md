@@ -137,8 +137,6 @@ Short answer: Gmail is great. So is Thunderbird.
 
 ## Next Steps
 
-* Retrict domains for both Chrome and Firefox to just Gmail+Hotmail+Yahoo. Having the extension be loaded on all domains is pretty dumb (basically just a debug tool so I can see where else it can be used -- but it shouldn't stay like that).
-
 * Test cases.
 
 * Syntax hightlighting!
@@ -152,14 +150,14 @@ Short answer: Gmail is great. So is Thunderbird.
 
 * Add a configurable hotkey.
 
-* Minify? Is there any advantage in extensions?
-  * Orthogonal, but: Can Browserling be used?
-
 * Add user option to specify Markdown dialect?
 
 * Make render-whole-email less of a special case? Just select the contents of the compose element and follow the render-selection code path?
 
 * Support images embedded in the Markdown (like, not hand-rolled image tags)? That will certainly deviate from straight Markdown, but maybe okay.
+
+* Retrict domains for both Chrome and Firefox to just Gmail+Hotmail+Yahoo. Having the extension be loaded on all domains is pretty dumb (basically just a debug tool so I can see where else it can be used -- but it shouldn't stay like that).
+  * *Update*: Tried and failed to get this working in Chrome. Also, getting Chrome to only show the menuitem when in a compose element. Capturing contextmenu and mousedown events is difficult in dynamically created iframes. Firefox is only showing the element when in a compose element, so that's good enough there for now.  
 
 ## Credits
 
