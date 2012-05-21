@@ -27,6 +27,8 @@ Change Log
 
 Added Thunderbird support to Firefox extension.
 
+Tightened security restrictions in Chrome extension.
+
 
 2011-05-20: v2.0.0
 
