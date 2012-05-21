@@ -137,6 +137,8 @@ Short answer: Gmail is great. So is Thunderbird.
 
 ## Next Steps
 
+* Improve table styling.
+
 * Test cases.
 
 * Syntax hightlighting!
