@@ -41,6 +41,7 @@ Or go to the "Tools > Add-ons" menu and then search for "Markdown Here".
 [Install](#installation) it, and then…
 
 1. In Chrome or Firefox, log into your Gmail, Hotmail, or Yahoo account and start a new email. In Thunderbird, start a new message.
+   * In Chrome, if you were already logged into your webmail, you'll need to reload the page. (Firefox and Thunderbird require you to restart the application.)
 2. Make sure you're using the rich editor.
    * In Gmail, click the "Rich formatting" link, if it's visible.
    * In Thunderbird, make sure "Compose messages in HTML format" is enabled in your "Account Settings", "Composition & Addressing" pane.
