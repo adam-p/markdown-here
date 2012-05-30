@@ -150,9 +150,12 @@ Two files will be written to the `src` directory: `markdown-here.zip` (Chrome bu
 
 * Improve table styling.
 
-* Add an option to make rendered mode read-only. If a user edits the rendered text and then reverts, they lose their changes, which is pretty bad. Better to not let the user make changes at all (optionally).
-  * Is it possible to do that? In Thunderbird as well?
+* Figure out how to prevent users from losing modifications to the rendered version when they revert.
   * Prompted by [this Reddit comment](http://www.reddit.com/r/programming/comments/uagqd/write_email_in_markdown_then_make_it_pretty/c4u6cpv).
+  * Maybe add an option to make rendered mode read-only. If a user edits the rendered text and then reverts, they lose their changes, which is pretty bad. Better to not let the user make changes at all (optionally).
+    * Is it possible to do that? In Thunderbird as well?
+  * Maybe convert the HTML back to Markdown. (Like, actually convert it -- don't just use the stashed original Markdown.)
+    * [to-markdown](https://github.com/domchristie/to-markdown) will probably be useful.
 
 * Test cases.
 
