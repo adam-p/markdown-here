@@ -69,12 +69,9 @@ function htmlToText(html, extensions) {
     // Replace <br> and <br/> with a single newline
     text = text.replace(/<\s*br[^>]*\/?\s*>/ig, '\n');
 
-	text = text
+    text = text
         // Remove all remaining tags.
         .replace(/(<([^>]+)>)/ig,"")
-        // Trim rightmost whitespaces for all lines
-        .replace(/([^\n\S]+)\n/g,"\n")
-        .replace(/([^\n\S]+)$/,"")
         // Make sure there are never more than two
         // consecutive linebreaks.
         .replace(/\n{2,}/g,"\n\n")
@@ -84,6 +81,15 @@ function htmlToText(html, extensions) {
         .replace(/\n+$/,"")
         // Decode HTML entities.
         .replace(/&([^;]+);/g, decodeHtmlEntity);
+
+    /* adam-p: make trailing whitespace stripping optional */
+
+    if (!extensions || !extensions['allowTrailingWhitespace']) {
+      text = text
+          // Trim rightmost whitespaces for all lines
+          .replace(/([^\n\S]+)\n/g,"\n")
+          .replace(/([^\n\S]+)$/,"");
+    }
 
     if (extensions && extensions['postprocessing'])
         text = extensions['postprocessing'](text);

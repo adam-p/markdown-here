@@ -30,7 +30,7 @@
       return replaced;
     }
 
-    extractedText = htmlToText(html, {tagreplacement: tagReplacement});
+    extractedText = htmlToText(html, {tagreplacement: tagReplacement, allowTrailingWhitespace: true});
 
     return markdownToHtml(extractedText);
   }
