@@ -150,6 +150,10 @@ Two files will be written to the `src` directory: `markdown-here.zip` (Chrome bu
 
 * Improve table styling.
 
+* Add an option to make rendered mode read-only. If a user edits the rendered text and then reverts, they lose their changes, which is pretty bad. Better to not let the user make changes at all (optionally).
+  * Is it possible to do that? In Thunderbird as well?
+  * Prompted by [this Reddit comment](http://www.reddit.com/r/programming/comments/uagqd/write_email_in_markdown_then_make_it_pretty/c4u6cpv).
+
 * Test cases.
 
 * Syntax hightlighting!
