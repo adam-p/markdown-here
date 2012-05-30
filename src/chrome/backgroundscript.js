@@ -10,7 +10,7 @@
 // Create the context menu that will signal our main code.
 chrome.contextMenus.create({
   contexts: ['editable'],
-  title: 'Markdown Toggle',
+  title: 'Mar&kdown Toggle',
   onclick: function(info, tab) {
     chrome.tabs.sendRequest(tab.id, {action: 'context-click'});
   }
