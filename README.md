@@ -132,13 +132,28 @@ Short answer: Gmail is great. So is Thunderbird.
 
 ## Building the Extension Bundles
 
-"Building" is really just zipping. Run the script to create the bundles:
+"Building" is really just zipping. Create all archives relative to the `src` directory.
 
-    > node store-assets/makezip.js
+### Chrome extension
 
-Two files will be written to the `src` directory: `markdown-here.zip` (Chrome bundle) and `markdown_here.xpi` (Mozilla bundle).
+Create a file with a `.zip` extension containing these files and directories:
 
-(Note that there are one or more dependencies required for the node script. I should create a `package.json`, but for now just examine the errors when you try to run it.)
+```
+manifest.json
+common/
+chrome/
+```
+
+### Firefox/Thunderbird extension
+
+Create a file with a `.xpi` extension containing these files and directories:
+
+```
+chrome.manifest
+install.rdf
+common/
+firefox/
+```
 
 ## Notes
 
