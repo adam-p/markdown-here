@@ -41,7 +41,7 @@ var markdown_here = {
     var focusedElem, showItem = false;
 
     // Are we running in Thunderbird?
-    if (GetCurrentEditorType) {
+    if (typeof(GetCurrentEditorType) !== 'undefined' && GetCurrentEditorType !== null) {
       // Are we rich-editing?
       showItem = (GetCurrentEditorType().indexOf('html') >= 0);
     }
