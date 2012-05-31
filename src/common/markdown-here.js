@@ -11,6 +11,9 @@
 
 ;(function() {
 
+// For debugging purposes. An external service is required to log with Firefox.
+var mylog = function() {};
+
 // Used to create unique IDs for each Markdown Here wrapper.
 var markdownHereWrapperIdCounter = 1;
 
@@ -28,14 +31,22 @@ function findFocusedElem(document) {
   return focusedElem;
 }
 
-// Get the currectly selected range.
-function getSelectedRange(contentDocument) {
+// Get the currectly selected range. If there is no selected range (i.e., it is
+// collapsed), then contents of the currently focused element will be selected.
+// Returns null if no range is selected nor can be selected.
+function getOperationalRange(focusedElem) {
   var selection, range;
 
-  selection = contentDocument.getSelection();
-  range = selection.getRangeAt(0);
-  if (range.collapsed) {
+  selection = focusedElem.ownerDocument.getSelection();
+  if (selection.rangeCount < 1) {
     return null;
+  }
+
+  range = selection.getRangeAt(0);
+
+  if (range.collapsed) {
+    // If there's no actual selection, select the contents of the focused element.
+    range.selectNodeContents(focusedElem);
   }
 
   return range;
@@ -181,25 +192,21 @@ function findMarkdownHereWrappersInRange(range) {
 // Converts the Markdown in the user's compose element to HTML and replaces it.
 // If `selectedRange` is null, then the entire email is being rendered.
 function renderMarkdown(focusedElem, selectedRange, markdownRenderer) {
-  var extractedHtml, replacingSelection, rangeWrapper;
+  var extractedHtml, rangeWrapper;
 
-  replacingSelection = !!selectedRange;
+  // Wrap the selection in a new element so that we can better extract the HTML.
+  // This modifies the DOM, but that's okay, since we're going to replace the
+  // new element in a moment.
+  rangeWrapper = focusedElem.ownerDocument.createElement('div');
+  rangeWrapper.appendChild(selectedRange.extractContents());
+  selectedRange.insertNode(rangeWrapper);
+  selectedRange.selectNode(rangeWrapper);
 
-  // Get the HTML containing the Markdown from either the selection or compose element.
+  // Get the HTML containing the Markdown from the selection.
+  extractedHtml = rangeWrapper.innerHTML;
 
-  if (replacingSelection) {
-    // Wrap the selection in a new element so that we can better extract the HTML.
-    // This modifies the DOM, but that's okay, since we're going to replace the
-    // new element in a moment.
-    rangeWrapper = focusedElem.ownerDocument.createElement('div');
-    rangeWrapper.appendChild(selectedRange.extractContents());
-    selectedRange.insertNode(rangeWrapper);
-    selectedRange.selectNode(rangeWrapper);
-
-    extractedHtml = rangeWrapper.innerHTML;
-  }
-  else {
-    extractedHtml = focusedElem.innerHTML;
+  if (!extractedHtml || extractedHtml.length === 0) {
+    return 'No Markdown found to render';
   }
 
   // Call to the extension main code to actually do the md->html conversion.
@@ -215,16 +222,8 @@ function renderMarkdown(focusedElem, selectedRange, markdownRenderer) {
 
     // Store the original Markdown-in-HTML to a data attribute on the wrapper
     // element. We'll use this later if we need to unrender back to Markdown.
-
-    if (selectedRange) {
-      wrapper = replaceRange(selectedRange, mdHtml);
-      wrapper.setAttribute('data-md-original', extractedHtml);
-    }
-    else {
-      focusedElem.innerHTML = mdHtml;
-      focusedElem.firstChild.setAttribute('data-md-original', extractedHtml);
-      wrapper = focusedElem.firstChild;
-    }
+    wrapper = replaceRange(selectedRange, mdHtml);
+    wrapper.setAttribute('data-md-original', extractedHtml);
 
     // Some webmail (Gmail) strips off any external style block. So we need to go
     // through our styles, explicitly applying them to matching elements.
@@ -246,7 +245,15 @@ function unrenderMarkdown(wrapperElem) {
 // @param `markdownRenderer`  The function that provides raw-Markdown-in-HTML
 //                            to pretty-Markdown-in-HTML rendering service.
 //                            See markdown-render.js for information.
-function markdownHere(document, markdownRenderer) {
+// @param `logger`  A function that can be used for logging debug messages. May
+//                  be null.
+// @returns True if successful, otherwise an error message that should be shown
+//          to the user.
+function markdownHere(document, markdownRenderer, logger) {
+
+  if (logger) {
+    mylog = logger;
+  }
 
   // If the cursor (or current selection) is in a Markdown Here wrapper, then
   // we're reverting that wrapper back to Markdown. If there's a selection that
@@ -259,7 +266,7 @@ function markdownHere(document, markdownRenderer) {
 
   focusedElem = findFocusedElem(document);
   if (!focusedElem || !focusedElem.ownerDocument) {
-    return;
+    return 'Could not find focused element';
   }
 
   // Look for existing rendered-Markdown wrapper to revert.
@@ -270,10 +277,15 @@ function markdownHere(document, markdownRenderer) {
   }
   else {
     // Are there wrappers in our selection?
-    range = getSelectedRange(focusedElem.ownerDocument);
-    if (range) {
-      wrappers = findMarkdownHereWrappersInRange(range);
+
+    range = getOperationalRange(focusedElem);
+
+    if (!range) {
+      return 'Nothing found to render or revert'
     }
+
+    // Look for wrappers in the range under consideration.
+    wrappers = findMarkdownHereWrappersInRange(range);
   }
 
   // If we've found wrappers, then we're reverting.
@@ -286,6 +298,8 @@ function markdownHere(document, markdownRenderer) {
   else {
     renderMarkdown(focusedElem, range, markdownRenderer);
   }
+
+  return true;
 }
 
 var EXPORTED_SYMBOLS = ['markdownHere'];

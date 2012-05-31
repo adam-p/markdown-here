@@ -38,7 +38,7 @@ Or go to the "Tools > Add-ons" menu and then search for "Markdown Here".
 
 ## Use
 
-[Install](#installation) it, and then…
+Install it, and then…
 
 1. In Chrome or Firefox, log into your Gmail, Hotmail, or Yahoo account and start a new email. In Thunderbird, start a new message.
    * In Chrome, if you were already logged into your webmail, you'll need to reload the page. (Firefox and Thunderbird require you to restart the application.)
@@ -172,9 +172,16 @@ Two files will be written to the `src` directory: `markdown-here.zip` (Chrome bu
 
 * Add user option to specify Markdown dialect?
 
-* Make render-whole-email less of a special case? Just select the contents of the compose element and follow the render-selection code path?
+* Briefly highlight rendered and reverted blocks/ranges.
+  * Probably use [CSS transitions](https://developer.mozilla.org/en/CSS/CSS_transitions).
+
+* Add a visual cue as to what action took place. Sometimes converts and reverts may be a little surprising if the user's selection is off. And sometimes their viewport won't show the entirety of what change occurred.
+
+* Internationalization
 
 * Support images embedded in the Markdown (like, not hand-rolled image tags)? That will certainly deviate from straight Markdown, but maybe okay.
+
+* Fix inconsistent behaviour: Sometimes a converted/reverted block ends up selected, and sometimes not.
 
 ## Credits
 

@@ -11,7 +11,10 @@
 // Handle the menu-item click
 function clickRequest(event) {
   if (event && event.action === 'context-click') {
-    markdownHere(document, requestMarkdownConversion);
+
+    function logger() { console.log.apply(console, arguments); }
+
+    markdownHere(document, requestMarkdownConversion, logger);
   }
 }
 chrome.extension.onRequest.addListener(clickRequest);
