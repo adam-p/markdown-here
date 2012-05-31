@@ -140,9 +140,14 @@ function makeStylesExplicit(wrapperElem, css) {
 // Find the wrapper element that's above the current cursor position and returns
 // it. Returns falsy if there is no wrapper.
 function findMarkdownHereWrapper(focusedElem) {
-  var selection, range, wrapper, match, i;
+  var selection, range, wrapper = null, match, i;
 
   selection = focusedElem.ownerDocument.getSelection();
+
+  if (selection.rangeCount < 1) {
+    return null;
+  }
+
   range = selection.getRangeAt(0);
 
   wrapper = range.commonAncestorContainer;
