@@ -87,6 +87,19 @@ To revert back to Markdown, just put your cursor anywhere in the block of conver
 
 * If you don't have anything selected when you click "Markdown Toggle", *Markdown Here* will check if there are converted blocks anywhere in the message and revert them. If there no converted blocks are found, it will convert the entire email.
 
+## Troubleshooting
+
+Here are some common problems people run into.
+
+<dl>
+<dt>Chrome/Firefox/Thunderbird: I just installed *Markdown Here* and the context menu item isn't showing up.</dt>
+<dd>Make sure you restarted Firefox or Thunderbird, and either restarted Chrome or reloaded your webmail page.</dd>
+
+<dt>Firefox/Thunderbird: The "Markdown Toggle" context menu item isn't showing up.</dt>
+<dt>Chrome: The "Markdown Toggle" context menu item is showing up but doesn't convert anything.</dt>
+<dd>Make sure you have enabled rich email editing.</dd>
+</dl>
+
 ## Compatibility
 
 Short answer: Gmail is great. So is Thunderbird.
