@@ -1,10 +1,10 @@
-# <img src="//github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png" /> Markdown Here
+# ![Markdown Here logo](//github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png) Markdown Here
 
 *Markdown Here* is a Google Chrome, Firefox, and Thunderbird extension that lets you write email in Markdown and render it before sending.
 
 Writing email with code in it is pretty tedious. Writing Markdown with code in it is easy. I found myself writing email in Markdown in the Github in-browser editor, then copying the preview into email. This is a pretty absurd workflow, so I decided create a tool to write and render Markdown right in the email.
 
-<img width="700px" src="//github.com/adam-p/markdown-here/raw/master/store-assets/markdown-here-image1.gimp.png" />
+![screenshot of conversion](//github.com/adam-p/markdown-here/raw/master/store-assets/markdown-here-image1.gimp.png)
 
 ## Installation
 
@@ -71,7 +71,7 @@ To convert only part of the email, select the text (with your mouse or keyboard)
 
 To revert back to Markdown, just put your cursor anywhere in the block of converted text, right click, and click the "Markdown Toggle" menu item again. Now it's magically back to the original Markdown.
 
-<img width="700px" src="//github.com/adam-p/markdown-here/raw/master/store-assets/markdown-here-image2.gimp.png" />
+![screenshot of selection conversion](//github.com/adam-p/markdown-here/raw/master/store-assets/markdown-here-image2.gimp.png)
 
 #### Things to know about converting a selection
 
