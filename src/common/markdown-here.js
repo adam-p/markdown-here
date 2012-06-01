@@ -31,6 +31,16 @@ function findFocusedElem(document) {
   return focusedElem;
 }
 
+// Returns true if the given element can be properly rendered (i.e., if it's 
+// a rich-edit compose element).
+function elementCanBeRendered(elem) {
+  // See here for more info about what we're checking:
+  // http://stackoverflow.com/a/3333679/729729
+  return elem.contentEditable === true || elem.contentEditable === 'true'
+         || elem.contenteditable === true || elem.contenteditable === 'true'
+         || (elem.ownerDocument && elem.ownerDocument.designMode === 'on');  
+}
+
 // Get the currectly selected range. If there is no selected range (i.e., it is
 // collapsed), then contents of the currently focused element will be selected.
 // Returns null if no range is selected nor can be selected.
@@ -306,6 +316,10 @@ function markdownHere(document, markdownRenderer, logger) {
 
   return true;
 }
+
+// We also export a couple of utility functions
+markdownHere.findFocusedElem = findFocusedElem;
+markdownHere.elementCanBeRendered = elementCanBeRendered;
 
 var EXPORTED_SYMBOLS = ['markdownHere'];
 

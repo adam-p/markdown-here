@@ -8,13 +8,13 @@
  * rendering services.
  */
 
+Components.utils.import('resource://common/markdown-here.js');
+
 var markdown_here = {
 
   // Handle the menu-item click
   onMenuItemCommand: function(e) {
     var mdReturn;
-
-    Components.utils.import('resource://common/markdown-here.js');
 
     mdReturn = markdownHere(window.document, this.markdownRender, this.log);
 
@@ -57,22 +57,8 @@ var markdown_here = {
       showItem = (GetCurrentEditorType().indexOf('html') >= 0);
     }
     else { // Firefox
-      function testElem(elem) {
-        // See here for more info about what we're checking:
-        // http://stackoverflow.com/a/3333679/729729
-        return elem.contentEditable === true || elem.contentEditable === 'true'
-               || elem.contenteditable === true || elem.contenteditable === 'true'
-               || (elem.ownerDocument && elem.ownerDocument.designMode === 'on');
-      }
-
-      focusedElem = gContextMenu.target;
-
-      // Test all the way up to the parent <body> (needed for Hotmail on Firefox).
-      while (focusedElem) {
-        showItem = testElem(focusedElem);
-        if (showItem) break;
-        focusedElem = focusedElem.parentElement;
-      }
+      focusedElem = markdownHere.findFocusedElem(window.document);
+      showItem = markdownHere.elementCanBeRendered(focusedElem);
     }
 
     document.getElementById('context-markdown_here').hidden = !showItem;

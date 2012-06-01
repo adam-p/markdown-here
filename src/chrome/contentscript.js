@@ -10,11 +10,25 @@
 
 // Handle the menu-item click
 function clickRequest(event) {
+  var focusedElem, mdReturn;
+
   if (event && event.action === 'context-click') {
+
+    // Check if the focused element is a valid render target
+    focusedElem = markdownHere.findFocusedElem(window.document);
+    if (!markdownHere.elementCanBeRendered(focusedElem)) {
+      alert('The selected field is not valid for Markdown rendering. Please use a rich editor.');
+      return;
+    }
 
     function logger() { console.log.apply(console, arguments); }
 
-    markdownHere(document, requestMarkdownConversion, logger);
+    mdReturn = markdownHere(document, requestMarkdownConversion, logger);
+
+    if (typeof(mdReturn) === 'string') {
+      // Error message was returned.
+      alert(mdReturn);
+    }
   }
 }
 chrome.extension.onRequest.addListener(clickRequest);
