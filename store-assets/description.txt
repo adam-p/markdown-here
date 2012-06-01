@@ -1,6 +1,6 @@
-Markdown Here lets you write email in Markdown and render it before sending.
+Markdown Here lets you write email in Markdown and render it (make it pretty!) before sending.
 
-This is great for anyone who doesn't like fiddling around with formatting buttons while write an email. It's especially good for programmers who write email with code in them.
+This is great for anyone who doesn't like fiddling around with formatting buttons while writing an email. It's especially good for programmers who write email with code in them.
 
 Totally simple to use:
 1. Write your email in your email client's rich editor using Markdown.
@@ -10,18 +10,31 @@ Totally simple to use:
 
 If only part of your email is Markdown (like if you're writing a reply and the original email is in your message body), then select the part you want to render into pretty HTML, right click, and click "Markdown Toggle". Only your selection will be converted. To revert back to the original Markdown, right click in the rendered block and click "Markdown Toggle" again.
 
-Markdown Here is primarily targeted to work with Gmail, but it also works pretty well with Yahoo! and Hotmail. It also works with Thunderbird.
+Markdown Here is primarily targeted to work with Gmail, but it also works pretty well with Yahoo and Hotmail. It also works with Thunderbird.
 
 Privacy: Markdown Here accesses and modifies the content of your email. It can, in theory, access other web content, but does not. It also makes no Internet requests itself whatsoever. You data is modified when and where you choose, and does not leave your browser.
 
 Available as a Chrome, Firefox, and Thunderbird extension.
 
-This is an open source project. See links for full instructions, more information, bug reports, or to contribute.
+This is an open source project. Visit the Markdown Here's Github page for full instructions, more information, bug reports, or to contribute.
 
 https://github.com/adam-p/markdown-here
 
 
 Change Log
+
+2011-05-31: v2.1.3
+
+Firefox/Thunderbird: "Markdown Toggle" menu item will show up for non-rich-edit elements, but an error message will be given if the item is clicked. Hopefully this will help people notice that they're not using a rich editor, instead of wondering where the menu item is.
+
+Chrome: If the "Markdown Toggle" menu item is clicked for a non-rich-edit element, a helpful error message will be shown. 
+
+Fixed bug: Significant trailing spaces were being stripped. This was breaking the Markdown syntax feature of two spaces at the end of the line indicating a hard line break.
+
+Changed context menu access key to 'k'. Previously, Chrome had no access key and Firefox/Thunderbird had the more-common letter 'm'.
+
+Other minor bugfixes.
+
 
 2011-05-21: v2.1.2
 

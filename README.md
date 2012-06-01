@@ -92,12 +92,8 @@ To revert back to Markdown, just put your cursor anywhere in the block of conver
 Here are some common problems people run into.
 
 <dl>
-<dt>Chrome/Firefox/Thunderbird: I just installed *Markdown Here* and the context menu item isn't showing up.</dt>
-<dd>Make sure you restarted Firefox or Thunderbird, and either restarted Chrome or reloaded your webmail page.</dd>
-
-<dt>Firefox/Thunderbird: The "Markdown Toggle" context menu item isn't showing up.</dt>
-<dt>Chrome: The "Markdown Toggle" context menu item is showing up but doesn't convert anything.</dt>
-<dd>Make sure you have enabled rich email editing.</dd>
+  <dt>Chrome/Firefox/Thunderbird: I just installed *Markdown Here* and the context menu item isn't showing up.</dt>
+  <dd>Make sure you restarted Firefox or Thunderbird, and either restarted Chrome or reloaded your webmail page.</dd>
 </dl>
 
 ## Compatibility
@@ -149,6 +145,9 @@ Short answer: Gmail is great. So is Thunderbird.
 ## Notes and Miscellaneous
 
 * *Markdown Here* uses [Github Flavored Markdown](http://github.github.com/github-flavored-markdown/).
+
+* In Firefox and Thunderbird, the "Markdown Toggle" menu item shows up for more element types than it can correctly render. This is intended to help people realize that they're not using a rich editor. Otherwise they just don't see the menu item and don't know why.
+  * In Chrome, I can't figure out how to selectively hide the menu item, so the above isn't strictly true. But the behaviour would be the same if I could.
 
 ## Building the Extension Bundles
 

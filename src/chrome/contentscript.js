@@ -28,6 +28,7 @@ function clickRequest(event) {
     if (typeof(mdReturn) === 'string') {
       // Error message was returned.
       alert(mdReturn);
+      return;
     }
   }
 }

@@ -14,17 +14,30 @@ var markdown_here = {
 
   // Handle the menu-item click
   onMenuItemCommand: function(e) {
-    var mdReturn;
+    var mdReturn, focusedElem;
+
+    // Are we running in Thunderbird?
+    if (typeof(GetCurrentEditorType) !== 'undefined' && GetCurrentEditorType !== null) {
+      // Are we rich-editing?
+      if (GetCurrentEditorType().indexOf('html') < 0) {
+        this.alert('You are using a plain-text compose editor. You must change to a rich editor to use Markdown Here.');
+        return;
+      }
+    }
+    else { // Firefox
+      focusedElem = markdownHere.findFocusedElem(window.document);
+      if (!markdownHere.elementCanBeRendered(focusedElem)) {
+        this.alert('The selected field is not valid for Markdown rendering. Please use a rich editor.');
+        return;
+      }
+    }
 
     mdReturn = markdownHere(window.document, this.markdownRender, this.log);
 
     if (typeof(mdReturn) === 'string') {
       // Error message was returned.
-
-      var prompts = Components.classes["@mozilla.org/embedcomp/prompt-service;1"]
-                              .getService(Components.interfaces.nsIPromptService);
-
-      prompts.alert(null, 'Markdown Here', mdReturn);
+      this.alert(mdReturn);
+      return;
     }
   },
 
@@ -53,22 +66,41 @@ var markdown_here = {
 
     // Are we running in Thunderbird?
     if (typeof(GetCurrentEditorType) !== 'undefined' && GetCurrentEditorType !== null) {
-      // Are we rich-editing?
-      showItem = (GetCurrentEditorType().indexOf('html') >= 0);
+      // Always show the menu item.
+      // If the editor isn't in rich mode, the user will get a helpful error 
+      // message telling them to change modes.
+      showItem = true;
     }
     else { // Firefox
       focusedElem = markdownHere.findFocusedElem(window.document);
-      showItem = markdownHere.elementCanBeRendered(focusedElem);
+
+      if (focusedElem.type === 'textarea') {
+        // Show the context menu item for `textarea`s. If the user clicks it, 
+        // there will be a helpful error message. This will make behaviour more 
+        // consistent with Chrome, and will hopefully help people notice that
+        // they're not using the rich editor instead of just wondering why the
+        // menu item just isn't showing up.
+        showItem = true;
+      }
+      else {
+        showItem = markdownHere.elementCanBeRendered(focusedElem);
+      }
     }
 
     document.getElementById('context-markdown_here').hidden = !showItem;
     document.getElementById('context-markdown_here-separator').hidden = !showItem;
   },
 
-  log: function(aMessage) {
+  log: function(msg) {
     var consoleService = Components.classes['@mozilla.org/consoleservice;1']
                                    .getService(Components.interfaces.nsIConsoleService);
-    consoleService.logStringMessage(aMessage);
+    consoleService.logStringMessage(msg);
+  },
+
+  alert: function(msg) {
+    var prompts = Components.classes["@mozilla.org/embedcomp/prompt-service;1"]
+                            .getService(Components.interfaces.nsIPromptService);
+    prompts.alert(null, 'Markdown Here', msg);
   },
 
   // The rendering service provided to the content script.
