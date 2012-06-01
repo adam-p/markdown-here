@@ -79,10 +79,13 @@ To revert back to Markdown, just put your cursor anywhere in the block of conver
 
 * Be aware that on Mac OS X (only >= Lion?), right clicking a word (only in Chrome?) will cause that word to be selected, and that triggers *Markdown Here*'s selection-convert mode. So if you want to convert the whole email, right-click where there's no text.
   * It's okay to have a selection when reverting back to Markdown, so don't worry about right-clicking on text when doing that.
+  * If right-clicking on empty space is a pain, you can select-all (Cmd+A) and then convert.
 
 * You don't have to revert selections back to Markdown in the same order that you converted them. Just right-click in a converted block of text, click the menu item, and only that block will be reverted.
 
 * You can select and revert multiple converted blocks at the same time. One upshot of this is that you can select your entire email, click "Markdown Toggle", and all portions of it that you had converted will be reverted.
+
+* If you don't have anything selected when you click "Markdown Toggle", *Markdown Here* will check if there are converted blocks anywhere in the message and revert them. If there no converted blocks are found, it will convert the entire email.
 
 ## Compatibility
 
@@ -130,6 +133,10 @@ Short answer: Gmail is great. So is Thunderbird.
 *Receive*
 > How well this email client displays rendered email that it receives (assuming the sender is perfect).
 
+## Notes and Miscellaneous
+
+* *Markdown Here* uses [Github Flavored Markdown](http://github.github.com/github-flavored-markdown/).
+
 ## Building the Extension Bundles
 
 "Building" is really just zipping. Create all archives relative to the `src` directory.
@@ -154,12 +161,6 @@ install.rdf
 common/
 firefox/
 ```
-
-## Notes
-
-* *Markdown Here* uses [Github Flavored Markdown](http://github.github.com/github-flavored-markdown/).
-
-* Even though the extension is only known to work (to varying degrees) with Gmail, Yahoo, and Hotmail, we're not restricting what URLs the extension applies to. The hope is that it'll work in unexpected places. Reports of good (or bad) functionality is appreciated (create an issue). In the future the set of target URLs should be restricted.
 
 ## Next Steps
 
@@ -219,6 +220,9 @@ firefox/
 * CSS:
   * [Mou.app](http://mouapp.com/)'s CSS looks pretty good. It can be found [here](https://github.com/borismus/markdown-preview/issues/16). I'm hesitant to use it because Mou isn't FOSS.
   * This [Github theme for Mou](https://github.com/gcollazo/mou-theme-github2) might be good, though.
+
+* HTML-to-Markdown
+  * [domchristie / to-markdown](https://github.com/domchristie/to-markdown)
 
 ## Feedback
 
