@@ -45,7 +45,7 @@ function elementCanBeRendered(elem) {
 // collapsed), then contents of the currently focused element will be selected.
 // Returns null if no range is selected nor can be selected.
 function getOperationalRange(focusedElem) {
-  var selection, range;
+  var selection, range, sig;
 
   selection = focusedElem.ownerDocument.getSelection();
   if (selection.rangeCount < 1) {
@@ -58,8 +58,53 @@ function getOperationalRange(focusedElem) {
     // If there's no actual selection, select the contents of the focused element.
     range.selectNodeContents(focusedElem);
   }
+  
+  // Does our range include a signature? If so, remove it.
+  sig = findSignatureStart(focusedElem);
+  if (sig) {
+    if (range.isPointInRange(sig, 0)) {
+      range.setEndBefore(sig);
+    }
+  }
 
   return range;
+}
+
+// A signature is indicated by a `'-- '` text node, either at the top level 
+// (e.g., Gmail), or one deep (e.g., Thunderbird, which wraps its sig in a 
+// `div`). So this is a one-deep recursive function.
+// Returns the sig start element, or null if one is not found.
+function findSignatureStart(startElem, recursiveCall) {
+  var i, child, recurseReturn;
+
+  for (i = 0; i < startElem.childNodes.length; i++) {
+    child = startElem.childNodes[i];
+    if (child.nodeType === child.TEXT_NODE) {
+      if (child.nodeValue === '-- '  // Gmail, etc.
+          || child.nodeValue.search(/^--\s+\n/) >= 0) { // Thunderbird
+
+        // Assume that the entire parent element belongs to the sig only if the
+        // `'--'` bit is the at the very start of the parent.
+        if (startElem.firstChild === child) {
+          return startElem;
+        }
+        
+        return child;
+      }
+    }
+    else {
+      if (!recursiveCall) {
+        recurseReturn = findSignatureStart(child, true);
+
+        // Did the recursive call find it?
+        if (recurseReturn) {
+          return recurseReturn;
+        }
+      }
+    }
+  }
+
+  return null;
 }
 
 // Replaces the contents of `range` with the HTML string in `html`.

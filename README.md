@@ -146,6 +146,9 @@ Short answer: Gmail is great. So is Thunderbird.
 
 * *Markdown Here* uses [Github Flavored Markdown](http://github.github.com/github-flavored-markdown/).
 
+* Email signatures are automatically excluded from conversion. 
+  * Anything after the semi-standard `'-- '` is left alone.
+
 * In Firefox and Thunderbird, the "Markdown Toggle" menu item shows up for more element types than it can correctly render. This is intended to help people realize that they're not using a rich editor. Otherwise they just don't see the menu item and don't know why.
   * In Chrome, I can't figure out how to selectively hide the menu item, so the above isn't strictly true. But the behaviour would be the same if I could.
 
@@ -210,6 +213,8 @@ firefox/
 * Support images embedded in the Markdown (like, not hand-rolled image tags)? That will certainly deviate from straight Markdown, but maybe okay.
 
 * Fix inconsistent behaviour: Sometimes a converted/reverted block ends up selected, and sometimes not.
+
+* Make email signature conversion exclusion optional. (Maybe some people will make a special one to convert.)
 
 ## Credits
 
