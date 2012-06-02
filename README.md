@@ -14,6 +14,8 @@ Writing email with code in it is pretty tedious. Writing Markdown with code in i
 
 Go to the [Chrome Web Store page for *Markdown Here*](https://chrome.google.com/webstore/detail/elifhakcjgalahccnjkneoccemfahfoa) and install normally.
 
+After installing, make sure to reload your webmail or restart Chrome!
+
 #### Manual/Development
 
 1. Clone this repo.
@@ -31,6 +33,8 @@ Go to the [Firefox Add-ons page for *Markdown Here*](https://addons.mozilla.org/
 
 Or go to the "Tools > Add-ons" menu and then search for "Markdown Here".
 
+After installing, make sure to restart Firefox/Thunderbird!
+
 #### Manual/Development
 
 1. Clone this repo.
@@ -41,7 +45,6 @@ Or go to the "Tools > Add-ons" menu and then search for "Markdown Here".
 Install it, and then…
 
 1. In Chrome or Firefox, log into your Gmail, Hotmail, or Yahoo account and start a new email. In Thunderbird, start a new message.
-   * In Chrome, if you were already logged into your webmail, you'll need to reload the page. (Firefox and Thunderbird require you to restart the application.)
 2. Make sure you're using the rich editor.
    * In Gmail, click the "Rich formatting" link, if it's visible.
    * In Thunderbird, make sure "Compose messages in HTML format" is enabled in your "Account Settings", "Composition & Addressing" pane.
