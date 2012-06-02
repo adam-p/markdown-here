@@ -146,8 +146,8 @@ Short answer: Gmail is great. So is Thunderbird.
 
 * *Markdown Here* uses [Github Flavored Markdown](http://github.github.com/github-flavored-markdown/).
 
-* Email signatures are automatically excluded from conversion. 
-  * Anything after the semi-standard `'-- '` is left alone.
+* Email signatures are automatically excluded from conversion. Specifically, anything after the semi-standard `'-- '` (note the trailing space) is left alone.
+  * Note that Hotmail and Yahoo do *not* automatically add the `'-- '` to signatures, so you have to add it yourself.
 
 * In Firefox and Thunderbird, the "Markdown Toggle" menu item shows up for more element types than it can correctly render. This is intended to help people realize that they're not using a rich editor. Otherwise they just don't see the menu item and don't know why.
   * In Chrome, I can't figure out how to selectively hide the menu item, so the above isn't strictly true. But the behaviour would be the same if I could.
@@ -207,6 +207,10 @@ firefox/
   * Probably use [CSS transitions](https://developer.mozilla.org/en/CSS/CSS_transitions).
 
 * Add a visual cue as to what action took place. Sometimes converts and reverts may be a little surprising if the user's selection is off. And sometimes their viewport won't show the entirety of what change occurred.
+
+* Context menu keyboard key does not reliably show a menu with the "Markdown Toggle" item on it.
+  * Probably not much we can do about it in Gmail. 
+  * Just consider this a browser problem. The context menu looks pretty wrong.
 
 * Internationalization
 

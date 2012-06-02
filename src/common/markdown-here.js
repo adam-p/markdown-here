@@ -70,18 +70,18 @@ function getOperationalRange(focusedElem) {
   return range;
 }
 
-// A signature is indicated by a `'-- '` text node, either at the top level 
-// (e.g., Gmail), or one deep (e.g., Thunderbird, which wraps its sig in a 
-// `div`). So this is a one-deep recursive function.
+// A signature is indicated by a `'-- '` text node (or something like it).
 // Returns the sig start element, or null if one is not found.
-function findSignatureStart(startElem, recursiveCall) {
+function findSignatureStart(startElem) {
   var i, child, recurseReturn;
 
   for (i = 0; i < startElem.childNodes.length; i++) {
     child = startElem.childNodes[i];
     if (child.nodeType === child.TEXT_NODE) {
-      if (child.nodeValue === '-- '  // Gmail, etc.
-          || child.nodeValue.search(/^--\s+\n/) >= 0) { // Thunderbird
+      // Thunderbird wraps the sig in a `<pre>`, so there's a newline.
+      // Hand-written sigs (including Hotmail and Yahoo) are `'--&nbsp;'` (aka \u00a0).
+      // Gmail auto-inserted sigs are `'-- '` (plain space).
+      if (child.nodeValue.search(/^--[\s\u00a0]+(\n|$)/) === 0) {
 
         // Assume that the entire parent element belongs to the sig only if the
         // `'--'` bit is the at the very start of the parent.
@@ -93,13 +93,11 @@ function findSignatureStart(startElem, recursiveCall) {
       }
     }
     else {
-      if (!recursiveCall) {
-        recurseReturn = findSignatureStart(child, true);
+      recurseReturn = findSignatureStart(child, true);
 
-        // Did the recursive call find it?
-        if (recurseReturn) {
-          return recurseReturn;
-        }
+      // Did the recursive call find it?
+      if (recurseReturn) {
+        return recurseReturn;
       }
     }
   }
