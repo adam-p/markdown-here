@@ -95,7 +95,7 @@ To revert back to Markdown, just put your cursor anywhere in the block of conver
 Here are some common problems people run into.
 
 <dl>
-  <dt>Chrome/Firefox/Thunderbird: I just installed *Markdown Here* and the context menu item isn't showing up.</dt>
+  <dt>Chrome/Firefox/Thunderbird: I just installed <em>Markdown Here</em> and the context menu item isn't showing up.</dt>
   <dd>Make sure you restarted Firefox or Thunderbird, and either restarted Chrome or reloaded your webmail page.</dd>
 </dl>
 
