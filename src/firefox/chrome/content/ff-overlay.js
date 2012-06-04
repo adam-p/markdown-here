@@ -124,7 +124,7 @@ var markdown_here = {
         marked,
         hljs, 
         html,
-        function() { return targetDocument.createElement.apply(targetDocument, arguments); }), 
+        targetDocument), 
       markdownHereCss);
   }
 };

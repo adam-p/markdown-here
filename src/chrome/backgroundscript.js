@@ -26,7 +26,7 @@ chrome.extension.onRequest.addListener(
         marked, 
         hljs,
         html,
-        function() { return document.createElement.apply(document, arguments); }),
+        document),
       css: markdownHereCss
     });
   });

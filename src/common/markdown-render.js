@@ -18,11 +18,11 @@
   /** 
    Using the functionality provided by the functions htmlToText and markdownToHtml,
    render html into pretty text.
-   @param createElemfn  Function that is equivalen to document.createElement. 
-                        It will be used to create elements, but those elements 
-                        will not be inserted into the DOM.
+   @param targetDocument  The document object where the action is taking place. 
+                          It will be used to create elements, but those elements 
+                          will not be inserted into the DOM.
    */
-  function markdownRender(htmlToText, markdownToHtml, syntaxHighlighter, html, createElemFn) {
+  function markdownRender(htmlToText, markdownToHtml, syntaxHighlighter, html, targetDocument) {
     var extractedText, markedOptions;
 
     // We need to tweak the html-to-text processing to get the results we want.
@@ -43,7 +43,7 @@
       sanitize: false,
       highlight: function(codeText, codeLanguage) {                 
                     return highlightSyntax(
-                              createElemFn, 
+                              targetDocument, 
                               syntaxHighlighter, 
                               codeText, 
                               codeLanguage); }
@@ -55,15 +55,16 @@
   // Using `syntaxHighlighter`, highlight the code in `codeText` that is of
   // language `codeLanguage` (may be falsy). 
   // `syntaxHighlighter` is expected to behave like (i.e., to be) highlight.js.
-  function highlightSyntax(createElemFn, syntaxHighlighter, codeText, codeLanguage) {
-    var codeElem, preElem;
+  function highlightSyntax(targetDocument, syntaxHighlighter, codeText, codeLanguage) {
+    var codeElem, preElem, textNode;
 
     // highlight.js requires a `<code>` element to be passed in that has a 
     // `<pre>` parent element.
 
-    preElem = createElemFn('pre');
-    codeElem = createElemFn('code');
-    codeElem.innerText = codeText;
+    preElem = targetDocument.createElement('pre');
+    codeElem = targetDocument.createElement('code');
+    textNode = targetDocument.createTextNode(codeText);
+    codeElem.appendChild(textNode);
     preElem.appendChild(codeElem);
 
     // If we're told the language, set it as a class so that the highlighter
