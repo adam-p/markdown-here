@@ -41,12 +41,13 @@
       gfm: true,
       pedantic: false,
       sanitize: false,
-      highlight: function(codeText, codeLanguage) { return highlightSyntax(
-                                                            createElemFn, 
-                                                            syntaxHighlighter, 
-                                                            codeText, 
-                                                            codeLanguage); }
-    };
+      highlight: function(codeText, codeLanguage) {                 
+                    return highlightSyntax(
+                              createElemFn, 
+                              syntaxHighlighter, 
+                              codeText, 
+                              codeLanguage); }
+      };
 
     return markdownToHtml(extractedText, markedOptions);
   }
@@ -62,7 +63,7 @@
 
     preElem = createElemFn('pre');
     codeElem = createElemFn('code');
-    codeElem.innerHTML = codeText;
+    codeElem.innerText = codeText;
     preElem.appendChild(codeElem);
 
     // If we're told the language, set it as a class so that the highlighter
