@@ -16,6 +16,8 @@ var markdown_here = {
   onMenuItemCommand: function(e) {
     var mdReturn, focusedElem, self = this;
 
+    focusedElem = markdownHere.findFocusedElem(window.document);
+
     // Are we running in Thunderbird?
     if (typeof(GetCurrentEditorType) !== 'undefined' && GetCurrentEditorType !== null) {
       // Are we rich-editing?
@@ -25,7 +27,6 @@ var markdown_here = {
       }
     }
     else { // Firefox
-      focusedElem = markdownHere.findFocusedElem(window.document);
       if (!markdownHere.elementCanBeRendered(focusedElem)) {
         this.alert('The selected field is not valid for Markdown rendering. Please use a rich editor.');
         return;
