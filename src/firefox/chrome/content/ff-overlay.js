@@ -14,7 +14,7 @@ var markdown_here = {
 
   // Handle the menu-item click
   onMenuItemCommand: function(e) {
-    var mdReturn, focusedElem;
+    var mdReturn, focusedElem, self = this;
 
     // Are we running in Thunderbird?
     if (typeof(GetCurrentEditorType) !== 'undefined' && GetCurrentEditorType !== null) {
@@ -32,7 +32,12 @@ var markdown_here = {
       }
     }
 
-    mdReturn = markdownHere(window.document, this.markdownRender, this.log);
+    mdReturn = markdownHere(
+                focusedElem.ownerDocument, 
+                // We'll need the target document available later
+                function() { 
+                  self.markdownRender.apply(self, [focusedElem.ownerDocument].concat([].splice.call(arguments, 0))); }, 
+                this.log);
 
     if (typeof(mdReturn) === 'string') {
       // Error message was returned.
@@ -105,13 +110,21 @@ var markdown_here = {
 
   // The rendering service provided to the content script.
   // See the comment in markdown-render.js for why we do this.
-  markdownRender: function(html, callback) {
+  markdownRender: function(targetDocument, html, callback) {
     Components.utils.import('resource://common/markdown-render.js');
     Components.utils.import('resource://common/marked.js');
     Components.utils.import('resource://common/jsHtmlToText.js');
+    Components.utils.import('resource://common/highlight.js');
     Components.utils.import('resource://common/github.css.js');
 
-    callback(markdownRender(htmlToText, marked, html), markdownHereCss);
+    callback(
+      markdownRender(
+        htmlToText, 
+        marked,
+        hljs, 
+        html,
+        function() { return targetDocument.createElement.apply(targetDocument, arguments); }), 
+      markdownHereCss);
   }
 };
 

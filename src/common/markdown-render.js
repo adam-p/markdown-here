@@ -15,10 +15,15 @@
 
 ;(function() {
 
-  // Using the functionality provided by the functions htmlToText and markdownToHtml,
-  // render html into pretty text.
-  function markdownRender(htmlToText, markdownToHtml, html) {
-    var extractedText;
+  /** 
+   Using the functionality provided by the functions htmlToText and markdownToHtml,
+   render html into pretty text.
+   @param createElemfn  Function that is equivalen to document.createElement. 
+                        It will be used to create elements, but those elements 
+                        will not be inserted into the DOM.
+   */
+  function markdownRender(htmlToText, markdownToHtml, syntaxHighlighter, html, createElemFn) {
+    var extractedText, markedOptions;
 
     // We need to tweak the html-to-text processing to get the results we want.
     function tagReplacement(text) {
@@ -32,7 +37,44 @@
 
     extractedText = htmlToText(html, {tagreplacement: tagReplacement, allowTrailingWhitespace: true});
 
-    return markdownToHtml(extractedText);
+    markedOptions = {
+      gfm: true,
+      pedantic: false,
+      sanitize: false,
+      highlight: function(codeText, codeLanguage) { return highlightSyntax(
+                                                            createElemFn, 
+                                                            syntaxHighlighter, 
+                                                            codeText, 
+                                                            codeLanguage); }
+    };
+
+    return markdownToHtml(extractedText, markedOptions);
+  }
+
+  // Using `syntaxHighlighter`, highlight the code in `codeText` that is of
+  // language `codeLanguage` (may be falsy). 
+  // `syntaxHighlighter` is expected to behave like (i.e., to be) highlight.js.
+  function highlightSyntax(createElemFn, syntaxHighlighter, codeText, codeLanguage) {
+    var codeElem, preElem;
+
+    // highlight.js requires a `<code>` element to be passed in that has a 
+    // `<pre>` parent element.
+
+    preElem = createElemFn('pre');
+    codeElem = createElemFn('code');
+    codeElem.innerHTML = codeText;
+    preElem.appendChild(codeElem);
+
+    // If we're told the language, set it as a class so that the highlighter
+    // doesn't have to guess it. This is part of the HTML5 standard. See:
+    // http://www.whatwg.org/specs/web-apps/current-work/multipage/text-level-semantics.html#the-code-element
+    if (codeLanguage && codeLanguage.length > 0) {
+      codeElem.setAttribute('class', 'language-'+codeLanguage);
+    }
+
+    syntaxHighlighter.highlightBlock(codeElem);
+
+    return codeElem.innerHTML;
   }
 
   var EXPORTED_SYMBOLS = ['markdownRender'];

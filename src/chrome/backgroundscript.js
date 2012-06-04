@@ -21,7 +21,12 @@ chrome.contextMenus.create({
 chrome.extension.onRequest.addListener(
   function renderRequest(html, sender, sendResponse) {
     sendResponse({
-      html: markdownRender(htmlToText, marked, html),
+      html: markdownRender(
+        htmlToText, 
+        marked, 
+        hljs,
+        html,
+        function() { return document.createElement.apply(document, arguments); }),
       css: markdownHereCss
     });
   });

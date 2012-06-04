@@ -128,6 +128,136 @@ h3{ \
 .vg { color: #dd7700 } /* Name.Variable.Global */ \
 .vi { color: #3333bb } /* Name.Variable.Instance */ \
 .il { color: #0000DD; font-weight: bold } /* Literal.Number.Integer.Long */ \
+\
+/* \
+ \
+github.com style (c) Vasily Polovnyov <vast@whiteants.net> \
+ \
+*/ \
+ \
+pre code { \
+  display: block; padding: 0.5em; \
+  color: #000; \
+  background: #f8f8ff \
+} \
+ \
+pre .comment, \
+pre .template_comment, \
+pre .diff .header, \
+pre .javadoc { \
+  color: #998; \
+  font-style: italic \
+} \
+ \
+pre .keyword, \
+pre .css .rule .keyword, \
+pre .winutils, \
+pre .javascript .title, \
+pre .lisp .title, \
+pre .subst { \
+  color: #000; \
+  font-weight: bold \
+} \
+ \
+pre .number, \
+pre .hexcolor { \
+  color: #40a070 \
+} \
+ \
+pre .string, \
+pre .tag .value, \
+pre .phpdoc, \
+pre .tex .formula { \
+  color: #d14 \
+} \
+ \
+pre .title, \
+pre .id { \
+  color: #900; \
+  font-weight: bold \
+} \
+ \
+pre .javascript .title, \
+pre .lisp .title, \
+pre .subst { \
+  font-weight: normal \
+} \
+ \
+pre .class .title, \
+pre .haskell .label, \
+pre .tex .command { \
+  color: #458; \
+  font-weight: bold \
+} \
+ \
+pre .tag, \
+pre .tag .title, \
+pre .rules .property, \
+pre .django .tag .keyword { \
+  color: #000080; \
+  font-weight: normal \
+} \
+ \
+pre .attribute, \
+pre .variable, \
+pre .instancevar, \
+pre .lisp .body { \
+  color: #008080 \
+} \
+ \
+pre .regexp { \
+  color: #009926 \
+} \
+ \
+pre .class { \
+  color: #458; \
+  font-weight: bold \
+} \
+ \
+pre .symbol, \
+pre .ruby .symbol .string, \
+pre .ruby .symbol .keyword, \
+pre .ruby .symbol .keymethods, \
+pre .lisp .keyword, \
+pre .tex .special, \
+pre .input_number { \
+  color: #990073 \
+} \
+ \
+pre .builtin, \
+pre .built_in, \
+pre .lisp .title { \
+  color: #0086b3 \
+} \
+ \
+pre .preprocessor, \
+pre .pi, \
+pre .doctype, \
+pre .shebang, \
+pre .cdata { \
+  color: #999; \
+  font-weight: bold \
+} \
+ \
+pre .deletion { \
+  background: #fdd \
+} \
+ \
+pre .addition { \
+  background: #dfd \
+} \
+ \
+pre .diff .change { \
+  background: #0086b3 \
+} \
+ \
+pre .chunk { \
+  color: #aaa \
+} \
+ \
+pre .tex .formula { \
+  opacity: 0.5; \
+} \
 ';
 
 var EXPORTED_SYMBOLS = ['markdownHereCss'];
