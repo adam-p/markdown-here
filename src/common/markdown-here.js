@@ -178,13 +178,20 @@ function makeStylesExplicit(wrapperElem, css) {
     // which is what querySelectorAll gives us).
     // Note that the CSS should not have any rules that use "body" or "html".
 
+    function applyStyleToElement(style, element) {
+      var i = 0;
+      for (i = 0; i < style.length; i++) {
+        element.style[style[i]] = style[style[i]];
+      }
+    }
+
     if (rule.selectorText === '.markdown-here-wrapper') {
-      wrapperElem.setAttribute('style', rule.style.cssText);
+      applyStyleToElement(rule.style, wrapperElem);
     }
     else {
       selectorMatches = wrapperElem.querySelectorAll(rule.selectorText);
       for (j = 0; j < selectorMatches.length; j++) {
-        selectorMatches[j].setAttribute('style', rule.style.cssText);
+        applyStyleToElement(rule.style, selectorMatches[j]);
       }
     }
   }
