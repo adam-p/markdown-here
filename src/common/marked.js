@@ -552,6 +552,7 @@ function tok() {
         + (token.lang
         ? ' class="lang-'
         + token.lang
+        + ' ' + token.lang /* adam-p: Added this line. highlight.js needs the bare lang name as a class. */
         + '"'
         : '')
         + '>'

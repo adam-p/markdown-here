@@ -6,135 +6,6 @@
 ;(function() {
 
 var markdownHereCss = ' \
-/* \
- \
-github.com style (c) Vasily Polovnyov <vast@whiteants.net> \
- \
-*/ \
- \
-pre code { \
-  display: block; padding: 0.5em; \
-  color: #000; \
-  background: #f8f8ff \
-} \
- \
-pre .comment, \
-pre .template_comment, \
-pre .diff .header, \
-pre .javadoc { \
-  color: #998; \
-  font-style: italic \
-} \
- \
-pre .keyword, \
-pre .css .rule .keyword, \
-pre .winutils, \
-pre .javascript .title, \
-pre .lisp .title, \
-pre .subst { \
-  color: #000; \
-  font-weight: bold \
-} \
- \
-pre .number, \
-pre .hexcolor { \
-  color: #40a070 \
-} \
- \
-pre .string, \
-pre .tag .value, \
-pre .phpdoc, \
-pre .tex .formula { \
-  color: #d14 \
-} \
- \
-pre .title, \
-pre .id { \
-  color: #900; \
-  font-weight: bold \
-} \
- \
-pre .javascript .title, \
-pre .lisp .title, \
-pre .subst { \
-  font-weight: normal \
-} \
- \
-pre .class .title, \
-pre .haskell .label, \
-pre .tex .command { \
-  color: #458; \
-  font-weight: bold \
-} \
- \
-pre .tag, \
-pre .tag .title, \
-pre .rules .property, \
-pre .django .tag .keyword { \
-  color: #000080; \
-  font-weight: normal \
-} \
- \
-pre .attribute, \
-pre .variable, \
-pre .instancevar, \
-pre .lisp .body { \
-  color: #008080 \
-} \
- \
-pre .regexp { \
-  color: #009926 \
-} \
- \
-pre .class { \
-  color: #458; \
-  font-weight: bold \
-} \
- \
-pre .symbol, \
-pre .ruby .symbol .string, \
-pre .ruby .symbol .keyword, \
-pre .ruby .symbol .keymethods, \
-pre .lisp .keyword, \
-pre .tex .special, \
-pre .input_number { \
-  color: #990073 \
-} \
- \
-pre .builtin, \
-pre .built_in, \
-pre .lisp .title { \
-  color: #0086b3 \
-} \
- \
-pre .preprocessor, \
-pre .pi, \
-pre .doctype, \
-pre .shebang, \
-pre .cdata { \
-  color: #999; \
-  font-weight: bold \
-} \
- \
-pre .deletion { \
-  background: #fdd \
-} \
- \
-pre .addition { \
-  background: #dfd \
-} \
- \
-pre .diff .change { \
-  background: #0086b3 \
-} \
- \
-pre .chunk { \
-  color: #aaa \
-} \
- \
-pre .tex .formula { \
-  opacity: 0.5; \
-} \
 \
 /* Based on: https://gist.github.com/1082608 */ \
 /* This is the overall wrapper, it should be treated as the `body` section. */ \
@@ -147,7 +18,7 @@ pre .tex .formula { \
     text-align:left; \
 } \
 pre{ \
-    padding: 10px; \
+    padding: 5px; \
     -webkit-border-radius: 5px; \
     -moz-border-radius: 5px; \
     border-radius: 5px; \
@@ -190,6 +61,136 @@ h3{ \
     -webkit-box-shadow:0 5px 15px #000; \
     -moz-box-shadow:0 5px 15px #000; \
     box-shadow:0 5px 15px #000;      \
+} \
+\
+/* \
+ \
+Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org> \
+ \
+*/ \
+ \
+pre code { \
+  display: block; padding: 0.5em; \
+  background: #F0F0F0; \
+} \
+ \
+pre code, \
+pre .ruby .subst, \
+pre .tag .title, \
+pre .lisp .title { \
+  color: black; \
+} \
+ \
+pre .string, \
+pre .title, \
+pre .constant, \
+pre .parent, \
+pre .tag .value, \
+pre .rules .value, \
+pre .rules .value .number, \
+pre .preprocessor, \
+pre .ruby .symbol, \
+pre .ruby .symbol .string, \
+pre .ruby .symbol .keyword, \
+pre .ruby .symbol .keymethods, \
+pre .instancevar, \
+pre .aggregate, \
+pre .template_tag, \
+pre .django .variable, \
+pre .smalltalk .class, \
+pre .addition, \
+pre .flow, \
+pre .stream, \
+pre .bash .variable, \
+pre .apache .tag, \
+pre .apache .cbracket, \
+pre .tex .command, \
+pre .tex .special, \
+pre .erlang_repl .function_or_atom, \
+pre .markdown .header { \
+  color: #800; \
+} \
+ \
+pre .comment, \
+pre .annotation, \
+pre .template_comment, \
+pre .diff .header, \
+pre .chunk, \
+pre .markdown .blockquote { \
+  color: #888; \
+} \
+ \
+pre .number, \
+pre .date, \
+pre .regexp, \
+pre .literal, \
+pre .smalltalk .symbol, \
+pre .smalltalk .char, \
+pre .go .constant, \
+pre .change, \
+pre .markdown .bullet, \
+pre .markdown .link_url { \
+  color: #080; \
+} \
+ \
+pre .label, \
+pre .javadoc, \
+pre .ruby .string, \
+pre .decorator, \
+pre .filter .argument, \
+pre .localvars, \
+pre .array, \
+pre .attr_selector, \
+pre .important, \
+pre .pseudo, \
+pre .pi, \
+pre .doctype, \
+pre .deletion, \
+pre .envvar, \
+pre .shebang, \
+pre .apache .sqbracket, \
+pre .nginx .built_in, \
+pre .tex .formula, \
+pre .erlang_repl .reserved, \
+pre .input_number, \
+pre .markdown .link_label { \
+  color: #88F \
+} \
+ \
+pre .keyword, \
+pre .id, \
+pre .phpdoc, \
+pre .title, \
+pre .built_in, \
+pre .aggregate, \
+pre .css .tag, \
+pre .javadoctag, \
+pre .phpdoc, \
+pre .yardoctag, \
+pre .smalltalk .class, \
+pre .winutils, \
+pre .bash .variable, \
+pre .apache .tag, \
+pre .go .typename, \
+pre .tex .command, \
+pre .markdown .strong { \
+  font-weight: bold; \
+} \
+ \
+pre .markdown .emphasis { \
+  font-style: italic; \
+} \
+ \
+pre .nginx .built_in { \
+  font-weight: normal; \
+} \
+ \
+pre .coffeescript .javascript, \
+pre .xml .css, \
+pre .xml .javascript, \
+pre .xml .vbscript, \
+pre .tex .formula { \
+  opacity: 0.5; \
 } \
 ';
 
