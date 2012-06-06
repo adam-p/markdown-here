@@ -9,58 +9,59 @@ var markdownHereCss = ' \
 \
 /* Based on: https://gist.github.com/1082608 */ \
 /* This is the overall wrapper, it should be treated as the `body` section. */ \
-.markdown-here-wrapper{ /* adam-p: changed from body */ \
-    font-family: helvetica, arial, freesans, clean, sans-serif; \
-    color: #333; \
-    background-color: #fff; \
-    border: none; \
-    line-height: 1.5; \
-    text-align:left; \
+.markdown-here-wrapper { /* adam-p: changed from body */ \
+  font-family: helvetica, arial, freesans, clean, sans-serif; \
+  color: #333; \
+  background-color: #fff; \
+  border: none; \
+  line-height: 1.5; \
+  text-align:left; \
 } \
-pre{ \
-    padding: 5px; \
-    -webkit-border-radius: 5px; \
-    -moz-border-radius: 5px; \
-    border-radius: 5px; \
-    border: 1px solid #CCC; \
-    overflow: auto; \
+pre { \
+  overflow: auto; \
+  line-height: 1.5; \
 } \
-code{ \
-    padding: 1px 0px; \
-    -webkit-border-radius: 2px; \
-    -moz-border-radius: 2px; \
-    border-radius: 2px;  \
-    white-space: pre; \
-    display: inline; /* adam-p: added to fix Yahoo block display */ \
+code { \
+  margin: 0 2px; \
+  padding: 0 5px; \
+  white-space: nowrap; \
+  border: 1px solid #EAEAEA; \
+  border-radius: 3px;  \
+  background-color: #F8F8F8; \
+  display: inline; /* adam-p: added to fix Yahoo block display */ \
 } \
-li p{ \
-    margin: 0.3em; \
+pre code { \
+  white-space: pre; \
+  border-radius: 3px; \
+  border: 1px solid #CCC; \
+  padding: 6px 10px; \
 } \
-a:link, a:visited{ \
-    color: #33e; \
-    text-decoration: none; \
+li p { \
+  margin: 0.3em; \
 } \
-a:hover{ \
-    color: #00f; \
-    text-shadow:1px 1px 2px #ccf; \
-    text-decoration:underline; \
+a:link, a:visited { \
+  color: #33e; \
+  text-decoration: none; \
 } \
-h1{ \
-    color: #999; \
-    font-weight: bold; \
+a:hover { \
+  color: #00f; \
+  text-shadow:1px 1px 2px #ccf; \
+  text-decoration:underline; \
 } \
-h2{ \
-    border-bottom: 1px dotted #aaa; \
-    margin-bottom: 1em; \
-    color: #333; \
+h1 { \
+  color: #999; \
+  font-weight: bold; \
 } \
-h3{ \
-    color: #666; \
+h2 { \
+  border-bottom: 1px dotted #aaa; \
+  margin-bottom: 1em; \
+  color: #333; \
 } \
-.shadow{ \
-    -webkit-box-shadow:0 5px 15px #000; \
-    -moz-box-shadow:0 5px 15px #000; \
-    box-shadow:0 5px 15px #000;      \
+h3 { \
+  color: #666; \
+} \
+.shadow { \
+  box-shadow:0 5px 15px #000;      \
 } \
 \
 /* \
@@ -70,7 +71,8 @@ Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiac
 */ \
  \
 pre code { \
-  display: block; padding: 0.5em; \
+  display: block; \
+  padding: 0.5em; \
   background: #F0F0F0; \
 } \
  \
