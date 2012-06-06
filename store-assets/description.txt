@@ -27,6 +27,10 @@ Change Log
 
 Email signatures are now excluded from conversion. Signatures must be preceded by "-- " (note the space at the end).
 
+Much improved table styling. (More like Github's.)
+
+Better styling consistency across browsers and mail clients.
+
 
 2012-05-31: v2.1.3
 

@@ -184,8 +184,6 @@ firefox/
 
 ## Next Steps
 
-* Improve table styling.
-
 * Figure out how to prevent users from losing modifications to the rendered version when they revert.
   * Prompted by [this Reddit comment](http://www.reddit.com/r/programming/comments/uagqd/write_email_in_markdown_then_make_it_pretty/c4u6cpv).
   * Maybe add an option to make rendered mode read-only. If a user edits the rendered text and then reverts, they lose their changes, which is pretty bad. Better to not let the user make changes at all (optionally).
@@ -194,13 +192,6 @@ firefox/
     * [to-markdown](https://github.com/domchristie/to-markdown) will probably be useful.
 
 * Test cases.
-
-* Syntax hightlighting!
-  * [SyntaxHighlighter](http://alexgorbatchev.com/SyntaxHighlighter/)
-  * [Highlight.js](http://softwaremaniacs.org/soft/highlight/en/)
-  * [google-code-prettify](https://code.google.com/p/google-code-prettify/)
-  * [Rainbow](http://craig.is/making/rainbows)
-  * There are more that require jQuery, but I just took it out…
 
 * Add user option to create custom CSS.
 
@@ -232,7 +223,7 @@ firefox/
 * Based on the Chrome extension pattern described in [antimatter15 / hideelements](https://github.com/antimatter15/hideelements).
 * Markdown-to-HTML: [chjj / marked](https://github.com/chjj/marked)
 * HTML-to-text: [mtrimpe / jsHtmlToText](https://github.com/mtrimpe/jsHtmlToText)
-* Github-style CSS: [somebox's gist](https://gist.github.com/1082608)
+* Syntax highlighting: [isagalaev / highlight.js](https://github.com/isagalaev/highlight.js)
 * Icons by [dunedel via IconArchive](http://www.iconarchive.com/show/kaori-icons-by-dunedhel/Other-Butterfly-icon.html) (CC BY-NC-ND 3.0)
 
 ### Other stuff not used, but to keep an eye on

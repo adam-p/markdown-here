@@ -9,7 +9,7 @@ var markdownHereCss = ' \
 \
 /* This is the overall wrapper, it should be treated as the `body` section. */ \
 .markdown-here-wrapper { /* adam-p: changed from body */ \
-  font: 13px Helvetica,arial,freesans,clean,sans-serif; \
+  font: 14px Helvetica,arial,freesans,clean,sans-serif; \
   color: #333; \
   background-color: #fff; \
   border: none; \
@@ -82,6 +82,39 @@ h6 { \
 } \
 .shadow { \
   box-shadow:0 5px 15px #000;      \
+} \
+table { \
+  padding: 0; \
+  margin: 15px 0; \
+  border-collapse: collapse; \
+  border-spacing: 0; \
+  font-size: 100%; \
+  font: inherit; \
+  border: 0; \
+} \
+tbody { \
+  margin: 0; \
+  padding: 0; \
+  border: 0; \
+} \
+table tr { \
+  border: 0; \
+  border-top: 1px solid #CCC; \
+  background-color: white; \
+  margin: 0; \
+  padding: 0; \
+} \
+table tr:nth-child(2n) { \
+  background-color: #F8F8F8; \
+} \
+table tr th, table tr td { \
+  border: 1px solid #CCC; \
+  text-align: left; \
+  margin: 0; \
+  padding: 6px 13px; \
+} \
+table tr th { \
+ font-weight: bold; \
 } \
 \
 /* \
