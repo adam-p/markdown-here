@@ -73,6 +73,9 @@
     if (codeLanguage && codeLanguage.length > 0) {
       codeElem.setAttribute('class', 'language-'+codeLanguage);
     }
+    else {
+      codeElem.setAttribute('class', 'no-highlight');
+    }
 
     syntaxHighlighter.highlightBlock(codeElem);
 
