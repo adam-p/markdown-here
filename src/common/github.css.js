@@ -40,8 +40,25 @@ pre code { \
   border: 1px solid #CCC; \
   padding: 6px 10px; \
 } \
-li p { \
-  margin: 0.3em; \
+ul, ol { \
+  padding-left: 30px; \
+} \
+p, blockquote, ul, ol, dl, li, table, pre { \
+  margin: 15px 0; \
+} \
+dl { \
+  padding: 0; \
+} \
+dl dt { \
+  font-size: 14px; \
+  font-weight: bold; \
+  font-style: italic; \
+  padding: 0; \
+  margin: 15px 0 5px; \
+} \
+dl dd { \
+  margin: 0 0 15px; \
+  padding: 0 15px; \
 } \
 a:link, a:visited { \
   color: #33e; \
@@ -85,7 +102,6 @@ h6 { \
 } \
 table { \
   padding: 0; \
-  margin: 15px 0; \
   border-collapse: collapse; \
   border-spacing: 0; \
   font-size: 100%; \
