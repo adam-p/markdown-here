@@ -166,29 +166,7 @@ function getMarkdownStylesheet(elem, css) {
 
 // Applies our styling explicitly to the elements under `elem`.
 function makeStylesExplicit(wrapperElem, css) {
-  var stylesheet, rule, selectorMatches, i, j;
-
-  // There appears to be an oddity (bug?) in Thunderbird (but not Firefox!?!) 
-  // whereby it can't cope with dash-separated style names. So something like 
-  // this doesn't work:
-  //     element.style['background-color'] = style['background-color'];
-  // But this does:
-  //     element.style['backgroundColor'] = style['backgroundColor'];
-  // The camel-case style seems to work fine in Chrome and Firefox, so we'll use
-  // that for all of them.
-
-  // From: http://www.devcurry.com/2011/07/javascript-convert-camelcase-to-dashes.html
-  function dashToCamel(str) {return str;
-    return str.replace(/\W+(.)/g, function (x, chr) { return chr.toUpperCase(); });
-  }
-
-  function applyStyleToElement(style, element) {
-    var i = 0, styleName;
-    for (i = 0; i < style.length; i++) {
-      styleName = dashToCamel(style[i]);
-      element.style[styleName] = style[styleName];
-    }
-  }
+  var stylesheet, rule, selectorMatches, i, j, styleAttr;
 
   stylesheet = getMarkdownStylesheet(wrapperElem, css);
 
@@ -201,12 +179,14 @@ function makeStylesExplicit(wrapperElem, css) {
     // Note that the CSS should not have any rules that use "body" or "html".
 
     if (rule.selectorText === '.markdown-here-wrapper') {
-      applyStyleToElement(rule.style, wrapperElem);
+      wrapperElem.setAttribute('style', rule.style.cssText);
     }
     else {
       selectorMatches = wrapperElem.querySelectorAll(rule.selectorText);
       for (j = 0; j < selectorMatches.length; j++) {
-        applyStyleToElement(rule.style, selectorMatches[j]);
+        styleAttr = selectorMatches[j].getAttribute('style') || '';
+        styleAttr += rule.style.cssText;
+        selectorMatches[j].setAttribute('style', styleAttr);
       }
     }
   }

@@ -155,6 +155,8 @@ Short answer: Gmail is great. So is Thunderbird.
 * In Firefox and Thunderbird, the "Markdown Toggle" menu item shows up for more element types than it can correctly render. This is intended to help people realize that they're not using a rich editor. Otherwise they just don't see the menu item and don't know why.
   * In Chrome, I can't figure out how to selectively hide the menu item, so the above isn't strictly true. But the behaviour would be the same if I could.
 
+* For styling, the use of browser-specific (-moz-, -webkit-) should be avoided. If used, they may not render correctly for people reading the email in a different browser from the one where the email was sent. 
+
 ## Building the Extension Bundles
 
 "Building" is really just zipping. Create all archives relative to the `src` directory.
