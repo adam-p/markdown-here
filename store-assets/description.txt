@@ -25,6 +25,8 @@ Change Log
 
 2012-xx-yy: v2.2.0
 
+Syntax highlighting! Coloured monospace text is super sexy.
+
 Email signatures are now excluded from conversion. Signatures must be preceded by "-- " (note the space at the end).
 
 Fixed block quotes.
