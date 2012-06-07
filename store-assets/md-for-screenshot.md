@@ -14,6 +14,12 @@ Actual review quote:
 
 ### Syntax highlighting: super rad
 
+Some JavaScript:
+
+```javascript
+alert('Hello Markdown');
+```
+
 How about an unusual example -- a diff:
 
 ```diff
@@ -22,18 +28,9 @@ index 24dcb97..20c36a1 100644
 --- a/src/common/markdown-here.js
 +++ b/src/common/markdown-here.js
 @@ -201,12 +179,14 @@ function makeStylesExplicit(wrapperElem, css) {
-       selectorMatches = wrapperElem.querySelectorAll(rule.selectorText);
-       for (j = 0; j < selectorMatches.length; j++) {
 -        applyStyleToElement(rule.style, selectorMatches[j]);
 +        styleAttr = selectorMatches[j].getAttribute('style') || '';
 +        styleAttr += rule.style.cssText;
 +        selectorMatches[j].setAttribute('style', styleAttr);
-       }
-     }
 ```
 
-And a more ordinary one -- JavaScript:
-
-```javascript
-alert('Hello Markdown');
-```
