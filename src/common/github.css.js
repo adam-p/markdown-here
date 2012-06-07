@@ -60,6 +60,17 @@ dl dd { \
   margin: 0 0 15px; \
   padding: 0 15px; \
 } \
+blockquote { \
+  border-left: 4px solid #DDD; \
+  padding: 0 15px; \
+  color: #777; \
+} \
+blockquote, q { \
+  quotes: none; \
+} \
+blockquote::before, blockquote::after, q::before, q::after { \
+  content: none; \
+} \
 a:link, a:visited { \
   color: #33e; \
   text-decoration: none; \
