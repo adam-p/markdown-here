@@ -1,6 +1,6 @@
 # ![Markdown Here logo](//github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png) Markdown Here
 
-*Markdown Here* is a Google Chrome, Firefox, and Thunderbird extension that lets you write email in Markdown and render it before sending.
+*Markdown Here* is a Google Chrome, Firefox, and Thunderbird extension that lets you write email in Markdown and render it before sending. It also supports syntax highlighting (just specify the language in a fenced code block).
 
 Writing email with code in it is pretty tedious. Writing Markdown with code in it is easy. I found myself writing email in Markdown in the Github in-browser editor, then copying the preview into email. This is a pretty absurd workflow, so I decided create a tool to write and render Markdown right in the email.
 
@@ -50,9 +50,13 @@ Install it, and then…
    * In Thunderbird, make sure "Compose messages in HTML format" is enabled in your "Account Settings", "Composition & Addressing" pane.
 3. Compose an email in Markdown. For example:
 
-    ```
-    **Hello** `world`.
-    ```
+   <pre>
+   **Hello** `world`.
+
+   ```javascript
+   alert('Hello syntax highlighting.');
+   ```
+   </pre>
 
 4. Right-click in the compose box and choose the "Markdown Toggle" item from the context menu.
 5. You should see your email rendered correctly from Markdown into rich HTML.
@@ -101,7 +105,7 @@ Here are some common problems people run into.
 
 ## Compatibility
 
-Short answer: Gmail is great. So is Thunderbird.
+Short answer: Gmail is great. Thunderbird is really good.
 
 <table>
   <tr>
@@ -148,6 +152,12 @@ Short answer: Gmail is great. So is Thunderbird.
 ## Notes and Miscellaneous
 
 * *Markdown Here* uses [Github Flavored Markdown](http://github.github.com/github-flavored-markdown/).
+  * ...with limitations. Please see the Issues for details, but here are some examples:
+    * No support for GFM special links: adam-p/markdown#11
+    * No support for GFM-style line breaks: adam-p/markdown#12
+    * No support for GFM-style tables: adam-p/markdown#13
+
+* Available languages for syntax highlighting (and the way they should be written in the fenced code block) can be seen on the [highlight.js demo page](http://softwaremaniacs.org/media/soft/highlight/test.html).
 
 * Email signatures are automatically excluded from conversion. Specifically, anything after the semi-standard `'-- '` (note the trailing space) is left alone.
   * Note that Hotmail and Yahoo do *not* automatically add the `'-- '` to signatures, so you have to add it yourself.
@@ -155,7 +165,7 @@ Short answer: Gmail is great. So is Thunderbird.
 * In Firefox and Thunderbird, the "Markdown Toggle" menu item shows up for more element types than it can correctly render. This is intended to help people realize that they're not using a rich editor. Otherwise they just don't see the menu item and don't know why.
   * In Chrome, I can't figure out how to selectively hide the menu item, so the above isn't strictly true. But the behaviour would be the same if I could.
 
-* For styling, the use of browser-specific (-moz-, -webkit-) should be avoided. If used, they may not render correctly for people reading the email in a different browser from the one where the email was sent. 
+* For styling, the use of browser-specific styles (-moz-, -webkit-) should be avoided. If used, they may not render correctly for people reading the email in a different browser from the one where the email was sent. 
 
 ## Building the Extension Bundles
 
@@ -184,6 +194,8 @@ firefox/
 
 ## Next Steps
 
+* Add user option to create custom CSS.
+
 * Figure out how to prevent users from losing modifications to the rendered version when they revert.
   * Prompted by [this Reddit comment](http://www.reddit.com/r/programming/comments/uagqd/write_email_in_markdown_then_make_it_pretty/c4u6cpv).
   * Maybe add an option to make rendered mode read-only. If a user edits the rendered text and then reverts, they lose their changes, which is pretty bad. Better to not let the user make changes at all (optionally).
@@ -192,8 +204,6 @@ firefox/
     * [to-markdown](https://github.com/domchristie/to-markdown) will probably be useful.
 
 * Test cases.
-
-* Add user option to create custom CSS.
 
 * Add a configurable hotkey.
 
