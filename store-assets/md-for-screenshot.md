@@ -1,12 +1,12 @@
-# Sweet Screenshot Markdown
+## Sweet Screenshot Markdown
 
-*Markdown Here* is a Google Chrome, Firefox, and Thunderbird extension that lets you write email in Markdown and render it before sending. 
+*Markdown Here* is a Google Chrome, Firefox, and Thunderbird extension that lets you write email in Markdown and render it before sending.
 
 * Markdown is **cool**. Put `code inline`.
 * Link to stuff, like [this project](https://github.com/adam-p/markdown-here).
 * Ordered, you say? **And** a sub-list?
   1. Done.
-  2. And done. 
+  2. And done.
 
 Actual review quote:
 
