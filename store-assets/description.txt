@@ -1,6 +1,6 @@
-Markdown Here lets you write email in Markdown and render it (make it pretty!) before sending. 
+Markdown Here lets you write email in Markdown and render it (make it pretty!) before sending.
 
-This is great for anyone who doesn't like fiddling around with formatting buttons while writing an email. It's especially good for programmers who write email with code in them -- it even supports syntax highlighting (just specify the language in a fenced code block). 
+This is great for anyone who doesn't like fiddling around with formatting buttons while writing an email. It's especially good for programmers who write email with code in them -- it even supports syntax highlighting (just specify the language in a fenced code block).
 
 Totally simple to use:
 1. Write your email in your email client's rich editor using Github-flavoured Markdown.
@@ -23,7 +23,7 @@ https://github.com/adam-p/markdown-here
 
 Change Log
 
-2012-xx-yy: v2.2.0
+2012-06-07: v2.2.0
 
 Syntax highlighting! Coloured monospace text is super sexy.
 
@@ -33,7 +33,7 @@ Fixed block quotes.
 
 Much improved table and definition list styling.
 
-Better styling consistency across browsers and mail clients.
+Better styling and consistency across browsers and mail clients.
 
 
 2012-05-31: v2.1.3
