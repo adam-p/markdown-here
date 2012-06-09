@@ -31,14 +31,14 @@ function findFocusedElem(document) {
   return focusedElem;
 }
 
-// Returns true if the given element can be properly rendered (i.e., if it's 
+// Returns true if the given element can be properly rendered (i.e., if it's
 // a rich-edit compose element).
 function elementCanBeRendered(elem) {
   // See here for more info about what we're checking:
   // http://stackoverflow.com/a/3333679/729729
   return elem.contentEditable === true || elem.contentEditable === 'true'
          || elem.contenteditable === true || elem.contenteditable === 'true'
-         || (elem.ownerDocument && elem.ownerDocument.designMode === 'on');  
+         || (elem.ownerDocument && elem.ownerDocument.designMode === 'on');
 }
 
 // Get the currectly selected range. If there is no selected range (i.e., it is
@@ -58,7 +58,7 @@ function getOperationalRange(focusedElem) {
     // If there's no actual selection, select the contents of the focused element.
     range.selectNodeContents(focusedElem);
   }
-  
+
   // Does our range include a signature? If so, remove it.
   sig = findSignatureStart(focusedElem);
   if (sig) {
@@ -88,7 +88,7 @@ function findSignatureStart(startElem) {
         if (startElem.firstChild === child) {
           return startElem;
         }
-        
+
         return child;
       }
     }
@@ -115,16 +115,19 @@ function replaceRange(range, html) {
   // Create a DocumentFragment to insert and populate it with HTML
   documentFragment = range.createContextualFragment(html);
 
+  for (var i = 0; i < documentFragment.childNodes.length; i++) {
+    documentFragment.childNodes[i].style.opacity = '0';
+  }
+
   // After inserting the node contents, the node is empty. So we need to save a
   // reference to the element that we need to return.
   newElement = documentFragment.firstChild;
 
   range.insertNode(documentFragment);
 
-  // Make sure the replacement is selected. This isn't strictly necessary, but
-  // in order to make Chrome and Firefox consistent, we either need to remove
-  // the selection in Chrome, or set it in Firefox. We'll do the latter.
-  range.selectNode(newElement);
+  for (var i = 0; i < documentFragment.childNodes.length; i++) {
+    documentFragment.childNodes[i].style.opacity = '1';
+  }
 
   return newElement;
 }
@@ -250,7 +253,6 @@ function findMarkdownHereWrappersInRange(range) {
 }
 
 // Converts the Markdown in the user's compose element to HTML and replaces it.
-// If `selectedRange` is null, then the entire email is being rendered.
 function renderMarkdown(focusedElem, selectedRange, markdownRenderer) {
   var extractedHtml, rangeWrapper;
 
@@ -293,7 +295,77 @@ function renderMarkdown(focusedElem, selectedRange, markdownRenderer) {
 
 // Revert the rendered Markdown wrapperElem back to its original form.
 function unrenderMarkdown(wrapperElem) {
-  wrapperElem.outerHTML = wrapperElem.getAttribute('data-md-original');
+  var parentElem = wrapperElem.parentElement, transitionParentElem, replacementElem, fadingOut = true;
+
+  transitionParentElem = wrapperElem.ownerDocument.createElement('div');
+  replacementElem = wrapperElem.ownerDocument.createElement('div');
+
+  toggleOpacity(replacementElem, false);
+
+  replacementElem.innerHTML = wrapperElem.getAttribute('data-md-original');
+
+  parentElem.insertBefore(transitionParentElem, wrapperElem);
+  transitionParentElem.appendChild(wrapperElem);
+  transitionParentElem.appendChild(replacementElem);
+
+  addTransitionParentStyles(transitionParentElem, wrapperElem);
+  addTransitionChildStyles(wrapperElem);
+  addTransitionChildStyles(replacementElem);
+
+  replacementElem.addEventListener('transitionend', transitionEnd, false);
+  replacementElem.addEventListener('webkitTransitionEnd', transitionEnd, false);
+
+  if (typeof(setTimeout) === 'undefined') {
+    doTransition(wrapperElem, replacementElem);
+  }
+  else {
+    mylog('setting timeout');
+    setTimeout(function() {
+      mylog('setTimeout triggered');
+      doTransition(wrapperElem, replacementElem);
+    }, 1);
+  }
+
+  function transitionEnd(event) {
+    mylog('transitionEnd', event);
+
+    if (event.propertyName === 'opacity') {
+      transitionParentElem.removeEventListener('transitionend', transitionEnd, false);
+      transitionParentElem.removeEventListener('webkitTransitionEnd', transitionEnd, false);
+
+      transitionParentElem.outerHTML = replacementElem.innerHTML;
+    }
+  }
+
+  function addTransitionParentStyles(elem, visibleChild) {
+    elem.style.position = 'relative';
+    elem.style.height = visibleChild.clientHeight+'px';
+    mylog(elem.style.height);
+  }
+
+  function addTransitionChildStyles(elem) {
+    elem.style.position = 'absolute';
+    elem.style.left = 0;
+  }
+
+  function toggleOpacity(elem, opaque) {
+    elem.style.opacity = opaque ? '1' : '0';
+  }
+
+  function doTransition(fromElem, toElem) {
+    toElem.parentElement.style.MozTransition = 'height 0.5s ease-in-out 0s';
+    toElem.parentElement.style.WebkitTransition = 'height 0.5s ease-in-out 0s';
+    fromElem.style.MozTransition = 'opacity 0.5s ease-in-out 0s';
+    fromElem.style.WebkitTransition = 'opacity 0.5s ease-in-out 0s';
+    toElem.style.MozTransition = 'opacity 0.5s ease-in-out 0s';
+    toElem.style.WebkitTransition = 'opacity 0.5s ease-in-out 0s';
+
+    mylog(toElem.parentElement.style.height);
+    toElem.parentElement.style.height = toElem.clientHeight+'px';
+    mylog(toElem.parentElement.style.height);
+    toggleOpacity(fromElem, false);
+    toggleOpacity(toElem, true);
+  }
 }
 
 // Exported function.
@@ -347,6 +419,9 @@ function markdownHere(document, markdownRenderer, logger) {
     // Look for wrappers in the range under consideration.
     wrappers = findMarkdownHereWrappersInRange(range);
   }
+
+  // Clear any selection.
+  document.getSelection().removeAllRanges();
 
   // If we've found wrappers, then we're reverting.
   // Otherwise, we're rendering.
