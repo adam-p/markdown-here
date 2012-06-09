@@ -222,8 +222,6 @@ firefox/
 
 * Internationalization
 
-* Support images embedded in the Markdown (like, not hand-rolled image tags)? That will certainly deviate from straight Markdown, but maybe okay.
-
 * Fix inconsistent behaviour: Sometimes a converted/reverted block ends up selected, and sometimes not.
 
 * Make email signature conversion exclusion optional. (Maybe some people will make a special one to convert.)

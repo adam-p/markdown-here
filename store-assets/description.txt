@@ -23,6 +23,11 @@ https://github.com/adam-p/markdown-here
 
 Change Log
 
+xxxxxxxx
+
+Added support for drag-and-dropped inline images. Gmail and Thunderbird allow the user to drop an image into the email body. Previously, the image would be lost when a "Markdown Toggle" was done. Now the image will be retained. This isn't Markdown, strictly speaking, but it sure is handy.
+
+
 2012-06-07: v2.2.0
 
 Syntax highlighting! Coloured monospace text is super sexy.
