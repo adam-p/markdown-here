@@ -31,6 +31,7 @@
         text
           .replace(/<div[^>]*>/ig, '<br>') // opening <div> --> <br>
           .replace(/<\/div>/ig, '')        // closing </div> --> nothing
+          .replace(/<(img[^>]*)>/ig, '&lt;$1&gt;') // <img> tags --> textual <img> tags
           .replace(/&nbsp;/ig, ' ');       // &nbsp; --> space
       return replaced;
     }
