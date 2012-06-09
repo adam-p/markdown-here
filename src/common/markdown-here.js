@@ -109,7 +109,7 @@ function findSignatureStart(startElem) {
 // Returns the element that is created from `html`.
 function replaceRange(range, html) {
   var documentFragment, newElement;
-
+  mylog('replaceRange', range);
   range.deleteContents();
 
   // Create a DocumentFragment to insert and populate it with HTML
@@ -252,6 +252,100 @@ function findMarkdownHereWrappersInRange(range) {
   }
 }
 
+function transitionContent(from, toHtml, callback) {
+  var fromElem = from, isRange, transitionParentElem, replacementElem;
+
+  isRange = from.constructor === Range;
+
+  // If it's a range, we need to first wrap the range in a div.
+  if (isRange) {
+    fromElem = from.startContainer.ownerDocument.createElement('div');
+    fromElem.appendChild(from.extractContents());
+    from.insertNode(fromElem);
+  }
+
+  transitionParentElem = fromElem.ownerDocument.createElement('div');
+  replacementElem = fromElem.ownerDocument.createElement('div');
+
+  toggleOpacity(replacementElem, false);
+
+  replacementElem.innerHTML = toHtml;
+
+  fromElem.parentElement.insertBefore(transitionParentElem, fromElem);
+  transitionParentElem.appendChild(fromElem);
+  transitionParentElem.appendChild(replacementElem);
+
+  addTransitionParentStyles(transitionParentElem, fromElem);
+  addTransitionChildStyles(fromElem);
+  addTransitionChildStyles(replacementElem);
+
+  replacementElem.addEventListener('transitionend', transitionEnd, false);
+  replacementElem.addEventListener('webkitTransitionEnd', transitionEnd, false);
+
+  if (typeof(setTimeout) === 'undefined') {
+    doTransition(fromElem, replacementElem);
+  }
+  else {
+    setTimeout(function() {
+      doTransition(fromElem, replacementElem);
+    }, 1);
+  }
+
+  function transitionEnd(event) {
+    var insertedElement;
+
+    if (event.propertyName === 'opacity') {
+      transitionParentElem.removeEventListener('transitionend', transitionEnd, false);
+      transitionParentElem.removeEventListener('webkitTransitionEnd', transitionEnd, false);
+
+      if (false && isRange) {
+        documentFragment = range.createContextualFragment(toHtml);
+        insertedElement = documentFragment.firstChild;
+        range.insertNode(documentFragment);
+      }
+      else {
+        transitionParentElem.outerHTML = replacementElem.innerHTML;
+      }
+
+      mylog('insertedElem', transitionParentElem);
+
+      if (callback) {
+        callback(insertedElement);
+      }
+    }
+  }
+
+  function addTransitionParentStyles(elem, visibleChild) {
+    elem.style.width = fromElem.ownerDocument.body.clientWidth+'px';
+    elem.style.height = visibleChild.clientHeight+'px';
+    elem.style.position = 'relative';
+  }
+
+  function addTransitionChildStyles(elem) {
+    elem.style.width = fromElem.ownerDocument.body.clientWidth+'px';
+    elem.style.position = 'absolute';
+    elem.style.top = 0;
+    elem.style.left = 0;
+  }
+
+  function toggleOpacity(elem, opaque) {
+    elem.style.opacity = opaque ? '1' : '0';
+  }
+
+  function doTransition(fromElem, toElem) {
+    toElem.parentElement.style.MozTransition = 'height 10s ease-in-out 0s';
+    toElem.parentElement.style.WebkitTransition = 'height 10s ease-in-out 0s';
+    fromElem.style.MozTransition = 'opacity 10s ease-in-out 0s';
+    fromElem.style.WebkitTransition = 'opacity 10s ease-in-out 0s';
+    toElem.style.MozTransition = 'opacity 10s ease-in-out 0s';
+    toElem.style.WebkitTransition = 'opacity 10s ease-in-out 0s';
+
+    toElem.parentElement.style.height = toElem.clientHeight+'px';
+    toggleOpacity(fromElem, false);
+    toggleOpacity(toElem, true);
+  }
+}
+
 // Converts the Markdown in the user's compose element to HTML and replaces it.
 function renderMarkdown(focusedElem, selectedRange, markdownRenderer) {
   var extractedHtml, rangeWrapper;
@@ -282,90 +376,22 @@ function renderMarkdown(focusedElem, selectedRange, markdownRenderer) {
       mdHtml +
       '</div>';
 
-    // Store the original Markdown-in-HTML to a data attribute on the wrapper
-    // element. We'll use this later if we need to unrender back to Markdown.
-    wrapper = replaceRange(selectedRange, mdHtml);
-    wrapper.setAttribute('data-md-original', extractedHtml);
+    transitionContent(selectedRange, mdHtml, function(insertedElem) {
+      // Store the original Markdown-in-HTML to a data attribute on the wrapper
+      // element. We'll use this later if we need to unrender back to Markdown.
+      wrapper = replaceRange(selectedRange, mdHtml);
+      wrapper.setAttribute('data-md-original', extractedHtml);
 
-    // Some webmail (Gmail) strips off any external style block. So we need to go
-    // through our styles, explicitly applying them to matching elements.
-    makeStylesExplicit(wrapper, mdCss);
+      // Some webmail (Gmail) strips off any external style block. So we need to go
+      // through our styles, explicitly applying them to matching elements.
+      makeStylesExplicit(wrapper, mdCss);
+    });
   });
 }
 
 // Revert the rendered Markdown wrapperElem back to its original form.
 function unrenderMarkdown(wrapperElem) {
-  var parentElem = wrapperElem.parentElement, transitionParentElem, replacementElem, fadingOut = true;
-
-  transitionParentElem = wrapperElem.ownerDocument.createElement('div');
-  replacementElem = wrapperElem.ownerDocument.createElement('div');
-
-  toggleOpacity(replacementElem, false);
-
-  replacementElem.innerHTML = wrapperElem.getAttribute('data-md-original');
-
-  parentElem.insertBefore(transitionParentElem, wrapperElem);
-  transitionParentElem.appendChild(wrapperElem);
-  transitionParentElem.appendChild(replacementElem);
-
-  addTransitionParentStyles(transitionParentElem, wrapperElem);
-  addTransitionChildStyles(wrapperElem);
-  addTransitionChildStyles(replacementElem);
-
-  replacementElem.addEventListener('transitionend', transitionEnd, false);
-  replacementElem.addEventListener('webkitTransitionEnd', transitionEnd, false);
-
-  if (typeof(setTimeout) === 'undefined') {
-    doTransition(wrapperElem, replacementElem);
-  }
-  else {
-    mylog('setting timeout');
-    setTimeout(function() {
-      mylog('setTimeout triggered');
-      doTransition(wrapperElem, replacementElem);
-    }, 1);
-  }
-
-  function transitionEnd(event) {
-    mylog('transitionEnd', event);
-
-    if (event.propertyName === 'opacity') {
-      transitionParentElem.removeEventListener('transitionend', transitionEnd, false);
-      transitionParentElem.removeEventListener('webkitTransitionEnd', transitionEnd, false);
-
-      transitionParentElem.outerHTML = replacementElem.innerHTML;
-    }
-  }
-
-  function addTransitionParentStyles(elem, visibleChild) {
-    elem.style.position = 'relative';
-    elem.style.height = visibleChild.clientHeight+'px';
-    mylog(elem.style.height);
-  }
-
-  function addTransitionChildStyles(elem) {
-    elem.style.position = 'absolute';
-    elem.style.left = 0;
-  }
-
-  function toggleOpacity(elem, opaque) {
-    elem.style.opacity = opaque ? '1' : '0';
-  }
-
-  function doTransition(fromElem, toElem) {
-    toElem.parentElement.style.MozTransition = 'height 0.5s ease-in-out 0s';
-    toElem.parentElement.style.WebkitTransition = 'height 0.5s ease-in-out 0s';
-    fromElem.style.MozTransition = 'opacity 0.5s ease-in-out 0s';
-    fromElem.style.WebkitTransition = 'opacity 0.5s ease-in-out 0s';
-    toElem.style.MozTransition = 'opacity 0.5s ease-in-out 0s';
-    toElem.style.WebkitTransition = 'opacity 0.5s ease-in-out 0s';
-
-    mylog(toElem.parentElement.style.height);
-    toElem.parentElement.style.height = toElem.clientHeight+'px';
-    mylog(toElem.parentElement.style.height);
-    toggleOpacity(fromElem, false);
-    toggleOpacity(toElem, true);
-  }
+  transitionContent(wrapperElem, wrapperElem.getAttribute('data-md-original'));
 }
 
 // Exported function.
