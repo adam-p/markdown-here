@@ -27,13 +27,80 @@
 
     // We need to tweak the html-to-text processing to get the results we want.
     function tagReplacement(text) {
-      var replaced =
+      text = escapeTagBlocks('blockquote', text);
+
+      text =
         text
           .replace(/<div[^>]*>/ig, '<br>') // opening <div> --> <br>
           .replace(/<\/div>/ig, '')        // closing </div> --> nothing
           .replace(/<(img[^>]*)>/ig, '&lt;$1&gt;') // <img> tags --> textual <img> tags
           .replace(/&nbsp;/ig, ' ');       // &nbsp; --> space
-      return replaced;
+
+      return text;
+
+      // Escape all tags between tags of type `tagName`, inclusive.
+      function escapeTagBlocks(tagName, text) {
+        var depth, startIndex, openIndex, closeIndex, currentOpenIndex, 
+          openRegex, closeRegex, remainderText;
+
+        openRegex = new RegExp('<'+tagName, 'i');
+        closeRegex = new RegExp('</'+tagName, 'i');
+
+        depth = 0;
+        startIndex = 0;
+
+        while (true) {
+          remainderText = text.slice(startIndex); 
+
+          openIndex = remainderText.search(openRegex);
+          closeIndex = remainderText.search(closeRegex);
+
+          if (openIndex < 0 && closeIndex < 0) {
+            break;
+          }
+
+          if (closeIndex < 0 || (openIndex >= 0 && openIndex < closeIndex)) { 
+            // Process an open tag next.
+
+            // Make the index relative to the beginning of the string.
+            openIndex += startIndex;
+
+            if (depth === 0) {
+              // Not a nested tag. Start the escape here.
+              currentOpenIndex = openIndex;
+            }
+
+            startIndex = openIndex + 1;
+            depth += 1;
+          }
+          else { 
+            // Process a close tag next.
+
+            // Make the index relative to the beginning of the string.
+            closeIndex += startIndex;
+
+            if (depth === 1) {
+              // Not a nested tag. Time to escape.
+              text = 
+                text.slice(0, currentOpenIndex)
+                + text.slice(currentOpenIndex, closeIndex+1).replace(/</ig, '&lt;')
+                + text.slice(closeIndex+1);
+
+              // Start from the beginning again. The length of the string has 
+              // changed (so our indexes are meaningless), and we'll only find
+              // unescaped/unprocessed tags of interest anyway.
+              startIndex = 0;
+            }
+            else {
+              startIndex = closeIndex + 1;
+            }
+            
+            depth -= 1;
+          }
+        }
+
+        return text;
+      }
     }
 
     extractedText = htmlToText(html, {tagreplacement: tagReplacement, allowTrailingWhitespace: true});
