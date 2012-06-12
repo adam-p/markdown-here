@@ -41,7 +41,7 @@
       // Escape all tags between tags of type `tagName`, inclusive.
       function escapeTagBlocks(tagName, text) {
         var depth, startIndex, openIndex, closeIndex, currentOpenIndex, 
-          openRegex, closeRegex, remainderText;
+          openRegex, closeRegex, remainderText, closeTagLength;
 
         openRegex = new RegExp('<'+tagName, 'i');
         closeRegex = new RegExp('</'+tagName, 'i');
@@ -81,10 +81,17 @@
 
             if (depth === 1) {
               // Not a nested tag. Time to escape.
+              // Because we've mangled the opening and closing tags, we need to
+              // put around them so that they don't get mashed together with the 
+              // preceeding and following Markdown.
+              closeTagLength = ('</'+tagName+'>').length;
+
               text = 
                 text.slice(0, currentOpenIndex)
-                + text.slice(currentOpenIndex, closeIndex+1).replace(/</ig, '&lt;')
-                + text.slice(closeIndex+1);
+                + '<p/>'
+                + text.slice(currentOpenIndex, closeIndex+closeTagLength).replace(/</ig, '&lt;')
+                + '<p/>'
+                + text.slice(closeIndex+closeTagLength);
 
               // Start from the beginning again. The length of the string has 
               // changed (so our indexes are meaningless), and we'll only find
