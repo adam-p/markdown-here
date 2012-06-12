@@ -187,8 +187,15 @@ function makeStylesExplicit(wrapperElem, css) {
     else {
       selectorMatches = wrapperElem.querySelectorAll(rule.selectorText);
       for (j = 0; j < selectorMatches.length; j++) {
+        // Get the existing styles for the element.
         styleAttr = selectorMatches[j].getAttribute('style') || '';
-        styleAttr += rule.style.cssText;
+
+        // Append the new styles to the end of the existing styles. This will
+        // give the new ones precedence if any are the same as existing ones.
+        // Not all existing styles will end with a semicolon, so add one.
+        styleAttr += '; ' + rule.style.cssText;
+
+        // Set the styles back.
         selectorMatches[j].setAttribute('style', styleAttr);
       }
     }
