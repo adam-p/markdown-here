@@ -70,10 +70,12 @@ function getOperationalRange(focusedElem) {
   return range;
 }
 
-// A signature is indicated by a `'-- '` text node (or something like it).
+// A signature is indicated by the last `'-- '` text node (or something like it).
 // Returns the sig start element, or null if one is not found.
 function findSignatureStart(startElem) {
-  var i, child, recurseReturn;
+  var i, child, recurseReturn, sig;
+
+  sig = null;
 
   for (i = 0; i < startElem.childNodes.length; i++) {
     child = startElem.childNodes[i];
@@ -86,10 +88,11 @@ function findSignatureStart(startElem) {
         // Assume that the entire parent element belongs to the sig only if the
         // `'--'` bit is the at the very start of the parent.
         if (startElem.firstChild === child) {
-          return startElem;
+          sig = startElem;
         }
-        
-        return child;
+        else {
+          sig = child;
+        }
       }
     }
     else {
@@ -97,12 +100,12 @@ function findSignatureStart(startElem) {
 
       // Did the recursive call find it?
       if (recurseReturn) {
-        return recurseReturn;
+        sig = recurseReturn;
       }
     }
   }
 
-  return null;
+  return sig;
 }
 
 // Replaces the contents of `range` with the HTML string in `html`.
