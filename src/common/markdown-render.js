@@ -84,12 +84,15 @@
               // Because we've mangled the opening and closing tags, we need to
               // put around them so that they don't get mashed together with the 
               // preceeding and following Markdown.
+              
               closeTagLength = ('</'+tagName+'>').length;
 
               text = 
                 text.slice(0, currentOpenIndex)
                 + '<p/>'
-                + text.slice(currentOpenIndex, closeIndex+closeTagLength).replace(/</ig, '&lt;')
+                + text.slice(currentOpenIndex, closeIndex+closeTagLength)
+                      .replace(/\&/ig, '&amp;')
+                      .replace(/</ig, '&lt;')
                 + '<p/>'
                 + text.slice(closeIndex+closeTagLength);
 
