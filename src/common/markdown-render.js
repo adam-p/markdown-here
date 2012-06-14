@@ -113,35 +113,13 @@
       }
 
       function addClassToAllTags(className, text) {
-        var openTagRegex, returnText, textIndex, match, currText;
-
-        openTagRegex = new RegExp(/<(\w+\b)(([^>]*)(class=("|')([^>]*?)\5)([^>]*)|[^>]*)>/i);
-
-        returnText = '';
-        textIndex = 0;
-
-        while (textIndex < text.length) {
-          currText = text.slice(textIndex);
-          match = currText.match(openTagRegex);
-
-          if (!match) {
-            returnText += currText;
-            break;
-          }
-
-          returnText += currText.slice(0, match.index);
-          textIndex += match.index + match[0].length;
-
-          if (match[7] !== undefined) {
-            returnText += '<' + match[1] + match[3] + 'class="' + match[6] + ' ' + className + '"' + match[7] + '>';
-          }
-          else {
-            // No existing class attribute
-            returnText += '<' + match[1] + ' class="' + className + '"' + match[2] + '>';
-          }
-        }
-
-        return returnText;
+        return text
+          .replace(
+            /<(\w+\b)(([^>]*)(class=("|')([^>]*?)\5)([^>]*))>/ig, 
+            '<$1$3class="$6 ' + className + '"$7>')
+          .replace(
+            /<(\w+\b)(((?!class)[^>])*)>/ig, 
+            '<$1 class="' + className + '"$2>');
       }
     }
 
