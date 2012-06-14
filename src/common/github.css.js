@@ -43,7 +43,7 @@ pre code { \
 ul, ol { \
   padding-left: 30px; \
 } \
-p, blockquote:not(.gmail_quote), ul, ol, dl, li, table, pre { \
+p, blockquote:not(.markdown-here-exclude), ul, ol, dl, li, table, pre { \
   margin: 15px 0; \
 } \
 dl { \
@@ -60,15 +60,15 @@ dl dd { \
   margin: 0 0 15px; \
   padding: 0 15px; \
 } \
-blockquote:not(.gmail_quote) { \
+blockquote:not(.markdown-here-exclude) { \
   border-left: 4px solid #DDD; \
   padding: 0 15px; \
   color: #777; \
 } \
-blockquote:not(.gmail_quote), q { \
+blockquote:not(.markdown-here-exclude), q { \
   quotes: none; \
 } \
-blockquote:not(.gmail_quote)::before, blockquote:not(.gmail_quote)::after, q::before, q::after { \
+blockquote:not(.markdown-here-exclude)::before, blockquote:not(.markdown-here-exclude)::after, q::before, q::after { \
   content: none; \
 } \
 a:link, a:visited { \

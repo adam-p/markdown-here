@@ -27,7 +27,7 @@
 
     // We need to tweak the html-to-text processing to get the results we want.
     function tagReplacement(text) {
-      text = escapeTagBlocks('blockquote', text);
+      text = excludeTagBlocks('blockquote', text);
 
       text =
         text
@@ -39,12 +39,12 @@
       return text;
 
       // Escape all tags between tags of type `tagName`, inclusive.
-      function escapeTagBlocks(tagName, text) {
+      function excludeTagBlocks(tagName, text) {
         var depth, startIndex, openIndex, closeIndex, currentOpenIndex, 
-          openRegex, closeRegex, remainderText, closeTagLength;
+          openTagRegex, closeTagRegex, remainderText, closeTagLength;
 
-        openRegex = new RegExp('<'+tagName, 'i');
-        closeRegex = new RegExp('</'+tagName, 'i');
+        openTagRegex = new RegExp('<'+tagName, 'i');
+        closeTagRegex = new RegExp('</'+tagName, 'i');
 
         depth = 0;
         startIndex = 0;
@@ -52,8 +52,8 @@
         while (true) {
           remainderText = text.slice(startIndex); 
 
-          openIndex = remainderText.search(openRegex);
-          closeIndex = remainderText.search(closeRegex);
+          openIndex = remainderText.search(openTagRegex);
+          closeIndex = remainderText.search(closeTagRegex);
 
           if (openIndex < 0 && closeIndex < 0) {
             break;
@@ -90,7 +90,7 @@
               text = 
                 text.slice(0, currentOpenIndex)
                 + '<p/>'
-                + text.slice(currentOpenIndex, closeIndex+closeTagLength)
+                + addClassToAllTags('markdown-here-exclude', text.slice(currentOpenIndex, closeIndex+closeTagLength))
                       .replace(/\&/ig, '&amp;')
                       .replace(/</ig, '&lt;')
                 + '<p/>'
@@ -110,6 +110,38 @@
         }
 
         return text;
+      }
+
+      function addClassToAllTags(className, text) {
+        var openTagRegex, returnText, textIndex, match, currText;
+
+        openTagRegex = new RegExp(/<(\w+\b)(([^>]*)(class=("|')([^>]*?)\5)([^>]*)|[^>]*)>/i);
+
+        returnText = '';
+        textIndex = 0;
+
+        while (textIndex < text.length) {
+          currText = text.slice(textIndex);
+          match = currText.match(openTagRegex);
+
+          if (!match) {
+            returnText += currText;
+            break;
+          }
+
+          returnText += currText.slice(0, match.index);
+          textIndex += match.index + match[0].length;
+
+          if (match[7] !== undefined) {
+            returnText += '<' + match[1] + match[3] + 'class="' + match[6] + ' ' + className + '"' + match[7] + '>';
+          }
+          else {
+            // No existing class attribute
+            returnText += '<' + match[1] + ' class="' + className + '"' + match[2] + '>';
+          }
+        }
+
+        return returnText;
       }
     }
 

@@ -62,6 +62,12 @@ function getOperationalRange(focusedElem) {
   // Does our range include a signature? If so, remove it.
   sig = findSignatureStart(focusedElem);
   if (sig) {
+    // If the sig is an element node, set a class indicating that it's a sig.
+    // This gives us (or the user) the option of styling differently.
+    if (sig.nodeType === sig.ELEMENT_NODE) {
+      sig.classList.add('markdown-here-signature');
+    }
+
     if (range.isPointInRange(sig, 0)) {
       range.setEndBefore(sig);
     }
@@ -95,7 +101,7 @@ function findSignatureStart(startElem) {
         }
       }
     }
-    else {
+    else if (['BLOCKQUOTE'].indexOf(child.nodeName) < 0) {
       recurseReturn = findSignatureStart(child, true);
 
       // Did the recursive call find it?
