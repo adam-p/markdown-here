@@ -27,6 +27,11 @@
 
     // We need to tweak the html-to-text processing to get the results we want.
     function tagReplacement(text) {
+
+      // The default behaviour for `htmlToText` is to strip out tags (and their
+      // inner text/html) that it doesn't expect/want. But we want some tag blocks
+      // to remain intact.
+      
       text = excludeTagBlocks('blockquote', text);
 
       text =
@@ -38,7 +43,8 @@
 
       return text;
 
-      // Escape all tags between tags of type `tagName`, inclusive.
+      // Escape all tags between tags of type `tagName`, inclusive. Also add a
+      // special "exclude" class to them.
       function excludeTagBlocks(tagName, text) {
         var depth, startIndex, openIndex, closeIndex, currentOpenIndex, 
           openTagRegex, closeTagRegex, remainderText, closeTagLength;
@@ -112,6 +118,7 @@
         return text;
       }
 
+      // Add the class `className` to all tags in `text`.
       function addClassToAllTags(className, text) {
         return text
           .replace(
