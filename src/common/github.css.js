@@ -13,7 +13,7 @@ var markdownHereCss = ' \
   color: #333; \
   background-color: #fff; \
   border: none; \
-  line-height: 1.5; \
+  line-height: 1.2; \
   text-align:left; \
 } \
 pre, code { \
