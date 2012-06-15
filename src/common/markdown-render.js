@@ -31,7 +31,7 @@
       // The default behaviour for `htmlToText` is to strip out tags (and their
       // inner text/html) that it doesn't expect/want. But we want some tag blocks
       // to remain intact.
-      
+
       text = excludeTagBlocks('blockquote', text);
 
       text =

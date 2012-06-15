@@ -14,9 +14,6 @@
 // For debugging purposes. An external service is required to log with Firefox.
 var mylog = function() {};
 
-// Used to create unique IDs for each Markdown Here wrapper.
-var markdownHereWrapperIdCounter = 1;
-
 // Finds and returns the page element that currently has focus. Drills down into
 // iframes if necessary.
 function findFocusedElem(document) {
@@ -301,7 +298,7 @@ function renderMarkdown(focusedElem, selectedRange, markdownRenderer) {
     // Wrap our pretty HTML in a <div> wrapper.
     // We'll use the wrapper as a marker to indicate that we're in a rendered state.
     mdHtml =
-      '<div class="markdown-here-wrapper" id="markdown-here-wrapper-' + (markdownHereWrapperIdCounter++) + '">' +
+      '<div class="markdown-here-wrapper" id="markdown-here-wrapper-' + Math.floor(Math.random()*1000000) + '">' +
       mdHtml +
       '</div>';
 
