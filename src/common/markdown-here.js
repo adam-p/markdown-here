@@ -224,8 +224,15 @@ function findMarkdownHereWrapper(focusedElem) {
   wrapper = range.commonAncestorContainer;
   while (wrapper) {
     match = false;
+
+    // Thunderbird (but not Chrome) leaves class names intact quoting an email
+    // that is being replied to. That means that there will be old wrappers in
+    // DOM that we need to ignore when looking for wrappers to revert. Luckily,
+    // the `data-md-original` attribute is not retained, so we'll require the
+    // presence of both the class and the data attribute to indicate a wrapper.
     for (i = 0; wrapper.attributes && i < wrapper.attributes.length; i++) {
-      if (wrapper.attributes[i].value === 'markdown-here-wrapper') {
+      if (wrapper.classList && wrapper.classList.contains('markdown-here-wrapper')
+          && wrapper.attributes && wrapper.attributes.getNamedItem('data-md-original')) {
         match = true;
         break;
       }
@@ -248,7 +255,9 @@ function findMarkdownHereWrappersInRange(range) {
 
   documentFragment = range.cloneContents();
 
-  cloneWrappers = documentFragment.querySelectorAll('.markdown-here-wrapper');
+  // See the comment in findMarkdownHereWrapper for why we're also checking for
+  // the presence of `data-md-original`.
+  cloneWrappers = documentFragment.querySelectorAll('.markdown-here-wrapper[data-md-original]');
 
   if (cloneWrappers && cloneWrappers.length > 0) {
     // Now we have an array of *copies* of the wrappers in the DOM. Find them in
