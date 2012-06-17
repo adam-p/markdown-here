@@ -195,8 +195,13 @@ function makeStylesExplicit(wrapperElem, css) {
 
         // Append the new styles to the end of the existing styles. This will
         // give the new ones precedence if any are the same as existing ones.
-        // Not all existing styles will end with a semicolon, so add one.
-        styleAttr += '; ' + rule.style.cssText;
+        
+        // Make sure existing styles end with a semicolon.
+        if (styleAttr && styleAttr.search(/;[\s]*$/) < 0) {
+          styleAttr += '; ';
+        }
+
+        styleAttr += rule.style.cssText;
 
         // Set the styles back.
         selectorMatches[j].setAttribute('style', styleAttr);
