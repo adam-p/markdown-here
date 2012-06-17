@@ -210,10 +210,27 @@ function makeStylesExplicit(wrapperElem, css) {
   }
 }
 
+function hasParentElementOfTagName(element, tagName) {
+  var parent;
+
+  tagName = tagName.toUpperCase();
+
+  parent = element.parentElement;
+  while (parent) {
+    if (parent.nodeName === tagName) {
+      return true;
+    }
+
+    parent = parent.parentElement;
+  }
+
+  return false;
+}
+
 // Find the wrapper element that's above the current cursor position and returns
 // it. Returns falsy if there is no wrapper.
 function findMarkdownHereWrapper(focusedElem) {
-  var selection, range, wrapper = null, match, i;
+  var selection, range, wrapper = null;
 
   selection = focusedElem.ownerDocument.getSelection();
 
@@ -225,24 +242,15 @@ function findMarkdownHereWrapper(focusedElem) {
 
   wrapper = range.commonAncestorContainer;
   while (wrapper) {
-    match = false;
-
-    // Thunderbird (but not Chrome) leaves class names intact quoting an email
-    // that is being replied to. That means that there will be old wrappers in
-    // DOM that we need to ignore when looking for wrappers to revert. Luckily,
-    // the `data-md-original` attribute is not retained, so we'll require the
-    // presence of both the class and the data attribute to indicate a wrapper.
-    for (i = 0; wrapper.attributes && i < wrapper.attributes.length; i++) {
-      if (wrapper.classList && wrapper.classList.contains('markdown-here-wrapper')
-          && wrapper.attributes && wrapper.attributes.getNamedItem('data-md-original')) {
-        match = true;
-        break;
-      }
+    // Skip all wrappers that are in a `blockquote`. We don't want to revert
+    // Markdown that was sent to us.
+    if (wrapper.classList && wrapper.classList.contains('markdown-here-wrapper')
+        && wrapper.attributes && wrapper.attributes.getNamedItem('data-md-original')
+        && !hasParentElementOfTagName(wrapper, 'BLOCKQUOTE')) {
+      break;
     }
 
-    if (match) break;
-
-    wrapper = wrapper.parentNode;
+    wrapper = wrapper.parentElement;
   }
 
   return wrapper;
@@ -255,17 +263,31 @@ function findMarkdownHereWrappersInRange(range) {
 
   // Finding elements in a range isn't very simple...
 
+  // Clone the contents of the range.
   documentFragment = range.cloneContents();
 
-  // See the comment in findMarkdownHereWrapper for why we're also checking for
-  // the presence of `data-md-original`.
+  // Find all wrappers. Require the presence of the `data-md-original` attribute.
   cloneWrappers = documentFragment.querySelectorAll('.markdown-here-wrapper[data-md-original]');
 
   if (cloneWrappers && cloneWrappers.length > 0) {
     // Now we have an array of *copies* of the wrappers in the DOM. Find them in
     // the DOM from their IDs. This is why we need unique IDs for our wrappers.
+    
     wrappers = [];
+
     for (i = 0; i < cloneWrappers.length; i++) {
+
+      // Require that the `data-md-original` attribute actually have content.
+      if (!cloneWrappers[i].attributes.getNamedItem('data-md-original')) {
+        continue;
+      }
+      
+      // Skip all wrappers that are in a `blockquote`. We don't want to revert
+      // Markdown that was sent to us.
+      if (hasParentElementOfTagName(cloneWrappers[i], 'BLOCKQUOTE')) {
+        continue;
+      }
+
       wrappers.push(range.commonAncestorContainer.ownerDocument.getElementById(cloneWrappers[i].id));
     }
 
