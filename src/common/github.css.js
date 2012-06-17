@@ -5,7 +5,12 @@
 
 ;(function() {
 
-var markdownHereCss = ' \
+var markdownHereCss = " \
+\
+/* NOTE: \
+ * - Do not use multi-word fonts. Gmail will strip them and kill following \
+ *   styles. Sometimes. \
+ */ \
 \
 /* This is the overall wrapper, it should be treated as the `body` section. */ \
 .markdown-here-wrapper { /* adam-p: changed from body */ \
@@ -18,7 +23,7 @@ var markdownHereCss = ' \
 } \
 pre, code { \
   font-size: 12px; \
-  font-family: "Bitstream Vera Sans Mono","Courier",monospace; \
+  font-family: Consolas, Inconsolata, Courier, monospace; \
 } \
 code { \
   margin: 0 2px; \
@@ -109,7 +114,7 @@ h6 { \
   color: #777; \
 } \
 .shadow { \
-  box-shadow:0 5px 15px #000;      \
+  box-shadow:0 5px 15px #000; \
 } \
 table { \
   padding: 0; \
@@ -277,7 +282,7 @@ pre .chunk { \
 pre .tex .formula { \
   opacity: 0.5; \
 } \
-';
+";
 
 var EXPORTED_SYMBOLS = ['markdownHereCss'];
 
