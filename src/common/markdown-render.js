@@ -31,14 +31,23 @@
       // The default behaviour for `htmlToText` is to strip out tags (and their
       // inner text/html) that it doesn't expect/want. But we want some tag blocks
       // to remain intact.
-
       text = excludeTagBlocks('blockquote', text);
 
+      // Try to leave intact the line that Gmail adds that says:
+      //   On such-a-date, such-a-person <email addy> wrote:
+      text = text.replace(
+                    /&lt;<a (href="mailto:[^>]+)>([^<]*)<\/a>&gt;/ig, 
+                    '&lt;&lt;a $1&gt;$2&lt;\/a&gt;&gt;');
+
+      // It's a deviation from Markdown, but we'd like to leave any rendered
+      // images already in the email intact. So we'll escape their tags.
+      text = text.replace(/<(img[^>]*)>/ig, '&lt;$1&gt;');
+
+      // Experimentation has shown some tags that need to be tweaked a little.
       text =
         text
           .replace(/<div[^>]*>/ig, '<br>') // opening <div> --> <br>
           .replace(/<\/div>/ig, '')        // closing </div> --> nothing
-          .replace(/<(img[^>]*)>/ig, '&lt;$1&gt;') // <img> tags --> textual <img> tags
           .replace(/&nbsp;/ig, ' ');       // &nbsp; --> space
 
       return text;
