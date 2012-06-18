@@ -27,7 +27,9 @@ xxxxxxxx
 
 Works in Google Groups' rich compose box. 
 
-Added support for drag-and-dropped inline images. Gmail and Thunderbird allow the user to drop an image into the email body. Previously, the image would be lost when a "Markdown Toggle" was done. Now the image will be retained. This isn't Markdown, strictly speaking, but it sure is handy.
+Added support for inline, pre-rendered images. Some email editors allow the user to drag-and-drop an image into an email body, and some allow users to select one from their computer or the web (or an emoticon in the email compose controls!). Previously, the image would be lost when a "Markdown Toggle" was done. Now the image will be retained. This isn't Markdown, strictly speaking, but it sure is handy.
+
+Pre-rendered links (made using the Gmail controls, for example) are now left intact when rendering the Markdown. Again, not really Markdown, but handy.
 
 Bug fixes.
 
