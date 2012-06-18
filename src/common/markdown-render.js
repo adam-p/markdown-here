@@ -31,7 +31,7 @@
       // The default behaviour for `htmlToText` is to strip out tags (and their
       // inner text/html) that it doesn't expect/want. But we want some tag blocks
       // to remain intact.
-      text = excludeTagBlocks('blockquote', text);
+      text = excludeTagBlocks('blockquote', text, true);
 
       // Try to leave intact the line that Gmail adds that says:
       //   On such-a-date, such-a-person <email addy> wrote:
@@ -41,7 +41,11 @@
 
       // It's a deviation from Markdown, but we'd like to leave any rendered
       // images already in the email intact. So we'll escape their tags.
+      // Note that we can't use excludeTagBlocks because there's no closing tag.
       text = text.replace(/<(img[^>]*)>/ig, '&lt;$1&gt;');
+
+      // Leave rendered links intact.
+      text = excludeTagBlocks('a', text, false);
 
       // Experimentation has shown some tags that need to be tweaked a little.
       text =
@@ -54,12 +58,14 @@
 
       // Escape all tags between tags of type `tagName`, inclusive. Also add a
       // special "exclude" class to them.
-      function excludeTagBlocks(tagName, text) {
+      // If `wrapInPara` is true, `<p>` tags will be added before and after each
+      // tag block found.
+      function excludeTagBlocks(tagName, text, wrapInPara) {
         var depth, startIndex, openIndex, closeIndex, currentOpenIndex, 
           openTagRegex, closeTagRegex, remainderText, closeTagLength;
 
-        openTagRegex = new RegExp('<'+tagName, 'i');
-        closeTagRegex = new RegExp('</'+tagName, 'i');
+        openTagRegex = new RegExp('<'+tagName+'\\b', 'i');
+        closeTagRegex = new RegExp('</'+tagName+'\\b', 'i');
 
         depth = 0;
         startIndex = 0;
@@ -104,11 +110,11 @@
 
               text = 
                 text.slice(0, currentOpenIndex)
-                + '<p/>'
+                + (wrapInPara ? '<p/>' : '')
                 + addClassToAllTags('markdown-here-exclude', text.slice(currentOpenIndex, closeIndex+closeTagLength))
                       .replace(/\&/ig, '&amp;')
                       .replace(/</ig, '&lt;')
-                + '<p/>'
+                + (wrapInPara ? '<p/>' : '')
                 + text.slice(closeIndex+closeTagLength);
 
               // Start from the beginning again. The length of the string has 
