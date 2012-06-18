@@ -125,21 +125,21 @@ Short answer: Gmail is great. Thunderbird is really good.
     <td>Perfect</td>
   </tr>
   <tr>
+    <th>Thunderbird</th>
+    <td>Perfect</td>
+    <td>Embedded image tags lose correct src</td>
+    <td>Perfect</td>
+  </tr>
+  <tr>
     <th>Hotmail</th>
     <td>Perfect</td>
-    <td>Paragraph tags are lost.</td>
     <td>Perfect</td>
+    <td>Email from received from Yahoo does not display with properly separated paragraphs. (Hotmail strips styling off <code>&lt;p&gt;</code> and <code>&lt;div&gt;</code> tags, and Yahoo uses the latter for paragraphs.)</td>
   </tr>
   <tr>
     <th>Yahoo</th>
     <td>Perfect</td>
-    <td>Paragraph tags are lost (or replaced?).</td>
-    <td>Paragraph tags are lost (or replaced?).</td>
-  </tr>
-  <tr>
-    <th>Thunderbird</th>
     <td>Perfect</td>
-    <td>Embedded image tags lose correct src</td>
     <td>Perfect</td>
   </tr>
 </table>
