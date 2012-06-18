@@ -1,10 +1,12 @@
 # ![Markdown Here logo](//github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png) Markdown Here
 
-*Markdown Here* is a Google Chrome, Firefox, and Thunderbird extension that lets you write email in Markdown and render it before sending. It also supports syntax highlighting (just specify the language in a fenced code block).
+*Markdown Here* is a Google Chrome, Firefox, and Thunderbird extension that lets you write email<sup>*</sup> in Markdown and render them before sending. It also supports syntax highlighting (just specify the language in a fenced code block).
 
 Writing email with code in it is pretty tedious. Writing Markdown with code in it is easy. I found myself writing email in Markdown in the Github in-browser editor, then copying the preview into email. This is a pretty absurd workflow, so I decided create a tool to write and render Markdown right in the email.
 
-To discover what can be done with Markdown in *Markdown Here*, check out the [Markdown Cheatsheet](//github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet). 
+To discover what can be done with Markdown in *Markdown Here*, check out the [Markdown Cheatsheet](//github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).
+
+<small>*: And Google Groups posts!</small>
 
 ![screenshot of conversion](//github.com/adam-p/markdown-here/raw/master/store-assets/markdown-here-image1.gimp.png)
 
@@ -142,6 +144,12 @@ Short answer: Gmail is great. Thunderbird is really good.
     <td>Perfect</td>
     <td>Perfect</td>
   </tr>
+  <tr>
+    <th>Google Groups</th>
+    <td>Perfect</td>
+    <td>Perfect</td>
+    <td>Perfect</td>
+  </tr>
 </table>
 
 *Compose*
@@ -167,9 +175,11 @@ Short answer: Gmail is great. Thunderbird is really good.
   * Note that Hotmail and Yahoo do *not* automatically add the `'-- '` to signatures, so you have to add it yourself.
 
 * In Firefox and Thunderbird, the "Markdown Toggle" menu item shows up for more element types than it can correctly render. This is intended to help people realize that they're not using a rich editor. Otherwise they just don't see the menu item and don't know why.
-  * In Chrome, I can't figure out how to selectively hide the menu item, so the above isn't strictly true. But the behaviour would be the same if I could.
+  * In Chrome, I can't figure out how to selectively hide the menu item, so the behaviour isn't entirely intentional. But it would be basically the same even if I could.
 
-* For styling, the use of browser-specific styles (-moz-, -webkit-) should be avoided. If used, they may not render correctly for people reading the email in a different browser from the one where the email was sent. 
+* Styling:
+  * The use of browser-specific styles (-moz-, -webkit-) should be avoided. If used, they may not render correctly for people reading the email in a different browser from the one where the email was sent.
+  * Do not use multi-word font names (e.g., "Andale Mono"). For some mysterious reason, they totally mess up styling.
 
 ## Building the Extension Bundles
 
