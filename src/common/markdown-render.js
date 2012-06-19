@@ -23,7 +23,7 @@
                           will not be inserted into the DOM.
    */
   function markdownRender(htmlToText, markdownToHtml, syntaxHighlighter, html, targetDocument) {
-    var extractedText, markedOptions;
+    var extractedText, markedOptions, keepTags, i;
 
     // We need to tweak the html-to-text processing to get the results we want.
     function tagReplacement(text) {
@@ -45,7 +45,10 @@
       text = text.replace(/<(img[^>]*)>/ig, '&lt;$1&gt;');
 
       // Leave rendered links intact.
-      text = excludeTagBlocks('a', text, false);
+      keepTags = ['a', 'b', 'i', 'u', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'font', 'span', 'ul', 'ol'];
+      for (i = 0; i < keepTags.length; i++) {
+        text = excludeTagBlocks(keepTags[i], text, false);
+      }
 
       // Experimentation has shown some tags that need to be tweaked a little.
       text =
@@ -112,7 +115,6 @@
                 text.slice(0, currentOpenIndex)
                 + (wrapInPara ? '<p/>' : '')
                 + addClassToAllTags('markdown-here-exclude', text.slice(currentOpenIndex, closeIndex+closeTagLength))
-                      .replace(/\&/ig, '&amp;')
                       .replace(/</ig, '&lt;')
                 + (wrapInPara ? '<p/>' : '')
                 + text.slice(closeIndex+closeTagLength);
