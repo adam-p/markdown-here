@@ -614,7 +614,7 @@ function tok() {
       if (options.sanitize) {
         return inline.lexer(token.text);
       }
-      return !token.pre && !options.pedantic && !options.gfm /* adam-p: added gfm check */
+      return !token.pre && !options.pedantic
         ? inline.lexer(token.text)
         : token.text;
     }
