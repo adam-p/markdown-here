@@ -113,7 +113,7 @@ Here are some common problems people run into.
 
 ## Compatibility
 
-Short answer: Gmail is great. Thunderbird is really good.
+Short answer: Gmail and Thunderbird are great.
 
 <table>
   <tr>
@@ -131,7 +131,7 @@ Short answer: Gmail is great. Thunderbird is really good.
   <tr>
     <th>Thunderbird</th>
     <td>Perfect</td>
-    <td>Embedded image tags lose correct src</td>
+    <td>Perfect</td>
     <td>Perfect</td>
   </tr>
   <tr>
