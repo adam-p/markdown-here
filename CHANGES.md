@@ -11,8 +11,8 @@ Change Log
 * Pre-formatted text (colours, italics, bold, etc.), links, and lists (made using the email client rich edit controls, for example) are now left intact when rendering the Markdown.
 
 * Added ability to convert a reply email in its entirety, rather than using the select-and-convert piecemeal approach. 
-  * This doesn't work with Yahoo and Hotmail, because they don't seem to quote the original email.
-  * Resolves adam-p/markdown-here/#14.
+  - This doesn't work with Yahoo and Hotmail, because they don't seem to quote the original email.
+  - Resolves adam-p/markdown-here/#14.
 
 * Some styling changes.
 
