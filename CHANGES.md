@@ -17,7 +17,7 @@ Change Log
 
 * Added ability to convert a reply email in its entirety, rather than using the select-and-convert piecemeal approach. 
   - This doesn't work with Yahoo and Hotmail, because they don't seem to quote the original email.
-  - Resolves adam-p/markdown-here/#14.
+  - Resolves issue #14
 
 * Some styling changes.
 
@@ -99,7 +99,7 @@ Change Log
 2012-05-14: v1.1.1
 ------------------
 
-* Fixed Gmail display of received rendered-from-Markdown email. Gmail was killing the <style> block, so styles are now also set explicitly on each element. Gmail works great now.
+* Fixed Gmail display of received rendered-from-Markdown email. Gmail was killing the `<style>` block, so styles are now also set explicitly on each element. Gmail works great now.
 
 
 2012-05-13: v1.1.0
