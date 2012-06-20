@@ -45,9 +45,19 @@
       text = text.replace(/<(img[^>]*)>/ig, '&lt;$1&gt;');
 
       // Leave rendered links intact.
-      keepTags = ['a', 'b', 'i', 'u', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'font', 'span', 'ul', 'ol'];
+      keepTags = ['a', 'b', 'i', 'u', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'font', 'ul', 'ol'];
       for (i = 0; i < keepTags.length; i++) {
         text = excludeTagBlocks(keepTags[i], text, false);
+      }
+
+      // Span tags are used by email editors for formatting (especially for 
+      // background colour -- "highlighting"), but Yahoo also uses them around
+      // almost everything. If we escape them all, we'll mess up code blocks
+      // (you'll just see a lot of span tag crap). So we'll only escape span
+      // tags that have styles.
+      keepTags = ['span'];
+      for (i = 0; i < keepTags.length; i++) {
+        text = excludeTagBlocks(keepTags[i], text, false, 'style');
       }
 
       // Experimentation has shown some tags that need to be tweaked a little.
@@ -63,11 +73,19 @@
       // special "exclude" class to them.
       // If `wrapInPara` is true, `<p>` tags will be added before and after each
       // tag block found.
-      function excludeTagBlocks(tagName, text, wrapInPara) {
+      // If `ifHasAttribute` is non-null, tags will only be matched if they have
+      // that attribute.
+      function excludeTagBlocks(tagName, text, wrapInPara, ifHasAttribute) {
         var depth, startIndex, openIndex, closeIndex, currentOpenIndex, 
           openTagRegex, closeTagRegex, remainderText, closeTagLength;
 
-        openTagRegex = new RegExp('<'+tagName+'\\b', 'i');
+        if (ifHasAttribute) {
+          openTagRegex = new RegExp('<'+tagName+'\\b[^>]*\\b'+ifHasAttribute+'\\b', 'i');
+        }
+        else {
+          openTagRegex = new RegExp('<'+tagName+'\\b', 'i');
+        }
+
         closeTagRegex = new RegExp('</'+tagName+'\\b', 'i');
 
         depth = 0;

@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+2012-06-20: v2.3.1
+------------------
+
+* Fixed bug: Yahoo: Code blocks would just show a bunch of span tags. (Introduced in 2.3.0.)
+
 2012-06-20: v2.3.0
 ------------------
 
