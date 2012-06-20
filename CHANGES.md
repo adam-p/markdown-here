@@ -1,16 +1,24 @@
 Change Log
 ==========
 
-2012-xx-yy: v2.3.0
+2012-06-20: v2.3.0
 ------------------
 
-* Works with Google Groups posts. You can use it either in the GG rich compose box, or when sending posts via email. 
+* Works with Google Groups posts! You can use it either in the GG rich compose box, or when sending posts via email. 
 
-* Added support for inline, pre-rendered images. Some email editors allow the user to drag-and-drop an image into an email body, and some allow users to select one from their computer or the web (or an emoticon in the email compose controls!). Previously, the image would be lost when a "Markdown Toggle" was done. Now the image will be retained. This isn't Markdown, strictly speaking, but it sure is handy.
+* Added support for inline, pre-rendered images. Some email editors allow the user to drag-and-drop an image into an email body, and some allow users to select one from their computer or the web (or an emoticon in the email compose controls!). Previously, the image would be lost when a "Markdown Toggle" was done. Now the image will be retained.
 
-* Pre-rendered text (colours, italics, bold, etc.), links, and lists (made using the email client rich edit controls, for example) is now left intact when rendering the Markdown. Again, not really Markdown, but handy. 
+* Pre-formatted text (colours, italics, bold, etc.), links, and lists (made using the email client rich edit controls, for example) are now left intact when rendering the Markdown.
+
+* Added ability to convert a reply email in its entirety, rather than using the select-and-convert piecemeal approach. 
+  * This doesn't work with Yahoo and Hotmail, because they don't seem to quote the original email.
+  * Resolves adam-p/markdown-here/#14.
+
+* Some styling changes.
 
 * Bug fixes.
+
+* Created a Markdown cheatsheet: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
 
 
 2012-06-07: v2.2.0

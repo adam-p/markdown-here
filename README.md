@@ -76,25 +76,27 @@ Note that any changes you make to the pretty HTML will be lost when you revert t
 
 In Gmail, you can also use the browser's Undo command (ctrl+z/cmd+z, or from the Edit menu). Be warned that you might also use the last few characters you entered.
 
-### Replies and Piecemeal Conversion
+### Replies
 
-Sometimes you don't want to convert the entire email; sometimes your email isn't entirely Markdown. The primary example of this is when you're writing a reply to an email: what you wrote -- either at the top or inline -- may be in Markdown, but no part of the original is. If you convert the entire email, the original will lose all formatting (or get otherwise messed up).
+In Gmail, Thunderbird, and Google Groups, you can use "Markdown Toggle" normally: just write your reply (top, bottom, inline, wherever) and then convert. The original email that you're replying to will be left alone. (Technically: Existing `blockquote` blocks will be left intact.) 
 
-To convert only part of the email, select the text (with your mouse or keyboard), right-click on it, and click the "Markdown Toggle" menu item. Your selection is magically rendered into pretty HTML.
+In Hotmail and Yahoo (which don't put the original in a `blockquote`), and optionally in Gmail, Thunderbird, and Google Groups, you can ensure that only the part of the reply that you wrote gets converted by selecting what you want to convert and then clicking "Markdown Toggle" -- see the next section.
+
+### Selection/Piecemeal Conversion
+
+Sometimes you don't want to convert the entire email; sometimes your email isn't entirely Markdown. To convert only part of the email, select the text (with your mouse or keyboard), right-click on it, and click the "Markdown Toggle" menu item. Your selection is magically rendered into pretty HTML.
 
 To revert back to Markdown, just put your cursor anywhere in the block of converted text, right click, and click the "Markdown Toggle" menu item again. Now it's magically back to the original Markdown.
 
 ![screenshot of selection conversion](//github.com/adam-p/markdown-here/raw/master/store-assets/markdown-here-image2.gimp.png)
 
-#### Things to know about converting a selection
+#### Things to know about converting/reverting a selection
 
 * If you select only part of a block of text, only that text will be converted. The converted block will be wrapped in a paragraph element, so the original line will be broken up. You probably don't want to ever do this.
 
 * Be aware that on Mac OS X (only >= Lion?), right clicking a word (only in Chrome?) will cause that word to be selected, and that triggers *Markdown Here*'s selection-convert mode. So if you want to convert the whole email, right-click where there's no text.
   * It's okay to have a selection when reverting back to Markdown, so don't worry about right-clicking on text when doing that.
   * If right-clicking on empty space is a pain, you can select-all (Cmd+A) and then convert.
-
-* You don't have to revert selections back to Markdown in the same order that you converted them. Just right-click in a converted block of text, click the menu item, and only that block will be reverted.
 
 * You can select and revert multiple converted blocks at the same time. One upshot of this is that you can select your entire email, click "Markdown Toggle", and all portions of it that you had converted will be reverted.
 
@@ -170,6 +172,10 @@ Short answer: Gmail is great. Thunderbird is really good.
     * No support for GFM-style tables: adam-p/markdown#13
 
 * Available languages for syntax highlighting (and the way they should be written in the fenced code block) can be seen on the [highlight.js demo page](http://softwaremaniacs.org/media/soft/highlight/test.html).
+
+* Most pre-formatting of email is maintained when rendering Markdown with *Markdown Here*. So you can, if you wish, add bold, font colors, links, and lists using the email editor's rich controls -- they will be kept intact after you "Markdown Toggle". 
+  * This includes images. Gmail allows you to put images inline in your email -- you can do this before converting and the image will be retained.
+  * This is a deviation from the Markdown spec, but it's really handy.
 
 * Email signatures are automatically excluded from conversion. Specifically, anything after the semi-standard `'-- '` (note the trailing space) is left alone.
   * Note that Hotmail and Yahoo do *not* automatically add the `'-- '` to signatures, so you have to add it yourself.
