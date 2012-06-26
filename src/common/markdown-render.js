@@ -118,35 +118,43 @@
           else { 
             // Process a close tag next.
 
-            // Make the index relative to the beginning of the string.
-            closeIndex += startIndex;
+            if (depth > 0) {
+              // Make the index relative to the beginning of the string.
+              closeIndex += startIndex;
 
-            if (depth === 1) {
-              // Not a nested tag. Time to escape.
-              // Because we've mangled the opening and closing tags, we need to
-              // put around them so that they don't get mashed together with the 
-              // preceeding and following Markdown.
+              if (depth === 1) {
+                // Not a nested tag. Time to escape.
+                // Because we've mangled the opening and closing tags, we need to
+                // put around them so that they don't get mashed together with the 
+                // preceeding and following Markdown.
+                
+                closeTagLength = ('</'+tagName+'>').length;
+
+                text = 
+                  text.slice(0, currentOpenIndex)
+                  + (wrapInPara ? '<p/>' : '')
+                  + addClassToAllTags('markdown-here-exclude', text.slice(currentOpenIndex, closeIndex+closeTagLength))
+                        .replace(/</ig, '&lt;')
+                  + (wrapInPara ? '<p/>' : '')
+                  + text.slice(closeIndex+closeTagLength);
+
+                // Start from the beginning again. The length of the string has 
+                // changed (so our indexes are meaningless), and we'll only find
+                // unescaped/unprocessed tags of interest anyway.
+                startIndex = 0;
+              }
+              else {
+                startIndex = closeIndex + 1;
+              }
               
-              closeTagLength = ('</'+tagName+'>').length;
-
-              text = 
-                text.slice(0, currentOpenIndex)
-                + (wrapInPara ? '<p/>' : '')
-                + addClassToAllTags('markdown-here-exclude', text.slice(currentOpenIndex, closeIndex+closeTagLength))
-                      .replace(/</ig, '&lt;')
-                + (wrapInPara ? '<p/>' : '')
-                + text.slice(closeIndex+closeTagLength);
-
-              // Start from the beginning again. The length of the string has 
-              // changed (so our indexes are meaningless), and we'll only find
-              // unescaped/unprocessed tags of interest anyway.
-              startIndex = 0;
+              depth -= 1;
             }
             else {
-              startIndex = closeIndex + 1;
+              // Depth is 0. So we've found a closing tag while not in an opening
+              // tag -- this can happen normally if `ifHasAttribute` is non-null.
+              // Just advance the startIndex.
+              startIndex += closeIndex + 1;
             }
-            
-            depth -= 1;
           }
         }
 
