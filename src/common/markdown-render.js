@@ -55,9 +55,11 @@
       // almost everything. If we escape them all, we'll mess up code blocks
       // (you'll just see a lot of span tag crap). So we'll only escape span
       // tags that have styles.
+      // And we *won't* escape span tags that have a class of 'Apple-tab-span',
+      // which is what Chrome inserts when you try to paste a tab character.
       keepTags = ['span'];
       for (i = 0; i < keepTags.length; i++) {
-        text = excludeTagBlocks(keepTags[i], text, false, 'style');
+        text = excludeTagBlocks(keepTags[i], text, false, 'style', 'Apple-tab-span');
       }
 
       // Experimentation has shown some tags that need to be tweaked a little.
@@ -75,15 +77,18 @@
       // tag block found.
       // If `ifHasAttribute` is non-null, tags will only be matched if they have
       // that attribute.
-      function excludeTagBlocks(tagName, text, wrapInPara, ifHasAttribute) {
+      // If `ifNotHasString` is non-null, tags that contain that string will not
+      // be matched. Note that `ifNotHasString` will be used in a regex.
+      function excludeTagBlocks(tagName, text, wrapInPara, ifHasAttribute, ifNotHasString) {
         var depth, startIndex, openIndex, closeIndex, currentOpenIndex, 
-          openTagRegex, closeTagRegex, remainderText, closeTagLength;
+          openTagRegex, closeTagRegex, remainderText, closeTagLength, regexFiller;
 
+        regexFiller = ifNotHasString ? '(((?!'+ifNotHasString+')[^>])*)' : '[^>]*'
         if (ifHasAttribute) {
-          openTagRegex = new RegExp('<'+tagName+'\\b[^>]*\\b'+ifHasAttribute+'\\b', 'i');
+          openTagRegex = new RegExp('<'+tagName+'\\b'+regexFiller+'\\b'+ifHasAttribute+'\\b'+regexFiller+'>', 'i');
         }
         else {
-          openTagRegex = new RegExp('<'+tagName+'\\b', 'i');
+          openTagRegex = new RegExp('<'+tagName+'\\b'+regexFiller+'>', 'i');
         }
 
         closeTagRegex = new RegExp('</'+tagName+'\\b', 'i');
