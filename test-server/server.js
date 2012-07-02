@@ -1,10 +1,8 @@
-var express = require('express');
-var app = express.createServer();
+var path = require('path');
+var tako = require('tako');
 
-app.listen(3000);
+var app = tako();
 
-app.get('/', function(req, res) {
-  res.sendfile(__dirname + '/index.html'); });
+app.route('/').file(path.join(__dirname, 'index.html'));
 
-app.use('/', express.static(__dirname + '/'));
-
+app.httpServer.listen(3000);
