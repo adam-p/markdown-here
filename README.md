@@ -33,8 +33,6 @@ After installing, make sure to reload your webmail or restart Chrome!
 
 #### Mozilla Add-ons site
 
-**!!! PLEASE NOTE: The extension has been pulled from the Mozilla Add-ons site. For info see [issue #20](https://github.com/adam-p/markdown-here/issues/20). !!!**
-
 Go to the [Firefox Add-ons page for *Markdown Here*](https://addons.mozilla.org/en-US/firefox/addon/markdown-here/) and install normally.
 
 Or go to the "Tools > Add-ons" menu and then search for "Markdown Here".
