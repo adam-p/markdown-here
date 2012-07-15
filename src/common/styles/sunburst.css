@@ -1,0 +1,149 @@
+/*
+
+Sunburst-like style (c) Vasily Polovnyov <vast@whiteants.net>
+
+*/
+
+pre code {
+  display: block; padding: 0.5em;
+  background: #000; color: #f8f8f8;
+}
+
+pre .comment,
+pre .template_comment,
+pre .javadoc {
+  color: #aeaeae;
+  font-style: italic;
+}
+
+pre .keyword,
+pre .ruby .function .keyword,
+pre .request,
+pre .status,
+pre .nginx .title {
+  color: #E28964;
+}
+
+pre .function .keyword,
+pre .sub .keyword,
+pre .method,
+pre .list .title {
+  color: #99CF50;
+}
+
+pre .string,
+pre .tag .value,
+pre .cdata,
+pre .filter .argument,
+pre .attr_selector,
+pre .apache .cbracket,
+pre .date,
+pre .tex .command {
+  color: #65B042;
+}
+
+pre .subst {
+  color: #DAEFA3;
+}
+
+pre .regexp {
+  color: #E9C062;
+}
+
+pre .title,
+pre .sub .identifier,
+pre .pi,
+pre .tag,
+pre .tag .keyword,
+pre .decorator,
+pre .shebang,
+pre .input_number {
+  color: #89BDFF;
+}
+
+pre .class .title,
+pre .haskell .type,
+pre .smalltalk .class,
+pre .javadoctag,
+pre .yardoctag,
+pre .phpdoc {
+  text-decoration: underline;
+}
+
+pre .symbol,
+pre .ruby .symbol .string,
+pre .ruby .symbol .keyword,
+pre .ruby .symbol .keymethods,
+pre .number {
+  color: #3387CC;
+}
+
+pre .params,
+pre .variable {
+  color: #3E87E3;
+}
+
+pre .css .tag,
+pre .rules .property,
+pre .pseudo,
+pre .tex .special {
+  color: #CDA869;
+}
+
+pre .css .class {
+  color: #9B703F;
+}
+
+pre .rules .keyword {
+  color: #C5AF75;
+}
+
+pre .rules .value {
+  color: #CF6A4C;
+}
+
+pre .css .id {
+  color: #8B98AB;
+}
+
+pre .annotation,
+pre .apache .sqbracket,
+pre .nginx .built_in {
+  color: #9B859D;
+}
+
+pre .preprocessor {
+  color: #8996A8;
+}
+
+pre .hexcolor,
+pre .css .value .number {
+  color: #DD7B3B;
+}
+
+pre .css .function {
+  color: #DAD085;
+}
+
+pre .diff .header,
+pre .chunk,
+pre .tex .formula {
+  background-color: #0E2231;
+  color: #F8F8F8;
+  font-style: italic;
+}
+
+pre .diff .change {
+  background-color: #4A410D;
+  color: #F8F8F8;
+}
+
+pre .addition {
+  background-color: #253B22;
+  color: #F8F8F8;
+}
+
+pre .deletion {
+  background-color: #420E09;
+  color: #F8F8F8;
+}

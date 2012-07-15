@@ -27,6 +27,7 @@ chrome.extension.onRequest.addListener(
         hljs,
         html,
         document),
-      css: markdownHereCss
+      css: (localStorage['markdown-here-css'] || markdownHereCss) +
+           (localStorage['markdown-here-syntax-css'] || markdownHereSyntaxCss)
     });
   });

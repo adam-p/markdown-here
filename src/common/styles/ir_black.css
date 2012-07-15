@@ -1,0 +1,99 @@
+/*
+  IR_Black style (c) Vasily Mikhailitchenko <vaskas@programica.ru>
+*/
+
+pre code {
+  display: block; padding: 0.5em;
+  background: #000; color: #f8f8f8;
+}
+
+pre .shebang,
+pre .comment,
+pre .template_comment,
+pre .javadoc {
+  color: #7c7c7c;
+}
+
+pre .keyword,
+pre .tag,
+pre .tex .command,
+pre .request,
+pre .status {
+  color: #96CBFE;
+}
+
+pre .sub .keyword,
+pre .method,
+pre .list .title,
+pre .nginx .title {
+  color: #FFFFB6;
+}
+
+pre .string,
+pre .tag .value,
+pre .cdata,
+pre .filter .argument,
+pre .attr_selector,
+pre .apache .cbracket,
+pre .date {
+  color: #A8FF60;
+}
+
+pre .subst {
+  color: #DAEFA3;
+}
+
+pre .regexp {
+  color: #E9C062;
+}
+
+pre .title,
+pre .sub .identifier,
+pre .pi,
+pre .decorator,
+pre .tex .special,
+pre .haskell .type,
+pre .constant,
+pre .smalltalk .class,
+pre .javadoctag,
+pre .yardoctag,
+pre .phpdoc,
+pre .nginx .built_in {
+  color: #FFFFB6;
+}
+
+pre .symbol,
+pre .ruby .symbol .string,
+pre .ruby .symbol .keyword,
+pre .ruby .symbol .keymethods,
+pre .number,
+pre .variable,
+pre .vbscript,
+pre .literal {
+  color: #C6C5FE;
+}
+
+pre .css .tag {
+  color: #96CBFE;
+}
+
+pre .css .rules .property,
+pre .css .id {
+  color: #FFFFB6;
+}
+
+pre .css .class {
+  color: #FFF;
+}
+
+pre .hexcolor {
+  color: #C6C5FE;
+}
+
+pre .number {
+  color:#FF73FD;
+}
+
+pre .tex .formula {
+  opacity: 0.7;
+}

@@ -1,0 +1,249 @@
+<html>
+
+  <head>
+    <title>Markdown Here Options</title>
+  </head>
+
+  <script src="../common/jsHtmlToText.js"></script>
+  <script src="../common/marked.js"></script>
+  <script src="../common/highlight.js"></script>
+  <script src="../common/github.css.js"></script>
+  <script src="../common/markdown-render.js"></script>
+  <script src="../common/markdown-here.js"></script>
+
+  <script>
+    var cssEdit, cssSyntaxEdit, cssSyntaxSelect, rawMarkdownIframe;
+
+    function onLoad() {
+      // Set up our control references.
+      cssEdit = document.getElementById('css-edit');
+      cssSyntaxEdit = document.getElementById('css-syntax-edit');
+      cssSyntaxSelect = document.getElementById('css-syntax-select');
+      rawMarkdownIframe = document.getElementById('rendered-markdown');
+
+      //
+      // Syntax highlighting styles and selection
+      //
+
+      // Get the available highlight.js styles.
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', '../common/styles/styles.json', false);
+      // synchronous
+      xhr.send(); 
+      // Assume 200 OK
+      var syntaxStyles = JSON.parse(xhr.responseText);
+      for (var name in syntaxStyles) {
+        cssSyntaxSelect.options.add(new Option(name, syntaxStyles[name]));
+      }
+
+      cssSyntaxSelect.options.add(new Option('Currently in use', ''));
+      cssSyntaxSelect.selectedIndex = cssSyntaxSelect.options.length - 1;
+
+      cssSyntaxSelect.addEventListener('change', cssSyntaxSelectChange);
+
+      //
+      // Restore previously set options
+      //
+
+      var cssMain = localStorage['markdown-here-css'];
+      var cssSyntax = localStorage['markdown-here-syntax-css'];
+      
+      // If the local storage value isn't set, grab our default value.
+      if (!cssMain) {
+        cssMain = markdownHereCss;
+      }
+      
+      if (!cssSyntax) {
+        cssSyntax = markdownHereSyntaxCss;
+      }
+
+      cssEdit.value = cssMain;
+
+      cssSyntaxEdit.value = cssSyntax;
+
+      // Load sample Markdown
+
+      // Load from a hidden element.
+      rawMarkdownIframe.contentDocument.body.contentEditable = true;
+      rawMarkdownIframe.contentDocument.body.innerHTML = document.getElementById('sample-markdown').innerHTML;
+
+      // Render the sample Markdown
+      renderMarkdown();
+
+      // Start watching for changes to the styles.
+      setInterval(checkChange, 100);
+    }
+
+    // Saves options to localStorage.
+    function saveOptions() {
+      localStorage['markdown-here-css'] = cssEdit.value;
+      localStorage['markdown-here-syntax-css'] = cssSyntaxEdit.value;
+    }
+
+    // If the CSS changes and the Markdown compose box is rendered, update the 
+    // rendering by toggling twice. If the compose box is not rendered, do nothing.
+    var lastCSS = '';
+    function checkChange() {
+      var newCSS = cssEdit.value + cssSyntaxEdit.value;
+      if (newCSS !== lastCSS) {
+        // CSS has changed.
+        lastCSS = newCSS;
+        saveOptions();
+        updateMarkdownRender();
+      }
+    }
+
+    // Helper for rendering.
+    function logger() { 
+      console.log.apply(console, arguments); 
+    }
+
+    // Helper for rendering.
+    // This function stolen entirely from contentscript.js
+    function requestMarkdownConversion(html, callback) {
+      // Send a request to the add-on script to actually do the rendering.
+      chrome.extension.sendRequest(html, function(response) {
+        callback(response.html, response.css);
+      });
+    }
+
+    // Render the sample Markdown.
+    function renderMarkdown(postRenderCallback) {
+      if (rawMarkdownIframe.contentDocument.querySelector('.markdown-here-wrapper')) {
+        // Already rendered.
+        postRenderCallback();
+        return;
+      }
+
+      // The body of the iframe needs to have a (collapsed) selection range for
+      // Markdown Here to work (simulating focus/cursor).
+      var range = rawMarkdownIframe.contentDocument.createRange();
+      range.setStart(rawMarkdownIframe.contentDocument.body);
+      var sel = rawMarkdownIframe.contentDocument.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+
+      // Begin rendering.
+      markdownHere(rawMarkdownIframe.contentDocument, requestMarkdownConversionInterceptor, logger);
+
+      // To figure out when the (asynchronous) rendering is complete -- so we
+      // can call the `postRenderCallback` -- we'll intercept the callback used
+      // by the rendering service.
+
+      function requestMarkdownConversionInterceptor(html, callback) {
+        function callbackInterceptor() {
+          callback.apply(null, arguments);
+
+          // Rendering done. Call callback.
+          if (postRenderCallback) postRenderCallback();
+        }
+
+        // Call the real rendering service.
+        requestMarkdownConversion(html, callbackInterceptor);
+      }
+    }
+
+    // Re-render already-rendered sample Markdown.
+    function updateMarkdownRender() {
+      if (!rawMarkdownIframe.contentDocument.querySelector('.markdown-here-wrapper')) {
+        // Not currently rendered, so nothing to update.
+        return;
+      }
+
+      // To mitigate flickering, hide the iframe during rendering.
+      rawMarkdownIframe.style.visibility = 'hidden';
+
+      // Unrender
+      markdownHere(rawMarkdownIframe.contentDocument, requestMarkdownConversion, logger);
+
+      // Re-render
+      renderMarkdown(function() { 
+        rawMarkdownIframe.style.visibility = ''; 
+      });
+    }
+
+    // Toggle the render state of the sample Markdown.
+    function markdownToggle() {
+      markdownHere(rawMarkdownIframe.contentDocument, requestMarkdownConversion, logger);
+    }
+
+    // Reset the main CSS to default.
+    function resetCssEdit() {
+      cssEdit.value = markdownHereCss;
+    }
+
+    // The syntax hightlighting CSS combo-box selection changed.
+    function cssSyntaxSelectChange() {
+      var selected = cssSyntaxSelect.options[cssSyntaxSelect.selectedIndex].value;
+      if (!selected) {
+        // This probably indicates that the user selected the "currently in use"
+        // option, which is by definition what is in the edit box.
+        return;
+      }
+
+      // Remove the "currently in use" option, since it doesn't make sense anymore.
+      if (!cssSyntaxSelect.options[cssSyntaxSelect.options.length-1].value) {
+        cssSyntaxSelect.options.length -= 1;
+      }
+
+      // Get the CSS for the selected theme.
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', '../common/styles/'+selected, false);
+      // synchronous
+      xhr.send(); 
+      // Assume 200 OK
+
+      cssSyntaxEdit.value = xhr.responseText;
+    }
+
+  </script>
+
+  <body onload="onLoad()">
+
+    <div>
+      <h1>
+        <img src="../common/images/icon48.png">
+        Markdown Here Options
+      </h1>
+    </div>
+
+    <div>
+      <textarea id="css-edit"></textarea>
+      <button onclick="resetCssEdit()">Reset</button>
+    </div>
+
+    <br>
+
+    <div>
+      <select id="css-syntax-select"></select>
+      <textarea id="css-syntax-edit"></textarea>
+    </div>
+
+    <br>
+
+    <iframe id="rendered-markdown">
+    </iframe>
+
+    <br>
+
+    <div id="markdown-toggle">
+      <button onclick="markdownToggle()">Markdown Toggle</button>
+      <div>Context menu item does not work here.</div>
+    </div>
+
+<div id="sample-markdown" style="display: none;">
+* p1<br>
+* p2<br>
+<br>
+<br>
+```python<br>
+def f(x):<br>
+&nbsp; &nbsp; s = "hi"<br>
+&nbsp; &nbsp; n = 33<br>
+&nbsp; &nbsp; print s<br>
+```<br>
+</div>
+
+  </body>
+
+</html>

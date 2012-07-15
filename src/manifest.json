@@ -18,5 +18,6 @@
       "matches": ["<all_urls>"],
       "js": ["common/markdown-here.js", "chrome/contentscript.js"]
     }
-  ]
+  ],
+  "options_page": "chrome/options.html"
 }

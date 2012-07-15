@@ -5,285 +5,289 @@
 
 ;(function() {
 
-var markdownHereCss = ' \
+var markdownHereCss = '\
 \
-/* This is the overall wrapper, it should be treated as the `body` section. */ \
-.markdown-here-wrapper { /* adam-p: changed from body */ \
-  font: 14px Helvetica,arial,freesans,clean,sans-serif; \
-  color: #333; \
-  background-color: #fff; \
-  border: none; \
-  line-height: 1.5; \
-  text-align:left; \
-} \
-pre, code { \
-  font-size: 12px; \
-  font-family: "Bitstream Vera Sans Mono","Courier",monospace; \
-} \
-code { \
-  margin: 0 2px; \
-  padding: 0 5px; \
-  white-space: nowrap; \
-  border: 1px solid #EAEAEA; \
-  background-color: #F8F8F8; \
-  border-radius: 3px; \
-  display: inline; /* adam-p: added to fix Yahoo block display */ \
-} \
-pre { \
-  font-size: 13px; \
-  line-height: 19px; \
-  overflow: auto; \
-} \
-pre code { \
-  white-space: pre; \
-  border-radius: 3px; \
-  border: 1px solid #CCC; \
-  padding: 6px 10px; \
-} \
-ul, ol { \
-  padding-left: 30px; \
-} \
-p, blockquote, ul, ol, dl, li, table, pre { \
-  margin: 15px 0; \
-} \
-dl { \
-  padding: 0; \
-} \
-dl dt { \
-  font-size: 14px; \
-  font-weight: bold; \
-  font-style: italic; \
-  padding: 0; \
-  margin: 15px 0 5px; \
-} \
-dl dd { \
-  margin: 0 0 15px; \
-  padding: 0 15px; \
-} \
-blockquote { \
-  border-left: 4px solid #DDD; \
-  padding: 0 15px; \
-  color: #777; \
-} \
-blockquote, q { \
-  quotes: none; \
-} \
-blockquote::before, blockquote::after, q::before, q::after { \
-  content: none; \
-} \
-a:link, a:visited { \
-  color: #33e; \
-  text-decoration: none; \
-} \
-a:hover { \
-  color: #00f; \
-  text-shadow:1px 1px 2px #ccf; \
-  text-decoration:underline; \
-} \
-h1, h2, h3, h4, h5, h6 { \
-  margin: 20px 0 10px; \
-  padding: 0; \
-  font-weight: bold; \
-  color: black; \
-  cursor: text; \
-  position: relative; \
-} \
-h1 { \
-  font-size: 28px; \
-} \
-h2 { \
-  font-size: 24px; \
-  border-bottom: 1px solid #CCC; \
-} \
-h3 { \
-  font-size: 18px; \
-} \
-h4 { \
-  font-size: 16px; \
-} \
-h5 { \
-  font-size: 14px; \
-} \
-h6 { \
-  font-size: 14px; \
-  color: #777; \
-} \
-.shadow { \
-  box-shadow:0 5px 15px #000;      \
-} \
-table { \
-  padding: 0; \
-  border-collapse: collapse; \
-  border-spacing: 0; \
-  font-size: 100%; \
-  font: inherit; \
-  border: 0; \
-} \
-tbody { \
-  margin: 0; \
-  padding: 0; \
-  border: 0; \
-} \
-table tr { \
-  border: 0; \
-  border-top: 1px solid #CCC; \
-  background-color: white; \
-  margin: 0; \
-  padding: 0; \
-} \
-table tr:nth-child(2n) { \
-  background-color: #F8F8F8; \
-} \
-table tr th, table tr td { \
-  border: 1px solid #CCC; \
-  text-align: left; \
-  margin: 0; \
-  padding: 6px 13px; \
-} \
-table tr th { \
- font-weight: bold; \
-} \
-\
-/* \
- \
-github.com style (c) Vasily Polovnyov <vast@whiteants.net> \
- \
-*/ \
- \
-pre code { \
-  display: block; padding: 0.5em; \
-  color: #000; \
-  background: #f8f8ff \
-} \
- \
-pre .comment, \
-pre .template_comment, \
-pre .diff .header, \
-pre .javadoc { \
-  color: #998; \
-  font-style: italic \
-} \
- \
-pre .keyword, \
-pre .css .rule .keyword, \
-pre .winutils, \
-pre .javascript .title, \
-pre .lisp .title, \
-pre .nginx .title, \
-pre .subst, \
-pre .request, \
-pre .status { \
-  color: #000; \
-  font-weight: bold \
-} \
- \
-pre .number, \
-pre .hexcolor { \
-  color: #40a070 \
-} \
- \
-pre .string, \
-pre .tag .value, \
-pre .phpdoc, \
-pre .tex .formula { \
-  color: #d14 \
-} \
- \
-pre .title, \
-pre .id { \
-  color: #900; \
-  font-weight: bold \
-} \
- \
-pre .javascript .title, \
-pre .lisp .title, \
-pre .subst { \
-  font-weight: normal \
-} \
- \
-pre .class .title, \
-pre .haskell .type, \
-pre .vhdl .literal, \
-pre .tex .command { \
-  color: #458; \
-  font-weight: bold \
-} \
- \
-pre .tag, \
-pre .tag .title, \
-pre .rules .property, \
-pre .django .tag .keyword { \
-  color: #000080; \
-  font-weight: normal \
-} \
- \
-pre .attribute, \
-pre .variable, \
-pre .instancevar, \
-pre .lisp .body { \
-  color: #008080 \
-} \
- \
-pre .regexp { \
-  color: #009926 \
-} \
- \
-pre .class { \
-  color: #458; \
-  font-weight: bold \
-} \
- \
-pre .symbol, \
-pre .ruby .symbol .string, \
-pre .ruby .symbol .keyword, \
-pre .ruby .symbol .keymethods, \
-pre .lisp .keyword, \
-pre .tex .special, \
-pre .input_number { \
-  color: #990073 \
-} \
- \
-pre .builtin, \
-pre .built_in, \
-pre .lisp .title { \
-  color: #0086b3 \
-} \
- \
-pre .preprocessor, \
-pre .pi, \
-pre .doctype, \
-pre .shebang, \
-pre .cdata { \
-  color: #999; \
-  font-weight: bold \
-} \
- \
-pre .deletion { \
-  background: #fdd \
-} \
- \
-pre .addition { \
-  background: #dfd \
-} \
- \
-pre .diff .change { \
-  background: #0086b3 \
-} \
- \
-pre .chunk { \
-  color: #aaa \
-} \
- \
-pre .tex .formula { \
-  opacity: 0.5; \
+/* This is the overall wrapper, it should be treated as the `body` section. */ \n\
+.markdown-here-wrapper { \n\
+  font: 14px Helvetica,arial,freesans,clean,sans-serif; \n\
+  color: #333; \n\
+  background-color: #fff; \n\
+  border: none; \n\
+  line-height: 1.5; \n\
+  text-align:left; \n\
+} \n\
+pre, code { \n\
+  font-size: 12px; \n\
+  font-family: "Bitstream Vera Sans Mono","Courier",monospace; \n\
+} \n\
+code { \n\
+  margin: 0 2px; \n\
+  padding: 0 5px; \n\
+  white-space: nowrap; \n\
+  border: 1px solid #EAEAEA; \n\
+  background-color: #F8F8F8; \n\
+  border-radius: 3px; \n\
+  display: inline; /* adam-p: added to fix Yahoo block display */ \n\
+} \n\
+pre { \n\
+  font-size: 13px; \n\
+  line-height: 19px; \n\
+  overflow: auto; \n\
+} \n\
+pre code { \n\
+  white-space: pre; \n\
+  border-radius: 3px; \n\
+  border: 1px solid #CCC; \n\
+  padding: 6px 10px; \n\
+} \n\
+ul, ol { \n\
+  padding-left: 30px; \n\
+} \n\
+p, blockquote, ul, ol, dl, li, table, pre { \n\
+  margin: 15px 0; \n\
+} \n\
+dl { \n\
+  padding: 0; \n\
+} \n\
+dl dt { \n\
+  font-size: 14px; \n\
+  font-weight: bold; \n\
+  font-style: italic; \n\
+  padding: 0; \n\
+  margin: 15px 0 5px; \n\
+} \n\
+dl dd { \n\
+  margin: 0 0 15px; \n\
+  padding: 0 15px; \n\
+} \n\
+blockquote { \n\
+  border-left: 4px solid #DDD; \n\
+  padding: 0 15px; \n\
+  color: #777; \n\
+} \n\
+blockquote, q { \n\
+  quotes: none; \n\
+} \n\
+blockquote::before, blockquote::after, q::before, q::after { \n\
+  content: none; \n\
+} \n\
+a:link, a:visited { \n\
+  color: #33e; \n\
+  text-decoration: none; \n\
+} \n\
+a:hover { \n\
+  color: #00f; \n\
+  text-shadow:1px 1px 2px #ccf; \n\
+  text-decoration:underline; \n\
+} \n\
+h1, h2, h3, h4, h5, h6 { \n\
+  margin: 20px 0 10px; \n\
+  padding: 0; \n\
+  font-weight: bold; \n\
+  color: black; \n\
+  cursor: text; \n\
+  position: relative; \n\
+} \n\
+h1 { \n\
+  font-size: 28px; \n\
+} \n\
+h2 { \n\
+  font-size: 24px; \n\
+  border-bottom: 1px solid #CCC; \n\
+} \n\
+h3 { \n\
+  font-size: 18px; \n\
+} \n\
+h4 { \n\
+  font-size: 16px; \n\
+} \n\
+h5 { \n\
+  font-size: 14px; \n\
+} \n\
+h6 { \n\
+  font-size: 14px; \n\
+  color: #777; \n\
+} \n\
+.shadow { \n\
+  box-shadow:0 5px 15px #000;      \n\
+} \n\
+table { \n\
+  padding: 0; \n\
+  border-collapse: collapse; \n\
+  border-spacing: 0; \n\
+  font-size: 100%; \n\
+  font: inherit; \n\
+  border: 0; \n\
+} \n\
+tbody { \n\
+  margin: 0; \n\
+  padding: 0; \n\
+  border: 0; \n\
+} \n\
+table tr { \n\
+  border: 0; \n\
+  border-top: 1px solid #CCC; \n\
+  background-color: white; \n\
+  margin: 0; \n\
+  padding: 0; \n\
+} \n\
+table tr:nth-child(2n) { \n\
+  background-color: #F8F8F8; \n\
+} \n\
+table tr th, table tr td { \n\
+  border: 1px solid #CCC; \n\
+  text-align: left; \n\
+  margin: 0; \n\
+  padding: 6px 13px; \n\
+} \n\
+table tr th { \n\
+ font-weight: bold; \n\
 } \
 ';
 
-var EXPORTED_SYMBOLS = ['markdownHereCss'];
+var markdownHereSyntaxCss = '\
+/* \n\
+ \n\
+github.com style (c) Vasily Polovnyov <vast@whiteants.net> \n\
+ \n\
+*/ \n\
+ \n\
+pre code { \n\
+  display: block; padding: 0.5em; \n\
+  color: #000; \n\
+  background: #f8f8ff \n\
+} \n\
+ \n\
+pre .comment, \n\
+pre .template_comment, \n\
+pre .diff .header, \n\
+pre .javadoc { \n\
+  color: #998; \n\
+  font-style: italic \n\
+} \n\
+ \n\
+pre .keyword, \n\
+pre .css .rule .keyword, \n\
+pre .winutils, \n\
+pre .javascript .title, \n\
+pre .lisp .title, \n\
+pre .nginx .title, \n\
+pre .subst, \n\
+pre .request, \n\
+pre .status { \n\
+  color: #000; \n\
+  font-weight: bold \n\
+} \n\
+ \n\
+pre .number, \n\
+pre .hexcolor { \n\
+  color: #40a070 \n\
+} \n\
+ \n\
+pre .string, \n\
+pre .tag .value, \n\
+pre .phpdoc, \n\
+pre .tex .formula { \n\
+  color: #d14 \n\
+} \n\
+ \n\
+pre .title, \n\
+pre .id { \n\
+  color: #900; \n\
+  font-weight: bold \n\
+} \n\
+ \n\
+pre .javascript .title, \n\
+pre .lisp .title, \n\
+pre .subst { \n\
+  font-weight: normal \n\
+} \n\
+ \n\
+pre .class .title, \n\
+pre .haskell .type, \n\
+pre .vhdl .literal, \n\
+pre .tex .command { \n\
+  color: #458; \n\
+  font-weight: bold \n\
+} \n\
+ \n\
+pre .tag, \n\
+pre .tag .title, \n\
+pre .rules .property, \n\
+pre .django .tag .keyword { \n\
+  color: #000080; \n\
+  font-weight: normal \n\
+} \n\
+ \n\
+pre .attribute, \n\
+pre .variable, \n\
+pre .instancevar, \n\
+pre .lisp .body { \n\
+  color: #008080 \n\
+} \n\
+ \n\
+pre .regexp { \n\
+  color: #009926 \n\
+} \n\
+ \n\
+pre .class { \n\
+  color: #458; \n\
+  font-weight: bold \n\
+} \n\
+ \n\
+pre .symbol, \n\
+pre .ruby .symbol .string, \n\
+pre .ruby .symbol .keyword, \n\
+pre .ruby .symbol .keymethods, \n\
+pre .lisp .keyword, \n\
+pre .tex .special, \n\
+pre .input_number { \n\
+  color: #990073 \n\
+} \n\
+ \n\
+pre .builtin, \n\
+pre .built_in, \n\
+pre .lisp .title { \n\
+  color: #0086b3 \n\
+} \n\
+ \n\
+pre .preprocessor, \n\
+pre .pi, \n\
+pre .doctype, \n\
+pre .shebang, \n\
+pre .cdata { \n\
+  color: #999; \n\
+  font-weight: bold \n\
+} \n\
+ \n\
+pre .deletion { \n\
+  background: #fdd \n\
+} \n\
+ \n\
+pre .addition { \n\
+  background: #dfd \n\
+} \n\
+ \n\
+pre .diff .change { \n\
+  background: #0086b3 \n\
+} \n\
+ \n\
+pre .chunk { \n\
+  color: #aaa \n\
+} \n\
+ \n\
+pre .tex .formula { \n\
+  opacity: 0.5; \n\
+} \n\
+';
+
+var EXPORTED_SYMBOLS = ['markdownHereCss', 'markdownHereSyntaxCss'];
 
 if (typeof module !== 'undefined') {
-  module.exports = markdownHereCss;
+  module.exports.markdownHereCss = markdownHereCss;
+  module.exports.markdownHereSyntaxCss = markdownHereSyntaxCss;
 } else {
+  this.markdownHereSyntaxCss = markdownHereSyntaxCss;
   this.markdownHereCss = markdownHereCss;
   this.EXPORTED_SYMBOLS = EXPORTED_SYMBOLS;
 }

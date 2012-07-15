@@ -125,7 +125,7 @@ var markdown_here = {
         hljs, 
         html,
         targetDocument), 
-      markdownHereCss);
+      markdownHereCss + markdownHereSyntaxCss);
   }
 };
 

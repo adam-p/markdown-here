@@ -299,7 +299,7 @@ function unrenderMarkdown(wrapperElem) {
 // Exported function.
 // The context menu handler. Does the rendering or unrendering, depending on the
 // state of the email compose element and the current selection.
-// @param `document`  The document object containg the email compose element.
+// @param `document`  The document object containing the email compose element.
 //        (Actually, it can be any document above the compose element. We'll
 //        drill down to find the correct element and document.)
 // @param `markdownRenderer`  The function that provides raw-Markdown-in-HTML

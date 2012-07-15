@@ -1,0 +1,110 @@
+/*
+
+FAR Style (c) MajestiC <majestic2k@gmail.com>
+
+*/
+
+pre code {
+  display: block; padding: 0.5em;
+  background: #000080;
+}
+
+pre code,
+.ruby .subst {
+  color: #0FF;
+}
+
+pre .string,
+pre .ruby .string,
+pre .haskell .type,
+pre .tag .value,
+pre .css .rules .value,
+pre .css .rules .value .number,
+pre .preprocessor,
+pre .ruby .symbol,
+pre .ruby .symbol .string,
+pre .ruby .symbol .keyword,
+pre .ruby .symbol .keymethods,
+pre .built_in,
+pre .sql .aggregate,
+pre .django .template_tag,
+pre .django .variable,
+pre .smalltalk .class,
+pre .addition,
+pre .apache .tag,
+pre .apache .cbracket,
+pre .tex .command {
+  color: #FF0;
+}
+
+pre .keyword,
+pre .css .id,
+pre .title,
+pre .haskell .type,
+pre .vbscript .built_in,
+pre .sql .aggregate,
+pre .rsl .built_in,
+pre .smalltalk .class,
+pre .xml .tag .title,
+pre .winutils,
+pre .flow,
+pre .change,
+pre .envvar,
+pre .bash .variable,
+pre .tex .special {
+  color: #FFF;
+}
+
+pre .comment,
+pre .phpdoc,
+pre .javadoc,
+pre .java .annotation,
+pre .template_comment,
+pre .deletion,
+pre .apache .sqbracket,
+pre .tex .formula {
+  color: #888;
+}
+
+pre .number,
+pre .date,
+pre .regexp,
+pre .literal,
+pre .smalltalk .symbol,
+pre .smalltalk .char {
+  color: #0F0;
+}
+
+pre .python .decorator,
+pre .django .filter .argument,
+pre .smalltalk .localvars,
+pre .smalltalk .array,
+pre .attr_selector,
+pre .pseudo,
+pre .xml .pi,
+pre .diff .header,
+pre .chunk,
+pre .shebang,
+pre .nginx .built_in,
+pre .input_number {
+  color: #008080;
+}
+
+pre .keyword,
+pre .css .id,
+pre .title,
+pre .haskell .type,
+pre .vbscript .built_in,
+pre .sql .aggregate,
+pre .rsl .built_in,
+pre .smalltalk .class,
+pre .winutils,
+pre .flow,
+pre .apache .tag,
+pre .nginx .built_in,
+pre .tex .command,
+pre .tex .special,
+pre .request,
+pre .status {
+  font-weight: bold;
+}

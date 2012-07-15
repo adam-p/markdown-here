@@ -1,0 +1,153 @@
+/*
+Date: 17.V.2011
+Author: pumbur <pumbur@pumbur.net>
+*/
+
+pre code
+{
+  display: block; padding: 0.5em;
+  background: #222;
+}
+
+pre .profile .header *,
+pre .ini .title,
+pre .nginx .title
+{
+  color: #fff;
+}
+
+pre .comment,
+pre .javadoc,
+pre .preprocessor,
+pre .preprocessor .title,
+pre .shebang,
+pre .profile .summary,
+pre .diff,
+pre .pi,
+pre .doctype,
+pre .tag,
+pre .template_comment,
+pre .css .rules,
+pre .tex .special
+{
+  color: #444;
+}
+
+pre .string,
+pre .symbol,
+pre .diff .change,
+pre .regexp,
+pre .xml .attribute,
+pre .smalltalk .char,
+pre .xml .value,
+pre .ini .value
+{
+  color: #ffcc33;
+}
+
+pre .number,
+pre .addition
+{
+  color: #00cc66;
+}
+
+pre .built_in,
+pre .literal,
+pre .vhdl .typename,
+pre .go .constant,
+pre .go .typename,
+pre .ini .keyword,
+pre .lua .title,
+pre .perl .variable,
+pre .php .variable,
+pre .mel .variable,
+pre .django .variable,
+pre .css .funtion,
+pre .smalltalk .method,
+pre .hexcolor,
+pre .important,
+pre .flow,
+pre .inheritance,
+pre .parser3 .variable
+{
+  color: #32AAEE;
+}
+
+pre .keyword,
+pre .tag .title,
+pre .css .tag,
+pre .css .class,
+pre .css .id,
+pre .css .pseudo,
+pre .css .attr_selector,
+pre .lisp .title,
+pre .winutils,
+pre .tex .command,
+pre .request,
+pre .status
+{
+  color: #6644aa;
+}
+
+pre .title,
+pre .ruby .constant,
+pre .vala .constant,
+pre .parent,
+pre .deletion,
+pre .template_tag,
+pre .css .keyword,
+pre .objectivec .class .id,
+pre .smalltalk .class,
+pre .lisp .keyword,
+pre .apache .tag,
+pre .nginx .variable,
+pre .envvar,
+pre .bash .variable,
+pre .go .built_in,
+pre .vbscript .built_in,
+pre .lua .built_in,
+pre .rsl .built_in,
+pre .tail,
+pre .avrasm .label,
+pre .tex .formula,
+pre .tex .formula *
+{
+  color: #bb1166;
+}
+
+pre .yardoctag,
+pre .phpdoc,
+pre .profile .header,
+pre .ini .title,
+pre .apache .tag,
+pre .parser3 .title
+{
+  font-weight: bold;
+}
+
+pre .coffeescript .javascript,
+pre .xml .javascript,
+pre .xml .css,
+pre .xml .cdata
+{
+  opacity: 0.6;
+}
+
+pre code,
+pre .javascript,
+pre .css,
+pre .xml,
+pre .subst,
+pre .diff .chunk,
+pre .css .value,
+pre .css .attribute,
+pre .lisp .string,
+pre .lisp .number,
+pre .tail .params,
+pre .container,
+pre .haskell *,
+pre .erlang *,
+pre .erlang_repl *
+{
+  color: #aaa;
+}
