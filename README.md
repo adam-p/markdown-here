@@ -1,10 +1,12 @@
 # ![Markdown Here logo](//github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png) Markdown Here
 
-*Markdown Here* is a Google Chrome, Firefox, and Thunderbird extension that lets you write email in Markdown and render it before sending. It also supports syntax highlighting (just specify the language in a fenced code block).
+*Markdown Here* is a Google Chrome, Firefox, and Thunderbird extension that lets you write email<sup>*</sup> in Markdown and render them before sending. It also supports syntax highlighting (just specify the language in a fenced code block).
 
 Writing email with code in it is pretty tedious. Writing Markdown with code in it is easy. I found myself writing email in Markdown in the Github in-browser editor, then copying the preview into email. This is a pretty absurd workflow, so I decided create a tool to write and render Markdown right in the email.
 
-To discover what can be done with Markdown in *Markdown Here*, check out the [Markdown Cheatsheet](//github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet). 
+To discover what can be done with Markdown in *Markdown Here*, check out the [Markdown Cheatsheet](//github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).
+
+<sup>*: And Google Groups posts!</sup>
 
 ![screenshot of conversion](//github.com/adam-p/markdown-here/raw/master/store-assets/markdown-here-image1.gimp.png)
 
@@ -36,6 +38,8 @@ Go to the [Firefox Add-ons page for *Markdown Here*](https://addons.mozilla.org/
 Or go to the "Tools > Add-ons" menu and then search for "Markdown Here".
 
 After installing, make sure to restart Firefox/Thunderbird!
+
+**Note:** It takes up to two weeks for Mozilla to approve changes to the Firefox/Thunderbird extension, so updates (features, fixes) will lag behind what is shown here. You can compare the version number on the [*Markdown Here* Mozilla Add-ons page](https://addons.mozilla.org/en-US/firefox/addon/markdown-here/) against [the changelist](https://github.com/adam-p/markdown-here/blob/master/CHANGES.md).
 
 #### Manual/Development
 
@@ -72,25 +76,27 @@ Note that any changes you make to the pretty HTML will be lost when you revert t
 
 In Gmail, you can also use the browser's Undo command (ctrl+z/cmd+z, or from the Edit menu). Be warned that you might also use the last few characters you entered.
 
-### Replies and Piecemeal Conversion
+### Replies
 
-Sometimes you don't want to convert the entire email; sometimes your email isn't entirely Markdown. The primary example of this is when you're writing a reply to an email: what you wrote -- either at the top or inline -- may be in Markdown, but no part of the original is. If you convert the entire email, the original will lose all formatting (or get otherwise messed up).
+In Gmail, Thunderbird, and Google Groups, you can use "Markdown Toggle" normally: just write your reply (top, bottom, inline, wherever) and then convert. The original email that you're replying to will be left alone. (Technically: Existing `blockquote` blocks will be left intact.) 
 
-To convert only part of the email, select the text (with your mouse or keyboard), right-click on it, and click the "Markdown Toggle" menu item. Your selection is magically rendered into pretty HTML.
+In Hotmail and Yahoo (which don't put the original in a `blockquote`), and optionally in Gmail, Thunderbird, and Google Groups, you can ensure that only the part of the reply that you wrote gets converted by selecting what you want to convert and then clicking "Markdown Toggle" -- see the next section.
+
+### Selection/Piecemeal Conversion
+
+Sometimes you don't want to convert the entire email; sometimes your email isn't entirely Markdown. To convert only part of the email, select the text (with your mouse or keyboard), right-click on it, and click the "Markdown Toggle" menu item. Your selection is magically rendered into pretty HTML.
 
 To revert back to Markdown, just put your cursor anywhere in the block of converted text, right click, and click the "Markdown Toggle" menu item again. Now it's magically back to the original Markdown.
 
 ![screenshot of selection conversion](//github.com/adam-p/markdown-here/raw/master/store-assets/markdown-here-image2.gimp.png)
 
-#### Things to know about converting a selection
+#### Things to know about converting/reverting a selection
 
 * If you select only part of a block of text, only that text will be converted. The converted block will be wrapped in a paragraph element, so the original line will be broken up. You probably don't want to ever do this.
 
 * Be aware that on Mac OS X (only >= Lion?), right clicking a word (only in Chrome?) will cause that word to be selected, and that triggers *Markdown Here*'s selection-convert mode. So if you want to convert the whole email, right-click where there's no text.
   * It's okay to have a selection when reverting back to Markdown, so don't worry about right-clicking on text when doing that.
   * If right-clicking on empty space is a pain, you can select-all (Cmd+A) and then convert.
-
-* You don't have to revert selections back to Markdown in the same order that you converted them. Just right-click in a converted block of text, click the menu item, and only that block will be reverted.
 
 * You can select and revert multiple converted blocks at the same time. One upshot of this is that you can select your entire email, click "Markdown Toggle", and all portions of it that you had converted will be reverted.
 
@@ -107,7 +113,7 @@ Here are some common problems people run into.
 
 ## Compatibility
 
-Short answer: Gmail is great. Thunderbird is really good.
+Short answer: Gmail and Thunderbird are great.
 
 <table>
   <tr>
@@ -123,21 +129,27 @@ Short answer: Gmail is great. Thunderbird is really good.
     <td>Perfect</td>
   </tr>
   <tr>
+    <th>Thunderbird</th>
+    <td>Perfect</td>
+    <td>Perfect</td>
+    <td>Perfect</td>
+  </tr>
+  <tr>
     <th>Hotmail</th>
     <td>Perfect</td>
-    <td>Paragraph tags are lost.</td>
     <td>Perfect</td>
+    <td>Email from received from Yahoo does not display with properly separated paragraphs. (Hotmail strips styling off <code>&lt;p&gt;</code> and <code>&lt;div&gt;</code> tags, and Yahoo uses the latter for paragraphs.)</td>
   </tr>
   <tr>
     <th>Yahoo</th>
     <td>Perfect</td>
-    <td>Paragraph tags are lost (or replaced?).</td>
-    <td>Paragraph tags are lost (or replaced?).</td>
+    <td>Perfect</td>
+    <td>Perfect</td>
   </tr>
   <tr>
-    <th>Thunderbird</th>
+    <th>Google Groups</th>
     <td>Perfect</td>
-    <td>Embedded image tags lose correct src</td>
+    <td>Perfect</td>
     <td>Perfect</td>
   </tr>
 </table>
@@ -161,13 +173,19 @@ Short answer: Gmail is great. Thunderbird is really good.
 
 * Available languages for syntax highlighting (and the way they should be written in the fenced code block) can be seen on the [highlight.js demo page](http://softwaremaniacs.org/media/soft/highlight/test.html).
 
+* Most pre-formatting of email is maintained when rendering Markdown with *Markdown Here*. So you can, if you wish, add bold, font colors, links, and lists using the email editor's rich controls -- they will be kept intact after you "Markdown Toggle". 
+  * This includes images. Gmail allows you to put images inline in your email -- you can do this before converting and the image will be retained.
+  * This is a deviation from the Markdown spec, but it's really handy.
+
 * Email signatures are automatically excluded from conversion. Specifically, anything after the semi-standard `'-- '` (note the trailing space) is left alone.
   * Note that Hotmail and Yahoo do *not* automatically add the `'-- '` to signatures, so you have to add it yourself.
 
 * In Firefox and Thunderbird, the "Markdown Toggle" menu item shows up for more element types than it can correctly render. This is intended to help people realize that they're not using a rich editor. Otherwise they just don't see the menu item and don't know why.
-  * In Chrome, I can't figure out how to selectively hide the menu item, so the above isn't strictly true. But the behaviour would be the same if I could.
+  * In Chrome, I can't figure out how to selectively hide the menu item, so the behaviour isn't entirely intentional. But it would be basically the same even if I could.
 
-* For styling, the use of browser-specific styles (-moz-, -webkit-) should be avoided. If used, they may not render correctly for people reading the email in a different browser from the one where the email was sent. 
+* Styling:
+  * The use of browser-specific styles (-moz-, -webkit-) should be avoided. If used, they may not render correctly for people reading the email in a different browser from the one where the email was sent.
+  * Do not use multi-word font names (e.g., "Andale Mono"). For some mysterious reason, they totally mess up styling.
 
 ## Building the Extension Bundles
 
@@ -216,13 +234,9 @@ firefox/
 
 * Add a visual cue as to what action took place. Sometimes converts and reverts may be a little surprising if the user's selection is off. And sometimes their viewport won't show the entirety of what change occurred.
 
-* Context menu keyboard key does not reliably show a menu with the "Markdown Toggle" item on it.
-  * Probably not much we can do about it in Gmail. 
-  * Just consider this a browser problem. The context menu looks pretty wrong.
+* When Thunderbird sends and displays, it leaves the `md-data-original` attribute (which contains the original Markdown) intact. We could provide the user the ability to extract this. (I know at least one person who wants this.)
 
 * Internationalization
-
-* Support images embedded in the Markdown (like, not hand-rolled image tags)? That will certainly deviate from straight Markdown, but maybe okay.
 
 * Fix inconsistent behaviour: Sometimes a converted/reverted block ends up selected, and sometimes not.
 

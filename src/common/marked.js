@@ -691,6 +691,7 @@ function tag() {
   var tag = '(?!(?:'
     + 'a|em|strong|small|s|cite|q|dfn|abbr|data|time|code'
     + '|var|samp|kbd|sub|sup|i|b|u|mark|ruby|rt|rp|bdi|bdo'
+    + '|font|h1|h2|h3|h4|h5|h6|ul|ol|li' /* adam-p: added these tags */
     + '|span|br|wbr|ins|del|img)\\b)\\w+';
 
   return tag;

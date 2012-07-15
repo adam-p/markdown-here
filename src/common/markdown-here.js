@@ -14,9 +14,6 @@
 // For debugging purposes. An external service is required to log with Firefox.
 var mylog = function() {};
 
-// Used to create unique IDs for each Markdown Here wrapper.
-var markdownHereWrapperIdCounter = 1;
-
 // Finds and returns the page element that currently has focus. Drills down into
 // iframes if necessary.
 function findFocusedElem(document) {
@@ -62,6 +59,12 @@ function getOperationalRange(focusedElem) {
   // Does our range include a signature? If so, remove it.
   sig = findSignatureStart(focusedElem);
   if (sig) {
+    // If the sig is an element node, set a class indicating that it's a sig.
+    // This gives us (or the user) the option of styling differently.
+    if (sig.nodeType === sig.ELEMENT_NODE) {
+      sig.classList.add('markdown-here-signature');
+    }
+
     if (range.isPointInRange(sig, 0)) {
       range.setEndBefore(sig);
     }
@@ -70,10 +73,12 @@ function getOperationalRange(focusedElem) {
   return range;
 }
 
-// A signature is indicated by a `'-- '` text node (or something like it).
+// A signature is indicated by the last `'-- '` text node (or something like it).
 // Returns the sig start element, or null if one is not found.
 function findSignatureStart(startElem) {
-  var i, child, recurseReturn;
+  var i, child, recurseReturn, sig;
+
+  sig = null;
 
   for (i = 0; i < startElem.childNodes.length; i++) {
     child = startElem.childNodes[i];
@@ -86,23 +91,24 @@ function findSignatureStart(startElem) {
         // Assume that the entire parent element belongs to the sig only if the
         // `'--'` bit is the at the very start of the parent.
         if (startElem.firstChild === child) {
-          return startElem;
+          sig = startElem;
         }
-        
-        return child;
+        else {
+          sig = child;
+        }
       }
     }
-    else {
+    else if (['BLOCKQUOTE'].indexOf(child.nodeName) < 0) {
       recurseReturn = findSignatureStart(child, true);
 
       // Did the recursive call find it?
       if (recurseReturn) {
-        return recurseReturn;
+        sig = recurseReturn;
       }
     }
   }
 
-  return null;
+  return sig;
 }
 
 // Replaces the contents of `range` with the HTML string in `html`.
@@ -184,18 +190,47 @@ function makeStylesExplicit(wrapperElem, css) {
     else {
       selectorMatches = wrapperElem.querySelectorAll(rule.selectorText);
       for (j = 0; j < selectorMatches.length; j++) {
+        // Get the existing styles for the element.
         styleAttr = selectorMatches[j].getAttribute('style') || '';
+
+        // Append the new styles to the end of the existing styles. This will
+        // give the new ones precedence if any are the same as existing ones.
+        
+        // Make sure existing styles end with a semicolon.
+        if (styleAttr && styleAttr.search(/;[\s]*$/) < 0) {
+          styleAttr += '; ';
+        }
+
         styleAttr += rule.style.cssText;
+
+        // Set the styles back.
         selectorMatches[j].setAttribute('style', styleAttr);
       }
     }
   }
 }
 
+function hasParentElementOfTagName(element, tagName) {
+  var parent;
+
+  tagName = tagName.toUpperCase();
+
+  parent = element.parentElement;
+  while (parent) {
+    if (parent.nodeName === tagName) {
+      return true;
+    }
+
+    parent = parent.parentElement;
+  }
+
+  return false;
+}
+
 // Find the wrapper element that's above the current cursor position and returns
 // it. Returns falsy if there is no wrapper.
 function findMarkdownHereWrapper(focusedElem) {
-  var selection, range, wrapper = null, match, i;
+  var selection, range, wrapper = null;
 
   selection = focusedElem.ownerDocument.getSelection();
 
@@ -207,17 +242,15 @@ function findMarkdownHereWrapper(focusedElem) {
 
   wrapper = range.commonAncestorContainer;
   while (wrapper) {
-    match = false;
-    for (i = 0; wrapper.attributes && i < wrapper.attributes.length; i++) {
-      if (wrapper.attributes[i].value === 'markdown-here-wrapper') {
-        match = true;
-        break;
-      }
+    // Skip all wrappers that are in a `blockquote`. We don't want to revert
+    // Markdown that was sent to us.
+    if (wrapper.classList && wrapper.classList.contains('markdown-here-wrapper')
+        && wrapper.attributes && wrapper.attributes.getNamedItem('data-md-original')
+        && !hasParentElementOfTagName(wrapper, 'BLOCKQUOTE')) {
+      break;
     }
 
-    if (match) break;
-
-    wrapper = wrapper.parentNode;
+    wrapper = wrapper.parentElement;
   }
 
   return wrapper;
@@ -230,15 +263,31 @@ function findMarkdownHereWrappersInRange(range) {
 
   // Finding elements in a range isn't very simple...
 
+  // Clone the contents of the range.
   documentFragment = range.cloneContents();
 
-  cloneWrappers = documentFragment.querySelectorAll('.markdown-here-wrapper');
+  // Find all wrappers. Require the presence of the `data-md-original` attribute.
+  cloneWrappers = documentFragment.querySelectorAll('.markdown-here-wrapper[data-md-original]');
 
   if (cloneWrappers && cloneWrappers.length > 0) {
     // Now we have an array of *copies* of the wrappers in the DOM. Find them in
     // the DOM from their IDs. This is why we need unique IDs for our wrappers.
+    
     wrappers = [];
+
     for (i = 0; i < cloneWrappers.length; i++) {
+
+      // Require that the `data-md-original` attribute actually have content.
+      if (!cloneWrappers[i].attributes.getNamedItem('data-md-original')) {
+        continue;
+      }
+      
+      // Skip all wrappers that are in a `blockquote`. We don't want to revert
+      // Markdown that was sent to us.
+      if (hasParentElementOfTagName(cloneWrappers[i], 'BLOCKQUOTE')) {
+        continue;
+      }
+
       wrappers.push(range.commonAncestorContainer.ownerDocument.getElementById(cloneWrappers[i].id));
     }
 
@@ -276,7 +325,7 @@ function renderMarkdown(focusedElem, selectedRange, markdownRenderer) {
     // Wrap our pretty HTML in a <div> wrapper.
     // We'll use the wrapper as a marker to indicate that we're in a rendered state.
     mdHtml =
-      '<div class="markdown-here-wrapper" id="markdown-here-wrapper-' + (markdownHereWrapperIdCounter++) + '">' +
+      '<div class="markdown-here-wrapper" id="markdown-here-wrapper-' + Math.floor(Math.random()*1000000) + '">' +
       mdHtml +
       '</div>';
 

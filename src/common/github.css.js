@@ -5,20 +5,25 @@
 
 ;(function() {
 
-var markdownHereCss = '\
+var markdownHereCss = "\
 \
+/* NOTE: \n\
+ * - Do not use multi-word fonts. Gmail will strip them and kill following \n\
+ *   styles. Sometimes. \n\
+ */ \n\
+\n\
 /* This is the overall wrapper, it should be treated as the `body` section. */ \n\
 .markdown-here-wrapper { \n\
   font: 14px Helvetica,arial,freesans,clean,sans-serif; \n\
   color: #333; \n\
   background-color: #fff; \n\
   border: none; \n\
-  line-height: 1.5; \n\
+  line-height: 1.2; \n\
   text-align:left; \n\
 } \n\
 pre, code { \n\
   font-size: 12px; \n\
-  font-family: "Bitstream Vera Sans Mono","Courier",monospace; \n\
+  font-family: Consolas, Inconsolata, Courier, monospace; \n\
 } \n\
 code { \n\
   margin: 0 2px; \n\
@@ -43,7 +48,7 @@ pre code { \n\
 ul, ol { \n\
   padding-left: 30px; \n\
 } \n\
-p, blockquote, ul, ol, dl, li, table, pre { \n\
+p, blockquote:not(.markdown-here-exclude), ul, ol, dl, li, table, pre { \n\
   margin: 15px 0; \n\
 } \n\
 dl { \n\
@@ -60,15 +65,15 @@ dl dd { \n\
   margin: 0 0 15px; \n\
   padding: 0 15px; \n\
 } \n\
-blockquote { \n\
+blockquote:not(.markdown-here-exclude) { \n\
   border-left: 4px solid #DDD; \n\
   padding: 0 15px; \n\
   color: #777; \n\
 } \n\
-blockquote, q { \n\
+blockquote:not(.markdown-here-exclude), q { \n\
   quotes: none; \n\
 } \n\
-blockquote::before, blockquote::after, q::before, q::after { \n\
+blockquote:not(.markdown-here-exclude)::before, blockquote:not(.markdown-here-exclude)::after, q::before, q::after { \n\
   content: none; \n\
 } \n\
 a:link, a:visited { \n\
@@ -109,7 +114,7 @@ h6 { \n\
   color: #777; \n\
 } \n\
 .shadow { \n\
-  box-shadow:0 5px 15px #000;      \n\
+  box-shadow:0 5px 15px #000; \n\
 } \n\
 table { \n\
   padding: 0; \n\
@@ -143,9 +148,9 @@ table tr th, table tr td { \n\
 table tr th { \n\
  font-weight: bold; \n\
 } \
-';
+";
 
-var markdownHereSyntaxCss = '\
+var markdownHereSyntaxCss = "\
 /* \n\
  \n\
 github.com style (c) Vasily Polovnyov <vast@whiteants.net> \n\
@@ -279,7 +284,7 @@ pre .chunk { \n\
 pre .tex .formula { \n\
   opacity: 0.5; \n\
 } \n\
-';
+";
 
 var EXPORTED_SYMBOLS = ['markdownHereCss', 'markdownHereSyntaxCss'];
 
