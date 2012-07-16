@@ -7,19 +7,20 @@
 
 var markdownHereCss = "\
 \
-/* NOTE: \n\
+/* \n\
+ * NOTE: \n\
  * - Do not use multi-word fonts. Gmail will strip them and kill following \n\
- *   styles. Sometimes. \n\
+ *   styles. (Sometimes.) \n\
  */ \n\
 \n\
 /* This is the overall wrapper, it should be treated as the `body` section. */ \n\
 .markdown-here-wrapper { \n\
-  font: 14px Helvetica,arial,freesans,clean,sans-serif; \n\
+  font: 14px Helvetica, arial, freesans, clean, sans-serif; \n\
   color: #333; \n\
   background-color: #fff; \n\
   border: none; \n\
   line-height: 1.2; \n\
-  text-align:left; \n\
+  text-align: left; \n\
 } \n\
 pre, code { \n\
   font-size: 12px; \n\
