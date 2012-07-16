@@ -1,7 +1,131 @@
+<!--
+Copyright Adam Pritchard 2012
+MIT License : http://adampritchard.mit-license.org/
+-->
+
 <html>
 
   <head>
     <title>Markdown Here Options</title>
+
+    <style type="text/css">
+      
+      body {
+        font-family: Helvetica, arial, freesans, clean, sans-serif;
+        padding: 20px;
+      }
+
+      h1 {
+        color: #2C0847;
+      }
+
+      #css-edit-group {
+        display: -webkit-flexbox;
+        height: 400px;
+      }
+
+      .css-edit-cluster {
+        -webkit-flex: 1;
+        margin: 10px;
+        padding: 10px;
+        display: -webkit-flexbox;
+        -webkit-flex-direction: column;
+        background-color: #EEE;
+        border-radius: 5px;
+      }
+
+      .css-edit-cluster > * {
+        margin: 5px 0;
+      }
+
+      .css-edit-cluster > .stretch {
+        -webkit-flex: 1;
+      }
+
+      .stretch > * {
+        box-sizing: border-box; 
+        height: -webkit-calc(100% - 125px);
+        width: 100%;
+      }
+
+      .section-title {
+        font-size: 1.2em;
+        font-weight: bold;
+        color: #2C0847;
+      }
+
+      #preview-cluster {
+        display: -webkit-flexbox;
+        height: 400px;
+        background-color: #EEE;
+        border-radius: 5px;
+      }
+
+      #preview-cluster > * {
+        margin: 10px;
+      }
+
+      #preview-cluster > .stretch {
+        -webkit-flex: 1;
+      }
+
+      #preview-cluster iframe {
+        /* This height is a hack, but I can't seem to get 100% or calc() to work */
+        height: 95%;
+        background-color: #FFF;
+        border: thin black solid;
+      }
+
+      #notes {
+        width: 300px;
+      }
+
+      #notes ul {
+        padding-left: 5px;
+      }
+
+      /* button styling from http://webdesignerwall.com/tutorials/css3-gradient-buttons */
+      .button {
+        display: inline-block;
+        outline: none;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        font: 14px/100% Arial, Helvetica, sans-serif;
+        padding: .5em 2em .55em;
+        text-shadow: 0 1px 1px rgba(0,0,0,.3);
+        -webkit-border-radius: .5em; 
+        -moz-border-radius: .5em;
+        border-radius: .5em;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+        -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+        box-shadow: 0 1px 2px rgba(0,0,0,.2);
+      }
+      .button:hover {
+        text-decoration: none;
+      }
+      .button:active {
+        position: relative;
+        top: 1px;
+      }
+      .purple {
+        color: #EEE5F1;
+        border: solid 1px #3c1e78;
+        background: -webkit-gradient(linear, left top, left bottom, from(#a569d2), to(#874bc3));
+      }
+      .purple:hover {
+        background: -webkit-gradient(linear, left top, left bottom, from(#692da5), to(#692da5));
+      }
+      .purple:active {
+        color: #fcd3a5;
+        background: -webkit-gradient(linear, left top, left bottom, from(#874bc3), to(#a569d2));
+      }
+
+      select.button {
+        height: 2.3em;
+      }
+
+    </style>
   </head>
 
   <script src="../common/jsHtmlToText.js"></script>
@@ -207,28 +331,57 @@
       </h1>
     </div>
 
-    <div>
-      <textarea id="css-edit"></textarea>
-      <button onclick="resetCssEdit()">Reset</button>
-    </div>
+    <div id="container">
 
-    <br>
+      <div id="css-edit-group">
 
-    <div>
-      <select id="css-syntax-select"></select>
-      <textarea id="css-syntax-edit"></textarea>
-    </div>
+        <div class="css-edit-cluster">
+          <div class="section-title">
+            Primary Styling CSS
+          </div>
+          <div class="stretch">
+            <textarea id="css-edit"></textarea>
+          </div>
+          <div>
+            <button class="button purple" onclick="resetCssEdit()">Reset to Default</button>
+          </div>
+        </div>
 
-    <br>
+        <div class="css-edit-cluster">
+          <div class="section-title">
+            Syntax Highlighting CSS
+          </div>
+          <div class="stretch">
+            <textarea id="css-syntax-edit"></textarea>
+          </div>
+          <div>
+            Theme: 
+            <select class="button purple" id="css-syntax-select"></select>
+          </div>
+        </div>
 
-    <iframe id="rendered-markdown">
-    </iframe>
+      </div>
 
-    <br>
+      <div id="preview-cluster">
+        <div class="section-title">
+          Preview
+        </div>
+        <div class="stretch">
+          <iframe id="rendered-markdown">
+            <!-- rendered Markdown preview will appear here -->
+          </iframe>
+        </div>
+        <div id="notes">
+          <div>
+            <button class="button purple" onclick="markdownToggle()">Markdown Toggle</button>
+          </div>
+          <ul>
+            <li>The context menu item does not work on this page. Use the "Markdown Toggle" button instead.</li>
+            <li>Changes are automatically saved.</li>
+          </ul>
+        </div>
+      </div>
 
-    <div id="markdown-toggle">
-      <button onclick="markdownToggle()">Markdown Toggle</button>
-      <div>Context menu item does not work here.</div>
     </div>
 
 <div id="sample-markdown" style="display: none;">
