@@ -42,4 +42,3 @@ function requestMarkdownConversion(html, callback) {
     callback(response.html, response.css);
   });
 }
-

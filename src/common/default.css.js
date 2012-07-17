@@ -9,8 +9,8 @@ var markdownHereCss = "\
 \
 /* \n\
  * NOTE: \n\
- * - Do not use multi-word fonts. Gmail will strip them and kill following \n\
- *   styles. (Sometimes.) \n\
+ * - Do not use font with spaces in the name. Gmail will strip them and kill \n\
+ *   following styles. (Sometimes.) \n\
  */ \n\
 \n\
 /* This is the overall wrapper, it should be treated as the `body` section. */ \n\

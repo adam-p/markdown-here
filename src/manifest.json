@@ -1,4 +1,5 @@
 {
+  "manifest_version": 2,
   "name": "Markdown Here",
   "version": "2.3.1",
   "description": "Write your email in Markdown, then make it pretty.",
@@ -11,8 +12,8 @@
     "128": "common/images/icon128.png",
     "512": "common/images/icon512.png"
   },
-  "permissions": ["contextMenus"],
-  "background_page": "chrome/background.html",
+  "permissions": ["contextMenus", "storage"],
+  "background": {"page": "chrome/background.html"},
   "content_scripts": [
     {
       "matches": ["<all_urls>"],

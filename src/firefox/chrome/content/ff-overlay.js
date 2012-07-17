@@ -116,7 +116,7 @@ var markdown_here = {
     Components.utils.import('resource://common/marked.js');
     Components.utils.import('resource://common/jsHtmlToText.js');
     Components.utils.import('resource://common/highlight.js');
-    Components.utils.import('resource://common/github.css.js');
+    Components.utils.import('resource://common/default.css.js');
 
     callback(
       markdownRender(

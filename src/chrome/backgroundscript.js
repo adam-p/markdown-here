@@ -20,14 +20,17 @@ chrome.contextMenus.create({
 // See the comment in markdown-render.js for why we do this.
 chrome.extension.onRequest.addListener(
   function renderRequest(html, sender, sendResponse) {
-    sendResponse({
-      html: markdownRender(
-        htmlToText, 
-        marked, 
-        hljs,
-        html,
-        document),
-      css: (localStorage['markdown-here-css'] || markdownHereCss) +
-           (localStorage['markdown-here-syntax-css'] || markdownHereSyntaxCss)
-    });
+    OptionsStore.get(function(prefs) {
+      sendResponse({
+        html: markdownRender(
+          htmlToText, 
+          marked, 
+          hljs,
+          html,
+          document),
+        // Use default CSS if not set
+        css: (prefs['markdown-here-css'] || markdownHereCss) +
+             (prefs['markdown-here-syntax-css'] || markdownHereSyntaxCss)
+      });
+    })
   });
