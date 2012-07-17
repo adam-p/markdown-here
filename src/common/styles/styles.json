@@ -1,6 +1,22 @@
 {
-"Arta": "arta.css",
-"Ascetic": "ascetic.css",
-"Brown Paper": "brown_paper.css",
-"Dark": "dark.css"
+  "Default (Github)": "github.css",
+  "Arta": "arta.css",
+  "Ascetic": "ascetic.css",
+  "Brown Paper": "brown_paper.css",
+  "Dark": "dark.css",
+  "Highlight.js Default": "default.css",
+  "Far": "far.css",
+  "Googlecode": "googlecode.css",
+  "Idea": "idea.css",
+  "IR Black": "ir_black.css",
+  "Magula": "magula.css",
+  "Monokai": "monokai.css",
+  "Pojoaque": "pojoaque.css",
+  "School Book": "school_book.css",
+  "Solarized Dark": "solarized_dark.css",
+  "Solarized Light": "solarized_light.css",
+  "Sunburst": "sunburst.css",
+  "VS": "vs.css",
+  "Xcode": "xcode.css",
+  "Zenburn": "zenburn.css"
 }
