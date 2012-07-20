@@ -20,12 +20,12 @@ MIT License : http://adampritchard.mit-license.org/
         color: #2C0847;
       }
 
-      #css-edit-group {
+      .horiz-groupset {
         display: -webkit-flexbox;
         height: 400px;
       }
 
-      .css-edit-cluster {
+      .control-group {
         -webkit-flex: 1;
         margin: 10px;
         padding: 10px;
@@ -36,11 +36,11 @@ MIT License : http://adampritchard.mit-license.org/
         box-shadow: 2px 2px 3px rgba(0, 0, 0, .2);
       }
 
-      .css-edit-cluster > * {
+      .control-group > * {
         margin: 5px 0;
       }
 
-      .css-edit-cluster > .stretch {
+      .control-group > .stretch {
         -webkit-flex: 1;
       }
 
@@ -61,34 +61,16 @@ MIT License : http://adampritchard.mit-license.org/
         color: #2C0847;
       }
 
-      #preview-cluster {
-        display: -webkit-flexbox;
-        margin: 10px;
-        height: 400px;
-        background-color: #EEE;
-        border-radius: 5px;
-        box-shadow: 2px 2px 3px rgba(0, 0, 0, .2);
-      }
-
-      #preview-cluster > * {
-        margin: 10px;
-      }
-
-      #preview-cluster > .stretch {
-        -webkit-flex: 1;
-      }
-
-      #preview-cluster iframe {
-        background-color: #FFF;
-        border: thin black solid;
+      .iframe-container {
+        background-color: #FFF;        
       }
 
       #notes {
-        width: 300px;
+        -webkit-flex: 1;
       }
 
       #notes ul {
-        padding-left: 5px;
+        padding-left: 30px;
       }
 
       #notes li {
@@ -112,8 +94,8 @@ MIT License : http://adampritchard.mit-license.org/
         cursor: pointer;
         text-align: center;
         text-decoration: none;
-        font: 14px/100% Arial, Helvetica, sans-serif;
-        padding: .5em 2em .55em;
+        font-size: 1em;
+        padding: .3em 1em;
         text-shadow: 0 1px 1px rgba(0,0,0,.3);
         border-radius: .5em;
         box-shadow: 0 1px 2px rgba(0,0,0,.2);
@@ -139,15 +121,7 @@ MIT License : http://adampritchard.mit-license.org/
       }
 
       #css-syntax-select {
-        font: 14px/100% Arial, Helvetica, sans-serif;
-        outline: none;
-        border: 1px solid black;
-        text-shadow: 0 1px 1px rgba(0,0,0,.3);
-        border-radius: .5em;
-        box-shadow: 0 1px 2px rgba(0,0,0,.2);
-        color: white;
-        background: #a569d2;
-        padding: 5px;
+        font-size: 1em;
       }
 
       footer {
@@ -174,9 +148,9 @@ MIT License : http://adampritchard.mit-license.org/
 
     <div id="container">
 
-      <div id="css-edit-group">
+      <div class="horiz-groupset">
 
-        <div class="css-edit-cluster">
+        <div class="control-group">
           <div class="section-title">
             Primary Styling CSS
           </div>
@@ -190,7 +164,7 @@ MIT License : http://adampritchard.mit-license.org/
           </div>
         </div>
 
-        <div class="css-edit-cluster">
+        <div class="control-group">
           <div class="section-title">
             Syntax Highlighting CSS
           </div>
@@ -205,28 +179,38 @@ MIT License : http://adampritchard.mit-license.org/
 
       </div>
 
-      <div id="preview-cluster">
-        <div class="section-title">
-          Preview
-        </div>
-        <div class="stretch">
-          <iframe id="rendered-markdown">
-            <!-- rendered Markdown preview will appear here -->
-          </iframe>
-        </div>
-        <div id="notes">
+      <div class="horiz-groupset">
+
+        <div class="control-group">
+          <div class="section-title">
+            Preview
+          </div>
+          <div class="stretch iframe-container">
+            <iframe id="rendered-markdown">
+              <!-- rendered Markdown preview will appear here -->
+            </iframe>
+          </div>
           <div>
             <button id="markdown-toggle-button" class="button purple">
               Markdown Toggle
             </button>
           </div>
-          <ul>
-            <li>The context menu item does not work on this page. Use the "Markdown Toggle" button instead.</li>
-            <li>Changes are automatically saved.</li>
-            <li>Some email editors and browsers impose their own styles. Those may not be apparent here.</li>
-            <li>Some of the syntax highlighting themes originally had background images that have been removed.</li>
-          </ul>
         </div>
+
+        <div class="control-group">
+          <div class="section-title">
+            Notes
+          </div>
+          <div id="notes">
+            <ul>
+              <li>The context menu item does not work on this page. Use the "Markdown Toggle" button instead.</li>
+              <li>Changes are automatically saved.</li>
+              <li>Some email editors and browsers impose their own styles. Those may not be apparent here.</li>
+              <li>Some of the syntax highlighting themes originally had background images that have been removed.</li>
+            </ul>
+          </div>
+        </div>
+
       </div>
 
     </div>
