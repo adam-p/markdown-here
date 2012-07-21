@@ -74,7 +74,7 @@ After rendering your Markdown to pretty HTML, you can still get back to your ori
 
 Note that any changes you make to the pretty HTML will be lost when you revert to Markdown.
 
-In Gmail, you can also use the browser's Undo command (ctrl+z/cmd+z, or from the Edit menu). Be warned that you might also use the last few characters you entered.
+In Gmail, you can also use the browser's Undo command (ctrl+z/cmd+z, or from the Edit menu). Be warned that you might also lose the last few characters you entered.
 
 ### Replies
 
@@ -104,7 +104,7 @@ To revert back to Markdown, just put your cursor anywhere in the block of conver
 
 ## Troubleshooting
 
-Here are some common problems people run into.
+Here are some common problems that people run into.
 
 <dl>
   <dt>Chrome/Firefox/Thunderbird: I just installed <em>Markdown Here</em> and the context menu item isn't showing up.</dt>
@@ -172,10 +172,8 @@ Short answer: Gmail and Thunderbird are great.
     * No support for GFM-style tables: adam-p/markdown#13
 
 * Available languages for syntax highlighting (and the way they should be written in the fenced code block) can be seen on the [highlight.js demo page](http://softwaremaniacs.org/media/soft/highlight/test.html).
-
-* Most pre-formatting of email is maintained when rendering Markdown with *Markdown Here*. So you can, if you wish, add bold, font colors, links, and lists using the email editor's rich controls -- they will be kept intact after you "Markdown Toggle". 
-  * This includes images. Gmail allows you to put images inline in your email -- you can do this before converting and the image will be retained.
-  * This is a deviation from the Markdown spec, but it's really handy.
+ 
+* Images embedded inline in your Markdown will be retained when you "Markdown Toggle". Gmail allows you to put images inline in your email -- this can be much easier than referencing an external image.
 
 * Email signatures are automatically excluded from conversion. Specifically, anything after the semi-standard `'-- '` (note the trailing space) is left alone.
   * Note that Hotmail and Yahoo do *not* automatically add the `'-- '` to signatures, so you have to add it yourself.
@@ -213,8 +211,6 @@ firefox/
 ```
 
 ## Next Steps
-
-* Add user option to create custom CSS.
 
 * Figure out how to prevent users from losing modifications to the rendered version when they revert.
   * Prompted by [this Reddit comment](http://www.reddit.com/r/programming/comments/uagqd/write_email_in_markdown_then_make_it_pretty/c4u6cpv).

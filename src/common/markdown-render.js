@@ -28,6 +28,14 @@
     // We need to tweak the html-to-text processing to get the results we want.
     function tagReplacement(text) {
 
+      // Historical note: At one time we kept lot of stuff intact: <b>, <i>, 
+      // <font>, <span>-with-style-attr, <h1>, and so on. This was nice, because
+      // it let users do some rich-edit-control formatting that would be retained
+      // when rendering.
+      // But it was a pain to get/keep working properly in Yahoo mail, and it 
+      // introduced issue #18. So I tore out the feature, and now we 
+      // only keep a few probably-not-problematic tags. 
+
       // The default behaviour for `htmlToText` is to strip out tags (and their
       // inner text/html) that it doesn't expect/want. But we want some tag blocks
       // to remain intact.
@@ -44,22 +52,10 @@
       // Note that we can't use excludeTagBlocks because there's no closing tag.
       text = text.replace(/<(img[^>]*)>/ig, '&lt;$1&gt;');
 
-      // Leave rendered links intact.
-      keepTags = ['a', 'b', 'i', 'u', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'font', 'ul', 'ol'];
+      // Leave some rendered elements intact.
+      keepTags = ['a'];
       for (i = 0; i < keepTags.length; i++) {
         text = excludeTagBlocks(keepTags[i], text, false);
-      }
-
-      // Span tags are used by email editors for formatting (especially for 
-      // background colour -- "highlighting"), but Yahoo also uses them around
-      // almost everything. If we escape them all, we'll mess up code blocks
-      // (you'll just see a lot of span tag crap). So we'll only escape span
-      // tags that have styles.
-      // And we *won't* escape span tags that have a class of 'Apple-tab-span',
-      // which is what Chrome inserts when you try to paste a tab character.
-      keepTags = ['span'];
-      for (i = 0; i < keepTags.length; i++) {
-        text = excludeTagBlocks(keepTags[i], text, false, 'style', 'Apple-tab-span');
       }
 
       // Experimentation has shown some tags that need to be tweaked a little.

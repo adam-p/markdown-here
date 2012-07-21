@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+2012-xx-xx: vx.x.x
+------------------
+
+* Removed feature: Pre-formatted text (colours, italics, bold, etc.) and lists (made using the email client rich edit controls, for example) are no longer left intact. It just caused too many problems and special cases (and would have required more special cases to get working again in Yahoo). Links are left intact.
+  - It saddens me to pull out this feature -- I was pretty excited about it -- but I think it's essentially creeping featurism that has a higher bug-danger-cost than it has an actually-useful-benefit.
+
 2012-06-20: v2.3.1
 ------------------
 
@@ -17,7 +23,7 @@ Change Log
 
 * Added ability to convert a reply email in its entirety, rather than using the select-and-convert piecemeal approach. 
   - This doesn't work with Yahoo and Hotmail, because they don't seem to quote the original email.
-  - Resolves issue #14
+  - Resolves issue #14.
 
 * Some styling changes.
 
