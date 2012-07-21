@@ -1,3 +1,4 @@
+
 Change Log
 ==========
 
@@ -5,7 +6,31 @@ Change Log
 ------------------
 
 * Removed feature: Pre-formatted text (colours, italics, bold, etc.) and lists (made using the email client rich edit controls, for example) are no longer left intact. It just caused too many problems and special cases (and would have required more special cases to get working again in Yahoo). Links are left intact.
-  - It saddens me to pull out this feature -- I was pretty excited about it -- but I think it's essentially creeping featurism that has a higher bug-danger-cost than it has an actually-useful-benefit.
+
+  - There are still two ways to still get additional formatting:
+      1. Format *after* Markdown-Toggling. Note that any changes -- including formatting -- made to rendered text will be lost if you toggle back to Markdown. So only do your additional formatting after you're happy with the rest.
+      2. Add inline HTML with the desired formatting.
+         * In your Markdown, you can use `<span>` or `<b>`, etc., to explicitly style your text. For example:
+           
+             ```
+             Here is some <span style="background-color:red; font-size:2em;">*big red*</span> highlighting.
+             ```
+         * If you find you use inline tags with complex styles a lot, edit the CSS in the options to add a class that you can reuse for your inline tags. For example, in the CSS add:
+   
+             ```
+             .bigred {
+               background-color: red;
+               font-size: 2em;
+             }
+             ```
+   
+             And then in your Markdown:
+
+             ```
+             Here is some <span class="red">*big red*</span> highlighting.
+             ```
+           
+  - It saddens me to remove out this feature, but I think it's essentially creeping featurism that has a higher bug-danger-cost than it has an actually-useful-benefit. If this feature is/was important to you, please create an issue to let me know.
 
 2012-06-20: v2.3.1
 ------------------
