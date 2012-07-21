@@ -32,7 +32,5 @@
         <em:iconURL>resource://common/images/icon128.png</em:iconURL>
         <em:homepageURL>https://github.com/adam-p/markdown-here</em:homepageURL>
 
-        <em:optionsURL>about:markdown-here</em:optionsURL>
-
     </Description>
 </RDF>
