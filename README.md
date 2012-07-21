@@ -102,6 +102,12 @@ To revert back to Markdown, just put your cursor anywhere in the block of conver
 
 * If you don't have anything selected when you click "Markdown Toggle", *Markdown Here* will check if there are converted blocks anywhere in the message and revert them. If there no converted blocks are found, it will convert the entire email.
 
+### Options
+
+The Chrome version of the extension has an Options page that you can access via the Chrome extensions list. In the options you can modify styling for the rendered Markdown and choose among different themes for syntax highlighting. Any changes made here are automatically synchronized between your other Chrome installations (if you have that feature enabled in Chrome). 
+
+![screenshot of options](//github.com/adam-p/markdown-here/raw/master/store-assets/markdown-here-chrome-options.gimp.png)
+
 ## Troubleshooting
 
 Here are some common problems that people run into.

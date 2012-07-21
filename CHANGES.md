@@ -2,8 +2,10 @@
 Change Log
 ==========
 
-2012-xx-xx: vx.x.x
+2012-07-21: v2.4.0
 ------------------
+
+* Chrome: Added styling options. You can now edit the CSS used to style the rendered Markdown and choose between various syntax highlighting themes. These options are synchronized between your different installations of Chrome (if you have it enabled in Chrome).
 
 * Removed feature: Pre-formatted text (colours, italics, bold, etc.) and lists (made using the email client rich edit controls, for example) are no longer left intact. It just caused too many problems and special cases (and would have required more special cases to get working again in Yahoo). Links are left intact.
 

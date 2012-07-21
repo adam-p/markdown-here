@@ -9,8 +9,11 @@ var markdownHereCss = "\
 \
 /* \n\
  * NOTE: \n\
- * - Do not use font with spaces in the name. Gmail will strip them and kill \n\
- *   following styles. (Sometimes.) \n\
+ * - Do not use multi-word font names (e.g., \"Andale Mono\"). For some \n\
+ *   mysterious reason, they totally mess up styling. \n\
+ * - The use of browser-specific styles (-moz-, -webkit-) should be avoided. \n\
+ *   If used, they may not render correctly for people reading the email in \n\
+ *   a different browser than the one from which the email was sent. \n\
  */ \n\
 \n\
 /* This is the overall wrapper, it should be treated as the `body` section. */ \n\
