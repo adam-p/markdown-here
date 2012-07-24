@@ -7,7 +7,7 @@ Change Log
 
 * Significant changes under the hood to (hopefully!) allow *Markdown Here* to properly pass a full Mozilla review. For details, see [issue #21](https://github.com/adam-p/markdown-here/issues/21).
 
-* Removed feature: Pre-formatted links are no longer left intact. It conflicted with Marked.js's GFM behaviour of turning text that looks like a URL into a link. So if a pre-formatted link was created that used the URL as the text (e.g. `<a href="http://github.com">http://github.com</a>`), the resulting rendering would get messed up (`<a ...><a ...>...</a></a>`).
+* Removed feature/fixed bug: Pre-formatted links are no longer left intact. It conflicted with Marked.js's GFM behaviour of turning text that looks like a URL into a link. So if a pre-formatted link was created that used the URL as the text (e.g. `<a href="http://github.com">http://github.com</a>`), the resulting rendering would get messed up (`<a ...><a ...>...</a></a>`).
   - Let this be a lesson about the perils of frivolous features.
 
 2012-07-21: v2.4.0
