@@ -21,6 +21,32 @@ chrome.contextMenus.create({
 chrome.extension.onRequest.addListener(
   function renderRequest(html, sender, sendResponse) {
     OptionsStore.get(function(prefs) {
+      var markdownHereCss, markdownHereSyntaxCss;
+
+      markdownHereCss = prefs['markdown-here-css'];
+      markdownHereSyntaxCss = prefs['markdown-here-syntax-css'];
+
+      var xhr = new XMLHttpRequest();
+      xhr.overrideMimeType('text/plain');
+
+      if (!markdownHereCss) {
+        // Get the default value.
+        xhr.open('GET', 'resource://common/default.css', false);
+        // synchronous
+        xhr.send(); 
+        // Assume 200 OK
+        markdownHereCss = xhr.responseText;
+      }
+
+      if (!markdownHereSyntaxCss) {
+        // Get the default value.        
+        xhr.open('GET', 'resource://common/highlightjs/styles/github.css', false);
+        // synchronous
+        xhr.send(); 
+        // Assume 200 OK
+        markdownHereSyntaxCss = xhr.responseText;
+      }
+
       sendResponse({
         html: markdownRender(
           htmlToText, 
@@ -29,8 +55,7 @@ chrome.extension.onRequest.addListener(
           html,
           document),
         // Use default CSS if not set
-        css: (prefs['markdown-here-css'] || markdownHereCss) +
-             (prefs['markdown-here-syntax-css'] || markdownHereSyntaxCss)
+        css: (markdownHereCss + markdownHereSyntaxCss)
       });
     })
   });

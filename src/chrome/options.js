@@ -7,7 +7,7 @@
  * Main script file for the options page.
  */
 
-var cssEdit, cssSyntaxEdit, cssSyntaxSelect, rawMarkdownIframe, savedMsg;
+var cssEdit, cssSyntaxEdit, cssSyntaxSelect, rawMarkdownIframe, savedMsg, defaultCss = '';
 
 function onLoad() {
   // Set up our control references.
@@ -23,7 +23,7 @@ function onLoad() {
 
   // Get the available highlight.js styles.
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', '../common/styles/styles.json', false);
+  xhr.open('GET', '../common/highlightjs/styles/styles.json', false);
   // synchronous
   xhr.send(); 
   // Assume 200 OK
@@ -46,14 +46,37 @@ function onLoad() {
   //
 
   OptionsStore.get(function(prefs) {
+    var markdownHereCss, markdownHereSyntaxCss;
 
-    // Use defaults if not set.
-    var cssMain = prefs['markdown-here-css'] || markdownHereCss;
-    var cssSyntax = prefs['markdown-here-syntax-css'] || markdownHereSyntaxCss;
-    
-    cssEdit.value = cssMain;
+    markdownHereCss = prefs['markdown-here-css'];
+    markdownHereSyntaxCss = prefs['markdown-here-syntax-css'];
 
-    cssSyntaxEdit.value = cssSyntax;
+    var xhr = new XMLHttpRequest();
+    xhr.overrideMimeType('text/plain');
+
+    // Get the default value.
+    xhr.open('GET', '../common/default.css', false);
+    // synchronous
+    xhr.send(); 
+    // Assume 200 OK
+    defaultCss = xhr.responseText;
+
+    if (!markdownHereCss) {
+      markdownHereCss = defaultCss;
+    }
+
+    if (!markdownHereSyntaxCss) {
+      // Get the default value.        
+      xhr.open('GET', '../common/highlightjs/styles/github.css', false);
+      // synchronous
+      xhr.send(); 
+      // Assume 200 OK
+      markdownHereSyntaxCss = xhr.responseText;
+    }
+
+    cssEdit.value = markdownHereCss;
+
+    cssSyntaxEdit.value = markdownHereSyntaxCss;
 
     // Render the sample Markdown
     renderMarkdown();
@@ -187,7 +210,7 @@ document.querySelector('#markdown-toggle-button').addEventListener('click', mark
 
 // Reset the main CSS to default.
 function resetCssEdit() {
-  cssEdit.value = markdownHereCss;
+  cssEdit.value = defaultCss;
 }
 document.querySelector('#reset-button').addEventListener('click', resetCssEdit, false);
 
@@ -207,7 +230,7 @@ function cssSyntaxSelectChange() {
 
   // Get the CSS for the selected theme.
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', '../common/styles/'+selected, false);
+  xhr.open('GET', '../common/highlightjs/styles/'+selected, false);
   // synchronous
   xhr.send(); 
   // Assume 200 OK

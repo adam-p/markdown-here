@@ -6,7 +6,7 @@ Brown Paper style from goldblog.com.ua (c) Zaripov Yura <yur4ik7@ukr.net>
 
 pre code {
   display: block; padding: 0.5em;
-  background-color: #b7a68e; /* adam-p: removed background image */
+  background-color:#b7a68e; /* adam-p: removed background image */
 }
 
 pre .keyword,

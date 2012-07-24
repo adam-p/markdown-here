@@ -8,7 +8,11 @@
  * rendering services.
  */
 
+var scriptLoader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"]
+                             .getService(Components.interfaces.mozIJSSubScriptLoader);
+
 Components.utils.import('resource://common/markdown-here.js');
+
 
 var markdown_here = {
 
@@ -112,17 +116,34 @@ var markdown_here = {
   // The rendering service provided to the content script.
   // See the comment in markdown-render.js for why we do this.
   markdownRender: function(targetDocument, html, callback) {
-    Components.utils.import('resource://common/markdown-render.js');
-    Components.utils.import('resource://common/marked.js');
-    Components.utils.import('resource://common/jsHtmlToText.js');
-    Components.utils.import('resource://common/highlight.js');
-    Components.utils.import('resource://common/default.css.js');
+    var markdownHereCss, markdownHereSyntaxCss, markdownRender = {}, hljs = {}, 
+        marked = {}, htmlToText = {};
+
+    Components.utils.import('resource://common/markdown-render.js', markdownRender);
+    Components.utils.import('resource://common/marked.js', marked);
+    Components.utils.import('resource://common/jsHtmlToText.js', htmlToText);
+    scriptLoader.loadSubScript('resource://common/highlightjs/highlight.js', hljs);
+
+    var xhr = new XMLHttpRequest();
+    xhr.overrideMimeType('text/plain');
+
+    xhr.open('GET', 'resource://common/default.css', false);
+    // synchronous
+    xhr.send(); 
+    // Assume 200 OK
+    markdownHereCss = xhr.responseText;
+
+    xhr.open('GET', 'resource://common/highlightjs/styles/github.css', false);
+    // synchronous
+    xhr.send(); 
+    // Assume 200 OK
+    markdownHereSyntaxCss = xhr.responseText;
 
     callback(
-      markdownRender(
-        htmlToText, 
-        marked,
-        hljs, 
+      markdownRender.markdownRender(
+        htmlToText.htmlToText, 
+        marked.marked,
+        hljs.hljs, 
         html,
         targetDocument), 
       markdownHereCss + markdownHereSyntaxCss);
