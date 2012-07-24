@@ -55,7 +55,8 @@
       // Experimentation has shown some tags that need to be tweaked a little.
       text =
         text
-          .replace(/<div[^>]*>/ig, '<br>') // opening <div> --> <br>
+          .replace(/<div[^>]*><br><\/div>/ig, '<br>') // <div><br></div> --> <br>
+          .replace(/(<div[^>]*>)+/ig, '<br>') // opening <div> --> <br> (but nested <div><div> just gets one <br>)
           .replace(/<\/div>/ig, '')        // closing </div> --> nothing
           .replace(/<(img[^>]*)>/ig, '&lt;$1&gt;') // <img> tags --> textual <img> tags
           .replace(/&nbsp;/ig, ' ');       // &nbsp; --> space
