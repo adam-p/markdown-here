@@ -31,7 +31,7 @@ chrome.extension.onRequest.addListener(
 
       if (!markdownHereCss) {
         // Get the default value.
-        xhr.open('GET', 'resource://common/default.css', false);
+        xhr.open('GET', '../common/default.css', false);
         // synchronous
         xhr.send(); 
         // Assume 200 OK
@@ -40,7 +40,7 @@ chrome.extension.onRequest.addListener(
 
       if (!markdownHereSyntaxCss) {
         // Get the default value.        
-        xhr.open('GET', 'resource://common/highlightjs/styles/github.css', false);
+        xhr.open('GET', '../common/highlightjs/styles/github.css', false);
         // synchronous
         xhr.send(); 
         // Assume 200 OK
