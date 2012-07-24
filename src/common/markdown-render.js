@@ -52,12 +52,6 @@
       // Note that we can't use excludeTagBlocks because there's no closing tag.
       text = text.replace(/<(img[^>]*)>/ig, '&lt;$1&gt;');
 
-      // Leave some rendered elements intact.
-      keepTags = ['a'];
-      for (i = 0; i < keepTags.length; i++) {
-        text = excludeTagBlocks(keepTags[i], text, false);
-      }
-
       // Experimentation has shown some tags that need to be tweaked a little.
       text =
         text
