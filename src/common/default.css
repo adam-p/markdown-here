@@ -9,22 +9,21 @@
 
 /* This is the overall wrapper, it should be treated as the `body` section. */ 
 .markdown-here-wrapper { 
-  font: 14px Helvetica, arial, freesans, clean, sans-serif; 
-  color: #333; 
+  font: 1em Helvetica, arial, freesans, clean, sans-serif; 
+  color: #222; 
   background-color: #fff; 
   border: none; 
   line-height: 1.2; 
-  text-align: left; 
 }
 
 pre, code { 
-  font-size: 12px; 
+  font-size: 0.85em; 
   font-family: Consolas, Inconsolata, Courier, monospace; 
 }
 
 code { 
-  margin: 0 2px; 
-  padding: 0 5px; 
+  margin: 0 0.15em; 
+  padding: 0 0.3em; 
   white-space: nowrap; 
   border: 1px solid #EAEAEA; 
   background-color: #F8F8F8; 
@@ -33,8 +32,8 @@ code {
 } 
 
 pre { 
-  font-size: 13px; 
-  line-height: 19px; 
+  font-size: 1em; 
+  line-height: 1.2em; 
   overflow: auto; 
 } 
 
@@ -42,15 +41,15 @@ pre code {
   white-space: pre; 
   border-radius: 3px; 
   border: 1px solid #CCC; 
-  padding: 6px 10px; 
+  padding: 0.5em 0.7em; 
 } 
 
 ul, ol { 
-  padding-left: 30px; 
+  padding-left: 2em; 
 } 
 
 p, blockquote:not(.markdown-here-exclude), ul, ol, dl, li, table, pre { 
-  margin: 15px 0; 
+  margin: 1em 0; 
 } 
 
 dl { 
@@ -58,21 +57,21 @@ dl {
 } 
 
 dl dt { 
-  font-size: 14px; 
+  font-size: 1em; 
   font-weight: bold; 
   font-style: italic; 
   padding: 0; 
-  margin: 15px 0 5px; 
+  margin: 1em 0 0.4em; 
 } 
 
 dl dd { 
-  margin: 0 0 15px; 
-  padding: 0 15px; 
+  margin: 0 0 1em; 
+  padding: 0 1em; 
 } 
 
 blockquote:not(.markdown-here-exclude) { 
   border-left: 4px solid #DDD; 
-  padding: 0 15px; 
+  padding: 0 1em; 
   color: #777; 
 } 
 
@@ -91,12 +90,12 @@ a:link, a:visited {
 
 a:hover { 
   color: #00f; 
-  text-shadow:1px 1px 2px #ccf; 
-  text-decoration:underline; 
+  text-shadow: 1px 1px 2px #ccf; 
+  text-decoration: underline; 
 } 
 
 h1, h2, h3, h4, h5, h6 { 
-  margin: 20px 0 10px; 
+  margin: 1.3em 0 1em; 
   padding: 0; 
   font-weight: bold; 
   color: black; 
@@ -105,28 +104,28 @@ h1, h2, h3, h4, h5, h6 {
 } 
 
 h1 { 
-  font-size: 28px; 
+  font-size: 2em; 
 } 
 
 h2 { 
-  font-size: 24px; 
+  font-size: 1.7em; 
   border-bottom: 1px solid #CCC; 
 } 
 
 h3 { 
-  font-size: 18px; 
+  font-size: 1.5em; 
 } 
 
 h4 { 
-  font-size: 16px; 
+  font-size: 1.2em; 
 } 
 
 h5 { 
-  font-size: 14px; 
+  font-size: 1em; 
 } 
 
 h6 { 
-  font-size: 14px; 
+  font-size: 1em; 
   color: #777; 
 } 
 
@@ -165,7 +164,7 @@ table tr th, table tr td {
   border: 1px solid #CCC; 
   text-align: left; 
   margin: 0; 
-  padding: 6px 13px; 
+  padding: 0.5em 1em; 
 } 
 
 table tr th { 
