@@ -5,9 +5,12 @@ Change Log
 2012-07-xx: v2.4.1
 ------------------
 
+* Changed default styles to be more relative. This results, for example, in ordinary Markdown-Here-rendered text looking more like ordinary Gmail text instead of the somewhat jarring size change.
+  * This also fixes a bug: Inline code in headings will now be the correct size.
+
 * Significant changes under the hood to (hopefully!) allow *Markdown Here* to properly pass a full Mozilla review. For details, see [issue #21](https://github.com/adam-p/markdown-here/issues/21).
 
-* Fixed bug: Empty would appear at the top of rendered fenced code blocks that had been pasted.
+* Fixed bug: Empty line would appear at the top of rendered fenced code blocks that had been pasted.
 
 * Removed feature/fixed bug: Pre-formatted links are no longer left intact. It conflicted with Marked.js's GFM behaviour of turning text that looks like a URL into a link. So if a pre-formatted link was created that used the URL as the text (e.g. `<a href="http://github.com">http://github.com</a>`), the resulting rendering would get messed up (`<a ...><a ...>...</a></a>`).
   - Let this be a lesson about the perils of frivolous features.
