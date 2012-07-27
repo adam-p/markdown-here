@@ -139,6 +139,16 @@ MIT License : http://adampritchard.mit-license.org/
         font-family: Consolas, Inconsolata, Courier, monospace; 
       }
 
+      #changelist {
+        height: 25em;
+        overflow-y: scroll;
+        border-radius: 5px;
+        box-shadow: 2px 2px 3px rgba(0, 0, 0, .2);
+        border: 2px #EEE solid;
+        margin: 10px;
+        padding: 10px;
+      }
+
     </style>
   </head>
 
@@ -151,7 +161,7 @@ MIT License : http://adampritchard.mit-license.org/
       </h1>
     </div>
 
-    <div id="container">
+    <div id="options-container">
 
       <div class="horiz-groupset">
 
@@ -221,6 +231,11 @@ MIT License : http://adampritchard.mit-license.org/
 
     </div>
 
+    <div id="changelist-container">
+      <div id="changelist">
+      </div>
+    </div>
+
     <footer>
       <p>
         <em>Markdown Here</em> is open source. To ask questions, report bugs, request features, or contribute, visit the <a target="_blank" href="https://github.com/adam-p/markdown-here">Github project page</a>.
@@ -235,9 +250,9 @@ MIT License : http://adampritchard.mit-license.org/
 <div id="sample-markdown" style="display: none;">
 ```javascript<br>
 function syntaxHighlighting() {<br>
-&nbsp; &nbsp; var n = 33;<br>
-&nbsp; &nbsp; var s = "hi";<br>
-&nbsp; &nbsp; console.log(s);<br>
+&nbsp; var n = 33;<br>
+&nbsp; var s = "hi";<br>
+&nbsp; console.log(s);<br>
 }<br>
 ```<br>
 <br>

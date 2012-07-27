@@ -62,7 +62,7 @@ var OptionsStore = {
     var that = this;
 
     // First clear out existing entries.
-    chrome.storage.sync.clear(function() {
+    this._clearExisting(obj, function() {
       var finalobj = {};
       for (var key in obj) {
         var val = obj[key];
@@ -81,6 +81,29 @@ var OptionsStore = {
       chrome.storage.sync.set(finalobj, function() {
         if (callback) callback();
       });
+    });
+  },
+
+  // Clear any existing entries that match the given object's members.
+  _clearExisting: function(obj, callback) {
+    var that = this;
+
+    chrome.storage.sync.get(null, function(sync) {
+      var keysToDelete = [];
+      for (var objKey in obj) {
+        for (var syncKey in sync) {
+          if (syncKey === objKey || syncKey.indexOf(objKey+that._div) === 0) {
+            keysToDelete.push(syncKey);
+          }
+        }
+      }
+
+      if (keysToDelete.length > 0) {
+        chrome.storage.sync.remove(keysToDelete, callback);
+      }
+      else {
+        if (callback) callback();
+      }
     });
   }
 };

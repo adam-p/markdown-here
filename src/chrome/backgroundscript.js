@@ -7,6 +7,22 @@
  * Chrome background script.
  */
 
+// On each load, check if we should show the options/changelist page.
+window.addEventListener('load', function() {
+    OptionsStore.get(function(options) {
+      var appDetails = chrome.app.getDetails();
+
+      // Have we been updated?
+      if (options['lastVersion'] !== appDetails.version) {
+        // Open our options page in changelist mode
+        chrome.tabs.create({ url: appDetails.options_page + "#changelist" });
+
+        // Update out last version
+        OptionsStore.set({ 'lastVersion': appDetails.version });
+      }
+    });
+  }, false);
+
 // Create the context menu that will signal our main code.
 chrome.contextMenus.create({
   contexts: ['editable'],
@@ -20,6 +36,7 @@ chrome.contextMenus.create({
 // See the comment in markdown-render.js for why we do this.
 chrome.extension.onRequest.addListener(
   function renderRequest(html, sender, sendResponse) {
+
     OptionsStore.get(function(prefs) {
       var markdownHereCss, markdownHereSyntaxCss;
 

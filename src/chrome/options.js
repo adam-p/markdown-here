@@ -84,6 +84,16 @@ function onLoad() {
     // Start watching for changes to the styles.
     setInterval(checkChange, 100);
   });
+
+  // Load the changelist section
+  
+  loadChangelist();
+
+  if (location.hash === '#changelist') {
+    var cc = document.querySelector('#changelist-container');
+    cc.parentElement.insertBefore(cc, document.querySelector('#options-container'));
+    setTimeout(function(){scroll(0, 0)}, 1);
+  }
 }
 document.addEventListener('DOMContentLoaded', onLoad, false);
 
@@ -236,4 +246,25 @@ function cssSyntaxSelectChange() {
   // Assume 200 OK
 
   cssSyntaxEdit.value = xhr.responseText;
+}
+
+function loadChangelist() {
+  var xhr = new XMLHttpRequest();
+  xhr.overrideMimeType('text/plain');
+
+  // Get the default value.
+  xhr.open('GET', '../CHANGES.md', false);
+  // synchronous
+  xhr.send(); 
+  // Assume 200 OK
+  var changes = xhr.responseText;
+
+  var markedOptions = {
+        gfm: true,
+        pedantic: false,
+        sanitize: false };
+
+  changes = marked(changes, markedOptions);
+
+  document.querySelector('#changelist').innerHTML = changes;
 }
