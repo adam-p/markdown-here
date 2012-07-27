@@ -2,6 +2,9 @@
 
 > This file is a catch-all for ideas, problems, plans, and other miscellaneous notes. If something should instead be an issue, it should be made an issue.
 
+- What should the upper bound on compatible Thunderbird versions be? (Too low now?)
+  - Might need to push out an interim release.
+
 - Add options to Firefox/Thunderbird
   - Add open-on-update page as well
   - If/when we pass review
