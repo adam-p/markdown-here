@@ -1,7 +1,7 @@
 Change Log
 ==========
 
-2012-07-xx: v2.4.1
+2012-07-xx: v2.5.0
 ------------------
 
 * Changed default styles to be more relative. This results, for example, in ordinary Markdown-Here-rendered text looking more like ordinary Gmail text instead of the somewhat jarring size change.
