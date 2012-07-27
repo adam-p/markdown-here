@@ -4,7 +4,7 @@ Change Log
 2012-07-xx: v2.5.0
 ------------------
 
-* Changed default styles to be more relative. This results, for example, in ordinary Markdown-Here-rendered text looking more like ordinary Gmail text instead of the somewhat jarring size change.
+* Changed default styles to be more relative. This results, for example, in ordinary Markdown-Here-rendered text looking more like ordinary Gmail text instead of the previous somewhat jarring size change.
   * This also fixes a bug: Inline code in headings will now be the correct size.
 
 * Chrome: Options page with changelist at top will be opened when *Markdown Here* updates.
