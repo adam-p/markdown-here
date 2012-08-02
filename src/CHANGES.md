@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+2012-08-02: v2.5.1
+------------------
+
+* Chrome: Fixed bug: In version 21 of Chrome, the Markdown Here options page no longer rendered correctly. (Chrome changed the display style name for flexbox layout from "-webkit-flexbox" to "-webkit-flex". Using bleeding edge CSS maybe wasn't a great idea.)
+
 2012-07-27: v2.5.0
 ------------------
 
