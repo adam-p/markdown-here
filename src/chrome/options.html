@@ -21,15 +21,21 @@ MIT License : http://adampritchard.mit-license.org/
       }
 
       .horiz-groupset {
+        /* Chrome v20 and earlier */
+        display: -webkit-flexbox;
+        /* Chrome v21 and later */
         display: -webkit-flex;
         height: 400px;
       }
 
       .control-group {
+        /* Chrome v20 and earlier */
+        display: -webkit-flexbox;
+        /* Chrome v21 and later */
+        display: -webkit-flex;
         -webkit-flex: 1;
         margin: 10px;
         padding: 10px;
-        display: -webkit-flex;
         -webkit-flex-direction: column;
         background-color: #EEE;
         border-radius: 5px;
