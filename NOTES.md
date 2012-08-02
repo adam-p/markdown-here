@@ -7,6 +7,8 @@
 - What should the upper bound on compatible Thunderbird versions be? (Too low now?)
   - Might need to push out an interim release.
 
+- Bug: CSS is being applied to excluded reply text.
+
 - Add options to Firefox/Thunderbird
   - Add open-on-update page as well
   - If/when we pass review
