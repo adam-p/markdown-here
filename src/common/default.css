@@ -1,7 +1,5 @@
 /* 
  * NOTE: 
- * - Do not use multi-word font names (e.g., "Andale Mono"). For some 
- *   mysterious reason, they totally mess up styling. 
  * - The use of browser-specific styles (-moz-, -webkit-) should be avoided. 
  *   If used, they may not render correctly for people reading the email in 
  *   a different browser than the one from which the email was sent. 
@@ -9,7 +7,8 @@
 
 /* This is the overall wrapper, it should be treated as the `body` section. */ 
 .markdown-here-wrapper { 
-  font: 1em Helvetica, arial, freesans, clean, sans-serif; 
+  font-size: 1em;
+  font-family: Helvetica, arial, freesans, clean, sans-serif; 
   color: #222; 
   background-color: #fff; 
   border: none; 
