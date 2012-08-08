@@ -5,16 +5,7 @@
     <Description about="urn:mozilla:install-manifest">
         <em:type>2</em:type> <!-- 2 : Extension -->
         <em:id>markdown-here@adam.pritchard</em:id>
-        <em:version>2.5.1</em:version>
-
-        <!-- Any suitably modern toolkit application -->
-        <em:targetApplication>
-          <Description>
-            <em:id>toolkit@mozilla.org</em:id>
-            <em:minVersion>5.0</em:minVersion>
-            <em:maxVersion>13.*</em:maxVersion>
-          </Description>
-        </em:targetApplication>
+        <em:version>2.5.2</em:version>
 
         <em:targetApplication>
             <Description>
@@ -23,6 +14,15 @@
                 <em:minVersion>11.0</em:minVersion>
                 <em:maxVersion>16.0a2</em:maxVersion>
             </Description>
+        </em:targetApplication>
+
+        <!-- Any suitably modern toolkit application -->
+        <em:targetApplication>
+          <Description>
+            <em:id>toolkit@mozilla.org</em:id>
+            <em:minVersion>6.0</em:minVersion>
+            <em:maxVersion>15.*</em:maxVersion>
+          </Description>
         </em:targetApplication>
 
         <em:name>Markdown Here</em:name>
