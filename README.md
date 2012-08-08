@@ -189,7 +189,6 @@ Short answer: Gmail and Thunderbird are great.
 
 * Styling:
   * The use of browser-specific styles (-moz-, -webkit-) should be avoided. If used, they may not render correctly for people reading the email in a different browser from the one where the email was sent.
-  * Do not use multi-word font names (e.g., "Andale Mono"). For some mysterious reason, they totally mess up styling.
 
 ## Building the Extension Bundles
 

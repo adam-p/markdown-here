@@ -18,6 +18,6 @@ Privacy: Markdown Here accesses and modifies the content of your email. It can, 
 
 Available as a Chrome, Firefox, and Thunderbird extension.
 
-This is an open source project. Visit the Markdown Here's Github page for full instructions, more information, bug reports, or to contribute.
+This is an open source project. Visit Markdown Here's Github page for full instructions, more information, bug reports, or to contribute.
 
 https://github.com/adam-p/markdown-here
