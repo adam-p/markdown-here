@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+2012-08-08: v2.5.2
+------------------
+
+* Firefox/Thunderbird: Minor change resulting from Mozilla review. (Fixed a "loose" variable.)
+
 2012-08-02: v2.5.1
 ------------------
 
