@@ -8,13 +8,19 @@
  * rendering services.
  */
 
-var scriptLoader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"]
-                             .getService(Components.interfaces.mozIJSSubScriptLoader);
-
 Components.utils.import('resource://common/markdown-here.js');
 
 
 var markdown_here = {
+
+  // Components.utils is somewhat more performant than mozIJSSubScriptLoader, so
+  // we'll use it when possible. However, Components.utils usually requires 
+  // modifications to the source file, which isn't allowed for some 3rd party
+  // code (Highlight.js, in particular) -- in that case we use mozIJSSubScriptLoader.
+  // For details on the difference, see:
+  // https://developer.mozilla.org/en-US/docs/Components.utils.import
+  scriptLoader: Components.classes["@mozilla.org/moz/jssubscript-loader;1"]
+                          .getService(Components.interfaces.mozIJSSubScriptLoader),
 
   // Handle the menu-item click
   onMenuItemCommand: function(e) {
@@ -122,7 +128,7 @@ var markdown_here = {
     Components.utils.import('resource://common/markdown-render.js', markdownRender);
     Components.utils.import('resource://common/marked.js', marked);
     Components.utils.import('resource://common/jsHtmlToText.js', htmlToText);
-    scriptLoader.loadSubScript('resource://common/highlightjs/highlight.js', hljs);
+    this.scriptLoader.loadSubScript('resource://common/highlightjs/highlight.js', hljs);
 
     var xhr = new XMLHttpRequest();
     xhr.overrideMimeType('text/plain');
