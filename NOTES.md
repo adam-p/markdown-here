@@ -4,9 +4,6 @@
 
 - Had a report that the Options page crashes if it's already open when the extension updates and opens the changelist.
 
-- What should the upper bound on compatible Thunderbird versions be? (Too low now?)
-  - Might need to push out an interim release.
-
 - Bug: CSS is being applied to excluded reply text.
 
 - Add options to Firefox/Thunderbird
