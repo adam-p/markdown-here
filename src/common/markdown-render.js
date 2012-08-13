@@ -176,6 +176,9 @@
       gfm: true,
       pedantic: false,
       sanitize: false,
+      math: function(mathcode) { 
+        return '<img alt="'+mathcode+'" src="https://chart.googleapis.com/chart?cht=tx&chl='+encodeURIComponent(mathcode)+'">';
+      },
       highlight: function(codeText, codeLanguage) {                 
                     return highlightSyntax(
                               targetDocument, 

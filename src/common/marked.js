@@ -304,18 +304,19 @@ block.token = function(src, tokens, top) {
  */
 
 var inline = {
-  escape: /^\\([\\`*{}\[\]()#+\-.!_>])/,
+  escape: /^\\([\\`*{}\[\]()#+\-.!_>\$])/,
   autolink: /^<([^ >]+(@|:\/)[^ >]+)>/,
   url: noop,
   tag: /^<!--[^\0]*?-->|^<\/?\w+(?:"[^"]*"|'[^']*'|[^'">])*?>/,
   link: /^!?\[(inside)\]\(href\)/,
   reflink: /^!?\[(inside)\]\s*\[([^\]]*)\]/,
+  math: /^\$([^ \t\n\$][^\$]*[^ \t\n\$])\$/,
   nolink: /^!?\[((?:\[[^\]]*\]|[^\[\]])*)\]/,
   strong: /^__([^\0]+?)__(?!_)|^\*\*([^\0]+?)\*\*(?!\*)/,
   em: /^\b_((?:__|[^\0])+?)_\b|^\*((?:\*\*|[^\0])+?)\*(?!\*)/,
   code: /^(`+)([^\0]*?[^`])\1(?!`)/,
   br: /^ {2,}\n(?!\s*$)/,
-  text: /^[^\0]+?(?=[\\<!\[_*`]| {2,}\n|$)/
+  text: /^[^\0]+?(?=[\$\\<!\[_*`]| {2,}\n|$)/
 };
 
 inline._linkInside = /(?:\[[^\]]*\]|[^\]]|\](?=[^\[]*\]))*/;
@@ -339,12 +340,13 @@ inline.normal = {
 
 inline.pedantic = {
   strong: /^__(?=\S)([^\0]*?\S)__(?!_)|^\*\*(?=\S)([^\0]*?\S)\*\*(?!\*)/,
-  em: /^_(?=\S)([^\0]*?\S)_(?!_)|^\*(?=\S)([^\0]*?\S)\*(?!\*)/
+  em: /^_(?=\S)([^\0]*?\S)_(?!_)|^\*(?=\S)([^\0]*?\S)\*(?!\*)/,
+  math: noop
 };
 
 inline.gfm = {
   url: /^(https?:\/\/[^\s]+[^.,:;"')\]\s])/,
-  text: /^[^\0]+?(?=[\\<!\[_*`]|https?:\/\/| {2,}\n|$)/
+  text: /^[^\0]+?(?=[\$\\<!\[_*`]|https?:\/\/| {2,}\n|$)/
 };
 
 /**
@@ -364,6 +366,14 @@ inline.lexer = function(src) {
     if (cap = inline.escape.exec(src)) {
       src = src.substring(cap[0].length);
       out += cap[1];
+      continue;
+    }
+
+    // math
+    if ((cap = inline.math.exec(src))
+        && options.math) {
+      src = src.substring(cap[0].length);
+      out += options.math(cap[1]);
       continue;
     }
 
