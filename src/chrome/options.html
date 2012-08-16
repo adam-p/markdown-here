@@ -21,22 +21,21 @@ MIT License : http://adampritchard.mit-license.org/
       }
 
       .horiz-groupset {
-        /* Chrome v20 and earlier */
-        display: -webkit-flexbox;
-        /* Chrome v21 and later */
-        display: -webkit-flex;
         height: 400px;
+        width: 100%;
+        overflow: auto;
       }
 
       .control-group {
-        /* Chrome v20 and earlier */
-        display: -webkit-flexbox;
-        /* Chrome v21 and later */
-        display: -webkit-flex;
-        -webkit-flex: 1;
+        float: left;
+        width: 45%;
+        width: -webkit-calc(50% - 40px);
+        width: calc(50% - 40px);
+        height: 360px;
+        height: -webkit-calc(100% - 40px);
+        height: calc(100% - 40px);
         margin: 10px;
         padding: 10px;
-        -webkit-flex-direction: column;
         background-color: #EEE;
         border-radius: 5px;
         box-shadow: 2px 2px 3px rgba(0, 0, 0, .2);
@@ -47,7 +46,9 @@ MIT License : http://adampritchard.mit-license.org/
       }
 
       .control-group > .stretch {
-        -webkit-flex: 1;
+        height: 295px;
+        height: -webkit-calc(100% - 65px);
+        height: calc(100% - 65px);
       }
 
       .stretch {
@@ -72,7 +73,6 @@ MIT License : http://adampritchard.mit-license.org/
       }
 
       #notes {
-        -webkit-flex: 1;
       }
 
       #notes ul {
