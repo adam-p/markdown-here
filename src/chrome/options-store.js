@@ -12,6 +12,10 @@
  *
  * Long strings are broken into pieces and stored in separate fields. They are
  * recombined when retrieved.
+ *
+ * Note that we fall back to (unsynced) localStorage if chrome.storage isn't 
+ * available. This is the case in Chromium v18 (currently the latest available
+ * via Ubuntu repo).
  */
 
 // TODO: Check for errors. See: https://code.google.com/chrome/extensions/dev/storage.html
@@ -23,13 +27,26 @@ var OptionsStore = {
   _div: '##',
 
   // HACK: Using the full length, or length-keylength, gives quota error.
-  _maxlen: (chrome.storage.sync.QUOTA_BYTES_PER_ITEM / 2),
+  // Because 
+  _maxlen: function() {
+    // Note that chrome.storage.sync.QUOTA_BYTES_PER_ITEM is in bytes, but JavaScript
+    // strings are UTF-16, so we need to divide by 2.
+    // Some JS string info: http://rosettacode.org/wiki/String_length#JavaScript
+    if (chrome.storage) {
+      return chrome.storage.sync.QUOTA_BYTES_PER_ITEM / 2;
+    }
+    else {
+      // 2048 is the default value for chrome.storage.sync.QUOTA_BYTES_PER_ITEM, so...
+      return 2048 / 2;
+    }
+
+  },
 
   // The options object will be passed to `callback`
   get: function(callback) {
     var that = this;
 
-    chrome.storage.sync.get(null, function(sync) {
+    this._storageGet(function(sync) {
       // Process the object, extracting divided entries.
       var tempobj = {}, finalobj = {};
       for (var key in sync) {
@@ -66,29 +83,83 @@ var OptionsStore = {
       var finalobj = {};
       for (var key in obj) {
         var val = obj[key];
-        if (typeof(val) !== 'string' || val.length < that._maxlen) {
+        if (typeof(val) !== 'string' || val.length < that._maxlen()) {
           // Don't need to split, or can't.
           finalobj[key] = val;
         }
         else {
-          var pieces = Math.ceil(val.length / that._maxlen);
+          var pieces = Math.ceil(val.length / that._maxlen());
           for (var i = 0; i < pieces; i++) {
-            finalobj[key+that._div+i] = val.substr(i*that._maxlen, that._maxlen);
+            finalobj[key+that._div+i] = val.substr(i*that._maxlen(), that._maxlen());
           }
         }
       }
 
-      chrome.storage.sync.set(finalobj, function() {
+      that._storageSet(finalobj, function() {
         if (callback) callback();
       });
     });
+  },
+
+  _storageGet: function(callback) {
+    if (chrome.storage) {
+      chrome.storage.sync.get(null, callback);
+      return;
+    }
+    else {
+      // Make this actually an async call.
+      setTimeout(function() {
+        var i, obj = {};
+        for (i = 0; i < localStorage.length; i++) {
+          obj[localStorage.key(i)] = localStorage.getItem(localStorage.key(i));
+        }
+        callback(obj);
+      });
+      return;
+    }
+  },
+
+  _storageSet: function(obj, callback) {
+    if (chrome.storage) {
+      chrome.storage.sync.set(obj, callback);
+      return;
+    }
+    else {
+      // Make this actually an async call.
+      setTimeout(function() {
+        var key;
+        for (key in obj) {
+          localStorage.setItem(key, obj[key]);
+        }
+        if (callback) callback();
+      });
+      return;
+    }
+  },
+
+  _storageRemove: function(keysToDelete, callback) {
+    if (chrome.storage) {
+      chrome.storage.sync.remove(keysToDelete, callback);
+      return;
+    }
+    else {
+      // Make this actually an async call.
+      setTimeout(function() {
+        var i;
+        for (i = 0; i < keysToDelete; i++) {
+          localStorage.removeItem(keysToDelete[i]);
+        }
+        callback();
+      });
+      return;      
+    }
   },
 
   // Clear any existing entries that match the given object's members.
   _clearExisting: function(obj, callback) {
     var that = this;
 
-    chrome.storage.sync.get(null, function(sync) {
+    this._storageGet(function(sync) {
       var keysToDelete = [];
       for (var objKey in obj) {
         for (var syncKey in sync) {
@@ -99,7 +170,7 @@ var OptionsStore = {
       }
 
       if (keysToDelete.length > 0) {
-        chrome.storage.sync.remove(keysToDelete, callback);
+        that._storageRemove(keysToDelete, callback);
       }
       else {
         if (callback) callback();
