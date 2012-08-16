@@ -176,9 +176,9 @@
       gfm: true,
       pedantic: false,
       sanitize: false,
-      math: function(mathcode) { 
+      math: localStorage['ilikemath'] ? function(mathcode) { 
         return '<img alt="'+mathcode+'" src="https://chart.googleapis.com/chart?cht=tx&chl='+encodeURIComponent(mathcode)+'">';
-      },
+      } : null,
       highlight: function(codeText, codeLanguage) {                 
                     return highlightSyntax(
                               targetDocument, 
