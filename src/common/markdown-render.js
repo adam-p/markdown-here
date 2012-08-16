@@ -176,7 +176,7 @@
       gfm: true,
       pedantic: false,
       sanitize: false,
-      math: localStorage['ilikemath'] ? function(mathcode) { 
+      math: typeof(localStorage) !== 'undefined' && localStorage['ilikemath'] ? function(mathcode) { 
         return '<img alt="'+mathcode+'" src="https://chart.googleapis.com/chart?cht=tx&chl='+encodeURIComponent(mathcode)+'">';
       } : null,
       highlight: function(codeText, codeLanguage) {                 
