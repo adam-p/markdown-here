@@ -23,6 +23,7 @@ function onLoad() {
 
   // Get the available highlight.js styles.
   var xhr = new XMLHttpRequest();
+  xhr.overrideMimeType('application/json');
   xhr.open('GET', '../common/highlightjs/styles/styles.json', false);
   // synchronous
   xhr.send(); 
