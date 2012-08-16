@@ -146,7 +146,7 @@ var OptionsStore = {
       // Make this actually an async call.
       setTimeout(function() {
         var i;
-        for (i = 0; i < keysToDelete; i++) {
+        for (i = 0; i < keysToDelete.length; i++) {
           localStorage.removeItem(keysToDelete[i]);
         }
         callback();
