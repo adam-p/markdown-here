@@ -2,6 +2,8 @@
 
 > This file is a catch-all for ideas, problems, plans, and other miscellaneous notes. If something should instead be an issue, it should be made an issue.
 
+- Reply exclusion is completely broken?
+
 - Had a report that the Options page crashes if it's already open when the extension updates and opens the changelist.
 
 - Bug: CSS is being applied to excluded reply text.
