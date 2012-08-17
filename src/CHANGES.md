@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+2012-08-16: v2.5.3
+------------------
+
+* Chrome: Fixed compatibility with Chromium v18 (currently the version in the Ubuntu repo).
+
 2012-08-08: v2.5.2
 ------------------
 
