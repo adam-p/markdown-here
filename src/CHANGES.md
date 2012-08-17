@@ -5,6 +5,7 @@ Change Log
 ------------------
 
 * Chrome: Fixed compatibility with Chromium v18 (currently the version in the Ubuntu repo).
+  * Limitation: Chromium v18 doesn't support synchronized settings. And when the user upgrades to a more recent version that supports `chrome.storage`, previous settings will not be migrated.
 
 2012-08-08: v2.5.2
 ------------------
