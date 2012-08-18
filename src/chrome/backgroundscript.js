@@ -41,41 +41,15 @@ chrome.extension.onRequest.addListener(
   function renderRequest(html, sender, sendResponse) {
 
     OptionsStore.get(function(prefs) {
-      var markdownHereCss, markdownHereSyntaxCss;
-
-      markdownHereCss = prefs['markdown-here-css'];
-      markdownHereSyntaxCss = prefs['markdown-here-syntax-css'];
-
-      var xhr = new XMLHttpRequest();
-      xhr.overrideMimeType('text/css');
-
-      if (!markdownHereCss) {
-        // Get the default value.
-        xhr.open('GET', '../common/default.css', false);
-        // synchronous
-        xhr.send(); 
-        // Assume 200 OK
-        markdownHereCss = xhr.responseText;
-      }
-
-      if (!markdownHereSyntaxCss) {
-        // Get the default value.        
-        xhr.open('GET', '../common/highlightjs/styles/github.css', false);
-        // synchronous
-        xhr.send(); 
-        // Assume 200 OK
-        markdownHereSyntaxCss = xhr.responseText;
-      }
-
       sendResponse({
         html: markdownRender(
-          htmlToText, 
-          marked, 
+          prefs,
+          htmlToText,
+          marked,
           hljs,
           html,
           document),
-        // Use default CSS if not set
-        css: (markdownHereCss + markdownHereSyntaxCss)
+        css: (prefs['markdown-here-css'] + prefs['markdown-here-syntax-css'])
       });
-    })
+    });
   });

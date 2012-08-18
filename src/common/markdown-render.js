@@ -22,7 +22,7 @@
                           It will be used to create elements, but those elements 
                           will not be inserted into the DOM.
    */
-  function markdownRender(htmlToText, markdownToHtml, syntaxHighlighter, html, targetDocument) {
+  function markdownRender(userprefs, htmlToText, markdownToHtml, syntaxHighlighter, html, targetDocument) {
     var extractedText, markedOptions, keepTags, i;
 
     // We need to tweak the html-to-text processing to get the results we want.
@@ -75,7 +75,7 @@
         var depth, startIndex, openIndex, closeIndex, currentOpenIndex, 
           openTagRegex, closeTagRegex, remainderText, closeTagLength, regexFiller;
 
-        regexFiller = ifNotHasString ? '(((?!'+ifNotHasString+')[^>])*)' : '[^>]*'
+        regexFiller = ifNotHasString ? '(((?!'+ifNotHasString+')[^>])*)' : '[^>]*';
         if (ifHasAttribute) {
           openTagRegex = new RegExp('<'+tagName+'\\b'+regexFiller+'\\b'+ifHasAttribute+'\\b'+regexFiller+'>', 'i');
         }
@@ -128,12 +128,12 @@
                 closeTagLength = ('</'+tagName+'>').length;
 
                 text = 
-                  text.slice(0, currentOpenIndex)
-                  + (wrapInPara ? '<p/>' : '')
-                  + addClassToAllTags('markdown-here-exclude', text.slice(currentOpenIndex, closeIndex+closeTagLength))
-                        .replace(/</ig, '&lt;')
-                  + (wrapInPara ? '<p/>' : '')
-                  + text.slice(closeIndex+closeTagLength);
+                  text.slice(0, currentOpenIndex) +
+                  (wrapInPara ? '<p/>' : '') +
+                  addClassToAllTags('markdown-here-exclude', text.slice(currentOpenIndex, closeIndex+closeTagLength))
+                        .replace(/</ig, '&lt;') +
+                  (wrapInPara ? '<p/>' : '') +
+                  text.slice(closeIndex+closeTagLength);
 
                 // Start from the beginning again. The length of the string has 
                 // changed (so our indexes are meaningless), and we'll only find
@@ -172,13 +172,17 @@
 
     extractedText = htmlToText(html, {tagreplacement: tagReplacement, allowTrailingWhitespace: true});
 
+    function mathify(mathcode) {
+      return userprefs['markdown-here-math-value']
+              .replace('{mathcode}', mathcode)
+              .replace('{urlmathcode}', encodeURIComponent(mathcode));
+    }
+
     markedOptions = {
       gfm: true,
       pedantic: false,
       sanitize: false,
-      math: typeof(localStorage) !== 'undefined' && localStorage['ilikemath'] ? function(mathcode) { 
-        return '<img alt="'+mathcode+'" src="https://chart.googleapis.com/chart?cht=tx&chl='+encodeURIComponent(mathcode)+'">';
-      } : null,
+      math: userprefs['markdown-here-math-enabled'] ? mathify : null,
       highlight: function(codeText, codeLanguage) {                 
                     return highlightSyntax(
                               targetDocument, 

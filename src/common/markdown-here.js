@@ -28,14 +28,14 @@ function findFocusedElem(document) {
   return focusedElem;
 }
 
-// Returns true if the given element can be properly rendered (i.e., if it's 
+// Returns true if the given element can be properly rendered (i.e., if it's
 // a rich-edit compose element).
 function elementCanBeRendered(elem) {
   // See here for more info about what we're checking:
   // http://stackoverflow.com/a/3333679/729729
-  return elem.contentEditable === true || elem.contentEditable === 'true'
-         || elem.contenteditable === true || elem.contenteditable === 'true'
-         || (elem.ownerDocument && elem.ownerDocument.designMode === 'on');  
+  return (elem.contentEditable === true || elem.contentEditable === 'true' ||
+          elem.contenteditable === true || elem.contenteditable === 'true' ||
+          (elem.ownerDocument && elem.ownerDocument.designMode === 'on'));
 }
 
 // Get the currectly selected range. If there is no selected range (i.e., it is
@@ -244,9 +244,9 @@ function findMarkdownHereWrapper(focusedElem) {
   while (wrapper) {
     // Skip all wrappers that are in a `blockquote`. We don't want to revert
     // Markdown that was sent to us.
-    if (wrapper.classList && wrapper.classList.contains('markdown-here-wrapper')
-        && wrapper.attributes && wrapper.attributes.getNamedItem('data-md-original')
-        && !hasParentElementOfTagName(wrapper, 'BLOCKQUOTE')) {
+    if (wrapper.classList && wrapper.classList.contains('markdown-here-wrapper') &&
+        wrapper.attributes && wrapper.attributes.getNamedItem('data-md-original') &&
+        !hasParentElementOfTagName(wrapper, 'BLOCKQUOTE')) {
       break;
     }
 
@@ -390,7 +390,7 @@ function markdownHere(document, markdownRenderer, logger) {
     range = getOperationalRange(focusedElem);
 
     if (!range) {
-      return 'Nothing found to render or revert'
+      return 'Nothing found to render or revert';
     }
 
     // Look for wrappers in the range under consideration.

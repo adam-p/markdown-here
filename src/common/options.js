@@ -7,7 +7,8 @@
  * Main script file for the options page.
  */
 
-var cssEdit, cssSyntaxEdit, cssSyntaxSelect, rawMarkdownIframe, savedMsg, defaultCss = '';
+var cssEdit, cssSyntaxEdit, cssSyntaxSelect, rawMarkdownIframe, savedMsg, 
+    mathEnable, mathEdit, defaultCss = '';
 
 function onLoad() {
   // Set up our control references.
@@ -16,6 +17,8 @@ function onLoad() {
   cssSyntaxSelect = document.getElementById('css-syntax-select');
   rawMarkdownIframe = document.getElementById('rendered-markdown');
   savedMsg = document.getElementById('saved-msg');
+  mathEnable = document.getElementById('math-enable');
+  mathEdit = document.getElementById('math-edit');
 
   //
   // Syntax highlighting styles and selection
@@ -55,37 +58,11 @@ function onLoad() {
   //
 
   OptionsStore.get(function(prefs) {
-    var markdownHereCss, markdownHereSyntaxCss;
+    cssEdit.value = prefs['markdown-here-css'];
+    cssSyntaxEdit.value = prefs['markdown-here-syntax-css'];
 
-    markdownHereCss = prefs['markdown-here-css'];
-    markdownHereSyntaxCss = prefs['markdown-here-syntax-css'];
-
-    var xhr = new XMLHttpRequest();
-    xhr.overrideMimeType('text/plain');
-
-    // Get the default value.
-    xhr.open('GET', 'default.css', false);
-    // synchronous
-    xhr.send(); 
-    // Assume 200 OK
-    defaultCss = xhr.responseText;
-
-    if (!markdownHereCss) {
-      markdownHereCss = defaultCss;
-    }
-
-    if (!markdownHereSyntaxCss) {
-      // Get the default value.        
-      xhr.open('GET', 'highlightjs/styles/github.css', false);
-      // synchronous
-      xhr.send(); 
-      // Assume 200 OK
-      markdownHereSyntaxCss = xhr.responseText;
-    }
-
-    cssEdit.value = markdownHereCss;
-
-    cssSyntaxEdit.value = markdownHereSyntaxCss;
+    mathEnable.checked = prefs['markdown-here-math-enabled'];
+    mathEdit.value = prefs['markdown-here-math-value'];
 
     // Render the sample Markdown
     renderMarkdown();
@@ -101,7 +78,7 @@ function onLoad() {
   if (location.hash === '#changelist') {
     var cc = document.querySelector('#changelist-container');
     cc.parentElement.insertBefore(cc, document.querySelector('#options-container'));
-    setTimeout(function(){scroll(0, 0)}, 1);
+    setTimeout(function(){scroll(0, 0);}, 1);
   }
 }
 document.addEventListener('DOMContentLoaded', onLoad, false);
@@ -109,15 +86,15 @@ document.addEventListener('DOMContentLoaded', onLoad, false);
 // If the CSS changes and the Markdown compose box is rendered, update the 
 // rendering by toggling twice. If the compose box is not rendered, do nothing.
 // Groups changes together rather than on every keystroke.
-var lastCSS = '';
+var lastOptions = '';
 var lastChangeTime = null;
 var firstSave = true;
 function checkChange() {
-  var newCSS = cssEdit.value + cssSyntaxEdit.value;
+  var newOptions = cssEdit.value + cssSyntaxEdit.value + mathEnable.checked + mathEdit.value;
 
-  if (newCSS !== lastCSS) {
+  if (newOptions !== lastOptions) {
     // CSS has changed.
-    lastCSS = newCSS;
+    lastOptions = newOptions;
     lastChangeTime = new Date();    
   }
   else {
@@ -131,7 +108,12 @@ function checkChange() {
       lastChangeTime = null;
 
       OptionsStore.set(
-        {'markdown-here-css': cssEdit.value, 'markdown-here-syntax-css': cssSyntaxEdit.value},
+        {
+          'markdown-here-css': cssEdit.value, 
+          'markdown-here-syntax-css': cssSyntaxEdit.value,
+          'markdown-here-math-enabled': mathEnable.checked,
+          'markdown-here-math-value': mathEdit.value
+        },
         function() {
           updateMarkdownRender();
 
@@ -162,14 +144,17 @@ function requestMarkdownConversion(html, callback) {
     });
   }
   else {
-    callback(
-      markdownRender(
-        htmlToText, 
-        marked,
-        hljs, 
-        html,
-        rawMarkdownIframe.contentDocument), 
-      cssEdit.value + cssSyntaxEdit.value);
+    OptionsStore.get(function(prefs) {
+      callback(
+        markdownRender(
+          prefs,
+          htmlToText, 
+          marked,
+          hljs, 
+          html,
+          rawMarkdownIframe.contentDocument), 
+        (prefs['markdown-here-css'] + prefs['markdown-here-syntax-css']));
+    });
   }
 }
 

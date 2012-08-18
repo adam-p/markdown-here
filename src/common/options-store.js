@@ -53,7 +53,7 @@ var ChromeOptionsStore = {
         finalobj[key] = tempobj[key].join('');
       }
 
-      callback(finalobj);
+      callback(that._fillDefaults(finalobj));
     });
   },
 
@@ -179,6 +179,44 @@ var ChromeOptionsStore = {
         if (callback) callback();
       }
     });
+  },
+
+  _fillDefaults: function(prefsObj) {
+    var xhr, filledPrefsObj = prefsObj;
+
+    if (typeof(prefsObj['markdown-here-css']) === 'undefined') {
+      xhr = new XMLHttpRequest();
+      xhr.overrideMimeType('text/css');
+
+      // Get the default value.
+      xhr.open('GET', '/common/default.css', false);
+      // synchronous
+      xhr.send();
+      // Assume 200 OK
+      filledPrefsObj['markdown-here-css'] = xhr.responseText;
+    }
+
+    if (typeof(prefsObj['markdown-here-syntax-css']) === 'undefined') {
+      xhr = new XMLHttpRequest();
+      xhr.overrideMimeType('text/css');
+
+      // Get the default value.
+      xhr.open('GET', '/common/highlightjs/styles/github.css', false);
+      // synchronous
+      xhr.send();
+      // Assume 200 OK
+      filledPrefsObj['markdown-here-syntax-css'] = xhr.responseText;
+    }
+
+    if (typeof(prefsObj['markdown-here-math-enabled']) === 'undefined') {
+      filledPrefsObj['markdown-here-math-enabled'] = false;
+    }
+
+    if (typeof(prefsObj['markdown-here-math-value']) === 'undefined') {
+      filledPrefsObj['markdown-here-math-value'] = '<img alt="{mathcode}" src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}">';
+    }
+
+    return filledPrefsObj;
   }
 };
 
@@ -189,7 +227,10 @@ var ChromeOptionsStore = {
 var MozillaOptionsStore = {
   
   get: function(callback) {
-    this._sendRequest({action: 'get'}, callback);
+    var that = this;
+    this._sendRequest({action: 'get'}, function(prefsObj) {
+      callback(that._fillDefaults(prefsObj));
+    });
   },
 
   set: function(obj, callback) {
@@ -203,7 +244,7 @@ var MozillaOptionsStore = {
   // directly. Unfortunately, this means duplicating some code from the background
   // service.
   _sendRequest: function(data, callback) { // analogue of chrome.extension.sendRequest
-    var prefs, prefKeys, prefsObj, request, sender;
+    var prefs, prefKeys, prefsObj, request, sender, i;
 
     try {
       prefs = Components.classes['@mozilla.org/preferences-service;1']
@@ -256,10 +297,46 @@ var MozillaOptionsStore = {
       sender.initEvent('markdown_here-options-query', true, false);
       request.dispatchEvent(sender);
     }
+  },
+
+  _fillDefaults: function(prefsObj) {
+    var xhr, filledPrefsObj = prefsObj;
+
+    if (typeof(prefsObj['markdown-here-css']) === 'undefined') {
+      xhr = new XMLHttpRequest();
+      xhr.overrideMimeType('text/css');
+
+      // Get the default value.
+      xhr.open('GET', 'resource://common/default.css', false);
+      // synchronous
+      xhr.send();
+      // Assume 200 OK
+      filledPrefsObj['markdown-here-css'] = xhr.responseText;
+    }
+
+    if (typeof(prefsObj['markdown-here-syntax-css']) === 'undefined') {
+      xhr = new XMLHttpRequest();
+      xhr.overrideMimeType('text/css');
+
+      // Get the default value.
+      xhr.open('GET', 'resource://common/highlightjs/styles/github.css', false);
+      // synchronous
+      xhr.send();
+      // Assume 200 OK
+      filledPrefsObj['markdown-here-syntax-css'] = xhr.responseText;
+    }
+
+    if (typeof(prefsObj['markdown-here-math-enabled']) === 'undefined') {
+      filledPrefsObj['markdown-here-math-enabled'] = false;
+    }
+
+    if (typeof(prefsObj['markdown-here-math-value']) === 'undefined') {
+      filledPrefsObj['markdown-here-math-value'] = '<img alt="{mathcode}" src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}">';
+    }
+
+    return filledPrefsObj;
   }
 };
-
-var EXPORTED_SYMBOLS = ['OptionsStore'];
 
 if (typeof(navigator) !== 'undefined' && navigator.userAgent.indexOf('Chrome') >= 0) {
   this.OptionsStore = ChromeOptionsStore;
@@ -268,6 +345,7 @@ else {
   this.OptionsStore = MozillaOptionsStore;
 }
 
+var EXPORTED_SYMBOLS = ['OptionsStore'];
 this.EXPORTED_SYMBOLS = EXPORTED_SYMBOLS;
 
 }).call(function() {

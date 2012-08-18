@@ -14,7 +14,7 @@ Components.utils.import('resource://common/markdown-here.js');
 var markdown_here = {
 
   // Components.utils is somewhat more performant than mozIJSSubScriptLoader, so
-  // we'll use it when possible. However, Components.utils usually requires 
+  // we'll use it when possible. However, Components.utils usually requires
   // modifications to the source file, which isn't allowed for some 3rd party
   // code (Highlight.js, in particular) -- in that case we use mozIJSSubScriptLoader.
   // For details on the difference, see:
@@ -44,10 +44,10 @@ var markdown_here = {
     }
 
     mdReturn = markdownHere(
-                focusedElem.ownerDocument, 
+                focusedElem.ownerDocument,
                 // We'll need the target document available later
-                function() { 
-                  self.markdownRender.apply(self, [focusedElem.ownerDocument].concat([].splice.call(arguments, 0))); }, 
+                function() {
+                  self.markdownRender.apply(self, [focusedElem.ownerDocument].concat([].splice.call(arguments, 0))); },
                 this.log);
 
     if (typeof(mdReturn) === 'string') {
@@ -83,7 +83,7 @@ var markdown_here = {
     // Are we running in Thunderbird?
     if (typeof(GetCurrentEditorType) !== 'undefined' && GetCurrentEditorType !== null) {
       // Always show the menu item.
-      // If the editor isn't in rich mode, the user will get a helpful error 
+      // If the editor isn't in rich mode, the user will get a helpful error
       // message telling them to change modes.
       showItem = true;
     }
@@ -91,8 +91,8 @@ var markdown_here = {
       focusedElem = markdownHere.findFocusedElem(window.document);
 
       if (focusedElem.type === 'textarea') {
-        // Show the context menu item for `textarea`s. If the user clicks it, 
-        // there will be a helpful error message. This will make behaviour more 
+        // Show the context menu item for `textarea`s. If the user clicks it,
+        // there will be a helpful error message. This will make behaviour more
         // consistent with Chrome, and will hopefully help people notice that
         // they're not using the rich editor instead of just wondering why the
         // menu item just isn't showing up.
@@ -122,8 +122,7 @@ var markdown_here = {
   // The rendering service provided to the content script.
   // See the comment in markdown-render.js for why we do this.
   markdownRender: function(targetDocument, html, callback) {
-    var markdownHereCss, markdownHereSyntaxCss, markdownRender = {}, hljs = {}, 
-        marked = {}, htmlToText = {}, optionsStore = {};
+    var markdownRender = {}, hljs = {}, marked = {}, htmlToText = {}, optionsStore = {};
 
     Components.utils.import('resource://common/markdown-render.js', markdownRender);
     Components.utils.import('resource://common/marked.js', marked);
@@ -132,40 +131,15 @@ var markdown_here = {
     Components.utils.import('resource://common/options-store.js', optionsStore);
 
     optionsStore.OptionsStore.get(function(prefs) {
-      var markdownHereCss, markdownHereSyntaxCss;
-
-      markdownHereCss = prefs['markdown-here-css'];
-      markdownHereSyntaxCss = prefs['markdown-here-syntax-css'];
-
-      var xhr = new XMLHttpRequest();
-      xhr.overrideMimeType('text/css');
-
-      if (!markdownHereCss) {
-        // Get the default value.
-        xhr.open('GET', 'resource://common/default.css', false);
-        // synchronous
-        xhr.send(); 
-        // Assume 200 OK
-        markdownHereCss = xhr.responseText;
-      }
-
-      if (!markdownHereSyntaxCss) {
-        // Get the default value.        
-        xhr.open('GET', 'resource://common/highlightjs/styles/github.css', false);
-        // synchronous
-        xhr.send(); 
-        // Assume 200 OK
-        markdownHereSyntaxCss = xhr.responseText;
-      }
-
       callback(
         markdownRender.markdownRender(
-          htmlToText.htmlToText, 
+          prefs,
+          htmlToText.htmlToText,
           marked.marked,
-          hljs.hljs, 
+          hljs.hljs,
           html,
-          targetDocument), 
-        markdownHereCss + markdownHereSyntaxCss);
+          targetDocument),
+        prefs['markdown-here-css'] + prefs['markdown-here-syntax-css']);
     });
   }
 };

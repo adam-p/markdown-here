@@ -170,6 +170,12 @@ MIT License : http://adampritchard.mit-license.org/
         font-family: Consolas, Inconsolata, Courier, monospace; 
       }
 
+      input[type="text"] {
+        width: 90%;
+        font-size: 1em;
+        background-color: rgba(212, 162, 250, 0.35);
+      }
+
       #changelist {
         height: 25em;
         overflow-y: scroll;
@@ -260,6 +266,39 @@ MIT License : http://adampritchard.mit-license.org/
 
       </div>
 
+      <div class="horiz-groupset">
+
+        <div class="control-group">
+          <div class="section-title">
+            TeX Mathematical Formulae Support
+          </div>
+
+          <div id="notes">
+            <strong>Privacy warning</strong>: 
+            <ul>
+              <li>The context menu item does not work on this page. Use the "Markdown Toggle" button instead.</li>
+              <li>Changes are automatically saved and synchronized.</li>
+              <li>The syntax highlighting styles are applied after the primary styling, and so take precedence.</li>
+              <li>Some email editors and browsers impose their own styles. Those may not be apparent here.</li>
+              <li>Some of the syntax highlighting themes originally had background images that have been removed.</li>
+            </ul>
+          </div>
+
+          <div>
+            <input type="checkbox" id="math-enable"/>
+            <input type="text" id="math-edit"/>
+          </div>
+
+          <div>
+            <button id="math-reset-button" class="button purple">
+              Reset to Default
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
     </div>
 
     <div id="changelist-container">
@@ -287,11 +326,6 @@ function syntaxHighlighting() {<br>
 }<br>
 ```<br>
 <br>
-```<br>
-code block
-with no highlighting
-```<br>
-<br>
 * plain<br>
 * *emphasis*<br>
 * **strong emphasis**<br>
@@ -304,6 +338,9 @@ with no highlighting
 <br>
 > Block quote.&nbsp; <br>
 > *With* **some** `markdown`.<br>
+<br>
+If **TeX Math** support is turned, this is the quadratic equation:&nbsp;<br>
+$-b \pm \sqrt{b^2 - 4ac} \over 2a$<br>
 <br>
 # Header 1<br>
 ## Header 2<br>
@@ -339,6 +376,11 @@ Horizontal rule<br>
     &lt;td>Row&lt;/td><br>
   &lt;/tr><br>
 &lt;/table><br>
+<br>
+```<br>
+code block<br>
+with no highlighting<br>
+```<br>
 <br>
 </div>
 
