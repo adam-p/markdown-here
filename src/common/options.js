@@ -138,14 +138,13 @@ function checkChange() {
           // Show the "saved changes" message, unless this is the first save 
           // (i.e., the one when the user first opens the options window).
           if (!firstSave) {
-            savedMsg.style.webkitTransition = 'opacity 100ms';
-            savedMsg.style.MozTransition = 'opacity 100ms';
-            savedMsg.style.opacity = '90';
+            savedMsg.classList.add('showing');
+
             // Hide it a bit later.
+            // Alternatively, could use the 'transitionend' event. But this way
+            // we control how long it shows.
             setTimeout(function() {
-              savedMsg.style.webkitTransition = 'opacity 1000ms';
-              savedMsg.style.MozTransition = 'opacity 1000ms';
-              savedMsg.style.opacity = '0';
+              savedMsg.classList.remove('showing');
             }, 2000);
           }
           firstSave = false;

@@ -97,7 +97,17 @@ MIT License : http://adampritchard.mit-license.org/
         background: -webkit-linear-gradient(right top, rgb(207,182,227) 0%, rgb(255,255,255) 100%);
         background: -moz-linear-gradient(225deg, rgb(207,182,227), rgb(255,255,255));
         color: #2C0847;
+        -webkit-transition: opacity 1000ms;
+        -moz-transition: opacity 1000ms;
+        transition: opacity 1000ms;
         opacity: 0;
+      }
+
+      #saved-msg.showing {
+        -webkit-transition: opacity 100ms;
+        -moz-transition: opacity 100ms;
+        transition: opacity 100ms;
+        opacity: 90;
       }
 
       /* button styling from http://webdesignerwall.com/tutorials/css3-gradient-buttons */
