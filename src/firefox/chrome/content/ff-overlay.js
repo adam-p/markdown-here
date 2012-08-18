@@ -123,40 +123,53 @@ var markdown_here = {
   // See the comment in markdown-render.js for why we do this.
   markdownRender: function(targetDocument, html, callback) {
     var markdownHereCss, markdownHereSyntaxCss, markdownRender = {}, hljs = {}, 
-        marked = {}, htmlToText = {};
+        marked = {}, htmlToText = {}, optionsStore = {};
 
     Components.utils.import('resource://common/markdown-render.js', markdownRender);
     Components.utils.import('resource://common/marked.js', marked);
     Components.utils.import('resource://common/jsHtmlToText.js', htmlToText);
     this.scriptLoader.loadSubScript('resource://common/highlightjs/highlight.js', hljs);
+    Components.utils.import('resource://common/options-store.js', optionsStore);
 
-    var xhr = new XMLHttpRequest();
-    xhr.overrideMimeType('text/plain');
+    optionsStore.OptionsStore.get(function(prefs) {
+      var markdownHereCss, markdownHereSyntaxCss;
 
-    xhr.open('GET', 'resource://common/default.css', false);
-    // synchronous
-    xhr.send(); 
-    // Assume 200 OK
-    markdownHereCss = xhr.responseText;
+      markdownHereCss = prefs['markdown-here-css'];
+      markdownHereSyntaxCss = prefs['markdown-here-syntax-css'];
 
-    xhr.open('GET', 'resource://common/highlightjs/styles/github.css', false);
-    // synchronous
-    xhr.send(); 
-    // Assume 200 OK
-    markdownHereSyntaxCss = xhr.responseText;
+      var xhr = new XMLHttpRequest();
+      xhr.overrideMimeType('text/css');
 
-    callback(
-      markdownRender.markdownRender(
-        htmlToText.htmlToText, 
-        marked.marked,
-        hljs.hljs, 
-        html,
-        targetDocument), 
-      markdownHereCss + markdownHereSyntaxCss);
+      if (!markdownHereCss) {
+        // Get the default value.
+        xhr.open('GET', 'resource://common/default.css', false);
+        // synchronous
+        xhr.send(); 
+        // Assume 200 OK
+        markdownHereCss = xhr.responseText;
+      }
+
+      if (!markdownHereSyntaxCss) {
+        // Get the default value.        
+        xhr.open('GET', 'resource://common/highlightjs/styles/github.css', false);
+        // synchronous
+        xhr.send(); 
+        // Assume 200 OK
+        markdownHereSyntaxCss = xhr.responseText;
+      }
+
+      callback(
+        markdownRender.markdownRender(
+          htmlToText.htmlToText, 
+          marked.marked,
+          hljs.hljs, 
+          html,
+          targetDocument), 
+        markdownHereCss + markdownHereSyntaxCss);
+    });
   }
 };
 
 window.addEventListener('load', function () {
   markdown_here.onLoad();
 }, false);
-

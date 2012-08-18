@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE overlay SYSTEM "chrome://markdown_here/locale/overlay.dtd">
+
+<overlay id="markdown_here-options-service-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script src="options.js" />
+
+</overlay>

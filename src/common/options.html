@@ -8,6 +8,8 @@ MIT License : http://adampritchard.mit-license.org/
 <html>
 
   <head>
+    <meta charset="utf-8">
+
     <title>Markdown Here Options</title>
 
     <style type="text/css">
@@ -30,9 +32,11 @@ MIT License : http://adampritchard.mit-license.org/
         float: left;
         width: 45%;
         width: -webkit-calc(50% - 40px);
+        width: -moz-calc(50% - 40px);
         width: calc(50% - 40px);
         height: 360px;
         height: -webkit-calc(100% - 40px);
+        height: -moz-calc(100% - 40px);
         height: calc(100% - 40px);
         margin: 10px;
         padding: 10px;
@@ -48,6 +52,7 @@ MIT License : http://adampritchard.mit-license.org/
       .control-group > .stretch {
         height: 295px;
         height: -webkit-calc(100% - 65px);
+        height: -moz-calc(100% - 65px);
         height: calc(100% - 65px);
       }
 
@@ -57,6 +62,7 @@ MIT License : http://adampritchard.mit-license.org/
 
       .stretch > * {
         box-sizing: border-box; 
+        -moz-box-sizing: border-box; 
         position: absolute;
         height: 100%;
         width: 100%;
@@ -89,6 +95,7 @@ MIT License : http://adampritchard.mit-license.org/
         right: 0;
         padding: 1em;
         background: -webkit-linear-gradient(right top, rgb(207,182,227) 0%, rgb(255,255,255) 100%);
+        background: -moz-linear-gradient(225deg, rgb(207,182,227), rgb(255,255,255));
         color: #2C0847;
         opacity: 0;
       }
@@ -117,13 +124,16 @@ MIT License : http://adampritchard.mit-license.org/
         color: #FAF5FC;
         border: solid 1px #2d0f5a;
         background: -webkit-gradient(linear, left top, left bottom, from(#a569d2), to(#874bc3));
+        background: -moz-linear-gradient(270deg, #a569d2, #874bc3);
       }
       .purple:hover {
         background: -webkit-gradient(linear, left top, left bottom, from(#692da5), to(#3c1e78));
+        background: -moz-linear-gradient(270deg, #692da5, #3c1e78);
       }
       .purple:active {
         color: #fcd3a5;
         background: -webkit-gradient(linear, left top, left bottom, from(#874bc3), to(#a569d2));
+        background: -moz-linear-gradient(270deg, #874bc3, #a569d2);
       }
 
       #css-syntax-select {
@@ -138,7 +148,6 @@ MIT License : http://adampritchard.mit-license.org/
       #css-syntax-select > option{
         background-color: inherit;
         font: inherit;
-
       }
 
       footer {
@@ -168,7 +177,7 @@ MIT License : http://adampritchard.mit-license.org/
 
     <div>
       <h1>
-        <img src="../common/images/icon48.png">
+        <img src="images/icon48.png">
         Markdown Here Options
       </h1>
     </div>
@@ -325,11 +334,11 @@ Horizontal rule<br>
 
   </body>
 
-  <script src="../common/jsHtmlToText.js"></script>
-  <script src="../common/marked.js"></script>
-  <script src="../common/highlightjs/highlight.js"></script>
-  <script src="../common/markdown-render.js"></script>
-  <script src="../common/markdown-here.js"></script>
+  <script src="jsHtmlToText.js"></script>
+  <script src="marked.js"></script>
+  <script src="highlightjs/highlight.js"></script>
+  <script src="markdown-render.js"></script>
+  <script src="markdown-here.js"></script>
 
   <script src="options-store.js"></script>
   <script src="options.js"></script>

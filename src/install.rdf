@@ -5,7 +5,7 @@
     <Description about="urn:mozilla:install-manifest">
         <em:type>2</em:type> <!-- 2 : Extension -->
         <em:id>markdown-here@adam.pritchard</em:id>
-        <em:version>2.5.3</em:version>
+        <em:version>2.5.4</em:version>
 
         <em:targetApplication>
             <Description>
@@ -31,6 +31,27 @@
 
         <em:iconURL>resource://common/images/icon128.png</em:iconURL>
         <em:homepageURL>https://github.com/adam-p/markdown-here</em:homepageURL>
+
+        <em:optionsURL>
+            javascript:
+                /* This is a pretty convoluted way of getting a tab to open with
+                   our options page. */
+                var windowMediator = Components.classes['@mozilla.org/appshell/window-mediator;1']
+                                               .getService(Components.interfaces.nsIWindowMediator);
+                var optionsUrl = 'resource://common/options.html';
+                if (navigator.userAgent.indexOf('Thunderbird') >= 0) {
+                    windowMediator.getMostRecentWindow('mail:3pane')
+                                  .document.getElementById('tabmail')
+                                  .openTab('contentTab', {contentPage: optionsUrl});
+                }
+                else {
+                    var win = windowMediator.getMostRecentWindow('navigator:browser');
+                    win.gBrowser.selectedTab = win.gBrowser.addTab(optionsUrl);
+                }
+                /* Close the stub prefs dialog that will have opened. */
+                window.close();
+        </em:optionsURL>
+
 
     </Description>
 </RDF>

@@ -39,7 +39,7 @@ Or go to the "Tools > Add-ons" menu and then search for "Markdown Here".
 
 After installing, make sure to restart Firefox/Thunderbird!
 
-**Note:** It takes up to two weeks for Mozilla to approve changes to the Firefox/Thunderbird extension, so updates (features, fixes) will lag behind what is shown here. You can compare the version number on the [*Markdown Here* Mozilla Add-ons page](https://addons.mozilla.org/en-US/firefox/addon/markdown-here/) against [the changelist](https://github.com/adam-p/markdown-here/blob/master/src/CHANGES.md).
+**Note:** It takes up to two weeks for Mozilla to approve changes to the Firefox/Thunderbird extension, so updates (features, fixes) will lag behind what is shown here. You can compare the version number on the [*Markdown Here* Mozilla Add-ons page](https://addons.mozilla.org/en-US/firefox/addon/markdown-here/) against [the changelist](https://github.com/adam-p/markdown-here/blob/master/src/common/CHANGES.md).
 
 #### Manual/Development
 
@@ -200,7 +200,6 @@ Create a file with a `.zip` extension containing these files and directories:
 
 ```
 manifest.json
-CHANGES.md
 common/
 chrome/
 ```

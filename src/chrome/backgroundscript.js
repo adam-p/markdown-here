@@ -47,7 +47,7 @@ chrome.extension.onRequest.addListener(
       markdownHereSyntaxCss = prefs['markdown-here-syntax-css'];
 
       var xhr = new XMLHttpRequest();
-      xhr.overrideMimeType('text/plain');
+      xhr.overrideMimeType('text/css');
 
       if (!markdownHereCss) {
         // Get the default value.

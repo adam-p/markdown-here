@@ -24,7 +24,7 @@ function onLoad() {
   // Get the available highlight.js styles.
   var xhr = new XMLHttpRequest();
   xhr.overrideMimeType('application/json');
-  xhr.open('GET', '../common/highlightjs/styles/styles.json', false);
+  xhr.open('GET', 'highlightjs/styles/styles.json', false);
   // synchronous
   xhr.send(); 
   // Assume 200 OK
@@ -42,6 +42,14 @@ function onLoad() {
   rawMarkdownIframe.contentDocument.body.contentEditable = true;
   rawMarkdownIframe.contentDocument.body.innerHTML = document.getElementById('sample-markdown').innerHTML;
 
+  // The body of the iframe needs to have a (collapsed) selection range for
+  // Markdown Here to work (simulating focus/cursor).
+  var range = rawMarkdownIframe.contentDocument.createRange();
+  range.setStart(rawMarkdownIframe.contentDocument.body, 0);
+  var sel = rawMarkdownIframe.contentDocument.getSelection();
+  sel.removeAllRanges();
+  sel.addRange(range);
+
   //
   // Restore previously set options (asynchronously)
   //
@@ -56,7 +64,7 @@ function onLoad() {
     xhr.overrideMimeType('text/plain');
 
     // Get the default value.
-    xhr.open('GET', '../common/default.css', false);
+    xhr.open('GET', 'default.css', false);
     // synchronous
     xhr.send(); 
     // Assume 200 OK
@@ -68,7 +76,7 @@ function onLoad() {
 
     if (!markdownHereSyntaxCss) {
       // Get the default value.        
-      xhr.open('GET', '../common/highlightjs/styles/github.css', false);
+      xhr.open('GET', 'highlightjs/styles/github.css', false);
       // synchronous
       xhr.send(); 
       // Assume 200 OK
@@ -131,10 +139,12 @@ function checkChange() {
           // (i.e., the one when the user first opens the options window).
           if (!firstSave) {
             savedMsg.style.webkitTransition = 'opacity 100ms';
+            savedMsg.style.mozTransition = 'opacity 100ms';
             savedMsg.style.opacity = '90';
             // Hide it a bit later.
             setTimeout(function() {
               savedMsg.style.webkitTransition = 'opacity 1000ms';
+              savedMsg.style.mozTransition = 'opacity 1000ms';
               savedMsg.style.opacity = '0';
             }, 2000);
           }
@@ -144,44 +154,43 @@ function checkChange() {
   }
 }
 
-// Helper for rendering.
-function logger() { 
-  console.log.apply(console, arguments); 
-}
-
-// Helper for rendering.
-// This function stolen entirely from contentscript.js
+// This function stolen entirely from contentscript.js and ff-overlay.js
 function requestMarkdownConversion(html, callback) {
-  // Send a request to the add-on script to actually do the rendering.
-  chrome.extension.sendRequest(html, function(response) {
-    callback(response.html, response.css);
-  });
+  if (typeof(chrome) !== 'undefined' && typeof(chrome.extension) !== 'undefined') {
+    // Send a request to the add-on script to actually do the rendering.
+    chrome.extension.sendRequest(html, function(response) {
+      callback(response.html, response.css);
+    });
+  }
+  else {
+    callback(
+      markdownRender(
+        htmlToText, 
+        marked,
+        hljs, 
+        html,
+        rawMarkdownIframe.contentDocument), 
+      cssEdit.value + cssSyntaxEdit.value);
+  }
 }
 
 // Render the sample Markdown.
 function renderMarkdown(postRenderCallback) {
   if (rawMarkdownIframe.contentDocument.querySelector('.markdown-here-wrapper')) {
     // Already rendered.
-    postRenderCallback();
+    if (postRenderCallback) postRenderCallback();
     return;
   }
 
-  // The body of the iframe needs to have a (collapsed) selection range for
-  // Markdown Here to work (simulating focus/cursor).
-  var range = rawMarkdownIframe.contentDocument.createRange();
-  range.setStart(rawMarkdownIframe.contentDocument.body);
-  var sel = rawMarkdownIframe.contentDocument.getSelection();
-  sel.removeAllRanges();
-  sel.addRange(range);
-
   // Begin rendering.
-  markdownHere(rawMarkdownIframe.contentDocument, requestMarkdownConversionInterceptor, logger);
+  markdownHere(rawMarkdownIframe.contentDocument, requestMarkdownConversionInterceptor);
 
   // To figure out when the (asynchronous) rendering is complete -- so we
   // can call the `postRenderCallback` -- we'll intercept the callback used
   // by the rendering service.
 
   function requestMarkdownConversionInterceptor(html, callback) {
+
     function callbackInterceptor() {
       callback.apply(null, arguments);
 
@@ -205,7 +214,7 @@ function updateMarkdownRender() {
   rawMarkdownIframe.style.visibility = 'hidden';
 
   // Unrender
-  markdownHere(rawMarkdownIframe.contentDocument, requestMarkdownConversion, logger);
+  markdownHere(rawMarkdownIframe.contentDocument, requestMarkdownConversion);
 
   // Re-render
   renderMarkdown(function() { 
@@ -215,7 +224,7 @@ function updateMarkdownRender() {
 
 // Toggle the render state of the sample Markdown.
 function markdownToggle() {
-  markdownHere(rawMarkdownIframe.contentDocument, requestMarkdownConversion, logger);
+  markdownHere(rawMarkdownIframe.contentDocument, requestMarkdownConversion);
 }
 document.querySelector('#markdown-toggle-button').addEventListener('click', markdownToggle, false);
 
@@ -241,7 +250,8 @@ function cssSyntaxSelectChange() {
 
   // Get the CSS for the selected theme.
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', '../common/highlightjs/styles/'+selected, false);
+  xhr.overrideMimeType('text/css');
+  xhr.open('GET', 'highlightjs/styles/'+selected, false);
   // synchronous
   xhr.send(); 
   // Assume 200 OK
@@ -254,7 +264,7 @@ function loadChangelist() {
   xhr.overrideMimeType('text/plain');
 
   // Get the default value.
-  xhr.open('GET', '../CHANGES.md', false);
+  xhr.open('GET', 'CHANGES.md', false);
   // synchronous
   xhr.send(); 
   // Assume 200 OK

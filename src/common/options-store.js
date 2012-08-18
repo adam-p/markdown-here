@@ -3,6 +3,9 @@
  * MIT License : http://adampritchard.mit-license.org/
  */
 
+
+;(function() {
+
 /*
  * Chrome storage helper. Gets around the synchronized value size limit.
  * Overall quota limits still apply (or less, but we should stay well within).
@@ -19,28 +22,9 @@
  */
 
 // TODO: Check for errors. See: https://code.google.com/chrome/extensions/dev/storage.html
+// TODO: Store as JSON?
 
-
-var OptionsStore = {
-
-  // Stored string pieces look like: {'key##0': 'the quick ', 'key##1': 'brown fox'}
-  _div: '##',
-
-  // HACK: Using the full length, or length-keylength, gives quota error.
-  // Because 
-  _maxlen: function() {
-    // Note that chrome.storage.sync.QUOTA_BYTES_PER_ITEM is in bytes, but JavaScript
-    // strings are UTF-16, so we need to divide by 2.
-    // Some JS string info: http://rosettacode.org/wiki/String_length#JavaScript
-    if (chrome.storage) {
-      return chrome.storage.sync.QUOTA_BYTES_PER_ITEM / 2;
-    }
-    else {
-      // 2048 is the default value for chrome.storage.sync.QUOTA_BYTES_PER_ITEM, so...
-      return 2048 / 2;
-    }
-
-  },
+var ChromeOptionsStore = {
 
   // The options object will be passed to `callback`
   get: function(callback) {
@@ -99,6 +83,25 @@ var OptionsStore = {
         if (callback) callback();
       });
     });
+  },
+
+  // Stored string pieces look like: {'key##0': 'the quick ', 'key##1': 'brown fox'}
+  _div: '##',
+
+  // HACK: Using the full length, or length-keylength, gives quota error.
+  // Because 
+  _maxlen: function() {
+    // Note that chrome.storage.sync.QUOTA_BYTES_PER_ITEM is in bytes, but JavaScript
+    // strings are UTF-16, so we need to divide by 2.
+    // Some JS string info: http://rosettacode.org/wiki/String_length#JavaScript
+    if (chrome.storage) {
+      return chrome.storage.sync.QUOTA_BYTES_PER_ITEM / 2;
+    }
+    else {
+      // 2048 is the default value for chrome.storage.sync.QUOTA_BYTES_PER_ITEM, so...
+      return 2048 / 2;
+    }
+
   },
 
   _storageGet: function(callback) {
@@ -178,3 +181,95 @@ var OptionsStore = {
     });
   }
 };
+
+/*
+ * Mozilla preferences storage helper
+ */
+
+var MozillaOptionsStore = {
+  
+  get: function(callback) {
+    this._sendRequest({action: 'get'}, callback);
+  },
+
+  set: function(obj, callback) {
+    this._sendRequest({action: 'set', obj: obj}, callback);
+  },
+
+  // This is called both from content and background scripts, and we need vastly
+  // different code in those cases. When calling from a content script, we need 
+  // to make a request to a background service (found in firefox/chrome/content/options.js).
+  // When called from a background script, we're going to access the browser prefs
+  // directly. Unfortunately, this means duplicating some code from the background
+  // service.
+  _sendRequest: function(data, callback) { // analogue of chrome.extension.sendRequest
+    var prefs, prefKeys, prefsObj, request, sender;
+
+    try {
+      prefs = Components.classes['@mozilla.org/preferences-service;1']
+                        .getService(Components.interfaces.nsIPrefService)
+                        .getBranch('extensions.markdown-here.');
+
+      if (data.action === 'get') {
+        prefKeys = prefs.getChildList('');
+        prefsObj = {};
+
+        for (i = 0; i < prefKeys.length; i++) {
+          prefsObj[prefKeys[i]] = JSON.parse(prefs.getCharPref(prefKeys[i]));
+        }
+
+        callback(prefsObj);
+        return;
+      }
+      else if (data.action === 'set') {
+        for (i in data.obj) {
+          prefs.setCharPref(i, JSON.stringify(data.obj[i]));
+        }
+
+        if (callback) callback();
+        return;
+      }
+    }
+    catch (e) {
+      request = document.createTextNode('');
+      request.setUserData('data', data, null);
+      if (callback) {
+        request.setUserData('callback', callback, null);
+
+        document.addEventListener('markdown_here-options-response', function(event) {
+          var node, callback, response;
+          node = event.target;
+          callback = node.getUserData('callback');
+          response = node.getUserData('response');
+
+          document.documentElement.removeChild(node);
+
+          document.removeEventListener('markdown_here-options-response', arguments.callee, false);
+
+          callback(response);
+          return;
+        }, false);
+      }
+      document.documentElement.appendChild(request);
+
+      sender = document.createEvent('HTMLEvents');
+      sender.initEvent('markdown_here-options-query', true, false);
+      request.dispatchEvent(sender);
+    }
+  }
+};
+
+var EXPORTED_SYMBOLS = ['OptionsStore'];
+
+if (typeof(navigator) !== 'undefined' && navigator.userAgent.indexOf('Chrome') >= 0) {
+  this.OptionsStore = ChromeOptionsStore;
+}
+else {
+  this.OptionsStore = MozillaOptionsStore;
+}
+
+this.EXPORTED_SYMBOLS = EXPORTED_SYMBOLS;
+
+}).call(function() {
+  return this || (typeof window !== 'undefined' ? window : global);
+}());
