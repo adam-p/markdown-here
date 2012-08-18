@@ -139,12 +139,12 @@ function checkChange() {
           // (i.e., the one when the user first opens the options window).
           if (!firstSave) {
             savedMsg.style.webkitTransition = 'opacity 100ms';
-            savedMsg.style.mozTransition = 'opacity 100ms';
+            savedMsg.style.MozTransition = 'opacity 100ms';
             savedMsg.style.opacity = '90';
             // Hide it a bit later.
             setTimeout(function() {
               savedMsg.style.webkitTransition = 'opacity 1000ms';
-              savedMsg.style.mozTransition = 'opacity 1000ms';
+              savedMsg.style.MozTransition = 'opacity 1000ms';
               savedMsg.style.opacity = '0';
             }, 2000);
           }
