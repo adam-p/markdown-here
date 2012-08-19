@@ -9,11 +9,12 @@ MIT License : http://adampritchard.mit-license.org/
 
   <head>
     <meta charset="utf-8">
+    <link rel="icon" type="image/png" href="images/icon16.png" />
 
     <title>Markdown Here Options</title>
 
     <style type="text/css">
-      
+
       body {
         font-family: Helvetica, arial, freesans, clean, sans-serif;
       }
@@ -43,6 +44,7 @@ MIT License : http://adampritchard.mit-license.org/
         background-color: #EEE;
         border-radius: 5px;
         box-shadow: 2px 2px 3px rgba(0, 0, 0, .2);
+        overflow-y: auto;
       }
 
       .control-group > * {
@@ -50,10 +52,10 @@ MIT License : http://adampritchard.mit-license.org/
       }
 
       .control-group > .stretch {
-        height: 295px;
-        height: -webkit-calc(100% - 65px);
-        height: -moz-calc(100% - 65px);
-        height: calc(100% - 65px);
+        height: 285px;
+        height: -webkit-calc(100% - 75px);
+        height: -moz-calc(100% - 75px);
+        height: calc(100% - 75px);
       }
 
       .stretch {
@@ -61,8 +63,8 @@ MIT License : http://adampritchard.mit-license.org/
       }
 
       .stretch > * {
-        box-sizing: border-box; 
-        -moz-box-sizing: border-box; 
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
         position: absolute;
         height: 100%;
         width: 100%;
@@ -75,7 +77,7 @@ MIT License : http://adampritchard.mit-license.org/
       }
 
       .iframe-container {
-        background-color: #FFF;        
+        background-color: #FFF;
       }
 
       #notes {
@@ -167,7 +169,7 @@ MIT License : http://adampritchard.mit-license.org/
       }
 
       textarea {
-        font-family: Consolas, Inconsolata, Courier, monospace; 
+        font-family: Consolas, Inconsolata, Courier, monospace;
       }
 
       input[type="text"] {
@@ -224,7 +226,7 @@ MIT License : http://adampritchard.mit-license.org/
             <textarea id="css-syntax-edit" wrap="off"></textarea>
           </div>
           <div>
-            Theme: 
+            Theme:
             <select class="purple" id="css-syntax-select"></select>
           </div>
         </div>
@@ -273,17 +275,6 @@ MIT License : http://adampritchard.mit-license.org/
             TeX Mathematical Formulae Support
           </div>
 
-          <div id="notes">
-            <strong>Privacy warning</strong>: 
-            <ul>
-              <li>The context menu item does not work on this page. Use the "Markdown Toggle" button instead.</li>
-              <li>Changes are automatically saved and synchronized.</li>
-              <li>The syntax highlighting styles are applied after the primary styling, and so take precedence.</li>
-              <li>Some email editors and browsers impose their own styles. Those may not be apparent here.</li>
-              <li>Some of the syntax highlighting themes originally had background images that have been removed.</li>
-            </ul>
-          </div>
-
           <div>
             <input type="checkbox" id="math-enable"/>
             <input type="text" id="math-edit"/>
@@ -293,6 +284,46 @@ MIT License : http://adampritchard.mit-license.org/
             <button id="math-reset-button" class="button purple">
               Reset to Default
             </button>
+          </div>
+
+          <div id="notes">
+            <p>
+            <strong>Privacy Issues</strong>:
+            <ul>
+              <li>
+                To generate the image for the formula, a request is sent to Google. That effectively means that you are sharing your formula with Google. It also means that recipients of your message will be making a request to Google to have the image rendered. That's why this option is disabled by default.
+              </li>
+              <li>
+                If you customize the formula rendering tag, you should use a secure (https://) path. Not all rendering services provide a secure option.
+              </li>
+            </ul>
+
+            <p>
+            <strong>Customization and Use</strong>:
+            <ul>
+              <li>
+                If this feature is enabled, text between dollar signs -- <code>$</code> -- will be interpreted as mathematical formulae. For example, <code>$\Delta$</code> would be rendered as a delta symbol.
+              </li>
+              <li>
+                For render customization options, see the <a href="https://developers.google.com/chart/infographics/docs/formulas" target="_blank">Google Charts documentation</a> for this service.
+              </li>
+              <li>
+                A good resource for creating TeX formulae is the <a href="http://www.codecogs.com/latex/about.php" target="_blank">CodeCogs Equation Editor</a>.
+              </li>
+              <li>
+                Formulae are rendered to images, so email recipients will have to enable images to be shown to see the rendering.
+              </li>
+              <li>
+                If you customize the rendering tag, you can (and should) use either or both of <code>{mathcode}</code> and <code>{urlmathcode}</code> as placeholders.
+                <ul>
+                  <li><code>{mathcode}</code>: The text between the <code>$</code> symbols -- i.e., the raw TeX formula; like <code>\Delta</code>.</li>
+                  <li><code>{urlmathcode}</code>: The URL-encoded form of the TeX formula; like <code>%5CDelta</code>.</li>
+                </ul>
+              </li>
+              <li>
+                If you customize the <code>&lt;img&gt;</code> tag, you should include an <code>alt</code> attribute that has as human-readable a value as possible, like <code>{mathcode}</code>. This value of this attribute will be used for the plaintext version of the email (when sent from Gmail and Thunderbird), and used by screen readers for sight-impaired recipients.
+              </li>
+            </ul>
           </div>
 
         </div>

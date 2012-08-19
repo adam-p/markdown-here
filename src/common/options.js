@@ -3,12 +3,12 @@
  * MIT License : http://adampritchard.mit-license.org/
  */
 
-/* 
+/*
  * Main script file for the options page.
  */
 
-var cssEdit, cssSyntaxEdit, cssSyntaxSelect, rawMarkdownIframe, savedMsg, 
-    mathEnable, mathEdit, defaultCss = '';
+var cssEdit, cssSyntaxEdit, cssSyntaxSelect, rawMarkdownIframe, savedMsg,
+    mathEnable, mathEdit;
 
 function onLoad() {
   // Set up our control references.
@@ -29,7 +29,7 @@ function onLoad() {
   xhr.overrideMimeType('application/json');
   xhr.open('GET', 'highlightjs/styles/styles.json', false);
   // synchronous
-  xhr.send(); 
+  xhr.send();
   // Assume 200 OK
   var syntaxStyles = JSON.parse(xhr.responseText);
   for (var name in syntaxStyles) {
@@ -72,7 +72,7 @@ function onLoad() {
   });
 
   // Load the changelist section
-  
+
   loadChangelist();
 
   if (location.hash === '#changelist') {
@@ -83,7 +83,7 @@ function onLoad() {
 }
 document.addEventListener('DOMContentLoaded', onLoad, false);
 
-// If the CSS changes and the Markdown compose box is rendered, update the 
+// If the CSS changes and the Markdown compose box is rendered, update the
 // rendering by toggling twice. If the compose box is not rendered, do nothing.
 // Groups changes together rather than on every keystroke.
 var lastOptions = '';
@@ -95,12 +95,12 @@ function checkChange() {
   if (newOptions !== lastOptions) {
     // CSS has changed.
     lastOptions = newOptions;
-    lastChangeTime = new Date();    
+    lastChangeTime = new Date();
   }
   else {
     // No change since the last check.
     // There's a delicate balance to choosing this apply/save-change timeout value.
-    // We want the user to see the effects of their change quite quickly, but 
+    // We want the user to see the effects of their change quite quickly, but
     // we don't want to spam our saves (because there are quota limits). But we
     // have to save before we can re-render (the rendering using the saved values).
     if (lastChangeTime && (new Date() - lastChangeTime) > 400) {
@@ -109,7 +109,7 @@ function checkChange() {
 
       OptionsStore.set(
         {
-          'markdown-here-css': cssEdit.value, 
+          'markdown-here-css': cssEdit.value,
           'markdown-here-syntax-css': cssSyntaxEdit.value,
           'markdown-here-math-enabled': mathEnable.checked,
           'markdown-here-math-value': mathEdit.value
@@ -117,7 +117,7 @@ function checkChange() {
         function() {
           updateMarkdownRender();
 
-          // Show the "saved changes" message, unless this is the first save 
+          // Show the "saved changes" message, unless this is the first save
           // (i.e., the one when the user first opens the options window).
           if (!firstSave) {
             savedMsg.classList.add('showing');
@@ -148,11 +148,11 @@ function requestMarkdownConversion(html, callback) {
       callback(
         markdownRender(
           prefs,
-          htmlToText, 
+          htmlToText,
           marked,
-          hljs, 
+          hljs,
           html,
-          rawMarkdownIframe.contentDocument), 
+          rawMarkdownIframe.contentDocument),
         (prefs['markdown-here-css'] + prefs['markdown-here-syntax-css']));
     });
   }
@@ -201,8 +201,8 @@ function updateMarkdownRender() {
   markdownHere(rawMarkdownIframe.contentDocument, requestMarkdownConversion);
 
   // Re-render
-  renderMarkdown(function() { 
-    rawMarkdownIframe.style.visibility = 'visible'; 
+  renderMarkdown(function() {
+    rawMarkdownIframe.style.visibility = 'visible';
   });
 }
 
@@ -214,9 +214,18 @@ document.querySelector('#markdown-toggle-button').addEventListener('click', mark
 
 // Reset the main CSS to default.
 function resetCssEdit() {
-  cssEdit.value = defaultCss;
+  var xhr = new XMLHttpRequest();
+  xhr.overrideMimeType('text/css');
+
+  // Get the default value.
+  xhr.open('GET', OptionsStore.defaults['markdown-here-css'], false);
+  // synchronous
+  xhr.send();
+  // Assume 200 OK
+
+  cssEdit.value = xhr.responseText;
 }
-document.querySelector('#reset-button').addEventListener('click', resetCssEdit, false);
+document.getElementById('reset-button').addEventListener('click', resetCssEdit, false);
 
 // The syntax hightlighting CSS combo-box selection changed.
 function cssSyntaxSelectChange() {
@@ -237,7 +246,7 @@ function cssSyntaxSelectChange() {
   xhr.overrideMimeType('text/css');
   xhr.open('GET', 'highlightjs/styles/'+selected, false);
   // synchronous
-  xhr.send(); 
+  xhr.send();
   // Assume 200 OK
 
   cssSyntaxEdit.value = xhr.responseText;
@@ -250,7 +259,7 @@ function loadChangelist() {
   // Get the default value.
   xhr.open('GET', 'CHANGES.md', false);
   // synchronous
-  xhr.send(); 
+  xhr.send();
   // Assume 200 OK
   var changes = xhr.responseText;
 
@@ -263,3 +272,9 @@ function loadChangelist() {
 
   document.querySelector('#changelist').innerHTML = changes;
 }
+
+// Reset the math img tag template to default.
+function resetMathEdit() {
+  mathEdit.value = OptionsStore.defaults['markdown-here-math-value'];
+}
+document.getElementById('math-reset-button').addEventListener('click', resetMathEdit, false);

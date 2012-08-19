@@ -15,11 +15,11 @@
 
 ;(function() {
 
-  /** 
+  /**
    Using the functionality provided by the functions htmlToText and markdownToHtml,
    render html into pretty text.
-   @param targetDocument  The document object where the action is taking place. 
-                          It will be used to create elements, but those elements 
+   @param targetDocument  The document object where the action is taking place.
+                          It will be used to create elements, but those elements
                           will not be inserted into the DOM.
    */
   function markdownRender(userprefs, htmlToText, markdownToHtml, syntaxHighlighter, html, targetDocument) {
@@ -28,13 +28,13 @@
     // We need to tweak the html-to-text processing to get the results we want.
     function tagReplacement(text) {
 
-      // Historical note: At one time we kept lot of stuff intact: <b>, <i>, 
+      // Historical note: At one time we kept lot of stuff intact: <b>, <i>,
       // <font>, <span>-with-style-attr, <h1>, and so on. This was nice, because
       // it let users do some rich-edit-control formatting that would be retained
       // when rendering.
-      // But it was a pain to get/keep working properly in Yahoo mail, and it 
-      // introduced issue #18. So I tore out the feature, and now we 
-      // only keep a few probably-not-problematic tags. 
+      // But it was a pain to get/keep working properly in Yahoo mail, and it
+      // introduced issue #18. So I tore out the feature, and now we
+      // only keep a few probably-not-problematic tags.
 
       // The default behaviour for `htmlToText` is to strip out tags (and their
       // inner text/html) that it doesn't expect/want. But we want some tag blocks
@@ -44,7 +44,7 @@
       // Try to leave intact the line that Gmail adds that says:
       //   On such-a-date, such-a-person <email addy> wrote:
       text = text.replace(
-                    /&lt;<a (href="mailto:[^>]+)>([^<]*)<\/a>&gt;/ig, 
+                    /&lt;<a (href="mailto:[^>]+)>([^<]*)<\/a>&gt;/ig,
                     '&lt;&lt;a $1&gt;$2&lt;\/a&gt;&gt;');
 
       // It's a deviation from Markdown, but we'd like to leave any rendered
@@ -72,7 +72,7 @@
       // If `ifNotHasString` is non-null, tags that contain that string will not
       // be matched. Note that `ifNotHasString` will be used in a regex.
       function excludeTagBlocks(tagName, text, wrapInPara, ifHasAttribute, ifNotHasString) {
-        var depth, startIndex, openIndex, closeIndex, currentOpenIndex, 
+        var depth, startIndex, openIndex, closeIndex, currentOpenIndex,
           openTagRegex, closeTagRegex, remainderText, closeTagLength, regexFiller;
 
         regexFiller = ifNotHasString ? '(((?!'+ifNotHasString+')[^>])*)' : '[^>]*';
@@ -89,7 +89,7 @@
         startIndex = 0;
 
         while (true) {
-          remainderText = text.slice(startIndex); 
+          remainderText = text.slice(startIndex);
 
           openIndex = remainderText.search(openTagRegex);
           closeIndex = remainderText.search(closeTagRegex);
@@ -98,7 +98,7 @@
             break;
           }
 
-          if (closeIndex < 0 || (openIndex >= 0 && openIndex < closeIndex)) { 
+          if (closeIndex < 0 || (openIndex >= 0 && openIndex < closeIndex)) {
             // Process an open tag next.
 
             // Make the index relative to the beginning of the string.
@@ -112,7 +112,7 @@
             startIndex = openIndex + 1;
             depth += 1;
           }
-          else { 
+          else {
             // Process a close tag next.
 
             if (depth > 0) {
@@ -122,12 +122,12 @@
               if (depth === 1) {
                 // Not a nested tag. Time to escape.
                 // Because we've mangled the opening and closing tags, we need to
-                // put around them so that they don't get mashed together with the 
+                // put around them so that they don't get mashed together with the
                 // preceeding and following Markdown.
-                
+
                 closeTagLength = ('</'+tagName+'>').length;
 
-                text = 
+                text =
                   text.slice(0, currentOpenIndex) +
                   (wrapInPara ? '<p/>' : '') +
                   addClassToAllTags('markdown-here-exclude', text.slice(currentOpenIndex, closeIndex+closeTagLength))
@@ -135,7 +135,7 @@
                   (wrapInPara ? '<p/>' : '') +
                   text.slice(closeIndex+closeTagLength);
 
-                // Start from the beginning again. The length of the string has 
+                // Start from the beginning again. The length of the string has
                 // changed (so our indexes are meaningless), and we'll only find
                 // unescaped/unprocessed tags of interest anyway.
                 startIndex = 0;
@@ -143,7 +143,7 @@
               else {
                 startIndex = closeIndex + 1;
               }
-              
+
               depth -= 1;
             }
             else {
@@ -162,10 +162,10 @@
       function addClassToAllTags(className, text) {
         return text
           .replace(
-            /<(\w+\b)(([^>]*)(class=("|')([^>]*?)\5)([^>]*))>/ig, 
+            /<(\w+\b)(([^>]*)(class=("|')([^>]*?)\5)([^>]*))>/ig,
             '<$1$3class="$6 ' + className + '"$7>')
           .replace(
-            /<(\w+\b)(((?!class)[^>])*)>/ig, 
+            /<(\w+\b)(((?!class)[^>])*)>/ig,
             '<$1 class="' + className + '"$2>');
       }
     }
@@ -174,8 +174,8 @@
 
     function mathify(mathcode) {
       return userprefs['markdown-here-math-value']
-              .replace('{mathcode}', mathcode)
-              .replace('{urlmathcode}', encodeURIComponent(mathcode));
+              .replace(/\{mathcode\}/ig, mathcode)
+              .replace(/\{urlmathcode\}/ig, encodeURIComponent(mathcode));
     }
 
     markedOptions = {
@@ -183,11 +183,11 @@
       pedantic: false,
       sanitize: false,
       math: userprefs['markdown-here-math-enabled'] ? mathify : null,
-      highlight: function(codeText, codeLanguage) {                 
+      highlight: function(codeText, codeLanguage) {
                     return highlightSyntax(
-                              targetDocument, 
-                              syntaxHighlighter, 
-                              codeText, 
+                              targetDocument,
+                              syntaxHighlighter,
+                              codeText,
                               codeLanguage); }
       };
 
@@ -195,12 +195,12 @@
   }
 
   // Using `syntaxHighlighter`, highlight the code in `codeText` that is of
-  // language `codeLanguage` (may be falsy). 
+  // language `codeLanguage` (may be falsy).
   // `syntaxHighlighter` is expected to behave like (i.e., to be) highlight.js.
   function highlightSyntax(targetDocument, syntaxHighlighter, codeText, codeLanguage) {
     var codeElem, preElem, textNode;
 
-    // highlight.js requires a `<code>` element to be passed in that has a 
+    // highlight.js requires a `<code>` element to be passed in that has a
     // `<pre>` parent element.
 
     preElem = targetDocument.createElement('pre');

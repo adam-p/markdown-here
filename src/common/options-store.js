@@ -16,7 +16,7 @@
  * Long strings are broken into pieces and stored in separate fields. They are
  * recombined when retrieved.
  *
- * Note that we fall back to (unsynced) localStorage if chrome.storage isn't 
+ * Note that we fall back to (unsynced) localStorage if chrome.storage isn't
  * available. This is the case in Chromium v18 (currently the latest available
  * via Ubuntu repo).
  */
@@ -57,7 +57,7 @@ var ChromeOptionsStore = {
     });
   },
 
-  // Store `obj`, splitting long strings when necessary. `callback` will be 
+  // Store `obj`, splitting long strings when necessary. `callback` will be
   // called (with no arguments) when complete.
   set: function(obj, callback) {
     var that = this;
@@ -85,11 +85,19 @@ var ChromeOptionsStore = {
     });
   },
 
+  // The default values or URLs for our various options.
+  defaults: {
+    'markdown-here-css': '/common/default.css',
+    'markdown-here-syntax-css': '/common/highlightjs/styles/github.css',
+    'markdown-here-math-enabled': false,
+    'markdown-here-math-value': '<img src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}" alt="{mathcode}">'
+  },
+
   // Stored string pieces look like: {'key##0': 'the quick ', 'key##1': 'brown fox'}
   _div: '##',
 
   // HACK: Using the full length, or length-keylength, gives quota error.
-  // Because 
+  // Because
   _maxlen: function() {
     // Note that chrome.storage.sync.QUOTA_BYTES_PER_ITEM is in bytes, but JavaScript
     // strings are UTF-16, so we need to divide by 2.
@@ -154,7 +162,7 @@ var ChromeOptionsStore = {
         }
         callback();
       });
-      return;      
+      return;
     }
   },
 
@@ -179,44 +187,6 @@ var ChromeOptionsStore = {
         if (callback) callback();
       }
     });
-  },
-
-  _fillDefaults: function(prefsObj) {
-    var xhr, filledPrefsObj = prefsObj;
-
-    if (typeof(prefsObj['markdown-here-css']) === 'undefined') {
-      xhr = new XMLHttpRequest();
-      xhr.overrideMimeType('text/css');
-
-      // Get the default value.
-      xhr.open('GET', '/common/default.css', false);
-      // synchronous
-      xhr.send();
-      // Assume 200 OK
-      filledPrefsObj['markdown-here-css'] = xhr.responseText;
-    }
-
-    if (typeof(prefsObj['markdown-here-syntax-css']) === 'undefined') {
-      xhr = new XMLHttpRequest();
-      xhr.overrideMimeType('text/css');
-
-      // Get the default value.
-      xhr.open('GET', '/common/highlightjs/styles/github.css', false);
-      // synchronous
-      xhr.send();
-      // Assume 200 OK
-      filledPrefsObj['markdown-here-syntax-css'] = xhr.responseText;
-    }
-
-    if (typeof(prefsObj['markdown-here-math-enabled']) === 'undefined') {
-      filledPrefsObj['markdown-here-math-enabled'] = false;
-    }
-
-    if (typeof(prefsObj['markdown-here-math-value']) === 'undefined') {
-      filledPrefsObj['markdown-here-math-value'] = '<img alt="{mathcode}" src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}">';
-    }
-
-    return filledPrefsObj;
   }
 };
 
@@ -225,7 +195,7 @@ var ChromeOptionsStore = {
  */
 
 var MozillaOptionsStore = {
-  
+
   get: function(callback) {
     var that = this;
     this._sendRequest({action: 'get'}, function(prefsObj) {
@@ -237,8 +207,16 @@ var MozillaOptionsStore = {
     this._sendRequest({action: 'set', obj: obj}, callback);
   },
 
+  // The default values or URLs for our various options.
+  defaults: {
+    'markdown-here-css': 'resource://common/default.css',
+    'markdown-here-syntax-css': 'resource://common/highlightjs/styles/github.css',
+    'markdown-here-math-enabled': false,
+    'markdown-here-math-value': '<img src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}" alt="{mathcode}">'
+  },
+
   // This is called both from content and background scripts, and we need vastly
-  // different code in those cases. When calling from a content script, we need 
+  // different code in those cases. When calling from a content script, we need
   // to make a request to a background service (found in firefox/chrome/content/options.js).
   // When called from a background script, we're going to access the browser prefs
   // directly. Unfortunately, this means duplicating some code from the background
@@ -297,44 +275,6 @@ var MozillaOptionsStore = {
       sender.initEvent('markdown_here-options-query', true, false);
       request.dispatchEvent(sender);
     }
-  },
-
-  _fillDefaults: function(prefsObj) {
-    var xhr, filledPrefsObj = prefsObj;
-
-    if (typeof(prefsObj['markdown-here-css']) === 'undefined') {
-      xhr = new XMLHttpRequest();
-      xhr.overrideMimeType('text/css');
-
-      // Get the default value.
-      xhr.open('GET', 'resource://common/default.css', false);
-      // synchronous
-      xhr.send();
-      // Assume 200 OK
-      filledPrefsObj['markdown-here-css'] = xhr.responseText;
-    }
-
-    if (typeof(prefsObj['markdown-here-syntax-css']) === 'undefined') {
-      xhr = new XMLHttpRequest();
-      xhr.overrideMimeType('text/css');
-
-      // Get the default value.
-      xhr.open('GET', 'resource://common/highlightjs/styles/github.css', false);
-      // synchronous
-      xhr.send();
-      // Assume 200 OK
-      filledPrefsObj['markdown-here-syntax-css'] = xhr.responseText;
-    }
-
-    if (typeof(prefsObj['markdown-here-math-enabled']) === 'undefined') {
-      filledPrefsObj['markdown-here-math-enabled'] = false;
-    }
-
-    if (typeof(prefsObj['markdown-here-math-value']) === 'undefined') {
-      filledPrefsObj['markdown-here-math-value'] = '<img alt="{mathcode}" src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}">';
-    }
-
-    return filledPrefsObj;
   }
 };
 
@@ -344,6 +284,44 @@ if (typeof(navigator) !== 'undefined' && navigator.userAgent.indexOf('Chrome') >
 else {
   this.OptionsStore = MozillaOptionsStore;
 }
+
+this.OptionsStore._fillDefaults = function(prefsObj) {
+  var xhr, filledPrefsObj = prefsObj;
+
+  if (typeof(prefsObj['markdown-here-css']) === 'undefined') {
+    xhr = new XMLHttpRequest();
+    xhr.overrideMimeType('text/css');
+
+    // Get the default value.
+    xhr.open('GET', this.defaults['markdown-here-css'], false);
+    // synchronous
+    xhr.send();
+    // Assume 200 OK
+    filledPrefsObj['markdown-here-css'] = xhr.responseText;
+  }
+
+  if (typeof(prefsObj['markdown-here-syntax-css']) === 'undefined') {
+    xhr = new XMLHttpRequest();
+    xhr.overrideMimeType('text/css');
+
+    // Get the default value.
+    xhr.open('GET', this.defaults['markdown-here-syntax-css'], false);
+    // synchronous
+    xhr.send();
+    // Assume 200 OK
+    filledPrefsObj['markdown-here-syntax-css'] = xhr.responseText;
+  }
+
+  if (typeof(prefsObj['markdown-here-math-enabled']) === 'undefined') {
+    filledPrefsObj['markdown-here-math-enabled'] = this.defaults['markdown-here-math-enabled'];
+  }
+
+  if (typeof(prefsObj['markdown-here-math-value']) === 'undefined') {
+    filledPrefsObj['markdown-here-math-value'] = this.defaults['markdown-here-math-value'];
+  }
+
+  return filledPrefsObj;
+};
 
 var EXPORTED_SYMBOLS = ['OptionsStore'];
 this.EXPORTED_SYMBOLS = EXPORTED_SYMBOLS;
