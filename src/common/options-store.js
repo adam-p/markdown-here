@@ -18,11 +18,11 @@
  *
  * Note that we fall back to (unsynced) localStorage if chrome.storage isn't
  * available. This is the case in Chromium v18 (currently the latest available
- * via Ubuntu repo).
+ * via Ubuntu repo). Part of the reason we JSON-encode values is to get around
+ * the fact that you can only store strings with localStorage.
  */
 
 // TODO: Check for errors. See: https://code.google.com/chrome/extensions/dev/storage.html
-// TODO: Store as JSON?
 
 var ChromeOptionsStore = {
 
@@ -31,7 +31,8 @@ var ChromeOptionsStore = {
     var that = this;
 
     this._storageGet(function(sync) {
-      // Process the object, extracting divided entries.
+
+      // Process the object, recombining divided entries.
       var tempobj = {}, finalobj = {};
       for (var key in sync) {
         var val = sync[key];
@@ -64,6 +65,8 @@ var ChromeOptionsStore = {
 
     // First clear out existing entries.
     this._clearExisting(obj, function() {
+
+      // Split long string entries into pieces, so we don't exceed the limit.
       var finalobj = {};
       for (var key in obj) {
         var val = obj[key];
@@ -114,7 +117,19 @@ var ChromeOptionsStore = {
 
   _storageGet: function(callback) {
     if (chrome.storage) {
-      chrome.storage.sync.get(null, callback);
+      chrome.storage.sync.get(null, function(obj) {
+        var key;
+        for (key in obj) {
+          // Older settings aren't JSON-encoded, so they'll throw an exception.
+          try {
+            obj[key] = JSON.parse(obj[key]);
+          }
+          catch (e) {
+            // do nothing, leave the value as-is
+          }
+        }
+        callback(obj);
+      });
       return;
     }
     else {
@@ -122,7 +137,13 @@ var ChromeOptionsStore = {
       setTimeout(function() {
         var i, obj = {};
         for (i = 0; i < localStorage.length; i++) {
-          obj[localStorage.key(i)] = localStorage.getItem(localStorage.key(i));
+          // Older settings aren't JSON-encoded, so they'll throw an exception.
+          try {
+            obj[localStorage.key(i)] = JSON.parse(localStorage.getItem(localStorage.key(i)));
+          }
+          catch (e) {
+            obj[localStorage.key(i)] = localStorage.getItem(localStorage.key(i));
+          }
         }
         callback(obj);
       });
@@ -131,16 +152,21 @@ var ChromeOptionsStore = {
   },
 
   _storageSet: function(obj, callback) {
+    var key, finalobj = {};
+    for (key in obj) {
+      finalobj[key] = JSON.stringify(obj[key]);
+    }
+
     if (chrome.storage) {
-      chrome.storage.sync.set(obj, callback);
+      chrome.storage.sync.set(finalobj, callback);
       return;
     }
     else {
       // Make this actually an async call.
       setTimeout(function() {
         var key;
-        for (key in obj) {
-          localStorage.setItem(key, obj[key]);
+        for (key in finalobj) {
+          localStorage.setItem(key, finalobj[key]);
         }
         if (callback) callback();
       });
