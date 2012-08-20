@@ -159,7 +159,10 @@ Short answer: Gmail and Thunderbird are great.
     <th>Hotmail</th>
     <td>Paragraphs don't appear spaced correctly. (But they do appear spaced correctly when viewed by recipients.)</td>
     <td>Perfect</td>
-    <td>Email from received from Yahoo does not display with properly separated paragraphs. (Hotmail strips styling off <code>&lt;p&gt;</code> and <code>&lt;div&gt;</code> tags, and Yahoo uses the latter for paragraphs.)</td>
+    <td>
+      Email from received from Yahoo does not display with properly separated paragraphs. (Hotmail strips styling off <code>&lt;p&gt;</code> and <code>&lt;div&gt;</code> tags, and Yahoo uses the latter for paragraphs.)<p>
+      Code blocks with very dark backgrounds aren't displayed correctly.
+    </td>
   </tr>
   <tr>
     <th>Yahoo</th>
