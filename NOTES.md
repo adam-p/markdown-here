@@ -8,10 +8,6 @@
 
 - Bug: CSS is being applied to excluded reply text.
 
-- Add options to Firefox/Thunderbird
-  - Add open-on-update page as well
-  - If/when we pass review
-
 - un-module-ify 3rd party apps? Unnecessary change that just makes it harder to pull upstream.
 
 - Marked: trailing (and leading?) newlines lost from fenced blocks. Create issue?

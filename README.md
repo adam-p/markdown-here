@@ -10,7 +10,7 @@ To discover what can be done with Markdown in *Markdown Here*, check out the [Ma
 
 ![screenshot of conversion](//github.com/adam-p/markdown-here/raw/master/store-assets/markdown-here-image1.gimp.png)
 
-## Installation
+## Installation Instructions
 
 ### Chrome
 
@@ -46,7 +46,7 @@ After installing, make sure to restart Firefox/Thunderbird!
 1. Clone this repo.
 2. Follow the instructions in the MDN ["Setting up an extension development environment"](https://developer.mozilla.org/en/Setting_up_extension_development_environment) article.
 
-## Use
+## Usage Instructions
 
 Install it, and then…
 
@@ -104,7 +104,13 @@ To revert back to Markdown, just put your cursor anywhere in the block of conver
 
 ### Options
 
-The Chrome version of the extension has an Options page that you can access via the Chrome extensions list. In the options you can modify styling for the rendered Markdown and choose among different themes for syntax highlighting. Any changes made here are automatically synchronized between your other Chrome installations (if you have that feature enabled in Chrome). 
+The *Markdown Here* Options page can be accessed via the Chrome, Firefox, or Thunderbird extensions list. The available options include:
+
+* Styling modifications for the rendered Markdown.
+* Syntax highlighting theme selection and modification.
+* TeX math formulae processing enabling and customization. 
+
+For Chrome and Firefox, any changes made in the *Markdown Here* Options are automatically synchronized between your other installations of that browser (if you have the sync feature enabled in the browser). 
 
 ![screenshot of options](//github.com/adam-p/markdown-here/raw/master/store-assets/markdown-here-chrome-options.gimp.png)
 

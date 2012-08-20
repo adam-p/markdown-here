@@ -12,9 +12,6 @@ window.addEventListener('load', function() {
     OptionsStore.get(function(options) {
       var appDetails = chrome.app.getDetails();
 
-      // Only show changelist for old Chromium users
-      if (chrome.storage) return;
-
       // Have we been updated?
       if (options['lastVersion'] !== appDetails.version) {
         // Open our options page in changelist mode

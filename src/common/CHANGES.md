@@ -1,11 +1,21 @@
 Change Log
 ==========
 
+2012-08-??: v2.6.0
+------------------
+
+* Added support for TeX math formulae. For info check out the Options page. 
+  * Note that this feature is disabled by default, due to privacy concerns. Again, the see the Options page for info.
+  * Thanks to [bordaigorl](https://github.com/bordaigorl) for [suggesting this feature](https://github.com/adam-p/markdown-here/issues/26) and helping to implement it.
+
+* Firefox/Thunderbird: Added Options page. (Chrome already had it.) Take a look around and play with the styles.
+
 2012-08-16: v2.5.3
 ------------------
 
 * Chrome: Fixed compatibility with Chromium v18 (currently the version in the Ubuntu repo).
   * Limitation: Chromium v18 doesn't support synchronized settings. And when the user upgrades to a more recent version that supports `chrome.storage`, previous settings will not be migrated.
+  * Thanks to [gingerlime](https://github.com/gingerlime) for [finding this bug](https://github.com/adam-p/markdown-here/issues/6#issuecomment-7769877) and helping to fix it.
 
 2012-08-08: v2.5.2
 ------------------
