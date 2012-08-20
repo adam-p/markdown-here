@@ -188,12 +188,12 @@ Short answer: Gmail and Thunderbird are great.
 
 * *Markdown Here* uses [Github Flavored Markdown](http://github.github.com/github-flavored-markdown/).
   * ...with limitations. Please see the Issues for details, but here are some examples:
-    * No support for GFM special links: adam-p/markdown#11
-    * No support for GFM-style line breaks: adam-p/markdown#12
-    * No support for GFM-style tables: adam-p/markdown#13
+    * No support for GFM special links: [issue #11](https://github.com/adam-p/markdown-here/issues/11)
+    * No support for GFM-style line breaks: [issue #12](https://github.com/adam-p/markdown-here/issues/12)
+    * No support for GFM-style tables: [issue #13](https://github.com/adam-p/markdown-here/issues/13)
 
 * Available languages for syntax highlighting (and the way they should be written in the fenced code block) can be seen on the [highlight.js demo page](http://softwaremaniacs.org/media/soft/highlight/test.html).
- 
+
 * Images embedded inline in your Markdown will be retained when you "Markdown Toggle". Gmail allows you to put images inline in your email -- this can be much easier than referencing an external image.
 
 * Email signatures are automatically excluded from conversion. Specifically, anything after the semi-standard `'-- '` (note the trailing space) is left alone.
