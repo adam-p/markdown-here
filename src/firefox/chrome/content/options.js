@@ -108,11 +108,11 @@ MozillaOptionsService.listenRequest(MozillaOptionsService.requestHandler);
       prefsBranch.setCharPref('last-version', JSON.stringify(currVer));
 
       // Set the sync flags while we're at it.
-      prefsServ.setBoolPref('services.sync.prefs.sync.extensions.markdown-here.markdown-here-css', true);
-      prefsServ.setBoolPref('services.sync.prefs.sync.extensions.markdown-here.markdown-here-syntax-css', true);
+      prefsServ.setBoolPref('services.sync.prefs.sync.extensions.markdown-here.main-css', true);
+      prefsServ.setBoolPref('services.sync.prefs.sync.extensions.markdown-here.syntax-css', true);
       prefsServ.setBoolPref('services.sync.prefs.sync.extensions.markdown-here.last-version', true);
-      prefsServ.setBoolPref('services.sync.prefs.sync.extensions.markdown-here.markdown-here-math-enabled', true);
-      prefsServ.setBoolPref('services.sync.prefs.sync.extensions.markdown-here.markdown-here-math-value', true);
+      prefsServ.setBoolPref('services.sync.prefs.sync.extensions.markdown-here.math-enabled', true);
+      prefsServ.setBoolPref('services.sync.prefs.sync.extensions.markdown-here.math-value', true);
 
       // This is a bit dirty. If we open the new tab immediately, it will get
       // overwritten when session restore starts creating tabs. So we'll wait a

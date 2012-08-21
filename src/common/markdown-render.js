@@ -173,7 +173,7 @@
     extractedText = htmlToText(html, {tagreplacement: tagReplacement, allowTrailingWhitespace: true});
 
     function mathify(mathcode) {
-      return userprefs['markdown-here-math-value']
+      return userprefs['math-value']
               .replace(/\{mathcode\}/ig, mathcode)
               .replace(/\{urlmathcode\}/ig, encodeURIComponent(mathcode));
     }
@@ -182,7 +182,7 @@
       gfm: true,
       pedantic: false,
       sanitize: false,
-      math: userprefs['markdown-here-math-enabled'] ? mathify : null,
+      math: userprefs['math-enabled'] ? mathify : null,
       highlight: function(codeText, codeLanguage) {
                     return highlightSyntax(
                               targetDocument,

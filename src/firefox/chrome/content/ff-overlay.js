@@ -139,7 +139,7 @@ var markdown_here = {
           hljs.hljs,
           html,
           targetDocument),
-        prefs['markdown-here-css'] + prefs['markdown-here-syntax-css']);
+        prefs['main-css'] + prefs['syntax-css']);
     });
   }
 };

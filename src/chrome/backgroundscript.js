@@ -46,7 +46,7 @@ chrome.extension.onRequest.addListener(
           hljs,
           html,
           document),
-        css: (prefs['markdown-here-css'] + prefs['markdown-here-syntax-css'])
+        css: (prefs['main-css'] + prefs['syntax-css'])
       });
     });
   });

@@ -54,6 +54,19 @@ var ChromeOptionsStore = {
         finalobj[key] = tempobj[key].join('');
       }
 
+      // I'm unhappy with my initial choice of option names, so I'm going to
+      // migrate them and remove this code in the next version.
+      // TEMP: REMOVE ME
+      finalobj['main-css'] = finalobj['markdown-here-css'];
+      finalobj['syntax-css'] = finalobj['markdown-here-syntax-css'];
+      try {
+        chrome.storage.sync.remove(['markdown-here-css', 'markdown-here-syntax-css']);
+      }
+      catch (ex) {
+        localStorage.removeItem('markdown-here-css');
+        localStorage.removeItem('markdown-here-syntax-css');
+      }
+
       callback(that._fillDefaults(finalobj));
     });
   },
@@ -90,10 +103,10 @@ var ChromeOptionsStore = {
 
   // The default values or URLs for our various options.
   defaults: {
-    'markdown-here-css': '/common/default.css',
-    'markdown-here-syntax-css': '/common/highlightjs/styles/github.css',
-    'markdown-here-math-enabled': false,
-    'markdown-here-math-value': '<img src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}" alt="{mathcode}">'
+    'main-css': '/common/default.css',
+    'syntax-css': '/common/highlightjs/styles/github.css',
+    'math-enabled': false,
+    'math-value': '<img src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}" alt="{mathcode}">'
   },
 
   // Stored string pieces look like: {'key##0': 'the quick ', 'key##1': 'brown fox'}
@@ -124,7 +137,7 @@ var ChromeOptionsStore = {
           try {
             obj[key] = JSON.parse(obj[key]);
           }
-          catch (e) {
+          catch (ex) {
             // do nothing, leave the value as-is
           }
         }
@@ -141,7 +154,7 @@ var ChromeOptionsStore = {
           try {
             obj[localStorage.key(i)] = JSON.parse(localStorage.getItem(localStorage.key(i)));
           }
-          catch (e) {
+          catch (ex) {
             obj[localStorage.key(i)] = localStorage.getItem(localStorage.key(i));
           }
         }
@@ -235,10 +248,10 @@ var MozillaOptionsStore = {
 
   // The default values or URLs for our various options.
   defaults: {
-    'markdown-here-css': 'resource://common/default.css',
-    'markdown-here-syntax-css': 'resource://common/highlightjs/styles/github.css',
-    'markdown-here-math-enabled': false,
-    'markdown-here-math-value': '<img src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}" alt="{mathcode}">'
+    'main-css': 'resource://common/default.css',
+    'syntax-css': 'resource://common/highlightjs/styles/github.css',
+    'math-enabled': false,
+    'math-value': '<img src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}" alt="{mathcode}">'
   },
 
   // This is called both from content and background scripts, and we need vastly
@@ -275,7 +288,7 @@ var MozillaOptionsStore = {
         return;
       }
     }
-    catch (e) {
+    catch (ex) {
       request = document.createTextNode('');
       request.setUserData('data', data, null);
       if (callback) {
@@ -314,36 +327,36 @@ else {
 this.OptionsStore._fillDefaults = function(prefsObj) {
   var xhr, filledPrefsObj = prefsObj;
 
-  if (typeof(prefsObj['markdown-here-css']) === 'undefined') {
+  if (typeof(prefsObj['main-css']) === 'undefined') {
     xhr = new XMLHttpRequest();
     xhr.overrideMimeType('text/css');
 
     // Get the default value.
-    xhr.open('GET', this.defaults['markdown-here-css'], false);
+    xhr.open('GET', this.defaults['main-css'], false);
     // synchronous
     xhr.send();
     // Assume 200 OK
-    filledPrefsObj['markdown-here-css'] = xhr.responseText;
+    filledPrefsObj['main-css'] = xhr.responseText;
   }
 
-  if (typeof(prefsObj['markdown-here-syntax-css']) === 'undefined') {
+  if (typeof(prefsObj['syntax-css']) === 'undefined') {
     xhr = new XMLHttpRequest();
     xhr.overrideMimeType('text/css');
 
     // Get the default value.
-    xhr.open('GET', this.defaults['markdown-here-syntax-css'], false);
+    xhr.open('GET', this.defaults['syntax-css'], false);
     // synchronous
     xhr.send();
     // Assume 200 OK
-    filledPrefsObj['markdown-here-syntax-css'] = xhr.responseText;
+    filledPrefsObj['syntax-css'] = xhr.responseText;
   }
 
-  if (typeof(prefsObj['markdown-here-math-enabled']) === 'undefined') {
-    filledPrefsObj['markdown-here-math-enabled'] = this.defaults['markdown-here-math-enabled'];
+  if (typeof(prefsObj['math-enabled']) === 'undefined') {
+    filledPrefsObj['math-enabled'] = this.defaults['math-enabled'];
   }
 
-  if (typeof(prefsObj['markdown-here-math-value']) === 'undefined') {
-    filledPrefsObj['markdown-here-math-value'] = this.defaults['markdown-here-math-value'];
+  if (typeof(prefsObj['math-value']) === 'undefined') {
+    filledPrefsObj['math-value'] = this.defaults['math-value'];
   }
 
   return filledPrefsObj;

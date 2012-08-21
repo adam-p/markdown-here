@@ -58,11 +58,11 @@ function onLoad() {
   //
 
   OptionsStore.get(function(prefs) {
-    cssEdit.value = prefs['markdown-here-css'];
-    cssSyntaxEdit.value = prefs['markdown-here-syntax-css'];
+    cssEdit.value = prefs['main-css'];
+    cssSyntaxEdit.value = prefs['syntax-css'];
 
-    mathEnable.checked = prefs['markdown-here-math-enabled'];
-    mathEdit.value = prefs['markdown-here-math-value'];
+    mathEnable.checked = prefs['math-enabled'];
+    mathEdit.value = prefs['math-value'];
 
     // Render the sample Markdown
     renderMarkdown();
@@ -109,10 +109,10 @@ function checkChange() {
 
       OptionsStore.set(
         {
-          'markdown-here-css': cssEdit.value,
-          'markdown-here-syntax-css': cssSyntaxEdit.value,
-          'markdown-here-math-enabled': mathEnable.checked,
-          'markdown-here-math-value': mathEdit.value
+          'main-css': cssEdit.value,
+          'syntax-css': cssSyntaxEdit.value,
+          'math-enabled': mathEnable.checked,
+          'math-value': mathEdit.value
         },
         function() {
           updateMarkdownRender();
@@ -153,7 +153,7 @@ function requestMarkdownConversion(html, callback) {
           hljs,
           html,
           rawMarkdownIframe.contentDocument),
-        (prefs['markdown-here-css'] + prefs['markdown-here-syntax-css']));
+        (prefs['main-css'] + prefs['syntax-css']));
     });
   }
 }
@@ -218,7 +218,7 @@ function resetCssEdit() {
   xhr.overrideMimeType('text/css');
 
   // Get the default value.
-  xhr.open('GET', OptionsStore.defaults['markdown-here-css'], false);
+  xhr.open('GET', OptionsStore.defaults['main-css'], false);
   // synchronous
   xhr.send();
   // Assume 200 OK
@@ -275,6 +275,6 @@ function loadChangelist() {
 
 // Reset the math img tag template to default.
 function resetMathEdit() {
-  mathEdit.value = OptionsStore.defaults['markdown-here-math-value'];
+  mathEdit.value = OptionsStore.defaults['math-value'];
 }
 document.getElementById('math-reset-button').addEventListener('click', resetMathEdit, false);
