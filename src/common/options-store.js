@@ -56,7 +56,7 @@ var ChromeOptionsStore = {
 
       // I'm unhappy with my initial choice of option names, so I'm going to
       // migrate them and remove this code in the next version.
-      // TEMP: REMOVE ME
+      // TEMP: REMOVE FROM HERE
       if (typeof(finalobj['main-css']) === 'undefined') {
         finalobj['main-css'] = finalobj['markdown-here-css'];
       }
@@ -66,7 +66,7 @@ var ChromeOptionsStore = {
       }
 
       // Clear out the defunct entries
-      var delEntries = ['markdown-here-css', 'markdown-here-syntax-css'];
+      var delEntries = ['markdown-here-css', 'markdown-here-syntax-css', 'lastVersion'];
       var i;
       for (i = 0; i < 10; i++) {
         delEntries.push('markdown-here-css'+that._div+i);
@@ -80,6 +80,7 @@ var ChromeOptionsStore = {
           localStorage.removeItem(delEntries[i]);
         }
       }
+      // TEMP: REMOVE TO HERE
 
       callback(that._fillDefaults(finalobj));
     });
