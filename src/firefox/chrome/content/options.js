@@ -3,7 +3,7 @@
  * MIT License : http://adampritchard.mit-license.org/
  */
 
-/* 
+/*
  * The background service for supplying preferences to content scripts.
  * From: https://developer.mozilla.org/en-US/docs/Code_snippets/Interaction_between_privileged_and_non-privileged_pages
  */
@@ -11,24 +11,24 @@
 
 var MozillaOptionsService = {
   listenRequest: function(callback) { // analogue of chrome.extension.onRequest.addListener
- 
+
     return document.addEventListener('markdown_here-options-query', function(event) {
       var node = event.target, doc = node.ownerDocument;
- 
+
       return callback(node.getUserData('data'), doc, function(data) {
         if (!node.getUserData('callback')) {
           return doc.documentElement.removeChild(node);
         }
- 
+
         node.setUserData('response', data, null);
- 
+
         var listener = doc.createEvent('HTMLEvents');
         listener.initEvent('markdown_here-options-response', true, false);
         return node.dispatchEvent(listener);
       });
     }, false, true);
   },
- 
+
   requestHandler: function(request, sender, callback) {
 
     var prefs, prefKeys, prefsObj, i;
@@ -36,7 +36,7 @@ var MozillaOptionsService = {
     prefs = Components.classes['@mozilla.org/preferences-service;1']
                       .getService(Components.interfaces.nsIPrefService)
                       .getBranch('extensions.markdown-here.');
-    
+
     if (request.action === 'get') {
       prefKeys = prefs.getChildList('');
       prefsObj = {};
@@ -47,7 +47,7 @@ var MozillaOptionsService = {
 
       return callback(prefsObj);
     }
- 
+
     if (request.action === 'set') {
       for (i in request.obj) {
         prefs.setCharPref(i, JSON.stringify(request.obj[i]));
@@ -56,11 +56,11 @@ var MozillaOptionsService = {
       if (callback) return callback();
       return;
     }
- 
+
     return alert('Error: no matching options service action');
   }
-}
- 
+};
+
 MozillaOptionsService.listenRequest(MozillaOptionsService.requestHandler);
 
 
@@ -111,16 +111,18 @@ MozillaOptionsService.listenRequest(MozillaOptionsService.requestHandler);
       prefsServ.setBoolPref('services.sync.prefs.sync.extensions.markdown-here.markdown-here-css', true);
       prefsServ.setBoolPref('services.sync.prefs.sync.extensions.markdown-here.markdown-here-syntax-css', true);
       prefsServ.setBoolPref('services.sync.prefs.sync.extensions.markdown-here.last-version', true);
+      prefsServ.setBoolPref('services.sync.prefs.sync.extensions.markdown-here.markdown-here-math-enabled', true);
+      prefsServ.setBoolPref('services.sync.prefs.sync.extensions.markdown-here.markdown-here-math-value', true);
 
-      // This is a bit dirty. If we open the new tab immediately, it will get 
+      // This is a bit dirty. If we open the new tab immediately, it will get
       // overwritten when session restore starts creating tabs. So we'll wait a
       // couple of seconds after the last tab is restored to open ours.
-      // But we'll also have to make sure we handle the case that no tabs are 
+      // But we'll also have to make sure we handle the case that no tabs are
       // being restored.
 
       var timeoutID = null;
 
-      function tabRestored() {
+      var tabRestored = function() {
         clearTimeout(timeoutID);
         timeoutID = setTimeout(function() {
           document.removeEventListener('SSTabRestored', tabRestored);
@@ -137,7 +139,7 @@ MozillaOptionsService.listenRequest(MozillaOptionsService.requestHandler);
               win.gBrowser.selectedTab = win.gBrowser.addTab(optionsUrl);
           }
         }, 2000);
-      }
+      };
       timeoutID = setTimeout(tabRestored, 1);
       document.addEventListener('SSTabRestored', tabRestored, false);
     }
