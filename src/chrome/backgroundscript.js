@@ -13,12 +13,12 @@ window.addEventListener('load', function() {
       var appDetails = chrome.app.getDetails();
 
       // Have we been updated?
-      if (options['lastVersion'] !== appDetails.version) {
+      if (options['last-version'] !== appDetails.version) {
         // Open our options page in changelist mode
         chrome.tabs.create({ url: appDetails.options_page + "#changelist" });
 
         // Update out last version
-        OptionsStore.set({ 'lastVersion': appDetails.version });
+        OptionsStore.set({ 'last-version': appDetails.version });
       }
     });
   }, false);
