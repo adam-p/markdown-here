@@ -67,6 +67,9 @@
       content: the excluded content
     }]
   }
+
+  NOTE: Maybe it would be better to do this stuff in markdown-here.js, where
+  we have the DOM available? String-processing the HTML seems suboptimal.
   */
   function preprocessHtml(html) {
 
