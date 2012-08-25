@@ -121,7 +121,8 @@ var ChromeOptionsStore = {
     'main-css': '/common/default.css',
     'syntax-css': '/common/highlightjs/styles/github.css',
     'math-enabled': false,
-    'math-value': '<img src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}" alt="{mathcode}">'
+    'math-value': '<img src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}" alt="{mathcode}">',
+    'hotkey': { shiftKey: true, ctrlKey: true, altKey: false, key: 'K' }
   },
 
   // Stored string pieces look like: {'key##0': 'the quick ', 'key##1': 'brown fox'}
@@ -266,7 +267,8 @@ var MozillaOptionsStore = {
     'main-css': 'resource://common/default.css',
     'syntax-css': 'resource://common/highlightjs/styles/github.css',
     'math-enabled': false,
-    'math-value': '<img src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}" alt="{mathcode}">'
+    'math-value': '<img src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}" alt="{mathcode}">',
+    'hotkey': { shiftKey: true, ctrlKey: true, altKey: false, key: 'K' }
   },
 
   // This is called both from content and background scripts, and we need vastly
@@ -340,38 +342,27 @@ else {
 }
 
 this.OptionsStore._fillDefaults = function(prefsObj) {
-  var xhr, filledPrefsObj = prefsObj;
+  var xhr, key, filledPrefsObj = prefsObj;
 
-  if (typeof(prefsObj['main-css']) === 'undefined') {
-    xhr = new XMLHttpRequest();
-    xhr.overrideMimeType('text/css');
+  for (key in this.defaults) {
+    if (key === 'main-css' || key === 'syntax-css') {
+      if (typeof(prefsObj[key]) === 'undefined') {
+        xhr = new XMLHttpRequest();
+        xhr.overrideMimeType('text/css');
 
-    // Get the default value.
-    xhr.open('GET', this.defaults['main-css'], false);
-    // synchronous
-    xhr.send();
-    // Assume 200 OK
-    filledPrefsObj['main-css'] = xhr.responseText;
-  }
-
-  if (typeof(prefsObj['syntax-css']) === 'undefined') {
-    xhr = new XMLHttpRequest();
-    xhr.overrideMimeType('text/css');
-
-    // Get the default value.
-    xhr.open('GET', this.defaults['syntax-css'], false);
-    // synchronous
-    xhr.send();
-    // Assume 200 OK
-    filledPrefsObj['syntax-css'] = xhr.responseText;
-  }
-
-  if (typeof(prefsObj['math-enabled']) === 'undefined') {
-    filledPrefsObj['math-enabled'] = this.defaults['math-enabled'];
-  }
-
-  if (typeof(prefsObj['math-value']) === 'undefined') {
-    filledPrefsObj['math-value'] = this.defaults['math-value'];
+        // Get the default value.
+        xhr.open('GET', this.defaults[key], false);
+        // synchronous
+        xhr.send();
+        // Assume 200 OK
+        filledPrefsObj[key] = xhr.responseText;
+      }
+    }
+    else {
+      if (typeof(prefsObj[key]) === 'undefined') {
+        filledPrefsObj[key] = this.defaults[key];
+      }
+    }
   }
 
   return filledPrefsObj;

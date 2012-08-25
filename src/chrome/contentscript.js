@@ -12,7 +12,7 @@
 function clickRequest(event) {
   var focusedElem, mdReturn;
 
-  if (event && event.action === 'context-click') {
+  if (event && (event.action === 'context-click' || event.action === 'hotkey')) {
 
     // Check if the focused element is a valid render target
     focusedElem = markdownHere.findFocusedElem(window.document);
@@ -42,3 +42,18 @@ function requestMarkdownConversion(html, callback) {
     callback(response.html, response.css);
   });
 }
+
+// Register a hotkey listener
+OptionsStore.get(function(prefs) {
+  // Only add a listener if a key is set
+  if (prefs.hotkey.key.length === 1) {
+    window.addEventListener('keyup', function(event) {
+      if (event.shiftKey === prefs.hotkey.shiftKey &&
+          event.ctrlKey === prefs.hotkey.ctrlKey &&
+          event.altKey === prefs.hotkey.altKey &&
+          event.which === prefs.hotkey.key.toUpperCase().charCodeAt(0)) {
+        clickRequest({action: 'hotkey'});
+      }
+    }, false);
+  }
+});

@@ -9,6 +9,7 @@
  */
 
 Components.utils.import('resource://common/markdown-here.js');
+Components.utils.import('resource://common/options-store.js');
 
 
 var markdown_here = {
@@ -128,9 +129,8 @@ var markdown_here = {
     Components.utils.import('resource://common/marked.js', marked);
     Components.utils.import('resource://common/jsHtmlToText.js', htmlToText);
     this.scriptLoader.loadSubScript('resource://common/highlightjs/highlight.js', hljs);
-    Components.utils.import('resource://common/options-store.js', optionsStore);
 
-    optionsStore.OptionsStore.get(function(prefs) {
+    OptionsStore.get(function(prefs) {
       callback(
         markdownRender.markdownRender(
           prefs,
@@ -147,3 +147,18 @@ var markdown_here = {
 window.addEventListener('load', function () {
   markdown_here.onLoad();
 }, false);
+
+// Register a hotkey listener
+OptionsStore.get(function(prefs) {
+  // Only add a listener if a key is set
+  if (prefs.hotkey.key.length === 1) {
+    window.addEventListener('keyup', function(event) {
+      if (event.shiftKey === prefs.hotkey.shiftKey &&
+          event.ctrlKey === prefs.hotkey.ctrlKey &&
+          event.altKey === prefs.hotkey.altKey &&
+          event.which === prefs.hotkey.key.toUpperCase().charCodeAt(0)) {
+        markdown_here.onMenuItemCommand();
+      }
+    }, false);
+  }
+});

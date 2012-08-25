@@ -113,6 +113,7 @@ MozillaOptionsService.listenRequest(MozillaOptionsService.requestHandler);
       prefsServ.setBoolPref('services.sync.prefs.sync.extensions.markdown-here.last-version', true);
       prefsServ.setBoolPref('services.sync.prefs.sync.extensions.markdown-here.math-enabled', true);
       prefsServ.setBoolPref('services.sync.prefs.sync.extensions.markdown-here.math-value', true);
+      prefsServ.setBoolPref('services.sync.prefs.sync.extensions.markdown-here.hotkey', true);
 
       // This is a bit dirty. If we open the new tab immediately, it will get
       // overwritten when session restore starts creating tabs. So we'll wait a

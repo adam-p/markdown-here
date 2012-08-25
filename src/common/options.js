@@ -8,7 +8,7 @@
  */
 
 var cssEdit, cssSyntaxEdit, cssSyntaxSelect, rawMarkdownIframe, savedMsg,
-    mathEnable, mathEdit;
+    mathEnable, mathEdit, hotkeyShift, hotkeyCtrl, hotkeyAlt, hotkeyKey;
 
 function onLoad() {
   // Set up our control references.
@@ -19,6 +19,10 @@ function onLoad() {
   savedMsg = document.getElementById('saved-msg');
   mathEnable = document.getElementById('math-enable');
   mathEdit = document.getElementById('math-edit');
+  hotkeyShift = document.getElementById('hotkey-shift');
+  hotkeyCtrl = document.getElementById('hotkey-ctrl');
+  hotkeyAlt = document.getElementById('hotkey-alt');
+  hotkeyKey = document.getElementById('hotkey-key');
 
   //
   // Syntax highlighting styles and selection
@@ -64,6 +68,11 @@ function onLoad() {
     mathEnable.checked = prefs['math-enabled'];
     mathEdit.value = prefs['math-value'];
 
+    hotkeyShift.checked = prefs.hotkey.shiftKey;
+    hotkeyCtrl.checked = prefs.hotkey.ctrlKey;
+    hotkeyAlt.checked = prefs.hotkey.altKey;
+    hotkeyKey.value = prefs.hotkey.key;
+
     // Render the sample Markdown
     renderMarkdown();
 
@@ -90,7 +99,10 @@ var lastOptions = '';
 var lastChangeTime = null;
 var firstSave = true;
 function checkChange() {
-  var newOptions = cssEdit.value + cssSyntaxEdit.value + mathEnable.checked + mathEdit.value;
+  var newOptions =
+        cssEdit.value + cssSyntaxEdit.value +
+        mathEnable.checked + mathEdit.value +
+        hotkeyShift.checked + hotkeyCtrl.checked + hotkeyAlt.checked + hotkeyKey.value;
 
   if (newOptions !== lastOptions) {
     // CSS has changed.
@@ -112,7 +124,13 @@ function checkChange() {
           'main-css': cssEdit.value,
           'syntax-css': cssSyntaxEdit.value,
           'math-enabled': mathEnable.checked,
-          'math-value': mathEdit.value
+          'math-value': mathEdit.value,
+          'hotkey': {
+                      shiftKey: hotkeyShift.checked,
+                      ctrlKey: hotkeyCtrl.checked,
+                      altKey: hotkeyAlt.checked,
+                      key: hotkeyKey.value
+                    }
         },
         function() {
           updateMarkdownRender();
