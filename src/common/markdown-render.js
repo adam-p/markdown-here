@@ -56,17 +56,18 @@
     return html;
   }
 
-  /* We need to tweak the html-to-text processing to get the results we want.
-     We also want to exclude some stuff (like reply blocks) from any processing.
-     Returns an object that looks like this:
-      {
-        html: the HTML to render,
-        exclusions: [array of {
-          placeholder: the string added as placeholder for the excluded content
-          content: the excluded content
-        }]
-      }
-   */
+  /*
+  We need to tweak the html-to-text processing to get the results we want.
+  We also want to exclude some stuff (like reply blocks) from any processing.
+  Returns an object that looks like this:
+  {
+    html: the HTML to render,
+    exclusions: [array of {
+      placeholder: the string added as placeholder for the excluded content
+      content: the excluded content
+    }]
+  }
+  */
   function preprocessHtml(html) {
 
     /*
@@ -79,10 +80,12 @@
     only keep a few probably-not-problematic tags.
     */
 
+    var preprocessInfo = { html: html, exclusions: [] };
+
     // The default behaviour for `htmlToText` is to strip out tags (and their
     // inner text/html) that it doesn't expect/want. But we want some tag blocks
     // to remain intact.
-    var preprocessInfo = excludeTagBlocks('blockquote', html, true);
+    preprocessInfo = excludeTagBlocks('blockquote', preprocessInfo, true);
 
     // Try to leave intact the line that Gmail adds that says:
     //   On such-a-date, such-a-person <email addy> wrote:
@@ -114,14 +117,9 @@
     // that attribute.
     // If `ifNotHasString` is non-null, tags that contain that string will not
     // be matched. Note that `ifNotHasString` will be used in a regex.
-    function excludeTagBlocks(tagName, html, wrapInPara, ifHasAttribute, ifNotHasString) {
+    function excludeTagBlocks(tagName, preprocessInfo, wrapInPara, ifHasAttribute, ifNotHasString) {
       var depth, startIndex, openIndex, closeIndex, currentOpenIndex,
         openTagRegex, closeTagRegex, remainder, closeTagLength, regexFiller;
-
-      var preprocessInfo = {
-        html: html,
-        exclusions: []
-      };
 
       regexFiller = ifNotHasString ? '(((?!'+ifNotHasString+')[^>])*)' : '[^>]*';
       if (ifHasAttribute) {
@@ -179,14 +177,22 @@
               preprocessInfo.exclusions.push({
                 placeholder: placeholder,
                 content:
-                  (wrapInPara ? '<p/>' : '') +
-                  html.slice(currentOpenIndex, closeIndex+closeTagLength) +
-                  (wrapInPara ? '<p/>' : '')
+                  '<div class="markdown-here-exclude">' +
+                  (wrapInPara ? '<p>' : '') +
+                  preprocessInfo.html.slice(currentOpenIndex, closeIndex+closeTagLength) +
+                  (wrapInPara ? '</p>' : '') +
+                  '</div>'
               });
+
+              // We need to insert some empty lines when we extract something,
+              // otherwise the stuff above and below would be rendered as if they
+              // were together.
 
               preprocessInfo.html =
                 preprocessInfo.html.slice(0, currentOpenIndex) +
+                '<br><br>' +
                 placeholder +
+                '<br><br>' +
                 preprocessInfo.html.slice(closeIndex+closeTagLength);
 
               // Start from the beginning again. The length of the string has
