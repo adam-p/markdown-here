@@ -73,6 +73,8 @@ function onLoad() {
     hotkeyAlt.checked = prefs.hotkey.altKey;
     hotkeyKey.value = prefs.hotkey.key;
 
+    checkHotkeyKeyValidity();
+
     // Render the sample Markdown
     renderMarkdown();
 
@@ -296,3 +298,19 @@ function resetMathEdit() {
   mathEdit.value = OptionsStore.defaults['math-value'];
 }
 document.getElementById('math-reset-button').addEventListener('click', resetMathEdit, false);
+
+// When the user changes the hotkey key, check if it's an alphanumeric value.
+// We only warning and not strictly enforcing because what's considered "alphanumeric"
+// in other languages and/or on other keyboards might be different.
+function checkHotkeyKeyValidity() {
+  console.log(event);
+  var regex = new RegExp('^[a-zA-Z0-9]+$');
+  var value = hotkeyKey.value;
+  if (value.length && !regex.test(value)) {
+    document.getElementById('hotkey-key-warning').classList.remove('hidden');
+  }
+  else {
+    document.getElementById('hotkey-key-warning').classList.add('hidden');
+  }
+}
+document.getElementById('hotkey-key').addEventListener('keyup', checkHotkeyKeyValidity, false);

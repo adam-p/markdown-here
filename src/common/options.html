@@ -188,6 +188,17 @@ MIT License : http://adampritchard.mit-license.org/
         padding: 10px;
       }
 
+      .warning {
+        background-color: #E6E619;
+        display: inline-block;
+        padding: 0.2em;
+        border-radius: 0.3em;
+      }
+
+      .hidden {
+        visibility: hidden;
+      }
+
     </style>
   </head>
 
@@ -341,6 +352,9 @@ MIT License : http://adampritchard.mit-license.org/
             &nbsp;+&nbsp;
             <input type="text" id="hotkey-key" maxlength="1" placeholder="KEY" style="width: 3em;"/>
           </div>
+          <div id="hotkey-key-warning" class="warning hidden">
+            Is the key an alphanumeric value?
+          </div>
           <div id="notes">
             <ul>
               <li>
@@ -348,6 +362,12 @@ MIT License : http://adampritchard.mit-license.org/
               </li>
               <li>
                 Firefox and Thunderbird: You must restart the application for the new hotkey setting to take effect.
+              </li>
+              <li>
+                You must use an alphanumeric key for the shortcut (varies by language and keyboard).
+              </li>
+              <li>
+                The Windows key and the OS X &#8984; key cannot be used in the shortcut.
               </li>
               <li>
                 To disable the use of this hotkey, leave the "key" text box empty.
