@@ -20,6 +20,11 @@
  * available. This is the case in Chromium v18 (currently the latest available
  * via Ubuntu repo). Part of the reason we JSON-encode values is to get around
  * the fact that you can only store strings with localStorage.
+ *
+ * Chrome note/warning: OptionsStore can't be used directly from a content script.
+ * When it tries to fill in the CSS defaults with a XHR request, it'll fail with
+ * a cross-domain restriction error. Instead use the service provided by the
+ * background script.
  */
 
 // TODO: Check for errors. See: https://code.google.com/chrome/extensions/dev/storage.html
@@ -342,7 +347,7 @@ else {
 }
 
 this.OptionsStore._fillDefaults = function(prefsObj) {
-  var xhr, key, filledPrefsObj = prefsObj, defaultGotFilled = false;
+  var xhr, key, filledPrefsObj = prefsObj;
 
   for (key in this.defaults) {
     if (key === 'main-css' || key === 'syntax-css') {
@@ -356,23 +361,14 @@ this.OptionsStore._fillDefaults = function(prefsObj) {
         xhr.send();
         // Assume 200 OK
         filledPrefsObj[key] = xhr.responseText;
-
-        defaultGotFilled = true;
       }
     }
     else {
       if (typeof(prefsObj[key]) === 'undefined') {
         filledPrefsObj[key] = this.defaults[key];
-        defaultGotFilled = true;
       }
     }
   }
-
-  // If we filled in a default value, store the object back. This is partly so
-  // that if we change the default, the user won't see a difference from what
-  // they expect. But it's mostly because Chrome throws an error if there's an
-  // attempt to access (xhr) the defaults files from a content script.
-  //this.set(prefsObj);
 
   return filledPrefsObj;
 };

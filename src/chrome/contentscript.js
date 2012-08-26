@@ -9,7 +9,7 @@
  */
 
 // Handle the menu-item click
-function clickRequest(event) {
+function requestHandler(event) {
   var focusedElem, mdReturn;
 
   if (event && (event.action === 'context-click' || event.action === 'hotkey')) {
@@ -32,19 +32,19 @@ function clickRequest(event) {
     }
   }
 }
-chrome.extension.onRequest.addListener(clickRequest);
+chrome.extension.onRequest.addListener(requestHandler);
 
 // The rendering service provided to the content script.
 // See the comment in markdown-render.js for why we do this.
 function requestMarkdownConversion(html, callback) {
   // Send a request to the add-on script to actually do the rendering.
-  chrome.extension.sendRequest(html, function(response) {
+  chrome.extension.sendRequest({action: 'render', html: html}, function(response) {
     callback(response.html, response.css);
   });
 }
 
 // Register a hotkey listener
-OptionsStore.get(function(prefs) {
+chrome.extension.sendRequest({action: 'get-options'}, function(prefs) {
   // Only add a listener if a key is set
   if (prefs.hotkey.key.length === 1) {
     window.addEventListener('keyup', function(event) {
@@ -52,7 +52,7 @@ OptionsStore.get(function(prefs) {
           event.ctrlKey === prefs.hotkey.ctrlKey &&
           event.altKey === prefs.hotkey.altKey &&
           event.which === prefs.hotkey.key.toUpperCase().charCodeAt(0)) {
-        clickRequest({action: 'hotkey'});
+        requestHandler({action: 'hotkey'});
       }
     }, false);
   }

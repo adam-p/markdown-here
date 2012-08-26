@@ -159,11 +159,13 @@ function checkChange() {
 function requestMarkdownConversion(html, callback) {
   if (typeof(chrome) !== 'undefined' && typeof(chrome.extension) !== 'undefined') {
     // Send a request to the add-on script to actually do the rendering.
-    chrome.extension.sendRequest(html, function(response) {
+    chrome.extension.sendRequest({action: 'render', html: html}, function(response) {
       callback(response.html, response.css);
     });
   }
   else {
+    // TODO: Implement a background script render service that can be used like
+    // the Chrome one.
     OptionsStore.get(function(prefs) {
       callback(
         markdownRender(
