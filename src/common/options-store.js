@@ -127,7 +127,7 @@ var ChromeOptionsStore = {
     'syntax-css': '/common/highlightjs/styles/github.css',
     'math-enabled': false,
     'math-value': '<img src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}" alt="{mathcode}">',
-    'hotkey': { shiftKey: true, ctrlKey: true, altKey: false, key: 'K' }
+    'hotkey': { shiftKey: false, ctrlKey: true, altKey: true, key: 'M' }
   },
 
   // Stored string pieces look like: {'key##0': 'the quick ', 'key##1': 'brown fox'}
@@ -273,7 +273,7 @@ var MozillaOptionsStore = {
     'syntax-css': 'resource://common/highlightjs/styles/github.css',
     'math-enabled': false,
     'math-value': '<img src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}" alt="{mathcode}">',
-    'hotkey': { shiftKey: true, ctrlKey: true, altKey: false, key: 'K' }
+    'hotkey': { shiftKey: false, ctrlKey: true, altKey: true, key: 'M' }
   },
 
   // This is called both from content and background scripts, and we need vastly
