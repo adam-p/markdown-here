@@ -342,7 +342,7 @@ else {
 }
 
 this.OptionsStore._fillDefaults = function(prefsObj) {
-  var xhr, key, filledPrefsObj = prefsObj;
+  var xhr, key, filledPrefsObj = prefsObj, defaultGotFilled = false;
 
   for (key in this.defaults) {
     if (key === 'main-css' || key === 'syntax-css') {
@@ -356,14 +356,23 @@ this.OptionsStore._fillDefaults = function(prefsObj) {
         xhr.send();
         // Assume 200 OK
         filledPrefsObj[key] = xhr.responseText;
+
+        defaultGotFilled = true;
       }
     }
     else {
       if (typeof(prefsObj[key]) === 'undefined') {
         filledPrefsObj[key] = this.defaults[key];
+        defaultGotFilled = true;
       }
     }
   }
+
+  // If we filled in a default value, store the object back. This is partly so
+  // that if we change the default, the user won't see a difference from what
+  // they expect. But it's mostly because Chrome throws an error if there's an
+  // attempt to access (xhr) the defaults files from a content script.
+  //this.set(prefsObj);
 
   return filledPrefsObj;
 };
