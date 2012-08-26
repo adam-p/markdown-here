@@ -303,7 +303,6 @@ document.getElementById('math-reset-button').addEventListener('click', resetMath
 // We only warning and not strictly enforcing because what's considered "alphanumeric"
 // in other languages and/or on other keyboards might be different.
 function checkHotkeyKeyValidity() {
-  console.log(event);
   var regex = new RegExp('^[a-zA-Z0-9]+$');
   var value = hotkeyKey.value;
   if (value.length && !regex.test(value)) {
