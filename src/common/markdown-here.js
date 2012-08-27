@@ -51,6 +51,16 @@ function getOperationalRange(focusedElem) {
 
   range = selection.getRangeAt(0);
 
+  // We're going to work around some weird OSX+Chrome behaviour where if you
+  // right-click on a word it gets selected, which then causes us to render just
+  // that one word and look dumb and be wrong.
+  if (typeof(chrome) !== 'undefined' &&
+      typeof(navigator) !== 'undefined' &&
+      navigator.userAgent.indexOf('OS X') >= 0 &&
+      range.toString().match(/^\b\w+\b$/)) {
+    range.collapse();
+  }
+
   if (range.collapsed) {
     // If there's no actual selection, select the contents of the focused element.
     range.selectNodeContents(focusedElem);
