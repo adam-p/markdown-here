@@ -7,10 +7,6 @@ pre code {
   background: #272822;
 }
 
-pre .params .identifier .keymethods {
-	color: #FD971F;
-}
-
 pre .tag,
 pre .tag .title,
 pre .keyword,
@@ -19,6 +15,7 @@ pre .change,
 pre .winutils,
 pre .flow,
 pre .lisp .title,
+pre .clojure .built_in,
 pre .nginx .title,
 pre .tex .special {
   color: #F92672;
@@ -38,6 +35,7 @@ pre .class .title {
 
 pre .attribute,
 pre .symbol,
+pre .symbol .string,
 pre .value,
 pre .regexp {
 	color: #BF79DB;
@@ -49,7 +47,6 @@ pre .ruby .subst,
 pre .title,
 pre .haskell .type,
 pre .preprocessor,
-pre .ruby .instancevar,
 pre .ruby .class .parent,
 pre .built_in,
 pre .sql .aggregate,
@@ -57,7 +54,6 @@ pre .django .template_tag,
 pre .django .variable,
 pre .smalltalk .class,
 pre .javadoc,
-pre .ruby .string,
 pre .django .filter .argument,
 pre .smalltalk .localvars,
 pre .smalltalk .array,

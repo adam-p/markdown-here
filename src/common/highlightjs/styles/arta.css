@@ -40,7 +40,8 @@ pre .regexp,
 pre .xml .attribute,
 pre .smalltalk .char,
 pre .xml .value,
-pre .ini .value
+pre .ini .value,
+pre .clojure .attribute
 {
   color: #ffcc33;
 }
@@ -81,6 +82,7 @@ pre .css .id,
 pre .css .pseudo,
 pre .css .attr_selector,
 pre .lisp .title,
+pre .clojure .built_in,
 pre .winutils,
 pre .tex .command,
 pre .request,
