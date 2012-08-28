@@ -13,6 +13,7 @@ pre code,
 pre .ruby .subst,
 pre .tag .title,
 pre .lisp .title,
+pre .clojure .built_in,
 pre .nginx .title {
   color: black;
 }
@@ -27,9 +28,6 @@ pre .rules .value .number,
 pre .preprocessor,
 pre .ruby .symbol,
 pre .ruby .symbol .string,
-pre .ruby .symbol .keyword,
-pre .ruby .symbol .keymethods,
-pre .instancevar,
 pre .aggregate,
 pre .template_tag,
 pre .django .variable,
@@ -90,7 +88,8 @@ pre .tex .formula,
 pre .erlang_repl .reserved,
 pre .input_number,
 pre .markdown .link_label,
-pre .vhdl .attribute {
+pre .vhdl .attribute,
+pre .clojure .attribute {
   color: #88F
 }
 

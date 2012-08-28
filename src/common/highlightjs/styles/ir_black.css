@@ -18,7 +18,8 @@ pre .keyword,
 pre .tag,
 pre .tex .command,
 pre .request,
-pre .status {
+pre .status,
+pre .clojure .attribute {
   color: #96CBFE;
 }
 
@@ -64,8 +65,6 @@ pre .nginx .built_in {
 
 pre .symbol,
 pre .ruby .symbol .string,
-pre .ruby .symbol .keyword,
-pre .ruby .symbol .keymethods,
 pre .number,
 pre .variable,
 pre .vbscript,

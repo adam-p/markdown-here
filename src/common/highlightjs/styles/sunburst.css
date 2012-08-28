@@ -72,14 +72,13 @@ pre .phpdoc {
 
 pre .symbol,
 pre .ruby .symbol .string,
-pre .ruby .symbol .keyword,
-pre .ruby .symbol .keymethods,
 pre .number {
   color: #3387CC;
 }
 
 pre .params,
-pre .variable {
+pre .variable,
+pre .clojure .attribute {
   color: #3E87E3;
 }
 

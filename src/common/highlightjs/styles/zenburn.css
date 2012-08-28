@@ -18,7 +18,8 @@ pre .css .id,
 pre .lisp .title,
 pre .nginx .title,
 pre .request,
-pre .status {
+pre .status,
+pre .clojure .attribute {
   color: #E3CEAB;
 }
 
@@ -70,10 +71,7 @@ pre .input_number {
 pre .dos .winutils,
 pre .ruby .symbol,
 pre .ruby .symbol .string,
-pre .ruby .symbol .keyword,
-pre .ruby .symbol .keymethods,
-pre .ruby .string,
-pre .ruby .instancevar {
+pre .ruby .string {
   color: #DCA3A3;
 }
 

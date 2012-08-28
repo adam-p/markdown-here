@@ -6,7 +6,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 
 pre code {
   display: block; padding: 0.5em;
-  color: #000;
+  color: #333;
   background: #f8f8ff
 }
 
@@ -22,18 +22,18 @@ pre .keyword,
 pre .css .rule .keyword,
 pre .winutils,
 pre .javascript .title,
-pre .lisp .title,
 pre .nginx .title,
 pre .subst,
 pre .request,
 pre .status {
-  color: #000;
+  color: #333;
   font-weight: bold
 }
 
 pre .number,
-pre .hexcolor {
-  color: #40a070
+pre .hexcolor,
+pre .ruby .constant {
+  color: #099;
 }
 
 pre .string,
@@ -51,6 +51,7 @@ pre .id {
 
 pre .javascript .title,
 pre .lisp .title,
+pre .clojure .title,
 pre .subst {
   font-weight: normal
 }
@@ -73,7 +74,6 @@ pre .django .tag .keyword {
 
 pre .attribute,
 pre .variable,
-pre .instancevar,
 pre .lisp .body {
   color: #008080
 }
@@ -89,17 +89,15 @@ pre .class {
 
 pre .symbol,
 pre .ruby .symbol .string,
-pre .ruby .symbol .keyword,
-pre .ruby .symbol .keymethods,
 pre .lisp .keyword,
 pre .tex .special,
 pre .input_number {
   color: #990073
 }
 
-pre .builtin,
 pre .built_in,
-pre .lisp .title {
+pre .lisp .title,
+pre .clojure .built_in {
   color: #0086b3
 }
 
