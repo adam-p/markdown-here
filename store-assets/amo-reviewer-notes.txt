@@ -1,0 +1,74 @@
+This extension is used to manipulate the content of email before sending. It can be used in Gmail, Hotmail, or Yahoo webmail interfaces, or in Thunderbird. Make sure you use the rich-edit interface for the email client.
+
+You write email in Markdown (if you're not familiar with Markdown, I made a little reference -- https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet), then right-click, click the "Markdown Toggle" menu item, and the content of the email will be replaced with a rendered-HTML version of the Markdown you had written.
+
+If you select a subset of your email and then "Markdown Toggle", only that selection will be rendered/converted.
+
+The Markdown is "Github-flavored". Syntax highlighting is supported. So, for example, you can use fenced code blocks with the language name specified, like so:
+
+```javascript
+var i = 0;
+```
+
+For complete info, see the project page: https://github.com/adam-p/markdown-here
+
+Please don't hesitate to contact me with questions.
+
+
+A more formal test methodology, if desired:
+
+1. Go into your webmail of choice, or Thunderbird. Make sure rich editing is enabled.
+
+2. Write a bit of Markdown. (I'll include some at the bottom of this that you can paste, if you want. Make sure to paste as plaintext.)
+
+3. Right-click and choose "Markdown Toggle".
+
+Test #1: The entire email should be converted to HTML, in accordance with Markdown syntax. The sample MD should have H1, H3, UL, and PRE/CODE elements, with some bold and code inline.
+
+4. Right-click again and choose "Markdown Toggle".
+
+Test #2: The email email should be reverted back the original raw Markdown.
+
+5. Select a few lines (but don't split the code block). Then right-click and choose "Markdown Toggle".
+
+Test #3: Only the selected lines should be rendered to HTML.
+
+6. Right-click again and choose "Markdown Toggle".
+
+Test #4: The email should be reverted back to original Markdown.
+
+7. Render the email again (either entirely or partially) and send it (to yourself or someone else).
+
+Test #5: The recipient of the email should see it pretty much as it was before you sent it.
+
+Test done.
+
+
+Caveat: Hotmail is a little flaky. Gmail and Thunderbird are the only first-class targets. Details: https://github.com/adam-p/markdown-here#compatibility
+
+
+A few secondary features that can be tested if desired:
+
+- Options: Should open after installation (and restart). Should open after upgrade. Should auto-save. Should sync settings.
+- Signatures should be excluded from the conversion. Sigs must be preceded by the standard-ish '-- ' (note the trailing space).
+- Images embedded in the email before conversion (Gmail and Thunderbird) should be retained by the conversion.
+- Quoted reply text should be excluded by the conversion.
+- TeX mathematical formulae should be rendered if and only if that functionality is enabled in the options.
+
+
+---
+
+# Markdown Sample (H1)
+
+### Smaller header (H3)
+
+* Bullet **with bold**
+* Bullet with `inline code`
+
+```javascript
+var s = 'code block';
+console.log(s);
+```
+
+This is the quadratic equation in TeX (rendered if enabled):
+$-b \pm \sqrt{b^2 - 4ac} \over 2a$
