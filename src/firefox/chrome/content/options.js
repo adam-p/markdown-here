@@ -129,7 +129,7 @@ MozillaOptionsService.listenRequest(MozillaOptionsService.requestHandler);
           document.removeEventListener('SSTabRestored', tabRestored);
           var windowMediator = Components.classes['@mozilla.org/appshell/window-mediator;1']
                                          .getService(Components.interfaces.nsIWindowMediator);
-          var optionsUrl = 'resource://common/options.html#changelist';
+          var optionsUrl = 'resource://markdown_here_common/options.html#changelist';
           if (navigator.userAgent.indexOf('Thunderbird') >= 0) {
               windowMediator.getMostRecentWindow('mail:3pane')
                             .document.getElementById('tabmail')

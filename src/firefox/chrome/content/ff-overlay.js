@@ -8,7 +8,7 @@
  * rendering services.
  */
 
-Components.utils.import('resource://common/markdown-here.js');
+Components.utils.import('resource://markdown_here_common/markdown-here.js');
 
 
 var markdown_here = {
@@ -76,7 +76,7 @@ var markdown_here = {
     }, false);
 
     // Register a hotkey listener
-    this.scriptLoader.loadSubScript('resource://common/options-store.js');
+    this.scriptLoader.loadSubScript('resource://markdown_here_common/options-store.js');
     OptionsStore.get(function(prefs) {
       // Only add a listener if a key is set
       if (prefs.hotkey.key.length === 1) {
@@ -140,10 +140,10 @@ var markdown_here = {
   markdownRender: function(targetDocument, html, callback) {
     var markdownRender = {}, hljs = {}, marked = {}, htmlToText = {}, optionsStore = {};
 
-    Components.utils.import('resource://common/markdown-render.js', markdownRender);
-    Components.utils.import('resource://common/marked.js', marked);
-    Components.utils.import('resource://common/jsHtmlToText.js', htmlToText);
-    this.scriptLoader.loadSubScript('resource://common/highlightjs/highlight.js', hljs);
+    Components.utils.import('resource://markdown_here_common/markdown-render.js', markdownRender);
+    Components.utils.import('resource://markdown_here_common/marked.js', marked);
+    Components.utils.import('resource://markdown_here_common/jsHtmlToText.js', htmlToText);
+    this.scriptLoader.loadSubScript('resource://markdown_here_common/highlightjs/highlight.js', hljs);
 
     OptionsStore.get(function(prefs) {
       callback(
