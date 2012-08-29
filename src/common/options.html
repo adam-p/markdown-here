@@ -52,10 +52,10 @@ MIT License : http://adampritchard.mit-license.org/
       }
 
       .control-group > .stretch {
-        height: 285px;
-        height: -webkit-calc(100% - 75px);
-        height: -moz-calc(100% - 75px);
-        height: calc(100% - 75px);
+        height: 280px;
+        height: -webkit-calc(100% - 80px);
+        height: -moz-calc(100% - 80px);
+        height: calc(100% - 80px);
       }
 
       .stretch {
@@ -186,6 +186,17 @@ MIT License : http://adampritchard.mit-license.org/
         border: 2px #EEE solid;
         margin: 10px;
         padding: 10px;
+      }
+
+      .warning {
+        background-color: #E6E619;
+        display: inline-block;
+        padding: 0.2em;
+        border-radius: 0.3em;
+      }
+
+      .hidden {
+        visibility: hidden;
       }
 
     </style>
@@ -326,6 +337,43 @@ MIT License : http://adampritchard.mit-license.org/
             </ul>
           </div>
 
+        </div>
+
+        <div class="control-group">
+          <div class="section-title">
+            Hotkey (aka keyboard shortcut)
+          </div>
+          <div>
+            <input type="checkbox" id="hotkey-shift"/><label for="hotkey-shift">SHIFT</label>
+            &nbsp;+&nbsp;
+            <input type="checkbox" id="hotkey-ctrl"/><label for="hotkey-ctrl">CTRL</label>
+            &nbsp;+&nbsp;
+            <input type="checkbox" id="hotkey-alt"/><label for="hotkey-alt">ALT</label>
+            &nbsp;+&nbsp;
+            <input type="text" id="hotkey-key" maxlength="1" placeholder="KEY" style="width: 3em;"/>
+          </div>
+          <div id="hotkey-key-warning" class="warning hidden">
+            Is the key an alphanumeric value?
+          </div>
+          <div id="notes">
+            <ul>
+              <li>
+                Chrome: You must reload your email web page for the new hotkey setting to take effect.
+              </li>
+              <li>
+                Firefox and Thunderbird: You must restart the application for the new hotkey setting to take effect.
+              </li>
+              <li>
+                You must use an alphanumeric key for the shortcut (varies by language and keyboard).
+              </li>
+              <li>
+                The Windows key and the OS X &#8984; key cannot be used in the shortcut.
+              </li>
+              <li>
+                To disable the use of this hotkey, leave the "key" text box empty.
+              </li>
+            </ul>
+          </div>
         </div>
 
       </div>

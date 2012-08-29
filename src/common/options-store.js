@@ -20,6 +20,11 @@
  * available. This is the case in Chromium v18 (currently the latest available
  * via Ubuntu repo). Part of the reason we JSON-encode values is to get around
  * the fact that you can only store strings with localStorage.
+ *
+ * Chrome note/warning: OptionsStore can't be used directly from a content script.
+ * When it tries to fill in the CSS defaults with a XHR request, it'll fail with
+ * a cross-domain restriction error. Instead use the service provided by the
+ * background script.
  */
 
 // TODO: Check for errors. See: https://code.google.com/chrome/extensions/dev/storage.html
@@ -121,7 +126,8 @@ var ChromeOptionsStore = {
     'main-css': '/common/default.css',
     'syntax-css': '/common/highlightjs/styles/github.css',
     'math-enabled': false,
-    'math-value': '<img src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}" alt="{mathcode}">'
+    'math-value': '<img src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}" alt="{mathcode}">',
+    'hotkey': { shiftKey: false, ctrlKey: true, altKey: true, key: 'M' }
   },
 
   // Stored string pieces look like: {'key##0': 'the quick ', 'key##1': 'brown fox'}
@@ -266,7 +272,8 @@ var MozillaOptionsStore = {
     'main-css': 'resource://markdown_here_common/default.css',
     'syntax-css': 'resource://markdown_here_common/highlightjs/styles/github.css',
     'math-enabled': false,
-    'math-value': '<img src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}" alt="{mathcode}">'
+    'math-value': '<img src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}" alt="{mathcode}">',
+    'hotkey': { shiftKey: false, ctrlKey: true, altKey: true, key: 'M' }
   },
 
   // This is called both from content and background scripts, and we need vastly
@@ -340,41 +347,30 @@ else {
 }
 
 this.OptionsStore._fillDefaults = function(prefsObj) {
-  var xhr, filledPrefsObj = prefsObj;
+  var xhr, key;
 
-  if (typeof(prefsObj['main-css']) === 'undefined') {
-    xhr = new XMLHttpRequest();
-    xhr.overrideMimeType('text/css');
+  for (key in this.defaults) {
+    if (key === 'main-css' || key === 'syntax-css') {
+      if (typeof(prefsObj[key]) === 'undefined') {
+        xhr = new XMLHttpRequest();
+        xhr.overrideMimeType('text/css');
 
-    // Get the default value.
-    xhr.open('GET', this.defaults['main-css'], false);
-    // synchronous
-    xhr.send();
-    // Assume 200 OK
-    filledPrefsObj['main-css'] = xhr.responseText;
+        // Get the default value.
+        xhr.open('GET', this.defaults[key], false);
+        // synchronous
+        xhr.send();
+        // Assume 200 OK
+        prefsObj[key] = xhr.responseText;
+      }
+    }
+    else {
+      if (typeof(prefsObj[key]) === 'undefined') {
+        prefsObj[key] = this.defaults[key];
+      }
+    }
   }
 
-  if (typeof(prefsObj['syntax-css']) === 'undefined') {
-    xhr = new XMLHttpRequest();
-    xhr.overrideMimeType('text/css');
-
-    // Get the default value.
-    xhr.open('GET', this.defaults['syntax-css'], false);
-    // synchronous
-    xhr.send();
-    // Assume 200 OK
-    filledPrefsObj['syntax-css'] = xhr.responseText;
-  }
-
-  if (typeof(prefsObj['math-enabled']) === 'undefined') {
-    filledPrefsObj['math-enabled'] = this.defaults['math-enabled'];
-  }
-
-  if (typeof(prefsObj['math-value']) === 'undefined') {
-    filledPrefsObj['math-value'] = this.defaults['math-value'];
-  }
-
-  return filledPrefsObj;
+  return prefsObj;
 };
 
 var EXPORTED_SYMBOLS = ['OptionsStore'];

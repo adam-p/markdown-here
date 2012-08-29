@@ -63,7 +63,7 @@ var markdown_here = {
   },
 
   onLoad: function() {
-    var contextMenu;
+    var contextMenu, optionsStore = {};
 
     // initialization code
     this.initialized = true;
@@ -74,6 +74,22 @@ var markdown_here = {
     contextMenu.addEventListener('popupshowing', function (e) {
       markdown_here.contextMenuShowing(e);
     }, false);
+
+    // Register a hotkey listener
+    this.scriptLoader.loadSubScript('resource://markdown_here_common/options-store.js');
+    OptionsStore.get(function(prefs) {
+      // Only add a listener if a key is set
+      if (prefs.hotkey.key.length === 1) {
+        window.addEventListener('keyup', function(event) {
+          if (event.shiftKey === prefs.hotkey.shiftKey &&
+              event.ctrlKey === prefs.hotkey.ctrlKey &&
+              event.altKey === prefs.hotkey.altKey &&
+              event.which === prefs.hotkey.key.toUpperCase().charCodeAt(0)) {
+            markdown_here.onMenuItemCommand();
+          }
+        }, false);
+      }
+    });
   },
 
   contextMenuShowing: function(event) {
@@ -128,9 +144,8 @@ var markdown_here = {
     Components.utils.import('resource://markdown_here_common/marked.js', marked);
     Components.utils.import('resource://markdown_here_common/jsHtmlToText.js', htmlToText);
     this.scriptLoader.loadSubScript('resource://markdown_here_common/highlightjs/highlight.js', hljs);
-    Components.utils.import('resource://markdown_here_common/options-store.js', optionsStore);
 
-    optionsStore.OptionsStore.get(function(prefs) {
+    OptionsStore.get(function(prefs) {
       callback(
         markdownRender.markdownRender(
           prefs,

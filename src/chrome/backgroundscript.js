@@ -34,19 +34,27 @@ chrome.contextMenus.create({
 
 // Handle rendering requests from the content script.
 // See the comment in markdown-render.js for why we do this.
-chrome.extension.onRequest.addListener(
-  function renderRequest(html, sender, sendResponse) {
-
+chrome.extension.onRequest.addListener(function(request, sender, responseCallback) {
+  if (request.action === 'render') {
     OptionsStore.get(function(prefs) {
-      sendResponse({
+      responseCallback({
         html: markdownRender(
           prefs,
           htmlToText,
           marked,
           hljs,
-          html,
+          request.html,
           document),
         css: (prefs['main-css'] + prefs['syntax-css'])
       });
     });
-  });
+  }
+  else if (request.action === 'get-options') {
+    OptionsStore.get(function(prefs) { responseCallback(prefs); });
+  }
+  else {
+    console.log('unmatched request action');
+    console.log(action);
+    throw 'unmatched request action: ' + action;
+  }
+});

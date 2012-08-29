@@ -51,11 +51,21 @@ function getOperationalRange(focusedElem) {
 
   range = selection.getRangeAt(0);
 
+  // We're going to work around some weird OSX+Chrome behaviour where if you
+  // right-click on a word it gets selected, which then causes us to render just
+  // that one word and look dumb and be wrong.
+  if (typeof(chrome) !== 'undefined' &&
+      typeof(navigator) !== 'undefined' &&
+      navigator.userAgent.indexOf('OS X') >= 0 &&
+      range.toString().match(/^\b\w+\b$/)) {
+    range.collapse();
+  }
+
   if (range.collapsed) {
     // If there's no actual selection, select the contents of the focused element.
     range.selectNodeContents(focusedElem);
   }
-  
+
   // Does our range include a signature? If so, remove it.
   sig = findSignatureStart(focusedElem);
   if (sig) {
@@ -75,6 +85,9 @@ function getOperationalRange(focusedElem) {
 
 // A signature is indicated by the last `'-- '` text node (or something like it).
 // Returns the sig start element, or null if one is not found.
+// NOTE: I would really prefer that this be in markdown-render.js with the other
+// exclusion code. But I'm not sure how to find the sig as well without being
+// able to traverse the DOM. (Surely with regexes and parsing... someday.)
 function findSignatureStart(startElem) {
   var i, child, recurseReturn, sig;
 
@@ -170,9 +183,9 @@ function getMarkdownStylesheet(elem, css) {
   return stylesheet;
 }
 
-// Applies our styling explicitly to the elements under `elem`.
+// Applies our styling explicitly to the elements under `wrapperElem`.
 function makeStylesExplicit(wrapperElem, css) {
-  var stylesheet, rule, selectorMatches, i, j, styleAttr;
+  var stylesheet, rule, selectorMatches, i, j, styleAttr, elem;
 
   stylesheet = getMarkdownStylesheet(wrapperElem, css);
 
@@ -190,12 +203,27 @@ function makeStylesExplicit(wrapperElem, css) {
     else {
       selectorMatches = wrapperElem.querySelectorAll(rule.selectorText);
       for (j = 0; j < selectorMatches.length; j++) {
+
+        // Make sure the selector match isn't inside an exclusion block.
+        elem = selectorMatches[j];
+        while (elem) {
+          if (elem.classList.contains('markdown-here-exclude')) {
+            elem = 'excluded';
+            break;
+          }
+          elem = elem.parentElement;
+        }
+        if (elem === 'excluded') {
+          // Don't style this element.
+          continue;
+        }
+
         // Get the existing styles for the element.
         styleAttr = selectorMatches[j].getAttribute('style') || '';
 
         // Append the new styles to the end of the existing styles. This will
         // give the new ones precedence if any are the same as existing ones.
-        
+
         // Make sure existing styles end with a semicolon.
         if (styleAttr && styleAttr.search(/;[\s]*$/) < 0) {
           styleAttr += '; ';
@@ -272,7 +300,7 @@ function findMarkdownHereWrappersInRange(range) {
   if (cloneWrappers && cloneWrappers.length > 0) {
     // Now we have an array of *copies* of the wrappers in the DOM. Find them in
     // the DOM from their IDs. This is why we need unique IDs for our wrappers.
-    
+
     wrappers = [];
 
     for (i = 0; i < cloneWrappers.length; i++) {
@@ -281,7 +309,7 @@ function findMarkdownHereWrappersInRange(range) {
       if (!cloneWrappers[i].attributes.getNamedItem('data-md-original')) {
         continue;
       }
-      
+
       // Skip all wrappers that are in a `blockquote`. We don't want to revert
       // Markdown that was sent to us.
       if (hasParentElementOfTagName(cloneWrappers[i], 'BLOCKQUOTE')) {

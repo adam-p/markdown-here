@@ -8,7 +8,7 @@
  */
 
 var cssEdit, cssSyntaxEdit, cssSyntaxSelect, rawMarkdownIframe, savedMsg,
-    mathEnable, mathEdit;
+    mathEnable, mathEdit, hotkeyShift, hotkeyCtrl, hotkeyAlt, hotkeyKey;
 
 function onLoad() {
   // Set up our control references.
@@ -19,6 +19,10 @@ function onLoad() {
   savedMsg = document.getElementById('saved-msg');
   mathEnable = document.getElementById('math-enable');
   mathEdit = document.getElementById('math-edit');
+  hotkeyShift = document.getElementById('hotkey-shift');
+  hotkeyCtrl = document.getElementById('hotkey-ctrl');
+  hotkeyAlt = document.getElementById('hotkey-alt');
+  hotkeyKey = document.getElementById('hotkey-key');
 
   //
   // Syntax highlighting styles and selection
@@ -64,6 +68,13 @@ function onLoad() {
     mathEnable.checked = prefs['math-enabled'];
     mathEdit.value = prefs['math-value'];
 
+    hotkeyShift.checked = prefs.hotkey.shiftKey;
+    hotkeyCtrl.checked = prefs.hotkey.ctrlKey;
+    hotkeyAlt.checked = prefs.hotkey.altKey;
+    hotkeyKey.value = prefs.hotkey.key;
+
+    checkHotkeyKeyValidity();
+
     // Render the sample Markdown
     renderMarkdown();
 
@@ -90,7 +101,10 @@ var lastOptions = '';
 var lastChangeTime = null;
 var firstSave = true;
 function checkChange() {
-  var newOptions = cssEdit.value + cssSyntaxEdit.value + mathEnable.checked + mathEdit.value;
+  var newOptions =
+        cssEdit.value + cssSyntaxEdit.value +
+        mathEnable.checked + mathEdit.value +
+        hotkeyShift.checked + hotkeyCtrl.checked + hotkeyAlt.checked + hotkeyKey.value;
 
   if (newOptions !== lastOptions) {
     // CSS has changed.
@@ -112,7 +126,13 @@ function checkChange() {
           'main-css': cssEdit.value,
           'syntax-css': cssSyntaxEdit.value,
           'math-enabled': mathEnable.checked,
-          'math-value': mathEdit.value
+          'math-value': mathEdit.value,
+          'hotkey': {
+                      shiftKey: hotkeyShift.checked,
+                      ctrlKey: hotkeyCtrl.checked,
+                      altKey: hotkeyAlt.checked,
+                      key: hotkeyKey.value
+                    }
         },
         function() {
           updateMarkdownRender();
@@ -139,11 +159,13 @@ function checkChange() {
 function requestMarkdownConversion(html, callback) {
   if (typeof(chrome) !== 'undefined' && typeof(chrome.extension) !== 'undefined') {
     // Send a request to the add-on script to actually do the rendering.
-    chrome.extension.sendRequest(html, function(response) {
+    chrome.extension.sendRequest({action: 'render', html: html}, function(response) {
       callback(response.html, response.css);
     });
   }
   else {
+    // TODO: Implement a background script render service that can be used like
+    // the Chrome one.
     OptionsStore.get(function(prefs) {
       callback(
         markdownRender(
@@ -278,3 +300,18 @@ function resetMathEdit() {
   mathEdit.value = OptionsStore.defaults['math-value'];
 }
 document.getElementById('math-reset-button').addEventListener('click', resetMathEdit, false);
+
+// When the user changes the hotkey key, check if it's an alphanumeric value.
+// We only warning and not strictly enforcing because what's considered "alphanumeric"
+// in other languages and/or on other keyboards might be different.
+function checkHotkeyKeyValidity() {
+  var regex = new RegExp('^[a-zA-Z0-9]+$');
+  var value = hotkeyKey.value;
+  if (value.length && !regex.test(value)) {
+    document.getElementById('hotkey-key-warning').classList.remove('hidden');
+  }
+  else {
+    document.getElementById('hotkey-key-warning').classList.add('hidden');
+  }
+}
+document.getElementById('hotkey-key').addEventListener('keyup', checkHotkeyKeyValidity, false);
