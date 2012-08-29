@@ -10,7 +10,7 @@ Change Log
 
 * Firefox/Thunderbird: Added Options page. (Chrome already had it.) Take a look around and play with the styles. 
 
-* Chrome: Added a few new syntax highlighting themes. (Thanks to Highlight.js.)
+* Added a few new syntax highlighting themes. (Thanks to Highlight.js.)
 
 2012-08-16: v2.5.3
 ------------------
