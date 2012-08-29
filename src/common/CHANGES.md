@@ -1,7 +1,7 @@
 Change Log
 ==========
 
-2012-08-??: v2.6.0
+2012-08-29: v2.6.0
 ------------------
 
 * Added support for TeX math formulae. For info check out the Options page. 

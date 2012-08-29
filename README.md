@@ -83,7 +83,7 @@ After rendering your Markdown to pretty HTML, you can still get back to your ori
 
 Note that any changes you make to the pretty HTML will be lost when you revert to Markdown.
 
-In Gmail, you can also use the browser's Undo command (ctrl+z/cmd+z, or from the Edit menu). Be warned that you might also lose the last few characters you entered.
+In Gmail, you can also use the browser's Undo command (<kbd>ctrl</kbd>+<kbd>z</kbd> / <kbd>cmd</kbd>+<kbd>z</kbd>, or from the Edit menu). Be warned that you might also lose the last few characters you entered.
 
 ### Replies
 
@@ -202,8 +202,7 @@ Short answer: Gmail and Thunderbird are great.
 * Email signatures are automatically excluded from conversion. Specifically, anything after the semi-standard `'-- '` (note the trailing space) is left alone.
   * Note that Hotmail and Yahoo do *not* automatically add the `'-- '` to signatures, so you have to add it yourself.
 
-* In Firefox and Thunderbird, the "Markdown Toggle" menu item shows up for more element types than it can correctly render. This is intended to help people realize that they're not using a rich editor. Otherwise they just don't see the menu item and don't know why.
-  * In Chrome, I can't figure out how to selectively hide the menu item, so the behaviour isn't entirely intentional. But it would be basically the same even if I could.
+* The "Markdown Toggle" menu item shows up for more element types than it can correctly render. This is intended to help people realize that they're not using a rich editor. Otherwise they just don't see the menu item and don't know why.
 
 * Styling:
   * The use of browser-specific styles (-moz-, -webkit-) should be avoided. If used, they may not render correctly for people reading the email in a different browser from the one where the email was sent.
@@ -240,7 +239,7 @@ firefox/
   * Maybe add an option to make rendered mode read-only. If a user edits the rendered text and then reverts, they lose their changes, which is pretty bad. Better to not let the user make changes at all (optionally).
     * Is it possible to do that? In Thunderbird as well?
   * Maybe convert the HTML back to Markdown. (Like, actually convert it -- don't just use the stashed original Markdown.)
-    * [to-markdown](https://github.com/domchristie/to-markdown) will probably be useful.
+    * [to-markdown](https://github.com/domchristie/to-markdown) or [reMarked.js](https://github.com/leeoniya/reMarked.js) will probably be useful.
 
 * Test cases.
 
@@ -285,6 +284,7 @@ firefox/
 
 * HTML-to-Markdown
   * [domchristie / to-markdown](https://github.com/domchristie/to-markdown)
+  * [leeoniya / reMarked.js](https://github.com/leeoniya/reMarked.js)
 
 ## Feedback
 
