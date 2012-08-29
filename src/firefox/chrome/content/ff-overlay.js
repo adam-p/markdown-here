@@ -8,7 +8,7 @@
  * rendering services.
  */
 
-Components.utils.import('resource://common/markdown-here.js');
+Components.utils.import('resource://markdown_here_common/markdown-here.js');
 
 
 var markdown_here = {
@@ -124,11 +124,11 @@ var markdown_here = {
   markdownRender: function(targetDocument, html, callback) {
     var markdownRender = {}, hljs = {}, marked = {}, htmlToText = {}, optionsStore = {};
 
-    Components.utils.import('resource://common/markdown-render.js', markdownRender);
-    Components.utils.import('resource://common/marked.js', marked);
-    Components.utils.import('resource://common/jsHtmlToText.js', htmlToText);
-    this.scriptLoader.loadSubScript('resource://common/highlightjs/highlight.js', hljs);
-    Components.utils.import('resource://common/options-store.js', optionsStore);
+    Components.utils.import('resource://markdown_here_common/markdown-render.js', markdownRender);
+    Components.utils.import('resource://markdown_here_common/marked.js', marked);
+    Components.utils.import('resource://markdown_here_common/jsHtmlToText.js', htmlToText);
+    this.scriptLoader.loadSubScript('resource://markdown_here_common/highlightjs/highlight.js', hljs);
+    Components.utils.import('resource://markdown_here_common/options-store.js', optionsStore);
 
     optionsStore.OptionsStore.get(function(prefs) {
       callback(

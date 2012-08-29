@@ -263,8 +263,8 @@ var MozillaOptionsStore = {
 
   // The default values or URLs for our various options.
   defaults: {
-    'main-css': 'resource://common/default.css',
-    'syntax-css': 'resource://common/highlightjs/styles/github.css',
+    'main-css': 'resource://markdown_here_common/default.css',
+    'syntax-css': 'resource://markdown_here_common/highlightjs/styles/github.css',
     'math-enabled': false,
     'math-value': '<img src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}" alt="{mathcode}">'
   },
