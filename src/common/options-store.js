@@ -347,7 +347,7 @@ else {
 }
 
 this.OptionsStore._fillDefaults = function(prefsObj) {
-  var xhr, key, filledPrefsObj = prefsObj;
+  var xhr, key;
 
   for (key in this.defaults) {
     if (key === 'main-css' || key === 'syntax-css') {
@@ -360,17 +360,17 @@ this.OptionsStore._fillDefaults = function(prefsObj) {
         // synchronous
         xhr.send();
         // Assume 200 OK
-        filledPrefsObj[key] = xhr.responseText;
+        prefsObj[key] = xhr.responseText;
       }
     }
     else {
       if (typeof(prefsObj[key]) === 'undefined') {
-        filledPrefsObj[key] = this.defaults[key];
+        prefsObj[key] = this.defaults[key];
       }
     }
   }
 
-  return filledPrefsObj;
+  return prefsObj;
 };
 
 var EXPORTED_SYMBOLS = ['OptionsStore'];
