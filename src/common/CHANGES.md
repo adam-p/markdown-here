@@ -8,7 +8,9 @@ Change Log
   * Note that this feature is disabled by default, due to privacy concerns. Again, the see the Options page for info.
   * Thanks to [bordaigorl](https://github.com/bordaigorl) for [suggesting this feature](https://github.com/adam-p/markdown-here/issues/26) and helping to implement it.
 
-* Firefox/Thunderbird: Added Options page. (Chrome already had it.) Take a look around and play with the styles.
+* Firefox/Thunderbird: Added Options page. (Chrome already had it.) Take a look around and play with the styles. 
+
+* Chrome: Added a few new syntax highlighting themes. (Thanks to Highlight.js.)
 
 2012-08-16: v2.5.3
 ------------------
