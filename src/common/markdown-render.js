@@ -193,9 +193,9 @@
 
               preprocessInfo.html =
                 preprocessInfo.html.slice(0, currentOpenIndex) +
-                '<br><br>' +
+                '<br><br><br>' + // three empty lines is "guaranteed" to break a Markdown block (like a bullet list)
                 placeholder +
-                '<br><br>' +
+                '<br><br><br>' +
                 preprocessInfo.html.slice(closeIndex+closeTagLength);
 
               // Start from the beginning again. The length of the string has
