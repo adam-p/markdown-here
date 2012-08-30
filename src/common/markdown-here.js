@@ -45,6 +45,14 @@ function getOperationalRange(focusedElem) {
   var selection, range, sig;
 
   selection = focusedElem.ownerDocument.getSelection();
+
+  // For some reason Postbox requires window.getSelection() rather than
+  // document.getSelection(). It doesn't fail, but there's a deprecation
+  // warning, and then selection.getRangeAt() fails as undefined.
+  if (typeof(selection.getRangeAt) === 'undefined') {
+    selection = focusedElem.ownerDocument.defaultView.getSelection();
+  }
+
   if (selection.rangeCount < 1) {
     return null;
   }
@@ -262,6 +270,13 @@ function findMarkdownHereWrapper(focusedElem) {
 
   selection = focusedElem.ownerDocument.getSelection();
 
+  // For some reason Postbox requires window.getSelection() rather than
+  // document.getSelection(). It doesn't fail, but there's a deprecation
+  // warning, and then selection.getRangeAt() fails as undefined.
+  if (typeof(selection.getRangeAt) === 'undefined') {
+    selection = focusedElem.ownerDocument.defaultView.getSelection();
+  }
+
   if (selection.rangeCount < 1) {
     return null;
   }
@@ -370,7 +385,28 @@ function renderMarkdown(focusedElem, selectedRange, markdownRenderer) {
 
 // Revert the rendered Markdown wrapperElem back to its original form.
 function unrenderMarkdown(wrapperElem) {
-  wrapperElem.outerHTML = wrapperElem.getAttribute('data-md-original');
+  if (typeof(wrapperElem.outerHTML) !== 'undefined') {
+    wrapperElem.outerHTML = wrapperElem.getAttribute('data-md-original');
+  }
+  else {
+    // Postbox doesn't seem to support outerHTML, so we'll take a more
+    // convoluted (but possibly more correct, and maybe this should be used for
+    // all platforms) approach.
+
+    // Create a document fragment with the original HTML and replace the wrapper with it.
+
+    var originalHtml = wrapperElem.getAttribute('data-md-original');
+
+    var range = wrapperElem.ownerDocument.createRange();
+
+    var documentFragment = range.createContextualFragment(originalHtml);
+
+    range.selectNode(wrapperElem);
+
+    range.deleteContents();
+
+    range.insertNode(documentFragment);
+  }
 }
 
 // Exported function.

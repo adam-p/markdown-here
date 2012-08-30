@@ -135,6 +135,9 @@ MozillaOptionsService.listenRequest(MozillaOptionsService.requestHandler);
                             .document.getElementById('tabmail')
                             .openTab('contentTab', {contentPage: optionsUrl});
           }
+          else if (navigator.userAgent.indexOf('Postbox') >= 0) {
+              /* Haven't yet figured out how to open a tab in Postbox */
+          }
           else {
               var win = windowMediator.getMostRecentWindow('navigator:browser');
               win.gBrowser.selectedTab = win.gBrowser.addTab(optionsUrl);

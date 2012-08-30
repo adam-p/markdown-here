@@ -16,6 +16,15 @@
             </Description>
         </em:targetApplication>
 
+        <!-- Postbox -->
+        <em:targetApplication>
+          <Description>
+            <em:id>postbox@postbox-inc.com</em:id>
+            <em:minVersion>2.0</em:minVersion>
+            <em:maxVersion>3.*</em:maxVersion>
+          </Description>
+        </em:targetApplication>
+
         <!-- Any suitably modern toolkit application -->
         <em:targetApplication>
           <Description>
@@ -43,6 +52,12 @@
                     windowMediator.getMostRecentWindow('mail:3pane')
                                   .document.getElementById('tabmail')
                                   .openTab('contentTab', {contentPage: optionsUrl});
+                }
+                else if (navigator.userAgent.indexOf('Postbox') >= 0) {
+                    /* Haven't yet figured out how to open a tab in Postbox */
+                    var prompts = Components.classes["@mozilla.org/embedcomp/prompt-service;1"]
+                                            .getService(Components.interfaces.nsIPromptService);
+                    prompts.alert(null, 'Markdown Here', 'Sorry, the options page is not supported for Postbox.');
                 }
                 else {
                     var win = windowMediator.getMostRecentWindow('navigator:browser');
