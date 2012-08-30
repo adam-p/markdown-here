@@ -80,12 +80,14 @@ var markdown_here = {
     OptionsStore.get(function(prefs) {
       // Only add a listener if a key is set
       if (prefs.hotkey.key.length === 1) {
-        window.addEventListener('keyup', function(event) {
+        window.addEventListener('keydown', function(event) {
           if (event.shiftKey === prefs.hotkey.shiftKey &&
               event.ctrlKey === prefs.hotkey.ctrlKey &&
               event.altKey === prefs.hotkey.altKey &&
               event.which === prefs.hotkey.key.toUpperCase().charCodeAt(0)) {
             markdown_here.onMenuItemCommand();
+            event.preventDefault();
+            return false;
           }
         }, false);
       }

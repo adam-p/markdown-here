@@ -48,7 +48,7 @@ chrome.extension.sendRequest({action: 'get-options'}, function(prefs) {
   // Only add a listener if a key is set
   if (prefs.hotkey.key.length === 1) {
 
-    // HACK: In Chrome, we have to add a keyup listener to every iframe of interest,
+    // HACK: In Chrome, we have to add a keydown listener to every iframe of interest,
     // otherwise the handler will only fire on the topmost window. It's difficult
     // to iterate (recursively) through iframes and add listeners to them (especially
     // for Yahoo, where there isn't a page change when the compose window appears,
@@ -58,18 +58,6 @@ chrome.extension.sendRequest({action: 'get-options'}, function(prefs) {
     // Note that this will result in addEventListener being called on the same
     // iframe/document repeatedly, but that's okay -- duplicate handlers are discarded.
     // https://developer.mozilla.org/en-US/docs/DOM/element.addEventListener#Multiple_identical_event_listeners
-
-    var keyHandler = function(event) {
-      if (event.shiftKey === prefs.hotkey.shiftKey &&
-          event.ctrlKey === prefs.hotkey.ctrlKey &&
-          event.altKey === prefs.hotkey.altKey &&
-          event.which === prefs.hotkey.key.toUpperCase().charCodeAt(0)) {
-        requestHandler({action: 'hotkey'});
-        // Because we're using the keyup event, there's little or no sense in
-        // trying to event.preventDefault(), since the default has probably fired
-        // already. I'm not sure we should even if we could.
-      }
-    };
 
     setInterval(function() {
       var focusedElem = document.activeElement;
@@ -87,9 +75,16 @@ chrome.extension.sendRequest({action: 'get-options'}, function(prefs) {
       // are valid targets. And/or let the hotkey match if the correct type of
       // control has focus.
 
-      // Using the keyup event because it only fires once per keypress, unlike
-      // the keydown event (and the keypress event?).
-      focusedElem.addEventListener('keyup', keyHandler, false);
+      focusedElem.addEventListener('keydown', function(event) {
+        if (event.shiftKey === prefs.hotkey.shiftKey &&
+            event.ctrlKey === prefs.hotkey.ctrlKey &&
+            event.altKey === prefs.hotkey.altKey &&
+            event.which === prefs.hotkey.key.toUpperCase().charCodeAt(0)) {
+          requestHandler({action: 'hotkey'});
+          event.preventDefault();
+          return false;
+        }
+      }, false);
     }, 3000);
   }
 });
