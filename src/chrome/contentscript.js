@@ -59,6 +59,17 @@ chrome.extension.sendRequest({action: 'get-options'}, function(prefs) {
     // iframe/document repeatedly, but that's okay -- duplicate handlers are discarded.
     // https://developer.mozilla.org/en-US/docs/DOM/element.addEventListener#Multiple_identical_event_listeners
 
+    function hotkeyHandler(event) {
+      if (event.shiftKey === prefs.hotkey.shiftKey &&
+          event.ctrlKey === prefs.hotkey.ctrlKey &&
+          event.altKey === prefs.hotkey.altKey &&
+          event.which === prefs.hotkey.key.toUpperCase().charCodeAt(0)) {
+        requestHandler({action: 'hotkey'});
+        event.preventDefault();
+        return false;
+      }
+    }
+
     setInterval(function() {
       var focusedElem = document.activeElement;
 
@@ -75,16 +86,7 @@ chrome.extension.sendRequest({action: 'get-options'}, function(prefs) {
       // are valid targets. And/or let the hotkey match if the correct type of
       // control has focus.
 
-      focusedElem.addEventListener('keydown', function(event) {
-        if (event.shiftKey === prefs.hotkey.shiftKey &&
-            event.ctrlKey === prefs.hotkey.ctrlKey &&
-            event.altKey === prefs.hotkey.altKey &&
-            event.which === prefs.hotkey.key.toUpperCase().charCodeAt(0)) {
-          requestHandler({action: 'hotkey'});
-          event.preventDefault();
-          return false;
-        }
-      }, false);
+      focusedElem.addEventListener('keydown', hotkeyHandler, false);
     }, 3000);
   }
 });

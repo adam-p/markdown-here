@@ -76,20 +76,23 @@ var markdown_here = {
     }, false);
 
     // Register a hotkey listener
+
     this.scriptLoader.loadSubScript('resource://markdown_here_common/options-store.js');
     OptionsStore.get(function(prefs) {
+      function hotkeyHandler(event) {
+        if (event.shiftKey === prefs.hotkey.shiftKey &&
+            event.ctrlKey === prefs.hotkey.ctrlKey &&
+            event.altKey === prefs.hotkey.altKey &&
+            event.which === prefs.hotkey.key.toUpperCase().charCodeAt(0)) {
+          markdown_here.onMenuItemCommand();
+          event.preventDefault();
+          return false;
+        }
+      }
+
       // Only add a listener if a key is set
       if (prefs.hotkey.key.length === 1) {
-        window.addEventListener('keydown', function(event) {
-          if (event.shiftKey === prefs.hotkey.shiftKey &&
-              event.ctrlKey === prefs.hotkey.ctrlKey &&
-              event.altKey === prefs.hotkey.altKey &&
-              event.which === prefs.hotkey.key.toUpperCase().charCodeAt(0)) {
-            markdown_here.onMenuItemCommand();
-            event.preventDefault();
-            return false;
-          }
-        }, false);
+        window.addEventListener('keydown', hotkeyHandler, false);
       }
     });
   },
