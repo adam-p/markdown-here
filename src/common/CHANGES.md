@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+2012-xx-xx: v2.x.x
+------------------
+
+* Fixed: In Chrome on OS X, right-clicking on a word causes it to be selected. If "Markdown Toggle" were then clicked, it would render just that one word, which is lame. This behaviour is now avoided by not rendering single word selections -- if a single word is selected, the entire content will be rendered instead.
+
 2012-08-29: v2.6.0
 ------------------
 

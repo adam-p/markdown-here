@@ -103,10 +103,6 @@ To revert back to Markdown, just put your cursor anywhere in the block of conver
 
 * If you select only part of a block of text, only that text will be converted. The converted block will be wrapped in a paragraph element, so the original line will be broken up. You probably don't want to ever do this.
 
-* Be aware that on Mac OS X (only >= Lion?), right clicking a word (only in Chrome?) will cause that word to be selected, and that triggers *Markdown Here*'s selection-convert mode. So if you want to convert the whole email, right-click where there's no text.
-  * It's okay to have a selection when reverting back to Markdown, so don't worry about right-clicking on text when doing that.
-  * If right-clicking on empty space is a pain, you can select-all (Cmd+A) and then convert.
-
 * You can select and revert multiple converted blocks at the same time. One upshot of this is that you can select your entire email, click "Markdown Toggle", and all portions of it that you had converted will be reverted.
 
 * If you don't have anything selected when you click "Markdown Toggle", *Markdown Here* will check if there are converted blocks anywhere in the message and revert them. If there no converted blocks are found, it will convert the entire email.
