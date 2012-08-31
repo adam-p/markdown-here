@@ -142,22 +142,22 @@ Short answer: Gmail and Thunderbird are great.
   </tr>
   <tr>
     <th>Gmail</th>
-    <td></td>
-    <td></td>
-    <td></td>
+    <td>&#x2713;</td>
+    <td>&#x2713;</td>
+    <td>&#x2713;</td>
     <td></td>
   </tr>
   <tr>
     <th>Thunderbird</th>
-    <td></td>
-    <td></td>
-    <td></td>
+    <td>&#x2713;</td>
+    <td>&#x2713;</td>
+    <td>&#x2713;</td>
     <td></td>
   </tr>
   <tr>
     <th>Hotmail</th>
     <td>Paragraphs don't appear spaced correctly. (But they do appear spaced correctly when viewed by recipients.)</td>
-    <td></td>
+    <td>&#x2713;</td>
     <td>
       Email from received from Yahoo does not display with properly separated paragraphs. (Hotmail strips styling off <code>&lt;p&gt;</code> and <code>&lt;div&gt;</code> tags, and Yahoo uses the latter for paragraphs.)<p>
       Code blocks with very dark backgrounds aren't displayed correctly.
@@ -166,23 +166,23 @@ Short answer: Gmail and Thunderbird are great.
   </tr>
   <tr>
     <th>Yahoo</th>
-    <td></td>
-    <td></td>
-    <td></td>
+    <td>&#x2713;</td>
+    <td>&#x2713;</td>
+    <td>&#x2713;</td>
     <td></td>
   </tr>
   <tr>
     <th>Google Groups</th>
-    <td></td>
-    <td></td>
-    <td></td>
+    <td>&#x2713;</td>
+    <td>&#x2713;</td>
+    <td>&#x2713;</td>
     <td>Rendered version doesn't show in digest email. But that's probably true of manually-rich-edited posts as well.</td>
   </tr>
   <tr>
     <th>Evernote (web interface)</th>
-    <td></td>
+    <td>&#x2713;</td>
     <td>Seems to strip newlines from <code>&lt;pre&gt;</code> blocks, which breaks display of code.</td>
-    <td></td>
+    <td>&#x2713;</td>
     <td></td>
   </tr>
 </table>
