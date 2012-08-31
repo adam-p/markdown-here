@@ -62,34 +62,6 @@ var ChromeOptionsStore = {
         finalobj[key] = tempobj[key].join('');
       }
 
-      // I'm unhappy with my initial choice of option names, so I'm going to
-      // migrate them and remove this code in the next version.
-      // TEMP: REMOVE FROM HERE
-      if (typeof(finalobj['main-css']) === 'undefined') {
-        finalobj['main-css'] = finalobj['markdown-here-css'];
-      }
-
-      if (typeof(finalobj['syntax-css']) === 'undefined') {
-        finalobj['syntax-css'] = finalobj['markdown-here-syntax-css'];
-      }
-
-      // Clear out the defunct entries
-      var delEntries = ['markdown-here-css', 'markdown-here-syntax-css', 'lastVersion'];
-      var i;
-      for (i = 0; i < 10; i++) {
-        delEntries.push('markdown-here-css'+that._div+i);
-        delEntries.push('markdown-here-syntax-css'+that._div+i);
-      }
-      try {
-        chrome.storage.sync.remove(delEntries);
-      }
-      catch (ex) {
-        for (i = 0; i < delEntries.length; i++) {
-          localStorage.removeItem(delEntries[i]);
-        }
-      }
-      // TEMP: REMOVE TO HERE
-
       callback(that._fillDefaults(finalobj));
     });
   },
