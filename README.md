@@ -6,7 +6,7 @@ Writing email with code in it is pretty tedious. Writing Markdown with code in i
 
 To discover what can be done with Markdown in *Markdown Here*, check out the [Markdown Cheatsheet](//github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).
 
-<sup>*: And Google Groups posts!</sup>
+<sup>*: And Google Groups posts, and Evernote notes! [See details](#compatibility).</sup>
 
 ![screenshot of conversion](//github.com/adam-p/markdown-here/raw/master/store-assets/markdown-here-image1.gimp.png)
 
@@ -138,39 +138,52 @@ Short answer: Gmail and Thunderbird are great.
     <th>Compose</th>
     <th>Send</th>
     <th>Receive</th>
+    <th>Notes</th>
   </tr>
   <tr>
     <th>Gmail</th>
-    <td>Perfect</td>
-    <td>Perfect</td>
-    <td>Perfect</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
   </tr>
   <tr>
     <th>Thunderbird</th>
-    <td>Perfect</td>
-    <td>Perfect</td>
-    <td>Perfect</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
   </tr>
   <tr>
     <th>Hotmail</th>
     <td>Paragraphs don't appear spaced correctly. (But they do appear spaced correctly when viewed by recipients.)</td>
-    <td>Perfect</td>
+    <td></td>
     <td>
       Email from received from Yahoo does not display with properly separated paragraphs. (Hotmail strips styling off <code>&lt;p&gt;</code> and <code>&lt;div&gt;</code> tags, and Yahoo uses the latter for paragraphs.)<p>
       Code blocks with very dark backgrounds aren't displayed correctly.
     </td>
+    <td></td>
   </tr>
   <tr>
     <th>Yahoo</th>
-    <td>Perfect</td>
-    <td>Perfect</td>
-    <td>Perfect</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
   </tr>
   <tr>
     <th>Google Groups</th>
-    <td>Perfect</td>
-    <td>Perfect</td>
-    <td>Perfect</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>Rendered version doesn't show in digest email. But that's probably true of manually-rich-edited posts as well.</td>
+  </tr>
+  <tr>
+    <th>Evernote (web interface)</th>
+    <td></td>
+    <td>Seems to strip newlines from <code>&lt;pre&gt;</code> blocks, which breaks display of code.</td>
+    <td></td>
+    <td></td>
   </tr>
 </table>
 

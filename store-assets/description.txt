@@ -10,7 +10,7 @@ Totally simple to use:
 
 If only part of your email is Markdown, then select the part you want to render into pretty HTML, right click, and click "Markdown Toggle". Only your selection will be converted. To revert back to the original Markdown, right click in the rendered block and click "Markdown Toggle" again.
 
-Markdown Here is primarily targeted to work with Gmail and Thunderbird, but it also works pretty well with Yahoo and Hotmail. It also works great with Google Groups.
+Markdown Here is primarily targeted to work with Gmail and Thunderbird, but it also works pretty well with Yahoo and Hotmail. Additionally, it works great with Google Groups and pretty well with Evernote's web interface.
 
 Syntax highlighting note: Used fenced code blocks and specify the language name. See the project page for an example.
 
