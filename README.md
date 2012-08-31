@@ -273,10 +273,9 @@ firefox/
 
 *Markdown Here* was coded on the shoulders of giants.
 
-* Based on the Chrome extension pattern described in [antimatter15 / hideelements](https://github.com/antimatter15/hideelements).
 * Markdown-to-HTML: [chjj / marked](https://github.com/chjj/marked)
-* HTML-to-text: [mtrimpe / jsHtmlToText](https://github.com/mtrimpe/jsHtmlToText)
 * Syntax highlighting: [isagalaev / highlight.js](https://github.com/isagalaev/highlight.js)
+* HTML-to-text: [mtrimpe / jsHtmlToText](https://github.com/mtrimpe/jsHtmlToText)
 * Icons by [dunedel via IconArchive](http://www.iconarchive.com/show/kaori-icons-by-dunedhel/Other-Butterfly-icon.html) (CC BY-NC-ND 3.0)
 
 ### Other stuff not used, but to keep an eye on
