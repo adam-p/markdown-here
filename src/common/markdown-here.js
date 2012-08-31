@@ -11,6 +11,9 @@
 
 ;(function() {
 
+"use strict";
+/*global module:false*/
+
 // For debugging purposes. An external service is required to log with Firefox.
 var mylog = function() {};
 

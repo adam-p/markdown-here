@@ -3,6 +3,10 @@
  * MIT License : http://adampritchard.mit-license.org/
  */
 
+ "use strict";
+ /*global Components:false, AddonManager:false*/
+ /*jshint devel:true*/
+
 /*
  * The background service for supplying preferences to content scripts.
  * From: https://developer.mozilla.org/en-US/docs/Code_snippets/Interaction_between_privileged_and_non-privileged_pages

@@ -3,6 +3,11 @@
  * MIT License : http://adampritchard.mit-license.org/
  */
 
+"use strict";
+/*global chrome:false, OptionsStore:false, markdownRender:false,
+  htmlToText:false, marked:false, hljs:false*/
+/*jshint devel:true*/
+
 /*
  * Chrome background script.
  */
@@ -54,7 +59,7 @@ chrome.extension.onRequest.addListener(function(request, sender, responseCallbac
   }
   else {
     console.log('unmatched request action');
-    console.log(action);
-    throw 'unmatched request action: ' + action;
+    console.log(request.action);
+    throw 'unmatched request action: ' + request.action;
   }
 });

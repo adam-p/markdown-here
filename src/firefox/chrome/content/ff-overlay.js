@@ -3,6 +3,11 @@
  * MIT License : http://adampritchard.mit-license.org/
  */
 
+"use strict";
+/*global Components:false, markdownHere:false, GetCurrentEditorType:false,
+  OptionsStore:false*/
+/*jshint browser:true*/
+
 /*
  * Firefox-specific code for responding to the context menu item and providing
  * rendering services.
@@ -31,6 +36,7 @@ var markdown_here = {
     // Are we running in Thunderbird?
     if (typeof(GetCurrentEditorType) !== 'undefined' && GetCurrentEditorType !== null) {
       // Are we rich-editing?
+      /*jshint newcap:false*/
       if (GetCurrentEditorType().indexOf('html') < 0) {
         this.alert('You are using a plain-text compose editor. You must change to a rich editor to use Markdown Here.');
         return;

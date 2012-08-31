@@ -15,6 +15,9 @@
 
 ;(function() {
 
+  "use strict";
+  /*global module:false*/
+
   /**
    Using the functionality provided by the functions htmlToText and markdownToHtml,
    render html into pretty text.

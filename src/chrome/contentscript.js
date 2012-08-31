@@ -3,6 +3,11 @@
  * MIT License : http://adampritchard.mit-license.org/
  */
 
+"use strict";
+/*global chrome:false, markdownHere:false*/
+/*jshint devel:true, browser:true*/
+
+
 /*
  * Chrome-specific code for responding to the context menu item and providing
  * rendering services.
@@ -21,7 +26,7 @@ function requestHandler(event) {
       return;
     }
 
-    function logger() { console.log.apply(console, arguments); }
+    var logger = function() { console.log.apply(console, arguments); };
 
     mdReturn = markdownHere(document, requestMarkdownConversion, logger);
 
@@ -59,7 +64,7 @@ chrome.extension.sendRequest({action: 'get-options'}, function(prefs) {
     // iframe/document repeatedly, but that's okay -- duplicate handlers are discarded.
     // https://developer.mozilla.org/en-US/docs/DOM/element.addEventListener#Multiple_identical_event_listeners
 
-    function hotkeyHandler(event) {
+    var hotkeyHandler = function(event) {
       if (event.shiftKey === prefs.hotkey.shiftKey &&
           event.ctrlKey === prefs.hotkey.ctrlKey &&
           event.altKey === prefs.hotkey.altKey &&
@@ -68,7 +73,7 @@ chrome.extension.sendRequest({action: 'get-options'}, function(prefs) {
         event.preventDefault();
         return false;
       }
-    }
+    };
 
     setInterval(function() {
       var focusedElem = document.activeElement;

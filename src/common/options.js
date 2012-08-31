@@ -3,6 +3,10 @@
  * MIT License : http://adampritchard.mit-license.org/
  */
 
+"use strict";
+/*global OptionsStore:false, chrome:false, markdownRender:false,
+  htmlToText:false, marked:false, hljs:false, markdownHere:false*/
+
 /*
  * Main script file for the options page.
  */

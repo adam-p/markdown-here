@@ -6,6 +6,9 @@
 
 ;(function() {
 
+"use strict";
+/*global module:false, chrome:false, Components:false*/
+
 /*
  * Chrome storage helper. Gets around the synchronized value size limit.
  * Overall quota limits still apply (or less, but we should stay well within).
@@ -316,7 +319,7 @@ var MozillaOptionsStore = {
       if (callback) {
         request.setUserData('callback', callback, null);
 
-        document.addEventListener('markdown_here-options-response', function(event) {
+        var optionsResponseHandler = function(event) {
           var node, callback, response;
           node = event.target;
           callback = node.getUserData('callback');
@@ -324,11 +327,13 @@ var MozillaOptionsStore = {
 
           document.documentElement.removeChild(node);
 
-          document.removeEventListener('markdown_here-options-response', arguments.callee, false);
+          document.removeEventListener('markdown_here-options-response', optionsResponseHandler, false);
 
           callback(response);
           return;
-        }, false);
+        };
+
+        document.addEventListener('markdown_here-options-response', optionsResponseHandler, false);
       }
       document.documentElement.appendChild(request);
 
