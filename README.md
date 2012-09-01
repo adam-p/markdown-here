@@ -220,6 +220,13 @@ Short answer: Gmail and Thunderbird are great.
 
 "Building" is really just zipping. Create all archives relative to the `src` directory.
 
+An important preparatory step is to remove any hidden files that shouldn't be 
+included in the release file (like Windows' `desktop.ini` and OS X's `.DS_Store`, etc.). This shell command will delete those unwanted files: 
+
+```
+find . -name "desktop.ini" -or -name ".*" -and -not -name ".git" -print0 | xargs -0 rm -rf
+```
+
 ### Chrome extension
 
 Create a file with a `.zip` extension containing these files and directories:
