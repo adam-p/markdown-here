@@ -6,8 +6,8 @@ Writing email with code in it is pretty tedious. Writing Markdown with code in i
 
 To discover what can be done with Markdown in *Markdown Here*, check out the [Markdown Cheatsheet](//github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).
 
-<sup>*: And Google Groups posts, and Evernote notes! [See details](#compatibility).</sup>
-<sup>*: And TeX mathematical formulae!</sup>
+<sup>\*: And Google Groups posts, and Evernote notes! [See details](#compatibility).</sup>  
+<sup>\*: And TeX mathematical formulae!</sup>
 
 ![screenshot of conversion](//github.com/adam-p/markdown-here/raw/master/store-assets/markdown-here-image1.gimp.png)
 
