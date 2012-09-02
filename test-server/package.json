@@ -1,7 +1,0 @@
-{
-  "name": "markdown-here-test-server",
-  "version": "0.0.1",
-  "dependencies": {
-    "tako": "*"
-  }
-}
