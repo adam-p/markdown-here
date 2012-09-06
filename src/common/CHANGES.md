@@ -1,10 +1,18 @@
 Change Log
 ==========
 
-2012-xx-xx: v2.x.x
+2012-xx-xx: v2.6.1
 ------------------
 
+* Added hot-key (keyboard shortcut) support. The default key combination is <kbd>ctrl</kbd>+<kbd>alt</kbd>+<kbd>m</kbd>, but it is configurable from the Markdown Here options. Using the hot-key is identical to using the "Markdown Toggle" context menu item. 
+
+* Added basic support for the [Postbox](http://www.postbox-inc.com/) desktop email client, at the [request of a user](https://github.com/adam-p/markdown-here/issues/30). There are [some significant caveats](https://github.com/adam-p/markdown-here/wiki/Compatibility), like the lack of an options page.
+
+* Fixed [bug](https://github.com/adam-p/markdown-here/issues/27): Gmail and Thunderbird reply exclusion wasn't working well, resulting in quoted replies getting messed up when doing a full (non-selection) rendering. 
+
 * Fixed: In Chrome on OS X, right-clicking on a word causes it to be selected. If "Markdown Toggle" were then clicked, it would render just that one word, which is lame. This behaviour is now avoided by not rendering single word selections -- if a single word is selected, the entire content will be rendered instead.
+
+* Discovered [Evernote](https://evernote.com/) web-interface compatibility, thanks to user [markgoodson](https://github.com/markgoodson). ([See details](https://github.com/adam-p/markdown-here/wiki/Compatibility).)
 
 2012-08-29: v2.6.0
 ------------------

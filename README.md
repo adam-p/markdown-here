@@ -6,7 +6,7 @@ Writing email with code in it is pretty tedious. Writing Markdown with code in i
 
 To discover what can be done with Markdown in *Markdown Here*, check out the [Markdown Cheatsheet](//github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).
 
-<sup>\*: And Google Groups posts, and Evernote notes! [See details](#compatibility).</sup>  
+<sup>\*: And Google Groups posts, and Evernote notes, and Postbox! [See details](#compatibility).</sup>  
 <sup>\*: And TeX mathematical formulae!</sup>
 
 ![screenshot of conversion](//github.com/adam-p/markdown-here/raw/master/store-assets/markdown-here-image1.gimp.png)
@@ -131,7 +131,7 @@ Here are some common problems that people run into.
 
 ## Compatibility
 
-Short answer: Gmail and Thunderbird are great.
+Short answer: Gmail and Thunderbird are great. More info about some clients can be found [in the wiki](https://github.com/adam-p/markdown-here/wiki/Compatibility).
 
 <table>
   <tr>
@@ -163,14 +163,14 @@ Short answer: Gmail and Thunderbird are great.
       Email from received from Yahoo does not display with properly separated paragraphs. (Hotmail strips styling off <code>&lt;p&gt;</code> and <code>&lt;div&gt;</code> tags, and Yahoo uses the latter for paragraphs.)<p>
       Code blocks with very dark backgrounds aren't displayed correctly.
     </td>
-    <td></td>
+    <td>No reply exclusion.</td>
   </tr>
   <tr>
     <th>Yahoo</th>
     <td>&#x2713;</td>
     <td>&#x2713;</td>
     <td>&#x2713;</td>
-    <td></td>
+    <td>No reply exclusion.</td>
   </tr>
   <tr>
     <th>Google Groups</th>
@@ -185,6 +185,13 @@ Short answer: Gmail and Thunderbird are great.
     <td>Seems to strip newlines from <code>&lt;pre&gt;</code> blocks, which breaks display of code.</td>
     <td>&#x2713;</td>
     <td></td>
+  </tr>
+  <tr>
+    <th>Postbox</th>
+    <td>&#x2713;</td>
+    <td>Inserts newlines in raw email, which can mess up code blocks.</td>
+    <td>&#x2713;</td>
+    <td>No options page. No reply exclusion.</td>
   </tr>
 </table>
 
@@ -221,7 +228,7 @@ Short answer: Gmail and Thunderbird are great.
 
 "Building" is really just zipping. Create all archives relative to the `src` directory.
 
-An important preparatory step is to remove any hidden files that shouldn't be 
+An important preparatory step is to remove any system-generated hidden files that shouldn't be 
 included in the release file (like Windows' `desktop.ini` and OS X's `.DS_Store`, etc.). This shell command will delete those unwanted files: 
 
 ```
