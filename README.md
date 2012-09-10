@@ -232,7 +232,7 @@ An important preparatory step is to remove any system-generated hidden files tha
 included in the release file (like Windows' `desktop.ini` and OS X's `.DS_Store`, etc.). This shell command will delete those unwanted files: 
 
 ```
-find . -name "desktop.ini" -or -name ".*" -and -not -name ".git" -print0 | xargs -0 rm -rf
+find . -name "desktop.ini" -or -name ".*" -and -not -name ".git*" -print0 | xargs -0 rm -rf
 ```
 
 ### Chrome extension
