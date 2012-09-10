@@ -1,7 +1,7 @@
 Change Log
 ==========
 
-2012-xx-xx: v2.6.1
+2012-09-09: v2.6.1
 ------------------
 
 * Added hot-key (keyboard shortcut) support. The default key combination is <kbd>ctrl</kbd>+<kbd>alt</kbd>+<kbd>m</kbd>, but it is configurable from the Markdown Here options. Using the hot-key is identical to using the "Markdown Toggle" context menu item. 
