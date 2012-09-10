@@ -9,5 +9,3 @@
 - Marked: trailing (and leading?) newlines lost from fenced blocks. Create issue?
 
 - Update selection conversion screenshot to not be all about replies.
-
-- Submit to Lifehacker.
