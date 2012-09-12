@@ -6,7 +6,7 @@ Writing email with code in it is pretty tedious. Writing Markdown with code in i
 
 To discover what can be done with Markdown in *Markdown Here*, check out the [Markdown Cheatsheet](//github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).
 
-<sup>\*: And Google Groups posts, and Evernote notes, and Postbox! [See details](#compatibility).</sup>  
+<sup>\*: And Google Groups posts, and Wordpress posts, and Evernote notes, and Postbox! [See details](#compatibility).</sup>  
 <sup>\*: And TeX mathematical formulae!</sup>
 
 ![screenshot of conversion](//github.com/adam-p/markdown-here/raw/master/store-assets/markdown-here-image1.gimp.png)
@@ -178,6 +178,13 @@ Short answer: Gmail and Thunderbird are great. More info about some clients can 
     <td>&#x2713;</td>
     <td>&#x2713;</td>
     <td>Rendered version doesn't show in digest email. But that's probably true of manually-rich-edited posts as well.</td>
+  </tr>
+  <tr>
+    <th>Wordpress</th>
+    <td>Editor not exactly WYSIWYG, but Preview is accurate</td>
+    <td></td>
+    <td></td>
+    <td>See the <a href="https://github.com/adam-p/markdown-here/wiki/Compatibility">Compatibility wiki page</a> for full details and tips</td>
   </tr>
   <tr>
     <th>Evernote (web interface)</th>
