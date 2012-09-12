@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+2012-xx-xx: v2.x.x
+------------------
+
+* Discovered Wordpress post compatibility, thanks to user [Sina Iravanian](https://plus.google.com/116422808039109985732/posts). ([See details](https://github.com/adam-p/markdown-here/wiki/Compatibility).)
+
 2012-09-09: v2.6.1
 ------------------
 
