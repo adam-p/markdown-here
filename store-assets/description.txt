@@ -1,6 +1,6 @@
 Markdown Here lets you write email in Markdown and render it (make it pretty!) before sending.
 
-This is great for anyone who doesn't like fiddling around with formatting buttons while writing an email. It's especially good for programmers who write email with code in them -- it even supports syntax highlighting.
+This is great for anyone who doesn't like fiddling around with formatting buttons while writing an email. It's especially good for programmers who write email with code in them -- it even supports syntax highlighting. And for the mathematicians among us: Markdown Here will render TeX formulae as well.
 
 Totally simple to use:
 1. Write your email in your email client's rich editor using Github-flavoured Markdown.
