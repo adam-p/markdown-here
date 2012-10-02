@@ -1,5 +1,8 @@
 # ![Markdown Here logo](//github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png) Markdown Here
 
+[**Get it for Chrome**](https://chrome.google.com/webstore/detail/elifhakcjgalahccnjkneoccemfahfoa)  
+[**Get it for Firefox, Thunderbird, and Postbox**](https://addons.mozilla.org/en-US/firefox/addon/markdown-here/)
+
 *Markdown Here* is a Google Chrome, Firefox, and Thunderbird extension that lets you write email<sup>*</sup> in Markdown<sup>*</sup> and render them before sending. It also supports syntax highlighting (just specify the language in a fenced code block).
 
 Writing email with code in it is pretty tedious. Writing Markdown with code in it is easy. I found myself writing email in Markdown in the Github in-browser editor, then copying the preview into email. This is a pretty absurd workflow, so I decided create a tool to write and render Markdown right in the email.
