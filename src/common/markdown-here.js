@@ -28,6 +28,13 @@ function findFocusedElem(document) {
     focusedElem = focusedElem.contentDocument.activeElement;
   }
 
+  // There's a bug in Firefox/Thunderbird that we need to work around. For
+  // details see https://github.com/adam-p/markdown-here/issues/31
+  // The short version: Sometimes we'll get the <html> element instead of <body>.
+  if (focusedElem instanceof document.defaultView.HTMLHtmlElement) {
+    focusedElem = focusedElem.ownerDocument.body;
+  }
+
   return focusedElem;
 }
 
