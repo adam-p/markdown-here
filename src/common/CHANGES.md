@@ -1,8 +1,11 @@
 Change Log
 ==========
 
-2012-xx-xx: v2.x.x
+2012-10-06: v2.6.2
 ------------------
+
+* Firefox/Thunderbird: [Fixed bug](https://github.com/adam-p/markdown-here/issues/31): Tabbing into the email body and then Markdown-Toggling via keyboard (i.e., never clicking the mouse in the message body) would result in the email body being lost when sent. 
+  * This is due to [a bug in Firefox/Thunderbird](https://bugzilla.mozilla.org/show_bug.cgi?id=740813).
 
 * Discovered Wordpress post compatibility, thanks to user [Sina Iravanian](https://plus.google.com/116422808039109985732/posts). ([See details](https://github.com/adam-p/markdown-here/wiki/Compatibility).)
 
