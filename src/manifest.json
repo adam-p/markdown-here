@@ -20,5 +20,8 @@
       "js": ["common/markdown-here.js", "chrome/contentscript.js"]
     }
   ],
+  "page_action": {
+    "default_icon": "common/images/icon16.png"
+  },
   "options_page": "common/options.html"
 }
