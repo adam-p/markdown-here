@@ -64,7 +64,6 @@ var markdown_here = {
   },
 
   onToolbarButtonCommand: function(e) {
-    // We don't have a toolbar button, but if we did...
     markdown_here.onMenuItemCommand(e);
   },
 
@@ -80,6 +79,8 @@ var markdown_here = {
     contextMenu.addEventListener('popupshowing', function (e) {
       markdown_here.contextMenuShowing(e);
     }, false);
+
+    this.setupButton();
 
     // Register a hotkey listener
 
@@ -167,6 +168,53 @@ var markdown_here = {
           targetDocument),
         prefs['main-css'] + prefs['syntax-css']);
     });
+  },
+
+  /*
+   * Set up our toggle button.
+   * Please see src/chrome/contentscript.js for more info.
+   */
+  setupButton: function() {
+
+    // At this time, only this function differs between Chrome and Firefox.
+    function showToggleButton(show) {
+      var btn = document.getElementById("pageAction-markdown_here");
+      if (btn) {
+        btn.setAttribute("collapsed", !show);
+      }
+    }
+
+    function setToggleButtonVisibility(elem) {
+      var renderable = false;
+
+      if (elem && elem.ownerDocument) {
+        // We may have gotten here via the timer, so we'll add an event handler.
+        // Setting the event handler like this lets us better deal with iframes.
+        // It's okay to call `addEventListener` more than once with the exact same
+        // arguments.
+        elem.ownerDocument.addEventListener('focus', focusChange, true);
+
+        renderable = markdownHere.elementCanBeRendered(elem);
+      }
+
+      showToggleButton(renderable);
+    }
+
+    // When the focus in the page changes, check if the newly focused element is
+    // a valid Markdown Toggle target.
+    function focusChange(event) {
+      setToggleButtonVisibility(event.target);
+    }
+    window.document.addEventListener('focus', focusChange, true);
+
+    // We're using a function expression rather than a function declaration
+    // because Mozilla's automatic extension review prefers when you pass the
+    // former to `setInterval()`.
+    var intervalCheck = function() {
+      var focusedElem = markdownHere.findFocusedElem(window.document);
+      setToggleButtonVisibility(focusedElem);
+    };
+    setInterval(intervalCheck, 2000);
   }
 };
 

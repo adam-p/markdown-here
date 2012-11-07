@@ -20,4 +20,11 @@
               oncommand="markdown_here.onMenuItemCommand(event)"/>
   </popup>
 
+  <hbox id="urlbar-icons">
+    <image id="pageAction-markdown_here" insertafter="star-button"
+           src="resource://markdown_here_common/images/icon16.png"
+           onclick="markdown_here.onToolbarButtonCommand(event)"
+           tooltiptext="Markdown Toggle" />
+  </hbox>
+
 </overlay>

@@ -60,11 +60,9 @@ chrome.extension.onRequest.addListener(function(request, sender, responseCallbac
   else if (request.action === 'show-page-action') {
     if (request.show) {
       chrome.pageAction.show(sender.tab.id);
-      chrome.browserAction.enable(sender.tab.id);
     }
     else {
       chrome.pageAction.hide(sender.tab.id);
-      chrome.browserAction.disable(sender.tab.id);
     }
     chrome.pageAction.setTitle({tabId: sender.tab.id, title: 'Markdown Toggle'});
   }
@@ -77,10 +75,5 @@ chrome.extension.onRequest.addListener(function(request, sender, responseCallbac
 
 // Add the pageAction (the icon/button in the address bar) listener.
 chrome.pageAction.onClicked.addListener(function(tab) {
-  chrome.tabs.sendRequest(tab.id, {action: 'context-click'});
-});
-
-// Add the pageAction (the icon/button in the address bar) listener.
-chrome.browserAction.onClicked.addListener(function(tab) {
-  chrome.tabs.sendRequest(tab.id, {action: 'context-click'});
+  chrome.tabs.sendRequest(tab.id, {action: 'button-click'});
 });

@@ -20,7 +20,7 @@
       "js": ["common/markdown-here.js", "chrome/contentscript.js"]
     }
   ],
-  "browser_action": {
+  "page_action": {
     "default_icon": "common/images/icon32.png",
     "default_title": "Markdown Toggle"
   },

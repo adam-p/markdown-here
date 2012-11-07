@@ -18,7 +18,9 @@
 function requestHandler(event) {
   var focusedElem, mdReturn;
 
-  if (event && (event.action === 'context-click' || event.action === 'hotkey')) {
+  if (event && (event.action === 'context-click' ||
+                event.action === 'hotkey' ||
+                event.action === 'button-click')) {
 
     // Check if the focused element is a valid render target
     focusedElem = markdownHere.findFocusedElem(window.document);
@@ -117,28 +119,45 @@ chrome.extension.sendRequest({action: 'get-options'}, function(prefs) {
 //
 // The problem with iframes is that they don't get focus/blur events when
 // moving between iframes.
+//
+// Regarding the `focus` event: Chrome seems to give us (bubbling) focus
+// events if `useCapture` is true. Firefox doesn't seem to give us focus
+// events at all (and it doesn't provide `focusin` or `DOMFocusIn`). So on FF
+// we're basically relaying entirely on the interval checks.
 
-function showHideToggleButton(elem) {
-  // We may have gotten here via the timer, so we'll add an event handler.
-  // Setting the event handler like this lets us better deal with iframes.
-  // It's okay to call `addEventListener` more than once with the exact same
-  // arguments.
-  elem.ownerDocument.addEventListener('focus', focusChange, true);
+// At this time, only this function differs between Chrome and Firefox.
+function showToggleButton(show) {
+  chrome.extension.sendRequest({action: 'show-page-action', show: show});
+}
 
-  var renderable = markdownHere.elementCanBeRendered(elem);
-  chrome.extension.sendRequest({action: 'show-page-action', show: renderable});
+function setToggleButtonVisibility(elem) {
+  var renderable = false;
+
+  if (elem && elem.ownerDocument) {
+    // We may have gotten here via the timer, so we'll add an event handler.
+    // Setting the event handler like this lets us better deal with iframes.
+    // It's okay to call `addEventListener` more than once with the exact same
+    // arguments.
+    elem.ownerDocument.addEventListener('focus', focusChange, true);
+
+    renderable = markdownHere.elementCanBeRendered(elem);
+  }
+
+  showToggleButton(renderable);
 }
 
 // When the focus in the page changes, check if the newly focused element is
 // a valid Markdown Toggle target.
 function focusChange(event) {
-  showHideToggleButton(event.target);
+  setToggleButtonVisibility(event.target);
 }
 window.document.addEventListener('focus', focusChange, true);
 
-
-function intervalCheck() {
+// We're using a function expression rather than a function declaration
+// because Mozilla's automatic extension review prefers when you pass the
+// former to `setInterval()`.
+var intervalCheck = function() {
   var focusedElem = markdownHere.findFocusedElem(window.document);
-  showHideToggleButton(focusedElem);
-}
+  setToggleButtonVisibility(focusedElem);
+};
 setInterval(intervalCheck, 2000);
