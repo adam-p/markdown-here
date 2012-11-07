@@ -92,7 +92,7 @@ MozillaOptionsService.listenRequest(MozillaOptionsService.requestHandler);
 
   function updateHandler(currVer) {
 
-    // I don't know why, but the getting the extension prefs -- like last-version
+    // I don't know why, but getting the extension prefs -- like last-version
     // -- doesn't seem to work when using prefsServ and providing the full pref
     // name. So we need to use prefsServ to set the sync options and prefsBranch
     // to get and set the extension options.
@@ -108,6 +108,17 @@ MozillaOptionsService.listenRequest(MozillaOptionsService.requestHandler);
     catch (ex) {
     }
 
+    var localFirstRun = false;
+    try {
+      // No need to assign this to anything. It shouldn't exist on first run.
+      JSON.parse(prefsBranch.getCharPref('local-first-run'));
+    }
+    catch (ex) {
+      // It's only the first run if the above throws.
+      localFirstRun = true;
+    }
+    prefsBranch.setCharPref('local-first-run', JSON.stringify(localFirstRun));
+
     if (currVer !== lastVersion) {
       prefsBranch.setCharPref('last-version', JSON.stringify(currVer));
 
@@ -118,6 +129,9 @@ MozillaOptionsService.listenRequest(MozillaOptionsService.requestHandler);
       prefsServ.setBoolPref('services.sync.prefs.sync.extensions.markdown-here.math-enabled', true);
       prefsServ.setBoolPref('services.sync.prefs.sync.extensions.markdown-here.math-value', true);
       prefsServ.setBoolPref('services.sync.prefs.sync.extensions.markdown-here.hotkey', true);
+
+      // Don't sync this one -- local only.
+      prefsServ.setBoolPref('services.sync.prefs.sync.extensions.markdown-here.local-first-run', false);
 
       // This is a bit dirty. If we open the new tab immediately, it will get
       // overwritten when session restore starts creating tabs. So we'll wait a

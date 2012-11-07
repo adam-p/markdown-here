@@ -16,7 +16,16 @@
               insertafter="context-markdown_here-separator"
               class="menuitem-iconic"
               image="resource://markdown_here_common/images/icon16.png"
-              oncommand="markdown_here.onMenuItemCommand(event)"/>
+              oncommand="markdown_here.onMenuItemCommand(event)" />
   </popup>
+
+  <toolbarpalette id="MsgComposeToolbarPalette">
+    <toolbarbutton id="toolbarButton-markdown_here"
+                   class="toolbarbutton-1 chromeclass-toolbar-additional"
+                   label="&markdown_hereButton.label;"
+                   tooltiptext="&markdown_hereButton.tooltiptext;"
+                   image="resource://markdown_here_common/images/icon32.png"
+                   oncommand="markdown_here.onToolbarButtonCommand(event)" />
+  </toolbarpalette>
 
 </overlay>

@@ -248,7 +248,8 @@ var MozillaOptionsStore = {
     'syntax-css': 'resource://markdown_here_common/highlightjs/styles/github.css',
     'math-enabled': false,
     'math-value': '<img src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}" alt="{mathcode}">',
-    'hotkey': { shiftKey: false, ctrlKey: true, altKey: true, key: 'M' }
+    'hotkey': { shiftKey: false, ctrlKey: true, altKey: true, key: 'M' },
+    'local-first-run': true
   },
 
   // This is called both from content and background scripts, and we need vastly

@@ -82,10 +82,24 @@ var markdown_here = {
 
     this.setupButton();
 
-    // Register a hotkey listener
-
+    // Some setup steps are dependent on options
     this.scriptLoader.loadSubScript('resource://markdown_here_common/options-store.js');
     OptionsStore.get(function(prefs) {
+
+      // If this is Thunderbird and the very first local run, we'll set our
+      // toolbar button to be visible (otherwise it would need to be added
+      // manually).
+      if (prefs['local-first-run']) {
+        var toolbar = document.getElementById('composeToolbar2');
+        if (toolbar && !document.getElementById('toolbarButton-markdown_here')) {
+          toolbar.insertItem('toolbarButton-markdown_here', null);
+          toolbar.setAttribute('currentset', toolbar.currentSet);
+          document.persist(toolbar.id, 'currentset');
+        }
+      }
+
+      // Register a hotkey listener
+
       function hotkeyHandler(event) {
         if (event.shiftKey === prefs.hotkey.shiftKey &&
             event.ctrlKey === prefs.hotkey.ctrlKey &&
