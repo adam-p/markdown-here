@@ -13,6 +13,7 @@
  * rendering services.
  */
 
+
 // Handle the menu-item click
 function requestHandler(event) {
   var focusedElem, mdReturn;
@@ -25,19 +26,6 @@ function requestHandler(event) {
       alert('The selected field is not valid for Markdown rendering. Please use a rich editor.');
       return;
     }
-
-    // Remove the inline toggle button, if there is one.
-    var btnBlock = focusedElem.querySelector('.markdown-here-inline-toggle');
-    if (btnBlock) {
-      btnBlock.parentElement.removeChild(btnBlock);
-    }
-
-    // Replace the inline toggle button after the rendering/unrendering is
-    // finished. Fire a focus event to effect that.
-    // HACK: There's no clean way to know when it's finished, so use a
-    // timeout. In the future we could/should add an is-finished callback
-    // to `markdownHere()`.
-    setTimeout(fireFocusEvent, 500);
 
     var logger = function() { console.log.apply(console, arguments); };
 
@@ -52,6 +40,7 @@ function requestHandler(event) {
 }
 chrome.extension.onRequest.addListener(requestHandler);
 
+
 // The rendering service provided to the content script.
 // See the comment in markdown-render.js for why we do this.
 function requestMarkdownConversion(html, callback) {
@@ -60,6 +49,7 @@ function requestMarkdownConversion(html, callback) {
     callback(response.html, response.css);
   });
 }
+
 
 // Register a hotkey listener
 chrome.extension.sendRequest({action: 'get-options'}, function(prefs) {
@@ -110,74 +100,45 @@ chrome.extension.sendRequest({action: 'get-options'}, function(prefs) {
 });
 
 
-// Insert the Markdown Toggle button into the parentElem (which is assumed to
-// be a contentEditable compose box).
-function insertToggleButton(parentElem) {
-  // Does this element already have a button?
-  if (parentElem.querySelector('.markdown-here-inline-toggle')) {
-    return;
-  }
+/*
+ * Show/hide the toggle button.
+ */
 
-  var btnBlock = window.document.createElement('div');
-  btnBlock.classList.add('markdown-here-inline-toggle');
-  btnBlock.contentEditable = false;
+// We're going to show the button depending on whether the currently focused
+// element is renderable or not. We'll keep track of what's "currently
+// focused" in two ways:
+//   1) Handling `focus` events. But that doesn't work for iframes, so we also
+//      need...
+//   2) An interval timer. Every so often we'll check the current focus.
+//
+// In principle, the #2 is sufficient by itself, but it's nice to have the
+// immediate response of #1 where possible. (And I hesitate to make the timer
+// interval too small. I already find this approach distasteful.)
+//
+// The problem with iframes is that they don't get focus/blur events when
+// moving between iframes.
 
-  // Add some space at above the button.
-  btnBlock.appendChild(window.document.createElement('br'));
+function showHideToggleButton(elem) {
+  // We may have gotten here via the timer, so we'll add an event handler.
+  // Setting the event handler like this lets us better deal with iframes.
+  // It's okay to call `addEventListener` more than once with the exact same
+  // arguments.
+  elem.ownerDocument.addEventListener('focus', focusChange, true);
 
-  var btn = window.document.createElement('mdhbutton');
-  btn.textContent = 'Markdown Toggle';
-  btn.style.webkitAppearance = 'button';
-  btn.style.cursor = 'default';
-  btn.addEventListener('click', function() {
-    // TODO: Use a new action
-    requestHandler({action: 'hotkey'});
-  });
-
-  btnBlock.appendChild(btn);
-
-  parentElem.appendChild(btnBlock);
-
-  // When the parentElem loses focus, remove the button. This helps prevent
-  // anything undesired from being in the email when the user hits Send.
-  var parentElemBlur = function() {
-    if (btnBlock && btnBlock.parentElement) {
-      btnBlock.parentElement.removeChild(btnBlock);
-      btnBlock = null;
-    }
-    parentElem.removeEventListener('blur', parentElemBlur, false);
-
-    // When the parentElem gets focus back, re-create the button.
-    var parentElemFocus = function() {
-      parentElem.removeEventListener('focus', parentElemFocus, false);
-      insertToggleButton(parentElem);
-    };
-    parentElem.addEventListener('focus', parentElemFocus, false);
-  };
-  parentElem.addEventListener('blur', parentElemBlur, false);
+  var renderable = markdownHere.elementCanBeRendered(elem);
+  chrome.extension.sendRequest({action: 'show-page-action', show: renderable});
 }
 
 // When the focus in the page changes, check if the newly focused element is
 // a valid Markdown Toggle target.
 function focusChange(event) {
-  //var focusedElem = markdownHere.findFocusedElem(window.document);
-  var focusedElem = event.target;
-  var renderable = focusedElem && markdownHere.elementCanBeRendered(focusedElem);
-
-  chrome.extension.sendRequest({action: 'show-page-action', show: renderable});
-
-  if (renderable) {
-    insertToggleButton(focusedElem);
-  }
+  showHideToggleButton(event.target);
 }
-// Note that useCapture=true seems to be necessary.
 window.document.addEventListener('focus', focusChange, true);
 
 
-// Cause a focus event to be fired on the currently focused element.
-function fireFocusEvent() {
+function intervalCheck() {
   var focusedElem = markdownHere.findFocusedElem(window.document);
-  var evt = document.createEvent('HTMLEvents');
-  evt.initEvent('focus', true, true);
-  focusedElem.dispatchEvent(evt);
+  showHideToggleButton(focusedElem);
 }
+setInterval(intervalCheck, 2000);
