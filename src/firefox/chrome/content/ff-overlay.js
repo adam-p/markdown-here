@@ -41,6 +41,12 @@ var markdown_here = {
         this.alert('You are using a plain-text compose editor. You must change to a rich editor to use Markdown Here.');
         return;
       }
+
+      // The focus might not be in the compose box
+      if (!markdownHere.elementCanBeRendered(focusedElem)) {
+        this.alert('Please put the cursor into the compose box.');
+        return;
+      }
     }
     else { // Firefox
       if (!markdownHere.elementCanBeRendered(focusedElem)) {
@@ -85,18 +91,6 @@ var markdown_here = {
     // Some setup steps are dependent on options
     this.scriptLoader.loadSubScript('resource://markdown_here_common/options-store.js');
     OptionsStore.get(function(prefs) {
-
-      // If this is Thunderbird and the very first local run, we'll set our
-      // toolbar button to be visible (otherwise it would need to be added
-      // manually).
-      if (prefs['local-first-run']) {
-        var toolbar = document.getElementById('composeToolbar2');
-        if (toolbar && !document.getElementById('toolbarButton-markdown_here')) {
-          toolbar.insertItem('toolbarButton-markdown_here', null);
-          toolbar.setAttribute('currentset', toolbar.currentSet);
-          document.persist(toolbar.id, 'currentset');
-        }
-      }
 
       // Register a hotkey listener
 

@@ -28,4 +28,14 @@
                    oncommand="markdown_here.onToolbarButtonCommand(event)" />
   </toolbarpalette>
 
+  <toolbar class="chromeclass-toolbar" id="FormatToolbar">
+    <toolbarbutton id="toolbarButton-markdown_here"
+                   class="formatting-button toolbarbutton-1 chromeclass-toolbar-additional"
+                   insertbefore="smileButtonMenu"
+                   label="&markdown_hereButton.label;"
+                   tooltiptext="&markdown_hereButton.tooltiptext;"
+                   image="resource://markdown_here_common/images/icon32.png"
+                   oncommand="markdown_here.onToolbarButtonCommand(event)" />
+  </toolbar>
+
 </overlay>
