@@ -24,7 +24,7 @@
                    class="toolbarbutton-1 chromeclass-toolbar-additional"
                    label="&markdown_hereButton.label;"
                    tooltiptext="&markdown_hereButton.tooltiptext;"
-                   image="resource://markdown_here_common/images/icon32.png"
+                   image="resource://markdown_here_common/images/icon16.png"
                    oncommand="markdown_here.onToolbarButtonCommand(event)" />
   </toolbarpalette>
 
