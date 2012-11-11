@@ -186,12 +186,13 @@ var markdown_here = {
 
     // At this time, only this function differs between Chrome and Firefox.
     function showToggleButton(show) {
-      var btn = document.getElementById("pageAction-markdown_here");
+      var btn = document.getElementById('pageAction-markdown_here');
       if (btn) {
-        btn.setAttribute("collapsed", !show);
+        btn.setAttribute('collapsed', !show);
       }
     }
 
+    var lastRenderable;
     function setToggleButtonVisibility(elem) {
       var renderable = false;
 
@@ -205,7 +206,10 @@ var markdown_here = {
         renderable = markdownHere.elementCanBeRendered(elem);
       }
 
-      showToggleButton(renderable);
+      if (renderable !== lastRenderable) {
+        showToggleButton(renderable);
+        lastRenderable = renderable;
+      }
     }
 
     // When the focus in the page changes, check if the newly focused element is

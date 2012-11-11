@@ -130,6 +130,7 @@ function showToggleButton(show) {
   chrome.extension.sendRequest({ action: 'show-page-action', show: show });
 }
 
+var lastRenderable;
 function setToggleButtonVisibility(elem) {
   var renderable = false;
 
@@ -143,7 +144,10 @@ function setToggleButtonVisibility(elem) {
     renderable = markdownHere.elementCanBeRendered(elem);
   }
 
-  showToggleButton(renderable);
+  if (renderable !== lastRenderable) {
+    showToggleButton(renderable);
+    lastRenderable = renderable;
+  }
 }
 
 // When the focus in the page changes, check if the newly focused element is
