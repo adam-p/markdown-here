@@ -125,14 +125,22 @@ chrome.extension.sendRequest({action: 'get-options'}, function(prefs) {
 // events at all (and it doesn't provide `focusin` or `DOMFocusIn`). So on FF
 // we're basically relaying entirely on the interval checks.
 
+
 // At this time, only this function differs between Chrome and Firefox.
 function showToggleButton(show) {
   chrome.extension.sendRequest({ action: 'show-page-action', show: show });
 }
 
-var lastRenderable;
+
+var lastElemChecked, lastRenderable;
 function setToggleButtonVisibility(elem) {
   var renderable = false;
+
+  // Assumption: An element does not change renderability.
+  if (elem === lastElemChecked) {
+    return;
+  }
+  lastElemChecked = elem;
 
   if (elem && elem.ownerDocument) {
     // We may have gotten here via the timer, so we'll add an event handler.
@@ -150,12 +158,14 @@ function setToggleButtonVisibility(elem) {
   }
 }
 
+
 // When the focus in the page changes, check if the newly focused element is
 // a valid Markdown Toggle target.
 function focusChange(event) {
   setToggleButtonVisibility(event.target);
 }
 window.document.addEventListener('focus', focusChange, true);
+
 
 // We're using a function expression rather than a function declaration
 // because Mozilla's automatic extension review prefers when you pass the

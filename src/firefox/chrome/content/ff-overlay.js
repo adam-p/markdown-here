@@ -192,9 +192,15 @@ var markdown_here = {
       }
     }
 
-    var lastRenderable;
+    var lastElemChecked, lastRenderable;
     function setToggleButtonVisibility(elem) {
       var renderable = false;
+
+      // Assumption: An element does not change renderability.
+      if (elem === lastElemChecked) {
+        return;
+      }
+      lastElemChecked = elem;
 
       if (elem && elem.ownerDocument) {
         // We may have gotten here via the timer, so we'll add an event handler.
