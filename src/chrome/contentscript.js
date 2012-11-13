@@ -115,7 +115,9 @@ chrome.extension.sendRequest({action: 'get-options'}, function(prefs) {
 //
 // In principle, the #2 is sufficient by itself, but it's nice to have the
 // immediate response of #1 where possible. (And I hesitate to make the timer
-// interval too small. I already find this approach distasteful.)
+// interval too small. I already find this approach distasteful.) The focus
+// event does actually work for the new Chrome+Gmail interface, which is an
+// important target.
 //
 // The problem with iframes is that they don't get focus/blur events when
 // moving between iframes.
