@@ -2,6 +2,8 @@
 <?xml-stylesheet href="chrome://markdown_here/skin/overlay.css" type="text/css"?>
 <!DOCTYPE overlay SYSTEM "chrome://markdown_here/locale/overlay.dtd">
 
+<?xml-stylesheet href="chrome://markdown_here/skin/toolbar.css" type="text/css"?>
+
 <overlay id="markdown_here-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
   <stringbundleset id="stringbundleset">
@@ -29,10 +31,9 @@
 
   <toolbarpalette id="BrowserToolbarPalette">
     <toolbarbutton id="toolbarButton-markdown_here"
-                   class="toolbarbutton-1 chromeclass-toolbar-additional"
+                   class="toolbarButton-markdown_here toolbarbutton-1 chromeclass-toolbar-additional"
                    label="&markdown_hereButton.label;"
                    tooltiptext="&markdown_hereButton.tooltiptext;"
-                   image="resource://markdown_here_common/images/icon16.png"
                    oncommand="markdown_here.onToolbarButtonCommand(event)" />
   </toolbarpalette>
 </overlay>

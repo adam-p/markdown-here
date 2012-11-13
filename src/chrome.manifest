@@ -3,6 +3,8 @@ skin      markdown_here   classic/1.0   firefox/chrome/skin/
 locale    markdown_here   en-US         firefox/chrome/locale/en-US/
 resource  markdown_here_common          common/
 
+style chrome://global/content/customizeToolbar.xul chrome://markdown_here/skin/toolbar.css
+
 overlay chrome://browser/content/browser.xul  chrome://markdown_here/content/ff-overlay.xul application={ec8030f7-c20a-464f-9b0e-13a3a9e97384}
 overlay chrome://browser/content/browser.xul  chrome://markdown_here/content/options-overlay.xul application={ec8030f7-c20a-464f-9b0e-13a3a9e97384}
 

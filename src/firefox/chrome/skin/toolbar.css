@@ -1,0 +1,7 @@
+.toolbarButton-markdown_here {
+  list-style-image: url("resource://markdown_here_common/images/icon24.png");
+}
+
+toolbar[iconsize="small"] .toolbarButton-markdown_here {
+  list-style-image: url("resource://markdown_here_common/images/icon16.png");
+}
