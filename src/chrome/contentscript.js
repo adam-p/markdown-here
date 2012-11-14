@@ -53,55 +53,6 @@ function requestMarkdownConversion(html, callback) {
 }
 
 
-// Register a hotkey listener
-chrome.extension.sendRequest({action: 'get-options'}, function(prefs) {
-  // Only add a listener if a key is set
-  if (prefs.hotkey.key.length === 1) {
-
-    // HACK: In Chrome, we have to add a keydown listener to every iframe of interest,
-    // otherwise the handler will only fire on the topmost window. It's difficult
-    // to iterate (recursively) through iframes and add listeners to them (especially
-    // for Yahoo, where there isn't a page change when the compose window appears,
-    // so this content script doesn't get re-run). Instead we're going to use the
-    // dirty hack of checking every few seconds if the user has focused a new iframe
-    // and adding a handler to it.
-    // Note that this will result in addEventListener being called on the same
-    // iframe/document repeatedly, but that's okay -- duplicate handlers are discarded.
-    // https://developer.mozilla.org/en-US/docs/DOM/element.addEventListener#Multiple_identical_event_listeners
-
-    var hotkeyHandler = function(event) {
-      if (event.shiftKey === prefs.hotkey.shiftKey &&
-          event.ctrlKey === prefs.hotkey.ctrlKey &&
-          event.altKey === prefs.hotkey.altKey &&
-          event.which === prefs.hotkey.key.toUpperCase().charCodeAt(0)) {
-        requestHandler({action: 'hotkey'});
-        event.preventDefault();
-        return false;
-      }
-    };
-
-    setInterval(function() {
-      var focusedElem = document.activeElement;
-
-      // If the focus is within an iframe, we'll have to drill down.
-      while (focusedElem && focusedElem.contentDocument) {
-        focusedElem = focusedElem.contentDocument.activeElement;
-      }
-
-      if (focusedElem.ownerDocument) {
-        focusedElem = focusedElem.ownerDocument;
-      }
-
-      // TODO: Chrome and Mozilla: Only add a hotkey handler on pages/iframes that
-      // are valid targets. And/or let the hotkey match if the correct type of
-      // control has focus.
-
-      focusedElem.addEventListener('keydown', hotkeyHandler, false);
-    }, 3000);
-  }
-});
-
-
 /*
  * Show/hide the toggle button.
  */
@@ -169,11 +120,71 @@ function focusChange(event) {
 window.document.addEventListener('focus', focusChange, true);
 
 
-// We're using a function expression rather than a function declaration
-// because Mozilla's automatic extension review prefers when you pass the
-// former to `setInterval()`.
-var intervalCheck = function() {
-  var focusedElem = markdownHere.findFocusedElem(window.document);
+function buttonIntervalCheck(focusedElem) {
   setToggleButtonVisibility(focusedElem);
-};
+}
+
+
+/*
+ * Hotkey support
+ */
+
+// Default the hotkey check to a no-op until we get the necessary info from the
+// user options.
+var hotkeyIntervalCheck = function(focusedElem) {};
+chrome.extension.sendRequest({action: 'get-options'}, function(prefs) {
+  // Only add a listener if a key is set
+  if (prefs.hotkey.key.length === 1) {
+
+    // HACK: In Chrome, we have to add a keydown listener to every iframe of interest,
+    // otherwise the handler will only fire on the topmost window. It's difficult
+    // to iterate (recursively) through iframes and add listeners to them (especially
+    // for Yahoo, where there isn't a page change when the compose window appears,
+    // so this content script doesn't get re-run). Instead we're going to use the
+    // dirty hack of checking every few seconds if the user has focused a new iframe
+    // and adding a handler to it.
+    // Note that this will result in addEventListener being called on the same
+    // iframe/document repeatedly, but that's okay -- duplicate handlers are discarded.
+    // https://developer.mozilla.org/en-US/docs/DOM/element.addEventListener#Multiple_identical_event_listeners
+
+    // The actual hotkey event handler.
+    var hotkeyHandler = function(event) {
+      if (event.shiftKey === prefs.hotkey.shiftKey &&
+          event.ctrlKey === prefs.hotkey.ctrlKey &&
+          event.altKey === prefs.hotkey.altKey &&
+          event.which === prefs.hotkey.key.toUpperCase().charCodeAt(0)) {
+        requestHandler({action: 'hotkey'});
+        event.preventDefault();
+        return false;
+      }
+    };
+
+    // The hotkey option is enabled, and we've created our event handler function,
+    // so now let's do real hotkey interval checking.
+    hotkeyIntervalCheck = function(focusedElem) {
+      if (focusedElem.ownerDocument) {
+        focusedElem = focusedElem.ownerDocument;
+      }
+
+      // TODO: Chrome and Mozilla: Only add a hotkey handler on pages/iframes that
+      // are valid targets. And/or let the hotkey match if the correct type of
+      // control has focus.
+
+      focusedElem.addEventListener('keydown', hotkeyHandler, false);
+    };
+  }
+  // else the hotkey is disabled and we'll leave hotkeyIntervalCheck as a no-op
+});
+
+
+/*
+ * Interval checks
+ * See specific sections above for reasons why this is necessary.
+ */
+
+function intervalCheck() {
+  var focusedElem = markdownHere.findFocusedElem(window.document);
+  hotkeyIntervalCheck(focusedElem);
+  buttonIntervalCheck(focusedElem);
+}
 setInterval(intervalCheck, 2000);
