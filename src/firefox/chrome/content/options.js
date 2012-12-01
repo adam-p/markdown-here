@@ -10,6 +10,9 @@
 /*
  * The background service for supplying preferences to content scripts.
  * From: https://developer.mozilla.org/en-US/docs/Code_snippets/Interaction_between_privileged_and_non-privileged_pages
+ *
+ * Note that the stored prefs are returned raw (well, after being JSON parsed).
+ * No additional processing is done, like filling in default values.
  */
 
 
@@ -35,6 +38,38 @@ var MozillaOptionsService = {
 
   requestHandler: function(request, sender, callback) {
 
+    /*
+    For information about what `addExposedProps()` is doing and why, see:
+    https://blog.mozilla.org/addons/2012/08/20/exposing-objects-to-content-safely/
+    The short version is that in Mozilla v17 a security feature was introduced
+    (well, enforced) whereby objects shared between background scripts (i.e.,
+    this code) and content scripts (i.e., the options page) have to specifically
+    indicate which properties are accessible.
+    This function basically undoes that by making all properties readable/writable,
+    but for our purposes that's okay (this code is effectively relinquishing
+    control of the object to the content script).
+    This fixes issue #37 (https://github.com/adam-p/markdown-here/issues/37).
+    */
+    function addExposedProps(obj) {
+      var key, i;
+
+      if (obj.constructor === Object) {
+        if (!('__exposedProps__' in obj)) {
+          obj['__exposedProps__'] = {};
+        }
+
+        for (key in obj) {
+          obj['__exposedProps__'][key] = 'rw';
+          addExposedProps(obj[key]);
+        }
+      }
+      else if (obj.constructor === Array) {
+        for (i = 0; i < obj.length; i++) {
+          addExposedProps(obj[i]);
+        }
+      }
+    }
+
     var prefs, prefKeys, prefsObj, i;
 
     prefs = Components.classes['@mozilla.org/preferences-service;1']
@@ -48,6 +83,8 @@ var MozillaOptionsService = {
       for (i = 0; i < prefKeys.length; i++) {
         prefsObj[prefKeys[i]] = JSON.parse(prefs.getCharPref(prefKeys[i]));
       }
+
+      addExposedProps(prefsObj);
 
       return callback(prefsObj);
     }
