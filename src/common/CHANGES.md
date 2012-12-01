@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+  
+2012-12-01: v2.6.3
+------------------
+
+* Firefox/Thunderbird: [Fixed bug](https://github.com/adam-p/markdown-here/issues/37): Changes in Firefox/Thunderbird version 17 resulted in the options page not working correctly.
+
 2012-10-06: v2.6.2
 ------------------
 
