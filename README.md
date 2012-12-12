@@ -301,7 +301,6 @@ firefox/
 * Markdown-to-HTML: [chjj / marked](https://github.com/chjj/marked)
 * Syntax highlighting: [isagalaev / highlight.js](https://github.com/isagalaev/highlight.js)
 * HTML-to-text: [mtrimpe / jsHtmlToText](https://github.com/mtrimpe/jsHtmlToText)
-* Icons by [dunedel via IconArchive](http://www.iconarchive.com/show/kaori-icons-by-dunedhel/Other-Butterfly-icon.html) (CC BY-NC-ND 3.0)
 
 ### Other stuff not used, but to keep an eye on
 
@@ -325,4 +324,14 @@ All bugs, feature requests, pull requests, feedback, etc., are welcome.
 
 ## License
 
-http://adampritchard.mit-license.org/
+### Code
+
+MIT License: http://adampritchard.mit-license.org/
+
+### Logo
+
+Copyright 2012, Tatiana Fryntov. With exclusive, unrestricted, non-transferable license to Adam Pritchard.
+
+### Other images
+
+CC-BY
