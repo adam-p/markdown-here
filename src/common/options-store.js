@@ -301,6 +301,13 @@ var MozillaOptionsStore = {
 
           document.removeEventListener('markdown_here-options-response', optionsResponseHandler, false);
 
+          // We need to return a clone of the response.
+          // This is because the response came from the background script, and
+          // if later content-script code tries to modify it, an error will
+          // result (silently). I belive that this is related to
+          // `__exposedProps__` -- see `addExposedProps()` for details.
+          response = JSON.parse(JSON.stringify(response));
+
           callback(response);
           return;
         };
