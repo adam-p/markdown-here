@@ -2,6 +2,11 @@ Change Log
 ==========
 
   
+2013-01-02: v2.6.4
+------------------
+
+* Firefox/Thunderbird: Actually fixed the bug that I thought I fixed in v2.6.3. Much thanks to Daniel Ashton for letting me know that it was still busted and John Galt for assisting in the fix.
+
 2012-12-01: v2.6.3
 ------------------
 
