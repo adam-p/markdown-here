@@ -59,6 +59,9 @@ var MozillaOptionsService = {
         }
 
         for (key in obj) {
+          if (key === '__exposedProps__') {
+            continue;
+          }
           obj['__exposedProps__'][key] = 'rw';
           addExposedProps(obj[key]);
         }

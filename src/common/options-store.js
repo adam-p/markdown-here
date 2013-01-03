@@ -296,11 +296,26 @@ var MozillaOptionsStore = {
           var node, callback, response;
           node = event.target;
           callback = node.getUserData('callback');
+
+          // May be undefined if there is no response data.
           response = node.getUserData('response');
 
           document.documentElement.removeChild(node);
+          // Note that if there's no callback, then the node gets removed by
+          // background service: firefox/chrome/content/options.js:listenRequest()
+          // TODO: That's pretty badly hacky. Can we do the node removal after
+          // the `dispatchEvent()` call below?
 
           document.removeEventListener('markdown_here-options-response', optionsResponseHandler, false);
+
+          // We need to return a clone of the response.
+          // This is because the response came from the background script, and
+          // if later content-script code tries to modify it, an error will
+          // result (silently). I belive that this is related to
+          // `__exposedProps__` -- see `addExposedProps()` for details.
+          if (response) {
+            response = JSON.parse(JSON.stringify(response));
+          }
 
           callback(response);
           return;
