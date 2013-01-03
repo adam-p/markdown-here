@@ -24,14 +24,13 @@
 
   <hbox id="urlbar-icons">
     <image id="pageAction-markdown_here" insertafter="star-button"
-           src="resource://markdown_here_common/images/icon19.png"
+           src="resource://markdown_here_common/images/icon16.png"
            onclick="markdown_here.onToolbarButtonCommand(event)"
            tooltiptext="&markdown_hereButton.tooltiptext;" />
   </hbox>
 
   <toolbarpalette id="BrowserToolbarPalette">
     <toolbarbutton id="toolbarButton-markdown_here"
-                   image="resource://markdown_here_common/images/icon19.png"
                    class="toolbarButton-markdown_here toolbarbutton-1 chromeclass-toolbar-additional"
                    label="&markdown_hereButton.label;"
                    tooltiptext="&markdown_hereButton.tooltiptext;"

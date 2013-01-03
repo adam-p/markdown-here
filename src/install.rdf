@@ -38,7 +38,8 @@
         <em:description>Write your email in Markdown, then make it pretty.</em:description>
         <em:creator>Adam Pritchard</em:creator>
 
-        <em:iconURL>resource://markdown_here_common/images/icon128.png</em:iconURL>
+        <em:iconURL>resource://markdown_here_common/images/icon48.png</em:iconURL>
+        <em:icon64URL>resource://markdown_here_common/images/icon64.png</em:iconURL>
         <em:homepageURL>https://github.com/adam-p/markdown-here</em:homepageURL>
 
         <em:optionsURL>
