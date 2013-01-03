@@ -295,6 +295,8 @@ var MozillaOptionsStore = {
           var node, callback, response;
           node = event.target;
           callback = node.getUserData('callback');
+
+          // May be undefined if there is no response data.
           response = node.getUserData('response');
 
           document.documentElement.removeChild(node);
@@ -306,7 +308,9 @@ var MozillaOptionsStore = {
           // if later content-script code tries to modify it, an error will
           // result (silently). I belive that this is related to
           // `__exposedProps__` -- see `addExposedProps()` for details.
-          response = JSON.parse(JSON.stringify(response));
+          if (response) {
+            response = JSON.parse(JSON.stringify(response));
+          }
 
           callback(response);
           return;
