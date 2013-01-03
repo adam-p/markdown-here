@@ -300,6 +300,10 @@ var MozillaOptionsStore = {
           response = node.getUserData('response');
 
           document.documentElement.removeChild(node);
+          // Note that if there's no callback, then the node gets removed by
+          // background service: firefox/chrome/content/options.js:listenRequest()
+          // TODO: That's pretty badly hacky. Can we do the node removal after
+          // the `dispatchEvent()` call below?
 
           document.removeEventListener('markdown_here-options-response', optionsResponseHandler, false);
 
