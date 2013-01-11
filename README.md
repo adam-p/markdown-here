@@ -1,7 +1,8 @@
 # ![Markdown Here logo](//github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png) Markdown Here
 
-[**Get it for Chrome**](https://chrome.google.com/webstore/detail/elifhakcjgalahccnjkneoccemfahfoa)  
-[**Get it for Firefox, Thunderbird, and Postbox**](https://addons.mozilla.org/en-US/firefox/addon/markdown-here/)
+[**Get it for Chrome.**](https://chrome.google.com/webstore/detail/elifhakcjgalahccnjkneoccemfahfoa)  
+[**Get it for Firefox, Thunderbird, and Postbox.**](https://addons.mozilla.org/en-US/firefox/addon/markdown-here/)  
+[**Discuss it and ask questions in the Google Group.**](https://groups.google.com/forum/?fromgroups#!forum/markdown-here/)
 
 *Markdown Here* is a Google Chrome, Firefox, and Thunderbird extension that lets you write email<sup>*</sup> in Markdown<sup>*</sup> and render them before sending. It also supports syntax highlighting (just specify the language in a fenced code block).
 
