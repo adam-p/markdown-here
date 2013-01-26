@@ -1080,6 +1080,7 @@ if (typeof exports === 'object') {
   define(function() { return marked; });
 } else {
   this.marked = marked;
+  this.EXPORTED_SYMBOLS = ['marked']; /* adam-p: added easier loading in Firefox */
 }
 
 }).call(function() {
