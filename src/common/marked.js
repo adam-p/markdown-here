@@ -482,9 +482,9 @@ inline.normal = merge({}, inline);
  */
 
 inline.pedantic = merge({}, inline.normal, {
+  math: noop, /* adam-p: added for math support */
   strong: /^__(?=\S)([\s\S]*?\S)__(?!_)|^\*\*(?=\S)([\s\S]*?\S)\*\*(?!\*)/,
-  em: /^_(?=\S)([\s\S]*?\S)_(?!_)|^\*(?=\S)([\s\S]*?\S)\*(?!\*)/,
-  math: noop /* adam-p: added for math support */
+  em: /^_(?=\S)([\s\S]*?\S)_(?!_)|^\*(?=\S)([\s\S]*?\S)\*(?!\*)/
 });
 
 /**
