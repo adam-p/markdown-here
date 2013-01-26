@@ -1,5 +1,5 @@
 /*
- * Copyright Adam Pritchard 2012
+ * Copyright Adam Pritchard 2013
  * MIT License : http://adampritchard.mit-license.org/
  */
 
@@ -42,6 +42,9 @@
       gfm: true,
       pedantic: false,
       sanitize: false,
+      tables: true,
+      smartLists: true,
+      langPrefix: 'language-',
       math: userprefs['math-enabled'] ? mathify : null,
       highlight: function(codeText, codeLanguage) {
                     return highlightSyntax(
