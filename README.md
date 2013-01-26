@@ -221,7 +221,6 @@ Short answer: Gmail and Thunderbird are great. More info about some clients can 
   * ...with limitations. Please see the Issues for details, but here are some examples:
     * No support for GFM special links: [issue #11](https://github.com/adam-p/markdown-here/issues/11)
     * No support for GFM-style line breaks: [issue #12](https://github.com/adam-p/markdown-here/issues/12)
-    * No support for GFM-style tables: [issue #13](https://github.com/adam-p/markdown-here/issues/13)
 
 * Available languages for syntax highlighting (and the way they should be written in the fenced code block) can be seen on the [highlight.js demo page](http://softwaremaniacs.org/media/soft/highlight/test.html).
 
