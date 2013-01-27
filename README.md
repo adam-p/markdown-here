@@ -217,10 +217,7 @@ Short answer: Gmail and Thunderbird are great. More info about some clients can 
 
 ## Notes and Miscellaneous
 
-* *Markdown Here* uses [Github Flavored Markdown](http://github.github.com/github-flavored-markdown/).
-  * ...with limitations. Please see the Issues for details, but here are some examples:
-    * No support for GFM special links: [issue #11](https://github.com/adam-p/markdown-here/issues/11)
-    * No support for GFM-style line breaks: [issue #12](https://github.com/adam-p/markdown-here/issues/12)
+* *Markdown Here* uses [Github Flavored Markdown](http://github.github.com/github-flavored-markdown/), with the limitation that GFM special links are not supported ([issue #11](https://github.com/adam-p/markdown-here/issues/11)); nor will they be, as MDH is not Github-specific.
 
 * Available languages for syntax highlighting (and the way they should be written in the fenced code block) can be seen on the [highlight.js demo page](http://softwaremaniacs.org/media/soft/highlight/test.html).
 
@@ -242,7 +239,7 @@ An important preparatory step is to remove any system-generated hidden files tha
 included in the release file (like Windows' `desktop.ini` and OS X's `.DS_Store`, etc.). This shell command will delete those unwanted files: 
 
 ```
-find . -name "desktop.ini" -or -name ".*" -and -not -name ".git*" -print0 | xargs -0 rm -rf
+find . -name "desktop.ini" -or -name ".*" -and -not -name "." -and -not -name ".git*" -print0 | xargs -0 rm -rf
 ```
 
 ### Chrome extension

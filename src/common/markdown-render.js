@@ -44,6 +44,7 @@
       sanitize: false,
       tables: true,
       smartLists: true,
+      breaks: true,
       langPrefix: 'language-',
       math: userprefs['math-enabled'] ? mathify : null,
       highlight: function(codeText, codeLanguage) {
