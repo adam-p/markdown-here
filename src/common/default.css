@@ -7,12 +7,6 @@
 
 /* This is the overall wrapper, it should be treated as the `body` section. */
 .markdown-here-wrapper {
-  font-size: 1em;
-  font-family: Helvetica, arial, freesans, clean, sans-serif;
-  color: #222;
-  background-color: #fff;
-  border: none;
-  line-height: 1.2;
 }
 
 pre, code {
@@ -43,12 +37,22 @@ pre code {
   padding: 0.5em 0.7em;
 }
 
+/* This spacing has been tweaked to closely match Gmail+Chrome "paragraph" (two line breaks) spacing. */
+p, table, pre, dl, blockquote, q, ul, ol {
+  margin: 1.2em 0;
+}
+
 ul, ol {
   padding-left: 2em;
 }
 
-p, blockquote, ul, ol, dl, li, table, pre {
-  margin: 1em 0;
+li {
+  margin: 0.5em 0;
+}
+
+/* Smaller spacing for sub-lists */
+ul ul, ul ol, ol ul, ol ol {
+  margin: 0;
 }
 
 dl {
@@ -59,8 +63,6 @@ dl dt {
   font-size: 1em;
   font-weight: bold;
   font-style: italic;
-  padding: 0;
-  margin: 1em 0 0.4em;
 }
 
 dl dd {
@@ -68,13 +70,10 @@ dl dd {
   padding: 0 1em;
 }
 
-blockquote {
+blockquote, q {
   border-left: 4px solid #DDD;
   padding: 0 1em;
   color: #777;
-}
-
-blockquote, q {
   quotes: none;
 }
 
@@ -82,24 +81,10 @@ blockquote::before, blockquote::after, q::before, q::after {
   content: none;
 }
 
-a:link, a:visited {
-  color: #33e;
-  text-decoration: none;
-}
-
-a:hover {
-  color: #00f;
-  text-shadow: 1px 1px 2px #ccf;
-  text-decoration: underline;
-}
-
 h1, h2, h3, h4, h5, h6 {
   margin: 1.3em 0 1em;
   padding: 0;
   font-weight: bold;
-  color: black;
-  cursor: text;
-  position: relative;
 }
 
 h1 {
@@ -126,10 +111,6 @@ h5 {
 h6 {
   font-size: 1em;
   color: #777;
-}
-
-.shadow {
-  box-shadow:0 5px 15px #000;
 }
 
 table {
@@ -167,4 +148,5 @@ table tr th, table tr td {
 
 table tr th {
  font-weight: bold;
+  background-color: #F0F0F0;
 }
