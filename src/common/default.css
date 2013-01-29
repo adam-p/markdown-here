@@ -3,6 +3,9 @@
  * - The use of browser-specific styles (-moz-, -webkit-) should be avoided.
  *   If used, they may not render correctly for people reading the email in
  *   a different browser than the one from which the email was sent.
+ * - The use of state-dependent styles (like a:hover) don't work because they
+ *   don't match at the time the styles are made explicit. (In email, styles
+ *   must be explicitly applied to all elements -- stylesheets get stripped.)
  */
 
 /* This is the overall wrapper, it should be treated as the `body` section. */
@@ -88,16 +91,16 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: 2em;
+  font-size: 1.6em;
 }
 
 h2 {
-  font-size: 1.7em;
+  font-size: 1.4em;
   border-bottom: 1px solid #CCC;
 }
 
 h3 {
-  font-size: 1.5em;
+  font-size: 1.3em;
 }
 
 h4 {
