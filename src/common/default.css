@@ -120,7 +120,7 @@ table {
   padding: 0;
   border-collapse: collapse;
   border-spacing: 0;
-  font-size: 100%;
+  font-size: 1em;
   font: inherit;
   border: 0;
 }
@@ -144,6 +144,7 @@ table tr:nth-child(2n) {
 }
 
 table tr th, table tr td {
+  font-size: 1em;
   border: 1px solid #CCC;
   margin: 0;
   padding: 0.5em 1em;
@@ -152,4 +153,16 @@ table tr th, table tr td {
 table tr th {
  font-weight: bold;
   background-color: #F0F0F0;
+}
+
+table tr td[align="right"] {
+  text-align: right;
+}
+
+table tr td[align="left"] {
+  text-align: left;
+}
+
+table tr td[align="center"] {
+  text-align: center;
 }
