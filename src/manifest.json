@@ -21,10 +21,7 @@
     }
   ],
   "page_action": {
-    "default_icon": {
-      "19": "common/images/icon19.png",
-      "38": "common/images/icon38.png"
-      },
+    "default_icon": "common/images/icon38.png",
     "default_title": "Markdown Toggle"
   },
   "options_page": "common/options.html"
