@@ -267,18 +267,7 @@ firefox/
 
 ## Next Steps
 
-* Test cases.
-
-* Add user option to specify Markdown dialect?
-
-* Briefly highlight rendered and reverted blocks/ranges.
-  * Probably use [CSS transitions](https://developer.mozilla.org/en/CSS/CSS_transitions).
-
-* Add a visual cue as to what action took place. Sometimes converts and reverts may be a little surprising if the user's selection is off. And sometimes their viewport won't show the entirety of what change occurred.
-
-* When Thunderbird sends and displays, it leaves the `md-data-original` attribute (which contains the original Markdown) intact. We could provide the user the ability to extract this. (I know at least one person who wants this.)
-
-* Internationalization.
+See the [issues list](https://github.com/adam-p/markdown-here/issues) and the [Notes file](https://github.com/adam-p/markdown-here/blob/master/NOTES.md). Feel free to create a feature request issue if what you want isn't already there.
 
 ## Credits
 
