@@ -1,7 +1,32 @@
 Change Log
 ==========
 
-  
+2013-0x-xx: v2.7.0
+------------------
+
+* Markdown Here has a new logo! A big thank you to the talented Tatiana A. Fryntoff for creating our shiny new logo.
+
+* Added a Markdown Toggle button to complement the context menu item and hotkey. 
+  * In Chrome and Firefox, this button will appear in the address bar (near the bookmark star) when you're typing in a compose box that Markdown Here can work with. Otherwise it'll stay out of your way. 
+    * This button might show up in places other than your email page -- try it out! You might discover that Markdown Here works somewhere new. If you do, please [add it to the wiki](https://github.com/adam-p/markdown-here/wiki/Compatibility).
+  * In Thunderbird and Postbox the appears on the formatting toolbar.
+  * In Firefox, Thunderbird, and Postbox you can also right-click on the browser toolbar, click "Customize" and then add the button to the toolbar.
+  * If you have any feedback about the new button, please join the ["markdown-here" Google Group discussion](https://groups.google.com/d/topic/markdown-here/NjQRYcD1mgY/discussion).
+  * Thanks to user jakov for [suggesting this feature in issue #34](https://github.com/adam-p/markdown-here/issues/34).
+
+* Support for new Markdown features. All credit goes to chjj of the [Marked library](https://github.com/chjj/marked).
+  * Tables! Now you can easily add tables to you email with Markdown. If you're not familiar with the syntax, check out [the wiki cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#wiki-tables). This closes [issue #13](https://github.com/adam-p/markdown-here/issues/13).
+  * Strikethrough: Put double tildes around things to ~~strike it out~~ (`~~strike it out~~`).
+  * Smarter lists: Have you ever had a numbered list mysteriously/annoyingly become a bullet list because it comes after one? Not anymore.
+  * GFM line breaks: If you put a line break in your Markdown, it will be a line break after you toggle, instead of joining to form a single line. This closes [issue #12](https://github.com/adam-p/markdown-here/issues/12).
+
+* Default styling changes. Note that you'll have to reset your styles to get the new defaults (click "Reset to Default" on the options page). The changes include:
+  * Slightly smaller header font size.
+  * Less space between list items.
+  * Link styling is now more standard (e.g., underlines in Gmail).
+  * If you have any feedback on the default styling, please join the [Google Group discussion](https://groups.google.com/d/topic/markdown-here/V2n5ZxgzGQw/discussion).
+  * Thanks to [Casey Watts](http://caseywatts.github.com/2012/12/17/markdown_in_gmail/) for his input.
+
 2013-01-02: v2.6.4
 ------------------
 

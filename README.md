@@ -4,14 +4,14 @@
 [**Get it for Firefox, Thunderbird, and Postbox.**](https://addons.mozilla.org/en-US/firefox/addon/markdown-here/)  
 [**Discuss it and ask questions in the Google Group.**](https://groups.google.com/forum/?fromgroups#!forum/markdown-here/)
 
-*Markdown Here* is a Google Chrome, Firefox, and Thunderbird extension that lets you write email<sup>*</sup> in Markdown<sup>*</sup> and render them before sending. It also supports syntax highlighting (just specify the language in a fenced code block).
+*Markdown Here* is a Google Chrome, Firefox, and Thunderbird extension that lets you write email<sup>&dagger;</sup> in Markdown<sup>&Dagger;</sup> and render them before sending. It also supports syntax highlighting (just specify the language in a fenced code block).
 
 Writing email with code in it is pretty tedious. Writing Markdown with code in it is easy. I found myself writing email in Markdown in the Github in-browser editor, then copying the preview into email. This is a pretty absurd workflow, so I decided create a tool to write and render Markdown right in the email.
 
 To discover what can be done with Markdown in *Markdown Here*, check out the [Markdown Cheatsheet](//github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).
 
-<sup>\*: And Google Groups posts, and Wordpress posts, and Evernote notes, and Postbox! [See details](#compatibility).</sup>  
-<sup>\*: And TeX mathematical formulae!</sup>
+<sup>&dagger;: And Google Groups posts, and Wordpress posts, and Evernote notes, and Postbox! [See details](#compatibility).</sup>  
+<sup>&Dagger;: And TeX mathematical formulae!</sup>
 
 ![screenshot of conversion](//github.com/adam-p/markdown-here/raw/master/store-assets/markdown-here-image1.gimp.png)
 
@@ -78,7 +78,7 @@ Install it, and then…
    ```
    </pre>
 
-4. Right-click in the compose box and choose the "Markdown Toggle" item from the context menu.
+4. Right-click in the compose box and choose the "Markdown Toggle" item from the context menu. Or click the button that appears in your address bar. Or use the hotkey (<kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>M</kbd> by default).
 5. You should see your email rendered correctly from Markdown into rich HTML.
 6. Send your awesome email to everyone you know. It will appear to them the same way it looks to you.
 
@@ -88,7 +88,7 @@ After rendering your Markdown to pretty HTML, you can still get back to your ori
 
 Note that any changes you make to the pretty HTML will be lost when you revert to Markdown.
 
-In Gmail, you can also use the browser's Undo command (<kbd>ctrl</kbd>+<kbd>z</kbd> / <kbd>cmd</kbd>+<kbd>z</kbd>, or from the Edit menu). Be warned that you might also lose the last few characters you entered.
+In Gmail, you can also use the browser's Undo command (<kbd>CTRL</kbd>+<kbd>Z</kbd> / <kbd>CMD</kbd>+<kbd>Z</kbd>, or from the Edit menu). Be warned that you might also lose the last few characters you entered.
 
 ### Replies
 
@@ -118,7 +118,8 @@ The *Markdown Here* Options page can be accessed via the Chrome, Firefox, or Thu
 
 * Styling modifications for the rendered Markdown.
 * Syntax highlighting theme selection and modification.
-* TeX math formulae processing enabling and customization. 
+* TeX math formulae processing enabling and customization.
+* What the hotkey should be.
 
 For Chrome and Firefox, any changes made in the *Markdown Here* Options are automatically synchronized between your other installations of that browser (if you have the sync feature enabled in the browser). 
 
@@ -230,6 +231,7 @@ Short answer: Gmail and Thunderbird are great. More info about some clients can 
 
 * Styling:
   * The use of browser-specific styles (-moz-, -webkit-) should be avoided. If used, they may not render correctly for people reading the email in a different browser from the one where the email was sent.
+  * The use of state-dependent styles (like `a:hover`) don't work because they don't match at the time the styles are made explicit. (In email, styles must be explicitly applied to all elements -- stylesheets get stripped.)
 
 ## Building the Extension Bundles
 
@@ -265,16 +267,7 @@ firefox/
 
 ## Next Steps
 
-* Figure out how to prevent users from losing modifications to the rendered version when they revert.
-  * Prompted by [this Reddit comment](http://www.reddit.com/r/programming/comments/uagqd/write_email_in_markdown_then_make_it_pretty/c4u6cpv).
-  * Maybe add an option to make rendered mode read-only. If a user edits the rendered text and then reverts, they lose their changes, which is pretty bad. Better to not let the user make changes at all (optionally).
-    * Is it possible to do that? In Thunderbird as well?
-  * Maybe convert the HTML back to Markdown. (Like, actually convert it -- don't just use the stashed original Markdown.)
-    * [to-markdown](https://github.com/domchristie/to-markdown) or [reMarked.js](https://github.com/leeoniya/reMarked.js) will probably be useful.
-
 * Test cases.
-
-* Add a configurable hotkey.
 
 * Add user option to specify Markdown dialect?
 
@@ -285,11 +278,7 @@ firefox/
 
 * When Thunderbird sends and displays, it leaves the `md-data-original` attribute (which contains the original Markdown) intact. We could provide the user the ability to extract this. (I know at least one person who wants this.)
 
-* Internationalization
-
-* Fix inconsistent behaviour: Sometimes a converted/reverted block ends up selected, and sometimes not.
-
-* Make email signature conversion exclusion optional. (Maybe some people will make a special one to convert.)
+* Internationalization.
 
 ## Credits
 
@@ -307,28 +296,24 @@ firefox/
   * [isaacs / github-flavored-markdown](https://github.com/isaacs/github-flavored-markdown) (A Showdown derivative)
   * [Showdown](https://github.com/coreyti/showdown)
 
-* CSS:
-  * [Mou.app](http://mouapp.com/)'s CSS looks pretty good. It can be found [here](https://github.com/borismus/markdown-preview/issues/16). I'm hesitant to use it because Mou isn't FOSS.
-  * This [Github theme for Mou](https://github.com/gcollazo/mou-theme-github2) might be good, though.
-
 * HTML-to-Markdown
   * [domchristie / to-markdown](https://github.com/domchristie/to-markdown)
   * [leeoniya / reMarked.js](https://github.com/leeoniya/reMarked.js)
 
 ## Feedback
 
-All bugs, feature requests, pull requests, feedback, etc., are welcome.
+All bugs, feature requests, pull requests, feedback, etc., are welcome. [Create an issue](https://github.com/adam-p/markdown-here/issues). Or [post to the "markdown-here" Google Group](https://groups.google.com/forum/?fromgroups=#!forum/markdown-here).
 
 ## License
 
 ### Code
 
-MIT License: http://adampritchard.mit-license.org/
+MIT License: http://adampritchard.mit-license.org/ or see [the `LICENSE` file](https://github.com/adam-p/markdown-here/blob/master/LICENSE).
 
 ### Logo
 
-Copyright 2012, Tatiana Fryntov. With exclusive, unrestricted, non-transferable license to Adam Pritchard.
+Copyright 2012, Tatiana A. Fryntoff. With exclusive, unrestricted, non-transferable license to Adam Pritchard.
 
 ### Other images
 
-CC-BY
+[Creative Commons Attribution 3.0 Unported License](http://creativecommons.org/licenses/by/3.0/)
