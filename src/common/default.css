@@ -53,6 +53,11 @@ li {
   margin: 0.5em 0;
 }
 
+/* Space paragraphs in a list the same as the list itself. */
+li p {
+  margin: 0.5em 0;
+}
+
 /* Smaller spacing for sub-lists */
 ul ul, ul ol, ol ul, ol ol {
   margin: 0;
