@@ -1,4 +1,4 @@
-<!--
+  <!--
 Copyright Adam Pritchard 2012
 MIT License : http://adampritchard.mit-license.org/
 -->
@@ -16,12 +16,13 @@ MIT License : http://adampritchard.mit-license.org/
     <style type="text/css">
 
       body {
-        font-family: Helvetica, arial, freesans, clean, sans-serif;
+        font-family: Tahoma, Helvetica, arial, freesans, clean, sans-serif;
       }
 
       h1 {
         color: #482168;
         text-shadow: 1px 1px 1px rgba(72, 33, 104, 0.23);
+        vertical-align: top;
       }
 
       .horiz-groupset {
@@ -213,6 +214,18 @@ MIT License : http://adampritchard.mit-license.org/
         margin: 0;
       }
 
+      #usage {
+        margin: 10px;
+        padding: 10px;
+        background-color: #EEE;
+        border-radius: 5px;
+        box-shadow: 2px 2px 3px rgba(0, 0, 0, .2);
+        overflow-y: auto;
+      }
+
+      ol > li {
+        margin-bottom: 0.3em;
+      }
     </style>
   </head>
 
@@ -223,6 +236,32 @@ MIT License : http://adampritchard.mit-license.org/
         <img src="images/icon48.png">
         Markdown Here Options
       </h1>
+    </div>
+
+    <div id="usage">
+      <div class="section-title">
+        Basic Usage
+      </div>
+      <div>
+        <ol>
+          <li class="chrome-only">
+            Reload your email web page or restart your web browser.
+          </li>
+          <li>
+            Start a new email message.
+          </li>
+          <li>
+            Type some Markdown into the email. Try this: <code>*Hello* `Markdown` **Here**!</code>
+          </li>
+          <li>
+            Right-click in the email and then click "Markdown Toggle".
+          </li>
+          <li>
+            The message should now look pretty cool. Send it to your friends!
+          </li>
+        </ol>
+        For lots more info and advanced usage, see <a href="https://github.com/adam-p/markdown-here" target="_blank">the Github project page</a>.
+      </div>
     </div>
 
     <div id="options-container">

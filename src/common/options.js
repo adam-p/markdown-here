@@ -15,6 +15,9 @@ var cssEdit, cssSyntaxEdit, cssSyntaxSelect, rawMarkdownIframe, savedMsg,
     mathEnable, mathEdit, hotkeyShift, hotkeyCtrl, hotkeyAlt, hotkeyKey;
 
 function onLoad() {
+  // Show/hide elements depending on platform
+  showPlatformElements();
+
   // Set up our control references.
   cssEdit = document.getElementById('css-edit');
   cssSyntaxEdit = document.getElementById('css-syntax-edit');
@@ -97,6 +100,35 @@ function onLoad() {
   }
 }
 document.addEventListener('DOMContentLoaded', onLoad, false);
+
+// Shows/hide page elements depending on the current platform.
+// E.g., not all usage instructions apply to all clients.
+function showPlatformElements() {
+  // This could be done more elegantly, but...
+  if (navigator.userAgent.indexOf('Thunderbird') >= 0 ||
+      navigator.userAgent.indexOf('Postbox') >= 0) {
+    setClassVisibility(false, ['chrome-only']);
+  }
+  else if (navigator.userAgent.indexOf('Chrome') >= 0) {
+    setClassVisibility(true, ['chrome-only']);
+  }
+  else if (navigator.userAgent.indexOf('Firefox') >= 0) {
+    setClassVisibility(false, ['chrome-only']);
+  }
+  else {
+    // Shouldn't happen. Don't modify anything.
+  }
+
+  function setClassVisibility(visible, classes) {
+    var i, j, elems;
+    for (i = 0; i < classes.length; i++) {
+      elems = document.querySelectorAll('.'+classes[i]);
+      for (j = 0; j < elems.length; j++) {
+        elems[j].style.display = (visible ? "" : "none");
+      }
+    }
+  }
+}
 
 // If the CSS changes and the Markdown compose box is rendered, update the
 // rendering by toggling twice. If the compose box is not rendered, do nothing.

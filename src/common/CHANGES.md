@@ -7,10 +7,10 @@ Change Log
 * Markdown Here has a new logo! A big thank you to the talented Tatiana A. Fryntoff for creating our shiny new logo.
 
 * Added a Markdown Toggle button to complement the context menu item and hotkey. 
-  * In Chrome and Firefox, this button will appear in the address bar (near the bookmark star) when you're typing in a compose box that Markdown Here can work with. Otherwise it'll stay out of your way. 
-    * This button might show up in places other than your email page -- try it out! You might discover that Markdown Here works somewhere new. If you do, please [add it to the wiki](https://github.com/adam-p/markdown-here/wiki/Compatibility).
+  * In Chrome and Firefox, this button will appear on the browser toolbar. It will be enabled when you're typing in a compose box that Markdown Here can work with. 
+    * You might notice the button enabled when you're typing in places other than your email page -- try it out! You might discover that Markdown Here works somewhere new. If you do, please [add it to the compatibility wiki](https://github.com/adam-p/markdown-here/wiki/Compatibility).
   * In Thunderbird and Postbox the appears on the formatting toolbar.
-  * In Firefox, Thunderbird, and Postbox you can also right-click on the browser toolbar, click "Customize" and then add the button to the toolbar.
+  * In Firefox, Thunderbird, and Postbox you can add/remove/move the button by right-clicking on the toolbar, clicking "Customize", and then dragging the button around. In Chrome you can remove it by right-click on it.
   * If you have any feedback about the new button, please join the ["markdown-here" Google Group discussion](https://groups.google.com/d/topic/markdown-here/NjQRYcD1mgY/discussion).
   * Thanks to user jakov for [suggesting this feature in issue #34](https://github.com/adam-p/markdown-here/issues/34).
 
@@ -26,6 +26,8 @@ Change Log
   * Link styling is now more standard (e.g., underlines in Gmail).
   * If you have any feedback on the default styling, please join the [Google Group discussion](https://groups.google.com/d/topic/markdown-here/V2n5ZxgzGQw/discussion).
   * Thanks to [Casey Watts](http://caseywatts.github.com/2012/12/17/markdown_in_gmail/) for his input.
+
+* Added a "Basic Usage" section to the options page. This is in response to [a tweet](https://twitter.com/KSuzukiii/status/294376172295446528) from user KSuzukii.
 
 2013-01-02: v2.6.4
 ------------------
