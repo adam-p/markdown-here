@@ -81,7 +81,7 @@ function requestMarkdownConversion(html, callback) {
 
 // At this time, only this function differs between Chrome and Firefox.
 function showToggleButton(show) {
-  chrome.extension.sendRequest({ action: 'show-page-action', show: show });
+  chrome.extension.sendRequest({ action: 'show-toggle-button', show: show });
 }
 
 

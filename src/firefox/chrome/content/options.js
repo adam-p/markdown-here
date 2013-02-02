@@ -157,6 +157,7 @@ MozillaOptionsService.listenRequest(MozillaOptionsService.requestHandler);
       // It's only the first run if the above throws.
       localFirstRun = true;
     }
+
     prefsBranch.setCharPref('local-first-run', JSON.stringify(localFirstRun));
 
     if (currVer !== lastVersion) {
@@ -204,6 +205,54 @@ MozillaOptionsService.listenRequest(MozillaOptionsService.requestHandler);
       };
       timeoutID = setTimeout(tabRestored, 1);
       document.addEventListener('SSTabRestored', tabRestored, false);
+    }
+
+    if (true || localFirstRun) {
+      installButton('nav-bar', 'toolbarButton-markdown_here');
+
+      // Note that we can't add the same button to more than one toolbar.
+      // If we wanted to add the button to the addon toolbar, we'd use this
+      // line.
+      // The 'addon-bar' is available since Firefox 4
+      //installButton('addon-bar', 'toolbarButton-markdown_here');
+    }
+  }
+
+  // From: https://developer.mozilla.org/en-US/docs/Code_snippets/Toolbar?redirectlocale=en-US&redirectslug=Code_snippets%3AToolbar#Adding_button_by_default
+  /**
+   * Installs the toolbar button with the given ID into the given
+   * toolbar, if it is not already present in the document.
+   *
+   * @param {string} toolbarId The ID of the toolbar to install to.
+   * @param {string} id The ID of the button to install.
+   * @param {string} afterId The ID of the element to insert after. @optional
+   */
+  function installButton(toolbarId, id, afterId) {
+    if (!document.getElementById(id)) {
+      var toolbar, elem;
+
+      toolbar = document.getElementById(toolbarId);
+
+      if (!toolbar) {
+        return;
+      }
+
+      // If no afterId is given, then append the item to the toolbar
+      var before = null;
+      if (afterId) {
+        elem = document.getElementById(afterId);
+        if (elem && elem.parentNode == toolbar) {
+          before = elem.nextElementSibling;
+        }
+      }
+
+      toolbar.insertItem(id, before);
+      toolbar.setAttribute('currentset', toolbar.currentSet);
+      document.persist(toolbar.id, 'currentset');
+
+      if (toolbarId == 'addon-bar') {
+        toolbar.collapsed = false;
+      }
     }
   }
 })();
