@@ -186,9 +186,39 @@ var markdown_here = {
 
     // At this time, only this function differs between Chrome and Firefox.
     function showToggleButton(show) {
-      var btn = document.getElementById('pageAction-markdown_here');
+      var btn, tooltipString;
+
+      // Page action button
+      btn = document.getElementById('pageAction-markdown_here');
       if (btn) {
         btn.setAttribute('collapsed', !show);
+      }
+
+      // Toolbar button
+      btn = document.getElementById('toolbarButton-markdown_here');
+      if (btn) {
+        var stringsBundle = document.getElementById('markdown_here-strings');
+
+        if (show) {
+          btn.removeAttribute('disabled');
+
+          if (stringsBundle) {
+            tooltipString = stringsBundle.getString('markdown_hereButton.tooltiptext');
+            if (tooltipString) {
+              btn.setAttribute('tooltiptext', tooltipString);
+            }
+          }
+        }
+        else {
+          btn.setAttribute('disabled', 'true');
+
+          if (stringsBundle) {
+            tooltipString = stringsBundle.getString('markdown_hereButton.disabledtooltiptext');
+            if (tooltipString) {
+              btn.setAttribute('tooltiptext', tooltipString);
+            }
+          }
+        }
       }
     }
 
