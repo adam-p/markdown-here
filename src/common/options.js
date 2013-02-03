@@ -80,7 +80,7 @@ function onLoad() {
     hotkeyAlt.checked = prefs.hotkey.altKey;
     hotkeyKey.value = prefs.hotkey.key;
 
-    checkHotkeyKeyValidity();
+    hotkeyChangeHandler();
 
     // Render the sample Markdown
     renderMarkdown();
@@ -340,7 +340,8 @@ document.getElementById('math-reset-button').addEventListener('click', resetMath
 // When the user changes the hotkey key, check if it's an alphanumeric value.
 // We only warning and not strictly enforcing because what's considered "alphanumeric"
 // in other languages and/or on other keyboards might be different.
-function checkHotkeyKeyValidity() {
+function hotkeyChangeHandler() {
+  // Check for a valid key value.
   var regex = new RegExp('^[a-zA-Z0-9]+$');
   var value = hotkeyKey.value;
   if (value.length && !regex.test(value)) {
@@ -349,5 +350,31 @@ function checkHotkeyKeyValidity() {
   else {
     document.getElementById('hotkey-key-warning').classList.add('hidden');
   }
+
+  // Set any representations of the hotkey to the new value.
+  var htmlRepr = '';
+  if (hotkeyShift.checked) htmlRepr += '<kbd>SHIFT</kbd>';
+  if (hotkeyCtrl.checked) htmlRepr += (htmlRepr.length ? '+' : '') + '<kbd>CTRL</kbd>';
+  if (hotkeyAlt.checked) htmlRepr += (htmlRepr.length ? '+' : '') + '<kbd>ALT</kbd>';
+  if (hotkeyKey.value) htmlRepr += (htmlRepr.length ? '+' : '') + '<kbd>' + hotkeyKey.value.toString().toUpperCase() + '</kbd>';
+
+  Array.prototype.forEach.call(document.querySelectorAll('.hotkey-display'), function(elem) {
+    if (hotkeyKey.value) {
+      if (elem.parentElement.classList.contains('hotkey-display-wrapper')) {
+        elem.parentElement.style.display = '';
+      }
+      elem.style.display = '';
+      elem.innerHTML = htmlRepr;
+    }
+    else {
+      if (elem.parentElement.classList.contains('hotkey-display-wrapper')) {
+        elem.parentElement.style.display = 'none';
+      }
+      elem.style.display = 'none';
+    }
+  });
 }
-document.getElementById('hotkey-key').addEventListener('keyup', checkHotkeyKeyValidity, false);
+document.getElementById('hotkey-key').addEventListener('keyup', hotkeyChangeHandler, false);
+document.getElementById('hotkey-shift').addEventListener('click', hotkeyChangeHandler, false);
+document.getElementById('hotkey-ctrl').addEventListener('click', hotkeyChangeHandler, false);
+document.getElementById('hotkey-alt').addEventListener('click', hotkeyChangeHandler, false);

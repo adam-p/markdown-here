@@ -7,238 +7,234 @@ MIT License : http://adampritchard.mit-license.org/
 
 <html>
 
-  <head>
-    <meta charset="utf-8">
-    <link rel="icon" type="image/png" href="images/icon16.png" />
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="images/icon16.png" />
 
-    <title>Markdown Here Options</title>
+  <title>Markdown Here Options</title>
 
-    <style type="text/css">
+  <style type="text/css">
 
-      body {
-        font-family: Tahoma, Helvetica, arial, freesans, clean, sans-serif;
-      }
+  body {
+    font-family: Tahoma, Helvetica, arial, freesans, clean, sans-serif;
+  }
 
-      h1 {
-        color: #482168;
-        text-shadow: 1px 1px 1px rgba(72, 33, 104, 0.23);
-        vertical-align: top;
-      }
+  h1 {
+    color: #482168;
+    text-shadow: 1px 1px 1px rgba(72, 33, 104, 0.23);
+    vertical-align: top;
+  }
 
-      .horiz-groupset {
-        height: 400px;
-        width: 100%;
-        overflow: auto;
-      }
+  .horiz-groupset {
+    height: 400px;
+    width: 100%;
+    overflow: auto;
+  }
 
-      .control-group {
-        float: left;
-        width: 45%;
-        width: -webkit-calc(50% - 40px);
-        width: -moz-calc(50% - 40px);
-        width: calc(50% - 40px);
-        height: 360px;
-        height: -webkit-calc(100% - 40px);
-        height: -moz-calc(100% - 40px);
-        height: calc(100% - 40px);
-        margin: 10px;
-        padding: 10px;
-        background-color: #EEE;
-        border-radius: 5px;
-        box-shadow: 2px 2px 3px rgba(0, 0, 0, .2);
-        overflow-y: auto;
-      }
+  .control-group {
+    float: left;
+    width: 45%;
+    width: -webkit-calc(50% - 40px);
+    width: -moz-calc(50% - 40px);
+    width: calc(50% - 40px);
+    height: 360px;
+    height: -webkit-calc(100% - 40px);
+    height: -moz-calc(100% - 40px);
+    height: calc(100% - 40px);
+    margin: 10px;
+    padding: 10px;
+    background-color: #EEE;
+    border-radius: 5px;
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, .2);
+    overflow-y: auto;
+  }
 
-      .control-group > * {
-        margin: 5px 0;
-      }
+  .control-group > * {
+    margin: 5px 0;
+  }
 
-      .control-group > .stretch {
-        height: 280px;
-        height: -webkit-calc(100% - 80px);
-        height: -moz-calc(100% - 80px);
-        height: calc(100% - 80px);
-      }
+  .control-group > .stretch {
+    height: 280px;
+    height: -webkit-calc(100% - 80px);
+    height: -moz-calc(100% - 80px);
+    height: calc(100% - 80px);
+  }
 
-      .stretch {
-        position: relative;
-      }
+  .stretch {
+    position: relative;
+  }
 
-      .stretch > * {
-        box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        position: absolute;
-        height: 100%;
-        width: 100%;
-      }
+  .stretch > * {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+  }
 
-      .section-title {
-        font-size: 1.2em;
-        font-weight: bold;
-        color: #482168;
-        text-shadow: 1px 1px 1px rgba(72, 33, 104, 0.23);
-      }
+  .section-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #482168;
+    text-shadow: 1px 1px 1px rgba(72, 33, 104, 0.23);
+  }
 
-      .iframe-container {
-        background-color: #FFF;
-      }
+  .iframe-container {
+    background-color: #FFF;
+  }
 
-      #notes {
-      }
+  #notes {
+  }
 
-      #notes ul {
-        padding-left: 30px;
-      }
+  #notes ul {
+    padding-left: 30px;
+  }
 
-      #notes li {
-        padding-bottom: 5px;
-      }
+  #notes li {
+    padding-bottom: 5px;
+  }
 
-      #saved-msg {
-        position: absolute;
-        top: 0;
-        right: 0;
-        padding: 1em;
-        background: -webkit-linear-gradient(right top, rgb(207,182,227) 0%, rgb(255,255,255) 100%);
-        background: -moz-linear-gradient(225deg, rgb(207,182,227), rgb(255,255,255));
-        background: linear-gradient(225deg, rgb(207,182,227), rgb(255,255,255));
-        color: #482168;
-        -webkit-transition: opacity 1000ms;
-        -moz-transition: opacity 1000ms;
-        transition: opacity 1000ms;
-        opacity: 0;
-      }
+  #saved-msg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1em;
+    background: -webkit-linear-gradient(right top, rgb(207,182,227) 0%, rgb(255,255,255) 100%);
+    background: -moz-linear-gradient(225deg, rgb(207,182,227), rgb(255,255,255));
+    background: linear-gradient(225deg, rgb(207,182,227), rgb(255,255,255));
+    color: #482168;
+    -webkit-transition: opacity 1000ms;
+    -moz-transition: opacity 1000ms;
+    transition: opacity 1000ms;
+    opacity: 0;
+  }
 
-      #saved-msg.showing {
-        -webkit-transition: opacity 100ms;
-        -moz-transition: opacity 100ms;
-        transition: opacity 100ms;
-        opacity: 90;
-      }
+  #saved-msg.showing {
+    -webkit-transition: opacity 100ms;
+    -moz-transition: opacity 100ms;
+    transition: opacity 100ms;
+    opacity: 90;
+  }
 
-      /* button styling from http://webdesignerwall.com/tutorials/css3-gradient-buttons */
-      .button {
-        display: inline-block;
-        outline: none;
-        cursor: pointer;
-        text-align: center;
-        text-decoration: none;
-        font-size: 1em;
-        padding: .3em 1em;
-        text-shadow: 0 1px 1px rgba(0,0,0,.3);
-        border-radius: .5em;
-        box-shadow: 0 1px 2px rgba(0,0,0,.2);
-      }
-      .button:hover {
-        text-decoration: none;
-      }
-      .button:active {
-        position: relative;
-        top: 1px;
-      }
-      .purple {
-        color: #FAF5FC;
-        border: solid 1px #2d0f5a;
-        background: -webkit-gradient(linear, left top, left bottom, from(#A022A0), to(#662D91));
-        background: -moz-linear-gradient(270deg, #A022A0, #662D91);
-        background: linear-gradient(270deg, #A022A0, #662D91);
-      }
-      .purple:hover {
-        background: -webkit-gradient(linear, left top, left bottom, from(#BC699F), to(#F98AD1));
-        background: -moz-linear-gradient(270deg, #BC699F, #F98AD1);
-        background: linear-gradient(270deg, #BC699F, #F98AD1);
-      }
-      .purple:active {
-        color: #fcd3a5;
-        background: -webkit-gradient(linear, left top, left bottom, from(#662D91), to(#A022A0));
-        background: -moz-linear-gradient(270deg, #662D91, #A022A0);
-        background: linear-gradient(270deg, #662D91, #A022A0);
-      }
+  /* button styling from http://webdesignerwall.com/tutorials/css3-gradient-buttons */
+  .button {
+    display: inline-block;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1em;
+    padding: .3em 1em;
+    text-shadow: 0 1px 1px rgba(0,0,0,.3);
+    border-radius: .5em;
+    box-shadow: 0 1px 2px rgba(0,0,0,.2);
+  }
+  .button:hover {
+    text-decoration: none;
+  }
+  .button:active {
+    position: relative;
+    top: 1px;
+  }
+  .purple {
+    color: #FAF5FC;
+    border: solid 1px #2d0f5a;
+    background: -webkit-gradient(linear, left top, left bottom, from(#A022A0), to(#662D91));
+    background: -moz-linear-gradient(270deg, #A022A0, #662D91);
+    background: linear-gradient(270deg, #A022A0, #662D91);
+  }
+  .purple:hover {
+    background: -webkit-gradient(linear, left top, left bottom, from(#BC699F), to(#F98AD1));
+    background: -moz-linear-gradient(270deg, #BC699F, #F98AD1);
+    background: linear-gradient(270deg, #BC699F, #F98AD1);
+  }
+  .purple:active {
+    color: #fcd3a5;
+    background: -webkit-gradient(linear, left top, left bottom, from(#662D91), to(#A022A0));
+    background: -moz-linear-gradient(270deg, #662D91, #A022A0);
+    background: linear-gradient(270deg, #662D91, #A022A0);
+  }
 
-      #css-syntax-select {
-        font-size: 1em;
-        border-radius: .5em;
-        text-shadow: 0 1px 1px rgba(0, 0, 0, .3);
-        background: #A022A0;
-        padding: 0.2em;
-        outline: none;
-      }
+  #css-syntax-select {
+    font-size: 1em;
+    border-radius: .5em;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, .3);
+    background: #A022A0;
+    padding: 0.2em;
+    outline: none;
+  }
 
-      #css-syntax-select > option{
-        background-color: inherit;
-        font: inherit;
-      }
+  #css-syntax-select > option{
+    background-color: inherit;
+    font: inherit;
+  }
 
-      footer {
-        margin: 1em auto;
-        max-width: 700px;
-        text-align: center;
-      }
+  footer {
+    margin: 1em auto;
+    max-width: 700px;
+    text-align: center;
+  }
 
-      textarea {
-        font-family: Consolas, Inconsolata, Courier, monospace;
-      }
+  textarea {
+    font-family: Consolas, Inconsolata, Courier, monospace;
+  }
 
-      input[type="text"] {
-        width: 90%;
-        font-size: 1em;
-        background-color: rgba(249, 138, 209, 0.35);
-      }
+  input[type="text"] {
+    width: 90%;
+    font-size: 1em;
+    background-color: rgba(249, 138, 209, 0.35);
+  }
 
-      #changelist {
-        height: 25em;
-        overflow-y: scroll;
-        border-radius: 5px;
-        box-shadow: 2px 2px 3px rgba(0, 0, 0, .2);
-        border: 2px #EEE solid;
-        margin: 10px;
-        padding: 10px;
-      }
+  #changelist {
+    height: 25em;
+    overflow-y: scroll;
+    border-radius: 5px;
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, .2);
+    border: 2px #EEE solid;
+    margin: 10px;
+    padding: 10px;
+  }
 
-      .warning {
-        background-color: #E6E619;
-        display: inline-block;
-        padding: 0.2em;
-        border-radius: 0.3em;
-      }
+  .warning {
+    background-color: #E6E619;
+    display: inline-block;
+    padding: 0.2em;
+    border-radius: 0.3em;
+  }
 
-      .hidden {
-        visibility: hidden;
-      }
+  .hidden {
+    visibility: hidden;
+  }
 
-      #changelist li {
-        margin: 0.5em 0;
-      }
+  #changelist li {
+    margin: 0.5em 0;
+  }
 
-      #changelist li p {
-        margin: 0;
-      }
+  #changelist li p {
+    margin: 0;
+  }
 
-      #usage {
-        margin: 10px;
-        padding: 10px;
-        background-color: #EEE;
-        border-radius: 5px;
-        box-shadow: 2px 2px 3px rgba(0, 0, 0, .2);
-        overflow-y: auto;
-      }
+  ol > li {
+    margin-bottom: 0.3em;
+  }
 
-      ol > li {
-        margin-bottom: 0.3em;
-      }
-    </style>
-  </head>
+  #resources li {
+    margin-bottom: 0.3em;
+  }
+  </style>
+</head>
 
-  <body>
+<body>
 
-    <div>
-      <h1>
-        <img src="images/icon48.png">
-        Markdown Here Options
-      </h1>
-    </div>
+  <div>
+    <h1>
+      <img src="images/icon48.png">
+      Markdown Here Options
+    </h1>
+  </div>
 
-    <div id="usage">
+  <div class="horiz-groupset">
+    <div id="usage" class="control-group">
       <div class="section-title">
         Basic Usage
       </div>
@@ -251,110 +247,141 @@ MIT License : http://adampritchard.mit-license.org/
             Start a new email message.
           </li>
           <li>
-            Type some Markdown into the email. Try this: <code>*Hello* `Markdown` **Here**!</code>
+            Type some Markdown into the email.<br>Try this: <code>*Hello* `Markdown` **Here**!</code>
           </li>
           <li>
-            Right-click in the email and then click "Markdown Toggle".
+            Right-click in the email and then click "Markdown Toggle". (Or click the button on the toolbar.<span class="hotkey-display-wrapper"> Or press <span class="hotkey-display"><kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>M</kbd></span></span>)
           </li>
           <li>
             The message should now look pretty cool. Send it to your friends!
           </li>
         </ol>
-
-        If you're new to Markdown, the <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank">Markdown Cheatsheet</a> will make you a prostar.
-        <p>
-        For lots more info and advanced usage, see the <a href="https://github.com/adam-p/markdown-here" target="_blank">Markdown Here project page</a>. You should also explore the options below.
       </div>
     </div>
 
-    <div id="options-container">
+    <div id="resources" class="control-group">
+      <div class="section-title">
+        Resources and Links
+      </div>
+      <div>
+        <ul>
+          <li>
+            If you're new to Markdown, the <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank">Markdown Cheatsheet</a> will make you a prostar.
+          </li>
+          <li>
+            For lots more info and advanced usage, see the <a href="https://github.com/adam-p/markdown-here" target="_blank">Markdown Here project page</a>. You should also explore the options below.
+          </li>
+          <li>
+            Ask a question, start a discussion, or just say hi in the <a href="https://groups.google.com/forum/?fromgroups=#!forum/markdown-here" target="_blank">markdown-here Google Group</a>.
+          </li>
+          <li>
+            Visit the <a href="https://github.com/adam-p/markdown-here/wiki" target="_blank">Markdown Here wiki</a> for info about <a href="https://github.com/adam-p/markdown-here/wiki/Compatibility" target="_blank">where else MDH works</a> and more <a href="https://github.com/adam-p/markdown-here/wiki/Tips-and-Tricks" target="_blank">tips and tricks</a>.
+          </li>
+          <li>
+            <span>Once you decide Markdown here is pretty sweet, please help me to buy some flowers for my wife so she's not too upset about how much time I spend working on it!</span>
+            <div style="margin-top: 0.3em">
+              <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+                <input type="hidden" name="cmd" value="_s-xclick">
+                <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+                ">
+                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+              </form>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-      <div class="horiz-groupset">
+  <div id="options-container">
 
-        <div class="control-group">
-          <div class="section-title">
-            Primary Styling CSS
-          </div>
-          <div class="stretch">
-            <textarea id="css-edit" wrap="off"></textarea>
-          </div>
-          <div>
-            <button id="reset-button" class="button purple">
-              Reset to Default
-            </button>
-          </div>
+    <div class="horiz-groupset">
+
+      <div class="control-group">
+        <div class="section-title">
+          Primary Styling CSS
         </div>
-
-        <div class="control-group">
-          <div class="section-title">
-            Syntax Highlighting CSS
-          </div>
-          <div class="stretch">
-            <textarea id="css-syntax-edit" wrap="off"></textarea>
-          </div>
-          <div>
-            Theme:
-            <select class="purple" id="css-syntax-select"></select>
-          </div>
+        <div class="stretch">
+          <textarea id="css-edit" wrap="off"></textarea>
         </div>
-
+        <div>
+          <button id="reset-button" class="button purple">
+            Reset to Default
+          </button>
+        </div>
       </div>
 
-      <div class="horiz-groupset">
-
-        <div class="control-group">
-          <div class="section-title">
-            Preview
-          </div>
-          <div class="stretch iframe-container">
-            <iframe id="rendered-markdown">
-              <!-- rendered Markdown preview will appear here -->
-            </iframe>
-          </div>
-          <div>
-            <button id="markdown-toggle-button" class="button purple">
-              Markdown Toggle
-            </button>
-          </div>
+      <div class="control-group">
+        <div class="section-title">
+          Syntax Highlighting CSS
         </div>
-
-        <div class="control-group">
-          <div class="section-title">
-            Notes
-          </div>
-          <div id="notes">
-            <ul>
-              <li>The context menu item does not work on this page. Use the "Markdown Toggle" button instead.</li>
-              <li>Changes are automatically saved and synchronized (if sync is enabled in your browser).</li>
-              <li>The syntax highlighting styles are applied after the primary styling, and so take precedence.</li>
-              <li>Some email editors and browsers impose their own styles. Those may not be apparent here.</li>
-              <li>Some of the syntax highlighting themes originally had background images that have been removed.</li>
-            </ul>
-          </div>
+        <div class="stretch">
+          <textarea id="css-syntax-edit" wrap="off"></textarea>
         </div>
-
+        <div>
+          Theme:
+          <select class="purple" id="css-syntax-select"></select>
+        </div>
       </div>
 
-      <div class="horiz-groupset">
+    </div>
 
-        <div class="control-group">
-          <div class="section-title">
-            TeX Mathematical Formulae Support
-          </div>
+    <div class="horiz-groupset">
 
-          <div>
-            <input type="checkbox" id="math-enable"/>
-            <input type="text" id="math-edit"/>
-          </div>
+      <div class="control-group">
+        <div class="section-title">
+          Preview
+        </div>
+        <div class="stretch iframe-container">
+          <iframe id="rendered-markdown">
+            <!-- rendered Markdown preview will appear here -->
+          </iframe>
+        </div>
+        <div>
+          <button id="markdown-toggle-button" class="button purple">
+            Markdown Toggle
+          </button>
+        </div>
+      </div>
 
-          <div>
-            <button id="math-reset-button" class="button purple">
-              Reset to Default
-            </button>
-          </div>
+      <div class="control-group">
+        <div class="section-title">
+          Notes
+        </div>
+        <div id="notes">
+          <ul>
+            <li>The context menu item does not work on this page. Use the "Markdown Toggle" button instead.</li>
+            <li>Changes are automatically saved and synchronized (if sync is enabled in your browser).</li>
+            <li>The syntax highlighting styles are applied after the primary styling, and so take precedence.</li>
+            <li>Some email editors and browsers impose their own styles. Those may not be apparent here.</li>
+            <li>Some of the syntax highlighting themes originally had background images that have been removed.</li>
+          </ul>
+        </div>
+      </div>
 
-          <div id="notes">
-            <p>
+    </div>
+
+    <div class="horiz-groupset">
+
+      <div class="control-group">
+        <div class="section-title">
+          TeX Mathematical Formulae Support
+        </div>
+
+        <div>
+          <input type="checkbox" id="math-enable"/>
+          <input type="text" id="math-edit"/>
+        </div>
+
+        <div>
+          <button id="math-reset-button" class="button purple">
+            Reset to Default
+          </button>
+        </div>
+
+        <div id="notes">
+          <p>
             <strong>Privacy Issues</strong>:
             <ul>
               <li>
@@ -366,144 +393,144 @@ MIT License : http://adampritchard.mit-license.org/
             </ul>
 
             <p>
-            <strong>Customization and Use</strong>:
-            <ul>
-              <li>
-                If this feature is enabled, text between dollar signs -- <code>$</code> -- will be interpreted as mathematical formulae. For example, <code>$\Delta$</code> would be rendered as a delta symbol.
-              </li>
-              <li>
-                For render customization options, see the <a href="https://developers.google.com/chart/infographics/docs/formulas" target="_blank">Google Charts documentation</a> for this service.
-              </li>
-              <li>
-                A good resource for creating TeX formulae is the <a href="https://www.codecogs.com/latex/about.php" target="_blank">CodeCogs Equation Editor</a>.
-              </li>
-              <li>
-                Formulae are rendered to images, so email recipients will have to enable images to be shown to see the rendering.
-              </li>
-              <li>
-                If you customize the rendering tag, you can (and should) use either or both of <code>{mathcode}</code> and <code>{urlmathcode}</code> as placeholders.
-                <ul>
-                  <li><code>{mathcode}</code>: The text between the <code>$</code> symbols -- i.e., the raw TeX formula; like <code>\Delta</code>.</li>
-                  <li><code>{urlmathcode}</code>: The URL-encoded form of the TeX formula; like <code>%5CDelta</code>.</li>
-                </ul>
-              </li>
-              <li>
-                If you customize the <code>&lt;img&gt;</code> tag, you should include an <code>alt</code> attribute that has as human-readable a value as possible, like <code>{mathcode}</code>. This value of this attribute will be used for the plaintext version of the email (when sent from Gmail and Thunderbird), and used by screen readers for sight-impaired recipients.
-              </li>
-            </ul>
+              <strong>Customization and Use</strong>:
+              <ul>
+                <li>
+                  If this feature is enabled, text between dollar signs -- <code>$</code> -- will be interpreted as mathematical formulae. For example, <code>$\Delta$</code> would be rendered as a delta symbol.
+                </li>
+                <li>
+                  For render customization options, see the <a href="https://developers.google.com/chart/infographics/docs/formulas" target="_blank">Google Charts documentation</a> for this service.
+                </li>
+                <li>
+                  A good resource for creating TeX formulae is the <a href="https://www.codecogs.com/latex/about.php" target="_blank">CodeCogs Equation Editor</a>.
+                </li>
+                <li>
+                  Formulae are rendered to images, so email recipients will have to enable images to be shown to see the rendering.
+                </li>
+                <li>
+                  If you customize the rendering tag, you can (and should) use either or both of <code>{mathcode}</code> and <code>{urlmathcode}</code> as placeholders.
+                  <ul>
+                    <li><code>{mathcode}</code>: The text between the <code>$</code> symbols -- i.e., the raw TeX formula; like <code>\Delta</code>.</li>
+                    <li><code>{urlmathcode}</code>: The URL-encoded form of the TeX formula; like <code>%5CDelta</code>.</li>
+                  </ul>
+                </li>
+                <li>
+                  If you customize the <code>&lt;img&gt;</code> tag, you should include an <code>alt</code> attribute that has as human-readable a value as possible, like <code>{mathcode}</code>. This value of this attribute will be used for the plaintext version of the email (when sent from Gmail and Thunderbird), and used by screen readers for sight-impaired recipients.
+                </li>
+              </ul>
+            </div>
+
+          </div>
+
+          <div class="control-group">
+            <div class="section-title">
+              Hotkey (aka keyboard shortcut)
+            </div>
+            <div>
+              <input type="checkbox" id="hotkey-shift"/><label for="hotkey-shift">SHIFT</label>
+              &nbsp;+&nbsp;
+              <input type="checkbox" id="hotkey-ctrl"/><label for="hotkey-ctrl">CTRL</label>
+              &nbsp;+&nbsp;
+              <input type="checkbox" id="hotkey-alt"/><label for="hotkey-alt">ALT</label>
+              &nbsp;+&nbsp;
+              <input type="text" id="hotkey-key" maxlength="1" placeholder="KEY" style="width: 3em;"/>
+            </div>
+            <div id="hotkey-key-warning" class="warning hidden">
+              Is the key an alphanumeric value?
+            </div>
+            <div id="notes">
+              <ul>
+                <li>
+                  Chrome: You must reload your email web page for the new hotkey setting to take effect.
+                </li>
+                <li>
+                  Firefox and Thunderbird: You must restart the application for the new hotkey setting to take effect.
+                </li>
+                <li>
+                  You must use an alphanumeric key for the shortcut (varies by language and keyboard).
+                </li>
+                <li>
+                  The Windows key and the OS X &#8984; key cannot be used in the shortcut.
+                </li>
+                <li>
+                  To disable the use of this hotkey, leave the "key" text box empty.
+                </li>
+              </ul>
+            </div>
           </div>
 
         </div>
 
-        <div class="control-group">
-          <div class="section-title">
-            Hotkey (aka keyboard shortcut)
-          </div>
-          <div>
-            <input type="checkbox" id="hotkey-shift"/><label for="hotkey-shift">SHIFT</label>
-            &nbsp;+&nbsp;
-            <input type="checkbox" id="hotkey-ctrl"/><label for="hotkey-ctrl">CTRL</label>
-            &nbsp;+&nbsp;
-            <input type="checkbox" id="hotkey-alt"/><label for="hotkey-alt">ALT</label>
-            &nbsp;+&nbsp;
-            <input type="text" id="hotkey-key" maxlength="1" placeholder="KEY" style="width: 3em;"/>
-          </div>
-          <div id="hotkey-key-warning" class="warning hidden">
-            Is the key an alphanumeric value?
-          </div>
-          <div id="notes">
-            <ul>
-              <li>
-                Chrome: You must reload your email web page for the new hotkey setting to take effect.
-              </li>
-              <li>
-                Firefox and Thunderbird: You must restart the application for the new hotkey setting to take effect.
-              </li>
-              <li>
-                You must use an alphanumeric key for the shortcut (varies by language and keyboard).
-              </li>
-              <li>
-                The Windows key and the OS X &#8984; key cannot be used in the shortcut.
-              </li>
-              <li>
-                To disable the use of this hotkey, leave the "key" text box empty.
-              </li>
-            </ul>
-          </div>
+      </div>
+
+      <div id="changelist-container">
+        <div id="changelist">
         </div>
-
       </div>
 
+      <footer>
+        <p>
+          <em>Markdown Here</em> is open source. To ask questions, report bugs, request features, or contribute, visit the <a target="_blank" href="https://github.com/adam-p/markdown-here">Github project page</a> or the <a target="_blank" href="https://groups.google.com/forum/?fromgroups=#!forum/markdown-here">"markdown-here" Google Group</a>.
+        </p>
+        <p>
+          Created by <a target="_blank" href="http://adam-p.github.com/">Adam Pritchard</a>.
+        </p>
+      </footer>
+
+      <div id="saved-msg">Changes saved</div>
+
+      <div id="sample-markdown" style="display: none;">
+        ```javascript<br>
+        function syntaxHighlighting() {<br>
+        &nbsp; var n = 33;<br>
+        &nbsp; var s = "hi";<br>
+        &nbsp; console.log(s);<br>
+      }<br>
+      ```<br>
+      <br>
+      * plain<br>
+      * *emphasis*<br>
+      * **strong emphasis**<br>
+      * `inline code`<br>
+      <br>
+      1. Numbered list<br>
+      2. [Link](https://www.google.com)<br>
+      <br>
+      <br>
+      > Block quote.&nbsp; <br>
+      > *With* **some** `markdown`.<br>
+      <br>
+      If **TeX Math** support is enabled, this is the quadratic equation:&nbsp;<br>
+      $-b \pm \sqrt{b^2 - 4ac} \over 2a$<br>
+      <br>
+      # Header 1<br>
+      ## Header 2<br>
+      ### Header 3<br>
+      #### Header 4<br>
+      ##### Header 5<br>
+      ###### Header 6<br>
+      &nbsp; <br>
+      | Tables        | Are           | Cool  |<br>
+      | ------------- |:-------------:| -----:|<br>
+      | col 3 is      | right-aligned | $1600 |<br>
+      | col 2 is      | centered      |   $12 |<br>
+      | zebra stripes | are neat      |    $1 |<br>
+      <br>
+      Horizontal rule<br>
+      <br>
+      ---<br>
+      <br>
+      &lt;dl><br>
+      &lt;dt>Definition list&lt;/dt><br>
+      &lt;dd>Is something people use sometimes.&lt;/dd><br>
+      &lt;/dl><br>
+      <br>
+      ```<br>
+      code block<br>
+      with no highlighting<br>
+      ```<br>
+      <br>
     </div>
-
-    <div id="changelist-container">
-      <div id="changelist">
-      </div>
-    </div>
-
-    <footer>
-      <p>
-        <em>Markdown Here</em> is open source. To ask questions, report bugs, request features, or contribute, visit the <a target="_blank" href="https://github.com/adam-p/markdown-here">Github project page</a> or the <a target="_blank" href="https://groups.google.com/forum/?fromgroups=#!forum/markdown-here">"markdown-here" Google Group</a>.
-      </p>
-      <p>
-        Created by <a target="_blank" href="http://adam-p.github.com/">Adam Pritchard</a>.
-      </p>
-    </footer>
-
-    <div id="saved-msg">Changes saved</div>
-
-<div id="sample-markdown" style="display: none;">
-```javascript<br>
-function syntaxHighlighting() {<br>
-&nbsp; var n = 33;<br>
-&nbsp; var s = "hi";<br>
-&nbsp; console.log(s);<br>
-}<br>
-```<br>
-<br>
-* plain<br>
-* *emphasis*<br>
-* **strong emphasis**<br>
-* `inline code`<br>
-<br>
-1. Numbered list<br>
-2. [Link](https://www.google.com)<br>
-<br>
-<br>
-> Block quote.&nbsp; <br>
-> *With* **some** `markdown`.<br>
-<br>
-If **TeX Math** support is enabled, this is the quadratic equation:&nbsp;<br>
-$-b \pm \sqrt{b^2 - 4ac} \over 2a$<br>
-<br>
-# Header 1<br>
-## Header 2<br>
-### Header 3<br>
-#### Header 4<br>
-##### Header 5<br>
-###### Header 6<br>
-&nbsp; <br>
-| Tables        | Are           | Cool  |<br>
-| ------------- |:-------------:| -----:|<br>
-| col 3 is      | right-aligned | $1600 |<br>
-| col 2 is      | centered      |   $12 |<br>
-| zebra stripes | are neat      |    $1 |<br>
-<br>
-Horizontal rule<br>
-<br>
----<br>
-<br>
-&lt;dl><br>
-  &lt;dt>Definition list&lt;/dt><br>
-  &lt;dd>Is something people use sometimes.&lt;/dd><br>
-&lt;/dl><br>
-<br>
-```<br>
-code block<br>
-with no highlighting<br>
-```<br>
-<br>
-</div>
 
   </body>
 
@@ -516,4 +543,4 @@ with no highlighting<br>
   <script src="options-store.js"></script>
   <script src="options.js"></script>
 
-</html>
+  </html>
