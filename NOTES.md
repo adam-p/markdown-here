@@ -1,6 +1,6 @@
 # Notes
 
-> This file is a catch-all for ideas, problems, plans, and other miscellaneous notes. If something should instead be an issue, it should be made an [issue](https://github.com/adam-p/markdown-here/issues).
+> This file is a catch-all for ideas, problems, plans, and other miscellaneous notes. If something should instead be an issue, it should be made an [issue](https://github.com/adam-p/markdown-here/issues).  
 > Be aware that changes to this file might live in another branch until a release is done. (You're probably looking at the `master` branch right now.)
 
 
@@ -9,8 +9,7 @@
 * Update selection conversion screenshot to not be all about replies.
 
 * Try out MDH in other web-based rich-edit tools -- it'll surely work in some of them.
-  * Redactor: http://imperavi.com/support/
-    * This seems to work at least nominally. Test and document.
+  * Redactor: http://imperavi.com/support/ This seems to work at least nominally. Test and document.
   * http://www.tinymce.com/
   * http://hallojs.org/
   * https://github.com/xing/wysihtml5
