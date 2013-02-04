@@ -101,9 +101,10 @@ MIT License : http://adampritchard.mit-license.org/
   }
 
   #saved-msg {
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
+    font-size: 1.5em;
     padding: 1em;
     background: -webkit-linear-gradient(right top, rgb(207,182,227) 0%, rgb(255,255,255) 100%);
     background: -moz-linear-gradient(225deg, rgb(207,182,227), rgb(255,255,255));
@@ -113,13 +114,15 @@ MIT License : http://adampritchard.mit-license.org/
     -moz-transition: opacity 1000ms;
     transition: opacity 1000ms;
     opacity: 0;
+    border-bottom-left-radius: 30px;
+    z-index: 99;
   }
 
   #saved-msg.showing {
     -webkit-transition: opacity 100ms;
     -moz-transition: opacity 100ms;
     transition: opacity 100ms;
-    opacity: 90;
+    opacity: 0.95;
   }
 
   /* button styling from http://webdesignerwall.com/tutorials/css3-gradient-buttons */
