@@ -1,24 +1,69 @@
 # Notes
 
-> This file is a catch-all for ideas, problems, plans, and other miscellaneous notes. If something should instead be an issue, it should be made an issue.
+> This file is a catch-all for ideas, problems, plans, and other miscellaneous notes. If something should instead be an issue, it should be made an [issue](https://github.com/adam-p/markdown-here/issues).
+
+
+## Miscellaneous
 
 * Update selection conversion screenshot to not be all about replies.
 
-* un-module-ify 3rd party apps? Unnecessary change that just makes it harder to pull upstream.
-
-* Marked: trailing (and leading?) newlines lost from fenced blocks. Create issue?
-
-* Automated testing. Using PhantomJS?
-
-* Add user option to specify Markdown dialect? This is probably part of a larger refactor/rewrite.
-
-* Briefly highlight rendered and reverted blocks/ranges.
-  * Probably use [CSS transitions](https://developer.mozilla.org/en/CSS/CSS_transitions).
+* Automated test suite. 
+  * This isn't sexy, but important. Stuff has broken in the past because of browser changes, and it's inevitable that I'll make a change without sufficient testing everywhere. Regression tests are badly needed. (And would be good experience for me...)
 
 * Add a visual cue as to what action took place. Sometimes converts and reverts may be a little surprising if the user's selection is off. And sometimes their viewport won't show the entirety of what change occurred.
 
-* When Thunderbird sends and displays, it leaves the `md-data-original` attribute (which contains the original Markdown) intact. We could provide the user the ability to extract this. (I know at least one person who wants this.)
-
 * Internationalization.
+  * [Mozilla statistics](https://addons.mozilla.org/en-US/firefox/addon/markdown-here/statistics/) suggest that about 35% of Markdown Here users are not anglophones.  
 
 * If a selection conversion is *inside* a paragraph, then it shouldn't add a paragraph to the newly rendered text. That way the text flow won't be totally broken, and the user could actually render just part of a sentence or paragraph.
+
+* I've talked to at least one person who wants Markdown Here to be able unrender an email *after it's sent*. This would allow him to modify and re-send it, or allow his recipients to modify and send it.
+  * This is a bit tricky, since all webmail clients (not Thunderbird) strip the `data-md-original` attribute from the `markdown-here-wrapper` element.
+  * Idea: base64-encode the original MD, then set it as an inline-data `src` attribute for a very small inline image. The image won't display properly, of course, but the data will be intact and extractable.
+
+* Briefly highlight rendered and reverted blocks/ranges.
+  * Probably use [CSS transitions](https://developer.mozilla.org/en/CSS/CSS_transitions).
+  * I started this in the `transitions` branch, but wasn't thrilled with how it worked. Might come back to it, though...
+
+
+## New renderers and render targets
+
+### Description 
+
+Right now Markdown Here takes content from a rich-edit element, turns it into plaintext, renders it from Markdown into HTML, and then replaces the content of the rich-edit element with the HTML. This flow is baked into the code.
+
+There are at least two aspects of that flow that could be customizable.
+
+The first is the source markup language, which is currently Github-flavored Markdown. There are many other excellent choices: Textile, ReST, LaTeX, and so on. There are also other flavors of Markdown, such as MultiMarkdown. 
+
+The second aspect is the "target", by which I mean the language that the source markup is rendered into as well as the element that the rendered value is put into. The target language is currently HTML, and the target element is the `innerHTML` of a rich-compose (`contenteditable`, `designmode`) element. But there have been requests (issues [36](https://github.com/adam-p/markdown-here/issues/36) and [#43](https://github.com/adam-p/markdown-here/issues/43)) for those aspects to be customizable: users would like to be able to render to BBCode or HTML and have the rendered value inserted as plaintext into a `textarea`. 
+
+### Work
+
+It will require a consider refactor to implement this, to say the least. 
+
+It'll also require some UI/UX thought and work to present this to the user in a coherent way. This includes options changes and in-app commands.
+
+There might need to be some CSS-specific work as well, kind of how there's different CSS for syntax highlighting. Some markup languages will be special-purpose (like math stuff) and will need special/specific styles.
+
+### Links
+
+* [MathJax](http://www.mathjax.org/) is a JS LaTeX and MathML renderer. 
+* [Fountain](http://fountain.io/dingus) is a screenplay markup language.
+
+
+## Advanced styling
+
+My original intention with Markdown Here was make structurally complex emails easy to write and look pretty good, like I was getting with my `README.md` files on Github. 
+
+After seeing user [Casey Watts's examples](https://groups.google.com/d/topic/markdown-here/XlsuTCHR4zE/discussion) of how he uses (and styles) Markdown Here, I realized that there's another axis of functionality that MDH begins to address but could do much, much more towards: making *stylistically* complex emails easy to write, look great, and be consistent (over time and across people).
+
+You still just write Markdown. While writing you might have your final styling in mind, but you have to make no extra effort. 
+
+As can be seen from Casey's examples, quite a lot of cool custom styling can be done -- and I don't think he has pushed it nearly as far as it can be pushed. There are limits, since this still has to be accepted as an email, but I think there's a lot of room to grow.
+
+There's also an opportunity for users to share styles and themes. Casey does a rudimentary form of this by [sharing his CSS via Github](https://github.com/caseywatts/markdown-here-css) with the people he works with, so they can all send consistent looking email, but there's no feature in MDH at the present that facilitates this -- users are forced to copy and paste back and forth. 
+
+A small-ish point, but: There should also be the ability to fairly easily switch between themes (style sets). Users send email in different contexts and need them to look different ways.
+
+I don't have a good sense for how widespread the appeal of this might be, but I suspect that it's pretty significant. (Although likely not so much among the coder crowd that I believe makes up the current user base.)

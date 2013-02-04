@@ -267,7 +267,11 @@ firefox/
 
 ## Next Steps
 
-See the [issues list](https://github.com/adam-p/markdown-here/issues) and the [Notes file](https://github.com/adam-p/markdown-here/blob/master/NOTES.md). Feel free to create a feature request issue if what you want isn't already there.
+See the [issues list](https://github.com/adam-p/markdown-here/issues) and the [Notes file](https://github.com/adam-p/markdown-here/blob/master/NOTES.md). All ideas, bugs, plans, complaints, and dreams will end up in one of those two places.
+
+Feel free to create a feature request issue if what you want isn't already there. If you'd prefer a less formal approach to floating an idea, post to the ["markdown-here" Google Group](https://groups.google.com/forum/?fromgroups=#!forum/markdown-here).
+
+It also takes a fair bit of work to stay up-to-date with the latest changes in all the applications and web sites where Markdown Here works.
 
 ## Credits
 
@@ -301,8 +305,8 @@ MIT License: http://adampritchard.mit-license.org/ or see [the `LICENSE` file](h
 
 ### Logo
 
-Copyright 2012, Tatiana A. Fryntoff. With exclusive, unrestricted, non-transferable license to Adam Pritchard.
+Copyright 2013, Tatiana A. Fryntoff. Licensed under [Creative Commons Attribution 3.0 Unported (CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
 
 ### Other images
 
-[Creative Commons Attribution 3.0 Unported License](http://creativecommons.org/licenses/by/3.0/)
+[Creative Commons Attribution 3.0 Unported (CC BY 3.0) License](http://creativecommons.org/licenses/by/3.0/)
