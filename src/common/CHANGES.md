@@ -20,7 +20,7 @@ Change Log
   * If you have any feedback about the new button, please join the ["markdown-here" Google Group discussion](https://groups.google.com/d/topic/markdown-here/NjQRYcD1mgY/discussion).
   * Thanks to user jakov for [suggesting this feature in issue #34](https://github.com/adam-p/markdown-here/issues/34).
 
-* Default styling changes. Note that you'll have to reset your styles to get the new defaults (click "Reset to Default" on the options page). The changes include:
+* **Default styling changes**. Note that you'll have to reset your styles to get the new defaults (click "**Reset to Default**" on the options page). The changes include:
   * Slightly smaller header font size.
   * Less space between list items.
   * Link styling is now more standard (e.g., underlines in Gmail).
