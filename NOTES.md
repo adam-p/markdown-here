@@ -1,11 +1,22 @@
 # Notes
 
 > This file is a catch-all for ideas, problems, plans, and other miscellaneous notes. If something should instead be an issue, it should be made an [issue](https://github.com/adam-p/markdown-here/issues).
+> Be aware that changes to this file might live in another branch until a release is done. (You're probably looking at the `master` branch right now.)
 
 
 ## Miscellaneous
 
 * Update selection conversion screenshot to not be all about replies.
+
+* Try out MDH in other web-based rich-edit tools -- it'll surely work in some of them.
+  * Redactor: http://imperavi.com/support/
+    * This seems to work at least nominally. Test and document.
+  * http://www.tinymce.com/
+  * http://hallojs.org/
+  * https://github.com/xing/wysihtml5
+  * http://jhollingworth.github.com/bootstrap-wysihtml5/
+
+* Test in Google Sites. I know it works to some degree, but need to fully test and document.
 
 * Automated test suite. 
   * This isn't sexy, but important. Stuff has broken in the past because of browser changes, and it's inevitable that I'll make a change without sufficient testing everywhere. Regression tests are badly needed. (And would be good experience for me...)
@@ -25,6 +36,22 @@
   * Probably use [CSS transitions](https://developer.mozilla.org/en/CSS/CSS_transitions).
   * I started this in the `transitions` branch, but wasn't thrilled with how it worked. Might come back to it, though...
 
+* Add telemetry/usage statistics gathering. Optional, of course. It'd be nice to know how people use MDH.
+  * Hotkey vs. button vs. context menu
+  * Custom CSS?
+  * Custom hotkey?
+
+* Detect unrendered MD when sending and warn. 
+  * Really not sure how to detect "when sending". Hooking into the send button will be very dependent on the platform and webmail brand. But even doing it just for Gmail and maybe Thunderbird would be good.
+  * https://twitter.com/geopet/status/294294916685778944
+
+
+## Project stuff
+
+* Create a wiki page for links to reviews and blogs posts.
+  * http://drezha.me.uk/post/33018298509/markdown-email-a-holy-grail
+  * http://caseywatts.github.com/2012/12/17/markdown_in_gmail/
+
 
 ## New renderers and render targets
 
@@ -36,7 +63,7 @@ There are at least two aspects of that flow that could be customizable.
 
 The first is the source markup language, which is currently Github-flavored Markdown. There are many other excellent choices: Textile, ReST, LaTeX, and so on. There are also other flavors of Markdown, such as MultiMarkdown. 
 
-The second aspect is the "target", by which I mean the language that the source markup is rendered into as well as the element that the rendered value is put into. The target language is currently HTML, and the target element is the `innerHTML` of a rich-compose (`contenteditable`, `designmode`) element. But there have been requests (issues [36](https://github.com/adam-p/markdown-here/issues/36) and [#43](https://github.com/adam-p/markdown-here/issues/43)) for those aspects to be customizable: users would like to be able to render to BBCode or HTML and have the rendered value inserted as plaintext into a `textarea`. 
+The second aspect is the "target", by which I mean the language that the source markup is rendered into as well as the element that the rendered value is put into. The target language is currently HTML, and the target element is the `innerHTML` of a rich-compose (`contenteditable`, `designmode`) element. But there have been requests (issues [36](https://github.com/adam-p/markdown-here/issues/36) and [43](https://github.com/adam-p/markdown-here/issues/43)) for those aspects to be customizable: users would like to be able to render to BBCode or HTML and have the rendered value inserted as plaintext into a `textarea`. 
 
 ### Work
 
@@ -45,6 +72,8 @@ It will require a consider refactor to implement this, to say the least.
 It'll also require some UI/UX thought and work to present this to the user in a coherent way. This includes options changes and in-app commands.
 
 There might need to be some CSS-specific work as well, kind of how there's different CSS for syntax highlighting. Some markup languages will be special-purpose (like math stuff) and will need special/specific styles.
+
+Maybe there should be separate projects for some of the structurally distinct components? Maybe other people could leverage, say, an email mutator extension where they just need to drop in the mutation code.
 
 ### Links
 
@@ -66,4 +95,10 @@ There's also an opportunity for users to share styles and themes. Casey does a r
 
 A small-ish point, but: There should also be the ability to fairly easily switch between themes (style sets). Users send email in different contexts and need them to look different ways.
 
+The styling could also go beyond straight CSS: 
+* Supporting LESS/SASS would be obviously good (I've wished for that already, while working on the default styles). 
+* It would also be cool to provide the ability to JS pre/post-processing of the rendered output. For example, [Casey wants](https://groups.google.com/d/msg/markdown-here/XlsuTCHR4zE/-iny-t2kSuIJ) to style paragraphs that follow a `H1` differently from ones that follow a `H2`, but I don't think there's a way to do it without JS (although [I suggested](https://groups.google.com/d/msg/markdown-here/XlsuTCHR4zE/ycHikmx01DUJ) a horrible hack workaround to him).
+
 I don't have a good sense for how widespread the appeal of this might be, but I suspect that it's pretty significant. (Although likely not so much among the coder crowd that I believe makes up the current user base.)
+
+Lots of work.
