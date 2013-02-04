@@ -111,6 +111,8 @@
     // Experimentation has shown some tags that need to be tweaked a little.
     preprocessInfo.html =
       preprocessInfo.html
+        .replace(/(<\/div>)((?!<div).+?)(<div[^>]*>)/ig, '$1<div>$2</div>$3') // a raw text node without an enclosing <div> won't be handled properly, so add one
+        .replace(/(<\/div>)<div[^>]*><\/div>(<div[^>]*>)/ig, '$1$2') // empty <div> between other <div> elems gets removed
         .replace(/<div[^>]*><br><\/div>/ig, '<br>') // <div><br></div> --> <br>
         .replace(/(<div[^>]*>)+/ig, '<br>') // opening <div> --> <br> (but nested <div><div> just gets one <br>)
         .replace(/<\/div>/ig, '')        // closing </div> --> nothing
