@@ -9,6 +9,7 @@ MIT License : http://adampritchard.mit-license.org/
 
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
   <link rel="icon" type="image/png" href="images/icon16.png" />
 
   <title>Markdown Here Options</title>
@@ -17,12 +18,17 @@ MIT License : http://adampritchard.mit-license.org/
 
   body {
     font-family: Tahoma, Helvetica, arial, freesans, clean, sans-serif;
+    font-size: 14px;
   }
 
   h1 {
     color: #482168;
     text-shadow: 1px 1px 1px rgba(72, 33, 104, 0.23);
     vertical-align: top;
+  }
+
+  textarea {
+    font-size: 0.8em;
   }
 
   .horiz-groupset {
@@ -354,7 +360,7 @@ MIT License : http://adampritchard.mit-license.org/
         </div>
         <div id="notes">
           <ul>
-            <li>The context menu item does not work on this page. Use the "Markdown Toggle" button instead.</li>
+            <li>The context menu item does not work on this page. Use the "Markdown Toggle" button below the Preview instead.</li>
             <li>Changes are automatically saved and synchronized (if sync is enabled in your browser).</li>
             <li>The syntax highlighting styles are applied after the primary styling, and so take precedence.</li>
             <li>Some email editors and browsers impose their own styles. Those may not be apparent here.</li>
@@ -482,58 +488,58 @@ MIT License : http://adampritchard.mit-license.org/
 
       <div id="saved-msg">Changes saved</div>
 
-      <div id="sample-markdown" style="display: none;">
-        ```javascript<br>
-        function syntaxHighlighting() {<br>
-        &nbsp; var n = 33;<br>
-        &nbsp; var s = "hi";<br>
-        &nbsp; console.log(s);<br>
-      }<br>
-      ```<br>
-      <br>
-      * plain<br>
-      * *emphasis*<br>
-      * **strong emphasis**<br>
-      * `inline code`<br>
-      <br>
-      1. Numbered list<br>
-      2. [Link](https://www.google.com)<br>
-      <br>
-      <br>
-      > Block quote.&nbsp; <br>
-      > *With* **some** `markdown`.<br>
-      <br>
-      If **TeX Math** support is enabled, this is the quadratic equation:&nbsp;<br>
-      $-b \pm \sqrt{b^2 - 4ac} \over 2a$<br>
-      <br>
-      # Header 1<br>
-      ## Header 2<br>
-      ### Header 3<br>
-      #### Header 4<br>
-      ##### Header 5<br>
-      ###### Header 6<br>
-      &nbsp; <br>
-      | Tables        | Are           | Cool  |<br>
-      | ------------- |:-------------:| -----:|<br>
-      | col 3 is      | right-aligned | $1600 |<br>
-      | col 2 is      | centered      |   $12 |<br>
-      | zebra stripes | are neat      |    $1 |<br>
-      <br>
-      Horizontal rule<br>
-      <br>
-      ---<br>
-      <br>
-      &lt;dl><br>
-      &lt;dt>Definition list&lt;/dt><br>
-      &lt;dd>Is something people use sometimes.&lt;/dd><br>
-      &lt;/dl><br>
-      <br>
-      ```<br>
-      code block<br>
-      with no highlighting<br>
-      ```<br>
-      <br>
-    </div>
+<div id="sample-markdown" style="display: none;">
+```javascript<br>
+function syntaxHighlighting() {<br>
+&nbsp; var n = 33;<br>
+&nbsp; var s = "hi";<br>
+&nbsp; console.log(s);<br>
+}<br>
+```<br>
+<br>
+* plain<br>
+* *emphasis*<br>
+&nbsp; * **strong emphasis**<br>
+* `inline code`<br>
+<br>
+1. Numbered list<br>
+2. [Link](https://www.google.com)<br>
+<br>
+<br>
+> Block quote.&nbsp; <br>
+> *With* **some** `markdown`.<br>
+<br>
+If **TeX Math** support is enabled, this is the quadratic equation:&nbsp;<br>
+$-b \pm \sqrt{b^2 - 4ac} \over 2a$<br>
+<br>
+# Header 1<br>
+## Header 2<br>
+### Header 3<br>
+#### Header 4<br>
+##### Header 5<br>
+###### Header 6<br>
+&nbsp; <br>
+| Tables        | Are           | Cool  |<br>
+| ------------- |:-------------:| -----:|<br>
+| col 3 is      | right-aligned | $1600 |<br>
+| col 2 is      | centered      |   $12 |<br>
+| zebra stripes | are neat      |    $1 |<br>
+<br>
+Horizontal rule<br>
+<br>
+---<br>
+<br>
+&lt;dl><br>
+&lt;dt>Definition list&lt;/dt><br>
+&lt;dd>Is something people use sometimes.&lt;/dd><br>
+&lt;/dl><br>
+<br>
+```<br>
+code block<br>
+with no highlighting<br>
+```<br>
+<br>
+</div>
 
   </body>
 
