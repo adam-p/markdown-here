@@ -112,7 +112,7 @@
     // Yahoo seems to often/always/sometimes (only in Chrome?) use <p> instead
     // of <div>. We'll replace the former with the latter so that our other rules work.
     // TODO: Figure out if it's more than Yahoo that's a problem.
-    if (url.match(/\.yahoo\./i)) {
+    if (url && url.match(/\.yahoo\./i)) {
       preprocessInfo.html =
         preprocessInfo.html
           .replace(/<p\b[^>]*>/ig, '<div>')

@@ -174,7 +174,7 @@ var markdown_here = {
           hljs.hljs,
           html,
           targetDocument,
-          targetDocument.location.href),
+          targetDocument.location ? targetDocument.location.href : null),
         prefs['main-css'] + prefs['syntax-css']);
     });
   },
