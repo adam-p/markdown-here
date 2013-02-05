@@ -41,7 +41,13 @@ pre code {
 }
 
 /* This spacing has been tweaked to closely match Gmail+Chrome "paragraph" (two line breaks) spacing. */
-p, table, pre, dl, blockquote, q, ul, ol {
+p {
+  /* !important is needed here because Hotmail/Outlook.com uses !important to
+     kill the margin in <p>. We need this to win. */
+  margin: 1.2em 0 !important;
+}
+
+table, pre, dl, blockquote, q, ul, ol {
   margin: 1.2em 0;
 }
 
@@ -55,7 +61,8 @@ li {
 
 /* Space paragraphs in a list the same as the list itself. */
 li p {
-  margin: 0.5em 0;
+  /* Needs !important to override rule above. */
+  margin: 0.5em 0 !important;
 }
 
 /* Smaller spacing for sub-lists */

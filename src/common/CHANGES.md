@@ -29,6 +29,8 @@ Change Log
 
 * Added a "Basic Usage" section to the options page. This is in response to [a tweet](https://twitter.com/KSuzukiii/status/294376172295446528) from user KSuzukii.
 
+* Yahoo and Outlook.com (Hotmail) now work a bit better.
+
 2013-01-02: v2.6.4
 ------------------
 
