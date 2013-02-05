@@ -47,9 +47,7 @@
 
 ## Project stuff
 
-* Create a wiki page for links to reviews and blogs posts.
-  * http://drezha.me.uk/post/33018298509/markdown-email-a-holy-grail
-  * http://caseywatts.github.com/2012/12/17/markdown_in_gmail/
+* Create a nicer info site than just the README (not that the README is *bad*, but...). Probably using `gh_pages`.
 
 
 ## New renderers and render targets
