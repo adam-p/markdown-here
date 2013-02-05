@@ -6,8 +6,8 @@ Change Log
 
 * Markdown Here has a **new logo**! A big thank you to the talented Tatiana A. Fryntoff for creating our shiny new logo.
 
-* Support for new Markdown features. All credit goes to chjj of the [Marked library](https://github.com/chjj/marked).
-  * **Tables!** Now you can easily add tables to you email with Markdown. If you're not familiar with the syntax, check out [the wiki cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#wiki-tables). This closes [issue #13](https://github.com/adam-p/markdown-here/issues/13).
+* Support for new Markdown features. All credit goes to chjj, the maintainer of the [Marked library](https://github.com/chjj/marked).
+  * **Tables!** Now you can easily add tables to your email with Markdown. If you're not familiar with the syntax, check out [the wiki cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#wiki-tables). This closes [issue #13](https://github.com/adam-p/markdown-here/issues/13).
   * Strikethrough: Put double tildes around things to ~~strike it out~~ (`~~strike it out~~`).
   * Smarter lists: Have you ever had a numbered list mysteriously/annoyingly become a bullet list because it comes after one? Not anymore.
   * GFM line breaks: If you put a line break in your Markdown, it will be a line break after you toggle, instead of joining to form a single line. This closes [issue #12](https://github.com/adam-p/markdown-here/issues/12).
