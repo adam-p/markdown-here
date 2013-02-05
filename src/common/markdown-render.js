@@ -25,10 +25,11 @@
                           It will be used to create elements, but those elements
                           will not be inserted into the DOM.
    */
-  function markdownRender(userprefs, htmlToText, markdownToHtml, syntaxHighlighter, html, targetDocument) {
+  function markdownRender(userprefs, htmlToText, markdownToHtml,
+                          syntaxHighlighter, html, targetDocument, url) {
     var extractedText, markedOptions, keepTags, i, processed;
 
-    processed = preprocessHtml(html);
+    processed = preprocessHtml(html, url);
 
     extractedText = htmlToText(processed.html, {allowTrailingWhitespace: true});
 
@@ -78,7 +79,7 @@
   NOTE: Maybe it would be better to do this stuff in markdown-here.js, where
   we have the DOM available? String-processing the HTML seems suboptimal.
   */
-  function preprocessHtml(html) {
+  function preprocessHtml(html, url) {
 
     /*
     Historical note: At one time we kept lot of stuff intact: <b>, <i>,
@@ -107,6 +108,16 @@
     // images already in the email intact. So we'll escape their tags.
     // Note that we can't use excludeTagBlocks because there's no closing tag.
     preprocessInfo.html = preprocessInfo.html.replace(/<(img[^>]*)>/ig, '&lt;$1&gt;');
+
+    // Yahoo seems to often/always/sometimes (only in Chrome?) use <p> instead
+    // of <div>. We'll replace the former with the latter so that our other rules work.
+    // TODO: Figure out if it's more than Yahoo that's a problem.
+    if (url.match(/\.yahoo\./i)) {
+      preprocessInfo.html =
+        preprocessInfo.html
+          .replace(/<p\b[^>]*>/ig, '<div>')
+          .replace(/<\/p\b[^>]*>/ig, '</div>');
+    }
 
     // Experimentation has shown some tags that need to be tweaked a little.
     preprocessInfo.html =

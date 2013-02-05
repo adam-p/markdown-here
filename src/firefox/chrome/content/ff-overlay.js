@@ -173,7 +173,8 @@ var markdown_here = {
           marked.marked,
           hljs.hljs,
           html,
-          targetDocument),
+          targetDocument,
+          targetDocument.location.href),
         prefs['main-css'] + prefs['syntax-css']);
     });
   },

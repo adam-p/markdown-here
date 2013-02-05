@@ -49,7 +49,8 @@ chrome.extension.onRequest.addListener(function(request, sender, responseCallbac
           marked,
           hljs,
           request.html,
-          document),
+          document,
+          sender.tab.url),
         css: (prefs['main-css'] + prefs['syntax-css'])
       });
     });
