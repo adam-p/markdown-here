@@ -1,7 +1,7 @@
 Change Log
 ==========
 
-2013-0x-xx: v2.7.0
+2013-02-06: v2.7.0
 ------------------
 
 * Markdown Here has a **new logo**! A big thank you to the talented Tatiana A. Fryntoff for creating our shiny new logo.
@@ -29,7 +29,7 @@ Change Log
 
 * Added a "Basic Usage" section to the options page. This is in response to [a tweet](https://twitter.com/KSuzukiii/status/294376172295446528) from user KSuzukii.
 
-* Yahoo and Outlook.com (Hotmail) now work a bit better.
+* Yahoo and Hotmail/Outlook.com now work a bit better.
 
 2013-01-02: v2.6.4
 ------------------
