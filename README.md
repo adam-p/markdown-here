@@ -1,4 +1,4 @@
-# ![Markdown Here logo](//github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png) Markdown Here
+# ![Markdown Here logo](//raw.github.com/adam-p/markdown-here/master/src/common/images/icon48.png) Markdown Here
 
 [**Get it for Chrome.**](https://chrome.google.com/webstore/detail/elifhakcjgalahccnjkneoccemfahfoa)  
 [**Get it for Firefox, Thunderbird, and Postbox.**](https://addons.mozilla.org/en-US/firefox/addon/markdown-here/)  
@@ -13,7 +13,7 @@ To discover what can be done with Markdown in *Markdown Here*, check out the [Ma
 <sup>&dagger;: And Google Groups posts, and Wordpress posts, and Evernote notes, and Postbox! [See details](#compatibility).</sup>  
 <sup>&Dagger;: And TeX mathematical formulae!</sup>
 
-![screenshot of conversion](//github.com/adam-p/markdown-here/raw/master/store-assets/markdown-here-image1.gimp.png)
+![screenshot of conversion](//raw.github.com/adam-p/markdown-here/master/store-assets/markdown-here-image1.gimp.png)
 
 ### Table of Contents
 **[Installation Instructions](#installation-instructions)**  
@@ -102,7 +102,7 @@ Sometimes you don't want to convert the entire email; sometimes your email isn't
 
 To revert back to Markdown, just put your cursor anywhere in the block of converted text, right click, and click the "Markdown Toggle" menu item again. Now it's magically back to the original Markdown.
 
-![screenshot of selection conversion](//github.com/adam-p/markdown-here/raw/master/store-assets/markdown-here-image2.gimp.png)
+![screenshot of selection conversion](//raw.github.com/adam-p/markdown-here/master/store-assets/markdown-here-image2.gimp.png)
 
 #### Things to know about converting/reverting a selection
 
@@ -123,7 +123,7 @@ The *Markdown Here* Options page can be accessed via the Chrome, Firefox, or Thu
 
 For Chrome and Firefox, any changes made in the *Markdown Here* Options are automatically synchronized between your other installations of that browser (if you have the sync feature enabled in the browser). 
 
-![screenshot of options](//github.com/adam-p/markdown-here/raw/master/store-assets/markdown-here-chrome-options.gimp.png)
+![screenshot of options](//raw.github.com/adam-p/markdown-here/master/store-assets/markdown-here-chrome-options.gimp.png)
 
 ## Troubleshooting
 
