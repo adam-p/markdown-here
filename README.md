@@ -1,4 +1,4 @@
-# ![Markdown Here logo](//raw.github.com/adam-p/markdown-here/master/src/common/images/icon48.png) Markdown Here
+# ![Markdown Here logo](https://raw.github.com/adam-p/markdown-here/master/src/common/images/icon48.png) Markdown Here
 
 [**Get it for Chrome.**](https://chrome.google.com/webstore/detail/elifhakcjgalahccnjkneoccemfahfoa)  
 [**Get it for Firefox, Thunderbird, and Postbox.**](https://addons.mozilla.org/en-US/firefox/addon/markdown-here/)  
@@ -8,12 +8,12 @@
 
 Writing email with code in it is pretty tedious. Writing Markdown with code in it is easy. I found myself writing email in Markdown in the Github in-browser editor, then copying the preview into email. This is a pretty absurd workflow, so I decided create a tool to write and render Markdown right in the email.
 
-To discover what can be done with Markdown in *Markdown Here*, check out the [Markdown Cheatsheet](//github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) and the other [wiki pages](//github.com/adam-p/markdown-here/wiki).
+To discover what can be done with Markdown in *Markdown Here*, check out the [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) and the other [wiki pages](https://github.com/adam-p/markdown-here/wiki).
 
 <sup>&dagger;: And Google Groups posts, and Wordpress posts, and Evernote notes, and Postbox! [See details](#compatibility).</sup>  
 <sup>&Dagger;: And TeX mathematical formulae!</sup>
 
-![screenshot of conversion](//raw.github.com/adam-p/markdown-here/master/store-assets/markdown-here-image1.gimp.png)
+![screenshot of conversion](https://raw.github.com/adam-p/markdown-here/master/store-assets/markdown-here-image1.gimp.png)
 
 ### Table of Contents
 **[Installation Instructions](#installation-instructions)**  
@@ -102,7 +102,7 @@ Sometimes you don't want to convert the entire email; sometimes your email isn't
 
 To revert back to Markdown, just put your cursor anywhere in the block of converted text, right click, and click the "Markdown Toggle" menu item again. Now it's magically back to the original Markdown.
 
-![screenshot of selection conversion](//raw.github.com/adam-p/markdown-here/master/store-assets/markdown-here-image2.gimp.png)
+![screenshot of selection conversion](https://raw.github.com/adam-p/markdown-here/master/store-assets/markdown-here-image2.gimp.png)
 
 #### Things to know about converting/reverting a selection
 
@@ -123,7 +123,7 @@ The *Markdown Here* Options page can be accessed via the Chrome, Firefox, or Thu
 
 For Chrome and Firefox, any changes made in the *Markdown Here* Options are automatically synchronized between your other installations of that browser (if you have the sync feature enabled in the browser). 
 
-![screenshot of options](//raw.github.com/adam-p/markdown-here/master/store-assets/markdown-here-chrome-options.gimp.png)
+![screenshot of options](https://raw.github.com/adam-p/markdown-here/master/store-assets/markdown-here-chrome-options.gimp.png)
 
 ## Troubleshooting
 
@@ -309,3 +309,7 @@ Copyright 2013, Tatiana A. Fryntoff. Licensed under [Creative Commons Attributio
 ### Other images
 
 [Creative Commons Attribution 3.0 Unported (CC BY 3.0) License](http://creativecommons.org/licenses/by/3.0/)
+
+---
+
+![Dos Equis man says](https://raw.github.com/adam-p/markdown-here/master/store-assets/dos-equis-MDH.jpg)
