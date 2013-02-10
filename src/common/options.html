@@ -346,7 +346,7 @@ MIT License : http://adampritchard.mit-license.org/
           Preview
         </div>
         <div class="stretch iframe-container">
-          <iframe id="rendered-markdown">
+          <iframe id="rendered-markdown" src="options-iframe.html">
             <!-- rendered Markdown preview will appear here -->
           </iframe>
         </div>
@@ -403,156 +403,105 @@ MIT License : http://adampritchard.mit-license.org/
                 If you customize the formula rendering tag, you should use a secure (https://) path. Not all rendering services provide a secure option.
               </li>
             </ul>
+          </p>
 
-            <p>
-              <strong>Customization and Use</strong>:
-              <ul>
-                <li>
-                  If this feature is enabled, text between dollar signs -- <code>$</code> -- will be interpreted as mathematical formulae. For example, <code>$\Delta$</code> would be rendered as a delta symbol.
-                </li>
-                <li>
-                  For render customization options, see the <a href="https://developers.google.com/chart/infographics/docs/formulas" target="_blank">Google Charts documentation</a> for this service.
-                </li>
-                <li>
-                  A good resource for creating TeX formulae is the <a href="https://www.codecogs.com/latex/about.php" target="_blank">CodeCogs Equation Editor</a>.
-                </li>
-                <li>
-                  Formulae are rendered to images, so email recipients will have to enable images to be shown to see the rendering.
-                </li>
-                <li>
-                  If you customize the rendering tag, you can (and should) use either or both of <code>{mathcode}</code> and <code>{urlmathcode}</code> as placeholders.
-                  <ul>
-                    <li><code>{mathcode}</code>: The text between the <code>$</code> symbols -- i.e., the raw TeX formula; like <code>\Delta</code>.</li>
-                    <li><code>{urlmathcode}</code>: The URL-encoded form of the TeX formula; like <code>%5CDelta</code>.</li>
-                  </ul>
-                </li>
-                <li>
-                  If you customize the <code>&lt;img&gt;</code> tag, you should include an <code>alt</code> attribute that has as human-readable a value as possible, like <code>{mathcode}</code>. This value of this attribute will be used for the plaintext version of the email (when sent from Gmail and Thunderbird), and used by screen readers for sight-impaired recipients.
-                </li>
-              </ul>
-            </div>
-
-          </div>
-
-          <div class="control-group">
-            <div class="section-title">
-              Hotkey (aka keyboard shortcut)
-            </div>
-            <div>
-              <input type="checkbox" id="hotkey-shift"/><label for="hotkey-shift">SHIFT</label>
-              &nbsp;+&nbsp;
-              <input type="checkbox" id="hotkey-ctrl"/><label for="hotkey-ctrl">CTRL</label>
-              &nbsp;+&nbsp;
-              <input type="checkbox" id="hotkey-alt"/><label for="hotkey-alt">ALT</label>
-              &nbsp;+&nbsp;
-              <input type="text" id="hotkey-key" maxlength="1" placeholder="KEY" style="width: 3em;"/>
-            </div>
-            <div id="hotkey-key-warning" class="warning hidden">
-              Is the key an alphanumeric value?
-            </div>
-            <div id="notes">
-              <ul>
-                <li>
-                  Chrome: You must reload your email web page for the new hotkey setting to take effect.
-                </li>
-                <li>
-                  Firefox and Thunderbird: You must restart the application for the new hotkey setting to take effect.
-                </li>
-                <li>
-                  You must use an alphanumeric key for the shortcut (varies by language and keyboard).
-                </li>
-                <li>
-                  The Windows key and the OS X &#8984; key cannot be used in the shortcut.
-                </li>
-                <li>
-                  To disable the use of this hotkey, leave the "key" text box empty.
-                </li>
-              </ul>
-            </div>
-          </div>
-
+          <p>
+            <strong>Customization and Use</strong>:
+            <ul>
+              <li>
+                If this feature is enabled, text between dollar signs -- <code>$</code> -- will be interpreted as mathematical formulae. For example, <code>$\Delta$</code> would be rendered as a delta symbol.
+              </li>
+              <li>
+                For render customization options, see the <a href="https://developers.google.com/chart/infographics/docs/formulas" target="_blank">Google Charts documentation</a> for this service.
+              </li>
+              <li>
+                A good resource for creating TeX formulae is the <a href="https://www.codecogs.com/latex/about.php" target="_blank">CodeCogs Equation Editor</a>.
+              </li>
+              <li>
+                Formulae are rendered to images, so email recipients will have to enable images to be shown to see the rendering.
+              </li>
+              <li>
+                If you customize the rendering tag, you can (and should) use either or both of <code>{mathcode}</code> and <code>{urlmathcode}</code> as placeholders.
+                <ul>
+                  <li><code>{mathcode}</code>: The text between the <code>$</code> symbols -- i.e., the raw TeX formula; like <code>\Delta</code>.</li>
+                  <li><code>{urlmathcode}</code>: The URL-encoded form of the TeX formula; like <code>%5CDelta</code>.</li>
+                </ul>
+              </li>
+              <li>
+                If you customize the <code>&lt;img&gt;</code> tag, you should include an <code>alt</code> attribute that has as human-readable a value as possible, like <code>{mathcode}</code>. This value of this attribute will be used for the plaintext version of the email (when sent from Gmail and Thunderbird), and used by screen readers for sight-impaired recipients.
+              </li>
+            </ul>
+          </p>
         </div>
 
       </div>
 
-      <div id="changelist-container">
-        <div id="changelist">
+      <div class="control-group">
+        <div class="section-title">
+          Hotkey (aka keyboard shortcut)
+        </div>
+        <div>
+          <input type="checkbox" id="hotkey-shift"/><label for="hotkey-shift">SHIFT</label>
+          &nbsp;+&nbsp;
+          <input type="checkbox" id="hotkey-ctrl"/><label for="hotkey-ctrl">CTRL</label>
+          &nbsp;+&nbsp;
+          <input type="checkbox" id="hotkey-alt"/><label for="hotkey-alt">ALT</label>
+          &nbsp;+&nbsp;
+          <input type="text" id="hotkey-key" maxlength="1" placeholder="KEY" style="width: 3em;"/>
+        </div>
+        <div id="hotkey-key-warning" class="warning hidden">
+          Is the key an alphanumeric value?
+        </div>
+        <div id="notes">
+          <ul>
+            <li>
+              Chrome: You must reload your email web page for the new hotkey setting to take effect.
+            </li>
+            <li>
+              Firefox and Thunderbird: You must restart the application for the new hotkey setting to take effect.
+            </li>
+            <li>
+              You must use an alphanumeric key for the shortcut (varies by language and keyboard).
+            </li>
+            <li>
+              The Windows key and the OS X &#8984; key cannot be used in the shortcut.
+            </li>
+            <li>
+              To disable the use of this hotkey, leave the "key" text box empty.
+            </li>
+          </ul>
         </div>
       </div>
 
-      <footer>
-        <p>
-          <em>Markdown Here</em> is open source. To ask questions, report bugs, request features, or contribute, visit the <a target="_blank" href="https://github.com/adam-p/markdown-here">Github project page</a> or the <a target="_blank" href="https://groups.google.com/forum/?fromgroups=#!forum/markdown-here">"markdown-here" Google Group</a>.
-        </p>
-        <p>
-          Created by <a target="_blank" href="http://adam-p.github.com/">Adam Pritchard</a>.
-        </p>
-      </footer>
+    </div>
 
-      <div id="saved-msg">Changes saved</div>
+  </div>
 
-<div id="sample-markdown" style="display: none;">
-```javascript<br>
-function syntaxHighlighting() {<br>
-&nbsp; var n = 33;<br>
-&nbsp; var s = "hi";<br>
-&nbsp; console.log(s);<br>
-}<br>
-```<br>
-<br>
-* plain<br>
-* *emphasis*<br>
-&nbsp; * **strong emphasis**<br>
-* `inline code`<br>
-<br>
-1. Numbered list<br>
-2. [Link](https://www.google.com)<br>
-<br>
-<br>
-> Block quote.&nbsp; <br>
-> *With* **some** `markdown`.<br>
-<br>
-If **TeX Math** support is enabled, this is the quadratic equation:&nbsp;<br>
-$-b \pm \sqrt{b^2 - 4ac} \over 2a$<br>
-<br>
-# Header 1<br>
-## Header 2<br>
-### Header 3<br>
-#### Header 4<br>
-##### Header 5<br>
-###### Header 6<br>
-&nbsp; <br>
-| Tables        | Are           | Cool  |<br>
-| ------------- |:-------------:| -----:|<br>
-| col 3 is      | right-aligned | $1600 |<br>
-| col 2 is      | centered      |   $12 |<br>
-| zebra stripes | are neat      |    $1 |<br>
-<br>
-Horizontal rule<br>
-<br>
----<br>
-<br>
-&lt;dl><br>
-&lt;dt>Definition list&lt;/dt><br>
-&lt;dd>Is something people use sometimes.&lt;/dd><br>
-&lt;/dl><br>
-<br>
-```<br>
-code block<br>
-with no highlighting<br>
-```<br>
-<br>
-</div>
+  <div id="changelist-container">
+    <div id="changelist">
+    </div>
+  </div>
 
-  </body>
+  <footer>
+    <p>
+      <em>Markdown Here</em> is open source. To ask questions, report bugs, request features, or contribute, visit the <a target="_blank" href="https://github.com/adam-p/markdown-here">Github project page</a> or the <a target="_blank" href="https://groups.google.com/forum/?fromgroups=#!forum/markdown-here">"markdown-here" Google Group</a>.
+    </p>
+    <p>
+      Created by <a target="_blank" href="http://adam-p.github.com/">Adam Pritchard</a>.
+    </p>
+  </footer>
 
-  <script src="jsHtmlToText.js"></script>
-  <script src="marked.js"></script>
-  <script src="highlightjs/highlight.js"></script>
-  <script src="markdown-render.js"></script>
-  <script src="markdown-here.js"></script>
+  <div id="saved-msg">Changes saved</div>
 
-  <script src="options-store.js"></script>
-  <script src="options.js"></script>
+</body>
 
-  </html>
+<script src="jsHtmlToText.js"></script>
+<script src="marked.js"></script>
+<script src="highlightjs/highlight.js"></script>
+<script src="markdown-render.js"></script>
+<script src="markdown-here.js"></script>
+
+<script src="options-store.js"></script>
+<script src="options.js"></script>
+
+</html>

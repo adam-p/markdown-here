@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <script src="markdown-here.js"></script>
+  <script src="../chrome/contentscript.js"></script>
+  <script src="options-iframe.js"></script>
+</head>
+
+<!-- NOTE: The content of the <body> *must not* be indented or have comments,
+     otherwise it will affect the MD rendering. -->
+
+<body contenteditable="true">
+```javascript<br>
+function syntaxHighlighting() {<br>
+&nbsp; var n = 33;<br>
+&nbsp; var s = "hi";<br>
+&nbsp; console.log(s);<br>
+}<br>
+```<br>
+<br>
+* plain<br>
+* *emphasis*<br>
+&nbsp; * **strong emphasis**<br>
+* `inline code`<br>
+<br>
+1. Numbered list<br>
+2. [Link](https://www.google.com)<br>
+<br>
+<br>
+> Block quote.&nbsp; <br>
+> *With* **some** `markdown`.<br>
+<br>
+If **TeX Math** support is enabled, this is the quadratic equation:&nbsp;<br>
+$-b \pm \sqrt{b^2 - 4ac} \over 2a$<br>
+<br>
+# Header 1<br>
+## Header 2<br>
+### Header 3<br>
+#### Header 4<br>
+##### Header 5<br>
+###### Header 6<br>
+&nbsp; <br>
+| Tables        | Are           | Cool  |<br>
+| ------------- |:-------------:| -----:|<br>
+| col 3 is      | right-aligned | $1600 |<br>
+| col 2 is      | centered      |   $12 |<br>
+| zebra stripes | are neat      |    $1 |<br>
+<br>
+Horizontal rule<br>
+<br>
+---<br>
+<br>
+&lt;dl><br>
+&lt;dt>Definition list&lt;/dt><br>
+&lt;dd>Is something people use sometimes.&lt;/dd><br>
+&lt;/dl><br>
+<br>
+```<br>
+code block<br>
+with no highlighting<br>
+```<br>
+<br>
+
+</body>
+
+</html>

@@ -52,18 +52,6 @@ function onLoad() {
 
   cssSyntaxSelect.addEventListener('change', cssSyntaxSelectChange);
 
-  // Load sameple Markdown from a hidden element.
-  rawMarkdownIframe.contentDocument.body.contentEditable = true;
-  rawMarkdownIframe.contentDocument.body.innerHTML = document.getElementById('sample-markdown').innerHTML;
-
-  // The body of the iframe needs to have a (collapsed) selection range for
-  // Markdown Here to work (simulating focus/cursor).
-  var range = rawMarkdownIframe.contentDocument.createRange();
-  range.setStart(rawMarkdownIframe.contentDocument.body, 0);
-  var sel = rawMarkdownIframe.contentDocument.getSelection();
-  sel.removeAllRanges();
-  sel.addRange(range);
-
   //
   // Restore previously set options (asynchronously)
   //
@@ -82,9 +70,6 @@ function onLoad() {
 
     hotkeyChangeHandler();
 
-    // Render the sample Markdown
-    renderMarkdown();
-
     // Start watching for changes to the styles.
     setInterval(checkChange, 100);
   });
@@ -100,6 +85,14 @@ function onLoad() {
   }
 }
 document.addEventListener('DOMContentLoaded', onLoad, false);
+
+
+// The Preview <iframe> will let us know when it's loaded, so that we can
+// trigger the rendering of it.
+document.addEventListener('options-iframe-loaded', function() {
+  renderMarkdown();
+});
+
 
 // Shows/hide page elements depending on the current platform.
 // E.g., not all usage instructions apply to all clients.
