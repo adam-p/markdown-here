@@ -6,7 +6,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <script src="markdown-here.js"></script>
+
+  <!-- In Chrome contentscript.js will not be loaded in the options page or
+       any sub-iframes, so we'll do it manually. Somehow, this doesn't hurt Firefox.
+  -->
   <script src="../chrome/contentscript.js"></script>
+
   <script src="options-iframe.js"></script>
 </head>
 
