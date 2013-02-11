@@ -1,5 +1,5 @@
 /*
- * Copyright Adam Pritchard 2012
+ * Copyright Adam Pritchard 2013
  * MIT License : http://adampritchard.mit-license.org/
  */
 
@@ -94,6 +94,14 @@ var ChromeOptionsStore = {
         if (callback) callback();
       });
     });
+  },
+
+  remove: function(arrayOfKeys, callback) {
+    var that = this;
+    if (typeof(arrayOfKeys) === 'string') {
+      arrayOfKeys = [arrayOfKeys];
+    }
+    this._clearExisting(arrayOfKeys, callback);
   },
 
   // The default values or URLs for our various options.
@@ -203,7 +211,15 @@ var ChromeOptionsStore = {
 
   // Clear any existing entries that match the given object's members.
   _clearExisting: function(obj, callback) {
-    var that = this;
+    var that = this, newObj = {}, i;
+
+    if (obj.constructor === Array) {
+      newObj = {};
+      for (i = 0; i < obj.length; i++) {
+        newObj[obj[i]] = null;
+      }
+      obj = newObj;
+    }
 
     this._storageGet(function(sync) {
       var keysToDelete = [];
@@ -240,6 +256,10 @@ var MozillaOptionsStore = {
 
   set: function(obj, callback) {
     this._sendRequest({action: 'set', obj: obj}, callback);
+  },
+
+  remove: function(arrayOfKeys, callback) {
+    this._sendRequest({action: 'clear', obj: arrayOfKeys}, callback);
   },
 
   // The default values or URLs for our various options.
@@ -283,6 +303,18 @@ var MozillaOptionsStore = {
         }
 
         if (callback) callback();
+        return;
+      }
+      else if (data.action === 'clear') {
+        if (typeof(data.obj) === 'string') {
+          data.obj = [data.obj];
+        }
+
+        for (i = 0; i < data.obj.length; i++) {
+          prefs.clearUserPref(data.obj[i]);
+        }
+
+        if (callback) return callback();
         return;
       }
     }

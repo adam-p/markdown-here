@@ -53,7 +53,12 @@ var MozillaOptionsService = {
     function addExposedProps(obj) {
       var key, i;
 
-      if (obj.constructor === Object) {
+      if (typeof(obj) === 'undefined' || obj === null) {
+        return;
+      }
+
+      // Note that this code path is for Objects and Arrays
+      if (typeof(obj) === 'object') {
         if (!('__exposedProps__' in obj)) {
           obj['__exposedProps__'] = {};
         }
@@ -64,11 +69,6 @@ var MozillaOptionsService = {
           }
           obj['__exposedProps__'][key] = 'rw';
           addExposedProps(obj[key]);
-        }
-      }
-      else if (obj.constructor === Array) {
-        for (i = 0; i < obj.length; i++) {
-          addExposedProps(obj[i]);
         }
       }
     }
@@ -84,17 +84,34 @@ var MozillaOptionsService = {
       prefsObj = {};
 
       for (i = 0; i < prefKeys.length; i++) {
-        prefsObj[prefKeys[i]] = JSON.parse(prefs.getCharPref(prefKeys[i]));
+        try {
+          prefsObj[prefKeys[i]] = JSON.parse(prefs.getCharPref(prefKeys[i]));
+        }
+        catch(e) {
+          // Null values and empty strings will result in JSON exceptions
+          prefsObj[prefKeys[i]] = null;
+        }
       }
 
       addExposedProps(prefsObj);
 
       return callback(prefsObj);
     }
-
-    if (request.action === 'set') {
+    else if (request.action === 'set') {
       for (i in request.obj) {
         prefs.setCharPref(i, JSON.stringify(request.obj[i]));
+      }
+
+      if (callback) return callback();
+      return;
+    }
+    else if (request.action === 'clear') {
+      if (typeof(request.obj) === 'string') {
+        request.obj = [request.obj];
+      }
+
+      for (i = 0; i < request.obj.length; i++) {
+        prefs.clearUserPref(request.obj[i]);
       }
 
       if (callback) return callback();
