@@ -152,7 +152,7 @@ function replaceRange(range, html) {
   // Create a DocumentFragment to insert and populate it with HTML
   documentFragment = range.createContextualFragment(html);
 
-  Utils.sanitizeDocumentFragment(documentFragment);
+  documentFragment = Utils.sanitizeDocumentFragment(documentFragment);
 
   // After inserting the node contents, the node is empty. So we need to save a
   // reference to the element that we need to return.

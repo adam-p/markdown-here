@@ -106,8 +106,8 @@ var ChromeOptionsStore = {
 
   // The default values or URLs for our various options.
   defaults: {
-    'main-css': '/common/default.css',
-    'syntax-css': '/common/highlightjs/styles/github.css',
+    'main-css': {'__defaultFromFile__': '/common/default.css', '__mimeType__': 'text/css'},
+    'syntax-css': {'__defaultFromFile__': '/common/highlightjs/styles/github.css', '__mimeType__': 'text/css'},
     'math-enabled': false,
     'math-value': '<img src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}" alt="{mathcode}">',
     'hotkey': { shiftKey: false, ctrlKey: true, altKey: true, key: 'M' }
@@ -264,8 +264,8 @@ var MozillaOptionsStore = {
 
   // The default values or URLs for our various options.
   defaults: {
-    'main-css': 'resource://markdown_here_common/default.css',
-    'syntax-css': 'resource://markdown_here_common/highlightjs/styles/github.css',
+    'main-css': {'__defaultFromFile__': 'resource://markdown_here_common/default.css', '__mimeType__': 'text/css'},
+    'syntax-css': {'__defaultFromFile__': 'resource://markdown_here_common/highlightjs/styles/github.css', '__mimeType__': 'text/css'},
     'math-enabled': false,
     'math-value': '<img src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}" alt="{mathcode}">',
     'hotkey': { shiftKey: false, ctrlKey: true, altKey: true, key: 'M' },
@@ -396,12 +396,15 @@ this.OptionsStore._fillDefaults = function(prefsObj, callback) {
   function doDefaultForKey(key, callback) {
     // Only take action if the key doesn't already have a value set.
     if (typeof(prefsObj[key]) === 'undefined') {
-      if (key === 'main-css' || key === 'syntax-css') {
+      if (that.defaults[key].hasOwnProperty('__defaultFromFile__')) {
         var xhr = new XMLHttpRequest();
-        xhr.overrideMimeType('text/css');
+
+        if (that.defaults[key]['__mimeType__']) {
+          xhr.overrideMimeType(that.defaults[key]['__mimeType__']);
+        }
 
         // Get the default value from the indicated file.
-        xhr.open('GET', that.defaults[key]);
+        xhr.open('GET', that.defaults[key]['__defaultFromFile__']);
 
         xhr.onreadystatechange = function() {
           if (this.readyState === this.DONE) {

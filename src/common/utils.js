@@ -1,10 +1,22 @@
+/*
+ * Copyright Adam Pritchard 2013
+ * MIT License : http://adampritchard.mit-license.org/
+ */
+
+/*
+ * Utilitiles and helpers that are needed in multiple places.
+ */
+
 ;(function() {
 
 "use strict";
 /*global module:false*/
 
-var Utils = {};
 
+// Assigning a string directly to `element.innerHTML` is potentially dangerous:
+// e.g., the string can contain harmful script elements. (Additionally, Mozilla
+// won't let us pass validation with `innerHTML` assignments in place.)
+// This function provides a safer way to append a HTML string into an element.
 function saferSetInnerHTML(parentElem, htmlString) {
   // Jump through some hoops to avoid using innerHTML...
 
@@ -12,18 +24,25 @@ function saferSetInnerHTML(parentElem, htmlString) {
   range.selectNodeContents(parentElem);
 
   var docFrag = range.createContextualFragment(htmlString);
-  sanitizeDocumentFragment(docFrag);
+  docFrag = sanitizeDocumentFragment(docFrag);
 
   range.deleteContents();
   range.insertNode(docFrag);
   range.detach();
 };
 
+
+// Removes potentially harmful elements and attributes from `docFrag`.
+// Returns a santized copy.
 function sanitizeDocumentFragment(docFrag) {
   var i;
+
+  // Don't modify the original
+  docFrag = docFrag.cloneNode(true);
+
   var scriptTagElems = docFrag.querySelectorAll('script');
   for (i = 0; i < scriptTagElems.length; i++) {
-    scriptTagElems[i].parentElement.removeChild(scriptTagElems[i]);
+    scriptTagElems[i].parentNode.removeChild(scriptTagElems[i]);
   }
 
   function cleanAttributes(node) {
@@ -43,8 +62,13 @@ function sanitizeDocumentFragment(docFrag) {
   }
 
   walkDOM(docFrag.firstChild, cleanAttributes);
+
+  return docFrag;
 }
 
+
+// Walk the DOM, executing `func` on each element.
+// From Crockform.
 function walkDOM(node, func) {
   func(node);
   node = node.firstChild;
@@ -54,7 +78,9 @@ function walkDOM(node, func) {
   }
 }
 
+
 // Expose these functions
+var Utils = {};
 Utils.saferSetInnerHTML = saferSetInnerHTML;
 Utils.sanitizeDocumentFragment = sanitizeDocumentFragment;
 

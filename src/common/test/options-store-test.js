@@ -214,6 +214,25 @@ describe('OptionsStore', function() {
         });
       });
     });
+
+    it('should fill in default values from files', function(done) {
+      OptionsStore.get(function(options) {
+        expect(options).to.not.have.property(testKeys[0]);
+
+        // Set a default value that requires a XHR
+        OptionsStore.defaults[testKeys[0]] = {'__defaultFromFile__': window.location.href};
+
+        // Get the value to compare against
+        $.get(window.location.href, function(checkData) {
+          OptionsStore.get(function(options) {
+            expect(options).to.have.property(testKeys[0]);
+            expect(options[testKeys[0]]).to.eql(checkData);
+            done();
+          });
+        });
+      });
+    });
+
   });
 
 });
