@@ -38,19 +38,23 @@ function onLoad() {
   // Get the available highlight.js styles.
   var xhr = new XMLHttpRequest();
   xhr.overrideMimeType('application/json');
-  xhr.open('GET', 'highlightjs/styles/styles.json', false);
-  // synchronous
+  xhr.open('GET', 'highlightjs/styles/styles.json');
+  xhr.onreadystatechange = function() {
+    if (this.readyState === this.DONE) {
+      // Assume 200 OK -- it's just a local call
+      var syntaxStyles = JSON.parse(this.responseText);
+
+      for (var name in syntaxStyles) {
+        cssSyntaxSelect.options.add(new Option(name, syntaxStyles[name]));
+      }
+
+      cssSyntaxSelect.options.add(new Option('Currently in use', ''));
+      cssSyntaxSelect.selectedIndex = cssSyntaxSelect.options.length - 1;
+
+      cssSyntaxSelect.addEventListener('change', cssSyntaxSelectChange);
+    }
+  };
   xhr.send();
-  // Assume 200 OK
-  var syntaxStyles = JSON.parse(xhr.responseText);
-  for (var name in syntaxStyles) {
-    cssSyntaxSelect.options.add(new Option(name, syntaxStyles[name]));
-  }
-
-  cssSyntaxSelect.options.add(new Option('Currently in use', ''));
-  cssSyntaxSelect.selectedIndex = cssSyntaxSelect.options.length - 1;
-
-  cssSyntaxSelect.addEventListener('change', cssSyntaxSelectChange);
 
   //
   // Restore previously set options (asynchronously)
@@ -265,16 +269,17 @@ document.querySelector('#markdown-toggle-button').addEventListener('click', mark
 
 // Reset the main CSS to default.
 function resetCssEdit() {
+  // Get the default value.
   var xhr = new XMLHttpRequest();
   xhr.overrideMimeType('text/css');
-
-  // Get the default value.
-  xhr.open('GET', OptionsStore.defaults['main-css'], false);
-  // synchronous
+  xhr.open('GET', OptionsStore.defaults['main-css']);
+  xhr.onreadystatechange = function() {
+    if (this.readyState === this.DONE) {
+      // Assume 200 OK -- it's just a local call
+      cssEdit.value = this.responseText;
+    }
+  };
   xhr.send();
-  // Assume 200 OK
-
-  cssEdit.value = xhr.responseText;
 }
 document.getElementById('reset-button').addEventListener('click', resetCssEdit, false);
 
@@ -295,33 +300,38 @@ function cssSyntaxSelectChange() {
   // Get the CSS for the selected theme.
   var xhr = new XMLHttpRequest();
   xhr.overrideMimeType('text/css');
-  xhr.open('GET', 'highlightjs/styles/'+selected, false);
-  // synchronous
+  xhr.open('GET', 'highlightjs/styles/'+selected);
+  xhr.onreadystatechange = function() {
+    if (this.readyState === this.DONE) {
+      // Assume 200 OK -- it's just a local call
+      cssSyntaxEdit.value = this.responseText;
+    }
+  };
   xhr.send();
-  // Assume 200 OK
-
-  cssSyntaxEdit.value = xhr.responseText;
 }
 
 function loadChangelist() {
   var xhr = new XMLHttpRequest();
   xhr.overrideMimeType('text/plain');
 
-  // Get the default value.
-  xhr.open('GET', 'CHANGES.md', false);
-  // synchronous
+  // Get the changelist from a local file.
+  xhr.open('GET', 'CHANGES.md');
+  xhr.onreadystatechange = function() {
+    if (this.readyState === this.DONE) {
+      // Assume 200 OK -- it's just a local call
+      var changes = this.responseText;
+
+      var markedOptions = {
+            gfm: true,
+            pedantic: false,
+            sanitize: false };
+
+      changes = marked(changes, markedOptions);
+
+      document.querySelector('#changelist').innerHTML = changes;
+    }
+  };
   xhr.send();
-  // Assume 200 OK
-  var changes = xhr.responseText;
-
-  var markedOptions = {
-        gfm: true,
-        pedantic: false,
-        sanitize: false };
-
-  changes = marked(changes, markedOptions);
-
-  document.querySelector('#changelist').innerHTML = changes;
 }
 
 // Reset the math img tag template to default.

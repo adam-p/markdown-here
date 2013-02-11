@@ -406,7 +406,7 @@ this.OptionsStore._fillDefaults = function(prefsObj, callback) {
         xhr.onreadystatechange = function() {
           if (this.readyState === this.DONE) {
             // Assume 200 OK -- it's just a local call
-            prefsObj[key] = xhr.responseText;
+            prefsObj[key] = this.responseText;
 
             return callback();
           }
