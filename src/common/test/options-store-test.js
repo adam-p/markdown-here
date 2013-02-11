@@ -8,16 +8,16 @@ describe('OptionsStore', function() {
     expect(OptionsStore).to.exist;
   });
 
-  var testKey = 'test-option';
+  var testKeys = ['test-option-a', 'test-option-b'];
 
   beforeEach(function(done) {
-    OptionsStore.remove([testKey], function() {
+    OptionsStore.remove(testKeys, function() {
       done();
     });
   });
 
   after(function(done) {
-    OptionsStore.remove([testKey], function() {
+    OptionsStore.remove(testKeys, function() {
       done();
     });
   });
@@ -42,15 +42,15 @@ describe('OptionsStore', function() {
 
   it('should set and get null values', function(done) {
     OptionsStore.get(function(options) {
-      expect(options).to.not.have.property(testKey);
+      expect(options).to.not.have.property(testKeys[0]);
 
       var obj = {};
-      obj[testKey] = null;
+      obj[testKeys[0]] = null;
 
       OptionsStore.set(obj, function() {
         OptionsStore.get(function(newOptions) {
-          expect(newOptions).to.have.property(testKey);
-          expect(newOptions[testKey]).to.be.null;
+          expect(newOptions).to.have.property(testKeys[0]);
+          expect(newOptions[testKeys[0]]).to.be.null;
           done();
         });
       });
@@ -61,12 +61,12 @@ describe('OptionsStore', function() {
     var longString = (new Array(10*1024)).join('x');
 
     var obj = {};
-    obj[testKey] = longString;
+    obj[testKeys[0]] = longString;
 
     OptionsStore.set(obj, function() {
       OptionsStore.get(function(newOptions) {
-        expect(newOptions).to.have.property(testKey);
-        expect(newOptions[testKey]).to.equal(longString);
+        expect(newOptions).to.have.property(testKeys[0]);
+        expect(newOptions[testKeys[0]]).to.equal(longString);
         done();
       });
     });
@@ -74,10 +74,10 @@ describe('OptionsStore', function() {
 
   it('should set and get objects', function(done) {
     OptionsStore.get(function(options) {
-      expect(options).to.not.have.property(testKey);
+      expect(options).to.not.have.property(testKeys[0]);
 
       var obj = {};
-      obj[testKey] = {
+      obj[testKeys[0]] = {
         'aaa': 111,
         'bbb': 'zzz',
         'ccc': ['q', 'w', 3, 4],
@@ -86,8 +86,8 @@ describe('OptionsStore', function() {
 
       OptionsStore.set(obj, function() {
         OptionsStore.get(function(newOptions) {
-          expect(newOptions).to.have.property(testKey);
-          expect(newOptions[testKey]).to.eql(obj[testKey]);
+          expect(newOptions).to.have.property(testKeys[0]);
+          expect(newOptions[testKeys[0]]).to.eql(obj[testKeys[0]]);
           done();
         });
       });
@@ -96,18 +96,18 @@ describe('OptionsStore', function() {
 
   it('should set and get arrays', function(done) {
     OptionsStore.get(function(options) {
-      expect(options).to.not.have.property(testKey);
+      expect(options).to.not.have.property(testKeys[0]);
 
       var obj = {};
-      obj[testKey] = [1, 2, 'a', 'b', {'aa': 11}, ['q', 6]];
+      obj[testKeys[0]] = [1, 2, 'a', 'b', {'aa': 11}, ['q', 6]];
 
       OptionsStore.set(obj, function() {
         OptionsStore.get(function(newOptions) {
-          expect(newOptions).to.have.property(testKey);
-          expect(newOptions[testKey]).to.eql(obj[testKey]);
+          expect(newOptions).to.have.property(testKeys[0]);
+          expect(newOptions[testKeys[0]]).to.eql(obj[testKeys[0]]);
 
           // Note that this will fail on Firefox:
-          // expect(newOptions[testKey].constructor).to.equal(Array);
+          // expect(newOptions[testKeys[0]].constructor).to.equal(Array);
 
           done();
         });
@@ -117,21 +117,99 @@ describe('OptionsStore', function() {
 
   it('should remove entries', function(done) {
     OptionsStore.get(function(options) {
-      expect(options).to.not.have.property(testKey);
+      expect(options).to.not.have.property(testKeys[0]);
 
       var obj = {};
-      obj[testKey] = 'hi';
+      obj[testKeys[0]] = 'hi';
 
       OptionsStore.set(obj, function() {
         OptionsStore.get(function(newOptions) {
-          expect(newOptions).to.have.property(testKey);
-          expect(newOptions[testKey]).to.eql(obj[testKey]);
+          expect(newOptions).to.have.property(testKeys[0]);
+          expect(newOptions[testKeys[0]]).to.eql(obj[testKeys[0]]);
 
-          OptionsStore.remove(testKey, function() {
+          OptionsStore.remove(testKeys[0], function() {
             OptionsStore.get(function(newOptions) {
-              expect(options).to.not.have.property(testKey);
+              expect(options).to.not.have.property(testKeys[0]);
               done();
             });
+          });
+        });
+      });
+    });
+  });
+
+  it('should set and get multiple values', function(done) {
+    OptionsStore.get(function(options) {
+      expect(options).to.not.have.property(testKeys[0]);
+
+      var obj = {};
+      obj[testKeys[0]] = 'value the first';
+      obj[testKeys[1]] = ['value the second'];
+
+      OptionsStore.set(obj, function() {
+        OptionsStore.get(function(newOptions) {
+          expect(newOptions).to.have.property(testKeys[0]);
+          expect(newOptions[testKeys[0]]).to.eql(obj[testKeys[0]]);
+          expect(newOptions).to.have.property(testKeys[1]);
+          expect(newOptions[testKeys[1]]).to.eql(obj[testKeys[1]]);
+          done();
+        });
+      });
+    });
+  });
+
+  describe('default value behaviour', function() {
+    beforeEach(function() {
+      delete OptionsStore.defaults[testKeys[0]];
+    });
+
+    after(function() {
+      delete OptionsStore.defaults[testKeys[0]];
+    });
+
+    it('should not fill in defaults if there is not a default', function(done) {
+      OptionsStore.get(function(options) {
+        expect(options).to.not.have.property(testKeys[0]);
+
+        done();
+      });
+    });
+
+    it('should fill in defaults', function(done) {
+      OptionsStore.get(function(options) {
+        expect(options).to.not.have.property(testKeys[0]);
+
+        // Set the default value (still pretty hacky)
+        OptionsStore.defaults[testKeys[0]] = 'my default value';
+
+        // Make sure we get the default value now
+        OptionsStore.get(function(options) {
+          expect(options).to.have.property(testKeys[0]);
+          expect(options[testKeys[0]]).to.eql('my default value');
+
+          done();
+        });
+      });
+    });
+
+    it('should not fill in default if value is set', function(done) {
+      OptionsStore.get(function(options) {
+        expect(options).to.not.have.property(testKeys[0]);
+
+        // Set the default value (still pretty hacky)
+        OptionsStore.defaults[testKeys[0]] = 'my default value';
+
+        var obj = {};
+        obj[testKeys[0]] = 'my non-default value';
+
+        // But also set the value in the options
+        OptionsStore.set(obj, function() {
+          // Make sure we do *not* get the default value now
+          OptionsStore.get(function(options) {
+            expect(options).to.have.property(testKeys[0]);
+            expect(options[testKeys[0]]).to.eql('my non-default value');
+
+            done();
           });
         });
       });

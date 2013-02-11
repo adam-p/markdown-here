@@ -62,7 +62,7 @@ var ChromeOptionsStore = {
         finalobj[key] = tempobj[key].join('');
       }
 
-      callback(that._fillDefaults(finalobj));
+      that._fillDefaults(finalobj, callback);
     });
   },
 
@@ -250,7 +250,7 @@ var MozillaOptionsStore = {
   get: function(callback) {
     var that = this;
     this._sendRequest({action: 'get'}, function(prefsObj) {
-      callback(that._fillDefaults(prefsObj));
+      that._fillDefaults(prefsObj, callback);
     });
   },
 
@@ -371,31 +371,64 @@ else {
   this.OptionsStore = MozillaOptionsStore;
 }
 
-this.OptionsStore._fillDefaults = function(prefsObj) {
-  var xhr, key;
+this.OptionsStore._fillDefaults = function(prefsObj, callback) {
+  var that = this;
 
-  for (key in this.defaults) {
-    if (key === 'main-css' || key === 'syntax-css') {
-      if (typeof(prefsObj[key]) === 'undefined') {
-        xhr = new XMLHttpRequest();
-        xhr.overrideMimeType('text/css');
-
-        // Get the default value.
-        xhr.open('GET', this.defaults[key], false);
-        // synchronous
-        xhr.send();
-        // Assume 200 OK
-        prefsObj[key] = xhr.responseText;
-      }
-    }
-    else {
-      if (typeof(prefsObj[key]) === 'undefined') {
-        prefsObj[key] = this.defaults[key];
-      }
+  var key, allKeys = [];
+  for (key in that.defaults) {
+    if (that.defaults.hasOwnProperty(key)) {
+      allKeys.push(key);
     }
   }
 
-  return prefsObj;
+  doNextKey();
+
+  function doNextKey() {
+    if (allKeys.length === 0) {
+      // All done
+      return callback(prefsObj);
+    }
+
+    // Keep processing keys (and recurse)
+    return doDefaultForKey(allKeys.pop(), doNextKey);
+  }
+
+  function doDefaultForKey(key, callback) {
+    // Only take action if the key doesn't already have a value set.
+    if (typeof(prefsObj[key]) === 'undefined') {
+      if (key === 'main-css' || key === 'syntax-css') {
+        var xhr = new XMLHttpRequest();
+        xhr.overrideMimeType('text/css');
+
+        // Get the default value from the indicated file.
+        xhr.open('GET', that.defaults[key]);
+
+        xhr.onreadystatechange = function() {
+          if (this.readyState === this.DONE) {
+            // Assume 200 OK -- it's just a local call
+            prefsObj[key] = xhr.responseText;
+
+            return callback();
+          }
+        };
+
+        xhr.send();
+      }
+      else {
+        // Make it actually asynchronous
+        setTimeout(function() {
+          prefsObj[key] = that.defaults[key];
+          return callback();
+        });
+      }
+    }
+    else {
+      // Just skip it, but make it asynchronous
+      setTimeout(function() {
+        return callback();
+      });
+    }
+  }
 };
 
 var EXPORTED_SYMBOLS = ['OptionsStore'];
