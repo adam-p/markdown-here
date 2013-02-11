@@ -87,6 +87,22 @@ function onLoad() {
     cc.parentElement.insertBefore(cc, document.querySelector('#options-container'));
     setTimeout(function(){scroll(0, 0);}, 1);
   }
+
+  // Hide the tests link if the page isn't available (it may be stripped out
+  // of extension packages).
+  // Note: Using $.ajax won't work because for local requests Firefox sets
+  // status to 0 even on success. jQuery interprets this as an error.
+  var xhr = new XMLHttpRequest();
+  xhr.open('HEAD', './test/index.html');
+  // If we don't set the mimetype, Firefox will complain.
+  xhr.overrideMimeType('text/plain');
+  xhr.onreadystatechange = function() {
+    if (this.readyState === this.DONE && !this.responseText) {
+      // The test files aren't present, so hide the button.
+      $('#tests-link').hide();
+    }
+  };
+  xhr.send();
 }
 document.addEventListener('DOMContentLoaded', onLoad, false);
 
