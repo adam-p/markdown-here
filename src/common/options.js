@@ -328,7 +328,7 @@ function loadChangelist() {
 
       changes = marked(changes, markedOptions);
 
-      document.querySelector('#changelist').innerHTML = changes;
+      Utils.saferSetInnerHTML($('#changelist').get(0), changes);
     }
   };
   xhr.send();
@@ -348,32 +348,40 @@ function hotkeyChangeHandler() {
   var regex = new RegExp('^[a-zA-Z0-9]+$');
   var value = hotkeyKey.value;
   if (value.length && !regex.test(value)) {
-    document.getElementById('hotkey-key-warning').classList.remove('hidden');
+    $('#hotkey-key-warning').removeClass('hidden');
   }
   else {
-    document.getElementById('hotkey-key-warning').classList.add('hidden');
+    $('#hotkey-key-warning').addClass('hidden');
   }
 
   // Set any representations of the hotkey to the new value.
-  var htmlRepr = '';
-  if (hotkeyShift.checked) htmlRepr += '<kbd>SHIFT</kbd>';
-  if (hotkeyCtrl.checked) htmlRepr += (htmlRepr.length ? '+' : '') + '<kbd>CTRL</kbd>';
-  if (hotkeyAlt.checked) htmlRepr += (htmlRepr.length ? '+' : '') + '<kbd>ALT</kbd>';
-  if (hotkeyKey.value) htmlRepr += (htmlRepr.length ? '+' : '') + '<kbd>' + hotkeyKey.value.toString().toUpperCase() + '</kbd>';
 
-  Array.prototype.forEach.call(document.querySelectorAll('.hotkey-display'), function(elem) {
+  var hotkeyPieces = [];
+  if (hotkeyShift.checked) hotkeyPieces.push('SHIFT');
+  if (hotkeyCtrl.checked) hotkeyPieces.push('CTRL');
+  if (hotkeyAlt.checked) hotkeyPieces.push('ALT');
+  if (hotkeyKey.value) hotkeyPieces.push(hotkeyKey.value.toString().toUpperCase());
+
+  $('.hotkey-display').each(function(hotkeyElem) {
     if (hotkeyKey.value) {
-      if (elem.parentElement.classList.contains('hotkey-display-wrapper')) {
-        elem.parentElement.style.display = '';
+      if ($(hotkeyElem).parent().hasClass('hotkey-display-wrapper')) {
+        $(hotkeyElem).parent().css({display: ''});
       }
-      elem.style.display = '';
-      elem.innerHTML = htmlRepr;
+      $(hotkeyElem).css({display: ''});
+      $(hotkeyElem).empty();
+
+      $.each(hotkeyPieces, function(idx, piece) {
+        if (idx > 0) {
+          $(hotkeyElem).append(document.createTextNode('+'));
+        }
+        $(hotkeyElem).append('<kbd>').text(piece);
+      });
     }
     else {
-      if (elem.parentElement.classList.contains('hotkey-display-wrapper')) {
-        elem.parentElement.style.display = 'none';
+      if ($(hotkeyElem).parent().hasClass('hotkey-display-wrapper')) {
+        $(hotkeyElem).parent().css({display: 'none'});
       }
-      elem.style.display = 'none';
+      $(hotkeyElem).css({display: 'none'});
     }
   });
 }

@@ -17,7 +17,7 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["common/markdown-here.js", "chrome/contentscript.js"]
+      "js": ["common/utils.js", "common/markdown-here.js", "chrome/contentscript.js"]
     }
   ],
   "browser_action": {

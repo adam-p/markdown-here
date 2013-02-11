@@ -13,6 +13,7 @@
  * rendering services.
  */
 
+Components.utils.import('resource://markdown_here_common/utils.js');
 Components.utils.import('resource://markdown_here_common/markdown-here.js');
 
 
