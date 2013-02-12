@@ -200,8 +200,7 @@ MozillaOptionsService.listenRequest(MozillaOptionsService.requestHandler);
       var timeoutID = null;
 
       var tabRestored = function() {
-        clearTimeout(timeoutID);
-        timeoutID = setTimeout(function() {
+        var postTabRestoredOptionsOpen = function() {
           document.removeEventListener('SSTabRestored', tabRestored);
           var windowMediator = Components.classes['@mozilla.org/appshell/window-mediator;1']
                                          .getService(Components.interfaces.nsIWindowMediator);
@@ -218,7 +217,10 @@ MozillaOptionsService.listenRequest(MozillaOptionsService.requestHandler);
               var win = windowMediator.getMostRecentWindow('navigator:browser');
               win.gBrowser.selectedTab = win.gBrowser.addTab(optionsUrl);
           }
-        }, 2000);
+        };
+
+        clearTimeout(timeoutID);
+        timeoutID = setTimeout(postTabRestoredOptionsOpen, 2000);
       };
       timeoutID = setTimeout(tabRestored, 1);
       document.addEventListener('SSTabRestored', tabRestored, false);

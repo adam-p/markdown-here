@@ -112,4 +112,48 @@ describe('Utils', function() {
 
   });
 
+  describe('saferSetOuterHTML', function() {
+    beforeEach(function() {
+      // Our test container element, which will not be modified
+      $('body').append($('<div id="test-container" style="display:none"><div id="test-elem"></div></div>'));
+    });
+
+    afterEach(function() {
+      $('#test-container').remove();
+    });
+
+    it('should throw exception if element not in DOM', function() {
+      var testElem = $('<div><b>bye</b></div>').get(0);
+
+      var fn = _.partial(Utils.saferSetOuterHTML, '<p></p>');
+
+      expect(fn).to.throw(Error);
+    });
+
+    it('should set safe HTML without alteration', function() {
+      Utils.saferSetOuterHTML($('#test-container').children(':first').get(0), '<p>hi</p>');
+
+      expect($('#test-container').html()).to.equal('<p>hi</p>');
+    });
+
+    it('should remove <script> elements', function() {
+      Utils.saferSetOuterHTML($('#test-container').children(':first').get(0), '<b>hi</b><script>alert("oops")</script>there<script>alert("derp")</script>');
+
+      expect($('#test-container').html()).to.equal('<b>hi</b>there');
+    });
+
+    it('should not remove safe attributes', function() {
+      Utils.saferSetOuterHTML($('#test-container').children(':first').get(0), '<div id="rad" style="color:red">hi</div>');
+
+      expect($('#test-container').html()).to.equal('<div id="rad" style="color:red">hi</div>');
+    });
+
+    it('should remove event handler attributes', function() {
+      Utils.saferSetOuterHTML($('#test-container').children(':first').get(0), '<div id="rad" style="color:red" onclick="javascript:alert(\'derp\')">hi</div>');
+
+      expect($('#test-container').html()).to.equal('<div id="rad" style="color:red">hi</div>');
+    });
+
+  });
+
 });

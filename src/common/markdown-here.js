@@ -403,7 +403,7 @@ function renderMarkdown(focusedElem, selectedRange, markdownRenderer) {
 // Revert the rendered Markdown wrapperElem back to its original form.
 function unrenderMarkdown(wrapperElem) {
   var originalMdHtml = wrapperElem.getAttribute('data-md-original');
-  Utils.saferSetInnerHTML(wrapperElem.parentElement, originalMdHtml);
+  Utils.saferSetOuterHTML(wrapperElem, originalMdHtml);
 }
 
 // Exported function.

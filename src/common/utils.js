@@ -32,6 +32,31 @@ function saferSetInnerHTML(parentElem, htmlString) {
 };
 
 
+// Approximating equivalent to assigning to `outerHTML` -- completely replaces
+// the target element with `htmlString`.
+// Note that some caveats apply that also apply to `outerHTML`:
+// - The element must be in the DOM. Otherwise an exception will be thrown.
+// - The original element has been removed from the DOM, but continues to exist.
+//   Any references to it (such as the one passed into this function) will be
+//   references to the original.
+function saferSetOuterHTML(elem, htmlString) {
+  if (!isElementinDocument(elem)) {
+    throw new Error('Element must be in document');
+    return;
+  }
+
+  var range = elem.ownerDocument.createRange();
+  range.selectNode(elem);
+
+  var docFrag = range.createContextualFragment(htmlString);
+  docFrag = sanitizeDocumentFragment(docFrag);
+
+  range.deleteContents();
+  range.insertNode(docFrag);
+  range.detach();
+};
+
+
 // Removes potentially harmful elements and attributes from `docFrag`.
 // Returns a santized copy.
 function sanitizeDocumentFragment(docFrag) {
@@ -79,9 +104,21 @@ function walkDOM(node, func) {
 }
 
 
+function isElementinDocument(element) {
+  var doc = element.ownerDocument;
+  while (element = element.parentNode) {
+    if (element === doc) {
+      return true;
+    }
+  }
+  return false;
+}
+
+
 // Expose these functions
 var Utils = {};
 Utils.saferSetInnerHTML = saferSetInnerHTML;
+Utils.saferSetOuterHTML = saferSetOuterHTML;
 Utils.sanitizeDocumentFragment = sanitizeDocumentFragment;
 
 var EXPORTED_SYMBOLS = ['Utils'];
