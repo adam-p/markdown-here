@@ -5,14 +5,19 @@
 
 /*
  * This file is the heart of Markdown Here. It decides whether we're rendering
- * or revert; whether we're doing a selection or the whole thing; and actually
- * does it (calling out for the final render).
+ * or reverting; whether we're doing a selection or the whole thing; and
+ * actually does it (calling out for the final render).
  */
 
 ;(function() {
 
 "use strict";
 /*global module:false*/
+
+// In Firefox/Thunderbird, Utils won't already exist.
+if (typeof(Utils) === 'undefined') {
+  Components.utils.import('resource://markdown_here_common/utils.js');
+}
 
 // For debugging purposes. An external service is required to log with Firefox.
 var mylog = function() {};
@@ -397,28 +402,8 @@ function renderMarkdown(focusedElem, selectedRange, markdownRenderer) {
 
 // Revert the rendered Markdown wrapperElem back to its original form.
 function unrenderMarkdown(wrapperElem) {
-  if (typeof(wrapperElem.outerHTML) !== 'undefined') {
-    wrapperElem.outerHTML = wrapperElem.getAttribute('data-md-original');
-  }
-  else {
-    // Postbox doesn't seem to support outerHTML, so we'll take a more
-    // convoluted (but possibly more correct, and maybe this should be used for
-    // all platforms) approach.
-
-    // Create a document fragment with the original HTML and replace the wrapper with it.
-
-    var originalHtml = wrapperElem.getAttribute('data-md-original');
-
-    var range = wrapperElem.ownerDocument.createRange();
-
-    var documentFragment = range.createContextualFragment(originalHtml);
-
-    range.selectNode(wrapperElem);
-
-    range.deleteContents();
-
-    range.insertNode(documentFragment);
-  }
+  var originalMdHtml = wrapperElem.getAttribute('data-md-original');
+  Utils.saferSetInnerHTML(wrapperElem.parentElement, originalMdHtml);
 }
 
 // Exported function.
