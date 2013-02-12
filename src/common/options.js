@@ -88,21 +88,28 @@ function onLoad() {
     setTimeout(function(){scroll(0, 0);}, 1);
   }
 
-  // Hide the tests link if the page isn't available (it may be stripped out
-  // of extension packages).
-  // Note: Using $.ajax won't work because for local requests Firefox sets
-  // status to 0 even on success. jQuery interprets this as an error.
-  var xhr = new XMLHttpRequest();
-  xhr.open('HEAD', './test/index.html');
-  // If we don't set the mimetype, Firefox will complain.
-  xhr.overrideMimeType('text/plain');
-  xhr.onreadystatechange = function() {
-    if (this.readyState === this.DONE && !this.responseText) {
-      // The test files aren't present, so hide the button.
-      $('#tests-link').hide();
-    }
-  };
-  xhr.send();
+  // Hide the tests link if the page isn't available. It may be stripped out
+  // of extension packages, and it doesn't work in Thunderbird/Postbox.
+  if (navigator.userAgent.indexOf('Chrome') < 0
+      && navigator.userAgent.indexOf('Firefox') < 0) {
+    $('#tests-link').hide();
+  }
+  else {
+    // Check if our test file exists.
+    // Note: Using $.ajax won't work because for local requests Firefox sets
+    // status to 0 even on success. jQuery interprets this as an error.
+    var xhr = new XMLHttpRequest();
+    xhr.open('HEAD', './test/index.html');
+    // If we don't set the mimetype, Firefox will complain.
+    xhr.overrideMimeType('text/plain');
+    xhr.onreadystatechange = function() {
+      if (this.readyState === this.DONE && !this.responseText) {
+        // The test files aren't present, so hide the button.
+        $('#tests-link').hide();
+      }
+    };
+    xhr.send();
+  }
 }
 document.addEventListener('DOMContentLoaded', onLoad, false);
 
