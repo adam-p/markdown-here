@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+2013-02-13: v2.7.1
+------------------
+
+* Under-the-hood changes to satisfy Mozilla requirements.
+
 2013-02-06: v2.7.0
 ------------------
 
