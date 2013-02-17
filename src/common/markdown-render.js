@@ -119,6 +119,9 @@
           .replace(/<\/p\b[^>]*>/ig, '</div>');
     }
 
+    // Some tags we can convert to Markdown
+    preprocessInfo.html = convertHTMLtoMarkdown('a', preprocessInfo.html);
+
     // Experimentation has shown some tags that need to be tweaked a little.
     preprocessInfo.html =
       preprocessInfo.html
@@ -140,6 +143,10 @@
     // that attribute.
     // If `ifNotHasString` is non-null, tags that contain that string will not
     // be matched. Note that `ifNotHasString` will be used in a regex.
+    // TODO: This function is pretty flawed. Wrapping block elements in paras
+    //       doesn't make much sense. And if we're going to support inline
+    //       elements, then we can't unconditionally put linebreaks around the
+    //       the wrapped elements.
     function excludeTagBlocks(tagName, preprocessInfo, wrapInPara, ifHasAttribute, ifNotHasString) {
       var depth, startIndex, openIndex, closeIndex, currentOpenIndex,
         openTagRegex, closeTagRegex, remainder, closeTagLength, regexFiller;
@@ -253,6 +260,22 @@
     }
   }
 
+  /**
+  Converts instances of `tag` in `html` to Markdown and returns the
+  resulting HTML.
+  */
+  function convertHTMLtoMarkdown(tag, html) {
+    if (tag === 'a') {
+      html = html.replace(/<a\b[^>]+href="([^"]*)"[^>]*>(.*?)<\/a>/ig, '[$2]($1)');
+    }
+    else {
+      throw new Error('convertHTMLtoMarkdown: ' + tag + ' is not a supported tag');
+      return;
+    }
+
+    return html;
+  }
+
   // Restore the content that we extracted so that it wouldn't be processed.
   function postprocessHtml(renderedMarkdown, preprocessInfo) {
     var i;
@@ -293,6 +316,10 @@
 
     return codeElem.innerHTML;
   }
+
+  markdownRender._testExports = {
+    convertHTMLtoMarkdown: convertHTMLtoMarkdown
+  };
 
   var EXPORTED_SYMBOLS = ['markdownRender'];
 
