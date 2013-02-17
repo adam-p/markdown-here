@@ -294,8 +294,8 @@ document.querySelector('#markdown-toggle-button').addEventListener('click', mark
 function resetCssEdit() {
   // Get the default value.
   var xhr = new XMLHttpRequest();
-  xhr.overrideMimeType('text/css');
-  xhr.open('GET', OptionsStore.defaults['main-css']);
+  xhr.overrideMimeType(OptionsStore.defaults['main-css']['__mimeType__']);
+  xhr.open('GET', OptionsStore.defaults['main-css']['__defaultFromFile__']);
   xhr.onreadystatechange = function() {
     if (this.readyState === this.DONE) {
       // Assume 200 OK -- it's just a local call
