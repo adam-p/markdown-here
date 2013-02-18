@@ -318,7 +318,8 @@
   }
 
   markdownRender._testExports = {
-    convertHTMLtoMarkdown: convertHTMLtoMarkdown
+    convertHTMLtoMarkdown: convertHTMLtoMarkdown,
+    preprocessHtml: preprocessHtml
   };
 
   var EXPORTED_SYMBOLS = ['markdownRender'];

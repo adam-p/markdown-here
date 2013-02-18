@@ -1,6 +1,13 @@
 Change Log
 ==========
 
+2013-xx-yy: v2.7.2
+------------------
+
+* Pre-formatted links will now be retained. If you use your email editor's formatting controls to create a link, it will be retained when you toggle the Markdown Here rendering state.
+
+* Firefox/Thunderbird: Fixed bug; Resetting the primary stying CSS wasn't working.
+
 2013-02-13: v2.7.1
 ------------------
 
