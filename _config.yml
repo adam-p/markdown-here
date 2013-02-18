@@ -1,0 +1,6 @@
+# Required/overridden by Github
+safe: true
+lsi: false
+pygments: true
+
+exclude: ["README.md", "node_modules"]
