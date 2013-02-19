@@ -1,22 +1,9 @@
+body {
+  background-image: url(../img/background.png);
+  background-repeat: repeat;
+}
 
-
-/* ==========================================================================
-   Author's custom styles
-   ========================================================================== */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.navbar img {
+  height: 1em;
+  vertical-align: top;
+}
