@@ -1,3 +1,6 @@
+/* apply a natural box layout model to all elements */
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
 body {
   background-image: url(../img/background.png);
   background-repeat: repeat;
@@ -6,4 +9,27 @@ body {
 .navbar img {
   height: 1em;
   vertical-align: top;
+}
+
+.livedemo {
+  border: thin solid lightGray;
+}
+
+.livedemo textarea {
+  resize: vertical;
+  height: 15em;
+}
+
+.livedemo .livedemo-raw {
+  padding: 0.3em;
+  margin: 0.3em;
+  width: 100%;
+}
+
+.livedemo .livedemo-rendered {
+  background-color: white;
+  margin: 0.3em;
+  border-style: inset;
+  overflow-y: scroll;
+  padding: 0.3em;
 }

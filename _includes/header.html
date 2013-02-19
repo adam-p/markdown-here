@@ -6,12 +6,13 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title></title>
+  <title>Markdown Here</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width">
 
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/github.css">
 
   <style>
   body {
@@ -31,4 +32,10 @@
 
   {% include nav.html %}
 
-  <div class="container">
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span2">
+        {% include sidebar.html %}
+      </div>
+      <div class="span10">
+      <!--Body content-->
