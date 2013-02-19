@@ -13,23 +13,73 @@ body {
 
 .livedemo {
   border: thin solid lightGray;
+  padding: 0.3em;
+}
+
+.livedemo h3 {
+  margin-right: 1em;
+  margin-left: 1em;
+}
+
+.livedemo-rendered-heading {
+  text-align: right;
 }
 
 .livedemo textarea {
-  resize: vertical;
-  height: 15em;
+  resize: none;
+  width: 100%;
+  height: 100%;
+  padding: 0.3em;
+}
+
+.livedemo-elem {
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, .2);
+  margin: 0.3em;
+  border: thin solid lightGray;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
 }
 
 .livedemo .livedemo-raw {
-  padding: 0.3em;
-  margin: 0.3em;
   width: 100%;
+  min-height: 15em;
+  padding: 0;
 }
 
 .livedemo .livedemo-rendered {
   background-color: white;
-  margin: 0.3em;
-  border-style: inset;
   overflow-y: scroll;
   padding: 0.3em;
+}
+
+pre, code {
+  font-size: 0.85em;
+  font-family: Consolas, Inconsolata, Courier, monospace;
+}
+
+code {
+  margin: 0 0.15em;
+  padding: 0 0.3em;
+  white-space: nowrap;
+  border: 1px solid #EAEAEA;
+  background-color: #F8F8F8;
+  border-radius: 3px;
+  display: inline; /* adam-p: added to fix Yahoo block display */
+}
+
+pre {
+  font-size: 1em;
+  line-height: 1.2em;
+  overflow: auto;
+  /* added to overcome Bootstrap styling */
+  padding: 0;
+  border: 0;
+}
+
+pre code {
+  white-space: pre;
+  border-radius: 3px;
+  border: 1px solid #CCC;
+  padding: 0.5em 0.7em;
 }

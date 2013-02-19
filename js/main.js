@@ -1,10 +1,15 @@
+"use strict";
+/*global marked:false, hljs:false, $:false, _:false*/
+
+
 $(function() {
 
   // Set up the live Markdown demo instances
   $('.livedemo').each(function() {
-     $that = $(this);
-     $raw = $(this).find('.livedemo-raw');
-     $rendered = $(this).find('.livedemo-rendered');
+    var $container = $(this);
+    var $raw = $(this).find('.livedemo-raw');
+    var $raw_textarea = $raw.find('textarea');
+    var $rendered = $(this).find('.livedemo-rendered');
     var markedOptions = {
         gfm: true,
         pedantic: false,
@@ -13,7 +18,7 @@ $(function() {
         smartLists: true,
         breaks: true,
         langPrefix: 'language-',
-        math: true,
+        math: mathify,
         highlight: function(codeText, codeLanguage) {
                       return highlightSyntax(
                                 $rendered.get(0).ownerDocument,
@@ -22,20 +27,32 @@ $(function() {
                                 codeLanguage); }
         };
 
-    $raw.keyup(function() {
-      var html = marked($(this).val(), markedOptions);
+    $raw_textarea.keyup(function() {
+      var html = marked($raw_textarea.val(), markedOptions);
       $rendered.html(html);
+
+      // Make links in the rendered view open in a new tab.
+      $rendered.find('a').attr('target', '_blank');
     });
 
     // Match the heights of the raw and rendered views.
-    $that.find('.livedemo-elem').height(Math.max($raw.height(), $rendered.height()));
+    $container.find('.livedemo-elem').outerHeight(Math.max($raw.outerHeight(), $rendered.outerHeight()));
 
     // Trigger the first render
-    $raw.keyup();
+    $raw_textarea.keyup();
   });
 });
 
 
+// Adapted from markdown-render.js
+function mathify(mathcode) {
+  return '<img src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}" alt="{mathcode}">'
+          .replace(/\{mathcode\}/ig, mathcode)
+          .replace(/\{urlmathcode\}/ig, encodeURIComponent(mathcode));
+}
+
+
+// Adapted from markdown-render.js
 function highlightSyntax(targetDocument, syntaxHighlighter, codeText, codeLanguage) {
   var codeElem, preElem, textNode;
 
