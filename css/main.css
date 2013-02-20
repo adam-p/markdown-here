@@ -11,11 +11,6 @@ body {
   vertical-align: top;
 }
 
-.livedemo {
-  border: thin solid lightGray;
-  padding: 0.3em;
-}
-
 .livedemo h3 {
   margin-right: 1em;
   margin-left: 1em;

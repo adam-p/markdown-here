@@ -3,8 +3,16 @@
 
 
 $(function() {
+  // Set the navbar active element to the current page
+  var pagefile = location.pathname.split('/').pop();
+  $('.nav').find('a[href="'+pagefile+'"]').parent().addClass('active');
+});
 
-  // Set up the live Markdown demo instances
+/*
+ * Set up the live Markdown demo instances
+ */
+$(function() {
+
   $('.livedemo').each(function() {
     var $container = $(this);
     var $raw = $(this).find('.livedemo-raw');
