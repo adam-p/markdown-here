@@ -12,6 +12,8 @@ $(function() {
  * Set up the live Markdown demo instances
  */
 $(function() {
+  // Load the text into the "bonus" livedemo.
+  $('#bonus-livedemo').find('textarea').val($('#bonus-livedemo-text').text());
 
   $('.livedemo').each(function() {
     var $container = $(this);

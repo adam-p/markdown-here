@@ -8,8 +8,16 @@ body {
 
 .navbar img {
   height: 1em;
-  vertical-align: top;
+  margin-top: -0.3em;
 }
+
+footer {
+  margin: 3em 1em 1em 1em;
+}
+
+/*
+ * Live demo styles
+ */
 
 .livedemo h3 {
   margin-right: 1em;
@@ -60,6 +68,7 @@ code {
 }
 
 pre {
+  margin: 1.2em 0;
   font-size: 1em;
   line-height: 1.2em;
   overflow: auto;
@@ -75,6 +84,54 @@ pre code {
   padding: 0.5em 0.7em;
 }
 
-footer {
-  margin: 3em 1em 1em 1em;
+.livedemo table {
+  margin: 1.2em 0;
+  padding: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: 1em;
+  font: inherit;
+  border: 0;
+}
+
+.livedemo tbody {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.livedemo table tr {
+  border: 0;
+  border-top: 1px solid #CCC;
+  background-color: white;
+  margin: 0;
+  padding: 0;
+}
+
+.livedemo table tr:nth-child(2n) {
+  background-color: #F8F8F8;
+}
+
+.livedemo table tr th, .livedemo table tr td {
+  font-size: 1em;
+  border: 1px solid #CCC;
+  margin: 0;
+  padding: 0.5em 1em;
+}
+
+.livedemo table tr th {
+ font-weight: bold;
+  background-color: #F0F0F0;
+}
+
+.livedemo table tr td[align="right"] {
+  text-align: right;
+}
+
+.livedemo table tr td[align="left"] {
+  text-align: left;
+}
+
+.livedemo table tr td[align="center"] {
+  text-align: center;
 }
