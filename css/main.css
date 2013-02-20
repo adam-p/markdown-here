@@ -16,10 +16,6 @@ body {
   margin-left: 1em;
 }
 
-.livedemo-rendered-heading {
-  text-align: right;
-}
-
 .livedemo textarea {
   resize: none;
   width: 100%;
