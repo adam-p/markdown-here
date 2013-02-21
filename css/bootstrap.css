@@ -207,9 +207,9 @@ textarea {
 }
 body {
   margin: 0;
-  font-family: PT Sans;
-  font-size: 14px;
-  line-height: 20px;
+  font-family: 'MainFont', Arial, sans-serif;
+  font-size: 18px;
+  line-height: 26px;
   color: #6f5d70;
   background-color: #f8edff;
 }
@@ -894,7 +894,7 @@ input,
 button,
 select,
 textarea {
-  font-family: PT Sans;
+  font-family: 'MainFont', Arial, sans-serif;
 }
 label {
   display: block;
