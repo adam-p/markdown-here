@@ -68,7 +68,7 @@ body {
 
 .navbar img {
   height: 1em;
-  margin-top: -0.3em;
+  vertical-align: text-top;
 }
 
 footer {
@@ -77,6 +77,11 @@ footer {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'TitleFont', Arial, sans-serif;
+}
+
+.browser-logo {
+  height: 1em;
+  vertical-align: baseline;
 }
 
 /*
