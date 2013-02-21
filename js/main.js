@@ -14,6 +14,7 @@ $(function() {
 $(function() {
   // Load the text into the "bonus" livedemo.
   $('#bonus-livedemo').find('textarea').val($('#bonus-livedemo-text').text());
+  $('#bonus-livedemo').find('textarea').css({'min-height': '30em'});
 
   $('.livedemo').each(function() {
     var $container = $(this);
