@@ -205,7 +205,8 @@ MozillaOptionsService.listenRequest(MozillaOptionsService.requestHandler);
           var windowMediator = Components.classes['@mozilla.org/appshell/window-mediator;1']
                                          .getService(Components.interfaces.nsIWindowMediator);
           var optionsUrl = 'resource://markdown_here_common/options.html#changelist';
-          if (navigator.userAgent.indexOf('Thunderbird') >= 0) {
+          if (navigator.userAgent.indexOf('Thunderbird') >= 0 ||
+              navigator.userAgent.indexOf('Icedove') >= 0) {
               windowMediator.getMostRecentWindow('mail:3pane')
                             .document.getElementById('tabmail')
                             .openTab('contentTab', {contentPage: optionsUrl});
