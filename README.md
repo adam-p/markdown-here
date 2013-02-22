@@ -1,5 +1,10 @@
 # Markdown Here Website
 
+## TODO
+
+* Fix colours
+* Pick a different font, probably
+
 ## Tools and Resources
 
 Mostly so that I can go back and use them again later...
