@@ -92,7 +92,8 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 14px;
 }
 
-.livedemo h3 {
+.livedemo-elem-title {
+  white-space: nowrap;
   margin-right: 1em;
   margin-left: 1em;
 }
