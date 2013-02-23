@@ -3,6 +3,8 @@
 ## TODO
 
 * Fix colours
+  - Use dark-on-light navbar
+  - tone down bright pink
 * Pick a different font, probably
 
 ## Tools and Resources
