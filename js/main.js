@@ -16,6 +16,10 @@ $(function() {
   $('#bonus-livedemo').find('textarea').val($('#bonus-livedemo-text').text());
   $('#bonus-livedemo').find('textarea').css({'min-height': '30em'});
 
+  // Load the text into the "code" livedemo.
+  $('#code-livedemo').find('textarea').val($('#code-livedemo-text').text());
+  $('#code-livedemo').find('textarea').css({'min-height': '20em'});
+
   $('.livedemo').each(function() {
     var $container = $(this);
     var $raw = $(this).find('.livedemo-raw');

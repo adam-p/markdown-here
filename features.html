@@ -4,29 +4,203 @@ layout: mainpage
 
 <div class="row-fluid">
   <div class="span12 page-header">
-    <h1>Features and Learnin'</h1>
-  </div>
-</div>
-
-<div class="row-fluid">
-  <div class="span12">
-    <p class="lead well">
-      "But what does Markdown Here actually <em>do</em>?"
-    </p>
+    <h1>Features In Depth</h1>
   </div>
 </div>
 
 <div class="row-fluid">
   <div class="span12">
     <p>
-      Markdown Here is an <b>extension for Chrome, Firefox, Thunderbird</b>, Postbox, and Icedove. With it, you can <b>write email in Markdown, and then click a button</b> (or context menu item, or use a hotkey) to render the email into good-looking, fully formatted text (HTML, technically).
+
+<div class="row-fluid">
+  <div class="span12">
+    <p>
+      At this point you think this Markdown thing has potential coolness, but you still have questions...
     </p>
   </div>
 </div>
 
+<div class="row-fluid">
+  <div class="span12">
+    <p class="lead well">
+      "What does Markdown Here actually <em>do</em>?"
+    </p>
+    <p>
+      Markdown Here is an <b>extension for Chrome, Firefox, Thunderbird</b>, Postbox, and Icedove. With it, you can <b>write email in Markdown, and then click a button</b> (or context menu item, or use a hotkey) to render the email into good-looking, fully formatted text (HTML, technically).
+    </p>
+    <p>
+      In action it works like this:
+    </p>
+  </div>
+</div>
 
-* not just email
+<div class="row-fluid">
+  <div class="span6">
+    <a href="img/compose-pre-render.png">
+      <img src="img/compose-pre-render.png">
+    </a>
+  </div>
+  <div class="span6">
+    <a href="img/compose-post-render.png">
+      <img src="img/compose-post-render.png">
+    </a>
+  </div>
+</div>
 
-* screenshots
+<div class="row-fluid">
+  <div class="span12">
+    <p>
+      <b>And that's it!</b> You've sent an email with fairly complex formatting structure, and it was <b>incredibly easy</b> to write and render.
+    </p>
+  </div>
+</div>
 
-* options
+<div class="row-fluid">
+  <div class="span12">
+    <p class="lead well">
+      "Does Markdown Here only work with email?"
+    </p>
+    <p>
+      Markdown Here <b>works in many places</b> that support rich editing. For example, it works great in <b>Google Groups</b>; you <a href="https://groups.google.com/d/msg/markdown-here/UwCTtsiWG5w/1ytDvFLz8z0J">can see an example here</a>.
+    </p>
+    <p>
+      It also works to varying degrees in the <b>Evernote</b> and <b>Wordpress</b> web edit interfaces. To get more information (and caveats) check out the <a href="https://github.com/adam-p/markdown-here/wiki/Compatibility">Compatibility wiki page</a>. There are more places where it will work just waiting to be discovered.
+    </p>
+    <p class="text-right">
+      <small>
+        Technical note: "Rich editing" == <code>contentEditable</code> or <code>designMode</code> elements.
+      </small>
+    </p>
+  </div>
+</div>
+
+<div class="row-fluid">
+  <div class="span12">
+    <p class="lead well">
+      "Can I customize how stuff looks?"
+    </p>
+    <p>
+      The styling used by Markdown Here is <b>entirely customizable</b>. You can change colours, fonts, spacing &mdash; you have full styling power. You can do something as small as tweaking the space between your bullet points, or as large as creating a whole email theme.
+    </p>
+    <p>
+      Here's an <b>example of a theme</b> <a href="https://groups.google.com/d/topic/markdown-here/XlsuTCHR4zE/discussion">created by a Markdown Here user</a>:
+    </p>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span12 text-center">
+    <p>
+      <a href="https://groups.google.com/d/topic/markdown-here/XlsuTCHR4zE/discussion">
+        <img class="img-polaroid" src="img/caseys-styling-sample.png">
+      </a>
+    </p>
+    <p class="text-right">
+      <small>
+        Technical note: Style customization is done by editing CSS. I can't pretend that this will be easy for everyone, but there are tons of resources to help you.
+      </small>
+    </p>
+  </div>
+</div>
+
+<div class="row-fluid">
+  <div class="span12">
+    <p class="lead well">
+      "I like math and code?"
+    </p>
+    <p>
+      You sure do! Markdown Here does too. MDH makes it <b>incredibly easy</b> to include <b>code and math formulae</b> in your email. Here are some examples. Feel free to try your own.
+    </p>
+  </div>
+</div>
+
+<div class="row-fluid">
+  <div class="span12">
+    <div id="code-livedemo">
+      {% include livedemo.html %}
+    </div>
+  </div>
+</div>
+
+<script id="code-livedemo-text" type="text/plain">#### Code
+
+Code can be inline, `using backticks`. Or it can be in blocks, either with backtick "fences" or with indents of four spaces. (I prefer fences.)
+
+```python
+print('You get syntax highlighting...')
+print('...if you include the language name')
+```
+
+You can also syntax-highlight some other cool stuff, like file diffs:
+```diff
+- This line got removed
++ This line got added
+```
+
+#### Math
+
+Math forumlae use TeX. Some examples:
+
+##### The quadratic equation
+$-b \pm \sqrt{b^2 - 4ac} \over 2a$
+
+##### The probability of getting (k) heads when flipping (n) coins
+$\[P(E)   = {n \choose k} p^k (1-p)^{ n-k} \]$
+
+##### The Lorenz Equations
+$\dot{x} = \sigma(y-x) \\ \dot{y} = \rho x - y - xz \\ \dot{z} = -\beta z + xy$
+
+##### The Cauchy-Schwarz Inequality
+$\[ \left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right) \]$
+
+[Math examples are from here](http://www.mathjax.org/demos/tex-samples/)
+</script>
+
+<div class="row-fluid">
+  <div class="span12">
+    <p>
+      There's also support for <b>syntax highlighting themes</b>. I'm going to repeat that, to let the awesomeness sink in: You can theme the code that you put in your in email, or in Google Groups posts.
+    </p>
+  </div>
+</div>
+
+<div class="row-fluid">
+  <div class="span6 text-center">
+    <img src="img/syntax-highlight-theme-1.png">
+  </div>
+  <div class="span6 text-center">
+    <img src="img/syntax-highlight-theme-2.png">
+  </div>
+</div>
+
+<div class="row-fluid">
+  <div class="span6 text-center">
+    <img src="img/syntax-highlight-theme-4.png">
+  </div>
+  <div class="span6 text-center">
+    <img src="img/syntax-highlight-theme-3.png">
+  </div>
+</div>
+
+<div class="row-fluid">
+  <div class="span12">
+    <p class="text-right">
+      <small>
+        Technical note: <a href="http://softwaremaniacs.org/soft/highlight/en/">Highlight.js</a> is used for syntax highlighting. You can take a look at its themes and supported languages on its <a href="http://softwaremaniacs.org/media/soft/highlight/test.html">demo page</a>.
+      </small>
+    </p>
+  </div>
+</div>
+
+<div class="row-fluid">
+  <div class="span12">
+    <p class="lead well">
+      "Can I participate in Markdown Here's development?"
+    </p>
+    <p>
+      Yes, please! Markdown Here is an <b>open source</b> project &mdash; check out its <a href="https://github.com/adam-p/markdown-here">Github project page</a>. You can file bug reports, suggest features, and collaborate on the code there.
+    </p>
+    <p>
+      If you want to ask questions or discuss Markdown Here in a less code-oriented forum, head over to our <a href="https://groups.google.com/forum/?fromgroups=#!forum/markdown-here">Google Group</a>.
+    </p>
+  </div>
+</div>

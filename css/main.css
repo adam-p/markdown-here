@@ -125,6 +125,11 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0.3em;
 }
 
+.livedemo, .livedemo-rendered h1, .livedemo-rendered h2, .livedemo-rendered h3,
+.livedemo-rendered h4, .livedemo-rendered h5, .livedemo-rendered h6 {
+  font-family: Arial, sans-serif;
+}
+
 pre, code {
   font-size: 0.85em;
   font-family: Consolas, Inconsolata, Courier, monospace;
