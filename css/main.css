@@ -89,7 +89,7 @@ h1, h2, h3, h4, h5, h6 {
  */
 
 .livedemo {
-  font-size: 14px;
+  font-size: 1em;
 }
 
 .livedemo-elem-title {
@@ -129,6 +129,32 @@ h1, h2, h3, h4, h5, h6 {
 .livedemo, .livedemo-rendered h1, .livedemo-rendered h2, .livedemo-rendered h3,
 .livedemo-rendered h4, .livedemo-rendered h5, .livedemo-rendered h6 {
   font-family: Arial, sans-serif;
+}
+
+.livedemo-rendered h1 {
+  font-size: 1.6em;
+}
+
+.livedemo-rendered h2 {
+  font-size: 1.4em;
+  border-bottom: 1px solid #CCC;
+}
+
+.livedemo-rendered h3 {
+  font-size: 1.3em;
+}
+
+.livedemo-rendered h4 {
+  font-size: 1.2em;
+}
+
+.livedemo-rendered h5 {
+  font-size: 1em;
+}
+
+.livedemo-rendered h6 {
+  font-size: 1em;
+  color: #777;
 }
 
 pre, code {
