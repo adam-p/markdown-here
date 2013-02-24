@@ -57,6 +57,7 @@
 }
 
 
+
 /* apply a natural box layout model to all elements */
 /* From: http://paulirish.com/2012/box-sizing-border-box-ftw/ */
 * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
@@ -64,6 +65,14 @@
 body {
   background-image: url('../img/background.png');
   background-repeat: repeat;
+}
+
+/* Set a max-width for horizontal fluid layout and make it centered */
+/* This is overriding Bootstrap styles */
+.container-fluid {
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 950px;
 }
 
 .navbar img {
