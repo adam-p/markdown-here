@@ -108,7 +108,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .livedemo textarea {
-  resize: none;
+  resize: vertical;
   width: 100%;
   height: 100%;
   padding: 0.3em;
@@ -123,13 +123,17 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 4px;
 }
 
-.livedemo .livedemo-raw {
+.livedemo-raw {
   width: 100%;
-  min-height: 20em;
   padding: 0;
 }
 
-.livedemo .livedemo-rendered {
+.livedemo-raw textarea {
+  min-height: 20em;
+  margin: 0;
+}
+
+.livedemo-rendered {
   background-color: white;
   overflow-y: scroll;
   padding: 0.3em;

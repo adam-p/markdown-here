@@ -14,11 +14,9 @@ $(function() {
 $(function() {
   // Load the text into the "bonus" livedemo.
   $('#bonus-livedemo').find('textarea').val($('#bonus-livedemo-text').text());
-  $('#bonus-livedemo').find('textarea').css({'min-height': '30em'});
 
   // Load the text into the "code" livedemo.
   $('#code-livedemo').find('textarea').val($('#code-livedemo-text').text());
-  $('#code-livedemo').find('textarea').css({'min-height': '20em'});
 
   $('.livedemo').each(function() {
     var $container = $(this);
@@ -50,8 +48,13 @@ $(function() {
       $rendered.find('a').attr('target', '_blank');
     });
 
-    // Match the heights of the raw and rendered views.
-    $container.find('.livedemo-elem').outerHeight(Math.max($raw.outerHeight(), $rendered.outerHeight()));
+    // The height of the rendered view is determined by the hight of the raw
+    $raw.resize(function() {
+      $rendered.outerHeight($raw.outerHeight());
+    });
+
+    // Trigger the size match
+    $raw.resize();
 
     // Trigger the first render
     $raw_textarea.keyup();

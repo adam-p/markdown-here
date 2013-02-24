@@ -2,4 +2,16 @@
 layout: isolatedpage
 ---
 
+<style>
+/* Not all styles that make sense to the inline live demos should be used in
+   this standalone version. */
+.container-fluid {
+  max-width: inherit;
+}
+
+.livedemo-raw textarea {
+  min-height: 30em;
+}
+</style>
+
 {% include livedemo.html %}
