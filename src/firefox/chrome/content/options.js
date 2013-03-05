@@ -227,7 +227,7 @@ MozillaOptionsService.listenRequest(MozillaOptionsService.requestHandler);
       document.addEventListener('SSTabRestored', tabRestored, false);
     }
 
-    if (true || localFirstRun) {
+    if (localFirstRun) {
       installButton('nav-bar', 'toolbarButton-markdown_here');
 
       // Note that we can't add the same button to more than one toolbar.
