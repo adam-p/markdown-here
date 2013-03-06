@@ -23,7 +23,7 @@
 
   <toolbarpalette id="MsgComposeToolbarPalette">
     <toolbarbutton id="composeToolbarButton-markdown_here"
-                   class="toolbarButton-markdown_here toolbarbutton-1 chromeclass-toolbar-additional"
+                   class="toolbarbutton-1 chromeclass-toolbar-additional"
                    label="&markdown_hereButton.label;"
                    tooltiptext="&markdown_hereButton.tooltiptext;"
                    oncommand="markdown_here.onToolbarButtonCommand(event)" />
@@ -31,7 +31,7 @@
 
   <toolbar class="chromeclass-toolbar" id="FormatToolbar">
     <toolbarbutton id="formatToolbarButton-markdown_here"
-                   class="toolbarButton-markdown_here formatting-button toolbarbutton-1 chromeclass-toolbar-additional"
+                   class="formatting-button toolbarbutton-1 chromeclass-toolbar-additional"
                    insertbefore="smileButtonMenu"
                    label="&markdown_hereButton.label;"
                    tooltiptext="&markdown_hereButton.tooltiptext;"
