@@ -126,6 +126,7 @@ document.addEventListener('options-iframe-loaded', function() {
 function showPlatformElements() {
   // This could be done more elegantly, but...
   if (navigator.userAgent.indexOf('Thunderbird') >= 0 ||
+      navigator.userAgent.indexOf('Icedove') >= 0 ||
       navigator.userAgent.indexOf('Postbox') >= 0) {
     setClassVisibility(false, ['chrome-only']);
   }

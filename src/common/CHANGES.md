@@ -1,6 +1,13 @@
 Change Log
 ==========
 
+2013-03-05: v2.7.3
+------------------
+
+* Fixed Firefox+Linux bug ([#56](https://github.com/adam-p/markdown-here/issues/56)): Toolbar button icon was not displaying correctly. 
+  * Thanks to users [ynoxia](https://github.com/ynoxia) and [jljouannic](https://github.com/jljouannic) for reporting the bug.
+* Fixed Firefox bug: Toolbar button would not stay removed when browser was restarted.
+
 2013-02-17: v2.7.2
 ------------------
 

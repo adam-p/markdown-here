@@ -5,7 +5,7 @@
     <Description about="urn:mozilla:install-manifest">
         <em:type>2</em:type> <!-- 2 : Extension -->
         <em:id>markdown-here@adam.pritchard</em:id>
-        <em:version>2.7.2</em:version>
+        <em:version>2.7.3</em:version>
 
         <em:targetApplication>
             <Description>
@@ -48,7 +48,8 @@
                 var windowMediator = Components.classes['@mozilla.org/appshell/window-mediator;1']
                                                .getService(Components.interfaces.nsIWindowMediator);
                 var optionsUrl = 'resource://markdown_here_common/options.html';
-                if (navigator.userAgent.indexOf('Thunderbird') >= 0) {
+                if (navigator.userAgent.indexOf('Thunderbird') >= 0 ||
+                    navigator.userAgent.indexOf('Icedove') >= 0) {
                     windowMediator.getMostRecentWindow('mail:3pane')
                                   .document.getElementById('tabmail')
                                   .openTab('contentTab', {contentPage: optionsUrl});
