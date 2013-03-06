@@ -1,17 +1,21 @@
 #toolbarButton-markdown_here, #composeToolbarButton-markdown_here, #formatToolbarButton-markdown_here {
   list-style-image: url("resource://markdown_here_common/images/icon24.png");
-  /* Disable grayscaling of icon */
-  filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0\'/></filter></svg>#grayscale");
 }
 
 #toolbarButton-markdown_here[disabled="true"],
 #composeToolbarButton-markdown_here[disabled="true"],
 #formatToolbarButton-markdown_here[disabled="true"] {
-  filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.6666 0.3333 0.3333 0 0 0.3333 0.6666 0.3333 0 0 0.3333 0.3333 0.6666 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
+  list-style-image: url("resource://markdown_here_common/images/icon24-bw.png");
 }
 
 toolbar[iconsize="small"] #toolbarButton-markdown_here,
 toolbar[iconsize="small"] #composeToolbarButton-markdown_here,
 toolbar[iconsize="small"] #formatToolbarButton-markdown_here {
   list-style-image: url("resource://markdown_here_common/images/icon16.png");
+}
+
+toolbar[iconsize="small"] #toolbarButton-markdown_here[disabled="true"],
+toolbar[iconsize="small"] #composeToolbarButton-markdown_here[disabled="true"],
+toolbar[iconsize="small"] #formatToolbarButton-markdown_here[disabled="true"] {
+  list-style-image: url("resource://markdown_here_common/images/icon16-bw.png");
 }
