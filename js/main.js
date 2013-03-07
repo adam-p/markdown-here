@@ -13,10 +13,10 @@ $(function() {
  */
 $(function() {
   // Load the text into the "bonus" livedemo.
-  $('#bonus-livedemo').find('textarea').val($('#bonus-livedemo-text').text());
+  $('#bonus-livedemo').find('textarea').val($('#bonus-livedemo-text').text().trim());
 
   // Load the text into the "code" livedemo.
-  $('#code-livedemo').find('textarea').val($('#code-livedemo-text').text());
+  $('#code-livedemo').find('textarea').val($('#code-livedemo-text').text().trim());
 
   $('.livedemo').each(function() {
     var $container = $(this);

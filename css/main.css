@@ -56,6 +56,16 @@
 
 }
 
+@font-face {
+    font-family: 'MonoFont';
+    src: url('../font/UbuntuMono-R-webfont.eot');
+    src: url('../font/UbuntuMono-R-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../font/UbuntuMono-R-webfont.woff') format('woff'),
+         url('../font/UbuntuMono-R-webfont.ttf') format('truetype'),
+         url('../font/UbuntuMono-R-webfont.svg#UbuntuMonoRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
 
 
 /* apply a natural box layout model to all elements */
