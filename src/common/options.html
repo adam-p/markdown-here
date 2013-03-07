@@ -21,10 +21,16 @@ MIT License : http://adampritchard.mit-license.org/
     font-size: 14px;
   }
 
+  .pagehead {
+    margin: 10px 0 0 10px;
+  }
+
   h1 {
     color: #482168;
     text-shadow: 1px 1px 1px rgba(72, 33, 104, 0.23);
     vertical-align: top;
+    /* Needs to match the height of the image */
+    line-height: 48px;
   }
 
   textarea {
@@ -240,12 +246,12 @@ MIT License : http://adampritchard.mit-license.org/
 
 <body>
 
-  <div>
+  <header class="pagehead">
     <h1>
       <img src="images/icon48.png">
       Markdown Here Options
     </h1>
-  </div>
+  </header>
 
   <div class="horiz-groupset">
     <div id="usage" class="control-group">
