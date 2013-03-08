@@ -6,59 +6,9 @@ $(function() {
   // Set the navbar active element to the current page
   var pagefile = location.pathname.split('/').pop() || 'index.html';
   $('.nav').find('a[href="'+pagefile+'"]').parent().addClass('active');
-});
 
-/*
- * Set up the live Markdown demo instances
- */
-$(function() {
-  // Load the text into the "bonus" livedemo.
-  $('#bonus-livedemo').find('textarea').val($('#bonus-livedemo-text').text().trim());
-
-  // Load the text into the "code" livedemo.
-  $('#code-livedemo').find('textarea').val($('#code-livedemo-text').text().trim());
-
-  $('.livedemo').each(function() {
-    var $container = $(this);
-    var $raw = $(this).find('.livedemo-raw');
-    var $raw_textarea = $raw.find('textarea');
-    var $rendered = $(this).find('.livedemo-rendered');
-    var markedOptions = {
-        gfm: true,
-        pedantic: false,
-        sanitize: false,
-        tables: true,
-        smartLists: true,
-        breaks: true,
-        langPrefix: 'language-',
-        math: mathify,
-        highlight: function(codeText, codeLanguage) {
-                      return highlightSyntax(
-                                $rendered.get(0).ownerDocument,
-                                hljs,
-                                codeText,
-                                codeLanguage); }
-        };
-
-    $raw_textarea.keyup(function() {
-      var html = marked($raw_textarea.val(), markedOptions);
-      $rendered.html(html);
-
-      // Make links in the rendered view open in a new tab.
-      $rendered.find('a').attr('target', '_blank');
-    });
-
-    // The height of the rendered view is determined by the hight of the raw
-    $raw.resize(function() {
-      $rendered.outerHeight($raw.outerHeight());
-    });
-
-    // Trigger the size match
-    $raw.resize();
-
-    // Trigger the first render
-    $raw_textarea.keyup();
-  });
+  // Set up the live Markdown demo instances
+  initLiveDemos();
 });
 
 
@@ -96,4 +46,58 @@ function highlightSyntax(targetDocument, syntaxHighlighter, codeText, codeLangua
   syntaxHighlighter.highlightBlock(codeElem);
 
   return codeElem.innerHTML;
+}
+
+
+function initLiveDemos() {
+  $('.livedemo').each(function() {
+    var $container = $(this);
+    var $raw = $(this).find('.livedemo-raw');
+    var $raw_textarea = $raw.find('textarea');
+    var $rendered = $(this).find('.livedemo-rendered');
+    var $parent = $(this).parent();
+
+    // Load the text from the associated script/text element
+    var livedemo_text = $('script[data-livedemo="'+$parent.attr('id')+'"]').text().trim();
+    // If there's no text block, use the default
+    if (livedemo_text) {
+      $raw_textarea.val(livedemo_text);
+    }
+
+    var markedOptions = {
+        gfm: true,
+        pedantic: false,
+        sanitize: false,
+        tables: true,
+        smartLists: true,
+        breaks: true,
+        langPrefix: 'language-',
+        math: mathify,
+        highlight: function(codeText, codeLanguage) {
+                      return highlightSyntax(
+                                $rendered.get(0).ownerDocument,
+                                hljs,
+                                codeText,
+                                codeLanguage); }
+        };
+
+    $raw_textarea.keyup(function() {
+      var html = marked($raw_textarea.val(), markedOptions);
+      $rendered.html(html);
+
+      // Make links in the rendered view open in a new tab.
+      $rendered.find('a').attr('target', '_blank');
+    });
+
+    // The height of the rendered view is determined by the hight of the raw
+    $raw.resize(function() {
+      $rendered.outerHeight($raw.outerHeight());
+    });
+
+    // Trigger the size match
+    $raw.resize();
+
+    // Trigger the first render
+    $raw_textarea.keyup();
+  });
 }

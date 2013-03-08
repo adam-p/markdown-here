@@ -114,14 +114,19 @@ layout: mainpage
 </div>
 
 <div class="row-fluid">
-  <div class="span12">
-    <div id="code-livedemo">
-      {% include livedemo.html %}
-    </div>
+  <div class="span12" id="code-livedemo">
+    {% include livedemo.html %}
   </div>
 </div>
 
-<script id="code-livedemo-text" type="text/plain">#### Code
+<style>
+#code-livedemo textarea {
+  min-height: 25em;
+}
+</style>
+
+<script data-livedemo="code-livedemo" type="text/plain">
+#### Code
 
 Code can be inline, `using backticks`. Or it can be in blocks, either with backtick "fences" or with indents of four spaces. (I prefer fences.)
 

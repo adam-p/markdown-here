@@ -47,10 +47,33 @@ layout: mainpage
 </div>
 
 <div class="row-fluid">
-  <div class="span12">
+  <div class="span12" id="main-livedemo">
     {% include livedemo.html %}
   </div>
 </div>
+
+<style>
+#main-livedemo textarea {
+  min-height: 25em;
+}
+</style>
+
+<script data-livedemo="main-livedemo" type="text/plain">
+This is just a sample. You can play around with your own text right here.
+
+Markdown
+-------------
+
+...is really just ordinary text, *plain and simple*. How is it good for you?
+
+- You just **type naturally**, and the result looks good.
+- You **don't have to worry** about clicking formatting buttons.
+  - Or fiddling with indentation. (Two spaces is all you need.)
+
+To see what else you can do with Markdown (including **tables**, **images**, **numbered lists**, and more) take a look at the [Cheatsheet][1]. And then try it out by typing in this box!
+
+[1]: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
+</script>
 
 <div class="row-fluid">
   <div class="span12">
@@ -76,25 +99,23 @@ layout: mainpage
 </div>
 
 <div class="row-fluid">
-  <div class="span12">
-    <div id="bonus-livedemo">
+  <div class="span12" id="bonus-livedemo">
     {% include livedemo.html %}
-    </div>
   </div>
 </div>
 
 <style>
 #bonus-livedemo textarea {
-  min-height: 30em;
+  min-height: 25em;
 }
 </style>
 
-<script id="bonus-livedemo-text" type="text/plain">
-Name | Lunch order | Spicy       | Owes
---------- | -------------------- | ------------- | ---------:
-Joan   | saag paneer | medium | $11
-Sally   | vindaloo        | mild        | $14
-Erin    | lamb madras | HOT       | $5
+<script data-livedemo="bonus-livedemo" type="text/plain">
+Name | Lunch order | Spicy      | Owes
+------- | ---------------- | ---------- | ---------:
+Joan  | saag paneer | medium | $11
+Sally  | vindaloo        | mild       | $14
+Erin   | lamb madras | HOT      | $5
 
 There are **multiple syntax highlighting themes** to choose from. Here's one of them:
 

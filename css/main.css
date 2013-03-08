@@ -107,10 +107,6 @@ h1, h2, h3, h4, h5, h6 {
  * Live demo styles
  */
 
-.livedemo {
-  font-size: 1em;
-}
-
 .livedemo-elem-title {
   white-space: nowrap;
   margin-right: 1em;
@@ -118,10 +114,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .livedemo textarea {
+  font-size: 0.8em;
+  line-height: 1.3em;
   resize: vertical;
   width: 100%;
   height: 100%;
   padding: 0.3em;
+  min-height: 25em;
+  margin: 0;
 }
 
 .livedemo-elem {
@@ -138,19 +138,16 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0;
 }
 
-.livedemo-raw textarea {
-  min-height: 20em;
-  margin: 0;
-}
-
 .livedemo-rendered {
+  font-size: 0.8em;
   background-color: white;
   overflow-y: scroll;
   padding: 0.3em;
 }
 
 .livedemo, .livedemo-rendered h1, .livedemo-rendered h2, .livedemo-rendered h3,
-.livedemo-rendered h4, .livedemo-rendered h5, .livedemo-rendered h6 {
+.livedemo-rendered h4, .livedemo-rendered h5, .livedemo-rendered h6,
+.livedemo textarea {
   font-family: Arial, sans-serif;
 }
 
