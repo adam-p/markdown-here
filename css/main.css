@@ -103,6 +103,18 @@ h1, h2, h3, h4, h5, h6 {
   vertical-align: text-top;
 }
 
+.quote-carousel .carousel {
+  margin-bottom: 0;
+  height: 5em;
+  overflow-y: auto;
+}
+
+.big-quote-mark {
+  font-size: 6em;
+  padding-top: 0.3em;
+  font-family: serif;
+}
+
 /*
  * Live demo styles
  */

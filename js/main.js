@@ -9,6 +9,9 @@ $(function() {
 
   // Set up the live Markdown demo instances
   initLiveDemos();
+
+  // Set up the review quotes carousel
+  initReviewQuotes();
 });
 
 
@@ -100,4 +103,36 @@ function initLiveDemos() {
     // Trigger the first render
     $raw_textarea.keyup();
   });
+}
+
+function initReviewQuotes() {
+  var quote_template = _.template($('#quote-carousel-item-template').text());
+  var $quote_carousel = $('.quote-carousel');
+
+  $.getJSON('reviews.json', function(quotes) {
+    // Show the quotes in different order each time
+    quotes = _.shuffle(quotes);
+
+    // Remove any existing items
+    $('.quote-carousel').find('.carousel-inner').children().remove();
+
+    // Add the quotes to the carousel
+    $.each(quotes, function() {
+      $('.quote-carousel').find('.carousel-inner').append(quote_template({
+        quote: fancifyCharacters(this['quote']),
+        link: this['link'],
+        context: fancifyCharacters(this['context']),
+        stars: this['stars']
+      }));
+    });
+
+    // Set the first quote as active
+    $('.quote-carousel').find('.carousel-inner').children().first().addClass('active');
+
+    $('.carousel').carousel({interval: 3000});
+  });
+}
+
+function fancifyCharacters(str) {
+  return str.replace(/"\b/g, '&ldquo;').replace(/\b"/g, '&rdquo;').replace(/\.\.\./g, '&hellip;');
 }

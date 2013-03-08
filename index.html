@@ -8,18 +8,54 @@ layout: mainpage
       <img class="pull-right" src="img/icon128.png">
       <h1>Your email is about to get awesome.</h1>
       <br>
-      <p>
-        <b>Markdown Here</b> will help you to <strong>write email</strong> more <strong>quickly and powerfully</strong> than you thought possible. <a href="get.html">Get it for Chrome, Firefox, and Thunderbird.</a>
+      <p class="lead">
+        <b>Markdown Here</b> will help you to <strong>write email</strong> more <strong>quickly and powerfully</strong> than you thought possible.
       </p>
+      <p class="lead">
+        <strong>With no extra effort</strong> on your part, Markdown Here <strong>eliminates all the hassle</strong> of formatting email. <strong>Empowerment through simplicity</strong>.
+      </p>
+      <p class="lead">
+        <a href="get.html">Get it for Chrome, Firefox, and Thunderbird.</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+<script type="text/template" id="quote-carousel-item-template">
+<div class="item">
+  <p>
+    <%= quote %>
+  </p>
+  <p class="text-right">
+    <small>
+      <% if (stars) { _.each(_.range(stars), function() { %> <i class="icon-star"></i> <% }) } %>
+      <a href="<%= link %>"><%= context %></a>
+    </small>
+  </p>
+</div>
+</script>
+
+<div class="row-fluid well">
+  <div class="span1 big-quote-mark">&rdquo;</div>
+  <div class="span11 quote-carousel">
+    <div class="carousel slide">
+      <!-- Carousel items -->
+      <div class="carousel-inner">
+        <div class="active item">
+          <div>
+            &ldquo;Incredibly simple to use. ... I recommend it to anybody who enjoys trying to write things that other people enjoy the process of reading.&rdquo;
+          </div>
+          <div class="text-right">
+            <small><a href="https://chrome.google.com/webstore/detail/markdown-here/elifhakcjgalahccnjkneoccemfahfoa/reviews">Chrome reviewer &ldquo;Ben Kennedy&rdquo;</a></small>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
 <div class="row-fluid">
   <div class="span12 well">
-    <p class="lead">
-      With no extra effort on your part, Markdown Here eliminates all the hassle of formatting email. Empowerment through simplicity.
-    </p>
     <p class="text-right">
       <small>Already love Markdown? Skip to the <a href="features.html">Markdown Here Features page</a>.</small>
     </p>
