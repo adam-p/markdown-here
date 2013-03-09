@@ -2,10 +2,6 @@
 
 ## TODO
 
-* Syntax highlighting theme screenshots should use different code from each other
-  * and be squarer and denser
-* In livedemo, make scrollbar always show 
-  * ...just a problem in OSX? Possible to fix?
 * Fix colours
   - Use dark-on-light navbar
   - tone down bright pink
