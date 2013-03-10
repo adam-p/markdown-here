@@ -12,6 +12,9 @@ $(function() {
 
   // Set up the review quotes carousel
   initReviewQuotes();
+
+  // Add on-hover anchor links
+  initAnchorLinks();
 });
 
 
@@ -135,4 +138,16 @@ function initReviewQuotes() {
 
 function fancifyCharacters(str) {
   return str.replace(/"\b/g, '&ldquo;').replace(/\b"/g, '&rdquo;').replace(/\.\.\./g, '&hellip;');
+}
+
+function initAnchorLinks() {
+  $('*[data-hover-target-for]').each(function() {
+    var $anchor = $('<a href="#" class="anchor pull-right"><i class="icon-link"></i></a>')
+                    .attr('href', '#'+$(this).data('hover-target-for'))
+                    .css('visibility', 'hidden');
+    $(this).append($anchor)
+           .hover(
+            function() { $anchor.css('visibility', ''); },
+            function() { $anchor.css('visibility', 'hidden'); });
+  });
 }
