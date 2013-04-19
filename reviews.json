@@ -82,5 +82,17 @@
     "context": "Smashing Magazine newsletter",
     "link": "http://www.smashingmagazine.com/smashing-newsletter-issue-62/#a4",
     "stars": null
+  },
+  {
+    "quote": "Delivers exactly what I wanted. Fast, easy, and the LaTeX support is wonderful. Highly, highly, highly recommend, especially for grad students emailing their advisors.",
+    "context": "Chrome reviewer \"Alexander Blocker\"",
+    "link": "https://chrome.google.com/webstore/detail/markdown-here/elifhakcjgalahccnjkneoccemfahfoa/reviews",
+    "stars": 5
+  },
+  {
+    "quote": "It must have taken all of 50ms for me to realize that markdown-here was indispensable.  Thank you so much for making my Thunderbird experience 1e3 times better.",
+    "context": "Google Group post by \"Tom Maynard\"",
+    "link": "https://groups.google.com/forum/?hl=en&fromgroups=#!topic/markdown-here/kxHVUqG834k",
+    "stars": null
   }
 ]
