@@ -364,8 +364,63 @@ var MozillaOptionsStore = {
   }
 };
 
+
+var SafariOptionsStore = {
+
+  // The options object will be passed to `callback`
+  get: function(callback) {
+    var that = this;
+    // Make this actually asynchronous
+    setTimeout(function() {
+      that._fillDefaults(safari.extension.settings, callback);
+    });
+  },
+
+  // Store `obj`. `callback` will be called (with no arguments) when complete.
+  set: function(obj, callback) {
+    for (var key in obj) {
+      safari.extension.settings[key] = obj[key];
+    }
+
+    // Make this actually asynchronous
+    setTimeout(function() {
+      if (callback) callback();
+    });
+  },
+
+  remove: function(arrayOfKeys, callback) {
+    var i;
+
+    if (typeof(arrayOfKeys) === 'string') {
+      arrayOfKeys = [arrayOfKeys];
+    }
+
+    for (i = 0; i < arrayOfKeys.length; i++) {
+      delete safari.extension.settings[arrayOfKeys[i]];
+    }
+
+    // Make this actually asynchronous
+    setTimeout(function() {
+      if (callback) callback();
+    });
+  },
+
+  // The default values or URLs for our various options.
+  defaults: {
+    'main-css': {'__defaultFromFile__': 'common/default.css', '__mimeType__': 'text/css'},
+    'syntax-css': {'__defaultFromFile__': 'common/highlightjs/styles/github.css', '__mimeType__': 'text/css'},
+    'math-enabled': false,
+    'math-value': '<img src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}" alt="{mathcode}">',
+    'hotkey': { shiftKey: false, ctrlKey: true, altKey: true, key: 'M' }
+  }
+};
+
+
 if (typeof(navigator) !== 'undefined' && navigator.userAgent.indexOf('Chrome') >= 0) {
   this.OptionsStore = ChromeOptionsStore;
+}
+else if (typeof(navigator) !== 'undefined' && navigator.userAgent.match(/AppleWebKit.*Version.*Safari/)) {
+  this.OptionsStore = SafariOptionsStore;
 }
 else {
   this.OptionsStore = MozillaOptionsStore;
