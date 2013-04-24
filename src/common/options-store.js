@@ -407,8 +407,8 @@ var SafariOptionsStore = {
 
   // The default values or URLs for our various options.
   defaults: {
-    'main-css': {'__defaultFromFile__': 'common/default.css', '__mimeType__': 'text/css'},
-    'syntax-css': {'__defaultFromFile__': 'common/highlightjs/styles/github.css', '__mimeType__': 'text/css'},
+    'main-css': {'__defaultFromFile__': safari.extension.baseURI+'markdown-here/src/common/default.css', '__mimeType__': 'text/css'},
+    'syntax-css': {'__defaultFromFile__': safari.extension.baseURI+'markdown-here/src/common/highlightjs/styles/github.css', '__mimeType__': 'text/css'},
     'math-enabled': false,
     'math-value': '<img src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}" alt="{mathcode}">',
     'hotkey': { shiftKey: false, ctrlKey: true, altKey: true, key: 'M' }
