@@ -404,14 +404,18 @@ var SafariOptionsStore = {
   _getPreferences: function(callback) {
     // Only the background script has `safari.extension.settings`.
     if (typeof(safari.extension.settings) === 'undefined') {
+      var reqID = Math.random();
       var optionsHandler = function(event) {
-        safari.self.removeEventListener('message', optionsHandler);
-        if (callback) callback(event.message.options);
+        // Only handle the request we made.
+        if (event.message && event.message.requestID === reqID) {
+          safari.self.removeEventListener('message', optionsHandler);
+          if (callback) callback(event.message.options);
+        }
       };
 
       safari.self.addEventListener('message', optionsHandler, true);
 
-      safari.self.tab.dispatchMessage('get-options', {});
+      safari.self.tab.dispatchMessage('get-options', { requestID: reqID });
     }
     else {
       // Make this actually asynchronous
@@ -424,14 +428,18 @@ var SafariOptionsStore = {
   _setPreferences: function(obj, callback) {
     // Only the background script has `safari.extension.settings`.
     if (typeof(safari.extension.settings) === 'undefined') {
+      var reqID = Math.random();
       var optionsHandler = function(event) {
-        safari.self.removeEventListener('message', optionsHandler);
-        if (callback) callback();
+        // Only handle the request we made.
+        if (event.message && event.message.requestID === reqID) {
+          safari.self.removeEventListener('message', optionsHandler);
+          if (callback) callback();
+        }
       };
 
       safari.self.addEventListener('message', optionsHandler, true);
 
-      safari.self.tab.dispatchMessage('set-options', { options: obj });
+      safari.self.tab.dispatchMessage('set-options', { options: obj, requestID: reqID });
     }
     else {
       // Make this actually asynchronous
@@ -447,8 +455,8 @@ var SafariOptionsStore = {
 
   // The default values or URLs for our various options.
   defaults: {
-    'main-css': {'__defaultFromFile__': safari.extension.baseURI+'markdown-here/src/common/default.css', '__mimeType__': 'text/css'},
-    'syntax-css': {'__defaultFromFile__': safari.extension.baseURI+'markdown-here/src/common/highlightjs/styles/github.css', '__mimeType__': 'text/css'},
+    'main-css': {'__defaultFromFile__': (typeof(safari) !== 'undefined' ? safari.extension.baseURI : '')+'markdown-here/src/common/default.css', '__mimeType__': 'text/css'},
+    'syntax-css': {'__defaultFromFile__': (typeof(safari) !== 'undefined' ? safari.extension.baseURI : '')+'markdown-here/src/common/highlightjs/styles/github.css', '__mimeType__': 'text/css'},
     'math-enabled': false,
     'math-value': '<img src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}" alt="{mathcode}">',
     'hotkey': { shiftKey: false, ctrlKey: true, altKey: true, key: 'M' }
