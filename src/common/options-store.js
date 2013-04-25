@@ -365,27 +365,23 @@ var MozillaOptionsStore = {
 };
 
 
+/*
+ * When called from the options page, this is effectively a content script, so
+ * we'll have to make calls to the background script in that case.
+ */
 var SafariOptionsStore = {
 
   // The options object will be passed to `callback`
   get: function(callback) {
     var that = this;
-    // Make this actually asynchronous
-    setTimeout(function() {
-      that._fillDefaults(safari.extension.settings, callback);
+    this._getPreferences(function(options) {
+      that._fillDefaults(options, callback);
     });
   },
 
   // Store `obj`. `callback` will be called (with no arguments) when complete.
   set: function(obj, callback) {
-    for (var key in obj) {
-      safari.extension.settings[key] = obj[key];
-    }
-
-    // Make this actually asynchronous
-    setTimeout(function() {
-      if (callback) callback();
-    });
+    this._setPreferences(obj, callback);
   },
 
   remove: function(arrayOfKeys, callback) {
@@ -403,6 +399,50 @@ var SafariOptionsStore = {
     setTimeout(function() {
       if (callback) callback();
     });
+  },
+
+  _getPreferences: function(callback) {
+    // Only the background script has `safari.extension.settings`.
+    if (typeof(safari.extension.settings) === 'undefined') {
+      var optionsHandler = function(event) {
+        safari.self.removeEventListener('message', optionsHandler);
+        if (callback) callback(event.message.options);
+      };
+
+      safari.self.addEventListener('message', optionsHandler, true);
+
+      safari.self.tab.dispatchMessage('get-options', {});
+    }
+    else {
+      // Make this actually asynchronous
+      setTimeout(function() {
+        if (callback) callback(safari.extension.settings);
+      });
+    }
+  },
+
+  _setPreferences: function(obj, callback) {
+    // Only the background script has `safari.extension.settings`.
+    if (typeof(safari.extension.settings) === 'undefined') {
+      var optionsHandler = function(event) {
+        safari.self.removeEventListener('message', optionsHandler);
+        if (callback) callback();
+      };
+
+      safari.self.addEventListener('message', optionsHandler, true);
+
+      safari.self.tab.dispatchMessage('set-options', { options: obj });
+    }
+    else {
+      // Make this actually asynchronous
+      setTimeout(function() {
+        for (var key in obj) {
+          safari.extension.settings[key] = obj[key];
+        }
+
+        if (callback) callback();
+      });
+    }
   },
 
   // The default values or URLs for our various options.
