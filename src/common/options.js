@@ -4,8 +4,8 @@
  */
 
 "use strict";
-/*global OptionsStore:false, chrome:false, markdownRender:false,
-  htmlToText:false, marked:false, hljs:false, markdownHere:false*/
+/*global OptionsStore:false, chrome:false, markdownRender:false, $:false,
+  htmlToText:false, marked:false, hljs:false, markdownHere:false, Utils:false*/
 
 /*
  * Main script file for the options page.
@@ -15,6 +15,8 @@ var cssEdit, cssSyntaxEdit, cssSyntaxSelect, rawMarkdownIframe, savedMsg,
     mathEnable, mathEdit, hotkeyShift, hotkeyCtrl, hotkeyAlt, hotkeyKey;
 
 function onLoad() {
+  var xhr;
+
   // Show/hide elements depending on platform
   showPlatformElements();
 
@@ -36,7 +38,7 @@ function onLoad() {
   //
 
   // Get the available highlight.js styles.
-  var xhr = new XMLHttpRequest();
+  xhr = new XMLHttpRequest();
   xhr.overrideMimeType('application/json');
   xhr.open('GET', 'highlightjs/styles/styles.json');
   xhr.onreadystatechange = function() {
@@ -90,15 +92,16 @@ function onLoad() {
 
   // Hide the tests link if the page isn't available. It may be stripped out
   // of extension packages, and it doesn't work in Thunderbird/Postbox.
-  if (navigator.userAgent.indexOf('Chrome') < 0
-      && navigator.userAgent.indexOf('Firefox') < 0) {
+  if (navigator.userAgent.indexOf('Chrome') < 0 &&
+      navigator.userAgent.indexOf('Firefox') < 0 &&
+      typeof(safari) === 'undefined') {
     $('#tests-link').hide();
   }
   else {
     // Check if our test file exists.
     // Note: Using $.ajax won't work because for local requests Firefox sets
     // status to 0 even on success. jQuery interprets this as an error.
-    var xhr = new XMLHttpRequest();
+    xhr = new XMLHttpRequest();
     xhr.open('HEAD', './test/index.html');
     // If we don't set the mimetype, Firefox will complain.
     xhr.overrideMimeType('text/plain');
