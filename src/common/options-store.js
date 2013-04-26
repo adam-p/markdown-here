@@ -385,20 +385,7 @@ var SafariOptionsStore = {
   },
 
   remove: function(arrayOfKeys, callback) {
-    var i;
-
-    if (typeof(arrayOfKeys) === 'string') {
-      arrayOfKeys = [arrayOfKeys];
-    }
-
-    for (i = 0; i < arrayOfKeys.length; i++) {
-      delete safari.extension.settings[arrayOfKeys[i]];
-    }
-
-    // Make this actually asynchronous
-    setTimeout(function() {
-      if (callback) callback();
-    });
+    this._removePreferences(arrayOfKeys, callback);
   },
 
   _getPreferences: function(callback) {
@@ -446,6 +433,39 @@ var SafariOptionsStore = {
       setTimeout(function() {
         for (var key in obj) {
           safari.extension.settings[key] = obj[key];
+        }
+
+        if (callback) callback();
+      });
+    }
+  },
+
+  _removePreferences: function(arrayOfKeys, callback) {
+    // Only the background script has `safari.extension.settings`.
+    if (typeof(safari.extension.settings) === 'undefined') {
+      var reqID = Math.random();
+      var optionsHandler = function(event) {
+        // Only handle the request we made.
+        if (event.message && event.message.requestID === reqID) {
+          safari.self.removeEventListener('message', optionsHandler);
+          if (callback) callback();
+        }
+      };
+
+      safari.self.addEventListener('message', optionsHandler, true);
+
+      safari.self.tab.dispatchMessage('remove-options', { arrayOfKeys: arrayOfKeys, requestID: reqID });
+    }
+    else {
+      // Make this actually asynchronous
+      setTimeout(function() {
+        var i;
+        if (typeof(arrayOfKeys) === 'string') {
+          arrayOfKeys = [arrayOfKeys];
+        }
+
+        for (i = 0; i < arrayOfKeys.length; i++) {
+          delete safari.extension.settings[arrayOfKeys[i]];
         }
 
         if (callback) callback();
