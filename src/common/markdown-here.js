@@ -74,13 +74,16 @@ function getOperationalRange(focusedElem) {
 
   range = selection.getRangeAt(0);
 
-  // We're going to work around some weird OSX+Chrome behaviour where if you
+  // We're going to work around some weird OSX+Chrome/Safari behaviour where if you
   // right-click on a word it gets selected, which then causes us to render just
   // that one word and look dumb and be wrong.
-  if (typeof(chrome) !== 'undefined' &&
-      typeof(navigator) !== 'undefined' &&
-      navigator.userAgent.indexOf('OS X') >= 0 &&
-      range.toString().match(/^\b\w+\b$/)) {
+  // Also, in OSX+Safari, right-clicking in empty space will cause a selection
+  // that isn't collapsed, but has no content. Also ignore that.
+  if ((range.toString().length === 0) ||
+      ((typeof(chrome) !== 'undefined' || typeof(safari) !== 'undefined') &&
+       typeof(navigator) !== 'undefined' &&
+       navigator.userAgent.indexOf('OS X') >= 0 &&
+       range.toString().match(/^\b\w+\b$/))) {
     range.collapse();
   }
 
