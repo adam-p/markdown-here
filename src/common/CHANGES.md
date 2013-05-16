@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+2013-05-xx: v2.8.0
+------------------
+
+* Markdown Here now supports Safari!
+
 2013-03-05: v2.7.3
 ------------------
 
