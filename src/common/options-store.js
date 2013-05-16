@@ -365,50 +365,118 @@ var MozillaOptionsStore = {
 };
 
 
+/*
+ * When called from the options page, this is effectively a content script, so
+ * we'll have to make calls to the background script in that case.
+ */
 var SafariOptionsStore = {
 
   // The options object will be passed to `callback`
   get: function(callback) {
     var that = this;
-    // Make this actually asynchronous
-    setTimeout(function() {
-      that._fillDefaults(safari.extension.settings, callback);
+    this._getPreferences(function(options) {
+      that._fillDefaults(options, callback);
     });
   },
 
   // Store `obj`. `callback` will be called (with no arguments) when complete.
   set: function(obj, callback) {
-    for (var key in obj) {
-      safari.extension.settings[key] = obj[key];
-    }
-
-    // Make this actually asynchronous
-    setTimeout(function() {
-      if (callback) callback();
-    });
+    this._setPreferences(obj, callback);
   },
 
   remove: function(arrayOfKeys, callback) {
-    var i;
+    this._removePreferences(arrayOfKeys, callback);
+  },
 
-    if (typeof(arrayOfKeys) === 'string') {
-      arrayOfKeys = [arrayOfKeys];
+  _getPreferences: function(callback) {
+    // Only the background script has `safari.extension.settings`.
+    if (typeof(safari.extension.settings) === 'undefined') {
+      var reqID = Math.random();
+      var optionsHandler = function(event) {
+        // Only handle the request we made.
+        if (event.message && event.message.requestID === reqID) {
+          safari.self.removeEventListener('message', optionsHandler);
+          if (callback) callback(event.message.options);
+        }
+      };
+
+      safari.self.addEventListener('message', optionsHandler, true);
+
+      safari.self.tab.dispatchMessage('get-options', { requestID: reqID });
     }
-
-    for (i = 0; i < arrayOfKeys.length; i++) {
-      delete safari.extension.settings[arrayOfKeys[i]];
+    else {
+      // Make this actually asynchronous
+      setTimeout(function() {
+        if (callback) callback(safari.extension.settings);
+      });
     }
+  },
 
-    // Make this actually asynchronous
-    setTimeout(function() {
-      if (callback) callback();
-    });
+  _setPreferences: function(obj, callback) {
+    // Only the background script has `safari.extension.settings`.
+    if (typeof(safari.extension.settings) === 'undefined') {
+      var reqID = Math.random();
+      var optionsHandler = function(event) {
+        // Only handle the request we made.
+        if (event.message && event.message.requestID === reqID) {
+          safari.self.removeEventListener('message', optionsHandler);
+          if (callback) callback();
+        }
+      };
+
+      safari.self.addEventListener('message', optionsHandler, true);
+
+      safari.self.tab.dispatchMessage('set-options', { options: obj, requestID: reqID });
+    }
+    else {
+      // Make this actually asynchronous
+      setTimeout(function() {
+        for (var key in obj) {
+          safari.extension.settings[key] = obj[key];
+        }
+
+        if (callback) callback();
+      });
+    }
+  },
+
+  _removePreferences: function(arrayOfKeys, callback) {
+    // Only the background script has `safari.extension.settings`.
+    if (typeof(safari.extension.settings) === 'undefined') {
+      var reqID = Math.random();
+      var optionsHandler = function(event) {
+        // Only handle the request we made.
+        if (event.message && event.message.requestID === reqID) {
+          safari.self.removeEventListener('message', optionsHandler);
+          if (callback) callback();
+        }
+      };
+
+      safari.self.addEventListener('message', optionsHandler, true);
+
+      safari.self.tab.dispatchMessage('remove-options', { arrayOfKeys: arrayOfKeys, requestID: reqID });
+    }
+    else {
+      // Make this actually asynchronous
+      setTimeout(function() {
+        var i;
+        if (typeof(arrayOfKeys) === 'string') {
+          arrayOfKeys = [arrayOfKeys];
+        }
+
+        for (i = 0; i < arrayOfKeys.length; i++) {
+          delete safari.extension.settings[arrayOfKeys[i]];
+        }
+
+        if (callback) callback();
+      });
+    }
   },
 
   // The default values or URLs for our various options.
   defaults: {
-    'main-css': {'__defaultFromFile__': 'common/default.css', '__mimeType__': 'text/css'},
-    'syntax-css': {'__defaultFromFile__': 'common/highlightjs/styles/github.css', '__mimeType__': 'text/css'},
+    'main-css': {'__defaultFromFile__': (typeof(safari) !== 'undefined' ? safari.extension.baseURI : '')+'markdown-here/src/common/default.css', '__mimeType__': 'text/css'},
+    'syntax-css': {'__defaultFromFile__': (typeof(safari) !== 'undefined' ? safari.extension.baseURI : '')+'markdown-here/src/common/highlightjs/styles/github.css', '__mimeType__': 'text/css'},
     'math-enabled': false,
     'math-value': '<img src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}" alt="{mathcode}">',
     'hotkey': { shiftKey: false, ctrlKey: true, altKey: true, key: 'M' }
