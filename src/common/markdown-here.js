@@ -84,7 +84,7 @@ function getOperationalRange(focusedElem) {
        typeof(navigator) !== 'undefined' &&
        navigator.userAgent.indexOf('OS X') >= 0 &&
        range.toString().match(/^\b\w+\b$/))) {
-    range.collapse();
+    range.collapse(true);
   }
 
   if (range.collapsed) {
