@@ -18,61 +18,27 @@
 
 var MozillaOptionsService = {
   listenRequest: function(callback) { // analogue of chrome.extension.onRequest.addListener
+    // https://developer.mozilla.org/en-US/docs/Code_snippets/Interaction_between_privileged_and_non-privileged_pages?redirectlocale=en-US&redirectslug=Code_snippets%3AInteraction_between_privileged_and_non-privileged_pages#Chromium-like_messaging.3A_json_request_with_json_callback
 
     return document.addEventListener('markdown_here-options-query', function(event) {
-      var node = event.target, doc = node.ownerDocument;
+      var node = event.target;
+      if (!node || node.nodeType != Node.TEXT_NODE) {
+        return;
+      }
 
-      return callback(node.getUserData('data'), doc, function(data) {
-        if (!node.getUserData('callback')) {
-          return doc.documentElement.removeChild(node);
-        }
+      var doc = node.ownerDocument;
 
-        node.setUserData('response', data, null);
+      return callback(JSON.parse(node.nodeValue), doc, function(response) {
+        node.nodeValue = JSON.stringify(response);
 
-        var listener = doc.createEvent('HTMLEvents');
-        listener.initEvent('markdown_here-options-response', true, false);
-        return node.dispatchEvent(listener);
+        var event = doc.createEvent('HTMLEvents');
+        event.initEvent('markdown_here-options-response', true, false);
+        return node.dispatchEvent(event);
       });
     }, false, true);
   },
 
   requestHandler: function(request, sender, callback) {
-
-    /*
-    For information about what `addExposedProps()` is doing and why, see:
-    https://blog.mozilla.org/addons/2012/08/20/exposing-objects-to-content-safely/
-    The short version is that in Mozilla v17 a security feature was introduced
-    (well, enforced) whereby objects shared between background scripts (i.e.,
-    this code) and content scripts (i.e., the options page) have to specifically
-    indicate which properties are accessible.
-    This function basically undoes that by making all properties readable/writable,
-    but for our purposes that's okay (this code is effectively relinquishing
-    control of the object to the content script).
-    This fixes issue #37 (https://github.com/adam-p/markdown-here/issues/37).
-    */
-    function addExposedProps(obj) {
-      var key, i;
-
-      if (typeof(obj) === 'undefined' || obj === null) {
-        return;
-      }
-
-      // Note that this code path is for Objects and Arrays
-      if (typeof(obj) === 'object') {
-        if (!('__exposedProps__' in obj)) {
-          obj['__exposedProps__'] = {};
-        }
-
-        for (key in obj) {
-          if (key === '__exposedProps__') {
-            continue;
-          }
-          obj['__exposedProps__'][key] = 'rw';
-          addExposedProps(obj[key]);
-        }
-      }
-    }
-
     var prefs, prefKeys, prefsObj, i;
 
     prefs = Components.classes['@mozilla.org/preferences-service;1']
@@ -93,13 +59,11 @@ var MozillaOptionsService = {
         }
       }
 
-      addExposedProps(prefsObj);
-
       return callback(prefsObj);
     }
     else if (request.action === 'set') {
-      for (i in request.obj) {
-        prefs.setCharPref(i, JSON.stringify(request.obj[i]));
+      for (var key in request.obj) {
+        prefs.setCharPref(key, JSON.stringify(request.obj[key]));
       }
 
       if (callback) return callback();

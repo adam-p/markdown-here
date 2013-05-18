@@ -105,8 +105,6 @@ describe('OptionsStore', function() {
         OptionsStore.get(function(newOptions) {
           expect(newOptions).to.have.property(testKeys[0]);
           expect(newOptions[testKeys[0]]).to.eql(obj[testKeys[0]]);
-
-          // Note that these will fail on Firefox:
           expect(Array.isArray(newOptions[testKeys[0]])).to.be.true;
           expect(newOptions[testKeys[0]]).to.have.property('length');
 

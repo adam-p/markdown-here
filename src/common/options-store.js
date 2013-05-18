@@ -319,47 +319,36 @@ var MozillaOptionsStore = {
       }
     }
     catch (ex) {
-      request = document.createTextNode('');
-      request.setUserData('data', data, null);
-      if (callback) {
-        request.setUserData('callback', callback, null);
+      // This exception was thrown by the Components.classes stuff above, and
+      // means that this code is being called from a content script.
+      // We need to send a request from this non-privileged context to the
+      // privileged background script.
+      // See: https://developer.mozilla.org/en-US/docs/Code_snippets/Interaction_between_privileged_and_non-privileged_pages?redirectlocale=en-US&redirectslug=Code_snippets%3AInteraction_between_privileged_and_non-privileged_pages#Chromium-like_messaging.3A_json_request_with_json_callback
 
-        var optionsResponseHandler = function(event) {
-          var node, callback, response;
-          node = event.target;
-          callback = node.getUserData('callback');
+      request = document.createTextNode(JSON.stringify(data));
 
-          // May be undefined if there is no response data.
-          response = node.getUserData('response');
+      var optionsResponseHandler = function(event) {
+        var response = null;
 
-          document.documentElement.removeChild(node);
-          // Note that if there's no callback, then the node gets removed by
-          // background service: firefox/chrome/content/options.js:listenRequest()
-          // TODO: That's pretty badly hacky. Can we do the node removal after
-          // the `dispatchEvent()` call below?
+        // There may be no response data.
+        if (request.nodeValue) {
+          response = JSON.parse(request.nodeValue);
+        }
 
-          document.removeEventListener('markdown_here-options-response', optionsResponseHandler, false);
+        request.parentNode.removeChild(request);
 
-          // We need to return a clone of the response.
-          // This is because the response came from the background script, and
-          // if later content-script code tries to modify it, an error will
-          // result (silently). I belive that this is related to
-          // `__exposedProps__` -- see `addExposedProps()` for details.
-          if (response) {
-            response = JSON.parse(JSON.stringify(response));
-          }
-
+        if (callback) {
           callback(response);
-          return;
-        };
+        }
+      };
 
-        document.addEventListener('markdown_here-options-response', optionsResponseHandler, false);
-      }
-      document.documentElement.appendChild(request);
+      request.addEventListener('markdown_here-options-response', optionsResponseHandler, false);
 
-      sender = document.createEvent('HTMLEvents');
-      sender.initEvent('markdown_here-options-query', true, false);
-      request.dispatchEvent(sender);
+      document.head.appendChild(request);
+
+      var event = document.createEvent('HTMLEvents');
+      event.initEvent('markdown_here-options-query', true, false);
+      request.dispatchEvent(event);
     }
   }
 };
