@@ -83,6 +83,8 @@ function onLoad() {
   // Load the changelist section
   loadChangelist();
 
+  showDonatePlea();
+
   // Hide the tests link if the page isn't available. It may be stripped out
   // of extension packages, and it doesn't work in Thunderbird/Postbox.
   if (navigator.userAgent.indexOf('Chrome') < 0 &&
@@ -363,6 +365,18 @@ function loadChangelist() {
     }
   };
   xhr.send();
+}
+
+// Choose one of the donate pleas to use, and update the donate info so we can
+// A/B test them.
+function showDonatePlea() {
+  var $pleas = $('.donate-plea');
+  var choice = Math.floor(Math.random() * $pleas.length);
+  var $plea = $pleas.eq(choice);
+  var pleaId = $plea.attr('id');
+
+  $plea.removeClass('donate-plea-hidden');
+  $('#donate-button input[name="item_number"]').prop('value', 'options-page-'+pleaId);
 }
 
 // Reset the math img tag template to default.

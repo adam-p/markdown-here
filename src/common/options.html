@@ -262,6 +262,23 @@ MIT License : http://adampritchard.mit-license.org/
     margin-top: 0;
     margin-bottom: 0;
   }
+
+  hr {
+    border: 0;
+    border-top: 1px dashed #482168;
+    width: 90%;
+  }
+
+  #donate-button {
+    margin-top: 0.3em;
+  }
+
+  .donate-plea-hidden {
+    display: none;
+  }
+
+  .donate-plea {
+  }
   </style>
 </head>
 
@@ -321,19 +338,29 @@ MIT License : http://adampritchard.mit-license.org/
           <li>
             If you're interested in what the future holds for Markdown Here, check out the <a href="https://github.com/adam-p/markdown-here#next-steps" target="_blank">Next Steps section</a> of the README.
           </li>
-          <li>
-            <span>Once you decide Markdown Here is pretty sweet, please help me to buy some flowers for my wife so she's not too upset about how much time I spend working on it. Thank you!</span>
-            <div style="margin-top: 0.3em">
-              <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-                <input type="hidden" name="cmd" value="_s-xclick">
-                <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
-                ">
-                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-                <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-              </form>
-            </div>
-          </li>
         </ul>
+
+        <hr>
+
+        <div>
+          <span class="donate-plea donate-plea-hidden" id="dp1">Once you decide Markdown Here is pretty sweet, please help me to buy some flowers for my wife so she's not too upset about how much time I spend working on it. <strong>Thank you!</strong></span>
+          <span class="donate-plea donate-plea-hidden" id="dp2"><strong>Help make Markdown Here better!</strong></span>
+          <span class="donate-plea donate-plea-hidden" id="dp3"><strong>Help support the development of Markdown Here!</strong></span>
+
+          <div id="donate-button">
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+            <input type="hidden" name="cmd" value="_donations">
+            <input type="hidden" name="business" value="9PNMFUUB4WVGY">
+            <input type="hidden" name="lc" value="CA">
+            <input type="hidden" name="item_name" value="Markdown Here development support">
+            <input type="hidden" name="item_number" value="options-page">
+            <input type="hidden" name="currency_code" value="CAD">
+            <input type="hidden" name="bn" value="PP-DonationsBF:btn_donate_LG.gif:NonHosted">
+            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+            <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   </div>
