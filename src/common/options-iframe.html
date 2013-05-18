@@ -13,6 +13,17 @@ MIT License : http://adampritchard.mit-license.org/
   <script src="utils.js"></script>
   <script src="markdown-here.js"></script>
   <script src="options-iframe.js"></script>
+
+  <style>
+  /* We don't really want to add styles to the preview because it might confuse
+     users when they are playing with their own styles. However, it's also
+     pretty confusing to show a serif font in the preview when email clients
+     almost always use a sans serif font by default.
+  */
+  body {
+    font-family: Arial, sans;
+  }
+  </style>
 </head>
 
 <!-- NOTE: The content of the <body> *must not* be indented or have comments,
