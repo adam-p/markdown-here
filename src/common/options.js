@@ -125,27 +125,16 @@ function showPlatformElements() {
   // This could be done more elegantly, but...
   if (navigator.userAgent.indexOf('Thunderbird') >= 0 ||
       navigator.userAgent.indexOf('Icedove') >= 0 ||
-      navigator.userAgent.indexOf('Postbox') >= 0) {
-    setClassVisibility(false, ['chrome-only']);
+      navigator.userAgent.indexOf('Postbox') >= 0 ||
+      navigator.userAgent.indexOf('Firefox') >= 0) {
+    $('#need-page-reload').css('display', 'none');
   }
-  else if (navigator.userAgent.indexOf('Chrome') >= 0) {
-    setClassVisibility(true, ['chrome-only']);
-  }
-  else if (navigator.userAgent.indexOf('Firefox') >= 0) {
-    setClassVisibility(false, ['chrome-only']);
+  else if (navigator.userAgent.indexOf('Chrome') >= 0 ||
+           navigator.userAgent.match(/AppleWebKit.*Version.*Safari/)) {
+    $('#need-page-reload').css('display', '');
   }
   else {
     // Shouldn't happen. Don't modify anything.
-  }
-
-  function setClassVisibility(visible, classes) {
-    var i, j, elems;
-    for (i = 0; i < classes.length; i++) {
-      elems = document.querySelectorAll('.'+classes[i]);
-      for (j = 0; j < elems.length; j++) {
-        elems[j].style.display = (visible ? "" : "none");
-      }
-    }
   }
 }
 
