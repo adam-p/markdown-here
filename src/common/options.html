@@ -200,16 +200,6 @@ MIT License : http://adampritchard.mit-license.org/
     background-color: rgba(249, 138, 209, 0.35);
   }
 
-  #changelist {
-    height: 25em;
-    overflow-y: scroll;
-    border-radius: 5px;
-    box-shadow: 2px 2px 3px rgba(0, 0, 0, .2);
-    border: 2px #EEE solid;
-    margin: 10px;
-    padding: 10px;
-  }
-
   .warning {
     background-color: #E6E619;
     display: inline-block;
@@ -240,6 +230,37 @@ MIT License : http://adampritchard.mit-license.org/
   #tests-link {
     font-size: 0.5em;
     text-align: right;
+  }
+
+  #changelist {
+    height: 25em;
+    overflow-y: scroll;
+    border-radius: 5px;
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, .2);
+    border: 2px #EEE solid;
+    margin: 10px;
+    padding: 10px;
+  }
+
+  .changelist-new {
+    border-radius: 5px;
+    background: -webkit-gradient(linear, left center, right center, from(rgb(227, 214, 238)), to(rgb(255,255,255)));
+    background: -moz-linear-gradient(90deg, rgb(227, 214, 238), rgb(255,255,255));
+    background: linear-gradient(90deg, rgb(227, 214, 238), rgb(255,255,255));
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    padding-bottom: 0.1em;
+  }
+
+  .changelist-new h2:first-child {
+    color: #FFF;
+    text-shadow: 1px 1px 2px black, 0 0 1em rgb(132, 41, 209), 0 0 0.2em rgb(132, 41, 209);
+    margin-bottom: 0;
+  }
+
+  #changelist > h1 {
+    margin-top: 0;
+    margin-bottom: 0;
   }
   </style>
 </head>

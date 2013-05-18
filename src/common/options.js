@@ -81,14 +81,7 @@ function onLoad() {
   });
 
   // Load the changelist section
-
   loadChangelist();
-
-  if (location.hash === '#changelist') {
-    var cc = document.querySelector('#changelist-container');
-    cc.parentElement.insertBefore(cc, document.querySelector('#options-container'));
-    setTimeout(function(){scroll(0, 0);}, 1);
-  }
 
   // Hide the tests link if the page isn't available. It may be stripped out
   // of extension packages, and it doesn't work in Thunderbird/Postbox.
@@ -356,6 +349,17 @@ function loadChangelist() {
       changes = marked(changes, markedOptions);
 
       Utils.saferSetInnerHTML($('#changelist').get(0), changes);
+
+      var prevVer = location.search ? location.search.match(/prevVer=([0-9\.]+)/) : null;
+      if (prevVer) {
+        prevVer = prevVer[1]; // capture group
+
+        var prevVerStart = $('#changelist h2').filter(function() { return $(this).text().match(new RegExp('v'+prevVer+'$')); });
+        $('#changelist').find('h1:first').after('<h2>NEW</h2>').nextUntil(prevVerStart).wrapAll('<div class="changelist-new"></div>');
+
+        // Move the changelist section up in the page
+        $('#changelist-container').insertBefore('#options-container');
+      }
     }
   };
   xhr.send();

@@ -19,8 +19,15 @@ window.addEventListener('load', function() {
 
       // Have we been updated?
       if (options['last-version'] !== appDetails.version) {
-        // Open our options page in changelist mode
-        chrome.tabs.create({ url: appDetails.options_page + "#changelist" });
+        var optionsUrl = appDetails.options_page;
+
+        // If this is an upgrade, open the options page in changelist mode
+        if (options['last-version']) {
+          optionsUrl += '?prevVer=' + options['last-version'];
+        }
+
+        // Open our options page
+        chrome.tabs.create({ url: optionsUrl });
 
         // Update out last version
         OptionsStore.set({ 'last-version': appDetails.version });
