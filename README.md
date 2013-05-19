@@ -1,10 +1,13 @@
 # ![Markdown Here logo](https://raw.github.com/adam-p/markdown-here/master/src/common/images/icon48.png) Markdown Here
 
+[**Visit the website.**](http://markdown-here.com)  
 [**Get it for Chrome.**](https://chrome.google.com/webstore/detail/elifhakcjgalahccnjkneoccemfahfoa)  
-[**Get it for Firefox, Thunderbird, and Postbox.**](https://addons.mozilla.org/en-US/firefox/addon/markdown-here/)  
+[**Get it for Firefox.**](https://addons.mozilla.org/en-US/firefox/addon/markdown-here/)  
+[**Get it for Safari.**](https://s3.amazonaws.com/markdown-here/markdown-here.safariextz)  
+[**Get it for Thunderbird and Postbox.**](https://addons.mozilla.org/en-US/thunderbird/addon/markdown-here/)  
 [**Discuss it and ask questions in the Google Group.**](https://groups.google.com/forum/?fromgroups#!forum/markdown-here/)
 
-*Markdown Here* is a Google Chrome, Firefox, and Thunderbird extension that lets you write email<sup>&dagger;</sup> in Markdown<sup>&Dagger;</sup> and render them before sending. It also supports syntax highlighting (just specify the language in a fenced code block).
+*Markdown Here* is a Google Chrome, Firefox, Safari, and Thunderbird extension that lets you write email<sup>&dagger;</sup> in Markdown<sup>&Dagger;</sup> and render them before sending. It also supports syntax highlighting (just specify the language in a fenced code block).
 
 Writing email with code in it is pretty tedious. Writing Markdown with code in it is easy. I found myself writing email in Markdown in the Github in-browser editor, then copying the preview into email. This is a pretty absurd workflow, so I decided create a tool to write and render Markdown right in the email.
 
@@ -60,15 +63,24 @@ After installing, make sure to restart Firefox/Thunderbird!
 1. Clone this repo.
 2. Follow the instructions in the MDN ["Setting up an extension development environment"](https://developer.mozilla.org/en/Setting_up_extension_development_environment) article.
 
+### Safari
+
+[Download the extension directly.](https://s3.amazonaws.com/markdown-here/markdown-here.safariextz) When it has finished downloading, double click it to install. 
+
+#### Preferences
+
+To get to the Markdown Here preferences, open the Safari preferences and then go to the "Extensions" tab. Then click the "Click me to show Markdown Here options" box.
+
 ## Usage Instructions
 
 Install it, and then…
 
-1. In Chrome or Firefox, log into your Gmail, Hotmail, or Yahoo account and start a new email. In Thunderbird, start a new message.
-2. Make sure you're using the rich editor.
+1. In Chrome and Safari, *make sure* you reload your web mail page before trying to use Markdown Here.
+2. In Chrome/Firefox/Safari, log into your Gmail, Hotmail, or Yahoo account and start a new email. In Thunderbird, start a new message.
+3. Make sure you're using the rich editor.
    * In Gmail, click the "Rich formatting" link, if it's visible.
    * In Thunderbird, make sure "Compose messages in HTML format" is enabled in your "Account Settings", "Composition & Addressing" pane.
-3. Compose an email in Markdown. For example:
+4. Compose an email in Markdown. For example:
 
    <pre>
    **Hello** `world`.
@@ -78,9 +90,9 @@ Install it, and then…
    ```
    </pre>
 
-4. Right-click in the compose box and choose the "Markdown Toggle" item from the context menu. Or click the button that appears in your address bar. Or use the hotkey (<kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>M</kbd> by default).
-5. You should see your email rendered correctly from Markdown into rich HTML.
-6. Send your awesome email to everyone you know. It will appear to them the same way it looks to you.
+5. Right-click in the compose box and choose the "Markdown Toggle" item from the context menu. Or click the button that appears in your address bar. Or use the hotkey (<kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>M</kbd> by default).
+6. You should see your email rendered correctly from Markdown into rich HTML.
+7. Send your awesome email to everyone you know. It will appear to them the same way it looks to you.
 
 ### Revert to Markdown
 
@@ -114,7 +126,7 @@ To revert back to Markdown, just put your cursor anywhere in the block of conver
 
 ### Options
 
-The *Markdown Here* Options page can be accessed via the Chrome, Firefox, or Thunderbird extensions list. The available options include:
+The *Markdown Here* Options page can be accessed via the Chrome, Firefox, Safari, or Thunderbird extensions list. The available options include:
 
 * Styling modifications for the rendered Markdown.
 * Syntax highlighting theme selection and modification.
@@ -130,8 +142,8 @@ For Chrome and Firefox, any changes made in the *Markdown Here* Options are auto
 Here are some common problems that people run into.
 
 <dl>
-  <dt>Chrome/Firefox/Thunderbird: I just installed <em>Markdown Here</em> and the context menu item isn't showing up.</dt>
-  <dd>Make sure you restarted Firefox or Thunderbird, and either restarted Chrome or reloaded your webmail page.</dd>
+  <dt>Chrome/Firefox/Safari/Thunderbird: I just installed <em>Markdown Here</em> and the context menu item isn't showing up.</dt>
+  <dd>Make sure you restarted Firefox or Thunderbird, and either restarted Chrome/Safari or reloaded your webmail page.</dd>
 </dl>
 
 ## Compatibility
@@ -263,6 +275,10 @@ install.rdf
 common/
 firefox/
 ```
+
+### Safari extension
+
+Use the Safari Extension Builder.
 
 ## Next Steps
 
