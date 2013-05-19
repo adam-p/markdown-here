@@ -278,6 +278,8 @@ firefox/
 
 ### Safari extension
 
+The browser-specific code is located in the [`markdown-here-safari`](https://github.com/adam-p/markdown-here-safari) project.
+
 Use the Safari Extension Builder.
 
 ## Next Steps
