@@ -4,7 +4,7 @@ Change Log
 2013-05-19: v2.8.0
 ------------------
 
-* **Markdown Here now supports Safari!**
+* **Markdown Here now supports Safari!** [Get it here.](http://markdown-here.com/get.html)
   * Thanks to users [unscriptable](https://github.com/unscriptable) and [martinsvalin](https://github.com/martinsvalin) for [requesting it](https://github.com/adam-p/markdown-here/issues/38).
 
 * Fixed bug in Firefox v23 (current Aurora): Options page wasn't working. ([See details.](https://github.com/adam-p/markdown-here/commit/c20b7e4841f325bed3201ea9a98b3f6c986cf8cc))
