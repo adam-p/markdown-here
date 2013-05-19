@@ -16,8 +16,9 @@ Syntax highlighting note: Used fenced code blocks and specify the language name.
 
 Privacy: Markdown Here accesses and modifies the content of your email. It can, in theory, access other web content, but does not. It also makes no Internet requests itself whatsoever. You data is modified when and where you choose, and does not leave your browser.
 
-Available as a Chrome, Firefox, and Thunderbird extension.
+Available as a Chrome, Firefox, Safari, and Thunderbird extension.
 
 This is an open source project. Visit Markdown Here's Github page for full instructions, more information, bug reports, or to contribute.
 
+http://markdown-here.com
 https://github.com/adam-p/markdown-here
