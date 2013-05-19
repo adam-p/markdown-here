@@ -15,7 +15,6 @@ MIT License : http://adampritchard.mit-license.org/
   <title>Markdown Here Options</title>
 
   <style type="text/css">
-
   body {
     font-family: Tahoma, Helvetica, arial, freesans, clean, sans-serif;
     font-size: 14px;
@@ -276,6 +275,61 @@ MIT License : http://adampritchard.mit-license.org/
   .donate-plea-hidden {
     display: none;
   }
+
+  /* Custom PayPal button styles from http://visitsteve.com/made/diy-paypal-buttons/ */
+  .paypal-button {
+    width: 200px;
+    height: 52px;
+    color: #2e3192;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    position: relative;
+
+    /* BACKGROUND GRADIENTS */
+    background: #FEE1A5;
+    background: -moz-linear-gradient(top, #FFF, #FEE1A5 50%, #FFB829 51%,
+      #FEE1A5 95%, #FEE1A5);
+    background: -webkit-gradient(linear, left top, left bottom,
+      color-stop(0, #FFF), color-stop(.5, #FEE1A5), color-stop(.51, #FFB829),
+      color-stop(.95, #FEE1A5), color-stop(.96, #FEE1A5), to(#FEE1A5));
+
+    /* BORDER RADIUS */
+    -moz-border-radius: 18px;
+    -webkit-border-radius: 18px;
+    border-radius: 18px;
+
+    border-bottom: 1px solid #FFF;
+    border-top: 1px solid #FFB829;
+    border-left: 1px solid #FEE1A5;
+    border-right: 1px solid #FEE1A5;
+
+    /* TEXT SHADOW */
+
+    text-shadow: 0px 1px 1px white;
+
+    /* BOX SHADOW */
+    -moz-box-shadow: 0 1px 3px #777;
+    -webkit-box-shadow: 0 1px 3px #777;
+    box-shadow: 0 1px 3px #777;
+    font: italic bold 34px/42px helvetica, arial;
+  }
+  /* WHILE HOVERED */
+  .paypal-button:hover {
+    background: #FEE1A5;
+    background: -moz-linear-gradient(top, #FFF, #FEE1A5 50%,
+      #FFB829 51%, #FEE1A5 95%, #FEE1A5);
+    background: -webkit-gradient(linear, left top, left bottom,
+      color-stop(0, #FFF), color-stop(.5, #FEE1A5), color-stop(.51, #FFB829),
+      color-stop(.95, #FEE1A5), color-stop(.96, #FEE1A5), to(#FEE1A5));
+    -moz-box-shadow: 0 1px 2px black;
+    -webkit-box-shadow: 0 1px 2px black;
+  }
+  /* WHILE BEING CLICKED */
+  .paypal-button:active {
+    -moz-box-shadow: 0 2px 6px black;
+    -webkit-box-shadow: 0 2px 6px black;
+  }
   </style>
 </head>
 
@@ -344,6 +398,7 @@ MIT License : http://adampritchard.mit-license.org/
           <span class="donate-plea donate-plea-hidden" id="dp2"><strong>Help make Markdown Here better!</strong></span>
           <span class="donate-plea donate-plea-hidden" id="dp3"><strong>Help support the development of Markdown Here!</strong></span>
           <span class="donate-plea donate-plea-hidden" id="dp4">You know what makes it easier to keep Markdown Here working on five different platforms and three different email providers? <strong>Beer!</strong></span>
+          <span class="donate-plea donate-plea-hidden" id="dp5" data-submit-type="paypal-submit-image"></span>
 
           <div id="donate-button">
             <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
@@ -354,8 +409,10 @@ MIT License : http://adampritchard.mit-license.org/
             <input type="hidden" name="item_number" value="options-page">
             <input type="hidden" name="currency_code" value="CAD">
             <input type="hidden" name="bn" value="PP-DonationsBF:btn_donate_LG.gif:NonHosted">
-            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
             <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+
+            <input id="paypal-submit-image" type="image" src="images/gary-arthur-donate-1.png" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+            <input id="paypal-submit-css" class="paypal-button" type="submit" value="Donate" alt="PayPal - The safer, easier way to pay online!">
             </form>
           </div>
         </div>

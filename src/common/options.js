@@ -363,6 +363,16 @@ function showDonatePlea() {
   var choice = Math.floor(Math.random() * $pleas.length);
   var $plea = $pleas.eq(choice);
   var pleaId = $plea.attr('id');
+  var submitType = $plea.data('submit-type');
+
+  if (submitType === 'paypal-submit-image') {
+    $('#paypal-submit-image').show();
+    $('#paypal-submit-css').hide();
+  }
+  else {
+    $('#paypal-submit-image').hide();
+    $('#paypal-submit-css').show();
+  }
 
   $plea.removeClass('donate-plea-hidden');
   $('#donate-button input[name="item_number"]').prop('value', 'options-page-'+pleaId);
