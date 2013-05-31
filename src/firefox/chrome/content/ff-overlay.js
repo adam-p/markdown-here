@@ -32,6 +32,10 @@ var markdown_here = {
     var mdReturn, focusedElem, self = this;
 
     focusedElem = markdownHere.findFocusedElem(window.document);
+    if (!focusedElem) {
+      // Shouldn't happen. But if it does, just silently abort.
+      return;
+    }
 
     // Are we running in Thunderbird?
     if (typeof(GetCurrentEditorType) !== 'undefined' && GetCurrentEditorType !== null) {
@@ -126,7 +130,10 @@ var markdown_here = {
     else { // Firefox
       focusedElem = markdownHere.findFocusedElem(window.document);
 
-      if (focusedElem.type === 'textarea') {
+      if (!focusedElem) {
+        showItem = false;
+      }
+      else if (focusedElem.type === 'textarea') {
         // Show the context menu item for `textarea`s. If the user clicks it,
         // there will be a helpful error message. This will make behaviour more
         // consistent with Chrome, and will hopefully help people notice that
@@ -261,6 +268,10 @@ var markdown_here = {
     // former to `setInterval()`.
     var intervalCheck = function() {
       var focusedElem = markdownHere.findFocusedElem(window.document);
+      if (!focusedElem) {
+        return;
+      }
+
       setToggleButtonVisibility(focusedElem);
     };
     setInterval(intervalCheck, 2000);
