@@ -4,9 +4,9 @@
  */
 
 "use strict";
-/*global chrome:false, markdownRender:false,
-  htmlToText:false, marked:false, hljs:false*/
-/*jshint devel:true*/
+/* jshint curly:true, noempty:true, newcap:true, eqeqeq:true, eqnull:true, es5:true, undef:true, devel:true, browser:true, node:true, evil:false, latedef:false, nonew:true, trailing:false, immed:false, smarttabs:true, expr:true */
+/* global describe, expect, it, before, beforeEach, after, afterEach */
+/* global _, $, markdownRender, htmlToText, marked, hljs, Utils */
 
 
 describe('Markdown-Render', function() {
