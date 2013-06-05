@@ -87,7 +87,7 @@ describe('Markdown-Render', function() {
     });
 
     // Test that issue #69 hasn't come back: https://github.com/adam-p/markdown-here/issues/69
-    it('should properly render MD links that have a pre-formatted URL as the URL portion', function() {
+    it('should properly render MD links that contain pre-formatted HTML links', function() {
       var md = '[aaa](<a href="http://bbb">ccc</a>)';
       var html = '<p><a href="ccc">aaa</a></p>';
 
