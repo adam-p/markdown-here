@@ -266,7 +266,28 @@
   */
   function convertHTMLtoMarkdown(tag, html) {
     if (tag === 'a') {
-      html = html.replace(/<a\b[^>]+href="([^"]*)"[^>]*>(.*?)<\/a>/ig, '[$2]($1)');
+      /*
+      Make sure we do *not* convert HTML links that are inside of MD links.
+      Otherwise we'll have problems like issue #69.
+      We're going to use a regex that mimics a negative lookbehind. For details see: http://blog.stevenlevithan.com/archives/mimic-lookbehind-javascript
+      Here's an attempt at an explanation of the regex:
+        (                 // begin optional prefix capture group
+          (?:\]\([^\)]*)  // match an unclosed URL portion of a MD link -- like "...](..."
+          |(?:\[[^\]]*)   // match an unclosed name portion of a MD link -- like "...[..."
+        )?                // capture group is optional so that we do the "negative" lookbehind -- that is, we can match links that are *not* preceded by the stuff we *don't* want
+        <a\s[^>]*href="([^"]*)"[^>]*>(.*?)<\/a>  // an HTML link
+      Then the replace callback looks like this:
+        return $1 ? $0 : '['+$3+']('+$2+')'
+      So, if the first capture group is matched (i.e., $1 has value), then we've
+      matched the bad thing -- the indication that the HTML is inside a MD link.
+      In that case, we don't modify anything. Otherwise we use our other capture
+      groups to create the desired MD link.
+      */
+      html = html.replace(
+        /((?:\]\([^\)]*)|(?:\[[^\]]*))?<a\s[^>]*href="([^"]*)"[^>]*>(.*?)<\/a>/ig,
+        function($0, $1, $2, $3) {
+          return $1 ? $0 : '['+$3+']('+$2+')';
+        });
     }
     else {
       throw new Error('convertHTMLtoMarkdown: ' + tag + ' is not a supported tag');

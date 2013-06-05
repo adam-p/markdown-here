@@ -86,6 +86,54 @@ describe('Markdown-Render', function() {
       expect(markdownRender(userprefs, htmlToText, marked, hljs, s, document, null)).to.contain(s);
     });
 
+    // Test that issue #69 hasn't come back: https://github.com/adam-p/markdown-here/issues/69
+    it('should properly render MD links that have a pre-formatted URL as the URL portion', function() {
+      var md = '[aaa](<a href="http://bbb">ccc</a>)';
+      var html = '<p><a href="ccc">aaa</a></p>';
+
+      var tests = [], i;
+
+      // Begin tests where the link should be converted
+
+      tests.push(['asdf <a href="http://www.aaa.com">bbb</a> asdf',
+                  '<p>asdf <a href="http://www.aaa.com">bbb</a> asdf</p>\n']);
+
+      tests.push(['<a href="aaa">bbb</a>',
+                  '<p><a href="aaa">bbb</a></p>\n']);
+
+      tests.push(['[xxx](yyy) <a href="aaa">bbb</a>',
+                  '<p><a href="yyy">xxx</a> <a href="aaa">bbb</a></p>\n']);
+
+      tests.push(['asdf (<a href="aaa">bbb</a>)',
+                  '<p>asdf (<a href="aaa">bbb</a>)</p>\n']);
+
+      // Begin tests where the link should *not* be converted
+
+      tests.push(['asdf [yyy](<a href="http://www.aaa.com">bbb</a>) asdf',
+                  '<p>asdf <a href="bbb">yyy</a> asdf</p>\n']);
+
+      tests.push(['asdf [<a href="http://www.aaa.com">bbb</a>](ccc) asdf',
+                  '<p>asdf <a href="ccc">bbb</a> asdf</p>\n']);
+
+      tests.push(['[yyy](<a href="http://www.aaa.com">bbb</a>)',
+                  '<p><a href="bbb">yyy</a></p>\n']);
+
+      tests.push(['[yyy]( <a href="http://www.aaa.com">bbb</a>)',
+                  '<p><a href="bbb">yyy</a></p>\n']);
+
+      tests.push(['asdf [qwer <a href="http://www.aaa.com">bbb</a>](ccc) asdf',
+                  '<p>asdf <a href="ccc">qwer bbb</a> asdf</p>\n']);
+
+      // Begin tests that don't work quite right
+
+      tests.push(['asdf [<a href="http://www.aaa.com">bbb</a>] asdf',
+                  '<p>asdf [bbb] asdf</p>\n']);
+
+      for (i = 0; i < tests.length; i++) {
+        expect(markdownRender(userprefs, htmlToText, marked, hljs, tests[i][0], document, null)).to.equal(tests[i][1]);
+      }
+    });
+
   });
 
 });
