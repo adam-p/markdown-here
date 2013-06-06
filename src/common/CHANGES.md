@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+2013-xx-yy: v2.8.1
+------------------
+
+* [Fixed bug](https://github.com/adam-p/markdown-here/issues/69): Pre-formatted links break Markdown links.
+  * Thanks to user Mitchell W. for finding this bug.
+
 2013-05-19: v2.8.0
 ------------------
 
