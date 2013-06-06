@@ -124,10 +124,18 @@ describe('Markdown-Render', function() {
       tests.push(['asdf [qwer <a href="http://www.aaa.com">bbb</a>](ccc) asdf',
                   '<p>asdf <a href="ccc">qwer bbb</a> asdf</p>\n']);
 
+      // Begin mixed tests
+
+      tests.push(['asdf [aaa](bbb) asdf <a href="http://www.aaa.com">bbb</a> asdf [yyy](<a href="http://www.aaa.com">bbb</a>) asdf',
+                  '<p>asdf <a href="bbb">aaa</a> asdf <a href="http://www.aaa.com">bbb</a> asdf <a href="bbb">yyy</a> asdf</p>\n']);
+
       // Begin tests that don't work quite right
 
       tests.push(['asdf [<a href="http://www.aaa.com">bbb</a>] asdf',
                   '<p>asdf [bbb] asdf</p>\n']);
+
+      tests.push(['asdf ](<a href="http://www.aaa.com">bbb</a>) asdf',
+                  '<p>asdf ](bbb) asdf</p>\n']);
 
       for (i = 0; i < tests.length; i++) {
         expect(markdownRender(userprefs, htmlToText, marked, hljs, tests[i][0], document, null)).to.equal(tests[i][1]);
