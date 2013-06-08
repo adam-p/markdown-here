@@ -30,11 +30,11 @@ code {
 pre {
   font-size: 1em;
   line-height: 1.2em;
-  overflow: auto;
 }
 
 pre code {
   white-space: pre;
+  overflow: auto;
   border-radius: 3px;
   border: 1px solid #CCC;
   padding: 0.5em 0.7em;
