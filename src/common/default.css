@@ -20,7 +20,7 @@ pre, code {
 code {
   margin: 0 0.15em;
   padding: 0 0.3em;
-  white-space: nowrap;
+  white-space: pre-wrap;
   border: 1px solid #EAEAEA;
   background-color: #F8F8F8;
   border-radius: 3px;
