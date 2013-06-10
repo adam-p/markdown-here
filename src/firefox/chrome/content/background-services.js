@@ -21,29 +21,39 @@
  */
 
 
-var MozillaOptionsService = {
-  listenRequest: function(callback) { // analogue of chrome.extension.onRequest.addListener
+(function() {
+
+  /*
+   * Set up the background request listeners
+   */
+
+  // analogue of chrome.extension.onRequest.addListener
+  var createRequestListener = function(eventName, responseName, callback) {
     // https://developer.mozilla.org/en-US/docs/Code_snippets/Interaction_between_privileged_and_non-privileged_pages?redirectlocale=en-US&redirectslug=Code_snippets%3AInteraction_between_privileged_and_non-privileged_pages#Chromium-like_messaging.3A_json_request_with_json_callback
 
-    return document.addEventListener('markdown_here-options-query', function(event) {
+    return document.addEventListener(eventName, function(event) {
       var node = event.target;
       if (!node || node.nodeType != Node.TEXT_NODE) {
         return;
       }
 
       var doc = node.ownerDocument;
+      var data = node.nodeValue ? JSON.parse(node.nodeValue) : null;
 
-      return callback(JSON.parse(node.nodeValue), doc, function(response) {
-        node.nodeValue = JSON.stringify(response);
+      return callback(data, doc, function(response) {
+        node.nodeValue = JSON.stringify(null);
+        if (response) {
+          node.nodeValue = JSON.stringify(response);
+        }
 
         var event = doc.createEvent('HTMLEvents');
-        event.initEvent('markdown_here-options-response', true, false);
+        event.initEvent(responseName, true, false);
         return node.dispatchEvent(event);
       });
     }, false, true);
-  },
+  };
 
-  requestHandler: function(request, sender, callback) {
+  var optionsRequestHandler = function(request, sender, callback) {
     var prefs, prefKeys, prefsObj, i;
 
     prefs = Components.classes['@mozilla.org/preferences-service;1']
@@ -88,19 +98,31 @@ var MozillaOptionsService = {
     }
 
     return alert('Error: no matching options service action');
-  }
-};
+  };
 
-MozillaOptionsService.listenRequest(MozillaOptionsService.requestHandler);
+  createRequestListener(
+    'markdown_here-options-query',
+    'markdown_here-options-response',
+    optionsRequestHandler);
+
+  var tabOpenRequestHandler = function(request, sender, callback) {
+    var url = request;
+    openTab(url);
+    callback();
+  };
+
+  createRequestListener(
+    'markdown_here-tabOpen-query',
+    'markdown_here-tabOpen-response',
+    tabOpenRequestHandler);
 
 
-/*
- * In order to check if this is a new version, etc., we need some code that runs
- * when the application starts. In the case of Thunderbird, our regular overlay
- * only loads when a new message is opened, so we're going to hijack this options
- * overlay code to add some version checks and startup code.
- */
-(function() {
+  /*
+   * In order to check if this is a new version, etc., we need some code that runs
+   * when the application starts. In the case of Thunderbird, our regular overlay
+   * only loads when a new message is opened, so we're going to hijack this
+   * overlay code to add some version checks and startup code.
+   */
   try {
       // Firefox 4 and later; Mozilla 2 and later
       Components.utils.import("resource://gre/modules/AddonManager.jsm");
@@ -171,8 +193,6 @@ MozillaOptionsService.listenRequest(MozillaOptionsService.requestHandler);
       var tabRestored = function() {
         var postTabRestoredOptionsOpen = function() {
           document.removeEventListener('SSTabRestored', tabRestored);
-          var windowMediator = Components.classes['@mozilla.org/appshell/window-mediator;1']
-                                         .getService(Components.interfaces.nsIWindowMediator);
 
           var optionsUrl = 'resource://markdown_here_common/options.html';
 
@@ -181,19 +201,7 @@ MozillaOptionsService.listenRequest(MozillaOptionsService.requestHandler);
             optionsUrl += '?prevVer=' + lastVersion;
           }
 
-          if (navigator.userAgent.indexOf('Thunderbird') >= 0 ||
-              navigator.userAgent.indexOf('Icedove') >= 0) {
-              windowMediator.getMostRecentWindow('mail:3pane')
-                            .document.getElementById('tabmail')
-                            .openTab('contentTab', {contentPage: optionsUrl});
-          }
-          else if (navigator.userAgent.indexOf('Postbox') >= 0) {
-              /* Haven't yet figured out how to open a tab in Postbox */
-          }
-          else {
-              var win = windowMediator.getMostRecentWindow('navigator:browser');
-              win.gBrowser.selectedTab = win.gBrowser.addTab(optionsUrl);
-          }
+          openTab(optionsUrl);
         };
 
         clearTimeout(timeoutID);
@@ -249,6 +257,29 @@ MozillaOptionsService.listenRequest(MozillaOptionsService.requestHandler);
       if (toolbarId == 'addon-bar') {
         toolbar.collapsed = false;
       }
+    }
+  }
+
+
+  /*
+   * Helper to open tabs, mostly for Thunderbird and friends.
+   */
+  function openTab(url) {
+    var windowMediator = Components.classes['@mozilla.org/appshell/window-mediator;1']
+                                   .getService(Components.interfaces.nsIWindowMediator);
+
+    if (navigator.userAgent.indexOf('Thunderbird') >= 0 ||
+        navigator.userAgent.indexOf('Icedove') >= 0) {
+        windowMediator.getMostRecentWindow('mail:3pane')
+                      .document.getElementById('tabmail')
+                      .openTab('contentTab', {contentPage: url});
+    }
+    else if (navigator.userAgent.indexOf('Postbox') >= 0) {
+        /* Haven't yet figured out how to open a tab in Postbox */
+    }
+    else {
+        var win = windowMediator.getMostRecentWindow('navigator:browser');
+        win.gBrowser.selectedTab = win.gBrowser.addTab(url);
     }
   }
 })();

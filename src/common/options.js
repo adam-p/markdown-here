@@ -85,29 +85,46 @@ function onLoad() {
 
   showDonatePlea();
 
+  // Special effort is required to open the test page in these clients.
+  if (navigator.userAgent.indexOf('Thunderbird') >= 0 ||
+      navigator.userAgent.indexOf('Icedove') >= 0 ||
+      navigator.userAgent.indexOf('Postbox') >= 0) {
+    $('#tests-link').click(function() {
+      var request = document.createTextNode(JSON.stringify($('#tests-link a').prop('href')));
+
+      var tabOpenResponseHandler = function(event) {
+        request.parentNode.removeChild(request);
+      };
+
+      request.addEventListener('markdown_here-tabOpen-response', tabOpenResponseHandler, false);
+
+      document.head.appendChild(request);
+
+      var event = document.createEvent('HTMLEvents');
+      event.initEvent('markdown_here-tabOpen-query', true, false);
+      request.dispatchEvent(event);
+
+      return false;
+    });
+  }
+
   // Hide the tests link if the page isn't available. It may be stripped out
-  // of extension packages, and it doesn't work in Thunderbird/Postbox.
-  if (navigator.userAgent.indexOf('Chrome') < 0 &&
-      navigator.userAgent.indexOf('Firefox') < 0 &&
-      typeof(safari) === 'undefined') {
-    $('#tests-link').hide();
-  }
-  else {
-    // Check if our test file exists.
-    // Note: Using $.ajax won't work because for local requests Firefox sets
-    // status to 0 even on success. jQuery interprets this as an error.
-    xhr = new XMLHttpRequest();
-    xhr.open('HEAD', './test/index.html');
-    // If we don't set the mimetype, Firefox will complain.
-    xhr.overrideMimeType('text/plain');
-    xhr.onreadystatechange = function() {
-      if (this.readyState === this.DONE && !this.responseText) {
-        // The test files aren't present, so hide the button.
-        $('#tests-link').hide();
-      }
-    };
-    xhr.send();
-  }
+  // of extension packages.
+
+  // Check if our test file exists.
+  // Note: Using $.ajax won't work because for local requests Firefox sets
+  // status to 0 even on success. jQuery interprets this as an error.
+  xhr = new XMLHttpRequest();
+  xhr.open('HEAD', './test/index.html');
+  // If we don't set the mimetype, Firefox will complain.
+  xhr.overrideMimeType('text/plain');
+  xhr.onreadystatechange = function() {
+    if (this.readyState === this.DONE && !this.responseText) {
+      // The test files aren't present, so hide the button.
+      $('#tests-link').hide();
+    }
+  };
+  xhr.send();
 }
 document.addEventListener('DOMContentLoaded', onLoad, false);
 
