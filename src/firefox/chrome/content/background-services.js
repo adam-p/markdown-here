@@ -1,5 +1,5 @@
 /*
- * Copyright Adam Pritchard 2012
+ * Copyright Adam Pritchard 2013
  * MIT License : http://adampritchard.mit-license.org/
  */
 
@@ -8,7 +8,12 @@
  /*jshint devel:true*/
 
 /*
- * The background service for supplying preferences to content scripts.
+ * This file is loaded as a background script in the main window -- even in
+ * Thunderbird, where the other background script is only loaded for compose
+ * windows.
+ * This provides services for supplying access to preferences and other
+ * background-only functions.
+ *
  * From: https://developer.mozilla.org/en-US/docs/Code_snippets/Interaction_between_privileged_and_non-privileged_pages
  *
  * Note that the stored prefs are returned raw (well, after being JSON parsed).

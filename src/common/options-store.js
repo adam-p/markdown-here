@@ -274,7 +274,7 @@ var MozillaOptionsStore = {
 
   // This is called both from content and background scripts, and we need vastly
   // different code in those cases. When calling from a content script, we need
-  // to make a request to a background service (found in firefox/chrome/content/options.js).
+  // to make a request to a background service (found in firefox/chrome/content/background-services.js).
   // When called from a background script, we're going to access the browser prefs
   // directly. Unfortunately, this means duplicating some code from the background
   // service.
