@@ -322,7 +322,7 @@ MIT License: http://adampritchard.mit-license.org/ or see [the `LICENSE` file](h
 
 ### Logo
 
-Copyright 2013, Tatiana A. Fryntoff. Licensed under [Creative Commons Attribution 3.0 Unported (CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
+Copyright 2013, [Tatiana A. Fryntoff](http://tatianafryntoff.com/). Licensed under [Creative Commons Attribution 3.0 Unported (CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
 
 ### Other images
 

@@ -4,6 +4,8 @@ Change Log
 2013-xx-yy: v2.8.1
 ------------------
 
+* The designer/artist of the Markdown Here logo has her own website up. You should check it out! http://tatianafryntoff.com/
+
 * [Fixed bug](https://github.com/adam-p/markdown-here/issues/69): Pre-formatted links break Markdown links.
   * Thanks to user Mitchell W. for finding this bug.
 
@@ -38,7 +40,7 @@ Change Log
 2013-02-06: v2.7.0
 ------------------
 
-* Markdown Here has a **new logo**! A big thank you to the talented Tatiana A. Fryntoff for creating our shiny new logo.
+* Markdown Here has a **new logo**! A big thank you to the talented [Tatiana A. Fryntoff](http://tatianafryntoff.com/) for creating our shiny new logo.
 
 * Support for new Markdown features. All credit goes to chjj, the maintainer of the [Marked library](https://github.com/chjj/marked).
   * **Tables!** Now you can easily add tables to your email with Markdown. If you're not familiar with the syntax, check out [the wiki cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#wiki-tables). This closes [issue #13](https://github.com/adam-p/markdown-here/issues/13).
