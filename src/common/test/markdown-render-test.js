@@ -152,6 +152,12 @@ describe('Markdown-Render', function() {
       expect(markdownRender(userprefs, htmlToText, marked, hljs, md, document, null)).to.equal(target);
     });
 
+    it('should *not* add the schema to anchor links', function() {
+      var md = 'asdf [aaa](#bbb) asdf [ccc](ftp://ddd) asdf';
+      var target = '<p>asdf <a href="#bbb">aaa</a> asdf <a href="ftp://ddd">ccc</a> asdf</p>\n';
+      expect(markdownRender(userprefs, htmlToText, marked, hljs, md, document, null)).to.equal(target);
+    });
+
   });
 
 });

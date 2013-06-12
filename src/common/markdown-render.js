@@ -123,9 +123,11 @@
     // Some tags we can convert to Markdown
     preprocessInfo.html = convertHTMLtoMarkdown('a', preprocessInfo.html);
 
-    // For all Markdown links with no schema, add "http://"
+    // For all Markdown links with no schema, and that aren't anchor links,
+    // add "http://". Note that this regex just uses the presence of a colon
+    // to signal the presence of a schema.
     // Fixes issue #57: https://github.com/adam-p/markdown-here/issues/57
-    preprocessInfo.html = preprocessInfo.html.replace(/\]\(([^\):]+)\)/ig, '](http://$1)');
+    preprocessInfo.html = preprocessInfo.html.replace(/\]\((?!#)([^\):]+)\)/ig, '](http://$1)');
 
     // Experimentation has shown some tags that need to be tweaked a little.
     preprocessInfo.html =
