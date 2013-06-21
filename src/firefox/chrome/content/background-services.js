@@ -194,7 +194,7 @@
         var postTabRestoredOptionsOpen = function() {
           document.removeEventListener('SSTabRestored', tabRestored);
 
-          var optionsUrl = 'resource://markdown_here_common/options.html';
+          var optionsUrl = 'resource://markdown_here_common/options/options.html';
 
           // If this is an upgrade, open the options page in changelist mode
           if (lastVersion) {

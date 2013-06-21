@@ -8,6 +8,8 @@
 
 * Update selection conversion screenshot to not be all about replies.
 
+* Change Options page to use Twitter Bootstrap. (Might as well, now that it's in the project.)
+
 * Try out MDH in other web-based rich-edit tools -- it'll surely work in some of them.
   * Redactor: http://imperavi.com/support/ This seems to work at least nominally. Test and document.
   * http://www.tinymce.com/

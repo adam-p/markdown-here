@@ -1,0 +1,13 @@
+/*
+Copyright Adam Pritchard 2013
+MIT License : http://adampritchard.mit-license.org/
+*/
+
+body {
+  font-family: Tahoma, Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+}
+
+.iframe-container {
+  background-color: #FFF;
+}

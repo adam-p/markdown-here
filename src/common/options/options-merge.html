@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+
+<!--
+Copyright Adam Pritchard 2013
+MIT License : http://adampritchard.mit-license.org/
+-->
+
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="../images/icon16.png" />
+
+  <title>Markdown Here Options Merge</title>
+
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+  <link href="vendor/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+  <link type="text/css" rel="stylesheet" href="vendor/mergely/codemirror.css" />
+  <link type="text/css" rel="stylesheet" href="vendor/mergely/mergely.css" />
+  <link href="options.css" rel="stylesheet" media="screen">
+  <style type="text/css">
+    #compare {
+      margin-top: 1em;
+      margin-bottom: 1em;
+    }
+
+    iframe {
+      width: 100%;
+      height: 300px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <div class="row-fluid">
+      <div class="span12">
+          <h1>
+            <img src="../images/icon48.png">
+            Markdown Here Options: CSS Merge
+          </h1>
+      </div>
+    </div>
+
+    <!-- Preamble
+    ================================================== -->
+    <div class="row-fluid">
+      <div class="span12 well">
+        <p>
+          First of all, <strong>don't panic</strong>. You're here because Markdown Here's default "Primary Styling CSS" has changed. This is probably to fix a bug or make stuff look better. In you're interested, you can <a href="https://github.com/adam-p/markdown-here/commits/master/src/common/default.css">check out the history of the default CSS</a>.
+        </p>
+        <p>
+          <strong>If you haven't ever made changes to your CSS</strong>, you should probably just <strong>click the right-hand side button</strong> that will save the default CSS as your Primary Styling CSS.
+        </p>
+        <p>
+          <strong>If you have customized your CSS</strong>, or if you're a naturally inquisitive sort, you can <strong>merge</strong> bits and pieces from one side into the other, check out the <strong>preview</strong>, and then <strong>choose the side you want to use</strong>.
+        </p>
+        <p>
+          If you don't feel like doing this right now, or if you mess something up, just close this tab. You'll have the choice to do this again the next time you open the Markdown Here Options tab.
+        </p>
+        <p>
+          If you don't want to change anything, and you don't want to see this again (unless the default CSS changes again), just click the left-hand side button that will keep your current CSS.
+        </p>
+      </div>
+    </div>
+
+    <!-- Merge controls
+    ================================================== -->
+    <div class="row-fluid">
+      <div class="span12">
+        <div class="row-fluid">
+          <div class="span6 text-center">
+            <h2>Your current CSS</h2>
+          </div>
+          <div class="span6 text-center">
+            <h2>The default CSS</h2>
+          </div>
+        </div>
+        <div class="row-fluid">
+          <div class="span6 text-center">
+            <button id="save-lhs" class="btn btn-primary save-css">Save this side as my Primary Styling CSS</button>
+          </div>
+          <div class="span6 text-center">
+            <button id="save-rhs" class="btn btn-primary save-css">Save this side as my Primary Styling CSS</button>
+          </div>
+        </div>
+
+        <div class="row-fluid">
+          <div class="span12">
+            <div id="compare">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Preview side choice
+    ================================================== -->
+
+    <div class="row-fluid">
+      <div class="span12 text-center">
+        <div id="preview-css-choice" class="btn-group" data-toggle="buttons-radio">
+          <button type="button" id="preview-css-lhs" class="btn active">Preview Left</button>
+          <button type="button" id="preview-css-rhs" class="btn">Preview Right</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Preview iframe
+    ================================================== -->
+
+    <div class="row-fluid">
+      <div class="offset3 span6">
+        <div class="stretch iframe-container">
+          <iframe id="rendered-markdown" src="options-iframe.html">
+            <!-- rendered Markdown preview will appear here -->
+          </iframe>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+  <script src="../jsHtmlToText.js"></script>
+  <script src="../marked.js"></script>
+  <script src="../highlightjs/highlight.js"></script>
+  <script src="../utils.js"></script>
+  <script src="../markdown-render.js"></script>
+  <script src="../markdown-here.js"></script>
+  <script src="../options-store.js"></script>
+
+  <script src="vendor/jquery-1.9.1.js"></script>
+
+  <script src="options-common.js"></script>
+  <script src="options-merge.js"></script>
+
+  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="vendor/mergely/codemirror.js"></script>
+  <script type="text/javascript" src="vendor/mergely/mergely.js"></script>
+</body>
+
+</html>

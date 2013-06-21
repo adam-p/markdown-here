@@ -1,335 +1,327 @@
+<!DOCTYPE html>
+
 <!--
-Copyright Adam Pritchard 2012
+Copyright Adam Pritchard 2013
 MIT License : http://adampritchard.mit-license.org/
 -->
-
-<!DOCTYPE html>
 
 <html>
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <link rel="icon" type="image/png" href="images/icon16.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="../images/icon16.png" />
 
   <title>Markdown Here Options</title>
 
+  <link href="options.css" rel="stylesheet" media="screen">
   <style type="text/css">
-  body {
-    font-family: Tahoma, Helvetica, arial, freesans, clean, sans-serif;
-    font-size: 14px;
-  }
+    .pagehead {
+      margin: 10px 0 0 10px;
+    }
 
-  .pagehead {
-    margin: 10px 0 0 10px;
-  }
+    h1 {
+      color: #482168;
+      text-shadow: 1px 1px 1px rgba(72, 33, 104, 0.23);
+      vertical-align: top;
+      /* Needs to match the height of the image */
+      line-height: 48px;
+    }
 
-  h1 {
-    color: #482168;
-    text-shadow: 1px 1px 1px rgba(72, 33, 104, 0.23);
-    vertical-align: top;
-    /* Needs to match the height of the image */
-    line-height: 48px;
-  }
+    textarea {
+      font-size: 0.8em;
+    }
 
-  textarea {
-    font-size: 0.8em;
-  }
+    .horiz-groupset {
+      height: 400px;
+      width: 100%;
+      overflow: auto;
+    }
 
-  .horiz-groupset {
-    height: 400px;
-    width: 100%;
-    overflow: auto;
-  }
+    .control-group {
+      float: left;
+      width: 45%;
+      width: -webkit-calc(50% - 40px);
+      width: -moz-calc(50% - 40px);
+      width: calc(50% - 40px);
+      height: 360px;
+      height: -webkit-calc(100% - 40px);
+      height: -moz-calc(100% - 40px);
+      height: calc(100% - 40px);
+      margin: 10px;
+      padding: 10px;
+      background-color: #EEE;
+      border-radius: 5px;
+      box-shadow: 2px 2px 3px rgba(0, 0, 0, .2);
+      overflow-y: auto;
+    }
 
-  .control-group {
-    float: left;
-    width: 45%;
-    width: -webkit-calc(50% - 40px);
-    width: -moz-calc(50% - 40px);
-    width: calc(50% - 40px);
-    height: 360px;
-    height: -webkit-calc(100% - 40px);
-    height: -moz-calc(100% - 40px);
-    height: calc(100% - 40px);
-    margin: 10px;
-    padding: 10px;
-    background-color: #EEE;
-    border-radius: 5px;
-    box-shadow: 2px 2px 3px rgba(0, 0, 0, .2);
-    overflow-y: auto;
-  }
+    .control-group > * {
+      margin: 5px 0;
+    }
 
-  .control-group > * {
-    margin: 5px 0;
-  }
+    .control-group > .stretch {
+      height: 280px;
+      height: -webkit-calc(100% - 80px);
+      height: -moz-calc(100% - 80px);
+      height: calc(100% - 80px);
+    }
 
-  .control-group > .stretch {
-    height: 280px;
-    height: -webkit-calc(100% - 80px);
-    height: -moz-calc(100% - 80px);
-    height: calc(100% - 80px);
-  }
+    .stretch {
+      position: relative;
+    }
 
-  .stretch {
-    position: relative;
-  }
+    .stretch > * {
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      position: absolute;
+      height: 100%;
+      width: 100%;
+    }
 
-  .stretch > * {
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-  }
+    .section-title {
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #482168;
+      text-shadow: 1px 1px 1px rgba(72, 33, 104, 0.23);
+    }
 
-  .section-title {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #482168;
-    text-shadow: 1px 1px 1px rgba(72, 33, 104, 0.23);
-  }
+    #notes {
+    }
 
-  .iframe-container {
-    background-color: #FFF;
-  }
+    #notes ul {
+      padding-left: 30px;
+    }
 
-  #notes {
-  }
+    #notes li {
+      padding-bottom: 5px;
+    }
 
-  #notes ul {
-    padding-left: 30px;
-  }
+    #saved-msg {
+      position: fixed;
+      top: 0;
+      right: 0;
+      font-size: 1.5em;
+      padding: 1em;
+      background: -webkit-linear-gradient(right top, rgb(207,182,227) 0%, rgb(255,255,255) 100%);
+      background: -moz-linear-gradient(225deg, rgb(207,182,227), rgb(255,255,255));
+      background: linear-gradient(225deg, rgb(207,182,227), rgb(255,255,255));
+      color: #482168;
+      -webkit-transition: opacity 1000ms;
+      -moz-transition: opacity 1000ms;
+      transition: opacity 1000ms;
+      opacity: 0;
+      border-bottom-left-radius: 30px;
+      z-index: 99;
+    }
 
-  #notes li {
-    padding-bottom: 5px;
-  }
+    #saved-msg.showing {
+      -webkit-transition: opacity 100ms;
+      -moz-transition: opacity 100ms;
+      transition: opacity 100ms;
+      opacity: 0.95;
+    }
 
-  #saved-msg {
-    position: fixed;
-    top: 0;
-    right: 0;
-    font-size: 1.5em;
-    padding: 1em;
-    background: -webkit-linear-gradient(right top, rgb(207,182,227) 0%, rgb(255,255,255) 100%);
-    background: -moz-linear-gradient(225deg, rgb(207,182,227), rgb(255,255,255));
-    background: linear-gradient(225deg, rgb(207,182,227), rgb(255,255,255));
-    color: #482168;
-    -webkit-transition: opacity 1000ms;
-    -moz-transition: opacity 1000ms;
-    transition: opacity 1000ms;
-    opacity: 0;
-    border-bottom-left-radius: 30px;
-    z-index: 99;
-  }
+    /* button styling from http://webdesignerwall.com/tutorials/css3-gradient-buttons */
+    .button {
+      display: inline-block;
+      outline: none;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      font-size: 1em;
+      padding: .3em 1em;
+      text-shadow: 0 1px 1px rgba(0,0,0,.3);
+      border-radius: .5em;
+      box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    }
+    .button:hover {
+      text-decoration: none;
+    }
+    .button:active {
+      position: relative;
+      top: 1px;
+    }
+    .purple {
+      color: #FAF5FC;
+      border: solid 1px #2d0f5a;
+      background: -webkit-gradient(linear, left top, left bottom, from(#A022A0), to(#662D91));
+      background: -moz-linear-gradient(270deg, #A022A0, #662D91);
+      background: linear-gradient(270deg, #A022A0, #662D91);
+    }
+    .purple:hover {
+      background: -webkit-gradient(linear, left top, left bottom, from(#BC699F), to(#F98AD1));
+      background: -moz-linear-gradient(270deg, #BC699F, #F98AD1);
+      background: linear-gradient(270deg, #BC699F, #F98AD1);
+    }
+    .purple:active {
+      color: #fcd3a5;
+      background: -webkit-gradient(linear, left top, left bottom, from(#662D91), to(#A022A0));
+      background: -moz-linear-gradient(270deg, #662D91, #A022A0);
+      background: linear-gradient(270deg, #662D91, #A022A0);
+    }
 
-  #saved-msg.showing {
-    -webkit-transition: opacity 100ms;
-    -moz-transition: opacity 100ms;
-    transition: opacity 100ms;
-    opacity: 0.95;
-  }
+    #css-syntax-select {
+      font-size: 1em;
+      border-radius: .5em;
+      text-shadow: 0 1px 1px rgba(0, 0, 0, .3);
+      background: #A022A0;
+      padding: 0.2em;
+      outline: none;
+    }
 
-  /* button styling from http://webdesignerwall.com/tutorials/css3-gradient-buttons */
-  .button {
-    display: inline-block;
-    outline: none;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    font-size: 1em;
-    padding: .3em 1em;
-    text-shadow: 0 1px 1px rgba(0,0,0,.3);
-    border-radius: .5em;
-    box-shadow: 0 1px 2px rgba(0,0,0,.2);
-  }
-  .button:hover {
-    text-decoration: none;
-  }
-  .button:active {
-    position: relative;
-    top: 1px;
-  }
-  .purple {
-    color: #FAF5FC;
-    border: solid 1px #2d0f5a;
-    background: -webkit-gradient(linear, left top, left bottom, from(#A022A0), to(#662D91));
-    background: -moz-linear-gradient(270deg, #A022A0, #662D91);
-    background: linear-gradient(270deg, #A022A0, #662D91);
-  }
-  .purple:hover {
-    background: -webkit-gradient(linear, left top, left bottom, from(#BC699F), to(#F98AD1));
-    background: -moz-linear-gradient(270deg, #BC699F, #F98AD1);
-    background: linear-gradient(270deg, #BC699F, #F98AD1);
-  }
-  .purple:active {
-    color: #fcd3a5;
-    background: -webkit-gradient(linear, left top, left bottom, from(#662D91), to(#A022A0));
-    background: -moz-linear-gradient(270deg, #662D91, #A022A0);
-    background: linear-gradient(270deg, #662D91, #A022A0);
-  }
+    #css-syntax-select > option{
+      background-color: inherit;
+      font: inherit;
+    }
 
-  #css-syntax-select {
-    font-size: 1em;
-    border-radius: .5em;
-    text-shadow: 0 1px 1px rgba(0, 0, 0, .3);
-    background: #A022A0;
-    padding: 0.2em;
-    outline: none;
-  }
+    footer {
+      margin: 1em auto;
+      max-width: 700px;
+      text-align: center;
+    }
 
-  #css-syntax-select > option{
-    background-color: inherit;
-    font: inherit;
-  }
+    textarea {
+      font-family: Consolas, Inconsolata, Courier, monospace;
+    }
 
-  footer {
-    margin: 1em auto;
-    max-width: 700px;
-    text-align: center;
-  }
+    input[type="text"] {
+      width: 90%;
+      font-size: 1em;
+      background-color: rgba(249, 138, 209, 0.35);
+    }
 
-  textarea {
-    font-family: Consolas, Inconsolata, Courier, monospace;
-  }
+    .warning {
+      background-color: #E6E619;
+      display: inline-block;
+      padding: 0.2em;
+      border-radius: 0.3em;
+    }
 
-  input[type="text"] {
-    width: 90%;
-    font-size: 1em;
-    background-color: rgba(249, 138, 209, 0.35);
-  }
+    .hidden {
+      visibility: hidden;
+    }
 
-  .warning {
-    background-color: #E6E619;
-    display: inline-block;
-    padding: 0.2em;
-    border-radius: 0.3em;
-  }
+    #changelist li {
+      margin: 0.5em 0;
+    }
 
-  .hidden {
-    visibility: hidden;
-  }
+    #changelist li p {
+      margin: 0;
+    }
 
-  #changelist li {
-    margin: 0.5em 0;
-  }
+    ol > li {
+      margin-bottom: 0.3em;
+    }
 
-  #changelist li p {
-    margin: 0;
-  }
+    #resources li {
+      margin-bottom: 0.3em;
+    }
 
-  ol > li {
-    margin-bottom: 0.3em;
-  }
+    #tests-link {
+      font-size: 0.5em;
+      text-align: right;
+    }
 
-  #resources li {
-    margin-bottom: 0.3em;
-  }
+    #changelist {
+      height: 25em;
+      overflow-y: scroll;
+      border-radius: 5px;
+      box-shadow: 2px 2px 3px rgba(0, 0, 0, .2);
+      border: 2px #EEE solid;
+      margin: 10px;
+      padding: 10px;
+    }
 
-  #tests-link {
-    font-size: 0.5em;
-    text-align: right;
-  }
+    .changelist-new {
+      border-radius: 5px;
+      background: -webkit-gradient(linear, left center, right center, from(rgb(227, 214, 238)), to(rgb(255,255,255)));
+      background: -moz-linear-gradient(90deg, rgb(227, 214, 238), rgb(255,255,255));
+      background: linear-gradient(90deg, rgb(227, 214, 238), rgb(255,255,255));
+      padding-left: 0.5em;
+      padding-right: 0.5em;
+      padding-bottom: 0.1em;
+    }
 
-  #changelist {
-    height: 25em;
-    overflow-y: scroll;
-    border-radius: 5px;
-    box-shadow: 2px 2px 3px rgba(0, 0, 0, .2);
-    border: 2px #EEE solid;
-    margin: 10px;
-    padding: 10px;
-  }
+    .changelist-new h2:first-child {
+      color: #FFF;
+      text-shadow: 1px 1px 2px black, 0 0 1em rgb(132, 41, 209), 0 0 0.2em rgb(132, 41, 209);
+      margin-bottom: 0;
+    }
 
-  .changelist-new {
-    border-radius: 5px;
-    background: -webkit-gradient(linear, left center, right center, from(rgb(227, 214, 238)), to(rgb(255,255,255)));
-    background: -moz-linear-gradient(90deg, rgb(227, 214, 238), rgb(255,255,255));
-    background: linear-gradient(90deg, rgb(227, 214, 238), rgb(255,255,255));
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-    padding-bottom: 0.1em;
-  }
+    #changelist > h1 {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
 
-  .changelist-new h2:first-child {
-    color: #FFF;
-    text-shadow: 1px 1px 2px black, 0 0 1em rgb(132, 41, 209), 0 0 0.2em rgb(132, 41, 209);
-    margin-bottom: 0;
-  }
+    hr {
+      border: 0;
+      border-top: 1px dashed #482168;
+      width: 90%;
+    }
 
-  #changelist > h1 {
-    margin-top: 0;
-    margin-bottom: 0;
-  }
+    #donate-button {
+      margin-top: 0.3em;
+    }
 
-  hr {
-    border: 0;
-    border-top: 1px dashed #482168;
-    width: 90%;
-  }
+    .donate-plea-hidden {
+      display: none;
+    }
 
-  #donate-button {
-    margin-top: 0.3em;
-  }
+    /* Custom PayPal button styles from http://visitsteve.com/made/diy-paypal-buttons/ */
+    .paypal-button {
+      width: 200px;
+      height: 52px;
+      color: #2e3192;
+      text-decoration: none;
+      display: block;
+      text-align: center;
+      position: relative;
 
-  .donate-plea-hidden {
-    display: none;
-  }
+      /* BACKGROUND GRADIENTS */
+      background: #FEE1A5;
+      background: -moz-linear-gradient(top, #FFF, #FEE1A5 50%, #FFB829 51%,
+        #FEE1A5 95%, #FEE1A5);
+      background: -webkit-gradient(linear, left top, left bottom,
+        color-stop(0, #FFF), color-stop(.5, #FEE1A5), color-stop(.51, #FFB829),
+        color-stop(.95, #FEE1A5), color-stop(.96, #FEE1A5), to(#FEE1A5));
 
-  /* Custom PayPal button styles from http://visitsteve.com/made/diy-paypal-buttons/ */
-  .paypal-button {
-    width: 200px;
-    height: 52px;
-    color: #2e3192;
-    text-decoration: none;
-    display: block;
-    text-align: center;
-    position: relative;
+      /* BORDER RADIUS */
+      -moz-border-radius: 18px;
+      -webkit-border-radius: 18px;
+      border-radius: 18px;
 
-    /* BACKGROUND GRADIENTS */
-    background: #FEE1A5;
-    background: -moz-linear-gradient(top, #FFF, #FEE1A5 50%, #FFB829 51%,
-      #FEE1A5 95%, #FEE1A5);
-    background: -webkit-gradient(linear, left top, left bottom,
-      color-stop(0, #FFF), color-stop(.5, #FEE1A5), color-stop(.51, #FFB829),
-      color-stop(.95, #FEE1A5), color-stop(.96, #FEE1A5), to(#FEE1A5));
+      border-bottom: 1px solid #FFF;
+      border-top: 1px solid #FFB829;
+      border-left: 1px solid #FEE1A5;
+      border-right: 1px solid #FEE1A5;
 
-    /* BORDER RADIUS */
-    -moz-border-radius: 18px;
-    -webkit-border-radius: 18px;
-    border-radius: 18px;
+      /* TEXT SHADOW */
 
-    border-bottom: 1px solid #FFF;
-    border-top: 1px solid #FFB829;
-    border-left: 1px solid #FEE1A5;
-    border-right: 1px solid #FEE1A5;
+      text-shadow: 0px 1px 1px white;
 
-    /* TEXT SHADOW */
-
-    text-shadow: 0px 1px 1px white;
-
-    /* BOX SHADOW */
-    -moz-box-shadow: 0 1px 3px #777;
-    -webkit-box-shadow: 0 1px 3px #777;
-    box-shadow: 0 1px 3px #777;
-    font: italic bold 34px/42px helvetica, arial;
-  }
-  /* WHILE HOVERED */
-  .paypal-button:hover {
-    background: #FEE1A5;
-    background: -moz-linear-gradient(top, #FFF, #FEE1A5 50%,
-      #FFB829 51%, #FEE1A5 95%, #FEE1A5);
-    background: -webkit-gradient(linear, left top, left bottom,
-      color-stop(0, #FFF), color-stop(.5, #FEE1A5), color-stop(.51, #FFB829),
-      color-stop(.95, #FEE1A5), color-stop(.96, #FEE1A5), to(#FEE1A5));
-    -moz-box-shadow: 0 1px 2px black;
-    -webkit-box-shadow: 0 1px 2px black;
-  }
-  /* WHILE BEING CLICKED */
-  .paypal-button:active {
-    -moz-box-shadow: 0 2px 6px black;
-    -webkit-box-shadow: 0 2px 6px black;
-  }
+      /* BOX SHADOW */
+      -moz-box-shadow: 0 1px 3px #777;
+      -webkit-box-shadow: 0 1px 3px #777;
+      box-shadow: 0 1px 3px #777;
+      font: italic bold 34px/42px helvetica, arial;
+    }
+    /* WHILE HOVERED */
+    .paypal-button:hover {
+      background: #FEE1A5;
+      background: -moz-linear-gradient(top, #FFF, #FEE1A5 50%,
+        #FFB829 51%, #FEE1A5 95%, #FEE1A5);
+      background: -webkit-gradient(linear, left top, left bottom,
+        color-stop(0, #FFF), color-stop(.5, #FEE1A5), color-stop(.51, #FFB829),
+        color-stop(.95, #FEE1A5), color-stop(.96, #FEE1A5), to(#FEE1A5));
+      -moz-box-shadow: 0 1px 2px black;
+      -webkit-box-shadow: 0 1px 2px black;
+    }
+    /* WHILE BEING CLICKED */
+    .paypal-button:active {
+      -moz-box-shadow: 0 2px 6px black;
+      -webkit-box-shadow: 0 2px 6px black;
+    }
   </style>
 </head>
 
@@ -337,7 +329,7 @@ MIT License : http://adampritchard.mit-license.org/
 
   <header class="pagehead">
     <h1>
-      <img src="images/icon48.png">
+      <img src="../images/icon48.png">
       Markdown Here Options
     </h1>
   </header>
@@ -359,7 +351,7 @@ MIT License : http://adampritchard.mit-license.org/
             Type some Markdown into the email.<br>Try this: <code>*Hello* `Markdown` **Here**!</code>
           </li>
           <li>
-            Right-click in the email and then click "Markdown Toggle". (Or click the <img src="images/icon16.png"> button on the toolbar.<span class="hotkey-display-wrapper"> Or press <span class="hotkey-display"><kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>M</kbd></span></span>)
+            Right-click in the email and then click "Markdown Toggle". (Or click the <img src="../images/icon16.png"> button on the toolbar.<span class="hotkey-display-wrapper"> Or press <span class="hotkey-display"><kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>M</kbd></span></span>)
           </li>
           <li>
             The message should now look pretty cool. Send it to your friends!
@@ -494,7 +486,7 @@ MIT License : http://adampritchard.mit-license.org/
           TeX Mathematical Formulae Support
         </div>
 
-        <div>
+        <div class="form-inline">
           <input type="checkbox" id="math-enable"/>
           <input type="text" id="math-edit"/>
         </div>
@@ -553,15 +545,32 @@ MIT License : http://adampritchard.mit-license.org/
         <div class="section-title">
           Hotkey (aka keyboard shortcut)
         </div>
-        <div>
-          <input type="checkbox" id="hotkey-shift"/><label for="hotkey-shift">SHIFT</label>
+
+        <div class="form-inline">
+          <label class="checkbox">
+            <input type="checkbox" id="hotkey-shift"/>
+            SHIFT
+          </label>
+
           &nbsp;+&nbsp;
-          <input type="checkbox" id="hotkey-ctrl"/><label for="hotkey-ctrl">CTRL</label>
+
+          <label class="checkbox">
+            <input type="checkbox" id="hotkey-ctrl"/>
+            CTRL
+          </label>
+
           &nbsp;+&nbsp;
-          <input type="checkbox" id="hotkey-alt"/><label for="hotkey-alt">ALT</label>
+
+          <label class="checkbox">
+            <input type="checkbox" id="hotkey-alt"/>
+            ALT
+          </label>
+
           &nbsp;+&nbsp;
+
           <input type="text" id="hotkey-key" maxlength="1" placeholder="KEY" style="width: 3em;"/>
         </div>
+
         <div id="hotkey-key-warning" class="warning hidden">
           Is the key an alphanumeric value?
         </div>
@@ -604,23 +613,25 @@ MIT License : http://adampritchard.mit-license.org/
     </p>
   </footer>
 
-  <div id="tests-link"><a href="./test/index.html"><img title="Run tests" src="images/icon16.png"></a></div>
+  <div id="tests-link"><a href="../test/index.html"><img title="Run tests" src="../images/icon16.png"></a></div>
+
+  <div id="compare"><div>
 
   <div id="saved-msg">Changes saved</div>
 
+  <script src="../jsHtmlToText.js"></script>
+  <script src="../marked.js"></script>
+  <script src="../highlightjs/highlight.js"></script>
+  <script src="../utils.js"></script>
+  <script src="../markdown-render.js"></script>
+  <script src="../markdown-here.js"></script>
+  <script src="../options-store.js"></script>
+
+  <script src="vendor/jquery-1.9.1.js"></script>
+
+  <script src="options-common.js"></script>
+  <script src="options.js"></script>
+
 </body>
-
-<script src="jsHtmlToText.js"></script>
-<script src="marked.js"></script>
-<script src="highlightjs/highlight.js"></script>
-
-<script src="utils.js"></script>
-<script src="markdown-render.js"></script>
-<script src="markdown-here.js"></script>
-
-<script src="options-store.js"></script>
-<script src="options.js"></script>
-
-<script src="vendor/jquery-1.9.1.js"></script>
 
 </html>

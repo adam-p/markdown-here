@@ -10,10 +10,10 @@ function onLoad() {
     window.LOAD_MARKDOWN_HERE_CONTENT_SCRIPT = true;
     var contentscript = document.createElement('script');
     if (typeof(safari) !== 'undefined') {
-      contentscript.src = '../../../contentscript.js';
+      contentscript.src = '../../../../contentscript.js';
     }
     else if (typeof(chrome) !== 'undefined') {
-      contentscript.src = '../chrome/contentscript.js';
+      contentscript.src = '../../chrome/contentscript.js';
     }
     document.body.appendChild(contentscript);
   }

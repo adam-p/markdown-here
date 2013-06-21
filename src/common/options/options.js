@@ -1,18 +1,20 @@
 /*
- * Copyright Adam Pritchard 2012
+ * Copyright Adam Pritchard 2013
  * MIT License : http://adampritchard.mit-license.org/
  */
 
 "use strict";
 /*global OptionsStore:false, chrome:false, markdownRender:false, $:false,
-  htmlToText:false, marked:false, hljs:false, markdownHere:false, Utils:false*/
+  htmlToText:false, marked:false, hljs:false, markdownHere:false, Utils:false,
+  OptionsCommon: false*/
 
 /*
  * Main script file for the options page.
  */
 
 var cssEdit, cssSyntaxEdit, cssSyntaxSelect, rawMarkdownIframe, savedMsg,
-    mathEnable, mathEdit, hotkeyShift, hotkeyCtrl, hotkeyAlt, hotkeyKey;
+    mathEnable, mathEdit, hotkeyShift, hotkeyCtrl, hotkeyAlt, hotkeyKey,
+    loaded = false;
 
 function onLoad() {
   var xhr;
@@ -40,7 +42,7 @@ function onLoad() {
   // Get the available highlight.js styles.
   xhr = new XMLHttpRequest();
   xhr.overrideMimeType('application/json');
-  xhr.open('GET', 'highlightjs/styles/styles.json');
+  xhr.open('GET', '../highlightjs/styles/styles.json');
   xhr.onreadystatechange = function() {
     if (this.readyState === this.DONE) {
       // Assume 200 OK -- it's just a local call
@@ -90,20 +92,7 @@ function onLoad() {
       navigator.userAgent.indexOf('Icedove') >= 0 ||
       navigator.userAgent.indexOf('Postbox') >= 0) {
     $('#tests-link').click(function() {
-      var request = document.createTextNode(JSON.stringify($('#tests-link a').prop('href')));
-
-      var tabOpenResponseHandler = function(event) {
-        request.parentNode.removeChild(request);
-      };
-
-      request.addEventListener('markdown_here-tabOpen-response', tabOpenResponseHandler, false);
-
-      document.head.appendChild(request);
-
-      var event = document.createEvent('HTMLEvents');
-      event.initEvent('markdown_here-tabOpen-query', true, false);
-      request.dispatchEvent(event);
-
+      openTab($('#tests-link a').prop('href'));
       return false;
     });
   }
@@ -115,7 +104,7 @@ function onLoad() {
   // Note: Using $.ajax won't work because for local requests Firefox sets
   // status to 0 even on success. jQuery interprets this as an error.
   xhr = new XMLHttpRequest();
-  xhr.open('HEAD', './test/index.html');
+  xhr.open('HEAD', '../test/index.html');
   // If we don't set the mimetype, Firefox will complain.
   xhr.overrideMimeType('text/plain');
   xhr.onreadystatechange = function() {
@@ -125,6 +114,8 @@ function onLoad() {
     }
   };
   xhr.send();
+
+  loaded = true;
 }
 document.addEventListener('DOMContentLoaded', onLoad, false);
 
@@ -132,7 +123,14 @@ document.addEventListener('DOMContentLoaded', onLoad, false);
 // The Preview <iframe> will let us know when it's loaded, so that we can
 // trigger the rendering of it.
 document.addEventListener('options-iframe-loaded', function() {
-  renderMarkdown();
+  // Even though the IFrame is loaded, the page DOM might not be, so we don't
+  // yet have a valid state. In that case, set a timer.
+  if (loaded) {
+    OptionsCommon.renderMarkdown(requestMarkdownConversion);
+  }
+  else {
+    setTimeout(function() {OptionsCommon.renderMarkdown(requestMarkdownConversion);}, 500);
+  }
 });
 
 
@@ -196,7 +194,7 @@ function checkChange() {
                     }
         },
         function() {
-          updateMarkdownRender();
+          OptionsCommon.updateMarkdownRender(requestMarkdownConversion);
 
           // Show the "saved changes" message, unless this is the first save
           // (i.e., the one when the user first opens the options window).
@@ -227,6 +225,7 @@ function requestMarkdownConversion(html, callback) {
   else {
     // TODO: Implement a background script render service that can be used like
     // the Chrome one.
+    // TODO: Or just use this code for Chrome? It's used now in options-merge.js
     OptionsStore.get(function(prefs) {
       callback(
         markdownRender(
@@ -235,58 +234,10 @@ function requestMarkdownConversion(html, callback) {
           marked,
           hljs,
           html,
-          rawMarkdownIframe.contentDocument),
+          $('#rendered-markdown')[0].contentDocument),
         (prefs['main-css'] + prefs['syntax-css']));
     });
   }
-}
-
-// Render the sample Markdown.
-function renderMarkdown(postRenderCallback) {
-  if (rawMarkdownIframe.contentDocument.querySelector('.markdown-here-wrapper')) {
-    // Already rendered.
-    if (postRenderCallback) postRenderCallback();
-    return;
-  }
-
-  // Begin rendering.
-  markdownHere(rawMarkdownIframe.contentDocument, requestMarkdownConversionInterceptor);
-
-  // To figure out when the (asynchronous) rendering is complete -- so we
-  // can call the `postRenderCallback` -- we'll intercept the callback used
-  // by the rendering service.
-
-  function requestMarkdownConversionInterceptor(html, callback) {
-
-    function callbackInterceptor() {
-      callback.apply(null, arguments);
-
-      // Rendering done. Call callback.
-      if (postRenderCallback) postRenderCallback();
-    }
-
-    // Call the real rendering service.
-    requestMarkdownConversion(html, callbackInterceptor);
-  }
-}
-
-// Re-render already-rendered sample Markdown.
-function updateMarkdownRender() {
-  if (!rawMarkdownIframe.contentDocument.querySelector('.markdown-here-wrapper')) {
-    // Not currently rendered, so nothing to update.
-    return;
-  }
-
-  // To mitigate flickering, hide the iframe during rendering.
-  rawMarkdownIframe.style.visibility = 'hidden';
-
-  // Unrender
-  markdownHere(rawMarkdownIframe.contentDocument, requestMarkdownConversion);
-
-  // Re-render
-  renderMarkdown(function() {
-    rawMarkdownIframe.style.visibility = 'visible';
-  });
 }
 
 // Toggle the render state of the sample Markdown.
@@ -328,7 +279,7 @@ function cssSyntaxSelectChange() {
   // Get the CSS for the selected theme.
   var xhr = new XMLHttpRequest();
   xhr.overrideMimeType('text/css');
-  xhr.open('GET', 'highlightjs/styles/'+selected);
+  xhr.open('GET', '../highlightjs/styles/'+selected);
   xhr.onreadystatechange = function() {
     if (this.readyState === this.DONE) {
       // Assume 200 OK -- it's just a local call
@@ -343,7 +294,7 @@ function loadChangelist() {
   xhr.overrideMimeType('text/plain');
 
   // Get the changelist from a local file.
-  xhr.open('GET', 'CHANGES.md');
+  xhr.open('GET', '../CHANGES.md');
   xhr.onreadystatechange = function() {
     if (this.readyState === this.DONE) {
       // Assume 200 OK -- it's just a local call
@@ -450,3 +401,34 @@ document.getElementById('hotkey-key').addEventListener('keyup', hotkeyChangeHand
 document.getElementById('hotkey-shift').addEventListener('click', hotkeyChangeHandler, false);
 document.getElementById('hotkey-ctrl').addEventListener('click', hotkeyChangeHandler, false);
 document.getElementById('hotkey-alt').addEventListener('click', hotkeyChangeHandler, false);
+
+
+function openTab(url) {
+  // First make the url absolute. This will avoid problems with Mozilla clients.
+  url = $('<a>').attr('href', url).prop('href');
+
+  // Opening a tab with window.open in Mozilla clients will often trigger the
+  // popup blocker. We can avoid it by using our background service.
+  if (navigator.userAgent.indexOf('Thunderbird') >= 0 ||
+      navigator.userAgent.indexOf('Icedove') >= 0 ||
+      navigator.userAgent.indexOf('Postbox') >= 0 ||
+      navigator.userAgent.indexOf('Firefox') >= 0) {
+    var request = document.createTextNode(JSON.stringify(url));
+
+    var tabOpenResponseHandler = function(event) {
+      request.parentNode.removeChild(request);
+    };
+
+    request.addEventListener('markdown_here-tabOpen-response', tabOpenResponseHandler, false);
+
+    document.head.appendChild(request);
+
+    var event = document.createEvent('HTMLEvents');
+    event.initEvent('markdown_here-tabOpen-query', true, false);
+    request.dispatchEvent(event);
+  }
+  else {
+    // Do we need to supply the window name param?
+    window.open(url);
+  }
+}
