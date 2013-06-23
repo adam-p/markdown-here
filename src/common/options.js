@@ -377,7 +377,7 @@ function loadChangelist() {
         $('#changelist').find('h1:first').after('<h2>NEW</h2>').nextUntil(prevVerStart).wrapAll('<div class="changelist-new"></div>');
 
         // Move the changelist section up in the page
-        $('#changelist-container').insertBefore('#options-container');
+        $('#changelist-container').insertAfter('#pagehead');
       }
     }
   };
