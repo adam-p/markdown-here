@@ -1,13 +1,27 @@
 Change Log
 ==========
 
-2013-xx-yy: v2.8.1
+2013-06-23: v2.8.1
 ------------------
+
+**PLEASE NOTE:** If you've never customized your CSS, you should click the "Reset to Default" button for the "Primary Styling CSS". This will fix a bug (see below) and maybe give you better styling (if you installed MDH before version 2.7.0, Feb. 2013). If you have customized your CSS, you can [take a look at the changes to the default CSS](https://github.com/adam-p/markdown-here/commits/master/src/common/default.css) and decide what to take. A more elegant way of handling this is [being planned](https://github.com/adam-p/markdown-here/issues/78).
 
 * The designer/artist of the Markdown Here logo has her own website up. You should check it out! http://tatianafryntoff.com/
 
 * [Fixed bug](https://github.com/adam-p/markdown-here/issues/69): Pre-formatted links break Markdown links.
-  * Thanks to user Mitchell W. for finding this bug.
+  * Thanks to users Mitchell W. and [crdx](https://github.com/crdx) for reporting this bug.
+
+* [Fixed bug](https://github.com/adam-p/markdown-here/issues/57): MD links should automatically add schema.
+  * Thanks to [Casey Watts](https://github.com/caseywatts) for reporting this bug.
+
+* [Fixed bug](https://github.com/adam-p/markdown-here/issues/70): Firefox/Thunderbird: Code blocks with horizontal scroll would have bad background colour.
+  * Thanks to user Hans B. for reporting this bug.
+  * Note that to get this bug fix, you either need to reset your "Primary Styling CSS" to default, or [manually apply the fix](https://github.com/adam-p/markdown-here/commit/4c9e0448251b4390ca6043fad5a75b1b6413464d).
+
+* [Fixed bug](https://github.com/adam-p/markdown-here/issues/52): Inline code line breaks are lost.
+  * Thanks to user [CheechGe](https://github.com/CheechGe) for reporting this bug.
+
+* [Fixed bug](https://github.com/adam-p/markdown-here/issues/77): Sometimes options page MD preview doesn't initially render.
 
 2013-05-19: v2.8.0
 ------------------

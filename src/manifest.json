@@ -1,9 +1,9 @@
 {
   "manifest_version": 2,
   "name": "Markdown Here",
-  "version": "2.8.0",
+  "version": "2.8.1",
   "description": "Write your email in Markdown, then make it pretty.",
-  "homepage_url": "https://chrome.google.com/webstore/detail/elifhakcjgalahccnjkneoccemfahfoa",
+  "homepage_url": "http://markdown-here.com",
   "minimum_chrome_version": "6",
   "icons": {
     "16": "common/images/icon16.png",
