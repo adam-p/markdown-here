@@ -1,5 +1,5 @@
 /*
- * Copyright Adam Pritchard 2012
+ * Copyright Adam Pritchard 2013
  * MIT License : http://adampritchard.mit-license.org/
  */
 
@@ -12,7 +12,8 @@
  */
 
 var cssEdit, cssSyntaxEdit, cssSyntaxSelect, rawMarkdownIframe, savedMsg,
-    mathEnable, mathEdit, hotkeyShift, hotkeyCtrl, hotkeyAlt, hotkeyKey;
+    mathEnable, mathEdit, hotkeyShift, hotkeyCtrl, hotkeyAlt, hotkeyKey,
+    loaded = false;
 
 function onLoad() {
   var xhr;
@@ -125,15 +126,25 @@ function onLoad() {
     }
   };
   xhr.send();
+
+  loaded = true;
 }
 document.addEventListener('DOMContentLoaded', onLoad, false);
 
 
 // The Preview <iframe> will let us know when it's loaded, so that we can
 // trigger the rendering of it.
-document.addEventListener('options-iframe-loaded', function() {
-  renderMarkdown();
-});
+function previewIframeLoaded() {
+  // Even though the IFrame is loaded, the page DOM might not be, so we don't
+  // yet have a valid state. In that case, set a timer.
+  if (loaded) {
+    renderMarkdown();
+  }
+  else {
+    setTimeout(previewIframeLoaded, 100);
+  }
+}
+document.addEventListener('options-iframe-loaded', previewIframeLoaded);
 
 
 // Shows/hide page elements depending on the current platform.

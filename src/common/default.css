@@ -34,7 +34,7 @@ pre {
 
 pre code {
   white-space: pre;
-  overflow: auto;
+  overflow: auto; /* fixes issue #70: Firefox/Thunderbird: Code blocks with horizontal scroll would have bad background colour */
   border-radius: 3px;
   border: 1px solid #CCC;
   padding: 0.5em 0.7em;
