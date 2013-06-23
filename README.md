@@ -298,18 +298,6 @@ It also takes a fair bit of work to stay up-to-date with the latest changes in a
 * Syntax highlighting: [isagalaev / highlight.js](https://github.com/isagalaev/highlight.js)
 * HTML-to-text: [mtrimpe / jsHtmlToText](https://github.com/mtrimpe/jsHtmlToText)
 
-### Other stuff not used, but to keep an eye on
-
-* Markdown-to-HTML:
-  * [evilstreak / markdown-js](https://github.com/evilstreak/markdown-js) (There's currently a GFM dialect that seems almost finished. See [issue #41](https://github.com/evilstreak/markdown-js/issues/41).)
-  * [Pagedown](https://code.google.com/p/pagedown/)
-  * [isaacs / github-flavored-markdown](https://github.com/isaacs/github-flavored-markdown) (A Showdown derivative)
-  * [Showdown](https://github.com/coreyti/showdown)
-
-* HTML-to-Markdown
-  * [domchristie / to-markdown](https://github.com/domchristie/to-markdown)
-  * [leeoniya / reMarked.js](https://github.com/leeoniya/reMarked.js)
-
 ## Feedback
 
 All bugs, feature requests, pull requests, feedback, etc., are welcome. [Create an issue](https://github.com/adam-p/markdown-here/issues). Or [post to the "markdown-here" Google Group](https://groups.google.com/forum/?fromgroups=#!forum/markdown-here).

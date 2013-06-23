@@ -4,6 +4,21 @@
 > Be aware that changes to this file might live in another branch until a release is done. (You're probably looking at the `master` branch right now.)
 
 
+## Other tools/libs not used, but to keep an eye on
+
+* Markdown-to-HTML:
+  * [evilstreak / markdown-js](https://github.com/evilstreak/markdown-js) (There's currently a GFM dialect that seems almost finished. See [issue #41](https://github.com/evilstreak/markdown-js/issues/41).)
+  * [Pagedown](https://code.google.com/p/pagedown/)
+  * [isaacs / github-flavored-markdown](https://github.com/isaacs/github-flavored-markdown) (A Showdown derivative)
+  * [Showdown](https://github.com/coreyti/showdown)
+
+* HTML-to-Markdown
+  * [domchristie / to-markdown](https://github.com/domchristie/to-markdown)
+  * [leeoniya / reMarked.js](https://github.com/leeoniya/reMarked.js)
+
+* [CSSUtilities](http://www.brothercake.com/site/resources/scripts/cssutilities/): "...is a JavaScript library that provides unique and indispensible methods for querying CSS style sheets!"
+  * Could maybe be used for better make-styles-explicit.
+
 ## Miscellaneous
 
 * Update selection conversion screenshot to not be all about replies.
