@@ -47,6 +47,12 @@ chrome.contextMenus.create({
 // Handle rendering requests from the content script.
 // See the comment in markdown-render.js for why we do this.
 chrome.extension.onRequest.addListener(function(request, sender, responseCallback) {
+  // The content script can load in a not-real tab (like the search box), which
+  // has a tab.id of -1. We should just ignore these pages.
+  if (sender.tab.id < 0) {
+    return;
+  }
+
   if (request.action === 'render') {
     OptionsStore.get(function(prefs) {
       responseCallback({

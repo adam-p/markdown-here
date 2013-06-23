@@ -137,7 +137,14 @@ function buttonIntervalCheck(focusedElem) {
 // Default the hotkey check to a no-op until we get the necessary info from the
 // user options.
 var hotkeyIntervalCheck = function(focusedElem) {};
-chrome.extension.sendRequest({action: 'get-options'}, function(prefs) {
+var hotkeyGetOptionsHandler = function(prefs) {
+  // If the background script isn't properly loaded, it can happen that the
+  // `prefs` argument is undefined. Detect this and try again.
+  if (typeof(prefs) === 'undefined') {
+    chrome.extension.sendRequest({action: 'get-options'}, hotkeyGetOptionsHandler);
+    return;
+  }
+
   // Only add a listener if a key is set
   if (prefs.hotkey.key.length === 1) {
 
@@ -179,7 +186,8 @@ chrome.extension.sendRequest({action: 'get-options'}, function(prefs) {
     };
   }
   // else the hotkey is disabled and we'll leave hotkeyIntervalCheck as a no-op
-});
+};
+chrome.extension.sendRequest({action: 'get-options'}, hotkeyGetOptionsHandler);
 
 
 /*
