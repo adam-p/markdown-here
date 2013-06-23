@@ -432,3 +432,29 @@ function openTab(url) {
     window.open(url);
   }
 }
+
+
+****** IN PROGRESS
+// Detects if the default CSS has changed and launches the process of merging it.
+function checkDefaultMainCSSChange() {
+  // Get the current default
+  var xhr = new XMLHttpRequest();
+  xhr.overrideMimeType(OptionsStore.defaults['main-css']['__mimeType__']);
+  xhr.open('GET', OptionsStore.defaults['main-css']['__defaultFromFile__']);
+  xhr.onreadystatechange = function() {
+    if (this.readyState === this.DONE) {
+      // Assume 200 OK -- it's just a local call
+
+      var currentDefaultMainCSSChecksum = Utils.crc32(this.responseText);
+
+      // Get the user's last-seen default CSS
+      OptionsStore.get(function(prefs) {
+        var lastSeenDefaultMainCSSChecksum = null;
+        if (typeof(prefs['last-seen-default-main-css-checksum']) !== 'undefined') {
+          lastSeenDefaultMainCSSChecksum = prefs['last-seen-default-main-css-checksum'];
+        }
+      });
+    }
+  };
+  xhr.send();
+}
