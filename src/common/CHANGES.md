@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+2013-08-24: v2.8.2
+------------------
+
+Added support for [**Opera Next**](http://www.opera.com/computer/next)! 
+
 2013-06-23: v2.8.1
 ------------------
 

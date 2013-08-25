@@ -5,9 +5,10 @@
 [**Get it for Firefox.**](https://addons.mozilla.org/en-US/firefox/addon/markdown-here/)  
 [**Get it for Safari.**](https://s3.amazonaws.com/markdown-here/markdown-here.safariextz)  
 [**Get it for Thunderbird and Postbox.**](https://addons.mozilla.org/en-US/thunderbird/addon/markdown-here/)  
+[**Get it for Opera Next.**](https://addons.opera.com/en/extensions/details/markdown-here/)  
 [**Discuss it and ask questions in the Google Group.**](https://groups.google.com/forum/?fromgroups#!forum/markdown-here/)
 
-*Markdown Here* is a Google Chrome, Firefox, Safari, and Thunderbird extension that lets you write email<sup>&dagger;</sup> in Markdown<sup>&Dagger;</sup> and render them before sending. It also supports syntax highlighting (just specify the language in a fenced code block).
+*Markdown Here* is a Google Chrome, Firefox, Safari, Opera Next, and Thunderbird extension that lets you write email<sup>&dagger;</sup> in Markdown<sup>&Dagger;</sup> and render them before sending. It also supports syntax highlighting (just specify the language in a fenced code block).
 
 Writing email with code in it is pretty tedious. Writing Markdown with code in it is easy. I found myself writing email in Markdown in the Github in-browser editor, then copying the preview into email. This is a pretty absurd workflow, so I decided create a tool to write and render Markdown right in the email.
 
@@ -93,6 +94,10 @@ Install it, and then…
 5. Right-click in the compose box and choose the "Markdown Toggle" item from the context menu. Or click the button that appears in your address bar. Or use the hotkey (<kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>M</kbd> by default).
 6. You should see your email rendered correctly from Markdown into rich HTML.
 7. Send your awesome email to everyone you know. It will appear to them the same way it looks to you.
+
+### Opera Next
+
+TBD
 
 ### Revert to Markdown
 
@@ -248,6 +253,8 @@ Short answer: Gmail and Thunderbird are great. More info about some clients can 
 
 "Building" is really just zipping. Create all archives relative to the `src` directory.
 
+Before zipping, delete the `src/common/test` directory. This will prevent the autotests from ending up in the release.
+
 An important preparatory step is to remove any system-generated hidden files that shouldn't be 
 included in the release file (like Windows' `desktop.ini` and OS X's `.DS_Store`, etc.). This shell command will delete those unwanted files: 
 
@@ -255,7 +262,7 @@ included in the release file (like Windows' `desktop.ini` and OS X's `.DS_Store`
 find . -name "desktop.ini" -or -name ".*" -and -not -name "." -and -not -name ".git*" -print0 | xargs -0 rm -rf
 ```
 
-### Chrome extension
+### Chrome and Opera extension
 
 Create a file with a `.zip` extension containing these files and directories:
 
