@@ -152,11 +152,11 @@ document.addEventListener('options-iframe-loaded', previewIframeLoaded);
 // E.g., not all usage instructions apply to all clients.
 function showPlatformElements() {
   if (typeof(chrome) !== 'undefined' && typeof(chrome.extension) !== 'undefined') {
-    // Mozilla-derived platforms
+    // Webkit-derived platforms
     $('#need-page-reload').css('display', 'none');
   }
   else {
-    // Webkit-derived platforms
+    // Mozilla-derived platforms
     $('#need-page-reload').css('display', '');
   }
 }
