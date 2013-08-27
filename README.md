@@ -72,12 +72,18 @@ After installing, make sure to restart Firefox/Thunderbird!
 
 To get to the Markdown Here preferences, open the Safari preferences and then go to the "Extensions" tab. Then click the "Click me to show Markdown Here options" box.
 
+### Opera Next
+
+Go to the [Opera Add-ons store page for *Markdown Here*](https://addons.opera.com/en/extensions/details/markdown-here/) and install normally.
+
+After installing, make sure to reload your webmail or restart Chrome!
+
 ## Usage Instructions
 
 Install it, and then…
 
-1. In Chrome and Safari, *make sure* you reload your web mail page before trying to use Markdown Here.
-2. In Chrome/Firefox/Safari, log into your Gmail, Hotmail, or Yahoo account and start a new email. In Thunderbird, start a new message.
+1. In Chrome/Safari/Opera, *make sure* you reload your web mail page before trying to use Markdown Here.
+2. In Chrome/Firefox/Safari/Opera, log into your Gmail, Hotmail, or Yahoo account and start a new email. In Thunderbird, start a new message.
 3. Make sure you're using the rich editor.
    * In Gmail, click the "Rich formatting" link, if it's visible.
    * In Thunderbird, make sure "Compose messages in HTML format" is enabled in your "Account Settings", "Composition & Addressing" pane.
@@ -94,10 +100,6 @@ Install it, and then…
 5. Right-click in the compose box and choose the "Markdown Toggle" item from the context menu. Or click the button that appears in your address bar. Or use the hotkey (<kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>M</kbd> by default).
 6. You should see your email rendered correctly from Markdown into rich HTML.
 7. Send your awesome email to everyone you know. It will appear to them the same way it looks to you.
-
-### Opera Next
-
-TBD
 
 ### Revert to Markdown
 
@@ -147,8 +149,8 @@ For Chrome and Firefox, any changes made in the *Markdown Here* Options are auto
 Here are some common problems that people run into.
 
 <dl>
-  <dt>Chrome/Firefox/Safari/Thunderbird: I just installed <em>Markdown Here</em> and the context menu item isn't showing up.</dt>
-  <dd>Make sure you restarted Firefox or Thunderbird, and either restarted Chrome/Safari or reloaded your webmail page.</dd>
+  <dt>Chrome/Firefox/Safari/Opera/Thunderbird: I just installed <em>Markdown Here</em> and the context menu item isn't showing up.</dt>
+  <dd>Make sure you restarted Firefox or Thunderbird, and either restarted Chrome/Safari/Opera or reloaded your webmail page.</dd>
 </dl>
 
 ## Compatibility
