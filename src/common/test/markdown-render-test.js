@@ -158,6 +158,13 @@ describe('Markdown-Render', function() {
       expect(markdownRender(userprefs, htmlToText, marked, hljs, md, document, null)).to.equal(target);
     });
 
+    // Test issue #87: https://github.com/adam-p/markdown-here/issues/87
+    it('should smartypants apostrophes properly', function() {
+      var md = "Adam's parents' place";
+      var target = '<p>Adam\u2019s parents\u2019 place</p>\n';
+      expect(markdownRender(userprefs, htmlToText, marked, hljs, md, document, null)).to.equal(target);
+    });
+
   });
 
 });

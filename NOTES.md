@@ -116,11 +116,9 @@ I don't have a good sense for how widespread the appeal of this might be, but I 
 Lots of work.
 
 
-## Random
+## Clipboard Interaction
 
-### Clipboard Paste
-
-In a Google Docs support issue (#28), [a user suggested](https://github.com/adam-p/markdown-here/issues/28#issuecomment-13085498) using paste to get the rendered Markdown into a GDoc. This seemed interesting, so I did some investigation. 
+In a Google Docs support issue (#28), [a user suggested](https://github.com/adam-p/markdown-here/issues/28#issuecomment-13085498) using paste to get the rendered Markdown into a GDoc. (This might also be useful for Evernote, Wordpress, and other places where MDH doesn't quite work right.) This seemed interesting, so I did some investigation. 
 
 * Paste does work fairly well to get rendered Markdown into a Google Doc. (Although Paste vs. Paste and Match Style give different results.) Some massaging of the Markdown (`<br>` vs. `<p>`, maybe) might improve results.
 
@@ -132,10 +130,88 @@ In a Google Docs support issue (#28), [a user suggested](https://github.com/adam
 
 * A common way for websites (including Github) to support copy-to-clipboard is to use Flash. The most popular seems to be [ZeroClipboard](https://github.com/jonrohan/ZeroClipboard) -- but it doesn't magically provide pasting (even if I could figure out how to use it in an extension).
 
-* When pasting, the `markdown-here-wrapper` is lost. This means that reverting may not be possible (at the very least, it'll require another approach).
+* When pasting, the `markdown-here-wrapper` is lost. This means that reverting may not be possible (at the very least, it'll require another approach). 
 
 * Copying arbitrary HTML to the clipboard is probably doable on all platforms (it is on Chrome, at least).
 
 So, it seem that, at best, MDH could put the rendered Markdown HTML into the clipboard and then the user will have to manually paste it. This is not great, but is perhaps better than nothing.
 
-Another really big outstanding question: Can MDH detect what's selected in the GDoc? Can it get the text? Can it change the selection? Can it delete or replace the selection? (Some simple `getSelection()` tests are *not* hopeful.)
+Another really big outstanding question: Can MDH detect what's selected in the GDoc? Can it get the text? Can it change the selection? Can it delete or replace the selection? (Some simple `getSelection()` tests are *not* hopeful.) Forcing the user to first copy the target text to the clipboard might be the best/only approach.
+
+### Sample code
+
+#### Chrome
+
+In `manifest.json`:
+
+```diff
+-  "permissions": ["contextMenus", "storage"],
++  "permissions": ["contextMenus", "storage", "clipboardRead", "clipboardWrite"],
+```
+
+In `backgroundscript.js`:
+
+```javascript
+function writeToClipboard(str) {
+  var sandbox = document.createElement('div');
+  sandbox.contentEditable = true;
+
+  // Potentially unsafe, and Mozilla review will disallow it. Use Utils.saferSetInnerHTML.
+  sandbox.innerHTML = str;
+
+  document.body.appendChild(sandbox);
+
+  var selection = document.getSelection();
+  selection.removeAllRanges();
+  var range = document.createRange();
+  range.selectNodeContents(sandbox);
+  selection.addRange(range);
+
+  document.execCommand('copy');
+
+  document.body.removeChild(sandbox);
+}
+
+// `plain` is a boolean indicating whether a plaintext version of the text
+// should be read from the clipboard.
+function readFromClipboard(plain) {
+  var sandbox = document.createElement('div');
+  sandbox.contentEditable = true;
+  document.body.appendChild(sandbox);
+
+  var selection = document.getSelection();
+  selection.removeAllRanges();
+  var range = document.createRange();
+  range.selectNodeContents(sandbox);
+  selection.addRange(range);
+  range.collapse();
+
+  var result = null;
+  if (document.execCommand('paste')) {
+      result = plain ? sandbox.innerText : sandbox.innerHTML;
+  }
+
+  document.body.removeChild(sandbox);
+
+  return result;
+}
+```
+
+Then in the background page console you can do stuff like this (after manually copying):
+
+```javascript
+var prefs;
+// async, so do it separtely in the console.
+OptionsStore.get(function(opts) {prefs=opts;});
+
+var cb = readFromClipboard();
+markdownRender(prefs, htmlToText, marked, hljs.highlight, cb, document, null);
+writeToClipboard(cb);
+
+// And then paste back into GDocs.
+
+// Alternatively, use `readFromClipboard(true)` to get a maybe-nicer plaintext
+// version of the Markdown, if `htmlToText` is misbehaving.
+```
+
+(Bug: It seems that spaces are being lost from the HTML written back into the clipboard.)
