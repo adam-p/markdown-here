@@ -110,19 +110,20 @@ describe('Markdown-Render', function() {
       tests.push(['asdf (<a href="aaa">bbb</a>)',
                   '<p>asdf (<a href="http://aaa">bbb</a>)</p>\n']);
 
-      // Begin tests where the link should *not* be converted
+      // Begin tests where the link should *not* be converted.
+      // Note that some tests are affected by issue #57: MD links should automatically add scheme
 
       tests.push(['asdf [yyy](<a href="http://www.aaa.com">bbb</a>) asdf',
-                  '<p>asdf <a href="bbb">yyy</a> asdf</p>\n']);
+                  '<p>asdf <a href="http://bbb">yyy</a> asdf</p>\n']);
 
       tests.push(['asdf [<a href="http://www.aaa.com">bbb</a>](ccc) asdf',
                   '<p>asdf <a href="http://ccc">bbb</a> asdf</p>\n']);
 
       tests.push(['[yyy](<a href="http://www.aaa.com">bbb</a>)',
-                  '<p><a href="bbb">yyy</a></p>\n']);
+                  '<p><a href="http://bbb">yyy</a></p>\n']);
 
       tests.push(['[yyy]( <a href="http://www.aaa.com">bbb</a>)',
-                  '<p><a href="bbb">yyy</a></p>\n']);
+                  '<p><a href="http://bbb">yyy</a></p>\n']);
 
       tests.push(['asdf [qwer <a href="http://www.aaa.com">bbb</a>](ccc) asdf',
                   '<p>asdf <a href="http://ccc">qwer bbb</a> asdf</p>\n']);
@@ -130,7 +131,7 @@ describe('Markdown-Render', function() {
       // Begin mixed tests
 
       tests.push(['asdf [aaa](bbb) asdf <a href="http://www.aaa.com">bbb</a> asdf [yyy](<a href="http://www.aaa.com">bbb</a>) asdf',
-                  '<p>asdf <a href="http://bbb">aaa</a> asdf <a href="http://www.aaa.com">bbb</a> asdf <a href="bbb">yyy</a> asdf</p>\n']);
+                  '<p>asdf <a href="http://bbb">aaa</a> asdf <a href="http://www.aaa.com">bbb</a> asdf <a href="http://bbb">yyy</a> asdf</p>\n']);
 
       // Begin tests that don't work quite right
 
@@ -171,8 +172,8 @@ describe('Markdown-Render', function() {
       var target = '<p><code>[a](b)</code></p>\n';
       expect(markdownRender(userprefs, htmlToText, marked, hljs, md, document, null)).to.equal(target);
 
-      md = '```\n[a](b)\n```';
-      target = '<p><pre><code>[a](b)</code></pre></p>\n';
+      md = '```<br>[a](b)<br>```';
+      target = '<pre><code>[a](b)</code></pre>\n';
       expect(markdownRender(userprefs, htmlToText, marked, hljs, md, document, null)).to.equal(target);
     });
 

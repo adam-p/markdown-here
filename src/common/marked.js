@@ -708,6 +708,7 @@ InlineLexer.prototype.output = function(src) {
 
 InlineLexer.prototype.outputLink = function(cap, link) {
   if (cap[0].charAt(0) !== '!') {
+    link.href = link.href.replace(/^(?!#)([^:]+)$/, 'http://$1'); /* adam-p: added to fix MDH issue #57: MD links should automatically add scheme. Note that the presence of a ':' is used to indicate a scheme, so port numbers will defeat this. */
     return '<a href="'
       + escape(link.href)
       + '"'
