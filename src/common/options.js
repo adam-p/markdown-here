@@ -89,7 +89,8 @@ function onLoad() {
   // Special effort is required to open the test page in these clients.
   if (navigator.userAgent.indexOf('Thunderbird') >= 0 ||
       navigator.userAgent.indexOf('Icedove') >= 0 ||
-      navigator.userAgent.indexOf('Postbox') >= 0) {
+      navigator.userAgent.indexOf('Postbox') >= 0 ||
+      navigator.userAgent.indexOf('Zotero') >= 0) {
     $('#tests-link').click(function() {
       var request = document.createTextNode(JSON.stringify($('#tests-link a').prop('href')));
 
@@ -150,19 +151,13 @@ document.addEventListener('options-iframe-loaded', previewIframeLoaded);
 // Shows/hide page elements depending on the current platform.
 // E.g., not all usage instructions apply to all clients.
 function showPlatformElements() {
-  // This could be done more elegantly, but...
-  if (navigator.userAgent.indexOf('Thunderbird') >= 0 ||
-      navigator.userAgent.indexOf('Icedove') >= 0 ||
-      navigator.userAgent.indexOf('Postbox') >= 0 ||
-      navigator.userAgent.indexOf('Firefox') >= 0) {
+  if (typeof(chrome) !== 'undefined' && typeof(chrome.extension) !== 'undefined') {
+    // Webkit-derived platforms
     $('#need-page-reload').css('display', 'none');
   }
-  else if (navigator.userAgent.indexOf('Chrome') >= 0 ||
-           navigator.userAgent.match(/AppleWebKit.*Version.*Safari/)) {
-    $('#need-page-reload').css('display', '');
-  }
   else {
-    // Shouldn't happen. Don't modify anything.
+    // Mozilla-derived platforms
+    $('#need-page-reload').css('display', '');
   }
 }
 
