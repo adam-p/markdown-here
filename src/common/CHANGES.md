@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+2013-xx-yy: v2.8.3
+------------------
+
+* [Fixed bug](https://github.com/adam-p/markdown-here/issues/83): `[a](b)` links shouldn't expand inside of a code block.
+  * Thanks to [jdanbrown](https://github.com/jdanbrown) for reporting this bug.
+
 2013-08-24: v2.8.2
 ------------------
 
