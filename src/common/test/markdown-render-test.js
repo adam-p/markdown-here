@@ -177,6 +177,24 @@ describe('Markdown-Render', function() {
       expect(markdownRender(userprefs, htmlToText, marked, hljs, md, document, null)).to.equal(target);
     });
 
+    // Test issue #84: Math: single-character formula won't render
+    // https://github.com/adam-p/markdown-here/issues/84
+    it('should render single-character math formulae', function() {
+      userprefs = {
+        'math-value': '<img src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}" alt="{mathcode}">',
+        'math-enabled': true
+      };
+
+      var md = '$x$';
+      var target = '<p><img src="https://chart.googleapis.com/chart?cht=tx&chl=x" alt="x"></p>\n';
+      expect(markdownRender(userprefs, htmlToText, marked, hljs, md, document, null)).to.equal(target);
+
+      // Make sure we haven't broken multi-character forumlae
+      md = '$xx$';
+      target = '<p><img src="https://chart.googleapis.com/chart?cht=tx&chl=xx" alt="xx"></p>\n';
+      expect(markdownRender(userprefs, htmlToText, marked, hljs, md, document, null)).to.equal(target);
+    });
+
   });
 
 });
