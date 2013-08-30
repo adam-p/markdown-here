@@ -165,6 +165,17 @@ describe('Markdown-Render', function() {
       expect(markdownRender(userprefs, htmlToText, marked, hljs, md, document, null)).to.equal(target);
     });
 
+    // Test issue #83: https://github.com/adam-p/markdown-here/issues/83
+    it('should not alter MD-link-looking text in code blocks', function() {
+      var md = '`[a](b)`';
+      var target = '<p><code>[a](b)</code></p>\n';
+      expect(markdownRender(userprefs, htmlToText, marked, hljs, md, document, null)).to.equal(target);
+
+      md = '```\n[a](b)\n```';
+      target = '<p><pre><code>[a](b)</code></pre></p>\n';
+      expect(markdownRender(userprefs, htmlToText, marked, hljs, md, document, null)).to.equal(target);
+    });
+
   });
 
 });
