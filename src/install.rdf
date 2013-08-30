@@ -5,14 +5,14 @@
     <Description about="urn:mozilla:install-manifest">
         <em:type>2</em:type> <!-- 2 : Extension -->
         <em:id>markdown-here@adam.pritchard</em:id>
-        <em:version>2.8.1</em:version>
+        <em:version>2.8.2</em:version>
 
         <em:targetApplication>
             <Description>
                 <!-- Firefox -->
                 <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
                 <em:minVersion>11.0</em:minVersion>
-                <em:maxVersion>23.*</em:maxVersion>
+                <em:maxVersion>25.*</em:maxVersion>
             </Description>
         </em:targetApplication>
 
@@ -30,7 +30,7 @@
           <Description>
             <em:id>toolkit@mozilla.org</em:id>
             <em:minVersion>6.0</em:minVersion>
-            <em:maxVersion>23.*</em:maxVersion>
+            <em:maxVersion>25.*</em:maxVersion>
           </Description>
         </em:targetApplication>
 

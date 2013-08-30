@@ -5,9 +5,10 @@
 [**Get it for Firefox.**](https://addons.mozilla.org/en-US/firefox/addon/markdown-here/)  
 [**Get it for Safari.**](https://s3.amazonaws.com/markdown-here/markdown-here.safariextz)  
 [**Get it for Thunderbird and Postbox.**](https://addons.mozilla.org/en-US/thunderbird/addon/markdown-here/)  
+[**Get it for Opera Next.**](https://addons.opera.com/en/extensions/details/markdown-here/)  
 [**Discuss it and ask questions in the Google Group.**](https://groups.google.com/forum/?fromgroups#!forum/markdown-here/)
 
-*Markdown Here* is a Google Chrome, Firefox, Safari, and Thunderbird extension that lets you write email<sup>&dagger;</sup> in Markdown<sup>&Dagger;</sup> and render them before sending. It also supports syntax highlighting (just specify the language in a fenced code block).
+*Markdown Here* is a Google Chrome, Firefox, Safari, Opera Next, and Thunderbird extension that lets you write email<sup>&dagger;</sup> in Markdown<sup>&Dagger;</sup> and render them before sending. It also supports syntax highlighting (just specify the language in a fenced code block).
 
 Writing email with code in it is pretty tedious. Writing Markdown with code in it is easy. I found myself writing email in Markdown in the Github in-browser editor, then copying the preview into email. This is a pretty absurd workflow, so I decided create a tool to write and render Markdown right in the email.
 
@@ -71,12 +72,18 @@ After installing, make sure to restart Firefox/Thunderbird!
 
 To get to the Markdown Here preferences, open the Safari preferences and then go to the "Extensions" tab. Then click the "Click me to show Markdown Here options" box.
 
+### Opera Next
+
+Go to the [Opera Add-ons store page for *Markdown Here*](https://addons.opera.com/en/extensions/details/markdown-here/) and install normally.
+
+After installing, make sure to reload your webmail or restart Chrome!
+
 ## Usage Instructions
 
 Install it, and then…
 
-1. In Chrome and Safari, *make sure* you reload your web mail page before trying to use Markdown Here.
-2. In Chrome/Firefox/Safari, log into your Gmail, Hotmail, or Yahoo account and start a new email. In Thunderbird, start a new message.
+1. In Chrome/Safari/Opera, *make sure* you reload your web mail page before trying to use Markdown Here.
+2. In Chrome/Firefox/Safari/Opera, log into your Gmail, Hotmail, or Yahoo account and start a new email. In Thunderbird, start a new message.
 3. Make sure you're using the rich editor.
    * In Gmail, click the "Rich formatting" link, if it's visible.
    * In Thunderbird, make sure "Compose messages in HTML format" is enabled in your "Account Settings", "Composition & Addressing" pane.
@@ -142,8 +149,8 @@ For Chrome and Firefox, any changes made in the *Markdown Here* Options are auto
 Here are some common problems that people run into.
 
 <dl>
-  <dt>Chrome/Firefox/Safari/Thunderbird: I just installed <em>Markdown Here</em> and the context menu item isn't showing up.</dt>
-  <dd>Make sure you restarted Firefox or Thunderbird, and either restarted Chrome/Safari or reloaded your webmail page.</dd>
+  <dt>Chrome/Firefox/Safari/Opera/Thunderbird: I just installed <em>Markdown Here</em> and the context menu item isn't showing up.</dt>
+  <dd>Make sure you restarted Firefox or Thunderbird, and either restarted Chrome/Safari/Opera or reloaded your webmail page.</dd>
 </dl>
 
 ## Compatibility
@@ -248,6 +255,8 @@ Short answer: Gmail and Thunderbird are great. More info about some clients can 
 
 "Building" is really just zipping. Create all archives relative to the `src` directory.
 
+Before zipping, delete the `src/common/test` directory. This will prevent the autotests from ending up in the release.
+
 An important preparatory step is to remove any system-generated hidden files that shouldn't be 
 included in the release file (like Windows' `desktop.ini` and OS X's `.DS_Store`, etc.). This shell command will delete those unwanted files: 
 
@@ -255,7 +264,7 @@ included in the release file (like Windows' `desktop.ini` and OS X's `.DS_Store`
 find . -name "desktop.ini" -or -name ".*" -and -not -name "." -and -not -name ".git*" -print0 | xargs -0 rm -rf
 ```
 
-### Chrome extension
+### Chrome and Opera extension
 
 Create a file with a `.zip` extension containing these files and directories:
 
