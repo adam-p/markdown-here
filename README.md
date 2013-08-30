@@ -5,10 +5,10 @@
 [**Get it for Firefox.**](https://addons.mozilla.org/en-US/firefox/addon/markdown-here/)  
 [**Get it for Safari.**](https://s3.amazonaws.com/markdown-here/markdown-here.safariextz)  
 [**Get it for Thunderbird and Postbox.**](https://addons.mozilla.org/en-US/thunderbird/addon/markdown-here/)  
-[**Get it for Opera Next.**](https://addons.opera.com/en/extensions/details/markdown-here/)  
+[**Get it for Opera.**](https://addons.opera.com/en/extensions/details/markdown-here/)  
 [**Discuss it and ask questions in the Google Group.**](https://groups.google.com/forum/?fromgroups#!forum/markdown-here/)
 
-*Markdown Here* is a Google Chrome, Firefox, Safari, Opera Next, and Thunderbird extension that lets you write email<sup>&dagger;</sup> in Markdown<sup>&Dagger;</sup> and render them before sending. It also supports syntax highlighting (just specify the language in a fenced code block).
+*Markdown Here* is a Google Chrome, Firefox, Safari, Opera, and Thunderbird extension that lets you write email<sup>&dagger;</sup> in Markdown<sup>&Dagger;</sup> and render them before sending. It also supports syntax highlighting (just specify the language in a fenced code block).
 
 Writing email with code in it is pretty tedious. Writing Markdown with code in it is easy. I found myself writing email in Markdown in the Github in-browser editor, then copying the preview into email. This is a pretty absurd workflow, so I decided create a tool to write and render Markdown right in the email.
 
@@ -72,7 +72,9 @@ After installing, make sure to restart Firefox/Thunderbird!
 
 To get to the Markdown Here preferences, open the Safari preferences and then go to the "Extensions" tab. Then click the "Click me to show Markdown Here options" box.
 
-### Opera Next
+### Opera
+
+Note that *Markdown Here* only works with Opera versions 16 and higher (i.e., the ones that are based on Chromium).
 
 Go to the [Opera Add-ons store page for *Markdown Here*](https://addons.opera.com/en/extensions/details/markdown-here/) and install normally.
 
