@@ -49,6 +49,11 @@ function requestHandler(request, sender, sendResponse) {
     showUpgradeNotification(request.html);
     return false;
   }
+  else if (request && request.action === 'clear-upgrade-notification')
+  {
+    clearUpgradeNotification();
+    return false;
+  }
 }
 chrome.runtime.onMessage.addListener(requestHandler);
 
@@ -217,25 +222,39 @@ setInterval(intervalCheck, 2000);
  */
 
 function showUpgradeNotification(html) {
+  if (document.querySelector('#markdown-here-upgrade-notification-content')) {
+    return;
+  }
+
   var elem = document.createElement('div');
   document.body.appendChild(elem);
   Utils.saferSetOuterHTML(elem, html);
 
-  // Setting the outer HTML wrecks our reference to the element, so get it again.
-  // Get the first ID that appears in the HTML
-  var id = html.match(/\bid="([^"]+)"/i)[1];
-  elem = document.querySelector('#'+id);
+  // Add click handlers so that we can clear the notification.
+  var optionsLink = document.querySelector('#markdown-here-upgrade-notification-link');
+  optionsLink.addEventListener('click', function() {
+    clearUpgradeNotification(true);
+    // Allow the default action
+  });
 
-  var removeUpgradeNotification = function() {
-    // We could use the transitionEnd event to remove the element we created,
-    // but... the event name is prefixed and seems a bit flaky.
-    var opacityTransitionTime = Number(html.match(/opacity (\d+)ms/i)[1]);
-    var removeChild = function() { document.body.removeChild(elem); };
-    setTimeout(removeChild, opacityTransitionTime * 1.1);
+  var closeLink = document.querySelector('#markdown-here-upgrade-notification-close');
+  closeLink.addEventListener('click', function(event) {
+    event.preventDefault();
+    clearUpgradeNotification(true);
+  });
+}
 
-    elem.style.opacity = 0;
-  };
+function clearUpgradeNotification(notifyBackgroundScript) {
+    // Setting the outer HTML wrecks our reference to the element, so get it again.
+  var elem = document.querySelector('#markdown-here-upgrade-notification-content');
 
-  // Remove the element after showing for a bit
-  setTimeout(removeUpgradeNotification, 8000);
+  if (!elem) {
+    return;
+  }
+
+  document.body.removeChild(elem);
+
+  if (notifyBackgroundScript) {
+    chrome.runtime.sendMessage({action: 'upgrade-notification-shown'});
+  }
 }

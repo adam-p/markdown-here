@@ -231,7 +231,6 @@ function makeStylesExplicit(wrapperElem, css) {
     else {
       selectorMatches = wrapperElem.querySelectorAll(rule.selectorText);
       for (j = 0; j < selectorMatches.length; j++) {
-
         // Make sure the selector match isn't inside an exclusion block.
         elem = selectorMatches[j];
         while (elem) {

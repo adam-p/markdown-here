@@ -75,6 +75,10 @@ chrome.runtime.onMessage.addListener(function(request, sender, responseCallback)
       return false;
     }
   }
+  else if (request.action === 'upgrade-notification-shown') {
+    clearUpgradeNotification();
+    return false;
+  }
   else {
     console.log('unmatched request action');
     console.log(request.action);
@@ -89,6 +93,15 @@ chrome.browserAction.onClicked.addListener(function(tab) {
 });
 
 
+/*
+Showing an notification after upgrade is complicated by the fact that the
+background script can't communicate with "stale" content scripts. (See https://code.google.com/p/chromium/issues/detail?id=168263)
+So, content scripts need to be reloaded before they can receive the "show
+upgrade notification message". So we're going to keep sending that message from
+the background script until a content script acknowledges it. (Content scripts
+will acknowledge when the user clicks the notification.)
+*/
+var showUpgradeNotificationInterval = null;
 function showUpgradeNotification(prevVer) {
   // Get the content of notification element
   var xhr = new XMLHttpRequest();
@@ -125,15 +138,18 @@ function showUpgradeNotification(prevVer) {
           html = html.replace('{{optionsURL}}', chrome.extension.getURL(optionsURL))
                      .replace('{{logoBase64}}', logoBase64);
 
-          // Get the front-most tabs
-          chrome.tabs.query({active: true, windowType: 'normal'}, function(tabs) {
-            for (var i = 0; i < tabs.length; i++) {
-              chrome.tabs.sendMessage(
-                tabs[i].id,
-                { action: 'show-upgrade-notification', html: html });
-            }
-          });
+          var askTabsToShowNotification = function() {
+            // Get the front-most tabs
+            chrome.tabs.query({windowType: 'normal'}, function(tabs) {
+              for (var i = 0; i < tabs.length; i++) {
+                chrome.tabs.sendMessage(
+                  tabs[i].id,
+                  { action: 'show-upgrade-notification', html: html });
+              }
+            });
+          };
 
+          showUpgradeNotificationInterval = setInterval(askTabsToShowNotification, 5000);
         }
       };
 
@@ -141,4 +157,19 @@ function showUpgradeNotification(prevVer) {
     }
   };
   xhr.send();
+}
+
+function clearUpgradeNotification() {
+  if (showUpgradeNotificationInterval) {
+    clearInterval(showUpgradeNotificationInterval);
+    showUpgradeNotificationInterval = null;
+
+    chrome.tabs.query({windowType: 'normal'}, function(tabs) {
+      for (var i = 0; i < tabs.length; i++) {
+        chrome.tabs.sendMessage(
+          tabs[i].id,
+          { action: 'clear-upgrade-notification' });
+      }
+    });
+  }
 }
