@@ -19,15 +19,7 @@ window.addEventListener('load', function() {
 
       // Have we been updated?
       if (options['last-version'] !== appDetails.version) {
-        var optionsUrl = appDetails.options_page;
-
-        // If this is an upgrade, open the options page in changelist mode
-        if (options['last-version']) {
-          optionsUrl += '?prevVer=' + options['last-version'];
-        }
-
-        // Open our options page
-        chrome.tabs.create({ url: optionsUrl });
+        showUpgradeNotification(options['last-version']);
 
         // Update out last version
         OptionsStore.set({ 'last-version': appDetails.version });
@@ -40,17 +32,17 @@ chrome.contextMenus.create({
   contexts: ['editable'],
   title: 'Mar&kdown Toggle',
   onclick: function(info, tab) {
-    chrome.tabs.sendRequest(tab.id, {action: 'context-click'});
+    chrome.tabs.sendMessage(tab.id, {action: 'context-click'});
   }
 });
 
 // Handle rendering requests from the content script.
 // See the comment in markdown-render.js for why we do this.
-chrome.extension.onRequest.addListener(function(request, sender, responseCallback) {
+chrome.runtime.onMessage.addListener(function(request, sender, responseCallback) {
   // The content script can load in a not-real tab (like the search box), which
   // has a tab.id of -1. We should just ignore these pages.
   if (sender.tab.id < 0) {
-    return;
+    return false;
   }
 
   if (request.action === 'render') {
@@ -67,26 +59,86 @@ chrome.extension.onRequest.addListener(function(request, sender, responseCallbac
         css: (prefs['main-css'] + prefs['syntax-css'])
       });
     });
+    return true;
   }
   else if (request.action === 'get-options') {
     OptionsStore.get(function(prefs) { responseCallback(prefs); });
+    return true;
   }
   else if (request.action === 'show-toggle-button') {
     if (request.show) {
       chrome.browserAction.enable(sender.tab.id);
+      return false;
     }
     else {
       chrome.browserAction.disable(sender.tab.id);
+      return false;
     }
   }
   else {
     console.log('unmatched request action');
     console.log(request.action);
     throw 'unmatched request action: ' + request.action;
+    return false;
   }
 });
 
 // Add the browserAction (the button in the browser toolbar) listener.
 chrome.browserAction.onClicked.addListener(function(tab) {
-  chrome.tabs.sendRequest(tab.id, {action: 'button-click'});
+  chrome.tabs.sendMessage(tab.id, {action: 'button-click', });
 });
+
+
+function showUpgradeNotification(prevVer) {
+  // Get the content of notification element
+  var xhr = new XMLHttpRequest();
+  xhr.overrideMimeType('text/html');
+  xhr.open('GET', chrome.extension.getURL('/common/upgrade-notification.html'));
+  xhr.onreadystatechange = function() {
+    if (this.readyState === this.DONE) {
+      // Assume 200 OK -- it's just a local call
+      var html = this.responseText;
+
+      // Get the logo image data
+      var logoBase64 = null;
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', '/common/images/icon16.png');
+
+      xhr.responseType = 'arraybuffer';
+
+      xhr.onload = function(e) {
+        if (this.status == 200) {
+          var uInt8Array = new Uint8Array(this.response);
+          var i = uInt8Array.length;
+          var binaryString = new Array(i);
+          while (i--)
+          {
+            binaryString[i] = String.fromCharCode(uInt8Array[i]);
+          }
+          var data = binaryString.join('');
+
+          var logoBase64 = window.btoa(data);
+
+          // Do some rough template replacement
+          var optionsURL = '/common/options.html';
+          if (prevVer) optionsURL += '?prevVer=' + prevVer;
+          html = html.replace('{{optionsURL}}', chrome.extension.getURL(optionsURL))
+                     .replace('{{logoBase64}}', logoBase64);
+
+          // Get the front-most tabs
+          chrome.tabs.query({active: true, windowType: 'normal'}, function(tabs) {
+            for (var i = 0; i < tabs.length; i++) {
+              chrome.tabs.sendMessage(
+                tabs[i].id,
+                { action: 'show-upgrade-notification', html: html });
+            }
+          });
+
+        }
+      };
+
+      xhr.send();
+    }
+  };
+  xhr.send();
+}

@@ -15,23 +15,23 @@
 
 
 // Handle the menu-item click
-function requestHandler(event) {
+function requestHandler(request, sender, sendResponse) {
   var focusedElem, mdReturn;
 
-  if (event && (event.action === 'context-click' ||
-                event.action === 'hotkey' ||
-                event.action === 'button-click')) {
+  if (request && (request.action === 'context-click' ||
+                request.action === 'hotkey' ||
+                request.action === 'button-click')) {
 
     // Check if the focused element is a valid render target
     focusedElem = markdownHere.findFocusedElem(window.document);
     if (!focusedElem) {
       // Shouldn't happen. But if it does, just silently abort.
-      return;
+      return false;
     }
 
     if (!markdownHere.elementCanBeRendered(focusedElem)) {
       alert('The selected field is not valid for Markdown rendering. Please use a rich editor.');
-      return;
+      return false;
     }
 
     var logger = function() { console.log.apply(console, arguments); };
@@ -41,18 +41,23 @@ function requestHandler(event) {
     if (typeof(mdReturn) === 'string') {
       // Error message was returned.
       alert(mdReturn);
-      return;
+      return false;
     }
   }
+  else if (request && request.action === 'show-upgrade-notification')
+  {
+    showUpgradeNotification(request.html);
+    return false;
+  }
 }
-chrome.extension.onRequest.addListener(requestHandler);
+chrome.runtime.onMessage.addListener(requestHandler);
 
 
 // The rendering service provided to the content script.
 // See the comment in markdown-render.js for why we do this.
 function requestMarkdownConversion(html, callback) {
   // Send a request to the add-on script to actually do the rendering.
-  chrome.extension.sendRequest({action: 'render', html: html}, function(response) {
+  chrome.runtime.sendMessage({action: 'render', html: html}, function(response) {
     callback(response.html, response.css);
   });
 }
@@ -86,7 +91,7 @@ function requestMarkdownConversion(html, callback) {
 
 // At this time, only this function differs between Chrome and Firefox.
 function showToggleButton(show) {
-  chrome.extension.sendRequest({ action: 'show-toggle-button', show: show });
+  chrome.runtime.sendMessage({ action: 'show-toggle-button', show: show });
 }
 
 
@@ -141,7 +146,7 @@ var hotkeyGetOptionsHandler = function(prefs) {
   // If the background script isn't properly loaded, it can happen that the
   // `prefs` argument is undefined. Detect this and try again.
   if (typeof(prefs) === 'undefined') {
-    chrome.extension.sendRequest({action: 'get-options'}, hotkeyGetOptionsHandler);
+    chrome.runtime.sendMessage({action: 'get-options'}, hotkeyGetOptionsHandler);
     return;
   }
 
@@ -187,7 +192,7 @@ var hotkeyGetOptionsHandler = function(prefs) {
   }
   // else the hotkey is disabled and we'll leave hotkeyIntervalCheck as a no-op
 };
-chrome.extension.sendRequest({action: 'get-options'}, hotkeyGetOptionsHandler);
+chrome.runtime.sendMessage({action: 'get-options'}, hotkeyGetOptionsHandler);
 
 
 /*
@@ -205,3 +210,32 @@ function intervalCheck() {
   buttonIntervalCheck(focusedElem);
 }
 setInterval(intervalCheck, 2000);
+
+
+/*
+ * Upgrade notification
+ */
+
+function showUpgradeNotification(html) {
+  var elem = document.createElement('div');
+  document.body.appendChild(elem);
+  Utils.saferSetOuterHTML(elem, html);
+
+  // Setting the outer HTML wrecks our reference to the element, so get it again.
+  // Get the first ID that appears in the HTML
+  var id = html.match(/\bid="([^"]+)"/i)[1];
+  elem = document.querySelector('#'+id);
+
+  var removeUpgradeNotification = function() {
+    // We could use the transitionEnd event to remove the element we created,
+    // but... the event name is prefixed and seems a bit flaky.
+    var opacityTransitionTime = Number(html.match(/opacity (\d+)ms/i)[1]);
+    var removeChild = function() { document.body.removeChild(elem); };
+    setTimeout(removeChild, opacityTransitionTime * 1.1);
+
+    elem.style.opacity = 0;
+  };
+
+  // Remove the element after showing for a bit
+  setTimeout(removeUpgradeNotification, 8000);
+}

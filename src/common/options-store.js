@@ -278,7 +278,7 @@ var MozillaOptionsStore = {
   // When called from a background script, we're going to access the browser prefs
   // directly. Unfortunately, this means duplicating some code from the background
   // service.
-  _sendRequest: function(data, callback) { // analogue of chrome.extension.sendRequest
+  _sendRequest: function(data, callback) { // analogue of chrome.extension.sendMessage
     var prefs, prefKeys, prefsObj, request, sender, i;
 
     try {

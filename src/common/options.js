@@ -226,7 +226,7 @@ function checkChange() {
 function requestMarkdownConversion(html, callback) {
   if (typeof(chrome) !== 'undefined' && typeof(chrome.extension) !== 'undefined') {
     // Send a request to the add-on script to actually do the rendering.
-    chrome.extension.sendRequest({action: 'render', html: html}, function(response) {
+    chrome.extension.sendMessage({action: 'render', html: html}, function(response) {
       callback(response.html, response.css);
     });
   }
