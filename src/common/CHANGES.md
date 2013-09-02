@@ -5,7 +5,7 @@ Change Log
 ------------------
 
 * [Fixed bug](https://github.com/adam-p/markdown-here/issues/84): Math: single-character formula won't render.
-  * Thanks to the user who reported this [in a Google Groups post](https://groups.google.com/forum/#!msg/markdown-here/tolrITkqrx0/phElyPBBAhYJ).
+  * Thanks to kbeach who reported this [in a Google Groups post](https://groups.google.com/forum/#!msg/markdown-here/tolrITkqrx0/phElyPBBAhYJ).
   * Thanks again to Emanuele D'Osualdo ([bordaigorl](https://github.com/bordaigorl)) for providing the fix.
 
 * [Fixed bug](https://github.com/adam-p/markdown-here/issues/83): `[a](b)` links shouldn't expand inside of a code block.
