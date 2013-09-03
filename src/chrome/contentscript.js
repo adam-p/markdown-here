@@ -230,6 +230,8 @@ function showUpgradeNotification(html) {
   document.body.appendChild(elem);
   Utils.saferSetOuterHTML(elem, html);
 
+  // Note that `elem` is no longer valid after we call Utils.saferSetOuterHTML on it.
+
   // Add click handlers so that we can clear the notification.
   var optionsLink = document.querySelector('#markdown-here-upgrade-notification-link');
   optionsLink.addEventListener('click', function() {
@@ -245,7 +247,6 @@ function showUpgradeNotification(html) {
 }
 
 function clearUpgradeNotification(notifyBackgroundScript) {
-    // Setting the outer HTML wrecks our reference to the element, so get it again.
   var elem = document.querySelector('#markdown-here-upgrade-notification-content');
 
   if (!elem) {

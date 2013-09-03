@@ -323,7 +323,7 @@ var MozillaOptionsStore = {
       // means that this code is being called from a content script.
       // We need to send a request from this non-privileged context to the
       // privileged background script.
-      // See: https://developer.mozilla.org/en-US/docs/Code_snippets/Interaction_between_privileged_and_non-privileged_pages?redirectlocale=en-US&redirectslug=Code_snippets%3AInteraction_between_privileged_and_non-privileged_pages#Chromium-like_messaging.3A_json_request_with_json_callback
+      // See: https://developer.mozilla.org/en-US/docs/Code_snippets/Interaction_between_privileged_and_non-privileged_pages#Chromium-like_messaging.3A_json_request_with_json_callback
 
       request = document.createTextNode(JSON.stringify(data));
 

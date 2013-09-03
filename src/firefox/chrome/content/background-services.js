@@ -14,7 +14,7 @@
  * This provides services for supplying access to preferences and other
  * background-only functions.
  *
- * From: https://developer.mozilla.org/en-US/docs/Code_snippets/Interaction_between_privileged_and_non-privileged_pages
+ * From: https://developer.mozilla.org/en-US/docs/Code_snippets/Interaction_between_privileged_and_non-privileged_pages#Chromium-like_messaging.3A_json_request_with_json_callback
  *
  * Note that the stored prefs are returned raw (well, after being JSON parsed).
  * No additional processing is done, like filling in default values.
@@ -23,13 +23,17 @@
 
 (function() {
 
+  if (typeof(Utils) === 'undefined') {
+    Components.utils.import('resource://markdown_here_common/utils.js');
+  }
+
   /*
    * Set up the background request listeners
    */
 
   // analogue of chrome.extension.onRequest.addListener
   var createRequestListener = function(eventName, responseName, callback) {
-    // https://developer.mozilla.org/en-US/docs/Code_snippets/Interaction_between_privileged_and_non-privileged_pages?redirectlocale=en-US&redirectslug=Code_snippets%3AInteraction_between_privileged_and_non-privileged_pages#Chromium-like_messaging.3A_json_request_with_json_callback
+    // https://developer.mozilla.org/en-US/docs/Code_snippets/Interaction_between_privileged_and_non-privileged_pages#Chromium-like_messaging.3A_json_request_with_json_callback
 
     return document.addEventListener(eventName, function(event) {
       var node = event.target;
@@ -222,7 +226,80 @@
     }
   }
 
-  // From: https://developer.mozilla.org/en-US/docs/Code_snippets/Toolbar?redirectlocale=en-US&redirectslug=Code_snippets%3AToolbar#Adding_button_by_default
+  function showUpgradeNotification(prevVer) {
+    var windowMediator = Components.classes['@mozilla.org/appshell/window-mediator;1']
+                                   .getService(Components.interfaces.nsIWindowMediator);
+    var win = windowMediator.getMostRecentWindow('navigator:browser');
+    var tabbrowser = win.gBrowser;
+
+    // Get the content of notification element
+    var xhr = new XMLHttpRequest();
+    xhr.overrideMimeType('text/html');
+    xhr.open('GET', 'resource://markdown_here_common/upgrade-notification.html');
+    xhr.onreadystatechange = function() {
+      if (this.readyState === this.DONE) {
+        // Assume 200 OK -- it's just a local call
+        var html = this.responseText;
+
+        // Get the logo image data
+        var logoBase64 = null;
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'resource://markdown_here_common/images/icon16.png');
+        xhr.responseType = 'arraybuffer';
+
+        xhr.onload = function(e) {
+          if (this.readyState === this.DONE) {
+            // Assume 200 OK -- it's just a local call
+            var uInt8Array = new Uint8Array(this.response);
+            var i = uInt8Array.length;
+            var binaryString = new Array(i);
+            while (i--)
+            {
+              binaryString[i] = String.fromCharCode(uInt8Array[i]);
+            }
+            var data = binaryString.join('');
+
+            var logoBase64 = window.btoa(data);
+
+            // Do some rough template replacement
+            var optionsURL = 'resource://markdown_here_common/options.html';
+            if (prevVer) optionsURL += '?prevVer=' + prevVer;
+            html = html.replace('{{optionsURL}}', optionsURL)
+                       .replace('{{logoBase64}}', logoBase64);
+
+            if (!tabbrowser.contentDocument.querySelector('#markdown-here-upgrade-notification-content')) {
+              var elem = tabbrowser.contentDocument.createElement('div');
+              tabbrowser.contentDocument.body.appendChild(elem);
+              Utils.saferSetOuterHTML(elem, html);
+
+                // Setting the outer HTML wrecks our reference to the element, so get it again.
+              elem = tabbrowser.contentDocument.querySelector('#markdown-here-upgrade-notification-content');
+
+
+              // Add click handlers so that we can clear the notification.
+              var optionsLink = tabbrowser.contentDocument.querySelector('#markdown-here-upgrade-notification-link');
+              optionsLink.addEventListener('click', function(event) {
+                event.preventDefault();
+                openTab(optionsURL);
+                event.target.ownerDocument.body.removeChild(elem);
+              });
+
+              var closeLink = tabbrowser.contentDocument.querySelector('#markdown-here-upgrade-notification-close');
+              closeLink.addEventListener('click', function(event) {
+                event.preventDefault();
+                event.target.ownerDocument.body.removeChild(elem);
+              });
+            }
+          }
+        };
+
+        xhr.send();
+      }
+    };
+    xhr.send();
+  }
+
+  // From: https://developer.mozilla.org/en-US/docs/Code_snippets/Toolbar#Adding_button_by_default
   /**
    * Installs the toolbar button with the given ID into the given
    * toolbar, if it is not already present in the document.

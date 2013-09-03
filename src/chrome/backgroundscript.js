@@ -115,12 +115,13 @@ function showUpgradeNotification(prevVer) {
       // Get the logo image data
       var logoBase64 = null;
       var xhr = new XMLHttpRequest();
-      xhr.open('GET', '/common/images/icon16.png');
+      xhr.open('GET', chrome.extension.getURL('/common/images/icon16.png'));
 
       xhr.responseType = 'arraybuffer';
 
       xhr.onload = function(e) {
-        if (this.status == 200) {
+        if (this.readyState === this.DONE) {
+          // Assume 200 OK -- it's just a local call
           var uInt8Array = new Uint8Array(this.response);
           var i = uInt8Array.length;
           var binaryString = new Array(i);
@@ -139,7 +140,6 @@ function showUpgradeNotification(prevVer) {
                      .replace('{{logoBase64}}', logoBase64);
 
           var askTabsToShowNotification = function() {
-            // Get the front-most tabs
             chrome.tabs.query({windowType: 'normal'}, function(tabs) {
               for (var i = 0; i < tabs.length; i++) {
                 chrome.tabs.sendMessage(
