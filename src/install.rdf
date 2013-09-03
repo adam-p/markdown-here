@@ -64,13 +64,14 @@
                     var prompts = Components.classes["@mozilla.org/embedcomp/prompt-service;1"]
                                             .getService(Components.interfaces.nsIPromptService);
                     prompts.alert(null, 'Markdown Here', 'Sorry, the options page is not supported for Zotero.');
-                    return;
 
                     /* This code does open the options page in a separate window,
                        but the page can't communicate with the background services
                        to get and set the options, so it's effectively unsupported. */
+                    /*
                     var win = windowMediator.getMostRecentWindow('navigator:browser');
                     win.open(optionsUrl, "Markdown-Here-Options");
+                    */
                 }
                 else {
                     var win = windowMediator.getMostRecentWindow('navigator:browser');
