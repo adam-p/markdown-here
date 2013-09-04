@@ -1,5 +1,5 @@
 /*
- * Copyright Adam Pritchard 2012
+ * Copyright Adam Pritchard 2013
  * MIT License : http://adampritchard.mit-license.org/
  */
 
@@ -275,6 +275,130 @@ var markdown_here = {
       setToggleButtonVisibility(focusedElem);
     };
     setInterval(intervalCheck, 2000);
+  },
+
+  showUpgradeNotification: function(optionsURL) {
+    var windowMediator = Components.classes['@mozilla.org/appshell/window-mediator;1']
+                                   .getService(Components.interfaces.nsIWindowMediator);
+    var browserEnumerator = windowMediator.getEnumerator("navigator:browser");
+    var win = windowMediator.getMostRecentWindow('navigator:browser');
+    var tabbrowser = win.gBrowser;
+
+    // Get the content of notification element
+    var xhr = new XMLHttpRequest();
+    xhr.overrideMimeType('text/html');
+    xhr.open('GET', 'resource://markdown_here_common/upgrade-notification.html');
+    xhr.onreadystatechange = function() {
+      if (this.readyState === this.DONE) {
+        // Assume 200 OK -- it's just a local call
+        var html = this.responseText;
+
+        // Get the logo image data
+        var logoBase64 = null;
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'resource://markdown_here_common/images/icon16.png');
+        xhr.responseType = 'arraybuffer';
+
+        xhr.onload = function(e) {
+          if (this.readyState === this.DONE) {
+            // Assume 200 OK -- it's just a local call
+            var uInt8Array = new Uint8Array(this.response);
+            var i = uInt8Array.length;
+            var binaryString = new Array(i);
+            while (i--)
+            {
+              binaryString[i] = String.fromCharCode(uInt8Array[i]);
+            }
+            var data = binaryString.join('');
+
+            var logoBase64 = window.btoa(data);
+
+            // Do some rough template replacement
+            html = html.replace('{{optionsURL}}', optionsURL)
+                       .replace('{{logoBase64}}', logoBase64);
+
+            var addUpgradeNotificationToTab = function(tabbrowser) {
+              if (!tabbrowser.contentDocument.querySelector('#markdown-here-upgrade-notification-content')) {
+                var elem = tabbrowser.contentDocument.createElement('div');
+                tabbrowser.contentDocument.body.appendChild(elem);
+                Utils.saferSetOuterHTML(elem, html);
+
+                  // Setting the outer HTML wrecks our reference to the element, so get it again.
+                elem = tabbrowser.contentDocument.querySelector('#markdown-here-upgrade-notification-content');
+
+                // Add click handlers so that we can clear the notification.
+                var optionsLink = tabbrowser.contentDocument.querySelector('#markdown-here-upgrade-notification-link');
+                optionsLink.addEventListener('click', function(event) {
+                  event.preventDefault();
+                  openTab(optionsURL);
+                  markdown_here._hideUpgradeNotification();
+                });
+
+                var closeLink = tabbrowser.contentDocument.querySelector('#markdown-here-upgrade-notification-close');
+                closeLink.addEventListener('click', function(event) {
+                  event.preventDefault();
+                  markdown_here._hideUpgradeNotification();
+                });
+              }
+            };
+
+            markdown_here._forAllTabsDo(addUpgradeNotificationToTab);
+          }
+        };
+
+        xhr.send();
+      }
+    };
+    xhr.send();
+  },
+
+  _hideUpgradeNotification: function() {
+    function removeNotificationFromTab(tabbrowser) {
+      // Check if this tab has the notification and remove it.
+      var notification = tabbrowser.contentDocument.querySelector('#markdown-here-upgrade-notification-content');
+      if (notification) {
+        tabbrowser.contentDocument.body.removeChild(notification);
+      }
+    }
+
+    markdown_here._forAllTabsDo(removeNotificationFromTab);
+  },
+
+  // TODO: move to a Mozilla/Firefox-specifc utils module.
+  /*
+   * doFunction will be passed a tabbrowser (https://developer.mozilla.org/en-US/docs/XUL/tabbrowser)
+   * object for each open tab. tabbrowser.contentDocument can be used to access
+   * the page's document object.
+   */
+  _forAllTabsDo: function(doFunction) {
+    // Tab enumerating code from: https://developer.mozilla.org/en-US/docs/Code_snippets/Tabbed_browser#Reusing_tabs
+    var windowMediator = Components.classes['@mozilla.org/appshell/window-mediator;1']
+                                   .getService(Components.interfaces.nsIWindowMediator);
+
+    var isNormalTab = function(tabbrowser) {
+      // Someday we might want to make this smarter or optional (maybe the caller
+      // wants to enumerate `about:` and `resource:` tabs?), but for now we'll
+      // restrict it to normal web page tabs by looking for http:// and https://
+      return tabbrowser.currentURI.spec.match(/^https?:\/\//i);
+    };
+
+    // Iterate through all browser windows...
+    var browserEnumerator = windowMediator.getEnumerator("navigator:browser");
+    while (browserEnumerator.hasMoreElements()) {
+      var browserWin = browserEnumerator.getNext();
+      var tabbrowser = browserWin.gBrowser;
+
+      // ...and through all tabs in the windows
+      var numTabs = tabbrowser.browsers.length;
+      for (var index = 0; index < numTabs; index++) {
+        var currentBrowser = tabbrowser.getBrowserAtIndex(index);
+
+        if (isNormalTab(currentBrowser)) {
+          // Do the per-tab work
+          doFunction(currentBrowser);
+        }
+      }
+    }
   }
 };
 

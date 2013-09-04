@@ -198,14 +198,17 @@
         var postTabRestoredOptionsOpen = function() {
           document.removeEventListener('SSTabRestored', tabRestored);
 
-          var optionsUrl = 'resource://markdown_here_common/options.html';
+          var optionsURL = 'resource://markdown_here_common/options.html';
 
-          // If this is an upgrade, open the options page in changelist mode
           if (lastVersion) {
-            optionsUrl += '?prevVer=' + lastVersion;
+            // If this is an upgrade, show the upgrade notification
+            optionsURL += '?prevVer=' + lastVersion;
+            markdown_here.showUpgradeNotification(optionsURL);
           }
-
-          openTab(optionsUrl);
+          else {
+            // If this is a brand new install, show our options page
+            openTab(optionsURL);
+          }
         };
 
         clearTimeout(timeoutID);
@@ -224,79 +227,6 @@
       // The 'addon-bar' is available since Firefox 4
       //installButton('addon-bar', 'toolbarButton-markdown_here');
     }
-  }
-
-  function showUpgradeNotification(prevVer) {
-    var windowMediator = Components.classes['@mozilla.org/appshell/window-mediator;1']
-                                   .getService(Components.interfaces.nsIWindowMediator);
-    var win = windowMediator.getMostRecentWindow('navigator:browser');
-    var tabbrowser = win.gBrowser;
-
-    // Get the content of notification element
-    var xhr = new XMLHttpRequest();
-    xhr.overrideMimeType('text/html');
-    xhr.open('GET', 'resource://markdown_here_common/upgrade-notification.html');
-    xhr.onreadystatechange = function() {
-      if (this.readyState === this.DONE) {
-        // Assume 200 OK -- it's just a local call
-        var html = this.responseText;
-
-        // Get the logo image data
-        var logoBase64 = null;
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'resource://markdown_here_common/images/icon16.png');
-        xhr.responseType = 'arraybuffer';
-
-        xhr.onload = function(e) {
-          if (this.readyState === this.DONE) {
-            // Assume 200 OK -- it's just a local call
-            var uInt8Array = new Uint8Array(this.response);
-            var i = uInt8Array.length;
-            var binaryString = new Array(i);
-            while (i--)
-            {
-              binaryString[i] = String.fromCharCode(uInt8Array[i]);
-            }
-            var data = binaryString.join('');
-
-            var logoBase64 = window.btoa(data);
-
-            // Do some rough template replacement
-            var optionsURL = 'resource://markdown_here_common/options.html';
-            if (prevVer) optionsURL += '?prevVer=' + prevVer;
-            html = html.replace('{{optionsURL}}', optionsURL)
-                       .replace('{{logoBase64}}', logoBase64);
-
-            if (!tabbrowser.contentDocument.querySelector('#markdown-here-upgrade-notification-content')) {
-              var elem = tabbrowser.contentDocument.createElement('div');
-              tabbrowser.contentDocument.body.appendChild(elem);
-              Utils.saferSetOuterHTML(elem, html);
-
-                // Setting the outer HTML wrecks our reference to the element, so get it again.
-              elem = tabbrowser.contentDocument.querySelector('#markdown-here-upgrade-notification-content');
-
-
-              // Add click handlers so that we can clear the notification.
-              var optionsLink = tabbrowser.contentDocument.querySelector('#markdown-here-upgrade-notification-link');
-              optionsLink.addEventListener('click', function(event) {
-                event.preventDefault();
-                openTab(optionsURL);
-                event.target.ownerDocument.body.removeChild(elem);
-              });
-
-              var closeLink = tabbrowser.contentDocument.querySelector('#markdown-here-upgrade-notification-close');
-              closeLink.addEventListener('click', function(event) {
-                event.preventDefault();
-                event.target.ownerDocument.body.removeChild(elem);
-              });
-            }
-          }
-        };
-
-        xhr.send();
-      }
-    };
-    xhr.send();
   }
 
   // From: https://developer.mozilla.org/en-US/docs/Code_snippets/Toolbar#Adding_button_by_default
