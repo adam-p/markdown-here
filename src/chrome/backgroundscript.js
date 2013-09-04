@@ -17,11 +17,23 @@ window.addEventListener('load', function() {
     OptionsStore.get(function(options) {
       var appDetails = chrome.app.getDetails();
 
-      // Have we been updated?
-      if (options['last-version'] !== appDetails.version) {
-        showUpgradeNotification(options['last-version']);
+      var optionsURL = '/common/options.html';
 
-        // Update out last version
+      if (typeof(options['last-version']) === 'undefined') {
+        // This is the very first time the extensions has been run, so show the
+        // options page.
+        chrome.tabs.create({ url: chrome.extension.getURL(optionsURL) });
+
+        // Update our last version
+        OptionsStore.set({ 'last-version': appDetails.version });
+      }
+      else if (options['last-version'] !== appDetails.version) {
+        // The extension has been newly updated
+        optionsURL += '?prevVer=' + options['last-version'];
+
+        showUpgradeNotification(chrome.extension.getURL(optionsURL));
+
+        // Update our last version
         OptionsStore.set({ 'last-version': appDetails.version });
       }
     });
@@ -102,7 +114,7 @@ the background script until a content script acknowledges it. (Content scripts
 will acknowledge when the user clicks the notification.)
 */
 var showUpgradeNotificationInterval = null;
-function showUpgradeNotification(prevVer) {
+function showUpgradeNotification(optionsURL) {
   // Get the content of notification element
   var xhr = new XMLHttpRequest();
   xhr.overrideMimeType('text/html');
@@ -134,9 +146,7 @@ function showUpgradeNotification(prevVer) {
           var logoBase64 = window.btoa(data);
 
           // Do some rough template replacement
-          var optionsURL = '/common/options.html';
-          if (prevVer) optionsURL += '?prevVer=' + prevVer;
-          html = html.replace('{{optionsURL}}', chrome.extension.getURL(optionsURL))
+          html = html.replace('{{optionsURL}}', optionsURL)
                      .replace('{{logoBase64}}', logoBase64);
 
           var askTabsToShowNotification = function() {
