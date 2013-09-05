@@ -372,25 +372,28 @@ var markdown_here = {
 
   // TODO: move to a Mozilla/Firefox-specifc utils module.
   /*
-   * doFunction will be passed a tabbrowser (https://developer.mozilla.org/en-US/docs/XUL/tabbrowser)
-   * object for each open tab. tabbrowser.contentDocument can be used to access
-   * the page's document object.
+   * doFunction will be passed a [browser](https://developer.mozilla.org/en-US/docs/XUL/browser)
+   * (which is approximately analogous to a tab)
+   * and a [tabbrowser](https://developer.mozilla.org/en-US/docs/XUL/tabbrowser)
+   * (which is approximately analogous to the window containing the tab)
+   * for each open tab. browser.contentDocument can be used to access the page's
+   * document object.
    */
   _forAllTabsDo: function(doFunction) {
     // Tab enumerating code from: https://developer.mozilla.org/en-US/docs/Code_snippets/Tabbed_browser#Reusing_tabs
     var windowMediator = Components.classes['@mozilla.org/appshell/window-mediator;1']
                                    .getService(Components.interfaces.nsIWindowMediator);
 
-    var isNormalTab = function(tabbrowser) {
+    var isNormalTab = function(browser) {
       // Someday we might want to make this smarter or optional (maybe the caller
       // wants to enumerate `about:` and `resource:` tabs?), but for now we'll
       // restrict it to normal web page tabs by looking for http:// and https://
-      if (!tabbrowser.currentURI.spec.match(/^https?:\/\//i)) {
+      if (!browser.currentURI.spec.match(/^https?:\/\//i)) {
         return false;
       }
 
       // Tabs that haven't loaded properly seem to have a null body.
-      if (!tabbrowser.contentDocument || !tabbrowser.contentDocument.body) {
+      if (!browser.contentDocument || !browser.contentDocument.body) {
         return false;
       }
 
@@ -406,11 +409,11 @@ var markdown_here = {
       // ...and through all tabs in the windows
       var numTabs = tabbrowser.browsers.length;
       for (var index = 0; index < numTabs; index++) {
-        var currentBrowser = tabbrowser.getBrowserAtIndex(index);
+        var browser = tabbrowser.getBrowserAtIndex(index);
 
-        if (isNormalTab(currentBrowser)) {
+        if (isNormalTab(browser)) {
           // Do the per-tab work
-          doFunction(currentBrowser);
+          doFunction(browser, tabbrowser);
         }
       }
     }
