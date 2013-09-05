@@ -278,12 +278,6 @@ var markdown_here = {
   },
 
   showUpgradeNotification: function(optionsURL) {
-    var windowMediator = Components.classes['@mozilla.org/appshell/window-mediator;1']
-                                   .getService(Components.interfaces.nsIWindowMediator);
-    var browserEnumerator = windowMediator.getEnumerator("navigator:browser");
-    var win = windowMediator.getMostRecentWindow('navigator:browser');
-    var tabbrowser = win.gBrowser;
-
     // Get the content of notification element
     var xhr = new XMLHttpRequest();
     xhr.overrideMimeType('text/html');
@@ -342,7 +336,13 @@ var markdown_here = {
               }
             };
 
-            markdown_here._forAllTabsDo(addUpgradeNotificationToTab);
+            // We keep showing notifications on an interval until one gets dimissed.
+            // This is because there might not actually be any tabs when we first
+            // start.
+            var showUpgradeNotificationsAgain = function() {
+              markdown_here._forAllTabsDo(addUpgradeNotificationToTab);
+            };
+            markdown_here.showUpgradeNotificationInterval = setInterval(showUpgradeNotificationsAgain, 5000);
           }
         };
 
@@ -353,6 +353,12 @@ var markdown_here = {
   },
 
   _hideUpgradeNotification: function() {
+    if (typeof(markdown_here.showUpgradeNotificationInterval) !== 'undefined' &&
+        markdown_here.showUpgradeNotificationInterval !== null) {
+      clearInterval(markdown_here.showUpgradeNotificationInterval);
+      markdown_here.showUpgradeNotificationInterval = null;
+    }
+
     function removeNotificationFromTab(tabbrowser) {
       // Check if this tab has the notification and remove it.
       var notification = tabbrowser.contentDocument.querySelector('#markdown-here-upgrade-notification-content');
@@ -379,7 +385,16 @@ var markdown_here = {
       // Someday we might want to make this smarter or optional (maybe the caller
       // wants to enumerate `about:` and `resource:` tabs?), but for now we'll
       // restrict it to normal web page tabs by looking for http:// and https://
-      return tabbrowser.currentURI.spec.match(/^https?:\/\//i);
+      if (!tabbrowser.currentURI.spec.match(/^https?:\/\//i)) {
+        return false;
+      }
+
+      // Tabs that haven't loaded properly seem to have a null body.
+      if (!tabbrowser.contentDocument || !tabbrowser.contentDocument.body) {
+        return false;
+      }
+
+      return true;
     };
 
     // Iterate through all browser windows...

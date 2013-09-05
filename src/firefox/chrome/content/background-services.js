@@ -199,14 +199,25 @@
           document.removeEventListener('SSTabRestored', tabRestored);
 
           var optionsURL = 'resource://markdown_here_common/options.html';
-
           if (lastVersion) {
-            // If this is an upgrade, show the upgrade notification
+            // If this is an upgrade, show the changelist
             optionsURL += '?prevVer=' + lastVersion;
+          }
+
+          // This is our attempt at a capabilities check to see if we can show
+          // upgrade notifications rather than just open the options tab.
+          // Note that this check will probably give a false positive for Zotero.
+          var canShowUpgradeNotification = Components.classes['@mozilla.org/appshell/window-mediator;1']
+                                                     .getService(Components.interfaces.nsIWindowMediator)
+                                                     .getMostRecentWindow('navigator:browser');
+
+          if (lastVersion && canShowUpgradeNotification) {
+            // If this is an upgrade, show the upgrade notification
             markdown_here.showUpgradeNotification(optionsURL);
           }
           else {
-            // If this is a brand new install, show our options page
+            // If this is a brand new install or we can't handle upgrade notifications,
+            // show our options page.
             openTab(optionsURL);
           }
         };
