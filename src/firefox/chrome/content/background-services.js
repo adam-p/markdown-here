@@ -204,16 +204,14 @@
             optionsURL += '?prevVer=' + lastVersion;
           }
 
-          // This is our attempt at a capabilities check to see if we can show
-          // upgrade notifications rather than just open the options tab.
-          // Note that this check will probably give a false positive for Zotero.
-          var canShowUpgradeNotification = Components.classes['@mozilla.org/appshell/window-mediator;1']
-                                                     .getService(Components.interfaces.nsIWindowMediator)
-                                                     .getMostRecentWindow('navigator:browser');
+          // If `markdown_here` is available, then we're going to assume we can
+          // use it to show the notification. (I.e., it's presence is our
+          // capability check.)
+          var canShowUpgradeNotification = typeof(markdown_here) !== 'undefined';
 
           if (lastVersion && canShowUpgradeNotification) {
             // If this is an upgrade, show the upgrade notification
-            markdown_here.showUpgradeNotification(optionsURL);
+            markdown_here.showUpgradeNotification(optionsURL, openTab);
           }
           else {
             // If this is a brand new install or we can't handle upgrade notifications,

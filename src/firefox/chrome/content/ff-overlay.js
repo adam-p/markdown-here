@@ -277,7 +277,9 @@ var markdown_here = {
     setInterval(intervalCheck, 2000);
   },
 
-  showUpgradeNotification: function(optionsURL) {
+  _showUpgradeNotificationInterval: null,
+
+  showUpgradeNotification: function(optionsURL, openTabFn) {
     // Get the content of notification element
     var xhr = new XMLHttpRequest();
     xhr.overrideMimeType('text/html');
@@ -324,8 +326,8 @@ var markdown_here = {
                 var optionsLink = tabbrowser.contentDocument.querySelector('#markdown-here-upgrade-notification-link');
                 optionsLink.addEventListener('click', function(event) {
                   event.preventDefault();
-                  openTab(optionsURL);
                   markdown_here._hideUpgradeNotification();
+                  openTabFn(optionsURL);
                 });
 
                 var closeLink = tabbrowser.contentDocument.querySelector('#markdown-here-upgrade-notification-close');
@@ -342,7 +344,10 @@ var markdown_here = {
             var showUpgradeNotificationsAgain = function() {
               markdown_here._forAllTabsDo(addUpgradeNotificationToTab);
             };
-            markdown_here.showUpgradeNotificationInterval = setInterval(showUpgradeNotificationsAgain, 5000);
+
+            if (markdown_here._showUpgradeNotificationInterval === null) {
+              markdown_here._showUpgradeNotificationInterval = setInterval(showUpgradeNotificationsAgain, 5000);
+            }
           }
         };
 
@@ -353,10 +358,9 @@ var markdown_here = {
   },
 
   _hideUpgradeNotification: function() {
-    if (typeof(markdown_here.showUpgradeNotificationInterval) !== 'undefined' &&
-        markdown_here.showUpgradeNotificationInterval !== null) {
-      clearInterval(markdown_here.showUpgradeNotificationInterval);
-      markdown_here.showUpgradeNotificationInterval = null;
+    if (markdown_here._showUpgradeNotificationInterval !== null) {
+      clearInterval(markdown_here._showUpgradeNotificationInterval);
+      markdown_here._showUpgradeNotificationInterval = null;
     }
 
     function removeNotificationFromTab(tabbrowser) {
