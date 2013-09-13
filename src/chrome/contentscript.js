@@ -213,6 +213,7 @@ function intervalCheck() {
 
   hotkeyIntervalCheck(focusedElem);
   buttonIntervalCheck(focusedElem);
+  forgotToRenderIntervalCheck(focusedElem);
 }
 setInterval(intervalCheck, 2000);
 
@@ -258,4 +259,151 @@ function clearUpgradeNotification(notifyBackgroundScript) {
   if (notifyBackgroundScript) {
     chrome.runtime.sendMessage({action: 'upgrade-notification-shown'});
   }
+}
+
+
+/*
+ * Forgot-to-render check
+ */
+
+var WATCHED_PROPERTY = 'markdownHereForgotToRenderWatched';
+var MARKDOWN_DETECTED_PROPERTY = 'markdownHereForgotToRenderMarkdownDetected';
+
+// This function encapsulates the logic required to prevent accidental sending of
+// email that the user wrote in Markdown but forgot to render.
+function forgotToRenderIntervalCheck(focusedElem) {
+  /*
+  There are four(?) ways to send a Gmail email:
+   1. Click the Send button. (TODO: Is a touchscreen touch different?)
+   2. Put focus on the Send button (with Tab) and hit the Space key.
+   3. Put focus on the Send button (with Tab) and hit the Enter key.
+   4. With focus in the compose area or subject field,
+      press the Ctrl+Enter (Windows, Linux) or ⌘+Enter (OSX) hotkey.
+      * For now we're going to ignore the "or subject field" part.
+  */
+
+  // There is only logic for GMail (so far)
+  if (location.host.indexOf('mail.google.') < 0) {
+    return;
+  }
+
+  // If focus isn't in the compose body, there's nothing to do
+  if (!markdownHere.elementCanBeRendered(focusedElem)) {
+    return;
+  }
+
+  // If we've already set up watchers for this compose element, skip it.
+  if (!focusedElem.hasOwnProperty(WATCHED_PROPERTY)) {
+    setupForgotToRenderInterceptors(focusedElem);
+    focusedElem[WATCHED_PROPERTY] = true;
+  }
+
+  focusedElem[MARKDOWN_DETECTED_PROPERTY] = probablyWritingMarkdown(focusedElem);
+}
+
+function setupForgotToRenderInterceptors(composeElem) {
+  // This is clearly fragile and will inevitably bring us grief as Google
+  // changes the Gmail layout, button labels, etc. But I don't know a better
+  // way to do this.
+  var elem = composeElem;
+  var sendButton = null;
+  while (elem = elem.parentElement) {
+    sendButton = elem.querySelector('[role="button"][tabindex="1"]');
+    if (sendButton) {
+      break;
+    }
+  }
+
+  if (!sendButton) {
+    console.log('Markdown Here was unable to find the Gmail "Send" button. Please let the developers know by creating an issue at: https://github.com/adam-p/markdown-here/issues')
+    return;
+  }
+
+  // NOTE: We are setting the event listeners on the *parent* element of the
+  // send button and compose area. This is so that we can capture and prevent
+  // propagation to the actual element, thereby preventing Gmail's event
+  // listeners from firing.
+
+  var ENTER_KEYCODE = 13;
+  var SPACE_KEYCODE = 32;
+  var FORGOT_TO_RENDER_PROMPT = "It looks like you've written this email in Markdown and forgot to make it pretty. Send it anyway?";
+
+  var sendButtonKeydownListener = function(event) {
+    if (event.target === sendButton
+        && (event.keyCode === ENTER_KEYCODE || event.keyCode === SPACE_KEYCODE)
+        && composeElem.hasOwnProperty(MARKDOWN_DETECTED_PROPERTY)
+        && composeElem[MARKDOWN_DETECTED_PROPERTY]) {
+      if (!confirm(FORGOT_TO_RENDER_PROMPT)) {
+        event.stopPropagation();
+        return false;
+      }
+    }
+  };
+
+  var sendButtonClickListener = function(event) {
+    if (event.target === sendButton
+        && composeElem.hasOwnProperty(MARKDOWN_DETECTED_PROPERTY)
+        && composeElem[MARKDOWN_DETECTED_PROPERTY]) {
+      if (!confirm(FORGOT_TO_RENDER_PROMPT)) {
+        modalPrompt();
+        event.stopPropagation();
+        return false;
+      }
+    }
+  };
+
+  var sendHotkeyKeydownListener = function(event) {
+    // Windows and Linux use Ctrl+Enter and OSX uses ⌘+Enter, so we're going
+    // to check for either.
+    if (event.target === composeElem
+        && (event.metaKey || event.ctrlKey) && event.keyCode === ENTER_KEYCODE
+        && composeElem.hasOwnProperty(MARKDOWN_DETECTED_PROPERTY)
+        && composeElem[MARKDOWN_DETECTED_PROPERTY]) {
+      if (!confirm(FORGOT_TO_RENDER_PROMPT)) {
+        event.stopPropagation();
+        return false;
+      }
+    }
+  };
+
+  sendButton.parentElement.addEventListener('keydown', sendButtonKeydownListener, true);
+  sendButton.parentElement.addEventListener('click', sendButtonClickListener, true);
+  composeElem.parentElement.addEventListener('keydown', sendHotkeyKeydownListener, true);
+}
+
+// Returns true if the contents of `composeElem` looks like raw Markdown,
+// false otherwise.
+function probablyWritingMarkdown(composeElem) {
+  /*
+  This is going to be tricksy and fraught with danger. Challenges:
+    * If it's not sensitive enough, it's useless.
+    * If it's too sensitive, users will be super annoyed.
+    * Different people write different kinds of Markdown: coders use backticks,
+      mathies use dollar signs, normal people don't use either.
+    * Being real slow would be bad.
+
+  Ways I considered doing this, but discarded:
+    * Use Highlight.js's relevance score.
+    * Use the size of the array returned by Marked.js's lexer.
+    * Render the contents, replace `<p>` tags with newlines, do string distance.
+
+  But I think there are some simple heuristics that will probably be more
+  accurate and/or faster.
+  */
+
+  // When we actually render, we don't just use `htmlToText()`, but it's good
+  // enough for our purposes here.
+  var mdMaybe = htmlToText(composeElem.innerHTML);
+
+  var bulletList = mdMaybe.match(/^[*+-] /mg);
+  if (bulletList && bulletList.length > 1) {
+    return true;
+  }
+
+  // TODO: More checks.
+  // - backticks
+  // - Latex
+  // - bold, italic
+
+  return false;
 }
