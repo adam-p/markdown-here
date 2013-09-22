@@ -219,7 +219,7 @@ describe('Utils', function() {
     it('should properly fire a click event', function(done) {
       var elem = document.createElement('button');
       document.body.appendChild(elem);
-      elem.addEventListener('click', function() {
+      elem.addEventListener('click', function(event) {
         expect(event[Utils.MARKDOWN_HERE_EVENT]).to.be.true;
         document.body.removeChild(elem);
         done();
