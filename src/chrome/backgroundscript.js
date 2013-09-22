@@ -91,6 +91,10 @@ chrome.runtime.onMessage.addListener(function(request, sender, responseCallback)
     clearUpgradeNotification();
     return false;
   }
+  else if (request.action === 'get-forgot-to-render-prompt') {
+    CommonLogic.getForgotToRenderPrompt(responseCallback);
+    return true;
+  }
   else {
     console.log('unmatched request action');
     console.log(request.action);
@@ -125,7 +129,6 @@ function showUpgradeNotification(optionsURL) {
       var html = this.responseText;
 
       // Get the logo image data
-      var logoBase64 = null;
       var xhr = new XMLHttpRequest();
       xhr.open('GET', chrome.extension.getURL('/common/images/icon16.png'));
 

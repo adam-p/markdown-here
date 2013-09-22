@@ -290,7 +290,6 @@ var markdown_here = {
         var html = this.responseText;
 
         // Get the logo image data
-        var logoBase64 = null;
         var xhr = new XMLHttpRequest();
         xhr.open('GET', 'resource://markdown_here_common/images/icon16.png');
         xhr.responseType = 'arraybuffer';

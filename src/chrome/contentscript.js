@@ -333,22 +333,28 @@ function setupForgotToRenderInterceptors(composeElem) {
         && (event.keyCode === ENTER_KEYCODE || event.keyCode === SPACE_KEYCODE)
         && composeElem.hasOwnProperty(MARKDOWN_DETECTED_PROPERTY)
         && composeElem[MARKDOWN_DETECTED_PROPERTY]) {
-      if (!confirm(FORGOT_TO_RENDER_PROMPT)) {
-        event.stopPropagation();
-        return false;
-      }
+      event.stopPropagation();
+
+      chrome.runtime.sendMessage({action: 'get-forgot-to-render-prompt'}, function(html) {
+        showForgotToRenderPrompt(html, composeElem, sendButton);
+      });
+
+      return false;
     }
   };
 
   var sendButtonClickListener = function(event) {
     if (event.target === sendButton
+        && !event[Utils.MARKDOWN_HERE_EVENT]
         && composeElem.hasOwnProperty(MARKDOWN_DETECTED_PROPERTY)
         && composeElem[MARKDOWN_DETECTED_PROPERTY]) {
-      if (!confirm(FORGOT_TO_RENDER_PROMPT)) {
-        modalPrompt();
-        event.stopPropagation();
-        return false;
-      }
+      event.stopPropagation();
+
+      chrome.runtime.sendMessage({action: 'get-forgot-to-render-prompt'}, function(html) {
+        showForgotToRenderPrompt(html, composeElem, sendButton);
+      });
+
+      return false;
     }
   };
 
@@ -359,10 +365,13 @@ function setupForgotToRenderInterceptors(composeElem) {
         && (event.metaKey || event.ctrlKey) && event.keyCode === ENTER_KEYCODE
         && composeElem.hasOwnProperty(MARKDOWN_DETECTED_PROPERTY)
         && composeElem[MARKDOWN_DETECTED_PROPERTY]) {
-      if (!confirm(FORGOT_TO_RENDER_PROMPT)) {
-        event.stopPropagation();
-        return false;
-      }
+      event.stopPropagation();
+
+      chrome.runtime.sendMessage({action: 'get-forgot-to-render-prompt'}, function(html) {
+        showForgotToRenderPrompt(html, composeElem, sendButton);
+      });
+
+      return false;
     }
   };
 
@@ -380,7 +389,7 @@ function probablyWritingMarkdown(composeElem) {
     * If it's too sensitive, users will be super annoyed.
     * Different people write different kinds of Markdown: coders use backticks,
       mathies use dollar signs, normal people don't use either.
-    * Being real slow would be bad.
+    * Being slow would be bad.
 
   Ways I considered doing this, but discarded:
     * Use Highlight.js's relevance score.
@@ -394,16 +403,111 @@ function probablyWritingMarkdown(composeElem) {
   // When we actually render, we don't just use `htmlToText()`, but it's good
   // enough for our purposes here.
   var mdMaybe = htmlToText(composeElem.innerHTML);
+  // TODO: Exclude blockquotes.
 
-  var bulletList = mdMaybe.match(/^[*+-] /mg);
-  if (bulletList && bulletList.length > 1) {
-    return true;
+  // Ensure that we're not checking on enormous amounts of text.
+  if (mdMaybe.length > 10000) {
+    mdMaybe = mdMaybe.slice(0, 10000);
   }
 
-  // TODO: More checks.
-  // - backticks
-  // - Latex
-  // - bold, italic
+  // TODO: Export regexes from Marked.js instead of copying them.
 
-  return false;
+  // NOTE: It's going to be tempting to use a ton of fancy regexes, but remember
+  // that this check is getting run every few seconds, and we don't want to
+  // slow down the user's browser.
+
+  // At least two bullet points
+  var bulletList = mdMaybe.match(/^[*+-] /mg);
+  bulletList = (bulletList && bulletList.length > 1);
+
+  // Backticks == code. Does anyone use backticks for anything else?
+  var backticks = mdMaybe.match(/`/);
+
+  // Math
+  var math = mdMaybe.match(/\$([^ \t\n\$]([^\$]*[^ \t\n\$])?)\$/);
+
+  // This matches both emphasis and strong Markdown
+  var em_strong = mdMaybe.match(/\b_((?:__|[\s\S])+?)_\b|\*((?:\*\*|[\s\S])+?)\*(?!\*)/);
+
+  // Links
+  var links = mdMaybe.match(/\[.+\]/);
+
+  return (bulletList || backticks || math || em_strong || links);
+}
+
+
+function showForgotToRenderPrompt(html, composeElem, mailSendButton) {
+  if (document.querySelector('#markdown-here-forgot-to-render')) {
+    return;
+  }
+
+  var elem = document.createElement('div');
+  document.body.appendChild(elem);
+  Utils.saferSetOuterHTML(elem, html);
+
+  // Note that `elem` is no longer valid after we call Utils.saferSetOuterHTML on it.
+
+  // Set focus to our first button.
+  document.querySelector('#markdown-here-forgot-to-render-buttons button').focus();
+
+  // Also add an Escape key handler and other keyboard shortcut disabler.
+  // NOTE: If we don't properly remove this in every case that the prompt is
+  // dismissed, then we'll break the user's ability to type anything.
+  // For some reason this doesn't seem to prevent tabbing, or triggering buttons
+  // with space or enter, which is good. (But how can that be?)
+  var keyboardCapture = (function() {
+    var keyboardCaptureHandler = function(event) {
+      event.stopPropagation();
+      var ESCAPE_KEY = 27;
+      if (event.keyCode === ESCAPE_KEY) {
+        dismissPrompt(event.target.ownerDocument, true);
+      }
+      return false;
+    };
+
+    return {
+      add: function() {
+        return mailSendButton.ownerDocument.body.addEventListener('keydown', keyboardCaptureHandler, true);
+      },
+      remove: function() {
+        return mailSendButton.ownerDocument.body.removeEventListener('keydown', keyboardCaptureHandler, true);
+      }
+    };
+  })();
+
+  var dismissPrompt = function(doc, backToCompose) {
+    keyboardCapture.remove();
+    var forgotToRenderContent = doc.querySelector('#markdown-here-forgot-to-render');
+    if (forgotToRenderContent) {
+      doc.body.removeChild(forgotToRenderContent);
+    }
+
+    if (backToCompose) {
+      composeElem.focus();
+    }
+  };
+
+  keyboardCapture.add();
+
+  var closeLink = document.querySelector('#markdown-here-forgot-to-render-close');
+  closeLink.addEventListener('click', function(event) {
+    event.preventDefault();
+    dismissPrompt(event.target.ownerDocument, true);
+    return false;
+  });
+
+  var backButton = document.querySelector('#markdown-here-forgot-to-render-button-back');
+  backButton.addEventListener('click', function(event) {
+    event.preventDefault();
+    dismissPrompt(event.target.ownerDocument, true);
+    return false;
+  });
+
+  var sendButton = document.querySelector('#markdown-here-forgot-to-render-button-send');
+  sendButton.addEventListener('click', function(event) {
+    event.preventDefault();
+    dismissPrompt(event.target.ownerDocument, false);
+    Utils.fireMouseClick(mailSendButton);
+    return false;
+  });
 }

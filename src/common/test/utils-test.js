@@ -158,7 +158,75 @@ describe('Utils', function() {
 
       expect($('#test-container').html()).to.equal('<div id="rad" style="color:red">hi</div>');
     });
+  });
 
+  describe('getLocalFile', function() {
+    it('should return correct data', function(done) {
+      // We "know" our logo file starts with this string when base64'd
+      var KNOWN_PREFIX = '<!DOCTYPE html>';
+      var callback = function(data) {
+        expect(data.slice(0, KNOWN_PREFIX.length)).to.equal(KNOWN_PREFIX);
+        done();
+      };
+
+      Utils.getLocalFile('../options.html', 'text/html', callback);
+    });
+
+    it('should correctly handle absence of optional argument', function(done) {
+      // We "know" our options.html file starts with this string
+      var KNOWN_PREFIX = '<!DOCTYPE html>';
+      var callback = function(data) {
+        expect(data.slice(0, KNOWN_PREFIX.length)).to.equal(KNOWN_PREFIX);
+        done();
+      };
+
+      Utils.getLocalFile('../options.html', callback);
+    });
+  });
+
+  describe('getLocalFileAsBase64', function() {
+    it('should return data as Base64', function(done) {
+      // We "know" our logo file starts with this string when base64'd
+      var KNOWN_PREFIX = 'iVBORw0KGgo';
+      var callback = function(data) {
+        expect(data.slice(0, KNOWN_PREFIX.length)).to.equal(KNOWN_PREFIX);
+        done();
+      };
+
+      Utils.getLocalFileAsBase64('../images/icon16.png', callback);
+    });
+  });
+
+  describe('getLocalURL', function() {
+    it('should return a URL that can be used successfully', function(done) {
+      // We're going to cheat a little and use the URL in a request to make
+      // sure it works.
+      // It would be tough to test otherwise without replicating the internal
+      // logic of the function.
+
+      var KNOWN_PREFIX = '<!DOCTYPE html>';
+      var callback = function(data) {
+        expect(data.slice(0, KNOWN_PREFIX.length)).to.equal(KNOWN_PREFIX);
+        done();
+      };
+
+      var url = Utils.getLocalURL('/common/options.html');
+      Utils.getLocalFile(url, 'text/html', callback);
+    });
+  });
+
+  describe('fireMouseClick', function() {
+    it('should properly fire a click event', function(done) {
+      var elem = document.createElement('button');
+      document.body.appendChild(elem);
+      elem.addEventListener('click', function() {
+        expect(event[Utils.MARKDOWN_HERE_EVENT]).to.be.true;
+        document.body.removeChild(elem);
+        done();
+      });
+
+      Utils.fireMouseClick(elem);
+    });
   });
 
 });
