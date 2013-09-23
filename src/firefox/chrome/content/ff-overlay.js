@@ -4,8 +4,7 @@
  */
 
 "use strict";
-/*global Components:false, markdownHere:false, GetCurrentEditorType:false,
-  OptionsStore:false*/
+/*global Components:false, GetCurrentEditorType:false, OptionsStore:false*/
 /*jshint browser:true*/
 
 /*
@@ -13,10 +12,9 @@
  * rendering services.
  */
 
-Components.utils.import('resource://markdown_here_common/markdown-here.js');
-
-
 var markdown_here = {
+
+  imports: {},
 
   // Components.utils is somewhat more performant than mozIJSSubScriptLoader, so
   // we'll use it when possible. However, Components.utils usually requires
@@ -31,7 +29,7 @@ var markdown_here = {
   onMenuItemCommand: function(e) {
     var mdReturn, focusedElem, self = this;
 
-    focusedElem = markdownHere.findFocusedElem(window.document);
+    focusedElem = markdown_here.imports.markdownHere.findFocusedElem(window.document);
     if (!focusedElem) {
       // Shouldn't happen. But if it does, just silently abort.
       return;
@@ -47,19 +45,19 @@ var markdown_here = {
       }
 
       // The focus might not be in the compose box
-      if (!markdownHere.elementCanBeRendered(focusedElem)) {
+      if (!markdown_here.imports.markdownHere.elementCanBeRendered(focusedElem)) {
         this.alert('Please put the cursor into the compose box.');
         return;
       }
     }
     else { // Firefox
-      if (!markdownHere.elementCanBeRendered(focusedElem)) {
+      if (!markdown_here.imports.markdownHere.elementCanBeRendered(focusedElem)) {
         this.alert('The selected field is not valid for Markdown rendering. Please use a rich editor.');
         return;
       }
     }
 
-    mdReturn = markdownHere(
+    mdReturn = markdown_here.imports.markdownHere(
                 focusedElem.ownerDocument,
                 // We'll need the target document available later
                 function() {
@@ -128,7 +126,7 @@ var markdown_here = {
       showItem = true;
     }
     else { // Firefox
-      focusedElem = markdownHere.findFocusedElem(window.document);
+      focusedElem = markdown_here.imports.markdownHere.findFocusedElem(window.document);
 
       if (!focusedElem) {
         showItem = false;
@@ -142,7 +140,7 @@ var markdown_here = {
         showItem = true;
       }
       else {
-        showItem = markdownHere.elementCanBeRendered(focusedElem);
+        showItem = markdown_here.imports.markdownHere.elementCanBeRendered(focusedElem);
       }
     }
 
@@ -151,9 +149,7 @@ var markdown_here = {
   },
 
   log: function(msg) {
-    var consoleService = Components.classes['@mozilla.org/consoleservice;1']
-                                   .getService(Components.interfaces.nsIConsoleService);
-    consoleService.logStringMessage(msg);
+    Utils.consoleLog(msg);
   },
 
   alert: function(msg) {
@@ -165,18 +161,17 @@ var markdown_here = {
   // The rendering service provided to the content script.
   // See the comment in markdown-render.js for why we do this.
   markdownRender: function(targetDocument, html, callback) {
-    var markdownRender = {}, hljs = {}, marked = {}, htmlToText = {}, optionsStore = {};
+    var markdownRender = {}, hljs = {}, marked = {}, optionsStore = {};
 
     Components.utils.import('resource://markdown_here_common/markdown-render.js', markdownRender);
     Components.utils.import('resource://markdown_here_common/marked.js', marked);
-    Components.utils.import('resource://markdown_here_common/jsHtmlToText.js', htmlToText);
     this.scriptLoader.loadSubScript('resource://markdown_here_common/highlightjs/highlight.js', hljs);
 
     OptionsStore.get(function(prefs) {
       callback(
         markdownRender.markdownRender(
           prefs,
-          htmlToText.htmlToText,
+          markdown_here.imports.htmlToText,
           marked.marked,
           hljs.hljs,
           html,
@@ -247,7 +242,7 @@ var markdown_here = {
         // arguments.
         elem.ownerDocument.addEventListener('focus', focusChange, true);
 
-        renderable = markdownHere.elementCanBeRendered(elem);
+        renderable = markdown_here.imports.markdownHere.elementCanBeRendered(elem);
       }
 
       if (renderable !== lastRenderable) {
@@ -267,12 +262,17 @@ var markdown_here = {
     // because Mozilla's automatic extension review prefers when you pass the
     // former to `setInterval()`.
     var intervalCheck = function() {
-      var focusedElem = markdownHere.findFocusedElem(window.document);
+      var focusedElem = markdown_here.imports.markdownHere.findFocusedElem(window.document);
       if (!focusedElem) {
         return;
       }
 
       setToggleButtonVisibility(focusedElem);
+
+      markdown_here.imports.CommonLogic.forgotToRenderIntervalCheck(
+        focusedElem,
+        markdown_here.imports.markdownHere,
+        markdown_here.imports.htmlToText);
     };
     setInterval(intervalCheck, 2000);
   },
@@ -423,6 +423,13 @@ var markdown_here = {
   }
 };
 
+
+Components.utils.import('resource://markdown_here_common/markdown-here.js', markdown_here.imports);
+Components.utils.import('resource://markdown_here_common/common-logic.js', markdown_here.imports);
+Components.utils.import('resource://markdown_here_common/jsHtmlToText.js', markdown_here.imports);
+
+
 window.addEventListener('load', function () {
   markdown_here.onLoad();
 }, false);
+

@@ -25,7 +25,14 @@
 
   if (typeof(Utils) === 'undefined') {
     Components.utils.import('resource://markdown_here_common/utils.js');
+    Utils.global = window;
   }
+
+  if (typeof(CommonLogic) === 'undefined') {
+    Components.utils.import('resource://markdown_here_common/common-logic.js');
+    CommonLogic.global = window;
+  }
+
 
   /*
    * Set up the background request listeners
@@ -119,6 +126,65 @@
     'markdown_here-tabOpen-query',
     'markdown_here-tabOpen-response',
     tabOpenRequestHandler);
+
+
+
+
+
+  document.addEventListener(Utils.PRIVILEGED_REQUEST_EVENT_NAME, function(event) {
+    var node = event.target;
+    if (!node || node.nodeType != Node.TEXT_NODE) {
+      return;
+    }
+
+    var doc = node.ownerDocument;
+    var data = node.nodeValue ? JSON.parse(node.nodeValue) : null;
+    var responseEventName = data.responseEventName;
+
+    var responseCallback = function(response) {
+      responseCallback.prototype.gotCalled = true;
+
+      node.nodeValue = JSON.stringify(null);
+      if (response) {
+        node.nodeValue = JSON.stringify(response);
+      }
+
+      var event = doc.createEvent('HTMLEvents');
+      event.initEvent(responseEventName, true, false);
+      return node.dispatchEvent(event);
+    };
+
+    // NOTE: Request handlers *must* set this to true if they are going to call
+    // the response callback asynchronously.
+    var asyncResponseCallback = false;
+
+    if (data.action === 'get-forgot-to-render-prompt') {
+      CommonLogic.getForgotToRenderPrompt(function(html) {
+        responseCallback({html: html});
+      });
+      asyncResponseCallback = true;
+    }
+    else {
+      console.log('unmatched request action');
+      console.log(request.action);
+      throw 'unmatched request action: ' + request.action;
+      return false;
+    }
+
+    // If the specific request handler hasn't indicated that it'll respond
+    // asynchronously, and the responseCallback hasn't already been called,
+    // then we need to make sure it happens now.
+    if (!asyncResponseCallback && !responseCallback.prototype.gotCalled) {
+      responseCallback(undefined);
+    }
+  },
+  false, // useCapture
+  true); // wantsUntrusted -- needed for communication with content scripts
+
+
+
+
+
 
 
   /*

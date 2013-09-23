@@ -16,8 +16,14 @@
   "background": {"page": "chrome/background.html"},
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
-      "js": ["common/utils.js", "common/jsHtmlToText.js", "common/markdown-here.js", "chrome/contentscript.js"]
+      "matches": ["http://*/*", "https://*/*"],
+      "js": [
+        "common/utils.js",
+        "common/common-logic.js",
+        "common/jsHtmlToText.js",
+        "common/markdown-here.js",
+        "chrome/contentscript.js"
+        ]
     }
   ],
   "browser_action": {

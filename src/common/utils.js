@@ -5,6 +5,9 @@
 
 /*
  * Utilities and helpers that are needed in multiple places.
+ * If this module is being instantiated without a global `window` object being
+ * available (providing XMLHttpRequest, for example), then `Utils.global` must
+ * be set to an equivalent object by the caller.
  */
 
 ;(function() {
@@ -12,6 +15,17 @@
 "use strict";
 /*global module:false, chrome:false*/
 
+
+function consoleLog(logString) {
+  if (typeof(console) !== 'undefined') {
+    console.log(logString);
+  }
+  else {
+    var consoleService = Components.classes['@mozilla.org/consoleservice;1']
+                                   .getService(Components.interfaces.nsIConsoleService);
+    consoleService.logStringMessage(logString);
+  }
+}
 
 // Assigning a string directly to `element.innerHTML` is potentially dangerous:
 // e.g., the string can contain harmful script elements. (Additionally, Mozilla
@@ -163,7 +177,7 @@ function getLocalFile(url, mimetype, callback) {
     mimetype = null;
   }
 
-  var xhr = new XMLHttpRequest();
+  var xhr = new Utils.global.XMLHttpRequest();
   if (mimetype) {
     xhr.overrideMimeType(mimetype);
   }
@@ -190,10 +204,11 @@ function getLocalFile(url, mimetype, callback) {
 // data-url image element.
 // Throws exception on error. This should never happen.
 function getLocalFileAsBase64(url, callback) {
-  var xhr = new XMLHttpRequest();
+  var xhr = new Utils.global.XMLHttpRequest();
   xhr.open('GET', url);
   xhr.responseType = 'arraybuffer';
 
+  var _this = this;
   xhr.onload = function() {
     if (this.readyState === this.DONE) {
       // Assume 200 OK -- we only use this for local requests
@@ -206,7 +221,7 @@ function getLocalFileAsBase64(url, callback) {
       }
       var data = binaryString.join('');
 
-      var base64Data = window.btoa(data);
+      var base64Data = Utils.global.btoa(data);
 
       callback(base64Data);
     }
@@ -221,8 +236,10 @@ function getLocalFileAsBase64(url, callback) {
 }
 
 
+// Events fired by Markdown Here will have this property set to true.
 var MARKDOWN_HERE_EVENT = 'markdown-here-event';
 
+// Fire a mouse event on the given element. (Note: not super robust.)
 function fireMouseClick(elem) {
   var clickEvent = elem.ownerDocument.createEvent('MouseEvent');
   clickEvent.initMouseEvent(
@@ -248,6 +265,58 @@ function fireMouseClick(elem) {
 }
 
 
+var PRIVILEGED_REQUEST_EVENT_NAME = 'markdown-here-request-event';
+
+function makeRequestToPrivilegedScript(doc, requestObj, callback) {
+  if (typeof(chrome) !== 'undefined') {
+    chrome.runtime.sendMessage(requestObj, callback);
+  }
+  else {
+    // See: https://developer.mozilla.org/en-US/docs/Code_snippets/Interaction_between_privileged_and_non-privileged_pages#Chromium-like_messaging.3A_json_request_with_json_callback
+
+    // Make a unique event name to use. (Bad style to modify the input like this...)
+    requestObj.responseEventName = 'markdown-here-response-event-' + Math.floor(Math.random()*1000000);
+
+    var request = doc.createTextNode(JSON.stringify(requestObj));
+
+    var responseHandler = function(event) {
+      var response = null;
+
+      // There may be no response data.
+      if (request.nodeValue) {
+        response = JSON.parse(request.nodeValue);
+      }
+
+      request.parentNode.removeChild(request);
+
+      if (callback) {
+        callback(response);
+      }
+    };
+
+    request.addEventListener(requestObj.responseEventName, responseHandler, false);
+
+    doc.head.appendChild(request);
+
+    var event = doc.createEvent('HTMLEvents');
+    event.initEvent(PRIVILEGED_REQUEST_EVENT_NAME, true, false);
+    request.dispatchEvent(event);
+  }
+}
+
+
+// Gives focus to the element.
+// Setting focus into elements inside iframes is not simple.
+function setFocus(elem) {
+  if (elem.ownerDocument.defaultView.frameElement) {
+    // Elem is in an iframe
+    elem.ownerDocument.defaultView.focus();
+  }
+
+  elem.focus();
+}
+
+
 // Expose these functions
 var Utils = {};
 Utils.saferSetInnerHTML = saferSetInnerHTML;
@@ -258,6 +327,13 @@ Utils.getLocalFile = getLocalFile;
 Utils.getLocalFileAsBase64 = getLocalFileAsBase64;
 Utils.fireMouseClick = fireMouseClick;
 Utils.MARKDOWN_HERE_EVENT = MARKDOWN_HERE_EVENT;
+Utils.makeRequestToPrivilegedScript = makeRequestToPrivilegedScript;
+Utils.PRIVILEGED_REQUEST_EVENT_NAME = PRIVILEGED_REQUEST_EVENT_NAME;
+Utils.consoleLog = consoleLog;
+Utils.setFocus = setFocus;
+
+Utils.global = this;
+
 
 var EXPORTED_SYMBOLS = ['Utils'];
 
