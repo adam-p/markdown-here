@@ -23,13 +23,14 @@ var CommonLogic = {};
 if (typeof(Utils) === 'undefined' && typeof(Components) !== 'undefined') {
   Components.utils.import('resource://markdown_here_common/utils.js');
 
-  // C.u.import creates only one cached instance of a module, so we'll changing
-  // global for everywhere. This is okay, as long as global always provides
-  // XHR, setTimeout, etc.
-  // We're using a closure because CommonLogic.global might not get set until later.
-  Utils.global = function() {
-    return CommonLogic.global;
-  };
+  // C.u.import creates only one cached instance of a module, so Utils.global
+  // might already be set elsewhere.
+  if (!Utils.global) {
+    // We're using a closure because CommonLogic.global might not get set until later.
+    Utils.global = function() {
+      return CommonLogic.global;
+    };
+  }
 }
 
 
@@ -42,7 +43,7 @@ if (typeof(Utils) === 'undefined' && typeof(Components) !== 'undefined') {
 /*
  * Gets the forgot-to-render prompt. This must be called from a privileged script.
  */
-function getForgotToRenderPrompt(responseCallback) {
+function getForgotToRenderPromptContent(responseCallback) {
   // Get the content of notification element
   Utils.getLocalFile(
     Utils.getLocalURL('/common/forgot-to-render-prompt.html'),
@@ -69,7 +70,11 @@ var MARKDOWN_DETECTED_PROPERTY = 'markdownHereForgotToRenderMarkdownDetected';
 
 // This function encapsulates the logic required to prevent accidental sending
 // of email that the user wrote in Markdown but forgot to render.
-function forgotToRenderIntervalCheck(focusedElem, MarkdownHere, htmlToText) {
+function forgotToRenderIntervalCheck(focusedElem, MarkdownHere, htmlToText, prefs) {
+  if (!prefs['forgot-to-render-check-enabled']) {
+    return;
+  }
+
   /*
   There are four(?) ways to send a Gmail email:
    1. Click the Send button. (TODO: Is a touchscreen touch different?)
@@ -362,7 +367,7 @@ function showForgotToRenderPrompt(html, composeElem, mailSendButton) {
 
 
 // Expose these functions
-CommonLogic.getForgotToRenderPrompt = getForgotToRenderPrompt;
+CommonLogic.getForgotToRenderPromptContent = getForgotToRenderPromptContent;
 CommonLogic.forgotToRenderIntervalCheck = forgotToRenderIntervalCheck;
 
 CommonLogic.__defineSetter__('global', function(val) { CommonLogic._global = val; });

@@ -110,7 +110,8 @@ var ChromeOptionsStore = {
     'syntax-css': {'__defaultFromFile__': '/common/highlightjs/styles/github.css', '__mimeType__': 'text/css'},
     'math-enabled': false,
     'math-value': '<img src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}" alt="{mathcode}">',
-    'hotkey': { shiftKey: false, ctrlKey: true, altKey: true, key: 'M' }
+    'hotkey': { shiftKey: false, ctrlKey: true, altKey: true, key: 'M' },
+    'forgot-to-render-check-enabled': true
   },
 
   // Stored string pieces look like: {'key##0': 'the quick ', 'key##1': 'brown fox'}
@@ -269,7 +270,8 @@ var MozillaOptionsStore = {
     'math-enabled': false,
     'math-value': '<img src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}" alt="{mathcode}">',
     'hotkey': { shiftKey: false, ctrlKey: true, altKey: true, key: 'M' },
-    'local-first-run': true
+    'local-first-run': true,
+    'forgot-to-render-check-enabled': true
   },
 
   // This is called both from content and background scripts, and we need vastly
@@ -468,7 +470,8 @@ var SafariOptionsStore = {
     'syntax-css': {'__defaultFromFile__': (typeof(safari) !== 'undefined' ? safari.extension.baseURI : '')+'markdown-here/src/common/highlightjs/styles/github.css', '__mimeType__': 'text/css'},
     'math-enabled': false,
     'math-value': '<img src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}" alt="{mathcode}">',
-    'hotkey': { shiftKey: false, ctrlKey: true, altKey: true, key: 'M' }
+    'hotkey': { shiftKey: false, ctrlKey: true, altKey: true, key: 'M' },
+    'forgot-to-render-check-enabled': true
   }
 };
 

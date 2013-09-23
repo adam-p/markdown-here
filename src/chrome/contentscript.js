@@ -213,7 +213,10 @@ function intervalCheck() {
 
   hotkeyIntervalCheck(focusedElem);
   buttonIntervalCheck(focusedElem);
-  CommonLogic.forgotToRenderIntervalCheck(focusedElem, markdownHere, htmlToText);
+
+  chrome.runtime.sendMessage({action: 'get-options'}, function(prefs) {
+    CommonLogic.forgotToRenderIntervalCheck(focusedElem, markdownHere, htmlToText, prefs);
+  });
 }
 setInterval(intervalCheck, 2000);
 

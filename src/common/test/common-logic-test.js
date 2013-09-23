@@ -14,7 +14,7 @@ describe('CommonLogic', function() {
     expect(CommonLogic).to.exist;
   });
 
-  describe('getForgotToRenderPrompt', function() {
+  describe('getForgotToRenderPromptContent', function() {
     it('should get the forgot-to-render prompt', function(done) {
       var KNOWN_CONTENT = 'id="markdown-here-forgot-to-render"';
       var callback = function(data) {
@@ -22,7 +22,7 @@ describe('CommonLogic', function() {
         done();
       };
 
-      CommonLogic.getForgotToRenderPrompt(callback);
+      CommonLogic.getForgotToRenderPromptContent(callback);
     });
   });
 

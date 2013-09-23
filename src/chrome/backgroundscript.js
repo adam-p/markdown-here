@@ -92,7 +92,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, responseCallback)
     return false;
   }
   else if (request.action === 'get-forgot-to-render-prompt') {
-    CommonLogic.getForgotToRenderPrompt(function(html) {
+    CommonLogic.getForgotToRenderPromptContent(function(html) {
       responseCallback({html: html});
     });
     return true;

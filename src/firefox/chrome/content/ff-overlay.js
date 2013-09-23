@@ -269,10 +269,13 @@ var markdown_here = {
 
       setToggleButtonVisibility(focusedElem);
 
-      markdown_here.imports.CommonLogic.forgotToRenderIntervalCheck(
-        focusedElem,
-        markdown_here.imports.markdownHere,
-        markdown_here.imports.htmlToText);
+      OptionsStore.get(function(prefs) {
+        markdown_here.imports.CommonLogic.forgotToRenderIntervalCheck(
+          focusedElem,
+          markdown_here.imports.markdownHere,
+          markdown_here.imports.htmlToText,
+          prefs);
+      });
     };
     setInterval(intervalCheck, 2000);
   },

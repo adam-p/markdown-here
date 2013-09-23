@@ -159,7 +159,7 @@
     var asyncResponseCallback = false;
 
     if (data.action === 'get-forgot-to-render-prompt') {
-      CommonLogic.getForgotToRenderPrompt(function(html) {
+      CommonLogic.getForgotToRenderPromptContent(function(html) {
         responseCallback({html: html});
       });
       asyncResponseCallback = true;
@@ -248,6 +248,7 @@
       prefsServ.setBoolPref('services.sync.prefs.sync.extensions.markdown-here.math-enabled', true);
       prefsServ.setBoolPref('services.sync.prefs.sync.extensions.markdown-here.math-value', true);
       prefsServ.setBoolPref('services.sync.prefs.sync.extensions.markdown-here.hotkey', true);
+      prefsServ.setBoolPref('services.sync.prefs.sync.extensions.markdown-here.forgot-to-render-check-enabled', true);
 
       // Don't sync this one -- local only.
       prefsServ.setBoolPref('services.sync.prefs.sync.extensions.markdown-here.local-first-run', false);

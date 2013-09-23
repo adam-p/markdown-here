@@ -13,7 +13,7 @@
 
 var cssEdit, cssSyntaxEdit, cssSyntaxSelect, rawMarkdownIframe, savedMsg,
     mathEnable, mathEdit, hotkeyShift, hotkeyCtrl, hotkeyAlt, hotkeyKey,
-    loaded = false;
+    forgotToRenderCheckEnabled, loaded = false;
 
 function onLoad() {
   var xhr;
@@ -33,6 +33,7 @@ function onLoad() {
   hotkeyCtrl = document.getElementById('hotkey-ctrl');
   hotkeyAlt = document.getElementById('hotkey-alt');
   hotkeyKey = document.getElementById('hotkey-key');
+  forgotToRenderCheckEnabled = document.getElementById('forgot-to-render-check-enabled');
 
   //
   // Syntax highlighting styles and selection
@@ -76,6 +77,8 @@ function onLoad() {
     hotkeyKey.value = prefs.hotkey.key;
 
     hotkeyChangeHandler();
+
+    forgotToRenderCheckEnabled.checked = prefs['forgot-to-render-check-enabled'];
 
     // Start watching for changes to the styles.
     setInterval(checkChange, 100);
@@ -171,7 +174,8 @@ function checkChange() {
   var newOptions =
         cssEdit.value + cssSyntaxEdit.value +
         mathEnable.checked + mathEdit.value +
-        hotkeyShift.checked + hotkeyCtrl.checked + hotkeyAlt.checked + hotkeyKey.value;
+        hotkeyShift.checked + hotkeyCtrl.checked + hotkeyAlt.checked + hotkeyKey.value +
+        forgotToRenderCheckEnabled.checked;
 
   if (newOptions !== lastOptions) {
     // CSS has changed.
@@ -199,7 +203,8 @@ function checkChange() {
                       ctrlKey: hotkeyCtrl.checked,
                       altKey: hotkeyAlt.checked,
                       key: hotkeyKey.value
-                    }
+                    },
+          'forgot-to-render-check-enabled': forgotToRenderCheckEnabled.checked
         },
         function() {
           updateMarkdownRender();

@@ -586,14 +586,30 @@ MIT License : http://adampritchard.mit-license.org/
         </div>
       </div>
 
-    </div>
+    </div><!-- /.horiz-groupset -->
 
-  </div>
+  </div><!-- /#options-container -->
 
   <div id="changelist-container">
     <div id="changelist">
     </div>
   </div>
+
+  <div id="extra-options-container">
+    <div class="horiz-groupset">
+
+      <div class="control-group">
+        <div class="section-title">
+          Advanced and Miscellaneous
+        </div>
+        <div>
+          <input type="checkbox" id="forgot-to-render-check-enabled"/><label for="forgot-to-render-check-enabled"><b>Enable "forgot-to-render" check.</b></label>
+          When you send an email, this checks the content to see if it looks like you wrote it in Markdow, but forgot to render it (i.e., click "Markdown Toggle") before sending. This may need to be disabled if it interferes with your ability to send email.
+        </div>
+      </div>
+
+    </div><!-- /.horiz-groupset -->
+  </div><!-- /#extra-options-container -->
 
   <footer>
     <p>
@@ -615,6 +631,7 @@ MIT License : http://adampritchard.mit-license.org/
 <script src="highlightjs/highlight.js"></script>
 
 <script src="utils.js"></script>
+<script src="common-logic.js"></script>
 <script src="markdown-render.js"></script>
 <script src="markdown-here.js"></script>
 
