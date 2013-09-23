@@ -319,6 +319,17 @@ function setFocus(elem) {
 
 // Expose these functions
 var Utils = {};
+
+// For some reason the other two ways of creating properties don't work.
+Utils.__defineSetter__('global', function(val) { Utils._global = val; });
+Utils.__defineGetter__('global', function() {
+  if (typeof(Utils._global) === 'function') {
+    return Utils._global.call();
+  }
+  return Utils._global;
+});
+Utils.global = this;
+
 Utils.saferSetInnerHTML = saferSetInnerHTML;
 Utils.saferSetOuterHTML = saferSetOuterHTML;
 Utils.sanitizeDocumentFragment = sanitizeDocumentFragment;
@@ -331,8 +342,6 @@ Utils.makeRequestToPrivilegedScript = makeRequestToPrivilegedScript;
 Utils.PRIVILEGED_REQUEST_EVENT_NAME = PRIVILEGED_REQUEST_EVENT_NAME;
 Utils.consoleLog = consoleLog;
 Utils.setFocus = setFocus;
-
-Utils.global = this;
 
 
 var EXPORTED_SYMBOLS = ['Utils'];

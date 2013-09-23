@@ -17,10 +17,19 @@
 "use strict";
 /*global module:false, chrome:false, Utils:false*/
 
+var CommonLogic = {};
+
 
 if (typeof(Utils) === 'undefined' && typeof(Components) !== 'undefined') {
   Components.utils.import('resource://markdown_here_common/utils.js');
-  // Do we need to set Utils.global? It doesn't appear so, but why...?
+
+  // C.u.import creates only one cached instance of a module, so we'll changing
+  // global for everywhere. This is okay, as long as global always provides
+  // XHR, setTimeout, etc.
+  // We're using a closure because CommonLogic.global might not get set until later.
+  Utils.global = function() {
+    return CommonLogic.global;
+  };
 }
 
 
@@ -353,11 +362,18 @@ function showForgotToRenderPrompt(html, composeElem, mailSendButton) {
 
 
 // Expose these functions
-var CommonLogic = {};
 CommonLogic.getForgotToRenderPrompt = getForgotToRenderPrompt;
 CommonLogic.forgotToRenderIntervalCheck = forgotToRenderIntervalCheck;
 
+CommonLogic.__defineSetter__('global', function(val) { CommonLogic._global = val; });
+CommonLogic.__defineGetter__('global', function() {
+  if (typeof(CommonLogic._global) === 'function') {
+    return CommonLogic._global.call();
+  }
+  return CommonLogic._global;
+});
 CommonLogic.global = this;
+
 
 var EXPORTED_SYMBOLS = ['CommonLogic'];
 
