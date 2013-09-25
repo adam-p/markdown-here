@@ -97,6 +97,10 @@ chrome.runtime.onMessage.addListener(function(request, sender, responseCallback)
     });
     return true;
   }
+  else if (request.action === 'test-request') {
+    responseCallback('test-request-good');
+    return false;
+  }
   else {
     console.log('unmatched request action');
     console.log(request.action);

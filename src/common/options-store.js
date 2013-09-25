@@ -250,17 +250,17 @@ var MozillaOptionsStore = {
 
   get: function(callback) {
     var that = this;
-    this._sendRequest({action: 'get'}, function(prefsObj) {
+    this._sendRequest({verb: 'get'}, function(prefsObj) {
       that._fillDefaults(prefsObj, callback);
     });
   },
 
   set: function(obj, callback) {
-    this._sendRequest({action: 'set', obj: obj}, callback);
+    this._sendRequest({verb: 'set', obj: obj}, callback);
   },
 
   remove: function(arrayOfKeys, callback) {
-    this._sendRequest({action: 'clear', obj: arrayOfKeys}, callback);
+    this._sendRequest({verb: 'clear', obj: arrayOfKeys}, callback);
   },
 
   // The default values or URLs for our various options.
@@ -288,7 +288,7 @@ var MozillaOptionsStore = {
                         .getService(Components.interfaces.nsIPrefService)
                         .getBranch('extensions.markdown-here.');
 
-      if (data.action === 'get') {
+      if (data.verb === 'get') {
         prefKeys = prefs.getChildList('');
         prefsObj = {};
 
@@ -299,7 +299,7 @@ var MozillaOptionsStore = {
         callback(prefsObj);
         return;
       }
-      else if (data.action === 'set') {
+      else if (data.verb === 'set') {
         for (i in data.obj) {
           prefs.setCharPref(i, JSON.stringify(data.obj[i]));
         }
@@ -307,7 +307,7 @@ var MozillaOptionsStore = {
         if (callback) callback();
         return;
       }
-      else if (data.action === 'clear') {
+      else if (data.verb === 'clear') {
         if (typeof(data.obj) === 'string') {
           data.obj = [data.obj];
         }
@@ -325,32 +325,11 @@ var MozillaOptionsStore = {
       // means that this code is being called from a content script.
       // We need to send a request from this non-privileged context to the
       // privileged background script.
-      // See: https://developer.mozilla.org/en-US/docs/Code_snippets/Interaction_between_privileged_and_non-privileged_pages#Chromium-like_messaging.3A_json_request_with_json_callback
-
-      request = document.createTextNode(JSON.stringify(data));
-
-      var optionsResponseHandler = function(event) {
-        var response = null;
-
-        // There may be no response data.
-        if (request.nodeValue) {
-          response = JSON.parse(request.nodeValue);
-        }
-
-        request.parentNode.removeChild(request);
-
-        if (callback) {
-          callback(response);
-        }
-      };
-
-      request.addEventListener('markdown_here-options-response', optionsResponseHandler, false);
-
-      document.head.appendChild(request);
-
-      var event = document.createEvent('HTMLEvents');
-      event.initEvent('markdown_here-options-query', true, false);
-      request.dispatchEvent(event);
+      data.action = 'prefs-access';
+      Utils.makeRequestToPrivilegedScript(
+        document,
+        data,
+        callback);
     }
   }
 };

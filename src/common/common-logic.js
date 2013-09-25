@@ -65,6 +65,28 @@ function getForgotToRenderPromptContent(responseCallback) {
 // Begin content script code
 //
 
+/* Regarding Firefox and the spacebar.
+
+In Chrome, canceling the spacebar `keydown` event seems to successfully prevent
+the resulting `click` event on a button. This is what we'd like to have happen.
+
+In Firefox, canceling the spacebar `keydown` does *not* prevent the `click` event.
+This has two annoying effects for us:
+
+1. If the user hits `space` on the Gmail Send button and they don't release right
+away, our message box's focused button might get immediately `click`ed.
+
+2. If the user hits `space` to dismiss our message box, any button underneath
+(such as on Gmail's "Please specificy at least one recipient" box) might get
+clicked.
+*/
+
+// TODO: Can we use VK_* instead?
+var ENTER_KEYCODE = 13;
+var SPACE_KEYCODE = 32;
+var TAB_KEYCODE = 9;
+var ESCAPE_KEYCODE = 27;
+
 var WATCHED_PROPERTY = 'markdownHereForgotToRenderWatched';
 var MARKDOWN_DETECTED_PROPERTY = 'markdownHereForgotToRenderMarkdownDetected';
 
@@ -148,8 +170,6 @@ function setupForgotToRenderInterceptors(composeElem) {
   // propagation to the actual element, thereby preventing Gmail's event
   // listeners from firing.
 
-  var ENTER_KEYCODE = 13;
-  var SPACE_KEYCODE = 32;
   var FORGOT_TO_RENDER_PROMPT = "It looks like you've written this email in Markdown and forgot to make it pretty. Send it anyway?";
 
   var sendButtonKeydownListener = function(event) {
@@ -159,9 +179,9 @@ function setupForgotToRenderInterceptors(composeElem) {
 
       // This is surely overkill, but stopPropagation() isn't enough to prevent
       // Firefox from scolling down a page when space is hit.
+      event.preventDefault();
       event.stopImmediatePropagation();
       event.stopPropagation();
-      event.preventDefault();
 
       Utils.makeRequestToPrivilegedScript(
         composeElem.ownerDocument,
@@ -176,8 +196,9 @@ function setupForgotToRenderInterceptors(composeElem) {
     if (event.target === sendButton
         && !event[Utils.MARKDOWN_HERE_EVENT]
         && composeElem[MARKDOWN_DETECTED_PROPERTY]) {
-      event.stopPropagation();
       event.preventDefault();
+      event.stopImmediatePropagation();
+      event.stopPropagation();
 
       Utils.makeRequestToPrivilegedScript(
         composeElem.ownerDocument,
@@ -196,8 +217,9 @@ function setupForgotToRenderInterceptors(composeElem) {
     if (event.target === composeElem
         && (event.metaKey || event.ctrlKey) && event.keyCode === ENTER_KEYCODE
         && composeElem[MARKDOWN_DETECTED_PROPERTY]) {
-      event.stopPropagation();
       event.preventDefault();
+      event.stopImmediatePropagation();
+      event.stopPropagation();
 
       Utils.makeRequestToPrivilegedScript(
         composeElem.ownerDocument,
@@ -277,87 +299,140 @@ function probablyWritingMarkdown(composeElem, htmlToText) {
 
 
 function showForgotToRenderPrompt(html, composeElem, mailSendButton) {
+  var elem, keyboardCapture, dismissPrompt, closeLink, backButton, sendButton,
+    okayToKeyupTimeout, okayToKeyup;
+
   if (mailSendButton.ownerDocument.querySelector('#markdown-here-forgot-to-render')) {
     return;
   }
 
-  var elem = mailSendButton.ownerDocument.createElement('div');
+  elem = mailSendButton.ownerDocument.createElement('div');
   mailSendButton.ownerDocument.body.appendChild(elem);
   Utils.saferSetOuterHTML(elem, html);
 
   // Note that `elem` is no longer valid after we call Utils.saferSetOuterHTML on it.
 
-  var setupForgotToRenderPromptHandlers = function() {
-    // Set focus to our first button.
-    Utils.setFocus(mailSendButton.ownerDocument.querySelector('#markdown-here-forgot-to-render-buttons button'));
+  // Set focus to our first button.
+  Utils.setFocus(mailSendButton.ownerDocument.querySelector('#markdown-here-forgot-to-render-buttons button'));
 
-    // Also add an Escape key handler and other keyboard shortcut disabler.
-    // NOTE: If we don't properly remove this in every case that the prompt is
-    // dismissed, then we'll break the user's ability to type anything.
-    // For some reason this doesn't seem to prevent tabbing, or triggering buttons
-    // with space or enter, which is good. (But how can that be?)
-    var keyboardCapture = (function() {
-      var keyboardCaptureHandler = function(event) {
-        event.stopPropagation();
-        var ESCAPE_KEY = 27;
-        if (event.keyCode === ESCAPE_KEY) {
-          dismissPrompt(event.target.ownerDocument, true);
-        }
-        return false;
-      };
+  // We're going to prevent `keyup` firing for a short amount of time to help
+  // deal with late `keyup` events resulting from initial Gmail Send activation.
+  okayToKeyup = false;
+  okayToKeyupTimeout = function() {
+    okayToKeyup = true;
+  };
+  mailSendButton.ownerDocument.defaultView.setTimeout(okayToKeyupTimeout, 300);
 
-      return {
-        add: function() {
-          mailSendButton.ownerDocument.body.addEventListener('keydown', keyboardCaptureHandler, true);
-        },
-        remove: function() {
-          mailSendButton.ownerDocument.body.removeEventListener('keydown', keyboardCaptureHandler, true);
-        }
-      };
-    })();
+  // Also add an Escape key handler and other keyboard shortcut disabler.
+  // Without this, Gmail shortcuts will fire if our buttons don't have focus.
+  // NOTE: If we don't properly remove this in every case that the prompt is
+  // dismissed, then we'll break the user's ability to type anything.
+  keyboardCapture = (function() {
+    var keyboardCaptureHandler = function(event) {
+      event.stopImmediatePropagation();
+      event.stopPropagation();
+      event.preventDefault();
 
-    var dismissPrompt = function(doc, backToCompose) {
-      keyboardCapture.remove();
-      var forgotToRenderContent = doc.querySelector('#markdown-here-forgot-to-render');
-      if (forgotToRenderContent) {
-        doc.body.removeChild(forgotToRenderContent);
+      if (event.keyCode === ESCAPE_KEYCODE) {
+        // We don't check okayToKeyup here, since Escape couldn't have been been
+        // the key that launched the prompt.
+        dismissPrompt(event.target.ownerDocument, true);
       }
+      else if (event.keyCode === TAB_KEYCODE) {
+        if (!okayToKeyup) {
+          return;
+        }
 
-      if (backToCompose) {
-        Utils.setFocus(composeElem);
+        if (event.target.ownerDocument.activeElement === backButton) {
+          sendButton.focus();
+        }
+        else {
+          backButton.focus();
+        }
+      }
+      else if (event.keyCode === ENTER_KEYCODE || event.keyCode === SPACE_KEYCODE) {
+        if (!okayToKeyup) {
+          return;
+        }
+
+        if (event.ctrlKey || event.metaKey) {
+          // This is probably a late keyup resulting from the Gmail send hotkey
+          // (Ctrl+Enter/Cmd+Enter), so ignore it.
+          return;
+        }
+
+        if (event.target.ownerDocument.activeElement === backButton
+            || event.target.ownerDocument.activeElement === sendButton)
+        {
+          Utils.fireMouseClick(event.target.ownerDocument.activeElement);
+        }
       }
     };
 
-    keyboardCapture.add();
-
-    var closeLink = mailSendButton.ownerDocument.querySelector('#markdown-here-forgot-to-render-close');
-    closeLink.addEventListener('click', function(event) {
+    var eventEater = function(event) {
+      event.stopImmediatePropagation();
+      event.stopPropagation();
       event.preventDefault();
-      dismissPrompt(event.target.ownerDocument, true);
-      return false;
-    });
+    };
 
-    var backButton = mailSendButton.ownerDocument.querySelector('#markdown-here-forgot-to-render-button-back');
-    backButton.addEventListener('click', function(event) {
-      event.preventDefault();
-      dismissPrompt(event.target.ownerDocument, true);
-      return false;
-    });
+    return {
+      add: function() {
+        // We need to respond to the `keyup` event so that it doesn't fire after
+        // we dismiss our prompt (affecting some control in Gmail).
+        // We need to swallow `keydown` events so that they don't trigger
+        // keyboard shortcuts in Gmail.
+        mailSendButton.ownerDocument.body.addEventListener('keydown', eventEater, true);
+        mailSendButton.ownerDocument.body.addEventListener('keyup', keyboardCaptureHandler, true);
+      },
+      remove: function() {
+        mailSendButton.ownerDocument.body.removeEventListener('keydown', eventEater, true);
+        mailSendButton.ownerDocument.body.removeEventListener('keyup', keyboardCaptureHandler, true);
+      }
+    };
+  })();
 
-    var sendButton = mailSendButton.ownerDocument.querySelector('#markdown-here-forgot-to-render-button-send');
-    sendButton.addEventListener('click', function(event) {
-      event.preventDefault();
-      dismissPrompt(event.target.ownerDocument, false);
-      Utils.fireMouseClick(mailSendButton);
-      return false;
-    });
+  dismissPrompt = function(doc, backToCompose) {
+    keyboardCapture.remove();
+
+    var forgotToRenderContent = doc.querySelector('#markdown-here-forgot-to-render');
+    if (forgotToRenderContent) {
+      doc.body.removeChild(forgotToRenderContent);
+    }
+
+    if (backToCompose) {
+      Utils.setFocus(composeElem);
+    }
   };
 
-  // Setting up the event listeners after a timeout is a dirty hack to fix
-  // the bad Firefox behaviour of the prompt being dismissed if the space key
-  // was hit on the email compose send button -- the keydown event was carrying
-  // through to our "Back" button.
-  mailSendButton.ownerDocument.defaultView.setTimeout(setupForgotToRenderPromptHandlers, 100);
+  keyboardCapture.add();
+
+  closeLink = mailSendButton.ownerDocument.querySelector('#markdown-here-forgot-to-render-close');
+  closeLink.addEventListener('click', function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+
+    dismissPrompt(event.target.ownerDocument, true);
+  });
+
+  backButton = mailSendButton.ownerDocument.querySelector('#markdown-here-forgot-to-render-button-back');
+  backButton.addEventListener('click', function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+
+    dismissPrompt(event.target.ownerDocument, true);
+  });
+
+  sendButton = mailSendButton.ownerDocument.querySelector('#markdown-here-forgot-to-render-button-send');
+  sendButton.addEventListener('click', function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+
+    dismissPrompt(event.target.ownerDocument, false);
+    Utils.fireMouseClick(mailSendButton);
+  });
 }
 
 /*

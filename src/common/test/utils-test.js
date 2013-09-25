@@ -229,4 +229,45 @@ describe('Utils', function() {
     });
   });
 
+  describe('makeRequestToPrivilegedScript', function() {
+    it('should communicate with privileged script', function(done) {
+      Utils.makeRequestToPrivilegedScript(
+        document,
+        { action: 'test-request' },
+        function(response) {
+          expect(response).to.equal('test-request-good');
+          done();
+        });
+    });
+  });
+
+  describe('setFocus', function() {
+    it('should set focus into a contenteditable div', function() {
+      var $div = $('<div contenteditable="true">').appendTo('body');
+      expect(document.activeElement).to.not.equal($div.get(0));
+
+      Utils.setFocus($div.get(0));
+      expect(document.activeElement).to.equal($div.get(0));
+
+      $div.remove();
+    });
+
+    it('should set focus into an iframe with contenteditable body', function() {
+      var $iframe = $('<iframe>').appendTo('body');
+      $iframe.get(0).contentDocument.body.contentEditable = true;
+      expect(document.activeElement).to.not.equal($iframe.get(0));
+
+      Utils.setFocus($iframe.get(0).contentDocument.body);
+      expect(document.activeElement).to.equal($iframe.get(0));
+      expect($iframe.get(0).contentDocument.activeElement).to.equal($iframe.get(0).contentDocument.body);
+
+      $iframe.remove();
+    });
+  });
+
+  describe('setFocus', function() {
+    it('should not explode', function() {
+      Utils.consoleLog('setFocus did not explode');
+    });
+  });
 });

@@ -94,22 +94,11 @@ function onLoad() {
       navigator.userAgent.indexOf('Icedove') >= 0 ||
       navigator.userAgent.indexOf('Postbox') >= 0 ||
       navigator.userAgent.indexOf('Zotero') >= 0) {
-    $('#tests-link').click(function() {
-      var request = document.createTextNode(JSON.stringify($('#tests-link a').prop('href')));
-
-      var tabOpenResponseHandler = function(event) {
-        request.parentNode.removeChild(request);
-      };
-
-      request.addEventListener('markdown_here-tabOpen-response', tabOpenResponseHandler, false);
-
-      document.head.appendChild(request);
-
-      var event = document.createEvent('HTMLEvents');
-      event.initEvent('markdown_here-tabOpen-query', true, false);
-      request.dispatchEvent(event);
-
-      return false;
+    $('#tests-link').click(function(event) {
+      event.preventDefault();
+      Utils.makeRequestToPrivilegedScript(
+        document,
+        { action: 'open-tab', url: $('#tests-link a').prop('href') });
     });
   }
 

@@ -244,7 +244,7 @@ function fireMouseClick(elem) {
   var clickEvent = elem.ownerDocument.createEvent('MouseEvent');
   clickEvent.initMouseEvent(
     'click',
-    true,                           // bubbles
+    false,                          // bubbles: We want to target this element and do not want the event to bubble.
     true,                           // cancelable
     elem.ownerDocument.defaultView, // view,
     1,                              // detail,
@@ -296,7 +296,7 @@ function makeRequestToPrivilegedScript(doc, requestObj, callback) {
 
     request.addEventListener(requestObj.responseEventName, responseHandler, false);
 
-    doc.head.appendChild(request);
+    (doc.head || doc.body).appendChild(request);
 
     var event = doc.createEvent('HTMLEvents');
     event.initEvent(PRIVILEGED_REQUEST_EVENT_NAME, true, false);

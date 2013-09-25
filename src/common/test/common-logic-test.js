@@ -26,5 +26,4 @@ describe('CommonLogic', function() {
     });
   });
 
-
 });

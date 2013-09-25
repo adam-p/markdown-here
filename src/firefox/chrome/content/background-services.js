@@ -38,99 +38,6 @@
    * Set up the background request listeners
    */
 
-  // analogue of chrome.extension.onRequest.addListener
-  var createRequestListener = function(eventName, responseName, callback) {
-    // https://developer.mozilla.org/en-US/docs/Code_snippets/Interaction_between_privileged_and_non-privileged_pages#Chromium-like_messaging.3A_json_request_with_json_callback
-
-    return document.addEventListener(eventName, function(event) {
-      var node = event.target;
-      if (!node || node.nodeType != Node.TEXT_NODE) {
-        return;
-      }
-
-      var doc = node.ownerDocument;
-      var data = node.nodeValue ? JSON.parse(node.nodeValue) : null;
-
-      return callback(data, doc, function(response) {
-        node.nodeValue = JSON.stringify(null);
-        if (response) {
-          node.nodeValue = JSON.stringify(response);
-        }
-
-        var event = doc.createEvent('HTMLEvents');
-        event.initEvent(responseName, true, false);
-        return node.dispatchEvent(event);
-      });
-    }, false, true);
-  };
-
-  var optionsRequestHandler = function(request, sender, callback) {
-    var prefs, prefKeys, prefsObj, i;
-
-    prefs = Components.classes['@mozilla.org/preferences-service;1']
-                      .getService(Components.interfaces.nsIPrefService)
-                      .getBranch('extensions.markdown-here.');
-
-    if (request.action === 'get') {
-      prefKeys = prefs.getChildList('');
-      prefsObj = {};
-
-      for (i = 0; i < prefKeys.length; i++) {
-        try {
-          prefsObj[prefKeys[i]] = JSON.parse(prefs.getCharPref(prefKeys[i]));
-        }
-        catch(e) {
-          // Null values and empty strings will result in JSON exceptions
-          prefsObj[prefKeys[i]] = null;
-        }
-      }
-
-      return callback(prefsObj);
-    }
-    else if (request.action === 'set') {
-      for (var key in request.obj) {
-        prefs.setCharPref(key, JSON.stringify(request.obj[key]));
-      }
-
-      if (callback) return callback();
-      return;
-    }
-    else if (request.action === 'clear') {
-      if (typeof(request.obj) === 'string') {
-        request.obj = [request.obj];
-      }
-
-      for (i = 0; i < request.obj.length; i++) {
-        prefs.clearUserPref(request.obj[i]);
-      }
-
-      if (callback) return callback();
-      return;
-    }
-
-    return alert('Error: no matching options service action');
-  };
-
-  createRequestListener(
-    'markdown_here-options-query',
-    'markdown_here-options-response',
-    optionsRequestHandler);
-
-  var tabOpenRequestHandler = function(request, sender, callback) {
-    var url = request;
-    openTab(url);
-    callback();
-  };
-
-  createRequestListener(
-    'markdown_here-tabOpen-query',
-    'markdown_here-tabOpen-response',
-    tabOpenRequestHandler);
-
-
-
-
-
   document.addEventListener(Utils.PRIVILEGED_REQUEST_EVENT_NAME, function(event) {
     var node = event.target;
     if (!node || node.nodeType != Node.TEXT_NODE) {
@@ -138,8 +45,8 @@
     }
 
     var doc = node.ownerDocument;
-    var data = node.nodeValue ? JSON.parse(node.nodeValue) : null;
-    var responseEventName = data.responseEventName;
+    var request = node.nodeValue ? JSON.parse(node.nodeValue) : null;
+    var responseEventName = request.responseEventName;
 
     var responseCallback = function(response) {
       responseCallback.prototype.gotCalled = true;
@@ -158,15 +65,26 @@
     // the response callback asynchronously.
     var asyncResponseCallback = false;
 
-    if (data.action === 'get-forgot-to-render-prompt') {
+    if (request.action === 'open-tab') {
+      asyncResponseCallback = false;
+      openTab(request.url);
+    }
+    else if (request.action === 'prefs-access') {
+      asyncResponseCallback = false;
+      responseCallback(prefsAccessRequestHandler(request));
+    }
+    else if (request.action === 'get-forgot-to-render-prompt') {
+      asyncResponseCallback = true;
       CommonLogic.getForgotToRenderPromptContent(function(html) {
         responseCallback({html: html});
       });
-      asyncResponseCallback = true;
+    }
+    else if (request.action === 'test-request') {
+      asyncResponseCallback = false;
+      responseCallback('test-request-good');
     }
     else {
-      console.log('unmatched request action');
-      console.log(request.action);
+      Utils.consoleLog('Markdown Here background script request handler: unmatched request action: ' + request.action);
       throw 'unmatched request action: ' + request.action;
       return false;
     }
@@ -182,9 +100,51 @@
   true); // wantsUntrusted -- needed for communication with content scripts
 
 
+  // Access the actual Firefox/Thunderbird stored prefs.
+  function prefsAccessRequestHandler(request) {
+    var prefs, prefKeys, prefsObj, i;
 
+    prefs = Components.classes['@mozilla.org/preferences-service;1']
+                      .getService(Components.interfaces.nsIPrefService)
+                      .getBranch('extensions.markdown-here.');
 
+    if (request.verb === 'get') {
+      prefKeys = prefs.getChildList('');
+      prefsObj = {};
 
+      for (i = 0; i < prefKeys.length; i++) {
+        try {
+          prefsObj[prefKeys[i]] = JSON.parse(prefs.getCharPref(prefKeys[i]));
+        }
+        catch(e) {
+          // Null values and empty strings will result in JSON exceptions
+          prefsObj[prefKeys[i]] = null;
+        }
+      }
+
+      return prefsObj;
+    }
+    else if (request.verb === 'set') {
+      for (var key in request.obj) {
+        prefs.setCharPref(key, JSON.stringify(request.obj[key]));
+      }
+
+      return;
+    }
+    else if (request.verb === 'clear') {
+      if (typeof(request.obj) === 'string') {
+        request.obj = [request.obj];
+      }
+
+      for (i = 0; i < request.obj.length; i++) {
+        prefs.clearUserPref(request.obj[i]);
+      }
+
+      return;
+    }
+
+    return alert('Error: no matching prefs access verb');
+  }
 
 
   /*
