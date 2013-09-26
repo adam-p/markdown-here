@@ -55,14 +55,18 @@
   * Custom CSS?
   * Custom hotkey?
 
-* Detect unrendered MD when sending and warn. 
-  * Really not sure how to detect "when sending". Hooking into the send button will be very dependent on the platform and webmail brand. But even doing it just for Gmail and maybe Thunderbird would be good.
-  * https://twitter.com/geopet/status/294294916685778944
 
+## Better HTML-to-Text
 
-## Project stuff
+[Need to flesh out these notes.]
 
-* Create a nicer info site than just the README (not that the README is *bad*, but...). Probably using `gh_pages`.
+Thunderbird's nsIEditor::outputToString does a really great job with HTML-to-text. Too bad it's all C++. Links to the code anyway:
+
+- nsIEditor::outputToString: https://developer.mozilla.org/en-US/docs/XPCOM_Interface_Reference/NsIEditor
+- http://hg.mozilla.org/mozilla-central/file/153aebb30387/content/base/src/nsHTMLContentSerializer.cpp
+- http://hg.mozilla.org/mozilla-central/file/153aebb30387/content/base/src/nsXHTMLContentSerializer.cpp
+- http://hg.mozilla.org/mozilla-central/file/153aebb30387/editor/libeditor/text/nsPlaintextEditor.cpp#l1247
+- http://hg.mozilla.org/mozilla-central/file/153aebb30387/content/base/src/nsDocumentEncoder.cpp
 
 
 ## New renderers and render targets

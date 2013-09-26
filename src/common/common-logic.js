@@ -90,6 +90,9 @@ var ESCAPE_KEYCODE = 27;
 var WATCHED_PROPERTY = 'markdownHereForgotToRenderWatched';
 var MARKDOWN_DETECTED_PROPERTY = 'markdownHereForgotToRenderMarkdownDetected';
 
+var FORGOT_TO_RENDER_PROMPT_INFO = "It looks like you wrote this email in Markdown but forgot to make it pretty.";
+var FORGOT_TO_RENDER_PROMPT_QUESTION = "Send it anyway?";
+
 // This function encapsulates the logic required to prevent accidental sending
 // of email that the user wrote in Markdown but forgot to render.
 function forgotToRenderIntervalCheck(focusedElem, MarkdownHere, htmlToText, prefs) {
@@ -169,8 +172,6 @@ function setupForgotToRenderInterceptors(composeElem) {
   // send button and compose area. This is so that we can capture and prevent
   // propagation to the actual element, thereby preventing Gmail's event
   // listeners from firing.
-
-  var FORGOT_TO_RENDER_PROMPT = "It looks like you've written this email in Markdown and forgot to make it pretty. Send it anyway?";
 
   var sendButtonKeydownListener = function(event) {
     if (event.target === sendButton
@@ -444,6 +445,9 @@ function showForgotToRenderPrompt(html, composeElem, mailSendButton) {
 // Expose these functions
 CommonLogic.getForgotToRenderPromptContent = getForgotToRenderPromptContent;
 CommonLogic.forgotToRenderIntervalCheck = forgotToRenderIntervalCheck;
+CommonLogic.probablyWritingMarkdown = probablyWritingMarkdown;
+CommonLogic.FORGOT_TO_RENDER_PROMPT_INFO = FORGOT_TO_RENDER_PROMPT_INFO;
+CommonLogic.FORGOT_TO_RENDER_PROMPT_QUESTION = FORGOT_TO_RENDER_PROMPT_QUESTION;
 
 CommonLogic.__defineSetter__('global', function(val) { CommonLogic._global = val; });
 CommonLogic.__defineGetter__('global', function() {

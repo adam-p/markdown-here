@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<!DOCTYPE overlay SYSTEM "chrome://markdown_here/locale/overlay.dtd">
+
+<dialog
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+  id="mdhDialogId"
+  title="&markdown_hereTitle;"
+  ondialogaccept="return onOK();"
+  onload="onLoad();"
+  persist=""
+  windowtype="mdhDialogWindowType">
+
+  <stringbundleset id="stringbundleset">
+    <stringbundle id="markdown_here-strings" src="chrome://markdown_here/locale/overlay.properties"/>
+  </stringbundleset>
+
+  <script type="application/javascript" src="chrome://markdown_here/content/confirm-prompt.js"/>
+
+  <vbox>
+    <hbox>
+      <image src="resource://markdown_here_common/images/icon32.png" height="32" width="32"/>
+      <vbox>
+        <label id="promptInfo" value=""/>
+        <label id="promptQuestion" value=""/>
+      </vbox>
+    </hbox>
+    <hbox>
+      <spacer flex="1"/>
+      <button dlgtype="accept" label="Send"/>
+      <button dlgtype="cancel" label="Back"/>
+    </hbox>
+  </vbox>
+
+</dialog>

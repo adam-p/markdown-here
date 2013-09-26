@@ -4,7 +4,7 @@
  */
 
 "use strict";
-/*global Components:false, GetCurrentEditorType:false, OptionsStore:false*/
+/*global Components:false, OptionsStore:false */
 /*jshint browser:true*/
 
 /*
@@ -36,10 +36,11 @@ var markdown_here = {
     }
 
     // Are we running in Thunderbird?
-    if (typeof(GetCurrentEditorType) !== 'undefined' && GetCurrentEditorType !== null) {
+    if (typeof(window.GetCurrentEditorType) !== 'undefined' &&
+        window.GetCurrentEditorType !== null) {
       // Are we rich-editing?
       /*jshint newcap:false*/
-      if (GetCurrentEditorType().indexOf('html') < 0) {
+      if (window.GetCurrentEditorType().indexOf('html') < 0) {
         this.alert('You are using a plain-text compose editor. You must change to a rich editor to use Markdown Here.');
         return;
       }
@@ -112,6 +113,57 @@ var markdown_here = {
         window.addEventListener('keydown', hotkeyHandler, false);
       }
     });
+
+    /*
+     * Set up Thunderbird's forgot-to-render hooks
+     */
+    // Are we running in Thunderbird?
+    if (typeof(window.GetCurrentEditorType) !== 'undefined' &&
+        window.GetCurrentEditorType !== null) {
+      // Are we rich-editing?
+      /*jshint newcap:false*/
+      if (window.GetCurrentEditorType().indexOf('html') < 0) {
+        return;
+      }
+
+      var sendEventHandler = function(event) {
+        var msgcomposeWindow = document.getElementById('msgcomposeWindow');
+
+        // This handler will also get hit when drafts get saved, and other times.
+        // For all values, see: http://hg.mozilla.org/comm-central/file/c588ff89c281/mailnews/compose/public/nsIMsgCompose.idl#l36
+        // Allow type coercion in the comparison
+        var deliverMode = Number(msgcomposeWindow.getAttribute('msgtype'));
+        if (deliverMode !== Components.interfaces.nsIMsgCompDeliverMode.Now &&
+            deliverMode !== Components.interfaces.nsIMsgCompDeliverMode.Later &&
+            deliverMode !== Components.interfaces.nsIMsgCompDeliverMode.Background) {
+          return;
+        }
+
+        if (!markdown_here.imports.CommonLogic.probablyWritingMarkdown(
+              window.GetCurrentEditor().document.body,
+              markdown_here.imports.htmlToText)) {
+          return;
+        }
+
+        var promptParams = {
+          inn:{
+            promptInfo: markdown_here.imports.CommonLogic.FORGOT_TO_RENDER_PROMPT_INFO,
+            promptQuestion: markdown_here.imports.CommonLogic.FORGOT_TO_RENDER_PROMPT_QUESTION},
+          out:null
+        };
+        window.openDialog(
+          "chrome://markdown_here/content/confirm-prompt.xul",
+          "",
+          "chrome, dialog, modal, centerscreen",
+          promptParams).focus();
+
+        if (!promptParams.out) {
+          // User wants to go back and render.
+          event.preventDefault();
+        }
+      };
+      window.addEventListener('compose-send-message', sendEventHandler, true);
+    }
   },
 
   contextMenuShowing: function(event) {
@@ -119,7 +171,8 @@ var markdown_here = {
     var focusedElem, showItem = false;
 
     // Are we running in Thunderbird?
-    if (typeof(GetCurrentEditorType) !== 'undefined' && GetCurrentEditorType !== null) {
+    if (typeof(window.GetCurrentEditorType) !== 'undefined' &&
+        window.GetCurrentEditorType !== null) {
       // Always show the menu item.
       // If the editor isn't in rich mode, the user will get a helpful error
       // message telling them to change modes.
@@ -149,7 +202,7 @@ var markdown_here = {
   },
 
   log: function(msg) {
-    Utils.consoleLog(msg);
+    markdown_here.imports.Utils.consoleLog(msg);
   },
 
   alert: function(msg) {
@@ -319,7 +372,7 @@ var markdown_here = {
               if (!tabbrowser.contentDocument.querySelector('#markdown-here-upgrade-notification-content')) {
                 var elem = tabbrowser.contentDocument.createElement('div');
                 tabbrowser.contentDocument.body.appendChild(elem);
-                Utils.saferSetOuterHTML(elem, html);
+                markdown_here.imports.Utils.saferSetOuterHTML(elem, html);
 
                   // Setting the outer HTML wrecks our reference to the element, so get it again.
                 elem = tabbrowser.contentDocument.querySelector('#markdown-here-upgrade-notification-content');
@@ -428,6 +481,7 @@ var markdown_here = {
 
 
 Components.utils.import('resource://markdown_here_common/markdown-here.js', markdown_here.imports);
+Components.utils.import('resource://markdown_here_common/utils.js', markdown_here.imports);
 Components.utils.import('resource://markdown_here_common/common-logic.js', markdown_here.imports);
 Components.utils.import('resource://markdown_here_common/jsHtmlToText.js', markdown_here.imports);
 
