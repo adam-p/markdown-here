@@ -394,7 +394,7 @@ function renderMarkdown(focusedElem, selectedRange, markdownRenderer) {
     // Store the original Markdown-in-HTML to a data attribute on the wrapper
     // element. We'll use this later if we need to unrender back to Markdown.
     wrapper = replaceRange(selectedRange, mdHtml);
-    wrapper.setAttribute('data-md-original', extractedHtml);
+    wrapper.setAttribute('data-md-original', encodeURIComponent(extractedHtml));
 
     // Some webmail (Gmail) strips off any external style block. So we need to go
     // through our styles, explicitly applying them to matching elements.
@@ -404,7 +404,7 @@ function renderMarkdown(focusedElem, selectedRange, markdownRenderer) {
 
 // Revert the rendered Markdown wrapperElem back to its original form.
 function unrenderMarkdown(wrapperElem) {
-  var originalMdHtml = wrapperElem.getAttribute('data-md-original');
+  var originalMdHtml = decodeURIComponent(wrapperElem.getAttribute('data-md-original'));
   Utils.saferSetOuterHTML(wrapperElem, originalMdHtml);
 }
 
