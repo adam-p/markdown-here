@@ -5,7 +5,7 @@
 
 "use strict";
 /*global chrome:false, markdownHere:false, CommonLogic:false, htmlToText:false,
-    Utils:false*/
+    Utils:false, marked:false*/
 /*jshint devel:true, browser:true*/
 
 
@@ -216,7 +216,12 @@ function intervalCheck() {
   buttonIntervalCheck(focusedElem);
 
   chrome.runtime.sendMessage({action: 'get-options'}, function(prefs) {
-    CommonLogic.forgotToRenderIntervalCheck(focusedElem, markdownHere, htmlToText, prefs);
+    CommonLogic.forgotToRenderIntervalCheck(
+      focusedElem,
+      markdownHere,
+      htmlToText,
+      marked,
+      prefs);
   });
 }
 setInterval(intervalCheck, 2000);

@@ -21,6 +21,7 @@
         "common/utils.js",
         "common/common-logic.js",
         "common/jsHtmlToText.js",
+        "common/marked.js",
         "common/markdown-here.js",
         "chrome/contentscript.js"
         ]

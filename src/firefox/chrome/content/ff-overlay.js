@@ -76,6 +76,14 @@ var markdown_here = {
     markdown_here.onMenuItemCommand(e);
   },
 
+  // NOTE: Thunderbird seems to reuse compose windows, so this will only get
+  // called for every addtion new open message. Like, if a message is opened
+  // and send and another message is opened, this will only get called once.
+  // If a message is opened and another message is opened at the same time, this
+  // will get called twice.
+  // This means that changes to the options that are used here (for turning off
+  // the forgot-to-render check, say) will not reliably take effect without an
+  // application restart.
   onLoad: function() {
     var contextMenu, optionsStore = {};
 
@@ -112,58 +120,60 @@ var markdown_here = {
       if (prefs.hotkey.key.length === 1) {
         window.addEventListener('keydown', hotkeyHandler, false);
       }
-    });
 
-    /*
-     * Set up Thunderbird's forgot-to-render hooks
-     */
-    // Are we running in Thunderbird?
-    if (typeof(window.GetCurrentEditorType) !== 'undefined' &&
-        window.GetCurrentEditorType !== null) {
-      // Are we rich-editing?
-      /*jshint newcap:false*/
-      if (window.GetCurrentEditorType().indexOf('html') < 0) {
-        return;
-      }
-
-      var sendEventHandler = function(event) {
-        var msgcomposeWindow = document.getElementById('msgcomposeWindow');
-
-        // This handler will also get hit when drafts get saved, and other times.
-        // For all values, see: http://hg.mozilla.org/comm-central/file/c588ff89c281/mailnews/compose/public/nsIMsgCompose.idl#l36
-        // Allow type coercion in the comparison
-        var deliverMode = Number(msgcomposeWindow.getAttribute('msgtype'));
-        if (deliverMode !== Components.interfaces.nsIMsgCompDeliverMode.Now &&
-            deliverMode !== Components.interfaces.nsIMsgCompDeliverMode.Later &&
-            deliverMode !== Components.interfaces.nsIMsgCompDeliverMode.Background) {
+      /*
+       * Set up Thunderbird's forgot-to-render hooks
+       */
+      // Are we running in Thunderbird?
+      if (prefs['forgot-to-render-check-enabled'] &&
+          typeof(window.GetCurrentEditorType) !== 'undefined' &&
+          window.GetCurrentEditorType !== null) {
+        // Are we rich-editing?
+        /*jshint newcap:false*/
+        if (window.GetCurrentEditorType().indexOf('html') < 0) {
           return;
         }
 
-        if (!markdown_here.imports.CommonLogic.probablyWritingMarkdown(
-              window.GetCurrentEditor().document.body,
-              markdown_here.imports.htmlToText)) {
-          return;
-        }
+        var sendEventHandler = function(event) {
+          var msgcomposeWindow = document.getElementById('msgcomposeWindow');
 
-        var promptParams = {
-          inn:{
-            promptInfo: markdown_here.imports.CommonLogic.FORGOT_TO_RENDER_PROMPT_INFO,
-            promptQuestion: markdown_here.imports.CommonLogic.FORGOT_TO_RENDER_PROMPT_QUESTION},
-          out:null
+          // This handler will also get hit when drafts get saved, and other times.
+          // For all values, see: http://hg.mozilla.org/comm-central/file/c588ff89c281/mailnews/compose/public/nsIMsgCompose.idl#l36
+          // Allow type coercion in the comparison
+          var deliverMode = Number(msgcomposeWindow.getAttribute('msgtype'));
+          if (deliverMode !== Components.interfaces.nsIMsgCompDeliverMode.Now &&
+              deliverMode !== Components.interfaces.nsIMsgCompDeliverMode.Later &&
+              deliverMode !== Components.interfaces.nsIMsgCompDeliverMode.Background) {
+            return;
+          }
+
+          if (!markdown_here.imports.CommonLogic.probablyWritingMarkdown(
+                window.GetCurrentEditor().document.body,
+                markdown_here.imports.htmlToText,
+                markdown_here.imports.marked)) {
+            return;
+          }
+
+          var promptParams = {
+            inn:{
+              promptInfo: markdown_here.imports.CommonLogic.FORGOT_TO_RENDER_PROMPT_INFO,
+              promptQuestion: markdown_here.imports.CommonLogic.FORGOT_TO_RENDER_PROMPT_QUESTION},
+            out:null
+          };
+          window.openDialog(
+            "chrome://markdown_here/content/confirm-prompt.xul",
+            "",
+            "chrome, dialog, modal, centerscreen",
+            promptParams).focus();
+
+          if (!promptParams.out) {
+            // User wants to go back and render.
+            event.preventDefault();
+          }
         };
-        window.openDialog(
-          "chrome://markdown_here/content/confirm-prompt.xul",
-          "",
-          "chrome, dialog, modal, centerscreen",
-          promptParams).focus();
-
-        if (!promptParams.out) {
-          // User wants to go back and render.
-          event.preventDefault();
-        }
-      };
-      window.addEventListener('compose-send-message', sendEventHandler, true);
-    }
+        window.addEventListener('compose-send-message', sendEventHandler, true);
+      }
+    });
   },
 
   contextMenuShowing: function(event) {
@@ -214,18 +224,16 @@ var markdown_here = {
   // The rendering service provided to the content script.
   // See the comment in markdown-render.js for why we do this.
   markdownRender: function(targetDocument, html, callback) {
-    var markdownRender = {}, hljs = {}, marked = {}, optionsStore = {};
+    var hljs = {}, optionsStore = {};
 
-    Components.utils.import('resource://markdown_here_common/markdown-render.js', markdownRender);
-    Components.utils.import('resource://markdown_here_common/marked.js', marked);
     this.scriptLoader.loadSubScript('resource://markdown_here_common/highlightjs/highlight.js', hljs);
 
     OptionsStore.get(function(prefs) {
       callback(
-        markdownRender.markdownRender(
+        markdown_here.imports.markdownRender(
           prefs,
           markdown_here.imports.htmlToText,
-          marked.marked,
+          markdown_here.imports.marked,
           hljs.hljs,
           html,
           targetDocument,
@@ -327,6 +335,7 @@ var markdown_here = {
           focusedElem,
           markdown_here.imports.markdownHere,
           markdown_here.imports.htmlToText,
+          markdown_here.imports.marked,
           prefs);
       });
     };
@@ -484,6 +493,8 @@ Components.utils.import('resource://markdown_here_common/markdown-here.js', mark
 Components.utils.import('resource://markdown_here_common/utils.js', markdown_here.imports);
 Components.utils.import('resource://markdown_here_common/common-logic.js', markdown_here.imports);
 Components.utils.import('resource://markdown_here_common/jsHtmlToText.js', markdown_here.imports);
+Components.utils.import('resource://markdown_here_common/marked.js', markdown_here.imports);
+Components.utils.import('resource://markdown_here_common/markdown-render.js', markdown_here.imports);
 
 
 window.addEventListener('load', function () {

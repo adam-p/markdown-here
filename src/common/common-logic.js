@@ -95,7 +95,7 @@ var FORGOT_TO_RENDER_PROMPT_QUESTION = "Send it anyway?";
 
 // This function encapsulates the logic required to prevent accidental sending
 // of email that the user wrote in Markdown but forgot to render.
-function forgotToRenderIntervalCheck(focusedElem, MarkdownHere, htmlToText, prefs) {
+function forgotToRenderIntervalCheck(focusedElem, MarkdownHere, htmlToText, marked, prefs) {
   if (!prefs['forgot-to-render-check-enabled']) {
     return;
   }
@@ -126,7 +126,7 @@ function forgotToRenderIntervalCheck(focusedElem, MarkdownHere, htmlToText, pref
     focusedElem[WATCHED_PROPERTY] = true;
   }
 
-  focusedElem[MARKDOWN_DETECTED_PROPERTY] = probablyWritingMarkdown(focusedElem, htmlToText);
+  focusedElem[MARKDOWN_DETECTED_PROPERTY] = probablyWritingMarkdown(focusedElem, htmlToText, marked);
 }
 
 
@@ -226,7 +226,7 @@ function setupForgotToRenderInterceptors(composeElem) {
 
 // Returns true if the contents of `composeElem` looks like raw Markdown,
 // false otherwise.
-function probablyWritingMarkdown(composeElem, htmlToText) {
+function probablyWritingMarkdown(composeElem, htmlToText, marked) {
   /*
   This is going to be tricksy and fraught with danger. Challenges:
     * If it's not sensitive enough, it's useless.
@@ -237,7 +237,7 @@ function probablyWritingMarkdown(composeElem, htmlToText) {
 
   Ways I considered doing this, but discarded:
     * Use Highlight.js's relevance score.
-    * Use the size of the array returned by Marked.js's lexer.
+    * Use the size of the array returned by Marked.js's lexer/parser.
     * Render the contents, replace `<p>` tags with newlines, do string distance.
 
   But I think there are some simple heuristics that will probably be more
@@ -259,19 +259,56 @@ function probablyWritingMarkdown(composeElem, htmlToText) {
   // NOTE: It's going to be tempting to use a ton of fancy regexes, but remember
   // that this check is getting run every few seconds, and we don't want to
   // slow down the user's browser.
+  // To that end, we're going to stop checking when we find a match.
+
+  function logMatch(type, match) {
+    var log =
+      'Markdown Here detected unrendered ' + type +
+      (typeof(match.index) !== 'undefined' ?
+        (': "' + mdMaybe.slice(match.index, match.index+10) + '"') :
+        '');
+
+    if (log !== probablyWritingMarkdown.lastLog) {
+      Utils.consoleLog(log);
+      probablyWritingMarkdown.lastLog = log;
+    }
+  }
 
   // At least two bullet points
   var bulletList = mdMaybe.match(/^[*+-] /mg);
-  bulletList = (bulletList && bulletList.length > 1);
+  if (bulletList && bulletList.length > 1) {
+    logMatch('bullet list', bulletList);
+    return true;
+  }
 
   // Backticks == code. Does anyone use backticks for anything else?
   var backticks = mdMaybe.match(/`/);
+  if (backticks) {
+    logMatch('code', backticks);
+    return true;
+  }
 
   // Math
-  var math = mdMaybe.match(/\$([^ \t\n\$]([^\$]*[^ \t\n\$])?)\$/);
+  var math = mdMaybe.match(marked.InlineLexer.rules.math);
+  if (math) {
+    logMatch('math', math);
+    return true;
+  }
 
   // This matches both emphasis and strong Markdown
-  var em_strong = mdMaybe.match(/\b_((?:__|[\s\S])+?)_\b|\*((?:\*\*|[\s\S])+?)\*(?!\*)/);
+  var em_strong = mdMaybe.match(marked.InlineLexer.rules.em);
+  if (em_strong) {
+    logMatch('emphasis', em_strong);
+    return true;
+  }
+
+  // Headers. (But not H1, since that seems more likely to false-positive, and
+  // less likely to be used. And underlines of at least length 5.)
+  var header = mdMaybe.match(/(^#{2,6}[^#])|(^[-=]{5,})/m);
+  if (header) {
+    logMatch('header', header);
+    return true;
+  }
 
   // Links
   // I'm worried about incorrectly catching square brackets in rendered code
@@ -279,9 +316,13 @@ function probablyWritingMarkdown(composeElem, htmlToText) {
   // immune to the problem, but a little better). This means we won't match
   // reference links (where the text in the square brackes is used elsewhere for
   // for the link).
-  var links = mdMaybe.match(/\]\(|\]\[/);
+  var link = mdMaybe.match(/\]\(|\]\[/);
+  if (link) {
+    logMatch('link', link);
+    return true;
+  }
 
-  return (bulletList || backticks || math || em_strong || links);
+  return false;
 }
 
 
