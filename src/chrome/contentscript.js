@@ -4,7 +4,8 @@
  */
 
 "use strict";
-/*global chrome:false, markdownHere:false*/
+/*global chrome:false, markdownHere:false, CommonLogic:false, htmlToText:false,
+    Utils:false*/
 /*jshint devel:true, browser:true*/
 
 

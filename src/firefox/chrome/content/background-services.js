@@ -3,10 +3,6 @@
  * MIT License : http://adampritchard.mit-license.org/
  */
 
- "use strict";
- /*global Components:false, AddonManager:false*/
- /*jshint devel:true*/
-
 /*
  * This file is loaded as a background script in the main window -- even in
  * Thunderbird, where the other background script is only loaded for compose
@@ -22,15 +18,20 @@
 
 
 (function() {
+  "use strict";
+  /*global Components:false, AddonManager:false, markdown_here:false*/
+  /*jshint devel:true*/
+
+  var imports = {};
 
   if (typeof(Utils) === 'undefined') {
-    Components.utils.import('resource://markdown_here_common/utils.js');
-    Utils.global = window;
+    Components.utils.import('resource://markdown_here_common/utils.js', imports);
+    imports.Utils.global = window;
   }
 
   if (typeof(CommonLogic) === 'undefined') {
-    Components.utils.import('resource://markdown_here_common/common-logic.js');
-    CommonLogic.global = window;
+    Components.utils.import('resource://markdown_here_common/common-logic.js', imports);
+    imports.CommonLogic.global = window;
   }
 
 
@@ -38,7 +39,7 @@
    * Set up the background request listeners
    */
 
-  document.addEventListener(Utils.PRIVILEGED_REQUEST_EVENT_NAME, function(event) {
+  document.addEventListener(imports.Utils.PRIVILEGED_REQUEST_EVENT_NAME, function(event) {
     var node = event.target;
     if (!node || node.nodeType != Node.TEXT_NODE) {
       return;
@@ -75,7 +76,7 @@
     }
     else if (request.action === 'get-forgot-to-render-prompt') {
       asyncResponseCallback = true;
-      CommonLogic.getForgotToRenderPromptContent(function(html) {
+      imports.CommonLogic.getForgotToRenderPromptContent(function(html) {
         responseCallback({html: html});
       });
     }
@@ -84,9 +85,8 @@
       responseCallback('test-request-good');
     }
     else {
-      Utils.consoleLog('Markdown Here background script request handler: unmatched request action: ' + request.action);
+      imports.Utils.consoleLog('Markdown Here background script request handler: unmatched request action: ' + request.action);
       throw 'unmatched request action: ' + request.action;
-      return false;
     }
 
     // If the specific request handler hasn't indicated that it'll respond

@@ -5,7 +5,7 @@
 
 "use strict";
 /*global chrome:false, OptionsStore:false, markdownRender:false,
-  htmlToText:false, marked:false, hljs:false*/
+  htmlToText:false, marked:false, hljs:false, CommonLogic:false */
 /*jshint devel:true*/
 
 /*
@@ -105,7 +105,6 @@ chrome.runtime.onMessage.addListener(function(request, sender, responseCallback)
     console.log('unmatched request action');
     console.log(request.action);
     throw 'unmatched request action: ' + request.action;
-    return false;
   }
 });
 

@@ -164,7 +164,7 @@ function setupForgotToRenderInterceptors(composeElem) {
   var sendButton = findClosestSendButton(composeElem);
 
   if (!sendButton) {
-    Utils.consoleLog('Markdown Here was unable to find the Gmail "Send" button. Please let the developers know by creating an issue at: https://github.com/adam-p/markdown-here/issues')
+    Utils.consoleLog('Markdown Here was unable to find the Gmail "Send" button. Please let the developers know by creating an issue at: https://github.com/adam-p/markdown-here/issues');
     return;
   }
 
@@ -174,9 +174,9 @@ function setupForgotToRenderInterceptors(composeElem) {
   // listeners from firing.
 
   var sendButtonKeydownListener = function(event) {
-    if (event.target === sendButton
-        && (event.keyCode === ENTER_KEYCODE || event.keyCode === SPACE_KEYCODE)
-        && composeElem[MARKDOWN_DETECTED_PROPERTY]) {
+    if (event.target === sendButton &&
+        (event.keyCode === ENTER_KEYCODE || event.keyCode === SPACE_KEYCODE) &&
+        composeElem[MARKDOWN_DETECTED_PROPERTY]) {
 
       // This is surely overkill, but stopPropagation() isn't enough to prevent
       // Firefox from scolling down a page when space is hit.
@@ -194,9 +194,9 @@ function setupForgotToRenderInterceptors(composeElem) {
   };
 
   var sendButtonClickListener = function(event) {
-    if (event.target === sendButton
-        && !event[Utils.MARKDOWN_HERE_EVENT]
-        && composeElem[MARKDOWN_DETECTED_PROPERTY]) {
+    if (event.target === sendButton &&
+        !event[Utils.MARKDOWN_HERE_EVENT] &&
+        composeElem[MARKDOWN_DETECTED_PROPERTY]) {
       event.preventDefault();
       event.stopImmediatePropagation();
       event.stopPropagation();
@@ -215,9 +215,9 @@ function setupForgotToRenderInterceptors(composeElem) {
   var sendHotkeyKeydownListener = function(event) {
     // Windows and Linux use Ctrl+Enter and OSX uses ⌘+Enter, so we're going
     // to check for either.
-    if (event.target === composeElem
-        && (event.metaKey || event.ctrlKey) && event.keyCode === ENTER_KEYCODE
-        && composeElem[MARKDOWN_DETECTED_PROPERTY]) {
+    if (event.target === composeElem &&
+        (event.metaKey || event.ctrlKey) && event.keyCode === ENTER_KEYCODE &&
+        composeElem[MARKDOWN_DETECTED_PROPERTY]) {
       event.preventDefault();
       event.stopImmediatePropagation();
       event.stopPropagation();
@@ -362,8 +362,8 @@ function showForgotToRenderPrompt(html, composeElem, mailSendButton) {
           return;
         }
 
-        if (event.target.ownerDocument.activeElement === backButton
-            || event.target.ownerDocument.activeElement === sendButton)
+        if (event.target.ownerDocument.activeElement === backButton ||
+            event.target.ownerDocument.activeElement === sendButton)
         {
           Utils.fireMouseClick(event.target.ownerDocument.activeElement);
         }
