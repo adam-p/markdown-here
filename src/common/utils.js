@@ -270,7 +270,14 @@ var PRIVILEGED_REQUEST_EVENT_NAME = 'markdown-here-request-event';
 
 function makeRequestToPrivilegedScript(doc, requestObj, callback) {
   if (typeof(chrome) !== 'undefined') {
-    chrome.runtime.sendMessage(requestObj, callback);
+    // If `callback` is undefined and we pass it anyway, Chrome complains with this:
+    // Uncaught Error: Invocation of form runtime.sendMessage(object, undefined, null) doesn't match definition runtime.sendMessage(optional string extensionId, any message, optional function responseCallback)
+    if (callback) {
+      chrome.runtime.sendMessage(requestObj, callback);
+    }
+    else {
+      chrome.runtime.sendMessage(requestObj);
+    }
   }
   else if (typeof(safari) !== 'undefined') {
     /*

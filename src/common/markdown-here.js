@@ -362,7 +362,7 @@ function findMarkdownHereWrappersInRange(range) {
 
 // Converts the Markdown in the user's compose element to HTML and replaces it.
 // If `selectedRange` is null, then the entire email is being rendered.
-function renderMarkdown(focusedElem, selectedRange, markdownRenderer) {
+function renderMarkdown(focusedElem, selectedRange, markdownRenderer, renderComplete) {
   var extractedHtml, rangeWrapper;
 
   // Wrap the selection in a new element so that we can better extract the HTML.
@@ -399,6 +399,8 @@ function renderMarkdown(focusedElem, selectedRange, markdownRenderer) {
     // Some webmail (Gmail) strips off any external style block. So we need to go
     // through our styles, explicitly applying them to matching elements.
     makeStylesExplicit(wrapper, mdCss);
+
+    renderComplete();
   });
 }
 
@@ -419,9 +421,13 @@ function unrenderMarkdown(wrapperElem) {
 //                            See markdown-render.js for information.
 // @param `logger`  A function that can be used for logging debug messages. May
 //                  be null.
+// @param `renderComplete`  Callback that will be called when a render or unrender
+//                          has completed. Passed two arguments: `elem`
+//                          (the element de/rendered) and `rendered` (boolean,
+//                          true if rendered, false if derendered).
 // @returns True if successful, otherwise an error message that should be shown
 //          to the user.
-function markdownHere(document, markdownRenderer, logger) {
+function markdownHere(document, markdownRenderer, logger, renderComplete) {
 
   if (logger) {
     mylog = logger;
@@ -466,9 +472,21 @@ function markdownHere(document, markdownRenderer, logger) {
     for (i = 0; i < wrappers.length; i++) {
       unrenderMarkdown(wrappers[i]);
     }
+
+    if (renderComplete) {
+      renderComplete(focusedElem, false);
+    }
   }
   else {
-    renderMarkdown(focusedElem, range, markdownRenderer);
+    renderMarkdown(
+      focusedElem,
+      range,
+      markdownRenderer,
+      function() {
+        if (renderComplete) {
+          renderComplete(focusedElem, true);
+        }
+      });
   }
 
   return true;

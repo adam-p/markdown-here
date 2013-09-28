@@ -63,7 +63,8 @@ var markdown_here = {
                 // We'll need the target document available later
                 function() {
                   self.markdownRender.apply(self, [focusedElem.ownerDocument].concat([].splice.call(arguments, 0))); },
-                this.log);
+                this.log,
+                markdown_here.markdownRenderComplete);
 
     if (typeof(mdReturn) === 'string') {
       // Error message was returned.
@@ -239,6 +240,17 @@ var markdown_here = {
           targetDocument,
           targetDocument.location ? targetDocument.location.href : null),
         prefs['main-css'] + prefs['syntax-css']);
+    });
+  },
+
+  markdownRenderComplete: function(elem, rendered) {
+    OptionsStore.get(function(prefs) {
+      markdown_here.imports.CommonLogic.forgotToRenderIntervalCheck(
+        elem,
+        markdown_here.imports.markdownHere,
+        markdown_here.imports.htmlToText,
+        markdown_here.imports.marked,
+        prefs);
     });
   },
 

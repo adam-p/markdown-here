@@ -37,7 +37,11 @@ function requestHandler(request, sender, sendResponse) {
 
     var logger = function() { console.log.apply(console, arguments); };
 
-    mdReturn = markdownHere(document, requestMarkdownConversion, logger);
+    mdReturn = markdownHere(
+                document,
+                requestMarkdownConversion,
+                logger,
+                markdownRenderComplete);
 
     if (typeof(mdReturn) === 'string') {
       // Error message was returned.
@@ -69,6 +73,12 @@ function requestMarkdownConversion(html, callback) {
     function(response) {
       callback(response.html, response.css);
     });
+}
+
+
+// When rendering (or unrendering) completed, do our interval checks.
+function markdownRenderComplete(elem, rendered) {
+  intervalCheck(elem);
 }
 
 
@@ -217,8 +227,9 @@ Utils.makeRequestToPrivilegedScript(
  * See specific sections above for reasons why this is necessary.
  */
 
-function intervalCheck() {
-  var focusedElem = markdownHere.findFocusedElem(window.document);
+// `elem` is optional. If not provided, the focused element will be checked.
+function intervalCheck(elem) {
+  var focusedElem = elem || markdownHere.findFocusedElem(window.document);
   if (!focusedElem) {
     return;
   }
