@@ -260,7 +260,8 @@ function probablyWritingMarkdown(composeElem, htmlToText, marked) {
     mdMaybe = mdMaybe.slice(0, 10000);
   }
 
-  // TODO: Export regexes from Marked.js instead of copying them.
+  // TODO: Export regexes from Marked.js instead of copying them. Except...
+  // Marked's rules use /^.../, which breaks our matching.
 
   // NOTE: It's going to be tempting to use a ton of fancy regexes, but remember
   // that this check is getting run every few seconds, and we don't want to
@@ -295,14 +296,14 @@ function probablyWritingMarkdown(composeElem, htmlToText, marked) {
   }
 
   // Math
-  var math = mdMaybe.match(marked.InlineLexer.rules.math);
+  var math = mdMaybe.match(/\$([^ \t\n\$]([^\$]*[^ \t\n\$])?)\$/);
   if (math) {
     logMatch('math', math);
     return true;
   }
 
   // This matches both emphasis and strong Markdown
-  var em_strong = mdMaybe.match(marked.InlineLexer.rules.em);
+  var em_strong = mdMaybe.match(/\b_((?:__|[\s\S])+?)_\b|\*((?:\*\*|[\s\S])+?)\*(?!\*)/);
   if (em_strong) {
     logMatch('emphasis', em_strong);
     return true;
