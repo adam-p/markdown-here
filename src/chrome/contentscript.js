@@ -63,9 +63,12 @@ chrome.runtime.onMessage.addListener(requestHandler);
 // See the comment in markdown-render.js for why we do this.
 function requestMarkdownConversion(html, callback) {
   // Send a request to the add-on script to actually do the rendering.
-  chrome.runtime.sendMessage({action: 'render', html: html}, function(response) {
-    callback(response.html, response.css);
-  });
+  Utils.makeRequestToPrivilegedScript(
+    document,
+    { action: 'render', html: html },
+    function(response) {
+      callback(response.html, response.css);
+    });
 }
 
 
@@ -97,7 +100,9 @@ function requestMarkdownConversion(html, callback) {
 
 // At this time, only this function differs between Chrome and Firefox.
 function showToggleButton(show) {
-  chrome.runtime.sendMessage({ action: 'show-toggle-button', show: show });
+  Utils.makeRequestToPrivilegedScript(
+    document,
+    { action: 'show-toggle-button', show: show });
 }
 
 
@@ -152,7 +157,10 @@ var hotkeyGetOptionsHandler = function(prefs) {
   // If the background script isn't properly loaded, it can happen that the
   // `prefs` argument is undefined. Detect this and try again.
   if (typeof(prefs) === 'undefined') {
-    chrome.runtime.sendMessage({action: 'get-options'}, hotkeyGetOptionsHandler);
+    Utils.makeRequestToPrivilegedScript(
+      document,
+      { action: 'get-options' },
+      hotkeyGetOptionsHandler);
     return;
   }
 
@@ -198,7 +206,10 @@ var hotkeyGetOptionsHandler = function(prefs) {
   }
   // else the hotkey is disabled and we'll leave hotkeyIntervalCheck as a no-op
 };
-chrome.runtime.sendMessage({action: 'get-options'}, hotkeyGetOptionsHandler);
+Utils.makeRequestToPrivilegedScript(
+  document,
+  { action: 'get-options' },
+  hotkeyGetOptionsHandler);
 
 
 /*
@@ -215,14 +226,17 @@ function intervalCheck() {
   hotkeyIntervalCheck(focusedElem);
   buttonIntervalCheck(focusedElem);
 
-  chrome.runtime.sendMessage({action: 'get-options'}, function(prefs) {
-    CommonLogic.forgotToRenderIntervalCheck(
-      focusedElem,
-      markdownHere,
-      htmlToText,
-      marked,
-      prefs);
-  });
+  Utils.makeRequestToPrivilegedScript(
+    document,
+    { action: 'get-options' },
+    function(prefs) {
+      CommonLogic.forgotToRenderIntervalCheck(
+        focusedElem,
+        markdownHere,
+        htmlToText,
+        marked,
+        prefs);
+    });
 }
 setInterval(intervalCheck, 2000);
 
@@ -266,6 +280,8 @@ function clearUpgradeNotification(notifyBackgroundScript) {
   document.body.removeChild(elem);
 
   if (notifyBackgroundScript) {
-    chrome.runtime.sendMessage({action: 'upgrade-notification-shown'});
+    Utils.makeRequestToPrivilegedScript(
+      document,
+      { action: 'upgrade-notification-shown' });
   }
 }

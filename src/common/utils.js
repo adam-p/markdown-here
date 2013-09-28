@@ -43,7 +43,7 @@ function saferSetInnerHTML(parentElem, htmlString) {
   range.deleteContents();
   range.insertNode(docFrag);
   range.detach();
-};
+}
 
 
 // Approximating equivalent to assigning to `outerHTML` -- completely replaces
@@ -56,7 +56,6 @@ function saferSetInnerHTML(parentElem, htmlString) {
 function saferSetOuterHTML(elem, htmlString) {
   if (!isElementinDocument(elem)) {
     throw new Error('Element must be in document');
-    return;
   }
 
   var range = elem.ownerDocument.createRange();
@@ -68,7 +67,7 @@ function saferSetOuterHTML(elem, htmlString) {
   range.deleteContents();
   range.insertNode(docFrag);
   range.detach();
-};
+}
 
 
 // Removes potentially harmful elements and attributes from `docFrag`.
@@ -120,7 +119,7 @@ function walkDOM(node, func) {
 
 function isElementinDocument(element) {
   var doc = element.ownerDocument;
-  while (element = element.parentNode) {
+  while (!!(element = element.parentNode)) {
     if (element === doc) {
       return true;
     }
@@ -155,7 +154,7 @@ function getLocalURL(url) {
     // to branch depending on the presence of "common".
 
     var COMMON = '/common/';
-    var CONTENT = '/firefox/chrome/'
+    var CONTENT = '/firefox/chrome/';
 
     if (url.indexOf(COMMON) === 0) {
       return 'resource://markdown_here_common/' + url.slice(COMMON.length);
@@ -211,7 +210,6 @@ function getLocalFileAsBase64(url, callback) {
   xhr.open('GET', url);
   xhr.responseType = 'arraybuffer';
 
-  var _this = this;
   xhr.onload = function() {
     if (this.readyState === this.DONE) {
       // Assume 200 OK -- we only use this for local requests
@@ -283,7 +281,7 @@ function makeRequestToPrivilegedScript(doc, requestObj, callback) {
     */
 
     // If this is the first call, do some initialization.
-    if (!typeof(makeRequestToPrivilegedScript.requestCallbacks) !== 'undefined') {
+    if (typeof(makeRequestToPrivilegedScript.requestCallbacks) !== 'undefined') {
       makeRequestToPrivilegedScript.requestCallbacks = {};
 
       // Handle messages received from the background script.
@@ -292,9 +290,9 @@ function makeRequestToPrivilegedScript(doc, requestObj, callback) {
         // from the background script to the content script for a page, and
         // it'll get triggered once for each frame in the page. So we need to
         // make very sure that we should be acting on the message.
-        if (event.name === 'request-response'
-            && event.message.requestID
-            && makeRequestToPrivilegedScript.requestCallbacks[event.message.requestID]) {
+        if (event.name === 'request-response' &&
+            event.message.requestID &&
+            makeRequestToPrivilegedScript.requestCallbacks[event.message.requestID]) {
           // Call the stored callback.
           makeRequestToPrivilegedScript.requestCallbacks[event.message.requestID](event.message.response);
           // And remove the stored callback.
