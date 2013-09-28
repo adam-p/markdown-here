@@ -13,7 +13,7 @@
 ;(function() {
 
 "use strict";
-/*global module:false, chrome:false*/
+/*global module:false, chrome:false, safari:false*/
 
 
 function consoleLog(logString) {
@@ -145,6 +145,9 @@ function getLocalURL(url) {
   if (typeof(chrome) !== 'undefined') {
     return chrome.extension.getURL(url);
   }
+  else if (typeof(safari) !== 'undefined') {
+    return safari.extension.baseURI + 'markdown-here/src' + url;
+  }
   else {
     // Mozilla platform.
     // HACK The proper URL depends on values in `chrome.manifest`. But we "know"
@@ -270,6 +273,45 @@ var PRIVILEGED_REQUEST_EVENT_NAME = 'markdown-here-request-event';
 function makeRequestToPrivilegedScript(doc, requestObj, callback) {
   if (typeof(chrome) !== 'undefined') {
     chrome.runtime.sendMessage(requestObj, callback);
+  }
+  else if (typeof(safari) !== 'undefined') {
+    /*
+    Unlike Chrome, Safari doesn't provide a way to pass a callback to a background-
+    script request. Instead the background script sends a separate message to
+    the content script. We'll keep a set of outstanding callbacks to process as
+    the responses come in.
+    */
+
+    // If this is the first call, do some initialization.
+    if (!typeof(makeRequestToPrivilegedScript.requestCallbacks) !== 'undefined') {
+      makeRequestToPrivilegedScript.requestCallbacks = {};
+
+      // Handle messages received from the background script.
+      var backgroundMessageHandler = function(event) {
+        // Note that this message handler will get triggered by any request sent
+        // from the background script to the content script for a page, and
+        // it'll get triggered once for each frame in the page. So we need to
+        // make very sure that we should be acting on the message.
+        if (event.name === 'request-response'
+            && event.message.requestID
+            && makeRequestToPrivilegedScript.requestCallbacks[event.message.requestID]) {
+          // Call the stored callback.
+          makeRequestToPrivilegedScript.requestCallbacks[event.message.requestID](event.message.response);
+          // And remove the stored callback.
+          delete makeRequestToPrivilegedScript.requestCallbacks[event.message.requestID];
+        }
+      };
+      safari.self.addEventListener('message', backgroundMessageHandler, false);
+    }
+
+    // Store the callback for later use in the response handler.
+    if (callback) {
+      var reqID = Math.random();
+      makeRequestToPrivilegedScript.requestCallbacks[reqID] = callback;
+      requestObj.requestID = reqID;
+    }
+
+    safari.self.tab.dispatchMessage('request', requestObj);
   }
   else {
     // See: https://developer.mozilla.org/en-US/docs/Code_snippets/Interaction_between_privileged_and_non-privileged_pages#Chromium-like_messaging.3A_json_request_with_json_callback

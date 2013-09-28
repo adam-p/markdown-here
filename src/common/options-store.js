@@ -361,18 +361,12 @@ var SafariOptionsStore = {
   _getPreferences: function(callback) {
     // Only the background script has `safari.extension.settings`.
     if (typeof(safari.extension.settings) === 'undefined') {
-      var reqID = Math.random();
-      var optionsHandler = function(event) {
-        // Only handle the request we made.
-        if (event.message && event.message.requestID === reqID) {
-          safari.self.removeEventListener('message', optionsHandler);
-          if (callback) callback(event.message.options);
-        }
-      };
-
-      safari.self.addEventListener('message', optionsHandler, true);
-
-      safari.self.tab.dispatchMessage('get-options', { requestID: reqID });
+      // We're going to assume we have Utils and document available here, which
+      // should be the case, since we should be running as a content script.
+      Utils.makeRequestToPrivilegedScript(
+        document,
+        { action: 'get-options' },
+        callback);
     }
     else {
       // Make this actually asynchronous
@@ -385,18 +379,12 @@ var SafariOptionsStore = {
   _setPreferences: function(obj, callback) {
     // Only the background script has `safari.extension.settings`.
     if (typeof(safari.extension.settings) === 'undefined') {
-      var reqID = Math.random();
-      var optionsHandler = function(event) {
-        // Only handle the request we made.
-        if (event.message && event.message.requestID === reqID) {
-          safari.self.removeEventListener('message', optionsHandler);
-          if (callback) callback();
-        }
-      };
-
-      safari.self.addEventListener('message', optionsHandler, true);
-
-      safari.self.tab.dispatchMessage('set-options', { options: obj, requestID: reqID });
+      // We're going to assume we have Utils and document available here, which
+      // should be the case, since we should be running as a content script.
+      Utils.makeRequestToPrivilegedScript(
+        document,
+        { action: 'set-options', options: obj },
+        callback);
     }
     else {
       // Make this actually asynchronous
@@ -413,18 +401,12 @@ var SafariOptionsStore = {
   _removePreferences: function(arrayOfKeys, callback) {
     // Only the background script has `safari.extension.settings`.
     if (typeof(safari.extension.settings) === 'undefined') {
-      var reqID = Math.random();
-      var optionsHandler = function(event) {
-        // Only handle the request we made.
-        if (event.message && event.message.requestID === reqID) {
-          safari.self.removeEventListener('message', optionsHandler);
-          if (callback) callback();
-        }
-      };
-
-      safari.self.addEventListener('message', optionsHandler, true);
-
-      safari.self.tab.dispatchMessage('remove-options', { arrayOfKeys: arrayOfKeys, requestID: reqID });
+      // We're going to assume we have Utils and document available here, which
+      // should be the case, since we should be running as a content script.
+      Utils.makeRequestToPrivilegedScript(
+        document,
+        { action: 'remove-options', arrayOfKeys: arrayOfKeys },
+        callback);
     }
     else {
       // Make this actually asynchronous
