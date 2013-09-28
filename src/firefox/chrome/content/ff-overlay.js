@@ -60,9 +60,9 @@ var markdown_here = {
 
     mdReturn = markdown_here.imports.markdownHere(
                 focusedElem.ownerDocument,
-                // We'll need the target document available later
-                function() {
-                  self.markdownRender.apply(self, [focusedElem.ownerDocument].concat([].splice.call(arguments, 0))); },
+                function(html, callback) {
+                  self.markdownRender(focusedElem.ownerDocument, html, callback);
+                },
                 this.log,
                 markdown_here.markdownRenderComplete);
 
@@ -237,7 +237,6 @@ var markdown_here = {
           markdown_here.imports.marked,
           hljs.hljs,
           html,
-          targetDocument,
           targetDocument.location ? targetDocument.location.href : null),
         prefs['main-css'] + prefs['syntax-css']);
     });

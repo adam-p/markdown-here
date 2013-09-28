@@ -66,7 +66,6 @@ chrome.runtime.onMessage.addListener(function(request, sender, responseCallback)
           marked,
           hljs,
           request.html,
-          document,
           sender.tab.url),
         css: (prefs['main-css'] + prefs['syntax-css'])
       });

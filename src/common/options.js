@@ -234,8 +234,7 @@ function requestMarkdownConversion(html, callback) {
           htmlToText,
           marked,
           hljs,
-          html,
-          rawMarkdownIframe.contentDocument),
+          html),
         (prefs['main-css'] + prefs['syntax-css']));
     });
   }
