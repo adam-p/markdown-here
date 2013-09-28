@@ -185,12 +185,21 @@ function setupForgotToRenderInterceptors(composeElem) {
   // propagation to the actual element, thereby preventing Gmail's event
   // listeners from firing.
 
-  var composeSendButtonKeydownListener = function(event) {
+  var composeSendButtonKeyListener = function(event) {
     if (event.target === composeSendButton &&
         (event.keyCode === ENTER_KEYCODE || event.keyCode === SPACE_KEYCODE) &&
         composeElem[MARKDOWN_DETECTED_PROPERTY]) {
-      eatEvent(event);
-      showForgotToRenderPromptAndRespond(composeElem, composeSendButton);
+      // Gmail uses keydown to trigger its send action. Firefox fires keyup even if
+      // keydown has been suppressed or hasn't yet been let through.
+      // So we're going to suppress keydown and act on keyup.
+
+      if (event.type === 'keydown') {
+        eatEvent(event);
+      }
+      else if (event.type === 'keyup') {
+        eatEvent(event);
+        showForgotToRenderPromptAndRespond(composeElem, composeSendButton);
+      }
     }
   };
 
@@ -214,11 +223,8 @@ function setupForgotToRenderInterceptors(composeElem) {
     }
   };
 
-  // Gmail uses keydown to trigger its send action. Firefox fires keyup even if
-  // keydown has been suppressed or hasn't yet been let through.
-  // So we're going to completely supporess keydown and act on keyup.
-  composeSendButton.parentElement.addEventListener('keyup', composeSendButtonKeydownListener, true);
-  composeSendButton.parentElement.addEventListener('keydown', eatEvent, true);
+  composeSendButton.parentElement.addEventListener('keydown', composeSendButtonKeyListener, true);
+  composeSendButton.parentElement.addEventListener('keyup', composeSendButtonKeyListener, true);
 
   composeSendButton.parentElement.addEventListener('click', composeSendButtonClickListener, true);
   composeElem.parentElement.addEventListener('keydown', sendHotkeyKeydownListener, true);
