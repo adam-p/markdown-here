@@ -355,12 +355,38 @@ function makeRequestToPrivilegedScript(doc, requestObj, callback) {
 // Gives focus to the element.
 // Setting focus into elements inside iframes is not simple.
 function setFocus(elem) {
-  if (elem.ownerDocument.defaultView.frameElement) {
-    // Elem is in an iframe
-    elem.ownerDocument.defaultView.focus();
+  // We need to do some tail-recursion focus setting up through the iframes.
+  if (elem.document) {
+    // This is a window
+    if (elem.frameElement) {
+      // This is the window of an iframe. Set focus to the parent window.
+      setFocus(elem.frameElement.ownerDocument.defaultView);
+    }
+  }
+  else if (elem.ownerDocument.defaultView.frameElement) {
+    // This element is in an iframe. Set focus to its owner window.
+    setFocus(elem.ownerDocument.defaultView);
   }
 
   elem.focus();
+}
+
+
+// Sets a short timeout and then calls callback
+function nextTick(callback) {
+  setTimeout(callback, 0);
+}
+
+// `context` is optional. Will be `this` when `callback` is called.
+function nextTickFn(callback, context) {
+  return function() {
+    var args = arguments;
+    var argApplier = function() {
+      callback.apply(context, args);
+    };
+
+    setTimeout(argApplier, 0);
+  };
 }
 
 
@@ -389,6 +415,8 @@ Utils.makeRequestToPrivilegedScript = makeRequestToPrivilegedScript;
 Utils.PRIVILEGED_REQUEST_EVENT_NAME = PRIVILEGED_REQUEST_EVENT_NAME;
 Utils.consoleLog = consoleLog;
 Utils.setFocus = setFocus;
+Utils.nextTick = nextTick;
+Utils.nextTickFn = nextTickFn;
 
 
 var EXPORTED_SYMBOLS = ['Utils'];

@@ -95,7 +95,7 @@ var FORGOT_TO_RENDER_PROMPT_QUESTION = "Send it anyway?";
 
 // This function encapsulates the logic required to prevent accidental sending
 // of email that the user wrote in Markdown but forgot to render.
-function forgotToRenderIntervalCheck(focusedElem, MarkdownHere, htmlToText, marked, prefs) {
+function forgotToRenderIntervalCheck(focusedElem, MarkdownHere, MdhHtmlToText, marked, prefs) {
   if (!prefs['forgot-to-render-check-enabled']) {
     return;
   }
@@ -126,7 +126,9 @@ function forgotToRenderIntervalCheck(focusedElem, MarkdownHere, htmlToText, mark
     focusedElem[WATCHED_PROPERTY] = true;
   }
 
-  focusedElem[MARKDOWN_DETECTED_PROPERTY] = probablyWritingMarkdown(focusedElem, htmlToText, marked);
+  var text = new MdhHtmlToText.MdhHtmlToText(focusedElem).get();
+
+  focusedElem[MARKDOWN_DETECTED_PROPERTY] = probablyWritingMarkdown(text, marked, prefs);
 }
 
 
@@ -230,9 +232,8 @@ function setupForgotToRenderInterceptors(composeElem) {
   composeElem.parentElement.addEventListener('keydown', sendHotkeyKeydownListener, true);
 }
 
-// Returns true if the contents of `composeElem` looks like raw Markdown,
-// false otherwise.
-function probablyWritingMarkdown(composeElem, htmlToText, marked) {
+// Returns true if `text` looks like raw Markdown, false otherwise.
+function probablyWritingMarkdown(mdMaybe, marked, prefs) {
   /*
   This is going to be tricksy and fraught with danger. Challenges:
     * If it's not sensitive enough, it's useless.
@@ -249,11 +250,6 @@ function probablyWritingMarkdown(composeElem, htmlToText, marked) {
   But I think there are some simple heuristics that will probably be more
   accurate and/or faster.
   */
-
-  // When we actually render, we don't just use `htmlToText()`, but it's good
-  // enough for our purposes here.
-  var mdMaybe = htmlToText(composeElem.innerHTML);
-  // TODO: Exclude blockquotes.
 
   // Ensure that we're not checking on enormous amounts of text.
   if (mdMaybe.length > 10000) {

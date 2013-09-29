@@ -88,6 +88,14 @@ var markdown_here = {
   onLoad: function() {
     var contextMenu, optionsStore = {};
 
+    Components.utils.import('resource://markdown_here_common/utils.js', markdown_here.imports);
+    Components.utils.import('resource://markdown_here_common/common-logic.js', markdown_here.imports);
+    Components.utils.import('resource://markdown_here_common/jsHtmlToText.js', markdown_here.imports);
+    Components.utils.import('resource://markdown_here_common/marked.js', markdown_here.imports);
+    Components.utils.import('resource://markdown_here_common/markdown-here.js', markdown_here.imports);
+    Components.utils.import('resource://markdown_here_common/mdh-html-to-text.js', markdown_here.imports);
+    Components.utils.import('resource://markdown_here_common/markdown-render.js', markdown_here.imports);
+
     // initialization code
     this.initialized = true;
     this.strings = document.getElementById('markdown_here-strings');
@@ -148,8 +156,11 @@ var markdown_here = {
             return;
           }
 
+          var plaintext = new markdown_here.imports.MdhHtmlToText.MdhHtmlToText(
+                            window.GetCurrentEditor().document.body).get();
+
           if (!markdown_here.imports.CommonLogic.probablyWritingMarkdown(
-                window.GetCurrentEditor().document.body,
+                plaintext,
                 markdown_here.imports.htmlToText,
                 markdown_here.imports.marked)) {
             return;
@@ -247,7 +258,7 @@ var markdown_here = {
       markdown_here.imports.CommonLogic.forgotToRenderIntervalCheck(
         elem,
         markdown_here.imports.markdownHere,
-        markdown_here.imports.htmlToText,
+        markdown_here.imports.MdhHtmlToText,
         markdown_here.imports.marked,
         prefs);
     });
@@ -345,7 +356,7 @@ var markdown_here = {
         markdown_here.imports.CommonLogic.forgotToRenderIntervalCheck(
           focusedElem,
           markdown_here.imports.markdownHere,
-          markdown_here.imports.htmlToText,
+          markdown_here.imports.MdhHtmlToText,
           markdown_here.imports.marked,
           prefs);
       });
@@ -500,15 +511,12 @@ var markdown_here = {
 };
 
 
-Components.utils.import('resource://markdown_here_common/markdown-here.js', markdown_here.imports);
-Components.utils.import('resource://markdown_here_common/utils.js', markdown_here.imports);
-Components.utils.import('resource://markdown_here_common/common-logic.js', markdown_here.imports);
-Components.utils.import('resource://markdown_here_common/jsHtmlToText.js', markdown_here.imports);
-Components.utils.import('resource://markdown_here_common/marked.js', markdown_here.imports);
-Components.utils.import('resource://markdown_here_common/markdown-render.js', markdown_here.imports);
-
-
 window.addEventListener('load', function () {
-  markdown_here.onLoad();
-}, false);
+  var delayedLoad = function() {
+    markdown_here.onLoad();
+  };
 
+  // In the interest of improved browser load performace, call our onLoad after a tick.
+  // Note that this is the same as `Utils.nextTick`, but we haven't loaded Utils yet.
+  setTimeout(delayedLoad, 0);
+}, false);

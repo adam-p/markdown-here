@@ -19,6 +19,19 @@
 * [CSSUtilities](http://www.brothercake.com/site/resources/scripts/cssutilities/): "...is a JavaScript library that provides unique and indispensible methods for querying CSS style sheets!"
   * Could maybe be used for better make-styles-explicit.
 
+
+## Extension development
+
+MDN: [Performance](https://developer.mozilla.org/en-US/docs/Performance)
+MDN: [Performance best practices in extensions](https://developer.mozilla.org/en-US/docs/Extensions/Performance_best_practices_in_extensions)
+MDN: [Appendix A: Add-on Performance](https://developer.mozilla.org/en-US/docs/XUL/School_tutorial/Appendix_A:_Add-on_Performance)
+
+TODO: Notes about MDH performance goals and decisions. Like:
+- Passing big strings from contentscript to backgroundscript probably undesirable.
+- Loading big script files (like highlight.js) into each page probably undesirable.
+- I don't really have a good idea of how much JS loaded into a page is too much, etc.
+
+
 ## Miscellaneous
 
 * Update selection conversion screenshot to not be all about replies.

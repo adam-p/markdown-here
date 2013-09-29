@@ -22,6 +22,7 @@
         "common/common-logic.js",
         "common/jsHtmlToText.js",
         "common/marked.js",
+        "common/mdh-html-to-text.js",
         "common/markdown-here.js",
         "chrome/contentscript.js"
         ]

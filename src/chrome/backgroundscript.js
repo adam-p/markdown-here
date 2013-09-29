@@ -1,11 +1,11 @@
 /*
- * Copyright Adam Pritchard 2012
+ * Copyright Adam Pritchard 2013
  * MIT License : http://adampritchard.mit-license.org/
  */
 
 "use strict";
 /*global chrome:false, OptionsStore:false, markdownRender:false,
-  htmlToText:false, marked:false, hljs:false, CommonLogic:false */
+  htmlToText:false, marked:false, hljs:false, Utils:false, CommonLogic:false */
 /*jshint devel:true*/
 
 /*
@@ -13,31 +13,34 @@
  */
 
 // On each load, check if we should show the options/changelist page.
-window.addEventListener('load', function() {
-    OptionsStore.get(function(options) {
-      var appDetails = chrome.app.getDetails();
+function onLoad() {
+  OptionsStore.get(function(options) {
+    var appDetails = chrome.app.getDetails();
 
-      var optionsURL = '/common/options.html';
+    var optionsURL = '/common/options.html';
 
-      if (typeof(options['last-version']) === 'undefined') {
-        // This is the very first time the extensions has been run, so show the
-        // options page.
-        chrome.tabs.create({ url: chrome.extension.getURL(optionsURL) });
+    if (typeof(options['last-version']) === 'undefined') {
+      // This is the very first time the extensions has been run, so show the
+      // options page.
+      chrome.tabs.create({ url: chrome.extension.getURL(optionsURL) });
 
-        // Update our last version
-        OptionsStore.set({ 'last-version': appDetails.version });
-      }
-      else if (options['last-version'] !== appDetails.version) {
-        // The extension has been newly updated
-        optionsURL += '?prevVer=' + options['last-version'];
+      // Update our last version
+      OptionsStore.set({ 'last-version': appDetails.version });
+    }
+    else if (options['last-version'] !== appDetails.version) {
+      // The extension has been newly updated
+      optionsURL += '?prevVer=' + options['last-version'];
 
-        showUpgradeNotification(chrome.extension.getURL(optionsURL));
+      showUpgradeNotification(chrome.extension.getURL(optionsURL));
 
-        // Update our last version
-        OptionsStore.set({ 'last-version': appDetails.version });
-      }
-    });
-  }, false);
+      // Update our last version
+      OptionsStore.set({ 'last-version': appDetails.version });
+    }
+  });
+}
+
+// In the interest of improved browser load performace, call our onLoad after a tick.
+window.addEventListener('load', Utils.nextTickFn(onLoad), false);
 
 // Create the context menu that will signal our main code.
 chrome.contextMenus.create({

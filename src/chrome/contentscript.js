@@ -5,7 +5,7 @@
 
 "use strict";
 /*global chrome:false, markdownHere:false, CommonLogic:false, htmlToText:false,
-    Utils:false, marked:false*/
+    Utils:false, MdhHtmlToText:false, marked:false*/
 /*jshint devel:true, browser:true*/
 
 
@@ -244,7 +244,7 @@ function intervalCheck(elem) {
       CommonLogic.forgotToRenderIntervalCheck(
         focusedElem,
         markdownHere,
-        htmlToText,
+        MdhHtmlToText,
         marked,
         prefs);
     });
