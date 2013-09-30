@@ -1,11 +1,11 @@
 /*
- * Copyright Adam Pritchard 2012
+ * Copyright Adam Pritchard 2013
  * MIT License : http://adampritchard.mit-license.org/
  */
 
 "use strict";
-/*global chrome:false, OptionsStore:false, markdownRender:false,
-  htmlToText:false, marked:false, hljs:false*/
+/*global chrome:false, OptionsStore:false, MarkdownRender:false,
+  marked:false, hljs:false, Utils:false, CommonLogic:false */
 /*jshint devel:true*/
 
 /*
@@ -13,31 +13,34 @@
  */
 
 // On each load, check if we should show the options/changelist page.
-window.addEventListener('load', function() {
-    OptionsStore.get(function(options) {
-      var appDetails = chrome.app.getDetails();
+function onLoad() {
+  OptionsStore.get(function(options) {
+    var appDetails = chrome.app.getDetails();
 
-      var optionsURL = '/common/options.html';
+    var optionsURL = '/common/options.html';
 
-      if (typeof(options['last-version']) === 'undefined') {
-        // This is the very first time the extensions has been run, so show the
-        // options page.
-        chrome.tabs.create({ url: chrome.extension.getURL(optionsURL) });
+    if (typeof(options['last-version']) === 'undefined') {
+      // This is the very first time the extensions has been run, so show the
+      // options page.
+      chrome.tabs.create({ url: chrome.extension.getURL(optionsURL) });
 
-        // Update our last version
-        OptionsStore.set({ 'last-version': appDetails.version });
-      }
-      else if (options['last-version'] !== appDetails.version) {
-        // The extension has been newly updated
-        optionsURL += '?prevVer=' + options['last-version'];
+      // Update our last version
+      OptionsStore.set({ 'last-version': appDetails.version });
+    }
+    else if (options['last-version'] !== appDetails.version) {
+      // The extension has been newly updated
+      optionsURL += '?prevVer=' + options['last-version'];
 
-        showUpgradeNotification(chrome.extension.getURL(optionsURL));
+      showUpgradeNotification(chrome.extension.getURL(optionsURL));
 
-        // Update our last version
-        OptionsStore.set({ 'last-version': appDetails.version });
-      }
-    });
-  }, false);
+      // Update our last version
+      OptionsStore.set({ 'last-version': appDetails.version });
+    }
+  });
+}
+
+// In the interest of improved browser load performace, call our onLoad after a tick.
+window.addEventListener('load', Utils.nextTickFn(onLoad), false);
 
 // Create the context menu that will signal our main code.
 chrome.contextMenus.create({
@@ -60,14 +63,11 @@ chrome.runtime.onMessage.addListener(function(request, sender, responseCallback)
   if (request.action === 'render') {
     OptionsStore.get(function(prefs) {
       responseCallback({
-        html: markdownRender(
+        html: MarkdownRender.markdownRender(
+          request.mdText,
           prefs,
-          htmlToText,
           marked,
-          hljs,
-          request.html,
-          document,
-          sender.tab.url),
+          hljs),
         css: (prefs['main-css'] + prefs['syntax-css'])
       });
     });
@@ -91,11 +91,20 @@ chrome.runtime.onMessage.addListener(function(request, sender, responseCallback)
     clearUpgradeNotification();
     return false;
   }
+  else if (request.action === 'get-forgot-to-render-prompt') {
+    CommonLogic.getForgotToRenderPromptContent(function(html) {
+      responseCallback({html: html});
+    });
+    return true;
+  }
+  else if (request.action === 'test-request') {
+    responseCallback('test-request-good');
+    return false;
+  }
   else {
     console.log('unmatched request action');
     console.log(request.action);
     throw 'unmatched request action: ' + request.action;
-    return false;
   }
 });
 
@@ -125,7 +134,6 @@ function showUpgradeNotification(optionsURL) {
       var html = this.responseText;
 
       // Get the logo image data
-      var logoBase64 = null;
       var xhr = new XMLHttpRequest();
       xhr.open('GET', chrome.extension.getURL('/common/images/icon16.png'));
 

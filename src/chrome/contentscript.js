@@ -4,7 +4,8 @@
  */
 
 "use strict";
-/*global chrome:false, markdownHere:false*/
+/*global chrome:false, markdownHere:false, CommonLogic:false, htmlToText:false,
+    Utils:false, MdhHtmlToText:false, marked:false*/
 /*jshint devel:true, browser:true*/
 
 
@@ -36,7 +37,11 @@ function requestHandler(request, sender, sendResponse) {
 
     var logger = function() { console.log.apply(console, arguments); };
 
-    mdReturn = markdownHere(document, requestMarkdownConversion, logger);
+    mdReturn = markdownHere(
+                document,
+                requestMarkdownConversion,
+                logger,
+                markdownRenderComplete);
 
     if (typeof(mdReturn) === 'string') {
       // Error message was returned.
@@ -60,11 +65,23 @@ chrome.runtime.onMessage.addListener(requestHandler);
 
 // The rendering service provided to the content script.
 // See the comment in markdown-render.js for why we do this.
-function requestMarkdownConversion(html, callback) {
+function requestMarkdownConversion(elem, range, callback) {
+  var mdhHtmlToText = new MdhHtmlToText.MdhHtmlToText(elem, range);
+
   // Send a request to the add-on script to actually do the rendering.
-  chrome.runtime.sendMessage({action: 'render', html: html}, function(response) {
-    callback(response.html, response.css);
-  });
+  Utils.makeRequestToPrivilegedScript(
+    document,
+    { action: 'render', mdText: mdhHtmlToText.get() },
+    function(response) {
+      var renderedMarkdown = mdhHtmlToText.postprocess(response.html);
+      callback(renderedMarkdown, response.css);
+    });
+}
+
+
+// When rendering (or unrendering) completed, do our interval checks.
+function markdownRenderComplete(elem, rendered) {
+  intervalCheck(elem);
 }
 
 
@@ -96,7 +113,9 @@ function requestMarkdownConversion(html, callback) {
 
 // At this time, only this function differs between Chrome and Firefox.
 function showToggleButton(show) {
-  chrome.runtime.sendMessage({ action: 'show-toggle-button', show: show });
+  Utils.makeRequestToPrivilegedScript(
+    document,
+    { action: 'show-toggle-button', show: show });
 }
 
 
@@ -151,7 +170,10 @@ var hotkeyGetOptionsHandler = function(prefs) {
   // If the background script isn't properly loaded, it can happen that the
   // `prefs` argument is undefined. Detect this and try again.
   if (typeof(prefs) === 'undefined') {
-    chrome.runtime.sendMessage({action: 'get-options'}, hotkeyGetOptionsHandler);
+    Utils.makeRequestToPrivilegedScript(
+      document,
+      { action: 'get-options' },
+      hotkeyGetOptionsHandler);
     return;
   }
 
@@ -197,7 +219,10 @@ var hotkeyGetOptionsHandler = function(prefs) {
   }
   // else the hotkey is disabled and we'll leave hotkeyIntervalCheck as a no-op
 };
-chrome.runtime.sendMessage({action: 'get-options'}, hotkeyGetOptionsHandler);
+Utils.makeRequestToPrivilegedScript(
+  document,
+  { action: 'get-options' },
+  hotkeyGetOptionsHandler);
 
 
 /*
@@ -205,14 +230,27 @@ chrome.runtime.sendMessage({action: 'get-options'}, hotkeyGetOptionsHandler);
  * See specific sections above for reasons why this is necessary.
  */
 
-function intervalCheck() {
-  var focusedElem = markdownHere.findFocusedElem(window.document);
+// `elem` is optional. If not provided, the focused element will be checked.
+function intervalCheck(elem) {
+  var focusedElem = elem || markdownHere.findFocusedElem(window.document);
   if (!focusedElem) {
     return;
   }
 
   hotkeyIntervalCheck(focusedElem);
   buttonIntervalCheck(focusedElem);
+
+  Utils.makeRequestToPrivilegedScript(
+    document,
+    { action: 'get-options' },
+    function(prefs) {
+      CommonLogic.forgotToRenderIntervalCheck(
+        focusedElem,
+        markdownHere,
+        MdhHtmlToText,
+        marked,
+        prefs);
+    });
 }
 setInterval(intervalCheck, 2000);
 
@@ -256,6 +294,8 @@ function clearUpgradeNotification(notifyBackgroundScript) {
   document.body.removeChild(elem);
 
   if (notifyBackgroundScript) {
-    chrome.runtime.sendMessage({action: 'upgrade-notification-shown'});
+    Utils.makeRequestToPrivilegedScript(
+      document,
+      { action: 'upgrade-notification-shown' });
   }
 }
