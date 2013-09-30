@@ -60,11 +60,10 @@ var markdown_here = {
 
     mdReturn = markdown_here.imports.markdownHere(
                 focusedElem.ownerDocument,
-                function(html, callback) {
-                  self.markdownRender(focusedElem.ownerDocument, html, callback);
+                function(elem, range, callback) {
+                  self.markdownRender(elem, range, callback);
                 },
-                this.log,
-                markdown_here.markdownRenderComplete);
+                this.log);
 
     if (typeof(mdReturn) === 'string') {
       // Error message was returned.
@@ -95,6 +94,8 @@ var markdown_here = {
     Components.utils.import('resource://markdown_here_common/markdown-here.js', markdown_here.imports);
     Components.utils.import('resource://markdown_here_common/mdh-html-to-text.js', markdown_here.imports);
     Components.utils.import('resource://markdown_here_common/markdown-render.js', markdown_here.imports);
+
+    markdown_here.scriptLoader.loadSubScript('resource://markdown_here_common/highlightjs/highlight.js', markdown_here.imports);
 
     // initialization code
     this.initialized = true;
@@ -234,33 +235,18 @@ var markdown_here = {
   },
 
   // The rendering service provided to the content script.
-  // See the comment in markdown-render.js for why we do this.
-  markdownRender: function(targetDocument, html, callback) {
-    var hljs = {}, optionsStore = {};
-
-    this.scriptLoader.loadSubScript('resource://markdown_here_common/highlightjs/highlight.js', hljs);
+  markdownRender: function(elem, range, callback) {
+    var mdhHtmlToText = new markdown_here.imports.MdhHtmlToText.MdhHtmlToText(elem, range);
 
     OptionsStore.get(function(prefs) {
-      callback(
-        markdown_here.imports.markdownRender(
-          prefs,
-          markdown_here.imports.htmlToText,
-          markdown_here.imports.marked,
-          hljs.hljs,
-          html,
-          targetDocument.location ? targetDocument.location.href : null),
-        prefs['main-css'] + prefs['syntax-css']);
-    });
-  },
-
-  markdownRenderComplete: function(elem, rendered) {
-    OptionsStore.get(function(prefs) {
-      markdown_here.imports.CommonLogic.forgotToRenderIntervalCheck(
-        elem,
-        markdown_here.imports.markdownHere,
-        markdown_here.imports.MdhHtmlToText,
+      var renderedMarkdown = markdown_here.imports.MarkdownRender.markdownRender(
+        mdhHtmlToText.get(),
+        prefs,
         markdown_here.imports.marked,
-        prefs);
+        markdown_here.imports.hljs);
+      renderedMarkdown = mdhHtmlToText.postprocess(renderedMarkdown);
+
+      callback(renderedMarkdown, prefs['main-css'] + prefs['syntax-css']);
     });
   },
 

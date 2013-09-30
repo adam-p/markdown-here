@@ -88,7 +88,6 @@ var TAB_KEYCODE = 9;
 var ESCAPE_KEYCODE = 27;
 
 var WATCHED_PROPERTY = 'markdownHereForgotToRenderWatched';
-var MARKDOWN_DETECTED_PROPERTY = 'markdownHereForgotToRenderMarkdownDetected';
 
 var FORGOT_TO_RENDER_PROMPT_INFO = "It looks like you wrote this email in Markdown but forgot to make it pretty.";
 var FORGOT_TO_RENDER_PROMPT_QUESTION = "Send it anyway?";
@@ -122,13 +121,9 @@ function forgotToRenderIntervalCheck(focusedElem, MarkdownHere, MdhHtmlToText, m
 
   // If we've already set up watchers for this compose element, skip it.
   if (typeof(focusedElem[WATCHED_PROPERTY]) === 'undefined') {
-    setupForgotToRenderInterceptors(focusedElem);
+    setupForgotToRenderInterceptors(focusedElem, MdhHtmlToText, marked, prefs);
     focusedElem[WATCHED_PROPERTY] = true;
   }
-
-  var text = new MdhHtmlToText.MdhHtmlToText(focusedElem).get();
-
-  focusedElem[MARKDOWN_DETECTED_PROPERTY] = probablyWritingMarkdown(text, marked, prefs);
 }
 
 
@@ -174,13 +169,18 @@ function eatEvent(event) {
 
 
 // Sets up event listeners to capture attempts to send the email.
-function setupForgotToRenderInterceptors(composeElem) {
+function setupForgotToRenderInterceptors(composeElem, MdhHtmlToText, marked, prefs) {
   var composeSendButton = findClosestSendButton(composeElem);
 
   if (!composeSendButton) {
     Utils.consoleLog('Markdown Here was unable to find the Gmail "Send" button. Please let the developers know by creating an issue at: https://github.com/adam-p/markdown-here/issues');
     return;
   }
+
+  var shouldIntercept = function() {
+    var mdMaybe = new MdhHtmlToText.MdhHtmlToText(composeElem).get();
+    return probablyWritingMarkdown(mdMaybe, marked, prefs);
+  };
 
   // NOTE: We are setting the event listeners on the *parent* element of the
   // send button and compose area. This is so that we can capture and prevent
@@ -190,7 +190,7 @@ function setupForgotToRenderInterceptors(composeElem) {
   var composeSendButtonKeyListener = function(event) {
     if (event.target === composeSendButton &&
         (event.keyCode === ENTER_KEYCODE || event.keyCode === SPACE_KEYCODE) &&
-        composeElem[MARKDOWN_DETECTED_PROPERTY]) {
+        shouldIntercept()) {
       // Gmail uses keydown to trigger its send action. Firefox fires keyup even if
       // keydown has been suppressed or hasn't yet been let through.
       // So we're going to suppress keydown and act on keyup.
@@ -208,7 +208,7 @@ function setupForgotToRenderInterceptors(composeElem) {
   var composeSendButtonClickListener = function(event) {
     if (event.target === composeSendButton &&
         !event[Utils.MARKDOWN_HERE_EVENT] &&
-        composeElem[MARKDOWN_DETECTED_PROPERTY]) {
+        shouldIntercept()) {
       eatEvent(event);
       showForgotToRenderPromptAndRespond(composeElem, composeSendButton);
     }
@@ -219,7 +219,7 @@ function setupForgotToRenderInterceptors(composeElem) {
     // to check for either.
     if (event.target === composeElem &&
         (event.metaKey || event.ctrlKey) && event.keyCode === ENTER_KEYCODE &&
-        composeElem[MARKDOWN_DETECTED_PROPERTY]) {
+        shouldIntercept()) {
       eatEvent(event);
       showForgotToRenderPromptAndRespond(composeElem, composeSendButton);
     }

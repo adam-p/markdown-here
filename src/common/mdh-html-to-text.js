@@ -7,13 +7,16 @@
 ;(function() {
 
 "use strict";
-/*global module:false, htmlToText:false*/
+/*global module:false, htmlToText:false, Utils:false*/
 
 var exports = {};
 
 
-if (typeof(htmlToText) === 'undefined' && typeof(Components) !== 'undefined') {
+if (typeof(htmlToText) === 'undefined' &&
+    typeof(Components) !== 'undefined' &&
+    typeof(Components.utils) !== 'undefined') {
   Components.utils.import('resource://markdown_here_common/jsHtmlToText.js');
+  Components.utils.import('resource://markdown_here_common/utils.js');
 }
 
 
@@ -23,8 +26,13 @@ the HTML seems suboptimal.
 */
 
 
-function MdhHtmlToText(elem) {
+function MdhHtmlToText(elem, range) {
   this.elem = elem;
+  this.range = range;
+
+  // NOTE: If we end up really using `range`, we should do this:
+  // if (!this.range) { this.range = new Range(); this.range.selectNodeContents(elem); }
+  // ...or just make it non-optional.
 
   // Is this insufficient? What if `elem` is in an iframe with no `src`?
   // Maybe we should go higher in the iframe chain?
@@ -70,7 +78,15 @@ MdhHtmlToText.prototype._preprocess = function() {
     }]
   }
   */
-  this.preprocessInfo = { html: this.elem.innerHTML, exclusions: [] };
+  var html;
+  if (this.range) {
+    html = Utils.getDocumentFragmentHTML(this.range.cloneContents());
+  }
+  else {
+    html = this.elem.innerHTML;
+  }
+
+  this.preprocessInfo = { html: html, exclusions: [] };
 
   // The default behaviour for `jsHtmlToText.js` is to strip out tags (and their
   // inner text/html) that it doesn't expect/want. But we want some tag blocks
@@ -120,7 +136,7 @@ MdhHtmlToText.prototype.get = function() {
 
 
 // Re-insert the excluded content that we removed in preprocessing
-MdhHtmlToText.prototype.postprocessRenderedMarkdown = function(renderedMarkdown) {
+MdhHtmlToText.prototype.postprocess = function(renderedMarkdown) {
   var i;
   for (i = 0; i < this.preprocessInfo.exclusions.length; i++) {
     renderedMarkdown = renderedMarkdown.replace(this.preprocessInfo.exclusions[i].placeholder,

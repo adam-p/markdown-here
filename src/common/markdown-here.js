@@ -363,25 +363,10 @@ function findMarkdownHereWrappersInRange(range) {
 // Converts the Markdown in the user's compose element to HTML and replaces it.
 // If `selectedRange` is null, then the entire email is being rendered.
 function renderMarkdown(focusedElem, selectedRange, markdownRenderer, renderComplete) {
-  var extractedHtml, rangeWrapper;
-
-  // Wrap the selection in a new element so that we can better extract the HTML.
-  // This modifies the DOM, but that's okay, since we're going to replace the
-  // new element in a moment.
-  rangeWrapper = focusedElem.ownerDocument.createElement('div');
-  rangeWrapper.appendChild(selectedRange.extractContents());
-  selectedRange.insertNode(rangeWrapper);
-  selectedRange.selectNode(rangeWrapper);
-
-  // Get the HTML containing the Markdown from the selection.
-  extractedHtml = rangeWrapper.innerHTML;
-
-  if (!extractedHtml || extractedHtml.length === 0) {
-    return 'No Markdown found to render';
-  }
+  var originalHtml = Utils.getDocumentFragmentHTML(selectedRange.cloneContents());
 
   // Call to the extension main code to actually do the md->html conversion.
-  markdownRenderer(extractedHtml, function(mdHtml, mdCss) {
+  markdownRenderer(focusedElem, selectedRange, function(mdHtml, mdCss) {
     var wrapper;
 
     // Wrap our pretty HTML in a <div> wrapper.
@@ -394,7 +379,7 @@ function renderMarkdown(focusedElem, selectedRange, markdownRenderer, renderComp
     // Store the original Markdown-in-HTML to a data attribute on the wrapper
     // element. We'll use this later if we need to unrender back to Markdown.
     wrapper = replaceRange(selectedRange, mdHtml);
-    wrapper.setAttribute('data-md-original', encodeURIComponent(extractedHtml));
+    wrapper.setAttribute('data-md-original', encodeURIComponent(originalHtml));
 
     // Some webmail (Gmail) strips off any external style block. So we need to go
     // through our styles, explicitly applying them to matching elements.
@@ -418,7 +403,6 @@ function unrenderMarkdown(wrapperElem) {
 //        drill down to find the correct element and document.)
 // @param `markdownRenderer`  The function that provides raw-Markdown-in-HTML
 //                            to pretty-Markdown-in-HTML rendering service.
-//                            See markdown-render.js for information.
 // @param `logger`  A function that can be used for logging debug messages. May
 //                  be null.
 // @param `renderComplete`  Callback that will be called when a render or unrender

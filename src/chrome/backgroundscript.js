@@ -4,8 +4,8 @@
  */
 
 "use strict";
-/*global chrome:false, OptionsStore:false, markdownRender:false,
-  htmlToText:false, marked:false, hljs:false, Utils:false, CommonLogic:false */
+/*global chrome:false, OptionsStore:false, MarkdownRender:false,
+  marked:false, hljs:false, Utils:false, CommonLogic:false */
 /*jshint devel:true*/
 
 /*
@@ -63,13 +63,11 @@ chrome.runtime.onMessage.addListener(function(request, sender, responseCallback)
   if (request.action === 'render') {
     OptionsStore.get(function(prefs) {
       responseCallback({
-        html: markdownRender(
+        html: MarkdownRender.markdownRender(
+          request.mdText,
           prefs,
-          htmlToText,
           marked,
-          hljs,
-          request.html,
-          sender.tab.url),
+          hljs),
         css: (prefs['main-css'] + prefs['syntax-css'])
       });
     });

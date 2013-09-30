@@ -32,6 +32,12 @@
 
 // TODO: Check for errors. See: https://code.google.com/chrome/extensions/dev/storage.html
 
+
+if (typeof(Utils) === 'undefined' && typeof(Components) !== 'undefined') {
+  Components.utils.import('resource://markdown_here_common/utils.js');
+}
+
+
 var ChromeOptionsStore = {
 
   // The options object will be passed to `callback`
@@ -152,7 +158,7 @@ var ChromeOptionsStore = {
     }
     else {
       // Make this actually an async call.
-      setTimeout(function() {
+      Utils.nextTick(function() {
         var i, obj = {};
         for (i = 0; i < localStorage.length; i++) {
           // Older settings aren't JSON-encoded, so they'll throw an exception.
@@ -181,7 +187,7 @@ var ChromeOptionsStore = {
     }
     else {
       // Make this actually an async call.
-      setTimeout(function() {
+      Utils.nextTick(function() {
         var key;
         for (key in finalobj) {
           localStorage.setItem(key, finalobj[key]);
@@ -199,7 +205,7 @@ var ChromeOptionsStore = {
     }
     else {
       // Make this actually an async call.
-      setTimeout(function() {
+      Utils.nextTick(function() {
         var i;
         for (i = 0; i < keysToDelete.length; i++) {
           localStorage.removeItem(keysToDelete[i]);
@@ -370,7 +376,7 @@ var SafariOptionsStore = {
     }
     else {
       // Make this actually asynchronous
-      setTimeout(function() {
+      Utils.nextTick(function() {
         if (callback) callback(safari.extension.settings);
       });
     }
@@ -388,7 +394,7 @@ var SafariOptionsStore = {
     }
     else {
       // Make this actually asynchronous
-      setTimeout(function() {
+      Utils.nextTick(function() {
         for (var key in obj) {
           safari.extension.settings[key] = obj[key];
         }
@@ -410,7 +416,7 @@ var SafariOptionsStore = {
     }
     else {
       // Make this actually asynchronous
-      setTimeout(function() {
+      Utils.nextTick(function() {
         var i;
         if (typeof(arrayOfKeys) === 'string') {
           arrayOfKeys = [arrayOfKeys];
@@ -495,7 +501,7 @@ this.OptionsStore._fillDefaults = function(prefsObj, callback) {
       }
       else {
         // Make it actually asynchronous
-        setTimeout(function() {
+        Utils.nextTick(function() {
           prefsObj[key] = that.defaults[key];
           return callback();
         });
@@ -503,7 +509,7 @@ this.OptionsStore._fillDefaults = function(prefsObj, callback) {
     }
     else {
       // Just skip it, but make it asynchronous
-      setTimeout(function() {
+      Utils.nextTick(function() {
         return callback();
       });
     }

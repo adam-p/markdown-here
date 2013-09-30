@@ -106,7 +106,7 @@ function sanitizeDocumentFragment(docFrag) {
 
 
 // Walk the DOM, executing `func` on each element.
-// From Crockform.
+// From Crockford.
 function walkDOM(node, func) {
   func(node);
   node = node.firstChild;
@@ -125,6 +125,23 @@ function isElementinDocument(element) {
     }
   }
   return false;
+}
+
+
+// An approximate equivalent to outerHTML for document fragments.
+function getDocumentFragmentHTML(docFrag) {
+  var html = '', i;
+  for (i = 0; i < docFrag.childNodes.length; i++) {
+    var node = docFrag.childNodes[i];
+    if (node.nodeType === node.TEXT_NODE) {
+      html += node.nodeValue;
+    }
+    else { // going to assume ELEMENT_NODE
+      html += node.outerHTML;
+    }
+  }
+
+  return html;
 }
 
 
@@ -374,7 +391,7 @@ function setFocus(elem) {
 
 // Sets a short timeout and then calls callback
 function nextTick(callback) {
-  setTimeout(callback, 0);
+  Utils.global.setTimeout(callback, 0);
 }
 
 // `context` is optional. Will be `this` when `callback` is called.
@@ -385,7 +402,7 @@ function nextTickFn(callback, context) {
       callback.apply(context, args);
     };
 
-    setTimeout(argApplier, 0);
+    Utils.global.setTimeout(argApplier, 0);
   };
 }
 
@@ -406,6 +423,7 @@ Utils.global = this;
 Utils.saferSetInnerHTML = saferSetInnerHTML;
 Utils.saferSetOuterHTML = saferSetOuterHTML;
 Utils.sanitizeDocumentFragment = sanitizeDocumentFragment;
+Utils.getDocumentFragmentHTML = getDocumentFragmentHTML;
 Utils.getLocalURL = getLocalURL;
 Utils.getLocalFile = getLocalFile;
 Utils.getLocalFileAsBase64 = getLocalFileAsBase64;

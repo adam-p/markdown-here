@@ -5,7 +5,8 @@
 
 "use strict";
 /*global OptionsStore:false, chrome:false, markdownRender:false, $:false,
-  htmlToText:false, marked:false, hljs:false, markdownHere:false, Utils:false*/
+  htmlToText:false, marked:false, hljs:false, markdownHere:false, Utils:false,
+  MdhHtmlToText:false*/
 
 /*
  * Main script file for the options page.
@@ -217,27 +218,16 @@ function checkChange() {
 }
 
 // This function stolen entirely from contentscript.js and ff-overlay.js
-function requestMarkdownConversion(html, callback) {
-  if (typeof(chrome) !== 'undefined' && typeof(chrome.extension) !== 'undefined') {
-    // Send a request to the add-on script to actually do the rendering.
-    chrome.extension.sendMessage({action: 'render', html: html}, function(response) {
-      callback(response.html, response.css);
+function requestMarkdownConversion(elem, range, callback) {
+  var mdhHtmlToText = new MdhHtmlToText.MdhHtmlToText(elem, range);
+
+  Utils.makeRequestToPrivilegedScript(
+    document,
+    { action: 'render', mdText: mdhHtmlToText.get() },
+    function(response) {
+      var renderedMarkdown = mdhHtmlToText.postprocess(response.html);
+      callback(renderedMarkdown, response.css);
     });
-  }
-  else {
-    // TODO: Implement a background script render service that can be used like
-    // the Chrome one.
-    OptionsStore.get(function(prefs) {
-      callback(
-        markdownRender(
-          prefs,
-          htmlToText,
-          marked,
-          hljs,
-          html),
-        (prefs['main-css'] + prefs['syntax-css']));
-    });
-  }
 }
 
 // Render the sample Markdown.
@@ -255,7 +245,7 @@ function renderMarkdown(postRenderCallback) {
   // can call the `postRenderCallback` -- we'll intercept the callback used
   // by the rendering service.
 
-  function requestMarkdownConversionInterceptor(html, callback) {
+  function requestMarkdownConversionInterceptor(elem, range, callback) {
 
     function callbackInterceptor() {
       callback.apply(null, arguments);
@@ -265,7 +255,7 @@ function renderMarkdown(postRenderCallback) {
     }
 
     // Call the real rendering service.
-    requestMarkdownConversion(html, callbackInterceptor);
+    requestMarkdownConversion(elem, range, callbackInterceptor);
   }
 }
 
