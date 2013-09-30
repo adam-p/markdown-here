@@ -188,21 +188,21 @@ Short answer: Gmail and Thunderbird are great. More info about some clients can 
     <td>
       Email received from Yahoo does not display with properly separated paragraphs. (Hotmail strips styling off <code>&lt;p&gt;</code> and <code>&lt;div&gt;</code> tags, and Yahoo uses the latter for paragraphs.)
     </td>
-    <td>No reply exclusion.</td>
+    <td>No reply exclusion. No forgot-to-render detection.</td>
   </tr>
   <tr>
     <th>Yahoo</th>
     <td>&#x2713;</td>
     <td>&#x2713;</td>
     <td>&#x2713;</td>
-    <td>No reply exclusion.</td>
+    <td>No reply exclusion. No forgot-to-render detection.</td>
   </tr>
   <tr>
     <th>Google Groups</th>
     <td>&#x2713;</td>
     <td>&#x2713;</td>
     <td>&#x2713;</td>
-    <td>Rendered version doesn't show in digest email. But that's probably true of manually-rich-edited posts as well.</td>
+    <td>Rendered version doesn't show in digest email, but that's probably true of manually-rich-edited posts as well. No forgot-to-render detection.</td>
   </tr>
   <tr>
     <th>Wordpress</th>
