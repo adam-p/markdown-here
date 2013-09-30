@@ -390,19 +390,23 @@ function setFocus(elem) {
 
 
 // Sets a short timeout and then calls callback
-function nextTick(callback) {
-  Utils.global.setTimeout(callback, 0);
+function nextTick(callback, context) {
+  var runner = function() {
+    callback.call(context);
+  };
+
+  Utils.global.setTimeout(runner, 0);
 }
 
 // `context` is optional. Will be `this` when `callback` is called.
 function nextTickFn(callback, context) {
   return function() {
     var args = arguments;
-    var argApplier = function() {
+    var runner = function() {
       callback.apply(context, args);
     };
 
-    Utils.global.setTimeout(argApplier, 0);
+    Utils.global.setTimeout(runner, 0);
   };
 }
 

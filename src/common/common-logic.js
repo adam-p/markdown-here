@@ -298,14 +298,19 @@ function probablyWritingMarkdown(mdMaybe, marked, prefs) {
     return true;
   }
 
-  // This matches both emphasis and strong Markdown
-  var em_strong = mdMaybe.match(/\b_((?:__|[\s\S])+?)_\b|\*((?:\*\*|[\s\S])+?)\*(?!\*)/);
-  if (em_strong) {
-    logMatch('emphasis', em_strong);
+  // We're going to look for strong emphasis (e.g., double asterisk), but not
+  // light emphasis (e.g., single asterisk). Rationale: people use surrounding
+  // single asterisks pretty often in ordinary, non-MD text, and we don't want
+  // to be annoying.
+  // TODO: If we ever get really fancy with MD detection, the presence of light
+  // emphasis should still contribute towards the determination.
+  var emphasis = mdMaybe.match(/__([\s\S]+?)__(?!_)|\*\*([\s\S]+?)\*\*(?!\*)/);
+  if (emphasis) {
+    logMatch('emphasis', emphasis);
     return true;
   }
 
-  // Headers. (But not H1, since that seems more likely to false-positive, and
+  // Headers. (But not hash-mark-H1, since that seems more likely to false-positive, and
   // less likely to be used. And underlines of at least length 5.)
   var header = mdMaybe.match(/(^#{2,6}[^#])|(^[-=]{5,})/m);
   if (header) {

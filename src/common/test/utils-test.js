@@ -160,6 +160,34 @@ describe('Utils', function() {
     });
   });
 
+
+  describe('getDocumentFragmentHTML', function() {
+    var makeFragment = function(htmlArray) {
+      var i, docFrag = document.createDocumentFragment();
+      htmlArray.forEach(function(html) {
+        docFrag.appendChild($(html).get(0));
+      });
+
+      return docFrag;
+    };
+
+    it('should be okay with an empty fragment', function() {
+      expect(Utils.getDocumentFragmentHTML(makeFragment([]))).to.equal('');
+    });
+
+    it('should return correct html', function() {
+      var htmlArray = [
+        '<div>aaa</div>',
+        '<span><b>bbb</b></span>'
+      ];
+
+      var expectedHTML = htmlArray.join('');
+
+      expect(Utils.getDocumentFragmentHTML(makeFragment(htmlArray))).to.equal(expectedHTML);
+    });
+  });
+
+
   describe('getLocalFile', function() {
     it('should return correct data', function(done) {
       // We "know" our logo file starts with this string when base64'd
@@ -270,4 +298,55 @@ describe('Utils', function() {
       Utils.consoleLog('setFocus did not explode');
     });
   });
+
+  describe('nextTick', function() {
+    it('should call callback asynchronously and quickly', function(done) {
+      var start = new Date();
+      var called = false;
+      Utils.nextTick(function() {
+        called = true;
+        expect(new Date() - start).to.be.lessThan(200);
+        done();
+      });
+      expect(called).to.equal(false);
+    });
+
+    it('should properly set context', function(done) {
+      var ctx = { hi: 'there' };
+
+      Utils.nextTick(function() {
+        expect(this).to.equal(ctx);
+        done();
+      }, ctx);
+    });
+  });
+
+  describe('nextTickFn', function() {
+    it('should return a function', function() {
+      expect(Utils.nextTickFn(function(){})).to.be.a('function');
+    });
+
+    it('should return a function that calls callback asynchronously and quickly', function(done) {
+      var start = new Date();
+      var called = false;
+      var fn = Utils.nextTickFn(function() {
+        called = true;
+        expect(new Date() - start).to.be.lessThan(200);
+        done();
+      });
+      fn();
+      expect(called).to.equal(false);
+    });
+
+    it('should properly set context', function(done) {
+      var ctx = { hi: 'there' };
+
+      var fn = Utils.nextTickFn(function() {
+        expect(this).to.equal(ctx);
+        done();
+      }, ctx);
+      fn();
+    });
+  });
+
 });
