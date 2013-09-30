@@ -253,6 +253,8 @@ Short answer: Gmail and Thunderbird are great. More info about some clients can 
   * The use of browser-specific styles (-moz-, -webkit-) should be avoided. If used, they may not render correctly for people reading the email in a different browser from the one where the email was sent.
   * The use of state-dependent styles (like `a:hover`) don't work because they don't match at the time the styles are made explicit. (In email, styles must be explicitly applied to all elements -- stylesheets get stripped.)
 
+* For more tweaky features, visit the [Tips and Tricks](https://github.com/adam-p/markdown-here/wiki/Tips-and-Tricks) section.
+
 ## Building the Extension Bundles
 
 "Building" is really just zipping. Create all archives relative to the `src` directory.
