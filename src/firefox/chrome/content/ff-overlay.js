@@ -85,7 +85,7 @@ var markdown_here = {
   // the forgot-to-render check, say) will not reliably take effect without an
   // application restart.
   onLoad: function() {
-    var contextMenu, optionsStore = {};
+    var contextMenu;
 
     Components.utils.import('resource://markdown_here_common/utils.js', markdown_here.imports);
     Components.utils.import('resource://markdown_here_common/common-logic.js', markdown_here.imports);
@@ -94,6 +94,7 @@ var markdown_here = {
     Components.utils.import('resource://markdown_here_common/markdown-here.js', markdown_here.imports);
     Components.utils.import('resource://markdown_here_common/mdh-html-to-text.js', markdown_here.imports);
     Components.utils.import('resource://markdown_here_common/markdown-render.js', markdown_here.imports);
+    Components.utils.import('resource://markdown_here_common/options-store.js', markdown_here.imports);
 
     markdown_here.scriptLoader.loadSubScript('resource://markdown_here_common/highlightjs/highlight.js', markdown_here.imports);
 
@@ -110,8 +111,7 @@ var markdown_here = {
     this.setupButton();
 
     // Some setup steps are dependent on options
-    this.scriptLoader.loadSubScript('resource://markdown_here_common/options-store.js');
-    OptionsStore.get(function(prefs) {
+    markdown_here.imports.OptionsStore.get(function(prefs) {
 
       // Register a hotkey listener
 
@@ -238,7 +238,7 @@ var markdown_here = {
   markdownRender: function(elem, range, callback) {
     var mdhHtmlToText = new markdown_here.imports.MdhHtmlToText.MdhHtmlToText(elem, range);
 
-    OptionsStore.get(function(prefs) {
+    markdown_here.imports.OptionsStore.get(function(prefs) {
       var renderedMarkdown = markdown_here.imports.MarkdownRender.markdownRender(
         mdhHtmlToText.get(),
         prefs,
@@ -338,7 +338,7 @@ var markdown_here = {
 
       setToggleButtonVisibility(focusedElem);
 
-      OptionsStore.get(function(prefs) {
+      markdown_here.imports.OptionsStore.get(function(prefs) {
         markdown_here.imports.CommonLogic.forgotToRenderIntervalCheck(
           focusedElem,
           markdown_here.imports.markdownHere,
