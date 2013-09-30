@@ -1,8 +1,13 @@
 Change Log
 ==========
 
-2013-xx-yy: v2.8.3
+2013-xx-yy: v2.9.0
 ------------------
+
+* New feature: **Forgot-to-render detection**. Have you ever forgotten to make your Markdown pretty before sending your email? Me too. Now Markdown Here will detect when your email contains raw Markdown and will give you second chance to go back and render it before sending.
+  * This feature is supported in Thunderbird (and Postbox), and for Gmail in Chrome, Firefox, Opera, and Safari. (If anyone really cares about Hotmail, Rocketmail, etc., please chime in.)
+  * For now this feature is off by default because I'm nervous about too many false positives driving people crazy. But please opt in! The checkbox to enable it is at the bottom of the MDH Options page. And please give feedback on how the feature does or doesn't work for you, either in the [Github issue](https://github.com/adam-p/markdown-here/issues/90) or the [MDH Google Group](https://groups.google.com/forum/#!forum/markdown-here).
+  * Thanks to [Petr Pudlák](https://github.com/ppetr) for requesting this in [issue #90](https://github.com/adam-p/markdown-here/issues/90), [Zhou Qiang](https://github.com/zhouqianghfut) in [issue #96](https://github.com/adam-p/markdown-here/issues/96), [Adam Backstrom](https://github.com/abackstrom) in [issue #98](https://github.com/adam-p/markdown-here/issues/98).
 
 * [Fixed bug](https://github.com/adam-p/markdown-here/issues/84): Math: single-character formula won't render.
   * Thanks to kbeach who reported this [in a Google Groups post](https://groups.google.com/forum/#!msg/markdown-here/tolrITkqrx0/phElyPBBAhYJ).

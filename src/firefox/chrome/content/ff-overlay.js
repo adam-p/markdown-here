@@ -4,8 +4,7 @@
  */
 
 "use strict";
-/*global Components:false, markdownHere:false, GetCurrentEditorType:false,
-  OptionsStore:false*/
+/*global Components:false, OptionsStore:false */
 /*jshint browser:true*/
 
 /*
@@ -13,10 +12,9 @@
  * rendering services.
  */
 
-Components.utils.import('resource://markdown_here_common/markdown-here.js');
-
-
 var markdown_here = {
+
+  imports: {},
 
   // Components.utils is somewhat more performant than mozIJSSubScriptLoader, so
   // we'll use it when possible. However, Components.utils usually requires
@@ -31,39 +29,40 @@ var markdown_here = {
   onMenuItemCommand: function(e) {
     var mdReturn, focusedElem, self = this;
 
-    focusedElem = markdownHere.findFocusedElem(window.document);
+    focusedElem = markdown_here.imports.markdownHere.findFocusedElem(window.document);
     if (!focusedElem) {
       // Shouldn't happen. But if it does, just silently abort.
       return;
     }
 
     // Are we running in Thunderbird?
-    if (typeof(GetCurrentEditorType) !== 'undefined' && GetCurrentEditorType !== null) {
+    if (typeof(window.GetCurrentEditorType) !== 'undefined' &&
+        window.GetCurrentEditorType !== null) {
       // Are we rich-editing?
       /*jshint newcap:false*/
-      if (GetCurrentEditorType().indexOf('html') < 0) {
+      if (window.GetCurrentEditorType().indexOf('html') < 0) {
         this.alert('You are using a plain-text compose editor. You must change to a rich editor to use Markdown Here.');
         return;
       }
 
       // The focus might not be in the compose box
-      if (!markdownHere.elementCanBeRendered(focusedElem)) {
+      if (!markdown_here.imports.markdownHere.elementCanBeRendered(focusedElem)) {
         this.alert('Please put the cursor into the compose box.');
         return;
       }
     }
     else { // Firefox
-      if (!markdownHere.elementCanBeRendered(focusedElem)) {
+      if (!markdown_here.imports.markdownHere.elementCanBeRendered(focusedElem)) {
         this.alert('The selected field is not valid for Markdown rendering. Please use a rich editor.');
         return;
       }
     }
 
-    mdReturn = markdownHere(
+    mdReturn = markdown_here.imports.markdownHere(
                 focusedElem.ownerDocument,
-                // We'll need the target document available later
-                function() {
-                  self.markdownRender.apply(self, [focusedElem.ownerDocument].concat([].splice.call(arguments, 0))); },
+                function(elem, range, callback) {
+                  self.markdownRender(elem, range, callback);
+                },
                 this.log);
 
     if (typeof(mdReturn) === 'string') {
@@ -77,8 +76,27 @@ var markdown_here = {
     markdown_here.onMenuItemCommand(e);
   },
 
+  // NOTE: Thunderbird seems to reuse compose windows, so this will only get
+  // called for every addtion new open message. Like, if a message is opened
+  // and send and another message is opened, this will only get called once.
+  // If a message is opened and another message is opened at the same time, this
+  // will get called twice.
+  // This means that changes to the options that are used here (for turning off
+  // the forgot-to-render check, say) will not reliably take effect without an
+  // application restart.
   onLoad: function() {
-    var contextMenu, optionsStore = {};
+    var contextMenu;
+
+    Components.utils.import('resource://markdown_here_common/utils.js', markdown_here.imports);
+    Components.utils.import('resource://markdown_here_common/common-logic.js', markdown_here.imports);
+    Components.utils.import('resource://markdown_here_common/jsHtmlToText.js', markdown_here.imports);
+    Components.utils.import('resource://markdown_here_common/marked.js', markdown_here.imports);
+    Components.utils.import('resource://markdown_here_common/markdown-here.js', markdown_here.imports);
+    Components.utils.import('resource://markdown_here_common/mdh-html-to-text.js', markdown_here.imports);
+    Components.utils.import('resource://markdown_here_common/markdown-render.js', markdown_here.imports);
+    Components.utils.import('resource://markdown_here_common/options-store.js', markdown_here.imports);
+
+    markdown_here.scriptLoader.loadSubScript('resource://markdown_here_common/highlightjs/highlight.js', markdown_here.imports);
 
     // initialization code
     this.initialized = true;
@@ -93,8 +111,7 @@ var markdown_here = {
     this.setupButton();
 
     // Some setup steps are dependent on options
-    this.scriptLoader.loadSubScript('resource://markdown_here_common/options-store.js');
-    OptionsStore.get(function(prefs) {
+    markdown_here.imports.OptionsStore.get(function(prefs) {
 
       // Register a hotkey listener
 
@@ -113,6 +130,62 @@ var markdown_here = {
       if (prefs.hotkey.key.length === 1) {
         window.addEventListener('keydown', hotkeyHandler, false);
       }
+
+      /*
+       * Set up Thunderbird's forgot-to-render hooks
+       */
+      // Are we running in Thunderbird?
+      if (prefs['forgot-to-render-check-enabled'] &&
+          typeof(window.GetCurrentEditorType) !== 'undefined' &&
+          window.GetCurrentEditorType !== null) {
+        // Are we rich-editing?
+        /*jshint newcap:false*/
+        if (window.GetCurrentEditorType().indexOf('html') < 0) {
+          return;
+        }
+
+        var sendEventHandler = function(event) {
+          var msgcomposeWindow = document.getElementById('msgcomposeWindow');
+
+          // This handler will also get hit when drafts get saved, and other times.
+          // For all values, see: http://hg.mozilla.org/comm-central/file/c588ff89c281/mailnews/compose/public/nsIMsgCompose.idl#l36
+          // Allow type coercion in the comparison
+          var deliverMode = Number(msgcomposeWindow.getAttribute('msgtype'));
+          if (deliverMode !== Components.interfaces.nsIMsgCompDeliverMode.Now &&
+              deliverMode !== Components.interfaces.nsIMsgCompDeliverMode.Later &&
+              deliverMode !== Components.interfaces.nsIMsgCompDeliverMode.Background) {
+            return;
+          }
+
+          var plaintext = new markdown_here.imports.MdhHtmlToText.MdhHtmlToText(
+                            window.GetCurrentEditor().document.body).get();
+
+          if (!markdown_here.imports.CommonLogic.probablyWritingMarkdown(
+                plaintext,
+                markdown_here.imports.htmlToText,
+                markdown_here.imports.marked)) {
+            return;
+          }
+
+          var promptParams = {
+            inn:{
+              promptInfo: markdown_here.imports.CommonLogic.FORGOT_TO_RENDER_PROMPT_INFO,
+              promptQuestion: markdown_here.imports.CommonLogic.FORGOT_TO_RENDER_PROMPT_QUESTION},
+            out:null
+          };
+          window.openDialog(
+            "chrome://markdown_here/content/confirm-prompt.xul",
+            "",
+            "chrome, dialog, modal, centerscreen",
+            promptParams).focus();
+
+          if (!promptParams.out) {
+            // User wants to go back and render.
+            event.preventDefault();
+          }
+        };
+        window.addEventListener('compose-send-message', sendEventHandler, true);
+      }
     });
   },
 
@@ -121,14 +194,15 @@ var markdown_here = {
     var focusedElem, showItem = false;
 
     // Are we running in Thunderbird?
-    if (typeof(GetCurrentEditorType) !== 'undefined' && GetCurrentEditorType !== null) {
+    if (typeof(window.GetCurrentEditorType) !== 'undefined' &&
+        window.GetCurrentEditorType !== null) {
       // Always show the menu item.
       // If the editor isn't in rich mode, the user will get a helpful error
       // message telling them to change modes.
       showItem = true;
     }
     else { // Firefox
-      focusedElem = markdownHere.findFocusedElem(window.document);
+      focusedElem = markdown_here.imports.markdownHere.findFocusedElem(window.document);
 
       if (!focusedElem) {
         showItem = false;
@@ -142,7 +216,7 @@ var markdown_here = {
         showItem = true;
       }
       else {
-        showItem = markdownHere.elementCanBeRendered(focusedElem);
+        showItem = markdown_here.imports.markdownHere.elementCanBeRendered(focusedElem);
       }
     }
 
@@ -151,9 +225,7 @@ var markdown_here = {
   },
 
   log: function(msg) {
-    var consoleService = Components.classes['@mozilla.org/consoleservice;1']
-                                   .getService(Components.interfaces.nsIConsoleService);
-    consoleService.logStringMessage(msg);
+    markdown_here.imports.Utils.consoleLog(msg);
   },
 
   alert: function(msg) {
@@ -163,26 +235,18 @@ var markdown_here = {
   },
 
   // The rendering service provided to the content script.
-  // See the comment in markdown-render.js for why we do this.
-  markdownRender: function(targetDocument, html, callback) {
-    var markdownRender = {}, hljs = {}, marked = {}, htmlToText = {}, optionsStore = {};
+  markdownRender: function(elem, range, callback) {
+    var mdhHtmlToText = new markdown_here.imports.MdhHtmlToText.MdhHtmlToText(elem, range);
 
-    Components.utils.import('resource://markdown_here_common/markdown-render.js', markdownRender);
-    Components.utils.import('resource://markdown_here_common/marked.js', marked);
-    Components.utils.import('resource://markdown_here_common/jsHtmlToText.js', htmlToText);
-    this.scriptLoader.loadSubScript('resource://markdown_here_common/highlightjs/highlight.js', hljs);
+    markdown_here.imports.OptionsStore.get(function(prefs) {
+      var renderedMarkdown = markdown_here.imports.MarkdownRender.markdownRender(
+        mdhHtmlToText.get(),
+        prefs,
+        markdown_here.imports.marked,
+        markdown_here.imports.hljs);
+      renderedMarkdown = mdhHtmlToText.postprocess(renderedMarkdown);
 
-    OptionsStore.get(function(prefs) {
-      callback(
-        markdownRender.markdownRender(
-          prefs,
-          htmlToText.htmlToText,
-          marked.marked,
-          hljs.hljs,
-          html,
-          targetDocument,
-          targetDocument.location ? targetDocument.location.href : null),
-        prefs['main-css'] + prefs['syntax-css']);
+      callback(renderedMarkdown, prefs['main-css'] + prefs['syntax-css']);
     });
   },
 
@@ -247,7 +311,7 @@ var markdown_here = {
         // arguments.
         elem.ownerDocument.addEventListener('focus', focusChange, true);
 
-        renderable = markdownHere.elementCanBeRendered(elem);
+        renderable = markdown_here.imports.markdownHere.elementCanBeRendered(elem);
       }
 
       if (renderable !== lastRenderable) {
@@ -267,12 +331,21 @@ var markdown_here = {
     // because Mozilla's automatic extension review prefers when you pass the
     // former to `setInterval()`.
     var intervalCheck = function() {
-      var focusedElem = markdownHere.findFocusedElem(window.document);
+      var focusedElem = markdown_here.imports.markdownHere.findFocusedElem(window.document);
       if (!focusedElem) {
         return;
       }
 
       setToggleButtonVisibility(focusedElem);
+
+      markdown_here.imports.OptionsStore.get(function(prefs) {
+        markdown_here.imports.CommonLogic.forgotToRenderIntervalCheck(
+          focusedElem,
+          markdown_here.imports.markdownHere,
+          markdown_here.imports.MdhHtmlToText,
+          markdown_here.imports.marked,
+          prefs);
+      });
     };
     setInterval(intervalCheck, 2000);
   },
@@ -290,7 +363,6 @@ var markdown_here = {
         var html = this.responseText;
 
         // Get the logo image data
-        var logoBase64 = null;
         var xhr = new XMLHttpRequest();
         xhr.open('GET', 'resource://markdown_here_common/images/icon16.png');
         xhr.responseType = 'arraybuffer';
@@ -317,7 +389,7 @@ var markdown_here = {
               if (!tabbrowser.contentDocument.querySelector('#markdown-here-upgrade-notification-content')) {
                 var elem = tabbrowser.contentDocument.createElement('div');
                 tabbrowser.contentDocument.body.appendChild(elem);
-                Utils.saferSetOuterHTML(elem, html);
+                markdown_here.imports.Utils.saferSetOuterHTML(elem, html);
 
                   // Setting the outer HTML wrecks our reference to the element, so get it again.
                 elem = tabbrowser.contentDocument.querySelector('#markdown-here-upgrade-notification-content');
@@ -424,6 +496,13 @@ var markdown_here = {
   }
 };
 
+
 window.addEventListener('load', function () {
-  markdown_here.onLoad();
+  var delayedLoad = function() {
+    markdown_here.onLoad();
+  };
+
+  // In the interest of improved browser load performace, call our onLoad after a tick.
+  // Note that this is the same as `Utils.nextTick`, but we haven't loaded Utils yet.
+  setTimeout(delayedLoad, 0);
 }, false);

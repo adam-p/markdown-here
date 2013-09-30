@@ -5,7 +5,8 @@
 
 "use strict";
 /*global OptionsStore:false, chrome:false, markdownRender:false, $:false,
-  htmlToText:false, marked:false, hljs:false, markdownHere:false, Utils:false*/
+  htmlToText:false, marked:false, hljs:false, markdownHere:false, Utils:false,
+  MdhHtmlToText:false*/
 
 /*
  * Main script file for the options page.
@@ -13,7 +14,7 @@
 
 var cssEdit, cssSyntaxEdit, cssSyntaxSelect, rawMarkdownIframe, savedMsg,
     mathEnable, mathEdit, hotkeyShift, hotkeyCtrl, hotkeyAlt, hotkeyKey,
-    loaded = false;
+    forgotToRenderCheckEnabled, loaded = false;
 
 function onLoad() {
   var xhr;
@@ -33,6 +34,7 @@ function onLoad() {
   hotkeyCtrl = document.getElementById('hotkey-ctrl');
   hotkeyAlt = document.getElementById('hotkey-alt');
   hotkeyKey = document.getElementById('hotkey-key');
+  forgotToRenderCheckEnabled = document.getElementById('forgot-to-render-check-enabled');
 
   //
   // Syntax highlighting styles and selection
@@ -77,6 +79,8 @@ function onLoad() {
 
     hotkeyChangeHandler();
 
+    forgotToRenderCheckEnabled.checked = prefs['forgot-to-render-check-enabled'];
+
     // Start watching for changes to the styles.
     setInterval(checkChange, 100);
   });
@@ -91,22 +95,11 @@ function onLoad() {
       navigator.userAgent.indexOf('Icedove') >= 0 ||
       navigator.userAgent.indexOf('Postbox') >= 0 ||
       navigator.userAgent.indexOf('Zotero') >= 0) {
-    $('#tests-link').click(function() {
-      var request = document.createTextNode(JSON.stringify($('#tests-link a').prop('href')));
-
-      var tabOpenResponseHandler = function(event) {
-        request.parentNode.removeChild(request);
-      };
-
-      request.addEventListener('markdown_here-tabOpen-response', tabOpenResponseHandler, false);
-
-      document.head.appendChild(request);
-
-      var event = document.createEvent('HTMLEvents');
-      event.initEvent('markdown_here-tabOpen-query', true, false);
-      request.dispatchEvent(event);
-
-      return false;
+    $('#tests-link').click(function(event) {
+      event.preventDefault();
+      Utils.makeRequestToPrivilegedScript(
+        document,
+        { action: 'open-tab', url: $('#tests-link a').prop('href') });
     });
   }
 
@@ -171,7 +164,8 @@ function checkChange() {
   var newOptions =
         cssEdit.value + cssSyntaxEdit.value +
         mathEnable.checked + mathEdit.value +
-        hotkeyShift.checked + hotkeyCtrl.checked + hotkeyAlt.checked + hotkeyKey.value;
+        hotkeyShift.checked + hotkeyCtrl.checked + hotkeyAlt.checked + hotkeyKey.value +
+        forgotToRenderCheckEnabled.checked;
 
   if (newOptions !== lastOptions) {
     // CSS has changed.
@@ -199,7 +193,8 @@ function checkChange() {
                       ctrlKey: hotkeyCtrl.checked,
                       altKey: hotkeyAlt.checked,
                       key: hotkeyKey.value
-                    }
+                    },
+          'forgot-to-render-check-enabled': forgotToRenderCheckEnabled.checked
         },
         function() {
           updateMarkdownRender();
@@ -223,28 +218,16 @@ function checkChange() {
 }
 
 // This function stolen entirely from contentscript.js and ff-overlay.js
-function requestMarkdownConversion(html, callback) {
-  if (typeof(chrome) !== 'undefined' && typeof(chrome.extension) !== 'undefined') {
-    // Send a request to the add-on script to actually do the rendering.
-    chrome.extension.sendMessage({action: 'render', html: html}, function(response) {
-      callback(response.html, response.css);
+function requestMarkdownConversion(elem, range, callback) {
+  var mdhHtmlToText = new MdhHtmlToText.MdhHtmlToText(elem, range);
+
+  Utils.makeRequestToPrivilegedScript(
+    document,
+    { action: 'render', mdText: mdhHtmlToText.get() },
+    function(response) {
+      var renderedMarkdown = mdhHtmlToText.postprocess(response.html);
+      callback(renderedMarkdown, response.css);
     });
-  }
-  else {
-    // TODO: Implement a background script render service that can be used like
-    // the Chrome one.
-    OptionsStore.get(function(prefs) {
-      callback(
-        markdownRender(
-          prefs,
-          htmlToText,
-          marked,
-          hljs,
-          html,
-          rawMarkdownIframe.contentDocument),
-        (prefs['main-css'] + prefs['syntax-css']));
-    });
-  }
 }
 
 // Render the sample Markdown.
@@ -262,7 +245,7 @@ function renderMarkdown(postRenderCallback) {
   // can call the `postRenderCallback` -- we'll intercept the callback used
   // by the rendering service.
 
-  function requestMarkdownConversionInterceptor(html, callback) {
+  function requestMarkdownConversionInterceptor(elem, range, callback) {
 
     function callbackInterceptor() {
       callback.apply(null, arguments);
@@ -272,7 +255,7 @@ function renderMarkdown(postRenderCallback) {
     }
 
     // Call the real rendering service.
-    requestMarkdownConversion(html, callbackInterceptor);
+    requestMarkdownConversion(elem, range, callbackInterceptor);
   }
 }
 

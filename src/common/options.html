@@ -8,9 +8,9 @@ MIT License : http://adampritchard.mit-license.org/
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <link rel="icon" type="image/png" href="images/icon16.png" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width"/>
+  <link rel="icon" type="image/png" href="images/icon16.png"/>
 
   <title>Markdown Here Options</title>
 
@@ -268,6 +268,11 @@ MIT License : http://adampritchard.mit-license.org/
     width: 90%;
   }
 
+  .extra-description {
+    font-size: 0.8em;
+    padding-left: 3em;
+  }
+
   #donate-button {
     margin-top: 0.3em;
   }
@@ -337,7 +342,7 @@ MIT License : http://adampritchard.mit-license.org/
 
   <header id="pagehead" class="pagehead">
     <h1>
-      <img src="images/icon48.png">
+      <img src="images/icon48.png"/>
       Markdown Here Options
     </h1>
   </header>
@@ -356,10 +361,10 @@ MIT License : http://adampritchard.mit-license.org/
             Start a new email message.
           </li>
           <li>
-            Type some Markdown into the email.<br>Try this: <code>*Hello* `Markdown` **Here**!</code>
+            Type some Markdown into the email.<br/>Try this: <code>*Hello* `Markdown` **Here**!</code>
           </li>
           <li>
-            Right-click in the email and then click "Markdown Toggle". (Or click the <img src="images/icon16.png"> button on the toolbar.<span class="hotkey-display-wrapper"> Or press <span class="hotkey-display"><kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>M</kbd></span></span>)
+            Right-click in the email and then click "Markdown Toggle". (Or click the <img src="images/icon16.png"/> button on the toolbar.<span class="hotkey-display-wrapper"> Or press <span class="hotkey-display"><kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>M</kbd></span></span>)
           </li>
           <li>
             The message should now look pretty cool. Send it to your friends!
@@ -391,7 +396,7 @@ MIT License : http://adampritchard.mit-license.org/
           </li>
         </ul>
 
-        <hr>
+        <hr/>
 
         <div>
           <span class="donate-plea donate-plea-hidden" id="dp1">Once you decide Markdown Here is pretty sweet, please help me to buy some flowers for my wife so she's not too upset about how much time I spend working on it. <strong>Thank you!</strong></span>
@@ -402,17 +407,17 @@ MIT License : http://adampritchard.mit-license.org/
 
           <div id="donate-button">
             <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-            <input type="hidden" name="cmd" value="_donations">
-            <input type="hidden" name="business" value="9PNMFUUB4WVGY">
-            <input type="hidden" name="lc" value="CA">
-            <input type="hidden" name="item_name" value="Markdown Here development support">
-            <input type="hidden" name="item_number" value="options-page">
-            <input type="hidden" name="currency_code" value="CAD">
-            <input type="hidden" name="bn" value="PP-DonationsBF:btn_donate_LG.gif:NonHosted">
-            <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+            <input type="hidden" name="cmd" value="_donations"/>
+            <input type="hidden" name="business" value="9PNMFUUB4WVGY"/>
+            <input type="hidden" name="lc" value="CA"/>
+            <input type="hidden" name="item_name" value="Markdown Here development support"/>
+            <input type="hidden" name="item_number" value="options-page"/>
+            <input type="hidden" name="currency_code" value="CAD"/>
+            <input type="hidden" name="bn" value="PP-DonationsBF:btn_donate_LG.gif:NonHosted"/>
+            <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1"/>
 
-            <input id="paypal-submit-image" type="image" src="images/gary-arthur-donate-1.png" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-            <input id="paypal-submit-css" class="paypal-button" type="submit" value="Donate" alt="PayPal - The safer, easier way to pay online!">
+            <input id="paypal-submit-image" type="image" src="images/gary-arthur-donate-1.png" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!"/>
+            <input id="paypal-submit-css" class="paypal-button" type="submit" value="Donate" alt="PayPal - The safer, easier way to pay online!"/>
             </form>
           </div>
         </div>
@@ -586,14 +591,38 @@ MIT License : http://adampritchard.mit-license.org/
         </div>
       </div>
 
-    </div>
+    </div><!-- /.horiz-groupset -->
 
-  </div>
+  </div><!-- /#options-container -->
 
   <div id="changelist-container">
     <div id="changelist">
     </div>
   </div>
+
+  <div id="extra-options-container">
+    <div class="horiz-groupset">
+
+      <div class="control-group">
+        <div class="section-title">
+          Advanced and Miscellaneous
+        </div>
+        <div>
+          <input type="checkbox" id="forgot-to-render-check-enabled"/><label for="forgot-to-render-check-enabled"><b>Enable "forgot-to-render" check.</b></label>
+          <div class="extra-description">
+            <p>
+              When you send an email, this checks the content to see if it looks like you wrote it in Markdow, but forgot to render it (i.e., click "Markdown Toggle") before sending. This may need to be disabled if it interferes with your ability to send email.
+            </p>
+            <p>
+              If you find yourself disabling this, <em>please</em> let me know why and how it could be better. Create <a href="https://groups.google.com/forum/#!forum/markdown-here" target="_blank">a post on the "markdown-here" Google Group</a> or <a href="https://github.com/adam-p/markdown-here/issues" target="_blank">an issue in the Github project</a>. Thanks.
+            </p>
+          </div>
+        </div>
+        <hr/>
+      </div>
+
+    </div><!-- /.horiz-groupset -->
+  </div><!-- /#extra-options-container -->
 
   <footer>
     <p>
@@ -604,7 +633,7 @@ MIT License : http://adampritchard.mit-license.org/
     </p>
   </footer>
 
-  <div id="tests-link"><a href="./test/index.html"><img title="Run tests" src="images/icon16.png"></a></div>
+  <div id="tests-link"><a href="./test/index.html"><img title="Run tests" src="images/icon16.png"/></a></div>
 
   <div id="saved-msg">Changes saved</div>
 
@@ -615,6 +644,8 @@ MIT License : http://adampritchard.mit-license.org/
 <script src="highlightjs/highlight.js"></script>
 
 <script src="utils.js"></script>
+<script src="common-logic.js"></script>
+<script src="mdh-html-to-text.js"></script>
 <script src="markdown-render.js"></script>
 <script src="markdown-here.js"></script>
 
