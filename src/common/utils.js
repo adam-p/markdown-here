@@ -305,7 +305,7 @@ function makeRequestToPrivilegedScript(doc, requestObj, callback) {
     */
 
     // If this is the first call, do some initialization.
-    if (typeof(makeRequestToPrivilegedScript.requestCallbacks) !== 'undefined') {
+    if (typeof(makeRequestToPrivilegedScript.requestCallbacks) === 'undefined') {
       makeRequestToPrivilegedScript.requestCallbacks = {};
 
       // Handle messages received from the background script.
