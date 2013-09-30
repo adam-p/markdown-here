@@ -11,10 +11,14 @@ Change Log
 
 * [Fixed bug](https://github.com/adam-p/markdown-here/issues/84): Math: single-character formula won't render.
   * Thanks to kbeach who reported this [in a Google Groups post](https://groups.google.com/forum/#!msg/markdown-here/tolrITkqrx0/phElyPBBAhYJ).
-  * Thanks again to Emanuele D'Osualdo ([bordaigorl](https://github.com/bordaigorl)) for providing the fix.
+  * Thanks again to [Emanuele D'Osualdo](https://github.com/bordaigorl) for providing the fix.
 
 * [Fixed bug](https://github.com/adam-p/markdown-here/issues/83): `[a](b)` links shouldn't expand inside of a code block.
-  * Thanks to Dan Brown ([jdanbrown](https://github.com/jdanbrown)) for reporting this bug.
+  * Thanks to [Dan Brown](https://github.com/jdanbrown) for reporting this bug.
+
+* Chrome and Firefox: Options page no longer opens when Markdown Here updates. Now there's a little notification in the corner of the window that can be clicked to show the MDH Options page (and the changes in the release), or dismissed.
+  * Thanks to [Casey Watts](https://github.com/caseywatts) for his help. Closes issues [#64](https://github.com/adam-p/markdown-here/issues/64) and [#95](https://github.com/adam-p/markdown-here/issues/95).
+
 
 2013-08-24: v2.8.2
 ------------------
