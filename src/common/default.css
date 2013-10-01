@@ -167,15 +167,3 @@ table tr th {
  font-weight: bold;
   background-color: #F0F0F0;
 }
-
-table tr td[align="right"] {
-  text-align: right;
-}
-
-table tr td[align="left"] {
-  text-align: left;
-}
-
-table tr td[align="center"] {
-  text-align: center;
-}
