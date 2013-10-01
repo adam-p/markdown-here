@@ -13,7 +13,9 @@
 }
 
 /* To add site specific rules, you can use the `data-md-url` attribute that we
-   add to the wrapper element. */
+   add to the wrapper element. Note that rules like this are used depending
+   on the URL you're *sending* from, not the URL where the recipient views it.
+*/
 /*
 .markdown-here-wrapper[data-md-url*="mail.yahoo."] ul {
   color: red;

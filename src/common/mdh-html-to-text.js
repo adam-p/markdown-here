@@ -106,8 +106,15 @@ MdhHtmlToText.prototype._preprocess = function() {
 
   // Yahoo seems to often/always/sometimes (only in Chrome?) use <p> instead
   // of <div>. We'll replace the former with the latter so that our other rules work.
-  // TODO: Figure out if it's more than Yahoo that's a problem.
-  if (this.url && this.url.match(/\.yahoo\./i)) {
+  // This also seems to be the case in Blogger.
+  // Instead of adding URL matches, we're going to count the number of <p> and
+  // <br> elements and do some replacement if there are more of the former than
+  // the latter.
+  var brMatches = this.preprocessInfo.html.match(/<br\b/g);
+  brMatches = (brMatches ? brMatches.length : 0);
+  var pMatches = this.preprocessInfo.html.match(/<p\b/g);
+  pMatches = (pMatches ? pMatches.length : 0);
+  if (pMatches > brMatches) {
     this.preprocessInfo.html =
       this.preprocessInfo.html
         .replace(/<p\b[^>]*>/ig, '<div>')
