@@ -36,7 +36,7 @@ function MdhHtmlToText(elem, range) {
 
   // Is this insufficient? What if `elem` is in an iframe with no `src`?
   // Maybe we should go higher in the iframe chain?
-  this.url = getTopURL(elem.ownerDocument.defaultView);
+  this.url = Utils.getTopURL(elem.ownerDocument.defaultView);
 
   this._preprocess();
 }
@@ -297,18 +297,6 @@ function convertHTMLtoMarkdown(tag, html) {
   }
 
   return html;
-}
-
-
-// Gets the URL of the top window that elem belongs to.
-// May recurse up through iframes.
-function getTopURL(win) {
-  if (win.frameElement) {
-    // This is the window of an iframe
-    return getTopURL(win.frameElement.ownerDocument.defaultView);
-  }
-
-  return win.location.href;
 }
 
 

@@ -12,6 +12,14 @@
 .markdown-here-wrapper {
 }
 
+/* To add site specific rules, you can use the `data-md-url` attribute that we
+   add to the wrapper element. */
+/*
+.markdown-here-wrapper[data-md-url*="mail.yahoo."] ul {
+  color: red;
+}
+*/
+
 pre, code {
   font-size: 0.85em;
   font-family: Consolas, Inconsolata, Courier, monospace;
@@ -24,7 +32,6 @@ code {
   border: 1px solid #EAEAEA;
   background-color: #F8F8F8;
   border-radius: 3px;
-  display: inline; /* adam-p: added to fix Yahoo block display */
 }
 
 pre {
@@ -166,16 +173,4 @@ table tr th, table tr td {
 table tr th {
  font-weight: bold;
   background-color: #F0F0F0;
-}
-
-table tr td[align="right"] {
-  text-align: right;
-}
-
-table tr td[align="left"] {
-  text-align: left;
-}
-
-table tr td[align="center"] {
-  text-align: center;
 }

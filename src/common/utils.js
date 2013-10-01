@@ -145,6 +145,18 @@ function getDocumentFragmentHTML(docFrag) {
 }
 
 
+function isElementDescendant(parent, descendant) {
+  var ancestor = descendant;
+  while (!!(ancestor = ancestor.parentElement)) {
+    if (ancestor === parent) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+
 // Take a URL that refers to a file in this extension and makes it absolute.
 // Note that the URL *must not* be relative to the current path position (i.e.,
 // no "./blah" or "../blah"). So `url` must start with `/`.
@@ -389,6 +401,18 @@ function setFocus(elem) {
 }
 
 
+// Gets the URL of the top window that elem belongs to.
+// May recurse up through iframes.
+function getTopURL(win) {
+  if (win.frameElement) {
+    // This is the window of an iframe
+    return getTopURL(win.frameElement.ownerDocument.defaultView);
+  }
+
+  return win.location.href;
+}
+
+
 // Sets a short timeout and then calls callback
 function nextTick(callback, context) {
   var runner = function() {
@@ -428,6 +452,7 @@ Utils.saferSetInnerHTML = saferSetInnerHTML;
 Utils.saferSetOuterHTML = saferSetOuterHTML;
 Utils.sanitizeDocumentFragment = sanitizeDocumentFragment;
 Utils.getDocumentFragmentHTML = getDocumentFragmentHTML;
+Utils.isElementDescendant = isElementDescendant;
 Utils.getLocalURL = getLocalURL;
 Utils.getLocalFile = getLocalFile;
 Utils.getLocalFileAsBase64 = getLocalFileAsBase64;
@@ -437,6 +462,7 @@ Utils.makeRequestToPrivilegedScript = makeRequestToPrivilegedScript;
 Utils.PRIVILEGED_REQUEST_EVENT_NAME = PRIVILEGED_REQUEST_EVENT_NAME;
 Utils.consoleLog = consoleLog;
 Utils.setFocus = setFocus;
+Utils.getTopURL = getTopURL;
 Utils.nextTick = nextTick;
 Utils.nextTickFn = nextTickFn;
 

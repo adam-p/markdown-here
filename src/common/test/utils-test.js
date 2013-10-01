@@ -188,6 +188,46 @@ describe('Utils', function() {
   });
 
 
+  describe('isElementDescendant', function() {
+    var $testOuter;
+
+    before(function() {
+      $testOuter = $('<div id="isElementDescendant-0"></div>')
+        .appendTo('body')
+        .append('<div id="isElementDescendant-1"><div id="isElementDescendant-1-1"></div></div>')
+        .append('<div id="isElementDescendant-2"><div id="isElementDescendant-2-1"></div></div>');
+    });
+
+    after(function() {
+      $testOuter.remove();
+    });
+
+    it('should correctly detect descendency', function() {
+      expect(Utils.isElementDescendant(
+        document.querySelector('#isElementDescendant-2'),
+        document.querySelector('#isElementDescendant-2-1'))).to.equal(true);
+
+      expect(Utils.isElementDescendant(
+        document.querySelector('#isElementDescendant-0'),
+        document.querySelector('#isElementDescendant-2-1'))).to.equal(true);
+    });
+
+    it('should correctly detect non-descendency', function() {
+      expect(Utils.isElementDescendant(
+        document.querySelector('#isElementDescendant-2-1'),
+        document.querySelector('#isElementDescendant-2'))).to.equal(false);
+
+      expect(Utils.isElementDescendant(
+        document.querySelector('#isElementDescendant-2-1'),
+        document.querySelector('#isElementDescendant-0'))).to.equal(false);
+
+      expect(Utils.isElementDescendant(
+        document.querySelector('#isElementDescendant-1'),
+        document.querySelector('#isElementDescendant-2'))).to.equal(false);
+    });
+  });
+
+
   describe('getLocalFile', function() {
     it('should return correct data', function(done) {
       // We "know" our logo file starts with this string when base64'd
