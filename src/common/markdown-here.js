@@ -220,47 +220,49 @@ function makeStylesExplicit(wrapperElem, css) {
   for (i = 0; i < stylesheet.cssRules.length; i++) {
     rule = stylesheet.cssRules[i];
 
-    // Special case for the selector: If the selector is '.markdown-here-wrapper',
-    // then we want to apply the rules to the wrapper (not just to its ancestors,
-    // which is what querySelectorAll gives us).
     // Note that the CSS should not have any rules that use "body" or "html".
 
-    if (rule.selectorText === '.markdown-here-wrapper') {
-      wrapperElem.setAttribute('style', rule.style.cssText);
-    }
-    else {
-      selectorMatches = wrapperElem.querySelectorAll(rule.selectorText);
-      for (j = 0; j < selectorMatches.length; j++) {
-        // Make sure the selector match isn't inside an exclusion block.
-        elem = selectorMatches[j];
-        while (elem) {
-          if (elem.classList.contains('markdown-here-exclude')) {
-            elem = 'excluded';
-            break;
-          }
-          elem = elem.parentElement;
-        }
-        if (elem === 'excluded') {
-          // Don't style this element.
-          continue;
-        }
+    // We're starting our search one level above the wrapper, which means we
+    // might match stuff outside of our wrapper. We'll have to double-check below.
+    selectorMatches = wrapperElem.parentElement.querySelectorAll(rule.selectorText);
 
-        // Get the existing styles for the element.
-        styleAttr = selectorMatches[j].getAttribute('style') || '';
+    for (j = 0; j < selectorMatches.length; j++) {
+      elem = selectorMatches[j];
 
-        // Append the new styles to the end of the existing styles. This will
-        // give the new ones precedence if any are the same as existing ones.
-
-        // Make sure existing styles end with a semicolon.
-        if (styleAttr && styleAttr.search(/;[\s]*$/) < 0) {
-          styleAttr += '; ';
-        }
-
-        styleAttr += rule.style.cssText;
-
-        // Set the styles back.
-        selectorMatches[j].setAttribute('style', styleAttr);
+      // Make sure the element is inside our wrapper (or is our wrapper).
+      if (elem !== wrapperElem &&
+          !Utils.isElementDescendant(wrapperElem, elem)) {
+        continue;
       }
+
+      // Make sure the selector match isn't inside an exclusion block.
+      while (elem) {
+        if (elem.classList.contains('markdown-here-exclude')) {
+          elem = 'excluded';
+          break;
+        }
+        elem = elem.parentElement;
+      }
+      if (elem === 'excluded') {
+        // Don't style this element.
+        continue;
+      }
+
+      // Get the existing styles for the element.
+      styleAttr = selectorMatches[j].getAttribute('style') || '';
+
+      // Append the new styles to the end of the existing styles. This will
+      // give the new ones precedence if any are the same as existing ones.
+
+      // Make sure existing styles end with a semicolon.
+      if (styleAttr && styleAttr.search(/;[\s]*$/) < 0) {
+        styleAttr += '; ';
+      }
+
+      styleAttr += rule.style.cssText;
+
+      // Set the styles back.
+      selectorMatches[j].setAttribute('style', styleAttr);
     }
   }
 }
@@ -372,8 +374,10 @@ function renderMarkdown(focusedElem, selectedRange, markdownRenderer, renderComp
     // Wrap our pretty HTML in a <div> wrapper.
     // We'll use the wrapper as a marker to indicate that we're in a rendered state.
     mdHtml =
-      '<div class="markdown-here-wrapper" id="markdown-here-wrapper-' + Math.floor(Math.random()*1000000) + '">' +
-      mdHtml +
+      '<div class="markdown-here-wrapper" ' +
+           'data-md-url="' + Utils.getTopURL(focusedElem.ownerDocument.defaultView) + '" ' +
+           'id="markdown-here-wrapper-' + Math.floor(Math.random()*1000000) + '">' +
+        mdHtml +
       '</div>';
 
     // Store the original Markdown-in-HTML to a data attribute on the wrapper
