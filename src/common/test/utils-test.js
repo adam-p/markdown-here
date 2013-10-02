@@ -339,6 +339,22 @@ describe('Utils', function() {
     });
   });
 
+  describe('getTopURL', function() {
+    it('should get the URL in a simple case', function() {
+      expect(Utils.getTopURL(window)).to.equal(location.href);
+    });
+
+    it('should get the URL from an iframe', function() {
+      var $iframe = $('<iframe>').appendTo('body');
+      expect(Utils.getTopURL($iframe.get(0).contentWindow)).to.equal(location.href);
+      $iframe.remove();
+    });
+
+    it('should get the hostname', function() {
+      expect(Utils.getTopURL(window, true)).to.equal(location.hostname);
+    });
+  });
+
   describe('nextTick', function() {
     it('should call callback asynchronously and quickly', function(done) {
       var start = new Date();

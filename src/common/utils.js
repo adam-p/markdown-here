@@ -403,13 +403,28 @@ function setFocus(elem) {
 
 // Gets the URL of the top window that elem belongs to.
 // May recurse up through iframes.
-function getTopURL(win) {
+function getTopURL(win, justHostname) {
   if (win.frameElement) {
     // This is the window of an iframe
     return getTopURL(win.frameElement.ownerDocument.defaultView);
   }
 
-  return win.location.href;
+  var url;
+  // We still want a useful value if we're in Thunderbird, etc.
+  if (!win.location.href || win.location.href === 'about:blank') {
+    url = win.navigator.match(/Thunderbird|Postbox'/);
+    if (url) {
+      url = url[0];
+    }
+  }
+  else if (justHostname) {
+    url = win.location.hostname;
+  }
+  else {
+    url = win.location.href;
+  }
+
+  return url;
 }
 
 

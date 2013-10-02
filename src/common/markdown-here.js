@@ -375,7 +375,7 @@ function renderMarkdown(focusedElem, selectedRange, markdownRenderer, renderComp
     // We'll use the wrapper as a marker to indicate that we're in a rendered state.
     mdHtml =
       '<div class="markdown-here-wrapper" ' +
-           'data-md-url="' + Utils.getTopURL(focusedElem.ownerDocument.defaultView) + '" ' +
+           'data-md-url="' + Utils.getTopURL(focusedElem.ownerDocument.defaultView, true) + '" ' +
            'id="markdown-here-wrapper-' + Math.floor(Math.random()*1000000) + '">' +
         mdHtml +
       '</div>';
