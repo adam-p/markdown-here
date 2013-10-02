@@ -412,7 +412,7 @@ function getTopURL(win, justHostname) {
   var url;
   // We still want a useful value if we're in Thunderbird, etc.
   if (!win.location.href || win.location.href === 'about:blank') {
-    url = win.navigator.match(/Thunderbird|Postbox'/);
+    url = win.navigator.userAgent.match(/Thunderbird|Postbox'/);
     if (url) {
       url = url[0];
     }
