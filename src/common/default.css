@@ -16,11 +16,7 @@
    add to the wrapper element. Note that rules like this are used depending
    on the URL you're *sending* from, not the URL where the recipient views it.
 */
-/*
-.markdown-here-wrapper[data-md-url*="mail.yahoo."] ul {
-  color: red;
-}
-*/
+/* .markdown-here-wrapper[data-md-url*="mail.yahoo."] ul { color: red; } */
 
 pre, code {
   font-size: 0.85em;
@@ -34,6 +30,7 @@ code {
   border: 1px solid #EAEAEA;
   background-color: #F8F8F8;
   border-radius: 3px;
+  display: inline; /* added to fix Yahoo block display of inline code */
 }
 
 pre {
@@ -47,6 +44,7 @@ pre code {
   border-radius: 3px;
   border: 1px solid #CCC;
   padding: 0.5em 0.7em;
+  display: block !important; /* added to counteract the Yahoo-specific `code` rule; without this, code blocks in Blogger are broken */
 }
 
 /* This spacing has been tweaked to closely match Gmail+Chrome "paragraph" (two line breaks) spacing. */
