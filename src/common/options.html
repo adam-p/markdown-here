@@ -273,8 +273,13 @@ MIT License : http://adampritchard.mit-license.org/
     padding-left: 3em;
   }
 
-  #donate-button {
+  #donate-buttons {
     margin-top: 0.3em;
+  }
+
+  #donate-buttons > * {
+    vertical-align: middle;
+    margin: 0.5em;
   }
 
   .donate-plea-hidden {
@@ -283,11 +288,10 @@ MIT License : http://adampritchard.mit-license.org/
 
   /* Custom PayPal button styles from http://visitsteve.com/made/diy-paypal-buttons/ */
   .paypal-button {
-    width: 200px;
-    height: 52px;
+    width: 150px;
+    height: 40px;
     color: #2e3192;
     text-decoration: none;
-    display: block;
     text-align: center;
     position: relative;
 
@@ -317,7 +321,7 @@ MIT License : http://adampritchard.mit-license.org/
     -moz-box-shadow: 0 1px 3px #777;
     -webkit-box-shadow: 0 1px 3px #777;
     box-shadow: 0 1px 3px #777;
-    font: italic bold 34px/42px helvetica, arial;
+    font: italic bold 30px/38px helvetica, arial;
   }
   /* WHILE HOVERED */
   .paypal-button:hover {
@@ -329,6 +333,7 @@ MIT License : http://adampritchard.mit-license.org/
       color-stop(.95, #FEE1A5), color-stop(.96, #FEE1A5), to(#FEE1A5));
     -moz-box-shadow: 0 1px 2px black;
     -webkit-box-shadow: 0 1px 2px black;
+    cursor: pointer;
   }
   /* WHILE BEING CLICKED */
   .paypal-button:active {
@@ -402,11 +407,11 @@ MIT License : http://adampritchard.mit-license.org/
           <span class="donate-plea donate-plea-hidden" id="dp1">Once you decide Markdown Here is pretty sweet, please help me to buy some flowers for my wife so she's not too upset about how much time I spend working on it. <strong>Thank you!</strong></span>
           <span class="donate-plea donate-plea-hidden" id="dp2"><strong>Help make Markdown Here better!</strong></span>
           <span class="donate-plea donate-plea-hidden" id="dp3"><strong>Help support the development of Markdown Here!</strong></span>
-          <span class="donate-plea donate-plea-hidden" id="dp4">You know what makes it easier to keep Markdown Here working on five different platforms and three different email providers? <strong>Beer!</strong></span>
+          <span class="donate-plea donate-plea-hidden" id="dp4">You know what makes it easier to keep Markdown Here working on Chrome, Firefox, Thunderbird, Postbox, Safari, Opera, Gmail, Yahoo, Hotmail, Blogger, Evernote, etc.? <strong>Coffee!</strong></span>
           <span class="donate-plea donate-plea-hidden" id="dp5" data-submit-type="paypal-submit-image"></span>
 
-          <div id="donate-button">
-            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+          <div id="donate-buttons">
+            <form style="display:inline" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
             <input type="hidden" name="cmd" value="_donations"/>
             <input type="hidden" name="business" value="9PNMFUUB4WVGY"/>
             <input type="hidden" name="lc" value="CA"/>
@@ -419,6 +424,13 @@ MIT License : http://adampritchard.mit-license.org/
             <input id="paypal-submit-image" type="image" src="images/gary-arthur-donate-1.png" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!"/>
             <input id="paypal-submit-css" class="paypal-button" type="submit" value="Donate" alt="PayPal - The safer, easier way to pay online!"/>
             </form>
+
+            <a style="text-decoration: none;" href="https://flattr.com/submit/auto?user_id=adam-p&url=http%3A%2F%2Fwww.markdown-here.com&title=Markdown%20Here&description=Browser%20(and%20other%20stuff)%20extension%20that%20lets%20you%20write%20email%20(and%20other%20stuff)%20in%20Markdown." target="_blank"><img src="https://api.flattr.com/button/flattr-badge-large.png"/></a>
+
+            <a href="http://markdown-here.com/about.html" target="_blank">
+              Other donation options
+            </a>
+
           </div>
         </div>
       </div>
