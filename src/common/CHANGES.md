@@ -10,10 +10,12 @@ Change Log
   * Thanks to [Petr Pudlák](https://github.com/ppetr) for requesting this in [issue #90](https://github.com/adam-p/markdown-here/issues/90), [Zhou Qiang](https://github.com/zhouqianghfut) in [issue #96](https://github.com/adam-p/markdown-here/issues/96), [Adam Backstrom](https://github.com/abackstrom) in [issue #98](https://github.com/adam-p/markdown-here/issues/98).
 
 * **Improved compatibility with [Blogger](http://blogger.com)**. It now works great.
-  * The changes made will probably help with some other sites. If you tried out a site and ended up with empty lines in your code blocks, try it again.
-  * Part of the improvement comes from a change to the default styling. If you've never customized your CSS, you should click the "Reset to Default" button for the "Primary Styling CSS". If you have customized your CSS, you can [take a look at the default CSS](https://github.com/adam-p/markdown-here/blob/master/src/common/default.css) and decide what to take.
-  * If you find a problem, or if you find a site that (almost) works, please edit the [Compatibility wiki page](https://github.com/adam-p/markdown-here/wiki/Compatibility), create a [Github issue](https://github.com/adam-p/markdown-here/issues), or post to the [MDH Google Group](https://groups.google.com/forum/#!forum/markdown-here).
-  * Thanks to [lambdaalice](https://github.com/lambdalice) for [reporting](https://github.com/adam-p/markdown-here/issues/89) the previous bad behaviour.
+  * The changes made will probably help with some other sites. If you tried out a site before and ended up with empty lines in your code blocks, try it again.
+  * See the [Compatibility wiki page](https://github.com/adam-p/markdown-here/wiki/Compatibility#blogger) for details.
+  * Thanks to [lambdaalice](https://github.com/lambdalice) for reporting the previous bad behaviour in [issue #89](https://github.com/adam-p/markdown-here/issues/89).
+
+* **Improved compatibility with [Wordpress](http://wordpress.com)**. It now works very well.
+  * See the [Compatibility wiki page](https://github.com/adam-p/markdown-here/wiki/Compatibility#wordpress) for details.
 
 * [Fixed bug](https://github.com/adam-p/markdown-here/issues/84): Math: single-character formula won't render.
   * Thanks to kbeach who reported this [in a Google Groups post](https://groups.google.com/forum/#!msg/markdown-here/tolrITkqrx0/phElyPBBAhYJ).
@@ -89,7 +91,7 @@ Added support for [**Opera**](http://www.opera.com)! Get it [here](https://addon
 * Markdown Here has a **new logo**! A big thank you to the talented [Tatiana A. Fryntoff](http://tatianafryntoff.com/) for creating our shiny new logo.
 
 * Support for new Markdown features. All credit goes to chjj, the maintainer of the [Marked library](https://github.com/chjj/marked).
-  * **Tables!** Now you can easily add tables to your email with Markdown. If you're not familiar with the syntax, check out [the wiki cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#wiki-tables). This closes [issue #13](https://github.com/adam-p/markdown-here/issues/13).
+  * **Tables!** Now you can easily add tables to your email with Markdown. If you're not familiar with the syntax, check out [the wiki cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet#wiki-tables). This closes [issue #13](https://github.com/adam-p/markdown-here/issues/13).
   * Strikethrough: Put double tildes around things to ~~strike it out~~ (`~~strike it out~~`).
   * Smarter lists: Have you ever had a numbered list mysteriously/annoyingly become a bullet list because it comes after one? Not anymore.
   * GFM line breaks: If you put a line break in your Markdown, it will be a line break after you toggle, instead of joining to form a single line. This closes [issue #12](https://github.com/adam-p/markdown-here/issues/12).
@@ -241,7 +243,7 @@ Added support for [**Opera**](http://www.opera.com)! Get it [here](https://addon
 
 * Bug fixes.
 
-* Created a Markdown cheatsheet: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
+* Created a Markdown cheatsheet: https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet
 
 
 2012-06-07: v2.2.0

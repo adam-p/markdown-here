@@ -12,7 +12,7 @@
 
 Writing email with code in it is pretty tedious. Writing Markdown with code in it is easy. I found myself writing email in Markdown in the Github in-browser editor, then copying the preview into email. This is a pretty absurd workflow, so I decided create a tool to write and render Markdown right in the email.
 
-To discover what can be done with Markdown in *Markdown Here*, check out the [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) and the other [wiki pages](https://github.com/adam-p/markdown-here/wiki).
+To discover what can be done with Markdown in *Markdown Here*, check out the [Markdown Here Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet) and the other [wiki pages](https://github.com/adam-p/markdown-here/wiki).
 
 <sup>&dagger;: And Google Groups posts, and Blogger posts, and Evernote notes, and Wordpress posts! [See details](#compatibility).</sup>  
 <sup>&Dagger;: And TeX mathematical formulae!</sup>
@@ -220,9 +220,9 @@ Short answer: Gmail and Thunderbird are great. More info about some clients can 
   </tr>
   <tr>
     <th>Wordpress</th>
-    <td>Editor not exactly WYSIWYG, but Preview is accurate</td>
-    <td></td>
-    <td></td>
+    <td>Inline code displays in non-monospace font, but is correct in preview and final post.</td>
+    <td>&#x2713;</td>
+    <td>&#x2713;</td>
     <td>See the <a href="https://github.com/adam-p/markdown-here/wiki/Compatibility">Compatibility wiki page</a> for full details and tips</td>
   </tr>
   <tr>

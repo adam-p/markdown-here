@@ -56,7 +56,7 @@ code look non-monospace. This rule will override it. */
 /* Wordpress adds a grey background to `pre` elements that doesn't go well with
 our syntax highlighting. */
 .markdown-here-wrapper[data-md-url*="wordpress."] pre {
-  background-color: initial;
+  background-color: transparent;
 }
 
 /* This spacing has been tweaked to closely match Gmail+Chrome "paragraph" (two line breaks) spacing. */
