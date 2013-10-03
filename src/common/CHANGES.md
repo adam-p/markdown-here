@@ -11,6 +11,7 @@ Change Log
 
 * **Improved compatibility with [Blogger](http://blogger.com)**. It now works great.
   * The changes made will probably help with some other sites. If you tried out a site and ended up with empty lines in your code blocks, try it again.
+  * Part of the improvement comes from a change to the default styling. If you've never customized your CSS, you should click the "Reset to Default" button for the "Primary Styling CSS". If you have customized your CSS, you can [take a look at the default CSS](https://github.com/adam-p/markdown-here/blob/master/src/common/default.css) and decide what to take.
   * If you find a problem, or if you find a site that (almost) works, please edit the [Compatibility wiki page](https://github.com/adam-p/markdown-here/wiki/Compatibility), create a [Github issue](https://github.com/adam-p/markdown-here/issues), or post to the [MDH Google Group](https://groups.google.com/forum/#!forum/markdown-here).
   * Thanks to [lambdaalice](https://github.com/lambdalice) for [reporting](https://github.com/adam-p/markdown-here/issues/89) the previous bad behaviour.
 
