@@ -47,6 +47,18 @@ pre code {
   display: block !important; /* added to counteract the Yahoo-specific `code` rule; without this, code blocks in Blogger are broken */
 }
 
+/* In edit mode, Wordpress uses a `* { font: ...;} rule+style that makes highlighted
+code look non-monospace. This rule will override it. */
+.markdown-here-wrapper[data-md-url*="wordpress."] code span {
+  font: inherit;
+}
+
+/* Wordpress adds a grey background to `pre` elements that doesn't go well with
+our syntax highlighting. */
+.markdown-here-wrapper[data-md-url*="wordpress."] pre {
+  background-color: initial;
+}
+
 /* This spacing has been tweaked to closely match Gmail+Chrome "paragraph" (two line breaks) spacing. */
 p {
   /* !important is needed here because Hotmail/Outlook.com uses !important to
