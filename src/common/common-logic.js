@@ -34,6 +34,19 @@ if (typeof(Utils) === 'undefined' && typeof(Components) !== 'undefined') {
 }
 
 
+var DEBUG = false;
+function debugLog() {
+  var i, log = '';
+  if (!DEBUG) {
+    return;
+  }
+  for (i = 0; i < arguments.length; i++) {
+    log += String(arguments[i]) + ' // ';
+  }
+  Utils.consoleLog(log);
+}
+
+
 /*
  ******************************************************************************
  Forgot-to-render check
@@ -44,6 +57,8 @@ if (typeof(Utils) === 'undefined' && typeof(Components) !== 'undefined') {
  * Gets the forgot-to-render prompt. This must be called from a privileged script.
  */
 function getForgotToRenderPromptContent(responseCallback) {
+  debugLog('getForgotToRenderPromptContent', 'getting');
+
   // Get the content of notification element
   Utils.getLocalFile(
     Utils.getLocalURL('/common/forgot-to-render-prompt.html'),
@@ -56,6 +71,7 @@ function getForgotToRenderPromptContent(responseCallback) {
           // Do some rough template replacement
           html = html.replace('{{logoBase64}}', logoBase64);
 
+          debugLog('getForgotToRenderPromptContent', 'got');
           return responseCallback(html);
         });
       });
@@ -96,6 +112,7 @@ var FORGOT_TO_RENDER_PROMPT_QUESTION = "Send it anyway?";
 // of email that the user wrote in Markdown but forgot to render.
 function forgotToRenderIntervalCheck(focusedElem, MarkdownHere, MdhHtmlToText, marked, prefs) {
   if (!prefs['forgot-to-render-check-enabled']) {
+    debugLog('forgotToRenderIntervalCheck', 'pref disabled');
     return;
   }
 
@@ -111,18 +128,24 @@ function forgotToRenderIntervalCheck(focusedElem, MarkdownHere, MdhHtmlToText, m
 
   // There is only logic for GMail (so far)
   if (focusedElem.ownerDocument.location.host.indexOf('mail.google.') < 0) {
+    debugLog('forgotToRenderIntervalCheck', 'not Gmail');
     return;
   }
 
   // If focus isn't in the compose body, there's nothing to do
   if (!MarkdownHere.elementCanBeRendered(focusedElem)) {
+    debugLog('forgotToRenderIntervalCheck', 'cannot be rendered');
     return;
   }
 
   // If we've already set up watchers for this compose element, skip it.
   if (typeof(focusedElem[WATCHED_PROPERTY]) === 'undefined') {
+    debugLog('forgotToRenderIntervalCheck', 'setting up interceptors');
     setupForgotToRenderInterceptors(focusedElem, MdhHtmlToText, marked, prefs);
     focusedElem[WATCHED_PROPERTY] = true;
+  }
+  else {
+    debugLog('forgotToRenderIntervalCheck', 'interceptors already in place');
   }
 }
 
@@ -141,6 +164,7 @@ function findClosestSendButton(elem) {
   while (elem.parentElement) {
     sendButton = elem.parentElement.querySelector('[role="button"][tabindex="1"]');
     if (sendButton) {
+      debugLog('findClosestSendButton', 'found');
       return sendButton;
     }
 
@@ -152,6 +176,7 @@ function findClosestSendButton(elem) {
     return findClosestSendButton(elem.ownerDocument.defaultView.frameElement);
   }
 
+  debugLog('findClosestSendButton', 'not found');
   return null;
 }
 
@@ -159,12 +184,14 @@ function findClosestSendButton(elem) {
 // Totally shuts down propagation of event, if we didn't trigger the event.
 function eatEvent(event) {
   if (event[Utils.MARKDOWN_HERE_EVENT]) {
+    debugLog('eatEvent', 'MDH event eaten', event.type);
     return;
   }
 
   event.stopImmediatePropagation();
   event.stopPropagation();
   event.preventDefault();
+  debugLog('eatEvent', 'non-MDH event eaten', event.type);
 }
 
 
@@ -217,17 +244,30 @@ function setupForgotToRenderInterceptors(composeElem, MdhHtmlToText, marked, pre
   var sendHotkeyKeydownListener = function(event) {
     // Windows and Linux use Ctrl+Enter and OSX uses ⌘+Enter, so we're going
     // to check for either.
-    if (event.target === composeElem &&
+
+    // There is a bug in Firefox (that has bitten us before) that causes tabbing
+    // into a `contenteditable` element to give focus to the parent `HTMLHtmlElement`
+    // rather than the edit element. If we don't work around this, then our hotkey
+    // interceptor won't work if the user tabs from the subject into the body
+    // (which lots of users do).
+    // https://bugzilla.mozilla.org/show_bug.cgi?id=740813
+    var ourTarget =
+      (event.target === composeElem) ||
+      (event.target instanceof composeElem.ownerDocument.defaultView.HTMLHtmlElement &&
+       event.target === composeElem.parentElement);
+
+    if (ourTarget &&
         (event.metaKey || event.ctrlKey) && event.keyCode === ENTER_KEYCODE &&
         shouldIntercept()) {
       eatEvent(event);
+      debugLog('setupForgotToRenderInterceptors', 'sendHotkeyKeydownListener', 'capture desired event');
       showForgotToRenderPromptAndRespond(composeElem, composeSendButton);
     }
+    debugLog('setupForgotToRenderInterceptors', 'sendHotkeyKeydownListener', 'skipping undesired event', event.target);
   };
 
   composeSendButton.parentElement.addEventListener('keydown', composeSendButtonKeyListener, true);
   composeSendButton.parentElement.addEventListener('keyup', composeSendButtonKeyListener, true);
-
   composeSendButton.parentElement.addEventListener('click', composeSendButtonClickListener, true);
   composeElem.parentElement.addEventListener('keydown', sendHotkeyKeydownListener, true);
 }
