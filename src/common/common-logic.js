@@ -178,7 +178,7 @@ function setupForgotToRenderInterceptors(composeElem, MdhHtmlToText, marked, pre
   }
 
   var shouldIntercept = function() {
-    var mdMaybe = new MdhHtmlToText.MdhHtmlToText(composeElem).get();
+    var mdMaybe = new MdhHtmlToText.MdhHtmlToText(composeElem, null, true).get();
     return probablyWritingMarkdown(mdMaybe, marked, prefs);
   };
 

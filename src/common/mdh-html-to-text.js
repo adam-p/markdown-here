@@ -3,6 +3,10 @@
  * MIT License : http://adampritchard.mit-license.org/
  */
 
+/*
+This module encapsulates Markdown Here's HTML-to-plaintext functionality.
+*/
+
 
 ;(function() {
 
@@ -26,9 +30,15 @@ the HTML seems suboptimal.
 */
 
 
-function MdhHtmlToText(elem, range) {
+/*
+`checkingIfMarkdown` should be true if the caller just wants to know if the
+HTML contains Markdown. It will prevent any alterations that introduce MD that
+isn't already present.
+*/
+function MdhHtmlToText(elem, range, checkingIfMarkdown) {
   this.elem = elem;
   this.range = range;
+  this.checkingIfMarkdown = checkingIfMarkdown;
 
   // NOTE: If we end up really using `range`, we should do this:
   // if (!this.range) { this.range = new Range(); this.range.selectNodeContents(elem); }
@@ -121,8 +131,12 @@ MdhHtmlToText.prototype._preprocess = function() {
         .replace(/<\/p\b[^>]*>/ig, '</div>');
   }
 
-  // Some tags we can convert to Markdown
-  this.preprocessInfo.html = convertHTMLtoMarkdown('a', this.preprocessInfo.html);
+  // Some tags we can convert to Markdown.
+  // ...but don't do it if we're just checking for Markdown, otherwise we'll
+  // cause false positives.
+  if (!this.checkingIfMarkdown) {
+    this.preprocessInfo.html = convertHTMLtoMarkdown('a', this.preprocessInfo.html);
+  }
 
   // Experimentation has shown some tags that need to be tweaked a little.
   this.preprocessInfo.html =
