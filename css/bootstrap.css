@@ -3913,7 +3913,7 @@ input[type="submit"].btn.btn-mini {
 .navbar .nav > li > a:focus,
 .navbar .nav > li > a:hover {
   background-color: transparent;
-  color: #999999;
+  color: #eb00ff;
   text-decoration: none;
 }
 .navbar .nav > .active > a,

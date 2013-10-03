@@ -119,6 +119,15 @@ a.anchor {
   text-decoration: none;
 }
 
+.donation-widgets > * {
+  vertical-align: middle;
+  margin: 1em 1em 1em 1em;
+}
+
+.donation-disclosure {
+  font-size: 0.6em;
+}
+
 /*
  * Live demo styles
  */
