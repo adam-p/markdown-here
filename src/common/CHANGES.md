@@ -17,6 +17,16 @@ Change Log
   * Now works very well with **Wordpress** ([details](https://github.com/adam-p/markdown-here/wiki/Compatibility#wordpress)).
   * See the [Compatibility wiki page](https://github.com/adam-p/markdown-here/wiki/Compatibility) for even more places where Markdown Here works, like **Google Sites** and **Facebook Notes**.
 
+* New feature: Automatic anchors for headers. This makes it much easier to put a **table of contents** (or other intra-page links) inside your email or blog post. Just use the text of your header as the anchor link text. For example:
+    ```no-highlight
+    [See below](#Deep-Dive Details Section) for details.
+    ...
+    Deep-Dive Details Section
+    =========================
+    ...
+    ```
+  * Thanks to [Casey Watts](https://github.com/caseywatts) for requesting this and giving insight on how to do it. Closes issue [#93](https://github.com/adam-p/markdown-here/issues/93).
+
 * [Fixed bug](https://github.com/adam-p/markdown-here/issues/84): Math: single-character formula won't render.
   * Thanks to kbeach who reported this [in a Google Groups post](https://groups.google.com/forum/#!msg/markdown-here/tolrITkqrx0/phElyPBBAhYJ).
   * Thanks again to [Emanuele D'Osualdo](https://github.com/bordaigorl) for providing the fix.

@@ -708,7 +708,17 @@ InlineLexer.prototype.output = function(src) {
 
 InlineLexer.prototype.outputLink = function(cap, link) {
   if (cap[0].charAt(0) !== '!') {
-    link.href = link.href.replace(/^(?!#)([^:]+)$/, 'http://$1'); /* adam-p: added to fix MDH issue #57: MD links should automatically add scheme. Note that the presence of a ':' is used to indicate a scheme, so port numbers will defeat this. */
+
+    /* adam-p: added to fix MDH issue #57: MD links should automatically add scheme.
+       Note that the presence of a ':' is used to indicate a scheme, so port
+       numbers will defeat this. */
+    link.href = link.href.replace(/^(?!#)([^:]+)$/, 'http://$1');
+
+    /* adam-p: added to support automatic anchor links in email. MDH issue #93. */
+    if (link.href.indexOf('#') === 0) {
+      link.href = '#' + link.href.slice(1).toLowerCase().replace(/[^\w]+/g, '-');
+    }
+
     return '<a href="'
       + escape(link.href)
       + '"'
@@ -855,7 +865,12 @@ Parser.prototype.tok = function() {
       return '<hr>\n';
     }
     case 'heading': {
-      return '<h'
+      /* adam-p: added this to make anchors work with email. MDH issue #93. */
+      var anchor = '<a href="#" name="' +
+        this.token.text.toLowerCase().replace(/[^\w]+/g, '-') +
+        '"></a>';
+
+      return anchor + '<h'
         + this.token.depth
         + ' id="'
         + this.token.text.toLowerCase().replace(/[^\w]+/g, '-')
