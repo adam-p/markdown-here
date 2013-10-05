@@ -19,6 +19,8 @@
 * [CSSUtilities](http://www.brothercake.com/site/resources/scripts/cssutilities/): "...is a JavaScript library that provides unique and indispensible methods for querying CSS style sheets!"
   * Could maybe be used for better make-styles-explicit.
 
+* [Rangy](http://code.google.com/p/rangy/), a "cross-browser JavaScript range and selection library".
+
 
 ## Extension development
 
@@ -35,15 +37,6 @@ TODO: Notes about MDH performance goals and decisions. Like:
 ## Miscellaneous
 
 * Update selection conversion screenshot to not be all about replies.
-
-* Try out MDH in other web-based rich-edit tools -- it'll surely work in some of them.
-  * Redactor: http://imperavi.com/support/ This seems to work at least nominally. Test and document.
-  * http://www.tinymce.com/
-  * http://hallojs.org/
-  * https://github.com/xing/wysihtml5
-  * http://jhollingworth.github.com/bootstrap-wysihtml5/
-
-* Test in Google Sites. I know it works to some degree, but need to fully test and document.
 
 * Automated test suite. 
   * This isn't sexy, but important. Stuff has broken in the past because of browser changes, and it's inevitable that I'll make a change without sufficient testing everywhere. Regression tests are badly needed. (And would be good experience for me...)
@@ -68,10 +61,15 @@ TODO: Notes about MDH performance goals and decisions. Like:
   * Custom CSS?
   * Custom hotkey?
 
+* Maybe rendered output should sometimes use `<br>` instead of `<p>` elements? I don't have any solid examples, but it seems to me that some clients might choke if presented with `<p>`-centric HTML when they only edit `<br>` content. Now that we count `<br>`-vs-`<p>` during HTML-to-text conversion, maybe we could use that information to alter the output to match.
+  * But it's hard to justify that kind of change with no evidence of benefit.
+
 
 ## Better HTML-to-Text
 
 [Need to flesh out these notes.]
+
+`jsHtmlToText.js` isn't very smart. New `mdh-html-to-text.js` has access to the DOM and could check element styles and whatnot to do a better HTML-to-text conversion.
 
 Thunderbird's nsIEditor::outputToString does a really great job with HTML-to-text. Too bad it's all C++. Links to the code anyway:
 

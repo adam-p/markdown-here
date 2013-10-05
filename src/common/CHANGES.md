@@ -9,13 +9,13 @@ Change Log
   * For now this feature is off by default because I'm nervous about too many false positives driving people crazy. But please opt in! The checkbox to enable it is at the bottom of the MDH Options page. And please give feedback on how the feature does or doesn't work for you, either in the [Github issue](https://github.com/adam-p/markdown-here/issues/90) or the [MDH Google Group](https://groups.google.com/forum/#!forum/markdown-here).
   * Thanks to [Petr Pudlák](https://github.com/ppetr) for requesting this in [issue #90](https://github.com/adam-p/markdown-here/issues/90), [Zhou Qiang](https://github.com/zhouqianghfut) in [issue #96](https://github.com/adam-p/markdown-here/issues/96), [Adam Backstrom](https://github.com/abackstrom) in [issue #98](https://github.com/adam-p/markdown-here/issues/98).
 
-* **Improved compatibility with [Blogger](http://blogger.com)**. It now works great.
-  * The changes made will probably help with some other sites. If you tried out a site before and ended up with empty lines in your code blocks, try it again.
-  * See the [Compatibility wiki page](https://github.com/adam-p/markdown-here/wiki/Compatibility#blogger) for details.
-  * Thanks to [lambdaalice](https://github.com/lambdalice) for reporting the previous bad behaviour in [issue #89](https://github.com/adam-p/markdown-here/issues/89).
-
-* **Improved compatibility with [Wordpress](http://wordpress.com)**. It now works very well.
-  * See the [Compatibility wiki page](https://github.com/adam-p/markdown-here/wiki/Compatibility#wordpress) for details.
+* **Compatibility improvements!**
+  * Now works great with **Blogger** ([details](https://github.com/adam-p/markdown-here/wiki/Compatibility#blogger)).
+    * The changes made will probably help with some other sites. If you tried out a site before and ended up with empty lines in your code blocks, try it again.
+    * See the [Compatibility wiki page](https://github.com/adam-p/markdown-here/wiki/Compatibility#blogger) for details.
+    * Thanks to [lambdaalice](https://github.com/lambdalice) for reporting the previous bad behaviour in [issue #89](https://github.com/adam-p/markdown-here/issues/89).
+  * Now works very well with **Wordpress** ([details](https://github.com/adam-p/markdown-here/wiki/Compatibility#wordpress)).
+  * See the [Compatibility wiki page](https://github.com/adam-p/markdown-here/wiki/Compatibility) for even more places where Markdown Here works, like **Google Sites** and **Facebook Notes**.
 
 * [Fixed bug](https://github.com/adam-p/markdown-here/issues/84): Math: single-character formula won't render.
   * Thanks to kbeach who reported this [in a Google Groups post](https://groups.google.com/forum/#!msg/markdown-here/tolrITkqrx0/phElyPBBAhYJ).
