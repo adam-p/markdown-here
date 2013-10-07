@@ -17,7 +17,7 @@ Change Log
   * Now works very well with **Wordpress** ([details](https://github.com/adam-p/markdown-here/wiki/Compatibility#wordpress)).
   * See the [Compatibility wiki page](https://github.com/adam-p/markdown-here/wiki/Compatibility) for even more places where Markdown Here works, like **Google Sites** and **Facebook Notes**.
 
-* New feature: Automatic anchors for headers. This makes it much easier to put a **table of contents** (or other intra-page links) inside your email or blog post. Just use the text of your header as the anchor link text. For example:
+* New feature: **Automatic anchors for headers**. This makes it much easier to put a **table of contents** (or other intra-page links) inside your email or blog post. Just use the text of your header as the anchor link text. For example:
     ```no-highlight
     [See below](#Deep-Dive Details Section) for details.
     ...
@@ -30,7 +30,7 @@ Change Log
 * Chrome and Firefox: Options page no longer opens when Markdown Here updates. Now there's a little notification in the corner of the window that can be clicked to show the MDH Options page (and the changes in the release), or dismissed.
   * Thanks to [Casey Watts](https://github.com/caseywatts) for his help. Closes issues [#64](https://github.com/adam-p/markdown-here/issues/64) and [#95](https://github.com/adam-p/markdown-here/issues/95).
 
-* Added the ability to set site-specific styles. To see an example of how to do this, either reset your Primary Styling CSS or [take a look at the source for it](https://github.com/adam-p/markdown-here/blob/6d3c2efea23219b58da183df23da111f8fd9febb/src/common/default.css#L15).
+* Added the ability to set **site-specific styles**. To see an example of how to do this, either reset your Primary Styling CSS or [take a look at the source for it](https://github.com/adam-p/markdown-here/blob/6d3c2efea23219b58da183df23da111f8fd9febb/src/common/default.css#L15).
 
 * [Fixed bug](https://github.com/adam-p/markdown-here/issues/84): Math: single-character formula won't render.
   * Thanks to kbeach who reported this [in a Google Groups post](https://groups.google.com/forum/#!msg/markdown-here/tolrITkqrx0/phElyPBBAhYJ).
@@ -40,7 +40,7 @@ Change Log
   * Thanks to [Dan Brown](https://github.com/jdanbrown) for reporting this bug.
 
 * [Fixed bug](https://github.com/adam-p/markdown-here/issues/87): "Smart" quotations and apostrophes would sometimes get confused and curl the wrong way.
-  * Thanks to [Jay Dixit](https://github.com/jaydixit) for reporting this.
+  * Thanks to [Jay Dixit](https://github.com/jaydixit) for reporting this bug.
 
 * [Fixed bug](https://github.com/adam-p/markdown-here/issues/53): Shouldn't require blank line before list.
 
