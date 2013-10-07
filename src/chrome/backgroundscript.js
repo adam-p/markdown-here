@@ -55,8 +55,9 @@ chrome.contextMenus.create({
 // See the comment in markdown-render.js for why we do this.
 chrome.runtime.onMessage.addListener(function(request, sender, responseCallback) {
   // The content script can load in a not-real tab (like the search box), which
-  // has a tab.id of -1. We should just ignore these pages.
-  if (sender.tab.id < 0) {
+  // has an invalid `sender.tab` value. We should just ignore these pages.
+  if (typeof(sender.tab) === 'undefined' ||
+      typeof(sender.tab.id) === 'undefined' || sender.tab.id < 0) {
     return false;
   }
 
