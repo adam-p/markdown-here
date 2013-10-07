@@ -1,7 +1,7 @@
 Change Log
 ==========
 
-2013-xx-yy: v2.9.0
+2013-10-07: v2.9.0
 ------------------
 
 * New feature: **Forgot-to-render detection**. Have you ever forgotten to make your Markdown pretty before sending your email? Me too. Now Markdown Here will detect when your email contains raw Markdown and will give you second chance to go back and render it before sending.
@@ -30,6 +30,8 @@ Change Log
 * Chrome and Firefox: Options page no longer opens when Markdown Here updates. Now there's a little notification in the corner of the window that can be clicked to show the MDH Options page (and the changes in the release), or dismissed.
   * Thanks to [Casey Watts](https://github.com/caseywatts) for his help. Closes issues [#64](https://github.com/adam-p/markdown-here/issues/64) and [#95](https://github.com/adam-p/markdown-here/issues/95).
 
+* Added the ability to set site-specific styles. To see an example of how to do this, either reset your Primary Styling CSS or [take a look at the source for it](https://github.com/adam-p/markdown-here/blob/6d3c2efea23219b58da183df23da111f8fd9febb/src/common/default.css#L15).
+
 * [Fixed bug](https://github.com/adam-p/markdown-here/issues/84): Math: single-character formula won't render.
   * Thanks to kbeach who reported this [in a Google Groups post](https://groups.google.com/forum/#!msg/markdown-here/tolrITkqrx0/phElyPBBAhYJ).
   * Thanks again to [Emanuele D'Osualdo](https://github.com/bordaigorl) for providing the fix.
@@ -37,7 +39,10 @@ Change Log
 * [Fixed bug](https://github.com/adam-p/markdown-here/issues/83): `[a](b)` links shouldn't expand inside of a code block.
   * Thanks to [Dan Brown](https://github.com/jdanbrown) for reporting this bug.
 
-* Added the ability to set site-specific styles. To see an example of how to do this, either reset your Primary Styling CSS or [take a look at the source for it](https://github.com/adam-p/markdown-here/blob/6d3c2efea23219b58da183df23da111f8fd9febb/src/common/default.css#L15).
+* [Fixed bug](https://github.com/adam-p/markdown-here/issues/87): "Smart" quotations and apostrophes would sometimes get confused and curl the wrong way.
+  * Thanks to [Jay Dixit](https://github.com/jaydixit) for reporting this.
+
+* [Fixed bug](https://github.com/adam-p/markdown-here/issues/53): Shouldn't require blank line before list.
 
 
 2013-08-24: v2.8.2
