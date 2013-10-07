@@ -27,15 +27,15 @@ Change Log
     ```
   * Thanks to [Casey Watts](https://github.com/caseywatts) for requesting this and giving insight on how to do it. Closes issue [#93](https://github.com/adam-p/markdown-here/issues/93).
 
+* Chrome and Firefox: Options page no longer opens when Markdown Here updates. Now there's a little notification in the corner of the window that can be clicked to show the MDH Options page (and the changes in the release), or dismissed.
+  * Thanks to [Casey Watts](https://github.com/caseywatts) for his help. Closes issues [#64](https://github.com/adam-p/markdown-here/issues/64) and [#95](https://github.com/adam-p/markdown-here/issues/95).
+
 * [Fixed bug](https://github.com/adam-p/markdown-here/issues/84): Math: single-character formula won't render.
   * Thanks to kbeach who reported this [in a Google Groups post](https://groups.google.com/forum/#!msg/markdown-here/tolrITkqrx0/phElyPBBAhYJ).
   * Thanks again to [Emanuele D'Osualdo](https://github.com/bordaigorl) for providing the fix.
 
 * [Fixed bug](https://github.com/adam-p/markdown-here/issues/83): `[a](b)` links shouldn't expand inside of a code block.
   * Thanks to [Dan Brown](https://github.com/jdanbrown) for reporting this bug.
-
-* Chrome and Firefox: Options page no longer opens when Markdown Here updates. Now there's a little notification in the corner of the window that can be clicked to show the MDH Options page (and the changes in the release), or dismissed.
-  * Thanks to [Casey Watts](https://github.com/caseywatts) for his help. Closes issues [#64](https://github.com/adam-p/markdown-here/issues/64) and [#95](https://github.com/adam-p/markdown-here/issues/95).
 
 * Added the ability to set site-specific styles. To see an example of how to do this, either reset your Primary Styling CSS or [take a look at the source for it](https://github.com/adam-p/markdown-here/blob/6d3c2efea23219b58da183df23da111f8fd9febb/src/common/default.css#L15).
 
