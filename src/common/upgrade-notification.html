@@ -1,0 +1,88 @@
+<style>
+    /* CSS reset. Borrowed from Vimium: https://github.com/philc/vimium/blob/5bd32a511da813d731f73c4d646c14a69c2515ff/content_scripts/vimium.css */
+  .markdown-here-reset,
+  a.markdown-here-reset,
+  a:visited.markdown-here-reset,
+  a:hover.markdown-here-reset,
+  a:link.markdown-here-reset {
+    background: none;
+    border: none;
+    bottom: auto;
+    box-shadow: none;
+    color: black;
+    cursor: auto;
+    display: inline;
+    float: none;
+    font-family : "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    font-size: inherit;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    height: auto;
+    left: auto;
+    letter-spacing: 0;
+    line-height: 100%;
+    margin: 0;
+    max-height: none;
+    max-width: none;
+    min-height: 0;
+    min-width: 0;
+    opacity: 1;
+    padding: 0;
+    position: static;
+    right: auto;
+    text-align: left;
+    text-decoration: none;
+    text-indent: 0;
+    text-shadow: none;
+    text-transform: none;
+    top: auto;
+    vertical-align: baseline;
+    white-space: normal;
+    width: auto;
+    z-index: 99999999;
+  }
+
+  #markdown-here-upgrade-notification-content,
+  #markdown-here-upgrade-notification-link {
+    font-family: Tahoma, Helvetica, arial, freesans, clean, sans-serif;
+    font-size: 16px;
+    color: #482168;
+  }
+
+  #markdown-here-upgrade-notification-content {
+    position: fixed;
+    display: block;
+    bottom: 0;
+    right: 20px;
+    padding: 4px;
+    background-color: rgb(220,202,235);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    box-shadow: 0 -1px 10px 2px #482168;
+    opacity: 0.95;
+    -webkit-transition: opacity 1000ms;
+    -moz-transition: opacity 1000ms;
+    transition: opacity 1000ms;
+  }
+
+  #markdown-here-upgrade-notification-link:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  #markdown-here-upgrade-notification-close:hover {
+    cursor: pointer;
+  }
+
+  #markdown-here-upgrade-notification-logo {
+    vertical-align: text-bottom;
+  }
+</style>
+<div id="markdown-here-upgrade-notification-content" class="markdown-here-reset">
+  <a id="markdown-here-upgrade-notification-link" class="markdown-here-reset" target="_blank" href="{{optionsURL}}" title="Click to the see the changes in this release">
+    <img id="markdown-here-upgrade-notification-logo" class="markdown-here-reset" src="data:image/png;base64,{{logoBase64}}"/>
+    Markdown Here updated
+  </a>
+  <a id="markdown-here-upgrade-notification-close" class="markdown-here-reset" href="#" title="Dismiss this notification">&#215;</a>
+</div>

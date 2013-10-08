@@ -11,6 +11,10 @@ MIT License : http://adampritchard.mit-license.org/
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <script src="utils.js"></script>
+  <script src="common-logic.js"></script>
+  <script src="jsHtmlToText.js"></script>
+  <script src="marked.js"></script>
+  <script src="mdh-html-to-text.js"></script>
   <script src="markdown-here.js"></script>
   <script src="options-iframe.js"></script>
 
@@ -47,6 +51,9 @@ function syntaxHighlighting() {<br>
 2. [Link](https://www.google.com)<br>
 <br>
 <br>
+An image: ![Markdown Here logo](http://adam-p.github.io/markdown-here/img/icon24.png)
+<br>
+<br>
 > Block quote.&nbsp; <br>
 > *With* **some** `markdown`.<br>
 <br>
@@ -66,14 +73,9 @@ $-b \pm \sqrt{b^2 - 4ac} \over 2a$<br>
 | col 2 is      | centered      |   $12 |<br>
 | zebra stripes | are neat      |    $1 |<br>
 <br>
-Horizontal rule<br>
+Here's a horizontal rule:<br>
 <br>
 ---<br>
-<br>
-&lt;dl><br>
-&lt;dt>Definition list&lt;/dt><br>
-&lt;dd>Is something people use sometimes.&lt;/dd><br>
-&lt;/dl><br>
 <br>
 ```<br>
 code block<br>

@@ -19,18 +19,24 @@
 * [CSSUtilities](http://www.brothercake.com/site/resources/scripts/cssutilities/): "...is a JavaScript library that provides unique and indispensible methods for querying CSS style sheets!"
   * Could maybe be used for better make-styles-explicit.
 
+* [Rangy](http://code.google.com/p/rangy/), a "cross-browser JavaScript range and selection library".
+
+
+## Extension development
+
+MDN: [Performance](https://developer.mozilla.org/en-US/docs/Performance)
+MDN: [Performance best practices in extensions](https://developer.mozilla.org/en-US/docs/Extensions/Performance_best_practices_in_extensions)
+MDN: [Appendix A: Add-on Performance](https://developer.mozilla.org/en-US/docs/XUL/School_tutorial/Appendix_A:_Add-on_Performance)
+
+TODO: Notes about MDH performance goals and decisions. Like:
+- Passing big strings from contentscript to backgroundscript probably undesirable.
+- Loading big script files (like highlight.js) into each page probably undesirable.
+- I don't really have a good idea of how much JS loaded into a page is too much, etc.
+
+
 ## Miscellaneous
 
 * Update selection conversion screenshot to not be all about replies.
-
-* Try out MDH in other web-based rich-edit tools -- it'll surely work in some of them.
-  * Redactor: http://imperavi.com/support/ This seems to work at least nominally. Test and document.
-  * http://www.tinymce.com/
-  * http://hallojs.org/
-  * https://github.com/xing/wysihtml5
-  * http://jhollingworth.github.com/bootstrap-wysihtml5/
-
-* Test in Google Sites. I know it works to some degree, but need to fully test and document.
 
 * Automated test suite. 
   * This isn't sexy, but important. Stuff has broken in the past because of browser changes, and it's inevitable that I'll make a change without sufficient testing everywhere. Regression tests are badly needed. (And would be good experience for me...)
@@ -55,14 +61,23 @@
   * Custom CSS?
   * Custom hotkey?
 
-* Detect unrendered MD when sending and warn. 
-  * Really not sure how to detect "when sending". Hooking into the send button will be very dependent on the platform and webmail brand. But even doing it just for Gmail and maybe Thunderbird would be good.
-  * https://twitter.com/geopet/status/294294916685778944
+* Maybe rendered output should sometimes use `<br>` instead of `<p>` elements? I don't have any solid examples, but it seems to me that some clients might choke if presented with `<p>`-centric HTML when they only edit `<br>` content. Now that we count `<br>`-vs-`<p>` during HTML-to-text conversion, maybe we could use that information to alter the output to match.
+  * But it's hard to justify that kind of change with no evidence of benefit.
 
 
-## Project stuff
+## Better HTML-to-Text
 
-* Create a nicer info site than just the README (not that the README is *bad*, but...). Probably using `gh_pages`.
+[Need to flesh out these notes.]
+
+`jsHtmlToText.js` isn't very smart. New `mdh-html-to-text.js` has access to the DOM and could check element styles and whatnot to do a better HTML-to-text conversion.
+
+Thunderbird's nsIEditor::outputToString does a really great job with HTML-to-text. Too bad it's all C++. Links to the code anyway:
+
+- nsIEditor::outputToString: https://developer.mozilla.org/en-US/docs/XPCOM_Interface_Reference/NsIEditor
+- http://hg.mozilla.org/mozilla-central/file/153aebb30387/content/base/src/nsHTMLContentSerializer.cpp
+- http://hg.mozilla.org/mozilla-central/file/153aebb30387/content/base/src/nsXHTMLContentSerializer.cpp
+- http://hg.mozilla.org/mozilla-central/file/153aebb30387/editor/libeditor/text/nsPlaintextEditor.cpp#l1247
+- http://hg.mozilla.org/mozilla-central/file/153aebb30387/content/base/src/nsDocumentEncoder.cpp
 
 
 ## New renderers and render targets
@@ -116,11 +131,9 @@ I don't have a good sense for how widespread the appeal of this might be, but I 
 Lots of work.
 
 
-## Random
+## Clipboard Interaction
 
-### Clipboard Paste
-
-In a Google Docs support issue (#28), [a user suggested](https://github.com/adam-p/markdown-here/issues/28#issuecomment-13085498) using paste to get the rendered Markdown into a GDoc. This seemed interesting, so I did some investigation. 
+In a Google Docs support issue (#28), [a user suggested](https://github.com/adam-p/markdown-here/issues/28#issuecomment-13085498) using paste to get the rendered Markdown into a GDoc. (This might also be useful for Evernote, Wordpress, and other places where MDH doesn't quite work right.) This seemed interesting, so I did some investigation. 
 
 * Paste does work fairly well to get rendered Markdown into a Google Doc. (Although Paste vs. Paste and Match Style give different results.) Some massaging of the Markdown (`<br>` vs. `<p>`, maybe) might improve results.
 
@@ -132,10 +145,88 @@ In a Google Docs support issue (#28), [a user suggested](https://github.com/adam
 
 * A common way for websites (including Github) to support copy-to-clipboard is to use Flash. The most popular seems to be [ZeroClipboard](https://github.com/jonrohan/ZeroClipboard) -- but it doesn't magically provide pasting (even if I could figure out how to use it in an extension).
 
-* When pasting, the `markdown-here-wrapper` is lost. This means that reverting may not be possible (at the very least, it'll require another approach).
+* When pasting, the `markdown-here-wrapper` is lost. This means that reverting may not be possible (at the very least, it'll require another approach). 
 
 * Copying arbitrary HTML to the clipboard is probably doable on all platforms (it is on Chrome, at least).
 
 So, it seem that, at best, MDH could put the rendered Markdown HTML into the clipboard and then the user will have to manually paste it. This is not great, but is perhaps better than nothing.
 
-Another really big outstanding question: Can MDH detect what's selected in the GDoc? Can it get the text? Can it change the selection? Can it delete or replace the selection? (Some simple `getSelection()` tests are *not* hopeful.)
+Another really big outstanding question: Can MDH detect what's selected in the GDoc? Can it get the text? Can it change the selection? Can it delete or replace the selection? (Some simple `getSelection()` tests are *not* hopeful.) Forcing the user to first copy the target text to the clipboard might be the best/only approach.
+
+### Sample code
+
+#### Chrome
+
+In `manifest.json`:
+
+```diff
+-  "permissions": ["contextMenus", "storage"],
++  "permissions": ["contextMenus", "storage", "clipboardRead", "clipboardWrite"],
+```
+
+In `backgroundscript.js`:
+
+```javascript
+function writeToClipboard(str) {
+  var sandbox = document.createElement('div');
+  sandbox.contentEditable = true;
+
+  // Potentially unsafe, and Mozilla review will disallow it. Use Utils.saferSetInnerHTML.
+  sandbox.innerHTML = str;
+
+  document.body.appendChild(sandbox);
+
+  var selection = document.getSelection();
+  selection.removeAllRanges();
+  var range = document.createRange();
+  range.selectNodeContents(sandbox);
+  selection.addRange(range);
+
+  document.execCommand('copy');
+
+  document.body.removeChild(sandbox);
+}
+
+// `plain` is a boolean indicating whether a plaintext version of the text
+// should be read from the clipboard.
+function readFromClipboard(plain) {
+  var sandbox = document.createElement('div');
+  sandbox.contentEditable = true;
+  document.body.appendChild(sandbox);
+
+  var selection = document.getSelection();
+  selection.removeAllRanges();
+  var range = document.createRange();
+  range.selectNodeContents(sandbox);
+  selection.addRange(range);
+  range.collapse();
+
+  var result = null;
+  if (document.execCommand('paste')) {
+      result = plain ? sandbox.innerText : sandbox.innerHTML;
+  }
+
+  document.body.removeChild(sandbox);
+
+  return result;
+}
+```
+
+Then in the background page console you can do stuff like this (after manually copying):
+
+```javascript
+var prefs;
+// async, so do it separtely in the console.
+OptionsStore.get(function(opts) {prefs=opts;});
+
+var cb = readFromClipboard();
+markdownRender(prefs, htmlToText, marked, hljs.highlight, cb, document, null);
+writeToClipboard(cb);
+
+// And then paste back into GDocs.
+
+// Alternatively, use `readFromClipboard(true)` to get a maybe-nicer plaintext
+// version of the Markdown, if `htmlToText` is misbehaving.
+```
+
+(Bug: It seems that spaces are being lost from the HTML written back into the clipboard.)

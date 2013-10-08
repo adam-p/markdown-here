@@ -1,6 +1,6 @@
 This extension is used to manipulate the content of email before sending. It can be used in Gmail, Hotmail, or Yahoo webmail interfaces, or in Thunderbird. Make sure you use the rich-edit interface for the email client.
 
-You write email in Markdown (if you're not familiar with Markdown, I made a little reference -- https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet), then right-click, click the "Markdown Toggle" menu item, and the content of the email will be replaced with a rendered-HTML version of the Markdown you had written.
+You write email in Markdown (if you're not familiar with Markdown, I made a little reference -- https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet), then right-click, click the "Markdown Toggle" menu item, and the content of the email will be replaced with a rendered-HTML version of the Markdown you had written.
 
 If you select a subset of your email and then "Markdown Toggle", only that selection will be rendered/converted.
 
