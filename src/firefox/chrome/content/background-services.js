@@ -22,39 +22,43 @@
 /*global Components:false, AddonManager:false, markdown_here:false*/
 /*jshint devel:true*/
 
-var scriptLoader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"]
+var scriptLoader, imports = {};
+
+scriptLoader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"]
                              .getService(Components.interfaces.mozIJSSubScriptLoader);
 
-Components.utils.import('resource://markdown_here_common/utils.js');
-Utils.global = window;
+Components.utils.import('resource://markdown_here_common/utils.js', imports);
+imports.Utils.global = window;
 
-Components.utils.import('resource://markdown_here_common/common-logic.js');
-CommonLogic.global = window;
+Components.utils.import('resource://markdown_here_common/common-logic.js', imports);
+imports.CommonLogic.global = window;
 
-Components.utils.import('resource://markdown_here_common/marked.js');
+Components.utils.import('resource://markdown_here_common/marked.js', imports);
 
-Components.utils.import('resource://markdown_here_common/markdown-render.js');
+Components.utils.import('resource://markdown_here_common/markdown-render.js', imports);
 
-scriptLoader.loadSubScript('resource://markdown_here_common/highlightjs/highlight.js');
+scriptLoader.loadSubScript('resource://markdown_here_common/highlightjs/highlight.js', imports);
 
-Components.utils.import('resource://markdown_here_common/options-store.js');
+Components.utils.import('resource://markdown_here_common/options-store.js', imports);
 
 
 /*
  * Set up the background request listeners
  */
 
-document.addEventListener(Utils.PRIVILEGED_REQUEST_EVENT_NAME, function(event) {
-  var node = event.target;
-  if (!node || node.nodeType != Node.TEXT_NODE) {
+document.addEventListener(imports.Utils.PRIVILEGED_REQUEST_EVENT_NAME, function(event) {
+  var node, doc, request, responseEventName, responseCallback, asyncResponseCallback;
+
+  node = event.target;
+  if (!node || node.nodeType != node.TEXT_NODE) {
     return;
   }
 
-  var doc = node.ownerDocument;
-  var request = node.nodeValue ? JSON.parse(node.nodeValue) : null;
-  var responseEventName = request.responseEventName;
+  doc = node.ownerDocument;
+  request = node.nodeValue ? JSON.parse(node.nodeValue) : null;
+  responseEventName = request.responseEventName;
 
-  var responseCallback = function(response) {
+  responseCallback = function(response) {
     responseCallback.prototype.gotCalled = true;
 
     node.nodeValue = JSON.stringify(null);
@@ -69,16 +73,16 @@ document.addEventListener(Utils.PRIVILEGED_REQUEST_EVENT_NAME, function(event) {
 
   // NOTE: Request handlers *must* set this to true if they are going to call
   // the response callback asynchronously.
-  var asyncResponseCallback = false;
+  asyncResponseCallback = false;
 
   if (request.action === 'render') {
-    OptionsStore.get(function(prefs) {
+    imports.OptionsStore.get(function(prefs) {
       responseCallback({
-        html: MarkdownRender.markdownRender(
+        html: imports.MarkdownRender.markdownRender(
           request.mdText,
           prefs,
-          marked,
-          hljs),
+          imports.marked,
+          imports.hljs),
         css: (prefs['main-css'] + prefs['syntax-css'])
       });
     });
@@ -94,7 +98,7 @@ document.addEventListener(Utils.PRIVILEGED_REQUEST_EVENT_NAME, function(event) {
   }
   else if (request.action === 'get-forgot-to-render-prompt') {
     asyncResponseCallback = true;
-    CommonLogic.getForgotToRenderPromptContent(function(html) {
+    imports.CommonLogic.getForgotToRenderPromptContent(function(html) {
       responseCallback({html: html});
     });
   }
@@ -103,7 +107,7 @@ document.addEventListener(Utils.PRIVILEGED_REQUEST_EVENT_NAME, function(event) {
     responseCallback('test-request-good');
   }
   else {
-    Utils.consoleLog('Markdown Here background script request handler: unmatched request action: ' + request.action);
+    imports.Utils.consoleLog('Markdown Here background script request handler: unmatched request action: ' + request.action);
     throw 'unmatched request action: ' + request.action;
   }
 
