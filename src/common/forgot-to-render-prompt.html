@@ -1,0 +1,136 @@
+<style>
+    /* CSS reset. Borrowed from Vimium: https://github.com/philc/vimium/blob/5bd32a511da813d731f73c4d646c14a69c2515ff/content_scripts/vimium.css */
+  .markdown-here-reset,
+  div.markdown-here-reset,
+  span.markdown-here-reset,
+  a.markdown-here-reset,
+  a:visited.markdown-here-reset,
+  a:hover.markdown-here-reset,
+  a:link.markdown-here-reset {
+    background: none;
+    border: none;
+    bottom: auto;
+    box-shadow: none;
+    color: black;
+    cursor: auto;
+    display: inline;
+    float: none;
+    font-family : "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    font-size: inherit;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    height: auto;
+    left: auto;
+    letter-spacing: 0;
+    line-height: 100%;
+    margin: 0;
+    max-height: none;
+    max-width: none;
+    min-height: 0;
+    min-width: 0;
+    opacity: 1;
+    padding: 0;
+    position: static;
+    right: auto;
+    text-align: left;
+    text-decoration: none;
+    text-indent: 0;
+    text-shadow: none;
+    text-transform: none;
+    top: auto;
+    vertical-align: baseline;
+    white-space: normal;
+    width: auto;
+    z-index: 99999999;
+  }
+
+  #markdown-here-forgot-to-render-background {
+    z-index: 90000;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    height: 100%;
+    width: 100%;
+    display: block;
+    background-color: silver;
+    opacity: 0.75;
+  }
+
+  #markdown-here-forgot-to-render-prompt {
+    display: block;
+    z-index: 90001;
+    background-color: rgb(220,202,235);
+    box-shadow: 0 4px 16px rgba(0,0,0,.2);
+    opacity: 1;
+    background-clip: padding-box;
+    position: absolute;
+    top: 33%;
+    left: 33%;
+    width: 33%;
+    padding: 1.5em;
+    font-family: Tahoma, Helvetica, arial, freesans, clean, sans-serif;
+    font-size: 16px;
+    color: #482168;
+    border: thin #482168 solid;
+  }
+
+  #markdown-here-forgot-to-render-head {
+    font-size: 1.2em;
+    margin-bottom: 0.8em;
+    text-shadow: 1px 1px 1px rgba(72, 33, 104, 0.23);
+  }
+
+  #markdown-here-forgot-to-render-close {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    text-decoration: none;
+    color: inherit;
+    font-size: 1.3em;
+  }
+
+  #markdown-here-forgot-to-render-close:hover {
+    cursor: pointer;
+  }
+
+  #markdown-here-forgot-to-render-buttons {
+    position: relative;
+    left: 20%;
+    margin: 1em;
+    color: inherit;
+  }
+
+  #markdown-here-forgot-to-render-buttons button {
+    font-size: 1.1em;
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
+    margin-top: 1.5em;
+    width: 5em;
+  }
+</style>
+
+<div id="markdown-here-forgot-to-render">
+  <div id="markdown-here-forgot-to-render-background" class="markdown-here-reset">
+  </div>
+  <div id="markdown-here-forgot-to-render-prompt">
+    <div id="markdown-here-forgot-to-render-head">
+      <span>
+        <img id="markdown-here-forgot-to-render-logo" class="markdown-here-reset" src="data:image/png;base64,{{logoBase64}}"/>
+        Forget to toggle Markdown?
+      </span>
+      <a id="markdown-here-forgot-to-render-close" class="markdown-here-reset" href="#" title="Dismiss this notification">&#215;</a>
+    </div>
+    <div>
+      It looks like you wrote this email in Markdown but didn't make it pretty. Send it anyway?
+    </div>
+    <div id="markdown-here-forgot-to-render-buttons" class="markdown-here-reset" >
+      <button id="markdown-here-forgot-to-render-button-back">
+        Back
+      </button>
+      <button id="markdown-here-forgot-to-render-button-send">
+        Send
+      </button>
+    </div>
+  </div>
+</div>

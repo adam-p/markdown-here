@@ -12,9 +12,9 @@
 
 Writing email with code in it is pretty tedious. Writing Markdown with code in it is easy. I found myself writing email in Markdown in the Github in-browser editor, then copying the preview into email. This is a pretty absurd workflow, so I decided create a tool to write and render Markdown right in the email.
 
-To discover what can be done with Markdown in *Markdown Here*, check out the [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) and the other [wiki pages](https://github.com/adam-p/markdown-here/wiki).
+To discover what can be done with Markdown in *Markdown Here*, check out the [Markdown Here Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet) and the other [wiki pages](https://github.com/adam-p/markdown-here/wiki).
 
-<sup>&dagger;: And Google Groups posts, and Wordpress posts, and Evernote notes, and Postbox! [See details](#compatibility).</sup>  
+<sup>&dagger;: And Google Groups posts, and Blogger posts, and Evernote notes, and Wordpress posts! [See more](#compatibility).</sup>  
 <sup>&Dagger;: And TeX mathematical formulae!</sup>
 
 ![screenshot of conversion](https://raw.github.com/adam-p/markdown-here/master/store-assets/markdown-here-image1.gimp.png)
@@ -188,35 +188,42 @@ Short answer: Gmail and Thunderbird are great. More info about some clients can 
     <td>
       Email received from Yahoo does not display with properly separated paragraphs. (Hotmail strips styling off <code>&lt;p&gt;</code> and <code>&lt;div&gt;</code> tags, and Yahoo uses the latter for paragraphs.)
     </td>
-    <td>No reply exclusion.</td>
+    <td>No reply exclusion. No forgot-to-render detection.</td>
   </tr>
   <tr>
     <th>Yahoo</th>
     <td>&#x2713;</td>
     <td>&#x2713;</td>
     <td>&#x2713;</td>
-    <td>No reply exclusion.</td>
+    <td>No reply exclusion. No forgot-to-render detection.</td>
   </tr>
   <tr>
     <th>Google Groups</th>
     <td>&#x2713;</td>
     <td>&#x2713;</td>
     <td>&#x2713;</td>
-    <td>Rendered version doesn't show in digest email. But that's probably true of manually-rich-edited posts as well.</td>
-  </tr>
-  <tr>
-    <th>Wordpress</th>
-    <td>Editor not exactly WYSIWYG, but Preview is accurate</td>
-    <td></td>
-    <td></td>
-    <td>See the <a href="https://github.com/adam-p/markdown-here/wiki/Compatibility">Compatibility wiki page</a> for full details and tips</td>
+    <td>Rendered version doesn't show in digest email, but that's probably true of manually-rich-edited posts as well. No forgot-to-render detection.</td>
   </tr>
   <tr>
     <th>Evernote (web interface)</th>
     <td>&#x2713;</td>
-    <td>Seems to strip newlines from <code>&lt;pre&gt;</code> blocks, which breaks display of code.</td>
+    <td>&#x2713;</td>
     <td>&#x2713;</td>
     <td></td>
+  </tr>
+  <tr>
+    <th>Blogger</th>
+    <td>&#x2713;</td>
+    <td>&#x2713;</td>
+    <td>&#x2713;</td>
+    <td></td>
+  </tr>
+  <tr>
+    <th>Wordpress</th>
+    <td>Inline code displays in non-monospace font, but is correct in preview and final post.</td>
+    <td>&#x2713;</td>
+    <td>&#x2713;</td>
+    <td>See the <a href="https://github.com/adam-p/markdown-here/wiki/Compatibility">Compatibility wiki page</a> for full details and tips</td>
   </tr>
   <tr>
     <th>Postbox</th>
@@ -252,6 +259,8 @@ Short answer: Gmail and Thunderbird are great. More info about some clients can 
 * Styling:
   * The use of browser-specific styles (-moz-, -webkit-) should be avoided. If used, they may not render correctly for people reading the email in a different browser from the one where the email was sent.
   * The use of state-dependent styles (like `a:hover`) don't work because they don't match at the time the styles are made explicit. (In email, styles must be explicitly applied to all elements -- stylesheets get stripped.)
+
+* For more tweaky features, visit the [Tips and Tricks](https://github.com/adam-p/markdown-here/wiki/Tips-and-Tricks) section.
 
 ## Building the Extension Bundles
 

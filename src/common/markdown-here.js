@@ -220,48 +220,49 @@ function makeStylesExplicit(wrapperElem, css) {
   for (i = 0; i < stylesheet.cssRules.length; i++) {
     rule = stylesheet.cssRules[i];
 
-    // Special case for the selector: If the selector is '.markdown-here-wrapper',
-    // then we want to apply the rules to the wrapper (not just to its ancestors,
-    // which is what querySelectorAll gives us).
     // Note that the CSS should not have any rules that use "body" or "html".
 
-    if (rule.selectorText === '.markdown-here-wrapper') {
-      wrapperElem.setAttribute('style', rule.style.cssText);
-    }
-    else {
-      selectorMatches = wrapperElem.querySelectorAll(rule.selectorText);
-      for (j = 0; j < selectorMatches.length; j++) {
+    // We're starting our search one level above the wrapper, which means we
+    // might match stuff outside of our wrapper. We'll have to double-check below.
+    selectorMatches = wrapperElem.parentElement.querySelectorAll(rule.selectorText);
 
-        // Make sure the selector match isn't inside an exclusion block.
-        elem = selectorMatches[j];
-        while (elem) {
-          if (elem.classList.contains('markdown-here-exclude')) {
-            elem = 'excluded';
-            break;
-          }
-          elem = elem.parentElement;
-        }
-        if (elem === 'excluded') {
-          // Don't style this element.
-          continue;
-        }
+    for (j = 0; j < selectorMatches.length; j++) {
+      elem = selectorMatches[j];
 
-        // Get the existing styles for the element.
-        styleAttr = selectorMatches[j].getAttribute('style') || '';
-
-        // Append the new styles to the end of the existing styles. This will
-        // give the new ones precedence if any are the same as existing ones.
-
-        // Make sure existing styles end with a semicolon.
-        if (styleAttr && styleAttr.search(/;[\s]*$/) < 0) {
-          styleAttr += '; ';
-        }
-
-        styleAttr += rule.style.cssText;
-
-        // Set the styles back.
-        selectorMatches[j].setAttribute('style', styleAttr);
+      // Make sure the element is inside our wrapper (or is our wrapper).
+      if (elem !== wrapperElem &&
+          !Utils.isElementDescendant(wrapperElem, elem)) {
+        continue;
       }
+
+      // Make sure the selector match isn't inside an exclusion block.
+      while (elem) {
+        if (elem.classList.contains('markdown-here-exclude')) {
+          elem = 'excluded';
+          break;
+        }
+        elem = elem.parentElement;
+      }
+      if (elem === 'excluded') {
+        // Don't style this element.
+        continue;
+      }
+
+      // Get the existing styles for the element.
+      styleAttr = selectorMatches[j].getAttribute('style') || '';
+
+      // Append the new styles to the end of the existing styles. This will
+      // give the new ones precedence if any are the same as existing ones.
+
+      // Make sure existing styles end with a semicolon.
+      if (styleAttr && styleAttr.search(/;[\s]*$/) < 0) {
+        styleAttr += '; ';
+      }
+
+      styleAttr += rule.style.cssText;
+
+      // Set the styles back.
+      selectorMatches[j].setAttribute('style', styleAttr);
     }
   }
 }
@@ -363,49 +364,38 @@ function findMarkdownHereWrappersInRange(range) {
 
 // Converts the Markdown in the user's compose element to HTML and replaces it.
 // If `selectedRange` is null, then the entire email is being rendered.
-function renderMarkdown(focusedElem, selectedRange, markdownRenderer) {
-  var extractedHtml, rangeWrapper;
-
-  // Wrap the selection in a new element so that we can better extract the HTML.
-  // This modifies the DOM, but that's okay, since we're going to replace the
-  // new element in a moment.
-  rangeWrapper = focusedElem.ownerDocument.createElement('div');
-  rangeWrapper.appendChild(selectedRange.extractContents());
-  selectedRange.insertNode(rangeWrapper);
-  selectedRange.selectNode(rangeWrapper);
-
-  // Get the HTML containing the Markdown from the selection.
-  extractedHtml = rangeWrapper.innerHTML;
-
-  if (!extractedHtml || extractedHtml.length === 0) {
-    return 'No Markdown found to render';
-  }
+function renderMarkdown(focusedElem, selectedRange, markdownRenderer, renderComplete) {
+  var originalHtml = Utils.getDocumentFragmentHTML(selectedRange.cloneContents());
 
   // Call to the extension main code to actually do the md->html conversion.
-  markdownRenderer(extractedHtml, function(mdHtml, mdCss) {
+  markdownRenderer(focusedElem, selectedRange, function(mdHtml, mdCss) {
     var wrapper;
 
     // Wrap our pretty HTML in a <div> wrapper.
     // We'll use the wrapper as a marker to indicate that we're in a rendered state.
     mdHtml =
-      '<div class="markdown-here-wrapper" id="markdown-here-wrapper-' + Math.floor(Math.random()*1000000) + '">' +
-      mdHtml +
+      '<div class="markdown-here-wrapper" ' +
+           'data-md-url="' + Utils.getTopURL(focusedElem.ownerDocument.defaultView, true) + '" ' +
+           'id="markdown-here-wrapper-' + Math.floor(Math.random()*1000000) + '">' +
+        mdHtml +
       '</div>';
 
     // Store the original Markdown-in-HTML to a data attribute on the wrapper
     // element. We'll use this later if we need to unrender back to Markdown.
     wrapper = replaceRange(selectedRange, mdHtml);
-    wrapper.setAttribute('data-md-original', extractedHtml);
+    wrapper.setAttribute('data-md-original', encodeURIComponent(originalHtml));
 
     // Some webmail (Gmail) strips off any external style block. So we need to go
     // through our styles, explicitly applying them to matching elements.
     makeStylesExplicit(wrapper, mdCss);
+
+    renderComplete();
   });
 }
 
 // Revert the rendered Markdown wrapperElem back to its original form.
 function unrenderMarkdown(wrapperElem) {
-  var originalMdHtml = wrapperElem.getAttribute('data-md-original');
+  var originalMdHtml = decodeURIComponent(wrapperElem.getAttribute('data-md-original'));
   Utils.saferSetOuterHTML(wrapperElem, originalMdHtml);
 }
 
@@ -417,12 +407,15 @@ function unrenderMarkdown(wrapperElem) {
 //        drill down to find the correct element and document.)
 // @param `markdownRenderer`  The function that provides raw-Markdown-in-HTML
 //                            to pretty-Markdown-in-HTML rendering service.
-//                            See markdown-render.js for information.
 // @param `logger`  A function that can be used for logging debug messages. May
 //                  be null.
+// @param `renderComplete`  Callback that will be called when a render or unrender
+//                          has completed. Passed two arguments: `elem`
+//                          (the element de/rendered) and `rendered` (boolean,
+//                          true if rendered, false if derendered).
 // @returns True if successful, otherwise an error message that should be shown
 //          to the user.
-function markdownHere(document, markdownRenderer, logger) {
+function markdownHere(document, markdownRenderer, logger, renderComplete) {
 
   if (logger) {
     mylog = logger;
@@ -467,9 +460,21 @@ function markdownHere(document, markdownRenderer, logger) {
     for (i = 0; i < wrappers.length; i++) {
       unrenderMarkdown(wrappers[i]);
     }
+
+    if (renderComplete) {
+      renderComplete(focusedElem, false);
+    }
   }
   else {
-    renderMarkdown(focusedElem, range, markdownRenderer);
+    renderMarkdown(
+      focusedElem,
+      range,
+      markdownRenderer,
+      function() {
+        if (renderComplete) {
+          renderComplete(focusedElem, true);
+        }
+      });
   }
 
   return true;

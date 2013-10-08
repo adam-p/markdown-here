@@ -12,6 +12,12 @@
 .markdown-here-wrapper {
 }
 
+/* To add site specific rules, you can use the `data-md-url` attribute that we
+   add to the wrapper element. Note that rules like this are used depending
+   on the URL you're *sending* from, not the URL where the recipient views it.
+*/
+/* .markdown-here-wrapper[data-md-url*="mail.yahoo."] ul { color: red; } */
+
 pre, code {
   font-size: 0.85em;
   font-family: Consolas, Inconsolata, Courier, monospace;
@@ -24,7 +30,7 @@ code {
   border: 1px solid #EAEAEA;
   background-color: #F8F8F8;
   border-radius: 3px;
-  display: inline; /* adam-p: added to fix Yahoo block display */
+  display: inline; /* added to fix Yahoo block display of inline code */
 }
 
 pre {
@@ -38,6 +44,19 @@ pre code {
   border-radius: 3px;
   border: 1px solid #CCC;
   padding: 0.5em 0.7em;
+  display: block !important; /* added to counteract the Yahoo-specific `code` rule; without this, code blocks in Blogger are broken */
+}
+
+/* In edit mode, Wordpress uses a `* { font: ...;} rule+style that makes highlighted
+code look non-monospace. This rule will override it. */
+.markdown-here-wrapper[data-md-url*="wordpress."] code span {
+  font: inherit;
+}
+
+/* Wordpress adds a grey background to `pre` elements that doesn't go well with
+our syntax highlighting. */
+.markdown-here-wrapper[data-md-url*="wordpress."] pre {
+  background-color: transparent;
 }
 
 /* This spacing has been tweaked to closely match Gmail+Chrome "paragraph" (two line breaks) spacing. */
@@ -166,16 +185,4 @@ table tr th, table tr td {
 table tr th {
  font-weight: bold;
   background-color: #F0F0F0;
-}
-
-table tr td[align="right"] {
-  text-align: right;
-}
-
-table tr td[align="left"] {
-  text-align: left;
-}
-
-table tr td[align="center"] {
-  text-align: center;
 }

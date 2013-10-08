@@ -8,15 +8,13 @@ Totally simple to use:
 3. Your email is now pretty! (That is, it's been rendered to HTML.)
 4. If you like the way it looks, just send it. If you want to change or add something, click "Markdown Toggle" again to get back to your original Markdown. Rinse and repeat.
 
-If only part of your email is Markdown, then select the part you want to render into pretty HTML, right click, and click "Markdown Toggle". Only your selection will be converted. To revert back to the original Markdown, right click in the rendered block and click "Markdown Toggle" again.
-
-Markdown Here is primarily targeted to work with Gmail and Thunderbird, but it also works pretty well with Yahoo and Hotmail. Additionally, it works great with Google Groups and pretty well with Evernote's web interface.
+Markdown Here is primarily targeted to work with Gmail and Thunderbird, but it also works pretty well with Yahoo and Hotmail. Additionally, it works great with Google Groups and Sites, Evernote's web interface, Blogger, Wordpress, and more!
 
 Syntax highlighting note: Used fenced code blocks and specify the language name. See the project page for an example.
 
 Privacy: Markdown Here accesses and modifies the content of your email. It can, in theory, access other web content, but does not. It also makes no Internet requests itself whatsoever. You data is modified when and where you choose, and does not leave your browser.
 
-Available as a Chrome, Firefox, Safari, and Thunderbird extension.
+Available as a Chrome, Firefox, Safari, Opera, and Thunderbird extension.
 
 This is an open source project. Visit Markdown Here's Github page for full instructions, more information, bug reports, or to contribute.
 

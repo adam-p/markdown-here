@@ -1,6 +1,50 @@
 Change Log
 ==========
 
+2013-10-07: v2.9.0
+------------------
+
+* New feature: **Forgot-to-render detection**. Have you ever forgotten to make your Markdown pretty before sending your email? Me too. Now Markdown Here will detect when your email contains raw Markdown and will give you second chance to go back and render it before sending.
+  * This feature is supported in Thunderbird (and Postbox), and for Gmail in Chrome, Firefox, Opera, and Safari. (Pull requests welcome for Hotmail, Yahoo, etc.)
+  * For now this feature is off by default because I'm nervous about too many false positives driving people crazy. But please opt in! The checkbox to enable it is at the bottom of the MDH Options page. And please give feedback on how the feature does or doesn't work for you, either in the [Github issue](https://github.com/adam-p/markdown-here/issues/90) or the [MDH Google Group](https://groups.google.com/forum/#!forum/markdown-here).
+  * Thanks to [Petr Pudlák](https://github.com/ppetr) for requesting this in [issue #90](https://github.com/adam-p/markdown-here/issues/90), [Zhou Qiang](https://github.com/zhouqianghfut) in [issue #96](https://github.com/adam-p/markdown-here/issues/96), [Adam Backstrom](https://github.com/abackstrom) in [issue #98](https://github.com/adam-p/markdown-here/issues/98).
+
+* **Compatibility improvements!**
+  * Now works great with **Blogger** ([details](https://github.com/adam-p/markdown-here/wiki/Compatibility#blogger)).
+    * The changes made will probably help with some other sites. If you tried out a site before and ended up with empty lines in your code blocks, try it again.
+    * See the [Compatibility wiki page](https://github.com/adam-p/markdown-here/wiki/Compatibility#blogger) for details.
+    * Thanks to [lambdaalice](https://github.com/lambdalice) for reporting the previous bad behaviour in [issue #89](https://github.com/adam-p/markdown-here/issues/89).
+  * Now works very well with **Wordpress** ([details](https://github.com/adam-p/markdown-here/wiki/Compatibility#wordpress)).
+  * See the [Compatibility wiki page](https://github.com/adam-p/markdown-here/wiki/Compatibility) for even more places where Markdown Here works, like **Google Sites** and **Facebook Notes**.
+
+* New feature: **Automatic anchors for headers**. This makes it much easier to put a **table of contents** (or other intra-page links) inside your email or blog post. Just use the text of your header as the anchor link text. For example:
+    ```no-highlight
+    [See below](#Deep-Dive Details Section) for details.
+    ...
+    Deep-Dive Details Section
+    =========================
+    ...
+    ```
+  * Thanks to [Casey Watts](https://github.com/caseywatts) for requesting this and giving insight on how to do it. Closes issue [#93](https://github.com/adam-p/markdown-here/issues/93).
+
+* Chrome and Firefox: Options page no longer opens when Markdown Here updates. Now there's a little notification in the corner of the window that can be clicked to show the MDH Options page (and the changes in the release), or dismissed.
+  * Thanks to [Casey Watts](https://github.com/caseywatts) for his help. Closes issues [#64](https://github.com/adam-p/markdown-here/issues/64) and [#95](https://github.com/adam-p/markdown-here/issues/95).
+
+* Added the ability to set **site-specific styles**. To see an example of how to do this, either reset your Primary Styling CSS or [take a look at the source for it](https://github.com/adam-p/markdown-here/blob/6d3c2efea23219b58da183df23da111f8fd9febb/src/common/default.css#L15).
+
+* [Fixed bug](https://github.com/adam-p/markdown-here/issues/84): Math: single-character formula won't render.
+  * Thanks to kbeach who reported this [in a Google Groups post](https://groups.google.com/forum/#!msg/markdown-here/tolrITkqrx0/phElyPBBAhYJ).
+  * Thanks again to [Emanuele D'Osualdo](https://github.com/bordaigorl) for providing the fix.
+
+* [Fixed bug](https://github.com/adam-p/markdown-here/issues/83): `[a](b)` links shouldn't expand inside of a code block.
+  * Thanks to [Dan Brown](https://github.com/jdanbrown) for reporting this bug.
+
+* [Fixed bug](https://github.com/adam-p/markdown-here/issues/87): "Smart" quotations and apostrophes would sometimes get confused and curl the wrong way.
+  * Thanks to [Jay Dixit](https://github.com/jaydixit) for reporting this bug.
+
+* [Fixed bug](https://github.com/adam-p/markdown-here/issues/53): Shouldn't require blank line before list.
+
+
 2013-08-24: v2.8.2
 ------------------
 
@@ -62,7 +106,7 @@ Added support for [**Opera**](http://www.opera.com)! Get it [here](https://addon
 * Markdown Here has a **new logo**! A big thank you to the talented [Tatiana A. Fryntoff](http://tatianafryntoff.com/) for creating our shiny new logo.
 
 * Support for new Markdown features. All credit goes to chjj, the maintainer of the [Marked library](https://github.com/chjj/marked).
-  * **Tables!** Now you can easily add tables to your email with Markdown. If you're not familiar with the syntax, check out [the wiki cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#wiki-tables). This closes [issue #13](https://github.com/adam-p/markdown-here/issues/13).
+  * **Tables!** Now you can easily add tables to your email with Markdown. If you're not familiar with the syntax, check out [the wiki cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet#wiki-tables). This closes [issue #13](https://github.com/adam-p/markdown-here/issues/13).
   * Strikethrough: Put double tildes around things to ~~strike it out~~ (`~~strike it out~~`).
   * Smarter lists: Have you ever had a numbered list mysteriously/annoyingly become a bullet list because it comes after one? Not anymore.
   * GFM line breaks: If you put a line break in your Markdown, it will be a line break after you toggle, instead of joining to form a single line. This closes [issue #12](https://github.com/adam-p/markdown-here/issues/12).
@@ -214,7 +258,7 @@ Added support for [**Opera**](http://www.opera.com)! Get it [here](https://addon
 
 * Bug fixes.
 
-* Created a Markdown cheatsheet: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
+* Created a Markdown cheatsheet: https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet
 
 
 2012-06-07: v2.2.0

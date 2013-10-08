@@ -4,7 +4,8 @@
  */
 
 "use strict";
-/*global chrome:false, markdownHere:false*/
+/*global chrome:false, markdownHere:false, CommonLogic:false, htmlToText:false,
+    Utils:false, MdhHtmlToText:false, marked:false*/
 /*jshint devel:true, browser:true*/
 
 
@@ -15,46 +16,72 @@
 
 
 // Handle the menu-item click
-function requestHandler(event) {
+function requestHandler(request, sender, sendResponse) {
   var focusedElem, mdReturn;
 
-  if (event && (event.action === 'context-click' ||
-                event.action === 'hotkey' ||
-                event.action === 'button-click')) {
+  if (request && (request.action === 'context-click' ||
+                request.action === 'hotkey' ||
+                request.action === 'button-click')) {
 
     // Check if the focused element is a valid render target
     focusedElem = markdownHere.findFocusedElem(window.document);
     if (!focusedElem) {
       // Shouldn't happen. But if it does, just silently abort.
-      return;
+      return false;
     }
 
     if (!markdownHere.elementCanBeRendered(focusedElem)) {
       alert('The selected field is not valid for Markdown rendering. Please use a rich editor.');
-      return;
+      return false;
     }
 
     var logger = function() { console.log.apply(console, arguments); };
 
-    mdReturn = markdownHere(document, requestMarkdownConversion, logger);
+    mdReturn = markdownHere(
+                document,
+                requestMarkdownConversion,
+                logger,
+                markdownRenderComplete);
 
     if (typeof(mdReturn) === 'string') {
       // Error message was returned.
       alert(mdReturn);
-      return;
+      return false;
     }
   }
+  else if (request && request.action === 'show-upgrade-notification')
+  {
+    showUpgradeNotification(request.html);
+    return false;
+  }
+  else if (request && request.action === 'clear-upgrade-notification')
+  {
+    clearUpgradeNotification();
+    return false;
+  }
 }
-chrome.extension.onRequest.addListener(requestHandler);
+chrome.runtime.onMessage.addListener(requestHandler);
 
 
 // The rendering service provided to the content script.
 // See the comment in markdown-render.js for why we do this.
-function requestMarkdownConversion(html, callback) {
+function requestMarkdownConversion(elem, range, callback) {
+  var mdhHtmlToText = new MdhHtmlToText.MdhHtmlToText(elem, range);
+
   // Send a request to the add-on script to actually do the rendering.
-  chrome.extension.sendRequest({action: 'render', html: html}, function(response) {
-    callback(response.html, response.css);
-  });
+  Utils.makeRequestToPrivilegedScript(
+    document,
+    { action: 'render', mdText: mdhHtmlToText.get() },
+    function(response) {
+      var renderedMarkdown = mdhHtmlToText.postprocess(response.html);
+      callback(renderedMarkdown, response.css);
+    });
+}
+
+
+// When rendering (or unrendering) completed, do our interval checks.
+function markdownRenderComplete(elem, rendered) {
+  intervalCheck(elem);
 }
 
 
@@ -86,7 +113,9 @@ function requestMarkdownConversion(html, callback) {
 
 // At this time, only this function differs between Chrome and Firefox.
 function showToggleButton(show) {
-  chrome.extension.sendRequest({ action: 'show-toggle-button', show: show });
+  Utils.makeRequestToPrivilegedScript(
+    document,
+    { action: 'show-toggle-button', show: show });
 }
 
 
@@ -141,7 +170,10 @@ var hotkeyGetOptionsHandler = function(prefs) {
   // If the background script isn't properly loaded, it can happen that the
   // `prefs` argument is undefined. Detect this and try again.
   if (typeof(prefs) === 'undefined') {
-    chrome.extension.sendRequest({action: 'get-options'}, hotkeyGetOptionsHandler);
+    Utils.makeRequestToPrivilegedScript(
+      document,
+      { action: 'get-options' },
+      hotkeyGetOptionsHandler);
     return;
   }
 
@@ -187,7 +219,10 @@ var hotkeyGetOptionsHandler = function(prefs) {
   }
   // else the hotkey is disabled and we'll leave hotkeyIntervalCheck as a no-op
 };
-chrome.extension.sendRequest({action: 'get-options'}, hotkeyGetOptionsHandler);
+Utils.makeRequestToPrivilegedScript(
+  document,
+  { action: 'get-options' },
+  hotkeyGetOptionsHandler);
 
 
 /*
@@ -195,13 +230,72 @@ chrome.extension.sendRequest({action: 'get-options'}, hotkeyGetOptionsHandler);
  * See specific sections above for reasons why this is necessary.
  */
 
-function intervalCheck() {
-  var focusedElem = markdownHere.findFocusedElem(window.document);
+// `elem` is optional. If not provided, the focused element will be checked.
+function intervalCheck(elem) {
+  var focusedElem = elem || markdownHere.findFocusedElem(window.document);
   if (!focusedElem) {
     return;
   }
 
   hotkeyIntervalCheck(focusedElem);
   buttonIntervalCheck(focusedElem);
+
+  Utils.makeRequestToPrivilegedScript(
+    document,
+    { action: 'get-options' },
+    function(prefs) {
+      CommonLogic.forgotToRenderIntervalCheck(
+        focusedElem,
+        markdownHere,
+        MdhHtmlToText,
+        marked,
+        prefs);
+    });
 }
 setInterval(intervalCheck, 2000);
+
+
+/*
+ * Upgrade notification
+ */
+
+function showUpgradeNotification(html) {
+  if (document.querySelector('#markdown-here-upgrade-notification-content')) {
+    return;
+  }
+
+  var elem = document.createElement('div');
+  document.body.appendChild(elem);
+  Utils.saferSetOuterHTML(elem, html);
+
+  // Note that `elem` is no longer valid after we call Utils.saferSetOuterHTML on it.
+
+  // Add click handlers so that we can clear the notification.
+  var optionsLink = document.querySelector('#markdown-here-upgrade-notification-link');
+  optionsLink.addEventListener('click', function() {
+    clearUpgradeNotification(true);
+    // Allow the default action
+  });
+
+  var closeLink = document.querySelector('#markdown-here-upgrade-notification-close');
+  closeLink.addEventListener('click', function(event) {
+    event.preventDefault();
+    clearUpgradeNotification(true);
+  });
+}
+
+function clearUpgradeNotification(notifyBackgroundScript) {
+  var elem = document.querySelector('#markdown-here-upgrade-notification-content');
+
+  if (!elem) {
+    return;
+  }
+
+  document.body.removeChild(elem);
+
+  if (notifyBackgroundScript) {
+    Utils.makeRequestToPrivilegedScript(
+      document,
+      { action: 'upgrade-notification-shown' });
+  }
+}
