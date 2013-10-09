@@ -20,21 +20,23 @@ function onLoad() {
     var optionsURL = '/common/options.html';
 
     if (typeof(options['last-version']) === 'undefined') {
-      // This is the very first time the extensions has been run, so show the
-      // options page.
-      chrome.tabs.create({ url: chrome.extension.getURL(optionsURL) });
-
-      // Update our last version
-      OptionsStore.set({ 'last-version': appDetails.version });
+      // Update our last version. Only when the update is complete will we take
+      // the next action, to make sure it doesn't happen every time we start up.
+      OptionsStore.set({ 'last-version': appDetails.version }, function() {
+        // This is the very first time the extensions has been run, so show the
+        // options page.
+        chrome.tabs.create({ url: chrome.extension.getURL(optionsURL) });
+      });
     }
     else if (options['last-version'] !== appDetails.version) {
-      // The extension has been newly updated
-      optionsURL += '?prevVer=' + options['last-version'];
+      // Update our last version. Only when the update is complete will we take
+      // the next action, to make sure it doesn't happen every time we start up.
+      OptionsStore.set({ 'last-version': appDetails.version }, function() {
+        // The extension has been newly updated
+        optionsURL += '?prevVer=' + options['last-version'];
 
-      showUpgradeNotification(chrome.extension.getURL(optionsURL));
-
-      // Update our last version
-      OptionsStore.set({ 'last-version': appDetails.version });
+        showUpgradeNotification(chrome.extension.getURL(optionsURL));
+      });
     }
   });
 }
