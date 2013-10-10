@@ -43,7 +43,9 @@ function markdownRender(mdText, userprefs, marked, hljs) {
     langPrefix: 'language-',
     math: userprefs['math-enabled'] ? mathify : null,
     highlight: function(codeText, codeLanguage) {
-        if (codeLanguage) {
+        if (codeLanguage &&
+            ((codeLanguage in hljs.LANGUAGES) ||
+             ((codeLanguage = codeLanguage.toLowerCase()) in hljs.LANGUAGES))) {
           return hljs.highlight(codeLanguage, codeText).value;
         }
 
