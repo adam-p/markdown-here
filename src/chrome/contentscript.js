@@ -51,6 +51,7 @@ function requestHandler(request, sender, sendResponse) {
   }
   else if (request && request.action === 'show-upgrade-notification')
   {
+    sendResponse(true);
     showUpgradeNotification(request.html);
     return false;
   }
@@ -285,17 +286,14 @@ function showUpgradeNotification(html) {
 }
 
 function clearUpgradeNotification(notifyBackgroundScript) {
-  var elem = document.querySelector('#markdown-here-upgrade-notification-content');
-
-  if (!elem) {
-    return;
-  }
-
-  document.body.removeChild(elem);
-
   if (notifyBackgroundScript) {
     Utils.makeRequestToPrivilegedScript(
       document,
       { action: 'upgrade-notification-shown' });
+  }
+
+  var elem = document.querySelector('#markdown-here-upgrade-notification-content');
+  if (elem) {
+    document.body.removeChild(elem);
   }
 }

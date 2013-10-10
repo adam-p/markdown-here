@@ -27,6 +27,9 @@ function consoleLog(logString) {
   }
 }
 
+// TODO: Try to use `insertAdjacentHTML` for the inner and outer HTML functions.
+// https://developer.mozilla.org/en-US/docs/Web/API/Element.insertAdjacentHTML
+
 // Assigning a string directly to `element.innerHTML` is potentially dangerous:
 // e.g., the string can contain harmful script elements. (Additionally, Mozilla
 // won't let us pass validation with `innerHTML` assignments in place.)

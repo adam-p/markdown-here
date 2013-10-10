@@ -48,6 +48,31 @@ function debugLog() {
 
 
 /*
+ * Gets the forgot-to-render prompt. This must be called from a privileged script.
+ */
+function getUpgradeNotification(optionsURL, responseCallback) {
+  debugLog('getUpgradeNotification', 'getting');
+
+  Utils.getLocalFile(
+    Utils.getLocalURL('/common/upgrade-notification.html'),
+    'text/html',
+    function(html) {
+      // Get the logo image data
+      Utils.getLocalFileAsBase64(
+        Utils.getLocalURL('/common/images/icon16.png'),
+        function(logoBase64) {
+          // Do some rough template replacement
+          html = html.replace('{{optionsURL}}', optionsURL)
+                     .replace('{{logoBase64}}', logoBase64);
+
+          debugLog('getUpgradeNotification', 'got');
+          return responseCallback(html);
+        });
+      });
+}
+
+
+/*
  ******************************************************************************
  Forgot-to-render check
  ******************************************************************************
@@ -59,7 +84,6 @@ function debugLog() {
 function getForgotToRenderPromptContent(responseCallback) {
   debugLog('getForgotToRenderPromptContent', 'getting');
 
-  // Get the content of notification element
   Utils.getLocalFile(
     Utils.getLocalURL('/common/forgot-to-render-prompt.html'),
     'text/html',
@@ -537,6 +561,7 @@ function showHTMLForgotToRenderPrompt(html, composeElem, composeSendButton, call
 
 
 // Expose these functions
+CommonLogic.getUpgradeNotification = getUpgradeNotification;
 CommonLogic.getForgotToRenderPromptContent = getForgotToRenderPromptContent;
 CommonLogic.forgotToRenderIntervalCheck = forgotToRenderIntervalCheck;
 CommonLogic.probablyWritingMarkdown = probablyWritingMarkdown;
