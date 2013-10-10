@@ -185,14 +185,16 @@ function findClosestSendButton(elem) {
   // boundaries and sometimes we won't.
 
   var sendButton = null;
-  while (elem.parentElement) {
-    sendButton = elem.parentElement.querySelector('[role="button"][tabindex="1"]');
+  // The `elem.parentNode.querySelector` check is to make sure we stop if we
+  // hit a parent node type that can't query.
+  while (elem.parentNode && elem.parentNode.querySelector) {
+    sendButton = elem.parentNode.querySelector('[role="button"][tabindex="1"]');
     if (sendButton) {
       debugLog('findClosestSendButton', 'found');
       return sendButton;
     }
 
-    elem = elem.parentElement;
+    elem = elem.parentNode;
   }
 
   // If this appears to be in an iframe, make a recursive call.
@@ -278,7 +280,7 @@ function setupForgotToRenderInterceptors(composeElem, MdhHtmlToText, marked, pre
     var ourTarget =
       (event.target === composeElem) ||
       (event.target instanceof composeElem.ownerDocument.defaultView.HTMLHtmlElement &&
-       event.target === composeElem.parentElement);
+       event.target === composeElem.parentNode);
 
     if (ourTarget &&
         (event.metaKey || event.ctrlKey) && event.keyCode === ENTER_KEYCODE &&
@@ -290,10 +292,10 @@ function setupForgotToRenderInterceptors(composeElem, MdhHtmlToText, marked, pre
     debugLog('setupForgotToRenderInterceptors', 'sendHotkeyKeydownListener', 'skipping undesired event', event.target);
   };
 
-  composeSendButton.parentElement.addEventListener('keydown', composeSendButtonKeyListener, true);
-  composeSendButton.parentElement.addEventListener('keyup', composeSendButtonKeyListener, true);
-  composeSendButton.parentElement.addEventListener('click', composeSendButtonClickListener, true);
-  composeElem.parentElement.addEventListener('keydown', sendHotkeyKeydownListener, true);
+  composeSendButton.parentNode.addEventListener('keydown', composeSendButtonKeyListener, true);
+  composeSendButton.parentNode.addEventListener('keyup', composeSendButtonKeyListener, true);
+  composeSendButton.parentNode.addEventListener('click', composeSendButtonClickListener, true);
+  composeElem.parentNode.addEventListener('keydown', sendHotkeyKeydownListener, true);
 }
 
 // Returns true if `text` looks like raw Markdown, false otherwise.

@@ -131,6 +131,21 @@ function isElementinDocument(element) {
 }
 
 
+// From: http://stackoverflow.com/a/3819589/729729
+// Postbox doesn't support `node.outerHTML`.
+function outerHTML(node, doc) {
+  // if IE, Chrome take the internal method otherwise build one
+  return node.outerHTML || (
+    function(n){
+        var div = doc.createElement('div'), h;
+        div.appendChild(n.cloneNode(true));
+        h = div.innerHTML;
+        div = null;
+        return h;
+    })(node);
+}
+
+
 // An approximate equivalent to outerHTML for document fragments.
 function getDocumentFragmentHTML(docFrag) {
   var html = '', i;
@@ -140,7 +155,7 @@ function getDocumentFragmentHTML(docFrag) {
       html += node.nodeValue;
     }
     else { // going to assume ELEMENT_NODE
-      html += node.outerHTML;
+      html += outerHTML(node, docFrag.ownerDocument);
     }
   }
 
@@ -150,7 +165,7 @@ function getDocumentFragmentHTML(docFrag) {
 
 function isElementDescendant(parent, descendant) {
   var ancestor = descendant;
-  while (!!(ancestor = ancestor.parentElement)) {
+  while (!!(ancestor = ancestor.parentNode)) {
     if (ancestor === parent) {
       return true;
     }

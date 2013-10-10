@@ -479,7 +479,7 @@ this.OptionsStore._fillDefaults = function(prefsObj, callback) {
     // Only take action if the key doesn't already have a value set.
     if (typeof(prefsObj[key]) === 'undefined') {
       if (that.defaults[key].hasOwnProperty('__defaultFromFile__')) {
-        var xhr = new XMLHttpRequest();
+        var xhr = new Utils.global.XMLHttpRequest();
 
         if (that.defaults[key]['__mimeType__']) {
           xhr.overrideMimeType(that.defaults[key]['__mimeType__']);
