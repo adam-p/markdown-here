@@ -14,6 +14,16 @@
 
 // On each load, check if we should show the options/changelist page.
 function onLoad() {
+  // This timeout is a dirty hack to fix bug #119: "Markdown Here Upgrade
+  // Notification every time I open Chrome". That issue on Github for details.
+  // https://github.com/adam-p/markdown-here/issues/119
+  setTimeout(upgradeCheck, 30000);
+}
+
+// In the interest of improved browser load performace, call `onLoad` after a tick.
+window.addEventListener('load', Utils.nextTickFn(onLoad), false);
+
+function upgradeCheck() {
   OptionsStore.get(function(options) {
     var appDetails = chrome.app.getDetails();
 
@@ -40,9 +50,6 @@ function onLoad() {
     }
   });
 }
-
-// In the interest of improved browser load performace, call our onLoad after a tick.
-window.addEventListener('load', Utils.nextTickFn(onLoad), false);
 
 // Create the context menu that will signal our main code.
 chrome.contextMenus.create({
