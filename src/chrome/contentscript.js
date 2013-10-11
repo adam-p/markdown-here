@@ -231,6 +231,8 @@ Utils.makeRequestToPrivilegedScript(
  * See specific sections above for reasons why this is necessary.
  */
 
+var forgotToRenderIntervalCheckPrefs = null;
+
 // `elem` is optional. If not provided, the focused element will be checked.
 function intervalCheck(elem) {
   var focusedElem = elem || markdownHere.findFocusedElem(window.document);
@@ -241,17 +243,24 @@ function intervalCheck(elem) {
   hotkeyIntervalCheck(focusedElem);
   buttonIntervalCheck(focusedElem);
 
-  Utils.makeRequestToPrivilegedScript(
-    document,
-    { action: 'get-options' },
-    function(prefs) {
-      CommonLogic.forgotToRenderIntervalCheck(
-        focusedElem,
-        markdownHere,
-        MdhHtmlToText,
-        marked,
-        prefs);
-    });
+  // Don't retrieve options every time. Doing so was probably causing the memory
+  // leak of #108 and the errors of #113.
+  if (forgotToRenderIntervalCheckPrefs === null) {
+    Utils.makeRequestToPrivilegedScript(
+      document,
+      { action: 'get-options' },
+      function(prefs) {
+        forgotToRenderIntervalCheckPrefs = prefs;
+      });
+  }
+  else {
+    CommonLogic.forgotToRenderIntervalCheck(
+      focusedElem,
+      markdownHere,
+      MdhHtmlToText,
+      marked,
+      forgotToRenderIntervalCheckPrefs);
+  }
 }
 setInterval(intervalCheck, 2000);
 

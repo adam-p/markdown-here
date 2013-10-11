@@ -327,6 +327,8 @@ var markdown_here = {
     }
     window.document.addEventListener('focus', focusChange, true);
 
+    var forgotToRenderIntervalCheckPrefs = null;
+
     // We're using a function expression rather than a function declaration
     // because Mozilla's automatic extension review prefers when you pass the
     // former to `setInterval()`.
@@ -338,14 +340,19 @@ var markdown_here = {
 
       setToggleButtonVisibility(focusedElem);
 
-      markdown_here.imports.OptionsStore.get(function(prefs) {
+      if (forgotToRenderIntervalCheckPrefs === null) {
+        markdown_here.imports.OptionsStore.get(function(prefs) {
+          forgotToRenderIntervalCheckPrefs = prefs;
+        });
+      }
+      else {
         markdown_here.imports.CommonLogic.forgotToRenderIntervalCheck(
           focusedElem,
           markdown_here.imports.markdownHere,
           markdown_here.imports.MdhHtmlToText,
           markdown_here.imports.marked,
-          prefs);
-      });
+          forgotToRenderIntervalCheckPrefs);
+      }
     };
     setInterval(intervalCheck, 2000);
   },
