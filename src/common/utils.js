@@ -27,6 +27,9 @@ function consoleLog(logString) {
   }
 }
 
+// TODO: Try to use `insertAdjacentHTML` for the inner and outer HTML functions.
+// https://developer.mozilla.org/en-US/docs/Web/API/Element.insertAdjacentHTML
+
 // Assigning a string directly to `element.innerHTML` is potentially dangerous:
 // e.g., the string can contain harmful script elements. (Additionally, Mozilla
 // won't let us pass validation with `innerHTML` assignments in place.)
@@ -128,6 +131,21 @@ function isElementinDocument(element) {
 }
 
 
+// From: http://stackoverflow.com/a/3819589/729729
+// Postbox doesn't support `node.outerHTML`.
+function outerHTML(node, doc) {
+  // if IE, Chrome take the internal method otherwise build one
+  return node.outerHTML || (
+    function(n){
+        var div = doc.createElement('div'), h;
+        div.appendChild(n.cloneNode(true));
+        h = div.innerHTML;
+        div = null;
+        return h;
+    })(node);
+}
+
+
 // An approximate equivalent to outerHTML for document fragments.
 function getDocumentFragmentHTML(docFrag) {
   var html = '', i;
@@ -137,7 +155,7 @@ function getDocumentFragmentHTML(docFrag) {
       html += node.nodeValue;
     }
     else { // going to assume ELEMENT_NODE
-      html += node.outerHTML;
+      html += outerHTML(node, docFrag.ownerDocument);
     }
   }
 
@@ -147,7 +165,7 @@ function getDocumentFragmentHTML(docFrag) {
 
 function isElementDescendant(parent, descendant) {
   var ancestor = descendant;
-  while (!!(ancestor = ancestor.parentElement)) {
+  while (!!(ancestor = ancestor.parentNode)) {
     if (ancestor === parent) {
       return true;
     }

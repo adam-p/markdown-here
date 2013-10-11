@@ -327,6 +327,8 @@ var markdown_here = {
     }
     window.document.addEventListener('focus', focusChange, true);
 
+    var forgotToRenderIntervalCheckPrefs = null;
+
     // We're using a function expression rather than a function declaration
     // because Mozilla's automatic extension review prefers when you pass the
     // former to `setInterval()`.
@@ -338,14 +340,19 @@ var markdown_here = {
 
       setToggleButtonVisibility(focusedElem);
 
-      markdown_here.imports.OptionsStore.get(function(prefs) {
+      if (forgotToRenderIntervalCheckPrefs === null) {
+        markdown_here.imports.OptionsStore.get(function(prefs) {
+          forgotToRenderIntervalCheckPrefs = prefs;
+        });
+      }
+      else {
         markdown_here.imports.CommonLogic.forgotToRenderIntervalCheck(
           focusedElem,
           markdown_here.imports.markdownHere,
           markdown_here.imports.MdhHtmlToText,
           markdown_here.imports.marked,
-          prefs);
-      });
+          forgotToRenderIntervalCheckPrefs);
+      }
     };
     setInterval(intervalCheck, 2000);
   },
@@ -353,80 +360,43 @@ var markdown_here = {
   _showUpgradeNotificationInterval: null,
 
   showUpgradeNotification: function(optionsURL, openTabFn) {
-    // Get the content of notification element
-    var xhr = new XMLHttpRequest();
-    xhr.overrideMimeType('text/html');
-    xhr.open('GET', 'resource://markdown_here_common/upgrade-notification.html');
-    xhr.onreadystatechange = function() {
-      if (this.readyState === this.DONE) {
-        // Assume 200 OK -- it's just a local call
-        var html = this.responseText;
+    markdown_here.imports.CommonLogic.getUpgradeNotification(optionsURL, function(html) {
+      var addUpgradeNotificationToTab = function(tabbrowser) {
+        if (!tabbrowser.contentDocument.querySelector('#markdown-here-upgrade-notification-content')) {
+          var elem = tabbrowser.contentDocument.createElement('div');
+          tabbrowser.contentDocument.body.appendChild(elem);
+          markdown_here.imports.Utils.saferSetOuterHTML(elem, html);
 
-        // Get the logo image data
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'resource://markdown_here_common/images/icon16.png');
-        xhr.responseType = 'arraybuffer';
+            // Setting the outer HTML wrecks our reference to the element, so get it again.
+          elem = tabbrowser.contentDocument.querySelector('#markdown-here-upgrade-notification-content');
 
-        xhr.onload = function(e) {
-          if (this.readyState === this.DONE) {
-            // Assume 200 OK -- it's just a local call
-            var uInt8Array = new Uint8Array(this.response);
-            var i = uInt8Array.length;
-            var binaryString = new Array(i);
-            while (i--)
-            {
-              binaryString[i] = String.fromCharCode(uInt8Array[i]);
-            }
-            var data = binaryString.join('');
+          // Add click handlers so that we can clear the notification.
+          var optionsLink = tabbrowser.contentDocument.querySelector('#markdown-here-upgrade-notification-link');
+          optionsLink.addEventListener('click', function(event) {
+            event.preventDefault();
+            markdown_here._hideUpgradeNotification();
+            openTabFn(optionsURL);
+          });
 
-            var logoBase64 = window.btoa(data);
+          var closeLink = tabbrowser.contentDocument.querySelector('#markdown-here-upgrade-notification-close');
+          closeLink.addEventListener('click', function(event) {
+            event.preventDefault();
+            markdown_here._hideUpgradeNotification();
+          });
+        }
+      };
 
-            // Do some rough template replacement
-            html = html.replace('{{optionsURL}}', optionsURL)
-                       .replace('{{logoBase64}}', logoBase64);
+      // We keep showing notifications on an interval until one gets dimissed.
+      // This is because there might not actually be any tabs when we first
+      // start.
+      var showUpgradeNotificationsAgain = function() {
+        markdown_here._forAllTabsDo(addUpgradeNotificationToTab);
+      };
 
-            var addUpgradeNotificationToTab = function(tabbrowser) {
-              if (!tabbrowser.contentDocument.querySelector('#markdown-here-upgrade-notification-content')) {
-                var elem = tabbrowser.contentDocument.createElement('div');
-                tabbrowser.contentDocument.body.appendChild(elem);
-                markdown_here.imports.Utils.saferSetOuterHTML(elem, html);
-
-                  // Setting the outer HTML wrecks our reference to the element, so get it again.
-                elem = tabbrowser.contentDocument.querySelector('#markdown-here-upgrade-notification-content');
-
-                // Add click handlers so that we can clear the notification.
-                var optionsLink = tabbrowser.contentDocument.querySelector('#markdown-here-upgrade-notification-link');
-                optionsLink.addEventListener('click', function(event) {
-                  event.preventDefault();
-                  markdown_here._hideUpgradeNotification();
-                  openTabFn(optionsURL);
-                });
-
-                var closeLink = tabbrowser.contentDocument.querySelector('#markdown-here-upgrade-notification-close');
-                closeLink.addEventListener('click', function(event) {
-                  event.preventDefault();
-                  markdown_here._hideUpgradeNotification();
-                });
-              }
-            };
-
-            // We keep showing notifications on an interval until one gets dimissed.
-            // This is because there might not actually be any tabs when we first
-            // start.
-            var showUpgradeNotificationsAgain = function() {
-              markdown_here._forAllTabsDo(addUpgradeNotificationToTab);
-            };
-
-            if (markdown_here._showUpgradeNotificationInterval === null) {
-              markdown_here._showUpgradeNotificationInterval = setInterval(showUpgradeNotificationsAgain, 5000);
-            }
-          }
-        };
-
-        xhr.send();
+      if (markdown_here._showUpgradeNotificationInterval === null) {
+        markdown_here._showUpgradeNotificationInterval = setInterval(showUpgradeNotificationsAgain, 5000);
       }
-    };
-    xhr.send();
+    });
   },
 
   _hideUpgradeNotification: function() {
