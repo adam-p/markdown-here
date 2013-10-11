@@ -185,9 +185,7 @@ function findClosestSendButton(elem) {
   // boundaries and sometimes we won't.
 
   var sendButton = null;
-  // The `elem.parentNode.querySelector` check is to make sure we stop if we
-  // hit a parent node type that can't query.
-  while (elem.parentNode && elem.parentNode.querySelector) {
+  while (elem.parentNode && elem.parentNode.nodeType === elem.ELEMENT_NODE) {
     sendButton = elem.parentNode.querySelector('[role="button"][tabindex="1"]');
     if (sendButton) {
       debugLog('findClosestSendButton', 'found');
