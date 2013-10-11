@@ -48,6 +48,31 @@ function debugLog() {
 
 
 /*
+ * Gets the forgot-to-render prompt. This must be called from a privileged script.
+ */
+function getUpgradeNotification(optionsURL, responseCallback) {
+  debugLog('getUpgradeNotification', 'getting');
+
+  Utils.getLocalFile(
+    Utils.getLocalURL('/common/upgrade-notification.html'),
+    'text/html',
+    function(html) {
+      // Get the logo image data
+      Utils.getLocalFileAsBase64(
+        Utils.getLocalURL('/common/images/icon16.png'),
+        function(logoBase64) {
+          // Do some rough template replacement
+          html = html.replace('{{optionsURL}}', optionsURL)
+                     .replace('{{logoBase64}}', logoBase64);
+
+          debugLog('getUpgradeNotification', 'got');
+          return responseCallback(html);
+        });
+      });
+}
+
+
+/*
  ******************************************************************************
  Forgot-to-render check
  ******************************************************************************
@@ -59,7 +84,6 @@ function debugLog() {
 function getForgotToRenderPromptContent(responseCallback) {
   debugLog('getForgotToRenderPromptContent', 'getting');
 
-  // Get the content of notification element
   Utils.getLocalFile(
     Utils.getLocalURL('/common/forgot-to-render-prompt.html'),
     'text/html',
@@ -161,14 +185,14 @@ function findClosestSendButton(elem) {
   // boundaries and sometimes we won't.
 
   var sendButton = null;
-  while (elem.parentElement) {
-    sendButton = elem.parentElement.querySelector('[role="button"][tabindex="1"]');
+  while (elem.parentNode && elem.parentNode.nodeType === elem.ELEMENT_NODE) {
+    sendButton = elem.parentNode.querySelector('[role="button"][tabindex="1"]');
     if (sendButton) {
       debugLog('findClosestSendButton', 'found');
       return sendButton;
     }
 
-    elem = elem.parentElement;
+    elem = elem.parentNode;
   }
 
   // If this appears to be in an iframe, make a recursive call.
@@ -254,7 +278,7 @@ function setupForgotToRenderInterceptors(composeElem, MdhHtmlToText, marked, pre
     var ourTarget =
       (event.target === composeElem) ||
       (event.target instanceof composeElem.ownerDocument.defaultView.HTMLHtmlElement &&
-       event.target === composeElem.parentElement);
+       event.target === composeElem.parentNode);
 
     if (ourTarget &&
         (event.metaKey || event.ctrlKey) && event.keyCode === ENTER_KEYCODE &&
@@ -266,10 +290,10 @@ function setupForgotToRenderInterceptors(composeElem, MdhHtmlToText, marked, pre
     debugLog('setupForgotToRenderInterceptors', 'sendHotkeyKeydownListener', 'skipping undesired event', event.target);
   };
 
-  composeSendButton.parentElement.addEventListener('keydown', composeSendButtonKeyListener, true);
-  composeSendButton.parentElement.addEventListener('keyup', composeSendButtonKeyListener, true);
-  composeSendButton.parentElement.addEventListener('click', composeSendButtonClickListener, true);
-  composeElem.parentElement.addEventListener('keydown', sendHotkeyKeydownListener, true);
+  composeSendButton.parentNode.addEventListener('keydown', composeSendButtonKeyListener, true);
+  composeSendButton.parentNode.addEventListener('keyup', composeSendButtonKeyListener, true);
+  composeSendButton.parentNode.addEventListener('click', composeSendButtonClickListener, true);
+  composeElem.parentNode.addEventListener('keydown', sendHotkeyKeydownListener, true);
 }
 
 // Returns true if `text` looks like raw Markdown, false otherwise.
@@ -537,6 +561,7 @@ function showHTMLForgotToRenderPrompt(html, composeElem, composeSendButton, call
 
 
 // Expose these functions
+CommonLogic.getUpgradeNotification = getUpgradeNotification;
 CommonLogic.getForgotToRenderPromptContent = getForgotToRenderPromptContent;
 CommonLogic.forgotToRenderIntervalCheck = forgotToRenderIntervalCheck;
 CommonLogic.probablyWritingMarkdown = probablyWritingMarkdown;

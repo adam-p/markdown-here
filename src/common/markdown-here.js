@@ -224,7 +224,7 @@ function makeStylesExplicit(wrapperElem, css) {
 
     // We're starting our search one level above the wrapper, which means we
     // might match stuff outside of our wrapper. We'll have to double-check below.
-    selectorMatches = wrapperElem.parentElement.querySelectorAll(rule.selectorText);
+    selectorMatches = wrapperElem.parentNode.querySelectorAll(rule.selectorText);
 
     for (j = 0; j < selectorMatches.length; j++) {
       elem = selectorMatches[j];
@@ -236,12 +236,14 @@ function makeStylesExplicit(wrapperElem, css) {
       }
 
       // Make sure the selector match isn't inside an exclusion block.
-      while (elem) {
+      // The check for `elem.classList` stop us if we hit a non-element node
+      // while going up through the parents.
+      while (elem && (typeof(elem.classList) !== 'undefined')) {
         if (elem.classList.contains('markdown-here-exclude')) {
           elem = 'excluded';
           break;
         }
-        elem = elem.parentElement;
+        elem = elem.parentNode;
       }
       if (elem === 'excluded') {
         // Don't style this element.
@@ -272,13 +274,13 @@ function hasParentElementOfTagName(element, tagName) {
 
   tagName = tagName.toUpperCase();
 
-  parent = element.parentElement;
+  parent = element.parentNode;
   while (parent) {
     if (parent.nodeName === tagName) {
       return true;
     }
 
-    parent = parent.parentElement;
+    parent = parent.parentNode;
   }
 
   return false;
@@ -314,7 +316,7 @@ function findMarkdownHereWrapper(focusedElem) {
       break;
     }
 
-    wrapper = wrapper.parentElement;
+    wrapper = wrapper.parentNode;
   }
 
   return wrapper;

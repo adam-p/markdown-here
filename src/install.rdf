@@ -5,7 +5,7 @@
     <Description about="urn:mozilla:install-manifest">
         <em:type>2</em:type> <!-- 2 : Extension -->
         <em:id>markdown-here@adam.pritchard</em:id>
-        <em:version>2.9.0</em:version>
+        <em:version>2.9.1</em:version>
 
         <em:targetApplication>
             <Description>

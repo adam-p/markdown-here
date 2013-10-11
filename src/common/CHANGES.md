@@ -1,6 +1,22 @@
 Change Log
 ==========
 
+2013-10-11: v2.9.1
+------------------
+
+* [Fixed bug](https://github.com/adam-p/markdown-here/issues/112): If a bad language name was used for a code block (where "bad" might even just be "SQL" vs. "sql"), rendering would break. Language name case is now ignored.
+  * Thanks to [Chris/jhwarehouse](https://github.com/jhwarehouse) for reporting the bug and helping to investigate. 
+
+* [Fixed bug](https://github.com/adam-p/markdown-here/issues/116): Markdown Here wasn't working on Postbox. Thanks to Branden C. for letting me know.
+
+* [Fixed bug](https://github.com/adam-p/markdown-here/issues/109): In Chrome, for some users, the Markdown Here upgrade notification would show up every time they opened Chrome. (I couldn't reproduce it myself, but the notification display is less aggressive now.)
+  * Thanks to [Chris/jhwarehouse](https://github.com/jhwarehouse), [Xarkam](https://github.com/Xarkam), [Tomáš Duda](https://github.com/TomasDuda), and [Emil Soman](https://github.com/emilsoman) for reporting the bug and helping to investigate.
+
+* [Fixed bug](https://github.com/adam-p/markdown-here/issues/108): In Chrome, memory was leaking. The size of the leak was proportional to the number of tabs and how long they were left open.
+  * I mitigated this in the Markdown Here code, but... it looks like it might actually be problem with Chrome itself. If someone familiar with Chrome/Chromium code and extension behaviour could help me I'd appreciate it. Here's a [Github Gist](https://gist.github.com/adam-p/6928614) I created that replicates the problem.
+  * Thanks to [Thomas Broyer](https://github.com/tbroyer) for reporting this problem.
+
+
 2013-10-07: v2.9.0
 ------------------
 

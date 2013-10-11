@@ -51,6 +51,7 @@ function requestHandler(request, sender, sendResponse) {
   }
   else if (request && request.action === 'show-upgrade-notification')
   {
+    sendResponse(true);
     showUpgradeNotification(request.html);
     return false;
   }
@@ -230,6 +231,8 @@ Utils.makeRequestToPrivilegedScript(
  * See specific sections above for reasons why this is necessary.
  */
 
+var forgotToRenderIntervalCheckPrefs = null;
+
 // `elem` is optional. If not provided, the focused element will be checked.
 function intervalCheck(elem) {
   var focusedElem = elem || markdownHere.findFocusedElem(window.document);
@@ -240,17 +243,24 @@ function intervalCheck(elem) {
   hotkeyIntervalCheck(focusedElem);
   buttonIntervalCheck(focusedElem);
 
-  Utils.makeRequestToPrivilegedScript(
-    document,
-    { action: 'get-options' },
-    function(prefs) {
-      CommonLogic.forgotToRenderIntervalCheck(
-        focusedElem,
-        markdownHere,
-        MdhHtmlToText,
-        marked,
-        prefs);
-    });
+  // Don't retrieve options every time. Doing so was probably causing the memory
+  // leak of #108 and the errors of #113.
+  if (forgotToRenderIntervalCheckPrefs === null) {
+    Utils.makeRequestToPrivilegedScript(
+      document,
+      { action: 'get-options' },
+      function(prefs) {
+        forgotToRenderIntervalCheckPrefs = prefs;
+      });
+  }
+  else {
+    CommonLogic.forgotToRenderIntervalCheck(
+      focusedElem,
+      markdownHere,
+      MdhHtmlToText,
+      marked,
+      forgotToRenderIntervalCheckPrefs);
+  }
 }
 setInterval(intervalCheck, 2000);
 
@@ -285,17 +295,14 @@ function showUpgradeNotification(html) {
 }
 
 function clearUpgradeNotification(notifyBackgroundScript) {
-  var elem = document.querySelector('#markdown-here-upgrade-notification-content');
-
-  if (!elem) {
-    return;
-  }
-
-  document.body.removeChild(elem);
-
   if (notifyBackgroundScript) {
     Utils.makeRequestToPrivilegedScript(
       document,
       { action: 'upgrade-notification-shown' });
+  }
+
+  var elem = document.querySelector('#markdown-here-upgrade-notification-content');
+  if (elem) {
+    document.body.removeChild(elem);
   }
 }
