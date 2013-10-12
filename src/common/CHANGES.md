@@ -1,6 +1,13 @@
 Change Log
 ==========
 
+2013-xx-yy: v2.9.2
+------------------
+
+* [Fixed bug](https://github.com/adam-p/markdown-here/issues/119), for real this time: In Chrome, for some users, the Markdown Here upgrade notification would show up every time they opened Chrome.
+  * Thanks again to [Chris/jhwarehouse](https://github.com/jhwarehouse) for reporting the bug still existed and helping to sort it out.
+
+
 2013-10-11: v2.9.1
 ------------------
 
