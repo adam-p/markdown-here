@@ -391,12 +391,27 @@ function renderMarkdown(focusedElem, selectedRange, markdownRenderer, renderComp
     // through our styles, explicitly applying them to matching elements.
     makeStylesExplicit(wrapper, mdCss);
 
+    if (typeof(wrapper.ownerDocument.defaultView.MutationObserver) !== 'undefined') {
+      var observer = new wrapper.ownerDocument.defaultView.MutationObserver(function(mutations) {
+        // Don't set the attribute unconditionally, or else
+        if (!wrapper.getAttribute('markdown-here-wrapper-content-modified')) {
+          wrapper.setAttribute('markdown-here-wrapper-content-modified', true);
+        }
+      });
+      observer.observe(wrapper, { childList: true, characterData: true, subtree: true });
+    }
+
     renderComplete();
   });
 }
 
 // Revert the rendered Markdown wrapperElem back to its original form.
 function unrenderMarkdown(wrapperElem) {
+  if (wrapperElem.getAttribute('markdown-here-wrapper-content-modified') &&
+      !wrapperElem.ownerDocument.defaultView.confirm('The rendered Markdown appears to have been modifed.\n\nAre you sure you wish to unrender?')) {
+    return;
+  }
+
   var originalMdHtml = decodeURIComponent(wrapperElem.getAttribute('data-md-original'));
   Utils.saferSetOuterHTML(wrapperElem, originalMdHtml);
 }
