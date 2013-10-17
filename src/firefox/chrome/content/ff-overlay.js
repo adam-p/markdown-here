@@ -158,7 +158,9 @@ var markdown_here = {
           }
 
           var plaintext = new markdown_here.imports.MdhHtmlToText.MdhHtmlToText(
-                            window.GetCurrentEditor().document.body).get();
+                            window.GetCurrentEditor().document.body,
+                            null,
+                            true).get();
 
           if (!markdown_here.imports.CommonLogic.probablyWritingMarkdown(
                 plaintext,
