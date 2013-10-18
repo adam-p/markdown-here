@@ -396,8 +396,11 @@ function renderMarkdown(focusedElem, selectedRange, markdownRenderer, renderComp
     // We're going to set this up after a short timeout, to help prevent false
     // detections based on automatic chagnes by the host site.
     wrapper.ownerDocument.defaultView.setTimeout(function addMutationObserver() {
-      if (typeof(wrapper.ownerDocument.defaultView.MutationObserver) !== 'undefined') {
-        var observer = new wrapper.ownerDocument.defaultView.MutationObserver(function(mutations) {
+      var SupportedMutationObserver =
+            wrapper.ownerDocument.defaultView.MutationObserver ||
+            wrapper.ownerDocument.defaultView.WebKitMutationObserver;
+      if (typeof(SupportedMutationObserver) !== 'undefined') {
+        var observer = new SupportedMutationObserver(function(mutations) {
           wrapper.setAttribute('markdown-here-wrapper-content-modified', true);
           observer.disconnect();
         });
