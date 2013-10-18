@@ -391,6 +391,23 @@ function renderMarkdown(focusedElem, selectedRange, markdownRenderer, renderComp
     // through our styles, explicitly applying them to matching elements.
     makeStylesExplicit(wrapper, mdCss);
 
+    // Monitor for changes to the content of the rendered MD. This will help us
+    // prevent the user from silently losing changes later.
+    // We're going to set this up after a short timeout, to help prevent false
+    // detections based on automatic chagnes by the host site.
+    wrapper.ownerDocument.defaultView.setTimeout(function addMutationObserver() {
+      var SupportedMutationObserver =
+            wrapper.ownerDocument.defaultView.MutationObserver ||
+            wrapper.ownerDocument.defaultView.WebKitMutationObserver;
+      if (typeof(SupportedMutationObserver) !== 'undefined') {
+        var observer = new SupportedMutationObserver(function(mutations) {
+          wrapper.setAttribute('markdown-here-wrapper-content-modified', true);
+          observer.disconnect();
+        });
+        observer.observe(wrapper, { childList: true, characterData: true, subtree: true });
+      }
+    }, 100);
+
     renderComplete();
   });
 }
@@ -459,7 +476,20 @@ function markdownHere(document, markdownRenderer, logger, renderComplete) {
   // If we've found wrappers, then we're reverting.
   // Otherwise, we're rendering.
   if (wrappers && wrappers.length > 0) {
+    var yesToAll = false;
     for (i = 0; i < wrappers.length; i++) {
+      // Has the content been modified by the user since rendering
+      if (wrappers[i].getAttribute('markdown-here-wrapper-content-modified') &&
+          !yesToAll) {
+
+          if (wrappers[i].ownerDocument.defaultView.confirm('The rendered Markdown appears to have been modifed.\nIf you unrender it, your changes since rendering will be lost.\n\nAre you sure you wish to unrender?')) {
+            yesToAll = true;
+          }
+          else {
+            break;
+          }
+      }
+
       unrenderMarkdown(wrappers[i]);
     }
 

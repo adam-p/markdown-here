@@ -131,10 +131,14 @@ MdhHtmlToText.prototype._preprocess = function() {
         .replace(/<\/p\b[^>]*>/ig, '</div>');
   }
 
-  // Some tags we can convert to Markdown.
-  // ...but don't do it if we're just checking for Markdown, otherwise we'll
-  // cause false positives.
-  if (!this.checkingIfMarkdown) {
+  if (this.checkingIfMarkdown) {
+    // If we're just checking for Markdown, strip out `<code>` blocks so that
+    // we don't incorrectly detect unrendered MD in them.
+    this.preprocessInfo.html = this.preprocessInfo.html.replace(/<code\b.+?<\/code>/ig, '');
+  }
+  else {
+    // Some tags we can convert to Markdown, but don't do it if we're just
+    // checking for Markdown, otherwise we'll cause false positives.
     this.preprocessInfo.html = convertHTMLtoMarkdown('a', this.preprocessInfo.html);
   }
 

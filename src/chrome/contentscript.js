@@ -245,7 +245,7 @@ function intervalCheck(elem) {
 
   // Don't retrieve options every time. Doing so was probably causing the memory
   // leak of #108 and the errors of #113.
-  if (forgotToRenderIntervalCheckPrefs === null) {
+  if (!forgotToRenderIntervalCheckPrefs) {
     Utils.makeRequestToPrivilegedScript(
       document,
       { action: 'get-options' },

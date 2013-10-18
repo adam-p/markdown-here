@@ -376,7 +376,7 @@ function probablyWritingMarkdown(mdMaybe, marked, prefs) {
 
   // Headers. (But not hash-mark-H1, since that seems more likely to false-positive, and
   // less likely to be used. And underlines of at least length 5.)
-  var header = mdMaybe.match(/(^#{2,6}[^#])|(^[-=]{5,})/m);
+  var header = mdMaybe.match(/(^\s{0,3}#{2,6}[^#])|(^\s*[-=]{5,}\s*$)/m);
   if (header) {
     logMatch('header', header);
     return true;

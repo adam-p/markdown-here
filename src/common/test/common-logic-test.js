@@ -86,6 +86,9 @@ describe('CommonLogic', function() {
       text = 'Hi friend,\n\nHow are you?\n\n###### IMAHEADER\n\nsincerely,\nme';
       expect(CommonLogic.probablyWritingMarkdown(text, marked, prefs)).to.equal(true);
 
+      text = 'Hi friend,\n\nHow are you?\n\n  ## SPACES BEFORE HASHES AND AFTER TEXT  \n\nsincerely,\nme';
+      expect(CommonLogic.probablyWritingMarkdown(text, marked, prefs)).to.equal(true);
+
       text = 'Hi friend,\n\nHow are you?\n\n####### TOO MANY HASH MARKS\n\nsincerely,\nme';
       expect(CommonLogic.probablyWritingMarkdown(text, marked, prefs)).to.equal(false);
 
@@ -94,6 +97,12 @@ describe('CommonLogic', function() {
 
       text = 'Hi friend,\n\nHow are you?\n\nUNDERLINE HEADER\n======\n\nsincerely,\nme';
       expect(CommonLogic.probablyWritingMarkdown(text, marked, prefs)).to.equal(true);
+
+      text = 'Hi friend,\n\nHow are you?\n\nSPACES BEFORE DASHES OKAY\n  ======\n\nsincerely,\nme';
+      expect(CommonLogic.probablyWritingMarkdown(text, marked, prefs)).to.equal(true);
+
+      text = 'Hi friend,\n\nHow are you?\n\n===== TEXT AFTER UNDERLINE\n\nsincerely,\nme';
+      expect(CommonLogic.probablyWritingMarkdown(text, marked, prefs)).to.equal(false);
     });
 
     it('should detect links', function() {
