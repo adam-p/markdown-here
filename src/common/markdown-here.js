@@ -391,15 +391,19 @@ function renderMarkdown(focusedElem, selectedRange, markdownRenderer, renderComp
     // through our styles, explicitly applying them to matching elements.
     makeStylesExplicit(wrapper, mdCss);
 
-    if (typeof(wrapper.ownerDocument.defaultView.MutationObserver) !== 'undefined') {
-      var observer = new wrapper.ownerDocument.defaultView.MutationObserver(function(mutations) {
-        // Don't set the attribute unconditionally, or else
-        if (!wrapper.getAttribute('markdown-here-wrapper-content-modified')) {
+    // Monitor for changes to the content of the rendered MD. This will help us
+    // prevent the user from silently losing changes later.
+    // We're going to set this up after a short timeout, to help prevent false
+    // detections based on automatic chagnes by the host site.
+    wrapper.ownerDocument.defaultView.setTimeout(function addMutationObserver() {
+      if (typeof(wrapper.ownerDocument.defaultView.MutationObserver) !== 'undefined') {
+        var observer = new wrapper.ownerDocument.defaultView.MutationObserver(function(mutations) {
           wrapper.setAttribute('markdown-here-wrapper-content-modified', true);
-        }
-      });
-      observer.observe(wrapper, { childList: true, characterData: true, subtree: true });
-    }
+          observer.disconnect();
+        });
+        observer.observe(wrapper, { childList: true, characterData: true, subtree: true });
+      }
+    }, 100);
 
     renderComplete();
   });
@@ -407,11 +411,6 @@ function renderMarkdown(focusedElem, selectedRange, markdownRenderer, renderComp
 
 // Revert the rendered Markdown wrapperElem back to its original form.
 function unrenderMarkdown(wrapperElem) {
-  if (wrapperElem.getAttribute('markdown-here-wrapper-content-modified') &&
-      !wrapperElem.ownerDocument.defaultView.confirm('The rendered Markdown appears to have been modifed.\n\nAre you sure you wish to unrender?')) {
-    return;
-  }
-
   var originalMdHtml = decodeURIComponent(wrapperElem.getAttribute('data-md-original'));
   Utils.saferSetOuterHTML(wrapperElem, originalMdHtml);
 }
@@ -474,7 +473,20 @@ function markdownHere(document, markdownRenderer, logger, renderComplete) {
   // If we've found wrappers, then we're reverting.
   // Otherwise, we're rendering.
   if (wrappers && wrappers.length > 0) {
+    var yesToAll = false;
     for (i = 0; i < wrappers.length; i++) {
+      // Has the content been modified by the user since rendering
+      if (wrappers[i].getAttribute('markdown-here-wrapper-content-modified') &&
+          !yesToAll) {
+
+          if (wrappers[i].ownerDocument.defaultView.confirm('The rendered Markdown appears to have been modifed.\nIf you unrender it, your changes since rendering will be lost.\n\nAre you sure you wish to unrender?')) {
+            yesToAll = true;
+          }
+          else {
+            break;
+          }
+      }
+
       unrenderMarkdown(wrappers[i]);
     }
 
