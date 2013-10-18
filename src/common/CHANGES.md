@@ -1,10 +1,11 @@
 Change Log
 ==========
 
-2013-xx-yy: v2.9.2
+2013-10-18: v2.9.2
 ------------------
 
 * Feature/fix: You may have found out the hard way that if you render, then make changes, and then unrender, you lose the changes. Now **Markdown Here will warn you when unrendering will cause you to lose changes**, and give you the choice of proceeding or not.
+  * Due to JavaScript support differences, this feature is not supported in Postbox or Safari 5 (but it is supported in Safari 6+).
   * Thanks to [jakov](https://github.com/jakov) for [originally requesting](https://github.com/adam-p/markdown-here/issues/33) this change, and to [jdhines](https://github.com/jdhines) and [lihlii](https://github.com/lihlii) for also reporting/requesting it.
 
 * [Fixed bug](https://github.com/adam-p/markdown-here/issues/119), for real this time: In Chrome, for some users, the Markdown Here upgrade notification would show up every time they opened Chrome.
