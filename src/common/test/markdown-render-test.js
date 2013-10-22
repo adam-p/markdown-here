@@ -145,6 +145,19 @@ describe('Markdown-Render', function() {
       expect(MarkdownRender.markdownRender(md, userprefs, marked, hljs)).to.equal(target);
     });
 
+    // Test issue #132: https://github.com/adam-p/markdown-here/issues/132
+    // Smart arrow
+    it('should render smart arrows', function() {
+      var md = '--> <-- <--> ==> <== <==>';
+      var target = '<p>→ ← ↔ ⇒ ⇐ ⇔</p>\n';
+      expect(MarkdownRender.markdownRender(md, userprefs, marked, hljs)).to.equal(target);
+
+      // And should not break headers or m-dashes
+      md = 'Arrows\n==\nAnd friends\n--\n--> <-- <--> ==> <== <==> -- m-dash';
+      target = '<a href="#" name="arrows"></a><h1 id="arrows">Arrows</h1>\n<a href="#" name="and-friends"></a><h2 id="and-friends">And friends</h2>\n<p>→ ← ↔ ⇒ ⇐ ⇔ — m-dash</p>\n';
+      expect(MarkdownRender.markdownRender(md, userprefs, marked, hljs)).to.equal(target);
+    });
+
   });
 
 
