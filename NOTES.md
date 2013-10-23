@@ -24,9 +24,9 @@
 
 ## Extension development
 
-MDN: [Performance](https://developer.mozilla.org/en-US/docs/Performance)
-MDN: [Performance best practices in extensions](https://developer.mozilla.org/en-US/docs/Extensions/Performance_best_practices_in_extensions)
-MDN: [Appendix A: Add-on Performance](https://developer.mozilla.org/en-US/docs/XUL/School_tutorial/Appendix_A:_Add-on_Performance)
+MDN: [Performance](https://developer.mozilla.org/en-US/docs/Performance)  
+MDN: [Performance best practices in extensions](https://developer.mozilla.org/en-US/docs/Extensions/Performance_best_practices_in_extensions)  
+MDN: [Appendix A: Add-on Performance](https://developer.mozilla.org/en-US/docs/XUL/School_tutorial/Appendix_A:_Add-on_Performance)  
 
 TODO: Notes about MDH performance goals and decisions. Like:
 - Passing big strings from contentscript to backgroundscript probably undesirable.
