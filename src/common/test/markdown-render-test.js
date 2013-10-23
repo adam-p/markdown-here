@@ -161,7 +161,8 @@ describe('Markdown-Render', function() {
   });
 
 
-  describe('full render pipeline', function() {
+  // This includes going from original HTML to MD to HTML and then postprocessing.
+  describe('HTML to Markdown to HTML', function() {
     var userprefs = {};
 
     beforeEach(function() {
