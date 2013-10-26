@@ -146,13 +146,24 @@ function outerHTML(node, doc) {
 }
 
 
+// From: http://stackoverflow.com/a/5499821/729729
+var charsToReplace = {
+  '&': '&amp;',
+  '<': '&lt;',
+  '>': '&gt;'
+};
+
+function replaceChar(char) {
+  return charsToReplace[char] || char;
+}
+
 // An approximate equivalent to outerHTML for document fragments.
 function getDocumentFragmentHTML(docFrag) {
   var html = '', i;
   for (i = 0; i < docFrag.childNodes.length; i++) {
     var node = docFrag.childNodes[i];
     if (node.nodeType === node.TEXT_NODE) {
-      html += node.nodeValue;
+      html += node.nodeValue.replace(/[&<>]/g, replaceChar);
     }
     else { // going to assume ELEMENT_NODE
       html += outerHTML(node, docFrag.ownerDocument);

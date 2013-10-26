@@ -163,11 +163,18 @@ describe('Utils', function() {
 
   describe('getDocumentFragmentHTML', function() {
     var makeFragment = function(htmlArray) {
-      var i, docFrag = document.createDocumentFragment();
+      var docFrag = document.createDocumentFragment();
       htmlArray.forEach(function(html) {
         docFrag.appendChild($(html).get(0));
       });
 
+      return docFrag;
+    };
+
+    var makeTextFragment = function(text) {
+      var docFrag = document.createDocumentFragment();
+      var textNode = document.createTextNode(text);
+      docFrag.appendChild(textNode);
       return docFrag;
     };
 
@@ -184,6 +191,15 @@ describe('Utils', function() {
       var expectedHTML = htmlArray.join('');
 
       expect(Utils.getDocumentFragmentHTML(makeFragment(htmlArray))).to.equal(expectedHTML);
+    });
+
+    // Test issue #133: https://github.com/adam-p/markdown-here/issues/133
+    // Thunderbird: raw HTML not rendering properly.
+    // HTML text nodes were not being escaped properly.
+    it('should escape HTML in a text node', function() {
+      var docFrag = makeTextFragment('<span style="color:blue">im&blue</span>');
+      var expectedHTML = '&lt;span style="color:blue"&gt;im&amp;blue&lt;/span&gt;';
+      expect(Utils.getDocumentFragmentHTML(docFrag)).to.equal(expectedHTML);
     });
   });
 

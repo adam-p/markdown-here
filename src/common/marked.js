@@ -752,6 +752,14 @@ InlineLexer.prototype.outputLink = function(cap, link) {
 InlineLexer.prototype.smartypants = function(text) {
   if (!this.options.smartypants) return text;
   return text
+    /* adam-p: Adding some smart arrows */
+    .replace(/<-->/g, '\u2194')
+    .replace(/<--/g, '\u2190')
+    .replace(/-->/g, '\u2192')
+    .replace(/<==>/g, '\u21d4')
+    .replace(/<==/g, '\u21d0')
+    .replace(/==>/g, '\u21d2')
+
     // em-dashes
     .replace(/--/g, '\u2014')
     // opening singles
