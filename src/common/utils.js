@@ -146,13 +146,24 @@ function outerHTML(node, doc) {
 }
 
 
+// From: http://stackoverflow.com/a/5499821/729729
+var charsToReplace = {
+  '&': '&amp;',
+  '<': '&lt;',
+  '>': '&gt;'
+};
+
+function replaceChar(char) {
+  return charsToReplace[char] || char;
+}
+
 // An approximate equivalent to outerHTML for document fragments.
 function getDocumentFragmentHTML(docFrag) {
   var html = '', i;
   for (i = 0; i < docFrag.childNodes.length; i++) {
     var node = docFrag.childNodes[i];
     if (node.nodeType === node.TEXT_NODE) {
-      html += node.nodeValue;
+      html += node.nodeValue.replace(/[&<>]/g, replaceChar);
     }
     else { // going to assume ELEMENT_NODE
       html += outerHTML(node, docFrag.ownerDocument);
@@ -344,13 +355,16 @@ function makeRequestToPrivilegedScript(doc, requestObj, callback) {
         // from the background script to the content script for a page, and
         // it'll get triggered once for each frame in the page. So we need to
         // make very sure that we should be acting on the message.
-        if (event.name === 'request-response' &&
-            event.message.requestID &&
-            makeRequestToPrivilegedScript.requestCallbacks[event.message.requestID]) {
-          // Call the stored callback.
-          makeRequestToPrivilegedScript.requestCallbacks[event.message.requestID](event.message.response);
-          // And remove the stored callback.
-          delete makeRequestToPrivilegedScript.requestCallbacks[event.message.requestID];
+        if (event.name === 'request-response') {
+          var responseObj = Utils.global.JSON.parse(event.message);
+
+          if (responseObj.requestID &&
+              makeRequestToPrivilegedScript.requestCallbacks[responseObj.requestID]) {
+            // Call the stored callback.
+            makeRequestToPrivilegedScript.requestCallbacks[responseObj.requestID](responseObj.response);
+            // And remove the stored callback.
+            delete makeRequestToPrivilegedScript.requestCallbacks[responseObj.requestID];
+          }
         }
       };
       safari.self.addEventListener('message', backgroundMessageHandler, false);
@@ -363,7 +377,7 @@ function makeRequestToPrivilegedScript(doc, requestObj, callback) {
       requestObj.requestID = reqID;
     }
 
-    safari.self.tab.dispatchMessage('request', requestObj);
+    safari.self.tab.dispatchMessage('request', Utils.global.JSON.stringify(requestObj));
   }
   else {
     // See: https://developer.mozilla.org/en-US/docs/Code_snippets/Interaction_between_privileged_and_non-privileged_pages#Chromium-like_messaging.3A_json_request_with_json_callback

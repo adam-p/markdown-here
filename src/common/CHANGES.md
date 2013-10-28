@@ -1,6 +1,23 @@
 Change Log
 ==========
 
+2013-10-27: v2.9.3
+------------------
+
+* New feature: Added support for **smart arrows**. Here's how to use them: 
+  * `<--` ←
+  * `-->` →
+  * `<-->` ↔
+  * `<==` ⇐
+  * `==>` ⇒
+  * `<==>` ⇔
+
+* [Fixed bug](https://github.com/adam-p/markdown-here/issues/137): Options were broken in Safari 7 (the Mavericks version).
+
+* [Fixed bug](https://github.com/adam-p/markdown-here/issues/133): In Thunderbird (mostly), raw HTML was not rendering properly. This is caused [another bug](https://github.com/adam-p/markdown-here/issues/135): using angular brackets makes contents invisible.
+  * Thanks to [lihlii](https://github.com/lihlii), [Marcelo Diez](https://github.com/sorashadow), [Kaspar Emanuel](https://github.com/kasbah), and [Tim](https://github.com/fugo) for reporting and helping to solve this.
+
+
 2013-10-18: v2.9.2
 ------------------
 
