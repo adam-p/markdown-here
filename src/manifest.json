@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Markdown Here",
-  "version": "2.9.2",
+  "version": "2.9.3",
   "description": "Write your email in Markdown, then make it pretty.",
   "homepage_url": "http://markdown-here.com",
   "minimum_chrome_version": "6",
