@@ -6,7 +6,7 @@ Brown Paper style from goldblog.com.ua (c) Zaripov Yura <yur4ik7@ukr.net>
 
 pre code {
   display: block; padding: 0.5em;
-  background-color:#b7a68e; /* adam-p: removed background image */
+  background-color: #b7a68e; /* adam-p: removed background image */
 }
 
 pre .keyword,
@@ -25,7 +25,7 @@ pre .status {
 }
 
 pre code,
-pre .ruby .subst,
+pre .subst,
 pre .tag .keyword {
   color: #363C69;
 }
@@ -94,9 +94,11 @@ pre .tex .command {
 }
 
 pre .coffeescript .javascript,
-pre .xml .css,
+pre .javascript .xml,
+pre .tex .formula,
 pre .xml .javascript,
 pre .xml .vbscript,
-pre .tex .formula {
+pre .xml .css,
+pre .xml .cdata {
   opacity: 0.8;
 }

@@ -10,7 +10,7 @@ pre code {
 }
 
 pre code,
-.ruby .subst {
+pre .subst {
   color: #0FF;
 }
 
@@ -32,7 +32,8 @@ pre .addition,
 pre .apache .tag,
 pre .apache .cbracket,
 pre .tex .command,
-pre .clojure .title {
+pre .clojure .title,
+pre .coffeescript .attribute {
   color: #FF0;
 }
 
@@ -87,7 +88,7 @@ pre .diff .header,
 pre .chunk,
 pre .shebang,
 pre .nginx .built_in,
-pre .input_number {
+pre .prompt {
   color: #008080;
 }
 

@@ -32,7 +32,7 @@ pre .pi,
 pre .chunk,
 pre .shebang,
 pre .apache .cbracket,
-pre .input_number,
+pre .prompt,
 pre .http .title {
   color: #808000;
 }

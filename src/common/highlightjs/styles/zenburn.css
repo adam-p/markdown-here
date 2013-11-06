@@ -51,7 +51,7 @@ pre .tex .special {
 }
 
 pre .diff .chunk,
-pre .ruby .subst {
+pre .subst {
   color: #8F8F8F;
 }
 
@@ -64,7 +64,7 @@ pre .ruby .class .parent,
 pre .apache .tag,
 pre .nginx .built_in,
 pre .tex .command,
-pre .input_number {
+pre .prompt {
     color: #efef8f;
 }
 
@@ -89,7 +89,8 @@ pre .css .rules .value,
 pre .attr_selector,
 pre .pseudo,
 pre .apache .cbracket,
-pre .tex .formula {
+pre .tex .formula,
+pre .coffeescript .attribute {
   color: #CC9393;
 }
 
@@ -104,10 +105,12 @@ pre .doctype {
 }
 
 pre .coffeescript .javascript,
-pre .xml .css,
+pre .javascript .xml,
+pre .tex .formula,
 pre .xml .javascript,
 pre .xml .vbscript,
-pre .tex .formula {
+pre .xml .css,
+pre .xml .cdata {
   opacity: 0.5;
 }
 

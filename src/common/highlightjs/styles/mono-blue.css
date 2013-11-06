@@ -1,0 +1,59 @@
+/*
+  Five-color theme from a single blue hue.
+*/
+pre code {
+  display: block; padding: 0.5em;
+  background: #EAEEF3; color: #00193A;
+}
+
+pre .keyword,
+pre .title,
+pre .important,
+pre .request,
+pre .header,
+pre .javadoctag {
+  font-weight: bold;
+}
+
+pre .comment,
+pre .chunk,
+pre .template_comment {
+  color: #738191;
+}
+
+pre .string,
+pre .title,
+pre .parent,
+pre .built_in,
+pre .literal,
+pre .filename,
+pre .value,
+pre .addition,
+pre .tag,
+pre .argument,
+pre .link_label,
+pre .blockquote,
+pre .header {
+  color: #0048AB;
+}
+
+pre .decorator,
+pre .prompt,
+pre .yardoctag,
+pre .subst,
+pre .symbol,
+pre .doctype,
+pre .regexp,
+pre .preprocessor,
+pre .pi,
+pre .attribute,
+pre .attr_selector,
+pre .javadoc,
+pre .xmlDocTag,
+pre .deletion,
+pre .shebang,
+pre .string .variable,
+pre .link_url,
+pre .bullet {
+  color: #4C81C9;
+}
