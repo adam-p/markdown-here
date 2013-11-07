@@ -1,18 +1,21 @@
 /*
 
-Sunburst-like style (c) Vasily Polovnyov <vast@whiteants.net>
+Railscasts-like style (c) Visoft, Inc. (Damien White)
 
 */
 
 pre code {
-  display: block; padding: 0.5em;
-  background: #000; color: #f8f8f8;
+  display: block;
+  padding: 0.5em;
+  background: #232323;
+  color: #E6E1DC;
 }
 
 pre .comment,
 pre .template_comment,
-pre .javadoc {
-  color: #aeaeae;
+pre .javadoc,
+pre .shebang {
+  color: #BC9458;
   font-style: italic;
 }
 
@@ -20,18 +23,15 @@ pre .keyword,
 pre .ruby .function .keyword,
 pre .request,
 pre .status,
-pre .nginx .title {
-  color: #E28964;
-}
-
-pre .function .keyword,
-pre .sub .keyword,
+pre .nginx .title,
 pre .method,
 pre .list .title {
-  color: #99CF50;
+  color: #C26230;
 }
 
 pre .string,
+pre .number,
+pre .regexp,
 pre .tag .value,
 pre .cdata,
 pre .filter .argument,
@@ -39,27 +39,26 @@ pre .attr_selector,
 pre .apache .cbracket,
 pre .date,
 pre .tex .command,
-pre .coffeescript .attribute {
-  color: #65B042;
+pre .markdown .link_label {
+  color: #A5C261;
 }
 
 pre .subst {
-  color: #DAEFA3;
+  color: #519F50;
 }
 
-pre .regexp {
-  color: #E9C062;
-}
-
-pre .title,
-pre .sub .identifier,
-pre .pi,
 pre .tag,
 pre .tag .keyword,
-pre .decorator,
-pre .shebang,
-pre .prompt {
-  color: #89BDFF;
+pre .tag .title,
+pre .doctype,
+pre .sub .identifier,
+pre .pi,
+pre .input_number {
+  color: #E8BF6A;
+}
+
+pre .identifier {
+  color: #D0D0FF;
 }
 
 pre .class .title,
@@ -68,19 +67,33 @@ pre .smalltalk .class,
 pre .javadoctag,
 pre .yardoctag,
 pre .phpdoc {
+  text-decoration: none;
+}
+
+pre .constant {
+  color: #DA4939;
+}
+
+
+pre .symbol,
+pre .built_in,
+pre .ruby .symbol .string,
+pre .ruby .symbol .identifier,
+pre .markdown .link_url,
+pre .attribute {
+  color: #6D9CBE;
+}
+
+pre .markdown .link_url {
   text-decoration: underline;
 }
 
-pre .symbol,
-pre .ruby .symbol .string,
-pre .number {
-  color: #3387CC;
-}
+
 
 pre .params,
 pre .variable,
 pre .clojure .attribute {
-  color: #3E87E3;
+  color: #D0D0FF;
 }
 
 pre .css .tag,
@@ -112,40 +125,49 @@ pre .nginx .built_in {
   color: #9B859D;
 }
 
-pre .preprocessor {
-  color: #8996A8;
+pre .preprocessor,
+pre .preprocessor *{
+  color: #8996A8 !important;
 }
 
 pre .hexcolor,
 pre .css .value .number {
-  color: #DD7B3B;
+  color: #A5C261;
 }
 
+pre .title,
+pre .decorator,
 pre .css .function {
-  color: #DAD085;
+  color: #FFC66D;
 }
 
 pre .diff .header,
-pre .chunk,
-pre .tex .formula {
-  background-color: #0E2231;
-  color: #F8F8F8;
-  font-style: italic;
+pre .chunk {
+  background-color: #2F33AB;
+  color: #E6E1DC;
+  display: inline-block;
+  width: 100%;
 }
 
 pre .diff .change {
   background-color: #4A410D;
   color: #F8F8F8;
+  display: inline-block;
+  width: 100%;
 }
 
 pre .addition {
-  background-color: #253B22;
-  color: #F8F8F8;
+  background-color: #144212;
+  color: #E6E1DC;
+  display: inline-block;
+  width: 100%;
 }
 
 pre .deletion {
-  background-color: #420E09;
-  color: #F8F8F8;
+  background-color: #600;
+  color: #E6E1DC;
+  display: inline-block;
+  width: 100%;
 }
 
 pre .coffeescript .javascript,
@@ -155,5 +177,5 @@ pre .xml .javascript,
 pre .xml .vbscript,
 pre .xml .css,
 pre .xml .cdata {
-  opacity: 0.5;
+  opacity: 0.7;
 }

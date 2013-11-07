@@ -1,19 +1,11 @@
-/*
-
-School Book style from goldblog.com.ua (c) Zaripov Yura <yur4ik7@ukr.net>
-
-*/
+/**
+ * Obsidian style
+ * ported by Alexander Marenin (http://github.com/ioncreature)
+ */
 
 pre code {
-  display: block; padding: 15px 0.5em 0.5em 30px;
-  font-size: 11px !important;
-  line-height:16px !important;
-}
-
-pre{
-  background-color:#f6f6ae; /* adam-p: removed background image */
-  border-top: solid 2px #d2e8b9;
-  border-bottom: solid 1px #d2e8b9;
+    display: block; padding: 0.5em;
+    background: #282B2E;
 }
 
 pre .keyword,
@@ -24,25 +16,69 @@ pre .flow,
 pre .lisp .title,
 pre .clojure .built_in,
 pre .nginx .title,
+pre .css .id,
 pre .tex .special {
-  color:#005599;
-  font-weight:bold;
+    color: #93C763;
 }
 
-pre code,
+pre .number {
+    color: #FFCD22;
+}
+
+pre code {
+    color: #E0E2E4;
+}
+
+pre .css .tag,
+pre .css .pseudo {
+    color: #D0D2B5;
+}
+
+pre .attribute,
+pre code .constant {
+    color: #668BB0;
+}
+
+pre .xml .attribute {
+    color: #B3B689;
+}
+
+pre .xml .tag .value {
+    color: #E8E2B7;
+}
+
+pre .code,
+pre .class .title,
+pre .header {
+    color: white;
+}
+
+pre .class,
+pre .hexcolor {
+    color: #93C763;
+}
+
+pre .regexp {
+    color: #D39745;
+}
+
+pre .at_rule,
+pre .at_rule .keyword {
+    color: #A082BD;
+}
+
+pre .doctype {
+    color: #557182;
+}
+
+pre .link_url,
+pre .tag,
+pre .tag .title,
+pre .bullet,
 pre .subst,
-pre .tag .keyword {
-  color: #3E5915;
-}
-
-pre .string,
-pre .title,
+pre .emphasis,
 pre .haskell .type,
-pre .tag .value,
-pre .css .rules .value,
 pre .preprocessor,
-pre .ruby .symbol,
-pre .ruby .symbol .string,
 pre .ruby .class .parent,
 pre .built_in,
 pre .sql .aggregate,
@@ -50,7 +86,6 @@ pre .django .template_tag,
 pre .django .variable,
 pre .smalltalk .class,
 pre .javadoc,
-pre .ruby .string,
 pre .django .filter .argument,
 pre .smalltalk .localvars,
 pre .smalltalk .array,
@@ -61,22 +96,27 @@ pre .stream,
 pre .envvar,
 pre .apache .tag,
 pre .apache .cbracket,
-pre .nginx .built_in,
 pre .tex .command,
-pre .coffeescript .attribute {
-  color: #2C009F;
+pre .prompt {
+    color: #8CBBAD;
+}
+
+pre .string {
+    color: #EC7600;
 }
 
 pre .comment,
 pre .java .annotation,
+pre .blockquote,
+pre .horizontal_rule,
 pre .python .decorator,
 pre .template_comment,
 pre .pi,
-pre .doctype,
 pre .deletion,
 pre .shebang,
-pre .apache .sqbracket {
-  color: #E60415;
+pre .apache .sqbracket,
+pre .tex .formula {
+    color: #818E96;
 }
 
 pre .keyword,
@@ -84,21 +124,22 @@ pre .literal,
 pre .css .id,
 pre .phpdoc,
 pre .title,
+pre .header,
 pre .haskell .type,
 pre .vbscript .built_in,
 pre .sql .aggregate,
 pre .rsl .built_in,
 pre .smalltalk .class,
-pre .xml .tag .title,
 pre .diff .header,
 pre .chunk,
 pre .winutils,
 pre .bash .variable,
 pre .apache .tag,
-pre .tex .command,
+pre .tex .special,
 pre .request,
+pre .at_rule .keyword,
 pre .status {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 pre .coffeescript .javascript,
@@ -108,5 +149,5 @@ pre .xml .javascript,
 pre .xml .vbscript,
 pre .xml .css,
 pre .xml .cdata {
-  opacity: 0.5;
+    opacity: 0.5;
 }

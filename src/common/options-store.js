@@ -290,16 +290,16 @@ var MozillaOptionsStore = {
     var prefs, prefKeys, prefsObj, request, sender, i;
 
     try {
-      prefs = Components.classes['@mozilla.org/preferences-service;1']
-                        .getService(Components.interfaces.nsIPrefService)
-                        .getBranch('extensions.markdown-here.');
+      prefs = Utils.global.Components.classes['@mozilla.org/preferences-service;1']
+                          .getService(Components.interfaces.nsIPrefService)
+                          .getBranch('extensions.markdown-here.');
 
       if (data.verb === 'get') {
         prefKeys = prefs.getChildList('');
         prefsObj = {};
 
         for (i = 0; i < prefKeys.length; i++) {
-          prefsObj[prefKeys[i]] = JSON.parse(prefs.getCharPref(prefKeys[i]));
+          prefsObj[prefKeys[i]] = Utils.global.JSON.parse(prefs.getCharPref(prefKeys[i]));
         }
 
         callback(prefsObj);
@@ -307,7 +307,7 @@ var MozillaOptionsStore = {
       }
       else if (data.verb === 'set') {
         for (i in data.obj) {
-          prefs.setCharPref(i, JSON.stringify(data.obj[i]));
+          prefs.setCharPref(i, Utils.global.JSON.stringify(data.obj[i]));
         }
 
         if (callback) callback();
@@ -327,6 +327,9 @@ var MozillaOptionsStore = {
       }
     }
     catch (ex) {
+      Utils.consoleLog('Markdown Here: failing back to content script preferences code');
+      Utils.consoleLog(ex);
+
       // This exception was thrown by the Components.classes stuff above, and
       // means that this code is being called from a content script.
       // We need to send a request from this non-privileged context to the

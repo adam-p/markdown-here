@@ -1,6 +1,19 @@
 Change Log
 ==========
 
+2013-11-07: v2.9.4
+------------------
+
+* **Updated [Highglight.js](http://highlightjs.org/)**, which is the syntax highlighting library used by Markdown Here.
+  * New languages: Handlebars templates, Oracle Rules, F#, AsciiDoc, Lasso, SCSS, VB.NET, Mizar.
+  * New themes: Docco, Foundation, Mono Blue, Monokai Sublime, Obsidian, Railscasts.
+  * And lots of theme and language improvements.
+  * This resolves MDH issues [#59](https://github.com/adam-p/markdown-here/issues/59) and [#114](https://github.com/adam-p/markdown-here/issues/114). Thanks to [Alex Pacini](https://github.com/alexpacini) and [Robert Jeppesen](https://github.com/rojepp) for reporting them.
+  * Make no mistake, all credit for this goes to [Ivan Sagalaev](https://github.com/isagalaev) and the [Hightlight.js contributors](https://github.com/isagalaev/highlight.js/blob/master/AUTHORS.en.txt).
+
+* Added some debug logging to help diagnose [issue #141](https://github.com/adam-p/markdown-here/issues/141). (And maybe fixed that issue, but probably not.)
+
+
 2013-10-27: v2.9.3
 ------------------
 

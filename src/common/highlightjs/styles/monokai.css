@@ -11,6 +11,7 @@ pre .tag,
 pre .tag .title,
 pre .keyword,
 pre .literal,
+pre .strong,
 pre .change,
 pre .winutils,
 pre .flow,
@@ -29,10 +30,13 @@ pre code .constant {
 	color: #66D9EF;
 }
 
-pre .class .title {
+pre .code,
+pre .class .title,
+pre .header {
 	color: white;
 }
 
+pre .link_label,
 pre .attribute,
 pre .symbol,
 pre .symbol .string,
@@ -41,10 +45,13 @@ pre .regexp {
 	color: #BF79DB;
 }
 
+pre .link_url,
 pre .tag .value,
 pre .string,
-pre .ruby .subst,
+pre .bullet,
+pre .subst,
 pre .title,
+pre .emphasis,
 pre .haskell .type,
 pre .preprocessor,
 pre .ruby .class .parent,
@@ -65,12 +72,14 @@ pre .envvar,
 pre .apache .tag,
 pre .apache .cbracket,
 pre .tex .command,
-pre .input_number {
+pre .prompt {
   color: #A6E22E;
 }
 
 pre .comment,
 pre .java .annotation,
+pre .blockquote,
+pre .horizontal_rule,
 pre .python .decorator,
 pre .template_comment,
 pre .pi,
@@ -87,6 +96,7 @@ pre .literal,
 pre .css .id,
 pre .phpdoc,
 pre .title,
+pre .header,
 pre .haskell .type,
 pre .vbscript .built_in,
 pre .sql .aggregate,
@@ -104,9 +114,11 @@ pre .status {
 }
 
 pre .coffeescript .javascript,
-pre .xml .css,
+pre .javascript .xml,
+pre .tex .formula,
 pre .xml .javascript,
 pre .xml .vbscript,
-pre .tex .formula {
+pre .xml .css,
+pre .xml .cdata {
   opacity: 0.5;
 }

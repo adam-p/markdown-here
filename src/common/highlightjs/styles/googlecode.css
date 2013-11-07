@@ -43,7 +43,8 @@ pre .filter .argument,
 pre .attr_selector,
 pre .apache .cbracket,
 pre .date,
-pre .regexp {
+pre .regexp,
+pre .coffeescript .attribute {
   color: #080;
 }
 
@@ -54,7 +55,7 @@ pre .tag .keyword,
 pre .decorator,
 pre .ini .title,
 pre .shebang,
-pre .input_number,
+pre .prompt,
 pre .hexcolor,
 pre .rules .value,
 pre .css .value .number,

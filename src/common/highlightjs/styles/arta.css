@@ -41,7 +41,8 @@ pre .xml .attribute,
 pre .smalltalk .char,
 pre .xml .value,
 pre .ini .value,
-pre .clojure .attribute
+pre .clojure .attribute,
+pre .coffeescript .attribute
 {
   color: #ffcc33;
 }
@@ -128,7 +129,10 @@ pre .parser3 .title
 }
 
 pre .coffeescript .javascript,
+pre .javascript .xml,
+pre .tex .formula,
 pre .xml .javascript,
+pre .xml .vbscript,
 pre .xml .css,
 pre .xml .cdata
 {

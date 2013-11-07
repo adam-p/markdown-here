@@ -1,0 +1,113 @@
+/*
+Description: Foundation 4 docs style for highlight.js
+Author: Dan Allen <dan.j.allen@gmail.com>
+Website: http://foundation.zurb.com/docs/
+Version: 1.0
+Date: 2013-04-02
+*/
+
+pre code {
+  display: block; padding: 0.5em;
+  background: #eee;
+}
+
+pre .decorator,
+pre .annotation {
+  color: #000077;
+}
+
+pre .attribute {
+  color: #070;
+}
+
+pre .value,
+pre .string,
+pre .scss .value .string {
+  color: #d14;
+}
+
+pre .comment {
+  color: #998;
+  font-style: italic;
+}
+
+pre .function .title {
+  color: #900;
+}
+
+pre .class {
+  color: #458;
+}
+
+pre .id,
+pre .pseudo,
+pre .constant,
+pre .hexcolor {
+  color: teal;
+}
+
+pre .variable {
+  color: #336699;
+}
+
+pre .javadoc {
+  color: #997700;
+}
+
+pre .pi,
+pre .doctype {
+  color: #3344bb;
+}
+
+pre .number {
+  color: #099;
+}
+
+pre .important {
+  color: #f00;
+}
+
+pre .label {
+  color: #970;
+}
+
+pre .preprocessor {
+  color: #579;
+}
+
+pre .reserved,
+pre .keyword,
+pre .scss .value {
+  color: #000;
+}
+
+pre .regexp {
+  background-color: #fff0ff;
+  color: #880088;
+}
+
+pre .symbol {
+  color: #990073;
+}
+
+pre .symbol .string {
+  color: #a60;
+}
+
+pre .tag {
+  color: #007700;
+}
+
+pre .at_rule,
+pre .at_rule .keyword {
+  color: #088;
+}
+
+pre .at_rule .preprocessor {
+  color: #808;
+}
+
+pre .scss .tag,
+pre .scss .attribute {
+  color: #339;
+}

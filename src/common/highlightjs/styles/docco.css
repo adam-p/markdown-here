@@ -1,12 +1,10 @@
 /*
-
-github.com style (c) Vasily Polovnyov <vast@whiteants.net>
-
+Docco style used in http://jashkenas.github.com/docco/ converted by Simon Madine (@thingsinjars)
 */
 
 pre code {
   display: block; padding: 0.5em;
-  color: #333;
+  color: #000;
   background: #f8f8ff
 }
 
@@ -14,53 +12,49 @@ pre .comment,
 pre .template_comment,
 pre .diff .header,
 pre .javadoc {
-  color: #998;
+  color: #408080;
   font-style: italic
 }
 
 pre .keyword,
+pre .assignment,
+pre .literal,
 pre .css .rule .keyword,
 pre .winutils,
 pre .javascript .title,
-pre .nginx .title,
-pre .subst,
-pre .request,
-pre .status {
-  color: #333;
-  font-weight: bold
+pre .lisp .title,
+pre .subst {
+  color: #954121;
 }
 
 pre .number,
-pre .hexcolor,
-pre .ruby .constant {
-  color: #099;
+pre .hexcolor {
+  color: #40a070
 }
 
 pre .string,
 pre .tag .value,
 pre .phpdoc,
 pre .tex .formula {
-  color: #d14
+  color: #219161;
 }
 
 pre .title,
-pre .id,
-pre .coffeescript .params,
-pre .scss .preprocessor {
-  color: #900;
-  font-weight: bold
+pre .id {
+  color: #19469D;
+}
+pre .params {
+  color: #00F;
 }
 
 pre .javascript .title,
 pre .lisp .title,
-pre .clojure .title,
 pre .subst {
   font-weight: normal
 }
 
 pre .class .title,
-pre .haskell .type,
-pre .vhdl .literal,
+pre .haskell .label,
 pre .tex .command {
   color: #458;
   font-weight: bold
@@ -76,12 +70,13 @@ pre .django .tag .keyword {
 
 pre .attribute,
 pre .variable,
+pre .instancevar,
 pre .lisp .body {
   color: #008080
 }
 
 pre .regexp {
-  color: #009926
+  color: #B68
 }
 
 pre .class {
@@ -91,15 +86,18 @@ pre .class {
 
 pre .symbol,
 pre .ruby .symbol .string,
+pre .ruby .symbol .keyword,
+pre .ruby .symbol .keymethods,
 pre .lisp .keyword,
 pre .tex .special,
-pre .prompt {
+pre .input_number {
   color: #990073
 }
 
+pre .builtin,
+pre .constructor,
 pre .built_in,
-pre .lisp .title,
-pre .clojure .built_in {
+pre .lisp .title {
   color: #0086b3
 }
 
@@ -126,4 +124,8 @@ pre .diff .change {
 
 pre .chunk {
   color: #aaa
+}
+
+pre .tex .formula {
+  opacity: 0.5;
 }

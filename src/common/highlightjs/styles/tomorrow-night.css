@@ -14,7 +14,7 @@
   color: #de935f;
 }
 
-.tomorrow-yellow, pre .class, pre .ruby .class .title, pre .css .rules .attribute {
+.tomorrow-yellow, pre .ruby .class .title, pre .css .rules .attribute {
   color: #f0c674;
 }
 
@@ -39,4 +39,14 @@ pre code {
   background: #1d1f21;
   color: #c5c8c6;
   padding: 0.5em;
+}
+
+pre .coffeescript .javascript,
+pre .javascript .xml,
+pre .tex .formula,
+pre .xml .javascript,
+pre .xml .vbscript,
+pre .xml .css,
+pre .xml .cdata {
+  opacity: 0.5;
 }
