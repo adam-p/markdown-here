@@ -282,9 +282,16 @@ function showUpgradeNotification(html) {
 
   // Add click handlers so that we can clear the notification.
   var optionsLink = document.querySelector('#markdown-here-upgrade-notification-link');
-  optionsLink.addEventListener('click', function() {
+  optionsLink.addEventListener('click', function(event) {
     clearUpgradeNotification(true);
-    // Allow the default action
+
+    // Only the background script can open the options page tab (without a
+    // bunch of extra permissions and effort).
+    Utils.makeRequestToPrivilegedScript(
+      document,
+      { action: 'open-tab', url: optionsLink.getAttribute('href') });
+
+    event.preventDefault();
   });
 
   var closeLink = document.querySelector('#markdown-here-upgrade-notification-close');

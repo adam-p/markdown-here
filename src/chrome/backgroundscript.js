@@ -107,6 +107,12 @@ chrome.runtime.onMessage.addListener(function(request, sender, responseCallback)
     });
     return true;
   }
+  else if (request.action === 'open-tab') {
+    chrome.tabs.create({
+        'url': request.url
+    });
+    return false;
+  }
   else if (request.action === 'test-request') {
     responseCallback('test-request-good');
     return false;
