@@ -18,6 +18,8 @@ function onLoad() {
     document.body.appendChild(contentscript);
   }
 
+  localize();
+
   // The body of the iframe needs to have a (collapsed) selection range for
   // Markdown Here to work (simulating focus/cursor).
   var range = document.createRange();
@@ -32,3 +34,19 @@ function onLoad() {
   top.document.dispatchEvent(e);
 }
 document.addEventListener('DOMContentLoaded', onLoad, false);
+
+
+// Copied from options.js
+function localize() {
+  // i18n/l10n is not yet supported on all of our platforms, so we'll catch the
+  // exception and just continue on.
+  try {
+    $('[data-i18n]').each(function() {
+      var messageID = 'options_page__' + $(this).data('i18n');
+      Utils.saferSetInnerHTML(this, Utils.getMessage(messageID));
+    });
+  }
+  catch (e) {
+    // pass
+  }
+}

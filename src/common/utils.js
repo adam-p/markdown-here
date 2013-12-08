@@ -482,6 +482,26 @@ function nextTickFn(callback, context) {
 }
 
 
+// Get the translated string indicated by `messageID`.
+// Note that there's no support for placeholders as yet.
+// Throws exception if message is not found or if the platform doesn't support
+// internationalization (yet).
+function getMessage(messageID) {
+  var message = '';
+  if (typeof(chrome) !== 'undefined') {
+    message = chrome.i18n.getMessage(messageID);
+    if (!message) {
+      throw new Error('Could not find message ID: ' + messageID);
+    }
+  }
+  else {
+    throw new Error('Translation not supported on this platform');
+  }
+
+  return message;
+}
+
+
 // Expose these functions
 var Utils = {};
 
@@ -512,6 +532,7 @@ Utils.setFocus = setFocus;
 Utils.getTopURL = getTopURL;
 Utils.nextTick = nextTick;
 Utils.nextTickFn = nextTickFn;
+Utils.getMessage = getMessage;
 
 
 var EXPORTED_SYMBOLS = ['Utils'];

@@ -17,6 +17,7 @@ MIT License : http://adampritchard.mit-license.org/
   <script src="mdh-html-to-text.js"></script>
   <script src="markdown-here.js"></script>
   <script src="options-iframe.js"></script>
+  <script src="vendor/jquery-1.9.1.js"></script>
 
   <style>
   /* We don't really want to add styles to the preview because it might confuse
@@ -33,7 +34,7 @@ MIT License : http://adampritchard.mit-license.org/
 <!-- NOTE: The content of the <body> *must not* be indented or have comments,
      otherwise it will affect the MD rendering. -->
 
-<body contenteditable="true">
+<body contenteditable="true" data-i18n="preview_markdown">
 ```javascript<br>
 function syntaxHighlighting() {<br>
 &nbsp; var n = 33;<br>
@@ -70,8 +71,8 @@ $-b \pm \sqrt{b^2 - 4ac} \over 2a$<br>
 &nbsp; <br>
 | Tables        | Are           | Cool  |<br>
 | ------------- |:-------------:| -----:|<br>
-| col 3 is      | right-aligned | $1600 |<br>
-| col 2 is      | centered      |   $12 |<br>
+| column 3 is   | right-aligned | $1600 |<br>
+| column 2 is   | centered      |   $12 |<br>
 | zebra stripes | are neat      |    $1 |<br>
 <br>
 Here's a horizontal rule:<br>

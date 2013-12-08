@@ -421,4 +421,17 @@ describe('Utils', function() {
     });
   });
 
+  describe('getMessage', function() {
+    it('should return a string', function() {
+      // Since the exact string retuned depends on the current browser locale,
+      // we'll just check that some string is returned.
+      expect(Utils.getMessage('options_page__page_title')).to.be.a('string');
+    });
+
+    it('should throw on bad message ID', function() {
+      var fn = _.partial(Utils.getMessage, 'BAADF00D');
+      expect(fn).to.throw(Error);
+    });
+  });
+
 });

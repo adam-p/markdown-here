@@ -5,6 +5,7 @@
   "description": "Write your email in Markdown, then make it pretty.",
   "homepage_url": "http://markdown-here.com",
   "minimum_chrome_version": "6",
+  "default_locale": "en",
   "icons": {
     "16": "common/images/icon16.png",
     "32": "common/images/icon32.png",

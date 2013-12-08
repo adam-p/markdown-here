@@ -19,6 +19,8 @@ var cssEdit, cssSyntaxEdit, cssSyntaxSelect, rawMarkdownIframe, savedMsg,
 function onLoad() {
   var xhr;
 
+  localize();
+
   // Show/hide elements depending on platform
   showPlatformElements();
 
@@ -153,6 +155,22 @@ function showPlatformElements() {
     $('#need-page-reload').css('display', '');
   }
 }
+
+
+function localize() {
+  // i18n/l10n is not yet supported on all of our platforms, so we'll catch the
+  // exception and just continue on.
+  try {
+    $('[data-i18n]').each(function() {
+      var messageID = 'options_page__' + $(this).data('i18n');
+      Utils.saferSetInnerHTML(this, Utils.getMessage(messageID));
+    });
+  }
+  catch (e) {
+    // pass
+  }
+}
+
 
 // If the CSS changes and the Markdown compose box is rendered, update the
 // rendering by toggling twice. If the compose box is not rendered, do nothing.
@@ -407,31 +425,32 @@ function hotkeyChangeHandler() {
   // Set any representations of the hotkey to the new value.
 
   var hotkeyPieces = [];
-  if (hotkeyShift.checked) hotkeyPieces.push('SHIFT');
-  if (hotkeyCtrl.checked) hotkeyPieces.push('CTRL');
-  if (hotkeyAlt.checked) hotkeyPieces.push('ALT');
+  if (hotkeyShift.checked) hotkeyPieces.push(Utils.getMessage('options_page__hotkey_shift_key'));
+  if (hotkeyCtrl.checked) hotkeyPieces.push(Utils.getMessage('options_page__hotkey_ctrl_key'));
+  if (hotkeyAlt.checked) hotkeyPieces.push(Utils.getMessage('options_page__hotkey_alt_key'));
   if (hotkeyKey.value) hotkeyPieces.push(hotkeyKey.value.toString().toUpperCase());
 
-  $('.hotkey-display').each(function(hotkeyElem) {
+  $('.hotkey-display').each(function() {
+    var $hotkeyElem = $(this);
     if (hotkeyKey.value) {
-      if ($(hotkeyElem).parent().hasClass('hotkey-display-wrapper')) {
-        $(hotkeyElem).parent().css({display: ''});
+      if ($hotkeyElem.parent().hasClass('hotkey-display-wrapper')) {
+        $hotkeyElem.parent().css({display: ''});
       }
-      $(hotkeyElem).css({display: ''});
-      $(hotkeyElem).empty();
+      $hotkeyElem.css({display: ''});
+      $hotkeyElem.empty();
 
       $.each(hotkeyPieces, function(idx, piece) {
         if (idx > 0) {
-          $(hotkeyElem).append(document.createTextNode('+'));
+          $hotkeyElem.append(document.createTextNode('+'));
         }
-        $(hotkeyElem).append('<kbd>').text(piece);
+        $('<kbd>').text(piece).appendTo($hotkeyElem);
       });
     }
     else {
-      if ($(hotkeyElem).parent().hasClass('hotkey-display-wrapper')) {
-        $(hotkeyElem).parent().css({display: 'none'});
+      if ($hotkeyElem.parent().hasClass('hotkey-display-wrapper')) {
+        $hotkeyElem.parent().css({display: 'none'});
       }
-      $(hotkeyElem).css({display: 'none'});
+      $hotkeyElem.css({display: 'none'});
     }
   });
 }
