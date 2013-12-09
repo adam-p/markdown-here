@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
-<!DOCTYPE overlay SYSTEM "chrome://markdown_here/locale/overlay.dtd">
+<!DOCTYPE overlay SYSTEM "chrome://markdown_here/locale/strings.dtd">
 
 <dialog
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
   id="mdhDialogId"
-  title="&markdown_hereTitle;"
+  title="&app_name;"
   ondialogaccept="return onOK();"
   onload="onLoad();"
   persist=""
@@ -23,8 +23,8 @@
     </hbox>
     <hbox>
       <spacer flex="1"/>
-      <button dlgtype="accept" label="Send"/>
-      <button dlgtype="cancel" label="Back"/>
+      <button id="promptSend" dlgtype="accept" label="&forgot_to_render_send_button;"/>
+      <button id="promptBack" dlgtype="cancel" label="&forgot_to_render_back_button;"/>
     </hbox>
   </vbox>
 

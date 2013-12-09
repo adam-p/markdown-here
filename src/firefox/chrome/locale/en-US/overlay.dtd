@@ -1,5 +1,0 @@
-<!ENTITY markdown_hereTitle "Markdown Here">
-<!ENTITY markdown_hereContext.label "Markdown Toggle">
-<!ENTITY markdown_hereContext.accesskey "k">
-<!ENTITY markdown_hereButton.label "MD Toggle">
-<!ENTITY markdown_hereButton.tooltiptext "Click to toggle Markdown rendering">

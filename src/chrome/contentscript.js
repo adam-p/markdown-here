@@ -31,7 +31,7 @@ function requestHandler(request, sender, sendResponse) {
     }
 
     if (!markdownHere.elementCanBeRendered(focusedElem)) {
-      alert('The selected field is not valid for Markdown rendering. Please use a rich editor.');
+      alert(Utils.getMessage('invalid_field'));
       return false;
     }
 

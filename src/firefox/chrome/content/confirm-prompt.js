@@ -8,6 +8,8 @@ function onLoad() {
   // Use the arguments passed to us by the caller
   document.getElementById("promptInfo").value = window.arguments[0].inn.promptInfo;
   document.getElementById("promptQuestion").value = window.arguments[0].inn.promptQuestion;
+  document.getElementById("promptSend").label = window.arguments[0].inn.promptSendButton;
+  document.getElementById("promptBack").label = window.arguments[0].inn.promptBackButton;
 }
 
 // Called once if and only if the user clicks OK

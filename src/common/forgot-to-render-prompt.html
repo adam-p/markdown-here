@@ -117,19 +117,21 @@
     <div id="markdown-here-forgot-to-render-head">
       <span>
         <img id="markdown-here-forgot-to-render-logo" class="markdown-here-reset" src="data:image/png;base64,{{logoBase64}}"/>
-        Forget to toggle Markdown?
+        {{forgot_to_render_prompt_title}}
       </span>
       <a id="markdown-here-forgot-to-render-close" class="markdown-here-reset" href="#" title="Dismiss this notification">&#215;</a>
     </div>
     <div>
-      It looks like you wrote this email in Markdown but didn't make it pretty. Send it anyway?
+      {{forgot_to_render_prompt_info}}
+      <br><br>
+      {{forgot_to_render_prompt_question}}
     </div>
     <div id="markdown-here-forgot-to-render-buttons" class="markdown-here-reset" >
       <button id="markdown-here-forgot-to-render-button-back">
-        Back
+        {{forgot_to_render_back_button}}
       </button>
       <button id="markdown-here-forgot-to-render-button-send">
-        Send
+        {{forgot_to_render_send_button}}
       </button>
     </div>
   </div>

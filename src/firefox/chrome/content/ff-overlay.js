@@ -41,19 +41,19 @@ var markdown_here = {
       // Are we rich-editing?
       /*jshint newcap:false*/
       if (window.GetCurrentEditorType().indexOf('html') < 0) {
-        this.alert('You are using a plain-text compose editor. You must change to a rich editor to use Markdown Here.');
+        this.alert(markdown_here.imports.Utils.getMessage('plain_text_compose'));
         return;
       }
 
       // The focus might not be in the compose box
       if (!markdown_here.imports.markdownHere.elementCanBeRendered(focusedElem)) {
-        this.alert('Please put the cursor into the compose box.');
+        this.alert(markdown_here.imports.Utils.getMessage('cursor_into_compose'));
         return;
       }
     }
     else { // Firefox
       if (!markdown_here.imports.markdownHere.elementCanBeRendered(focusedElem)) {
-        this.alert('The selected field is not valid for Markdown rendering. Please use a rich editor.');
+        this.alert(markdown_here.imports.Utils.getMessage('invalid_field'));
         return;
       }
     }
@@ -170,8 +170,10 @@ var markdown_here = {
 
           var promptParams = {
             inn:{
-              promptInfo: markdown_here.imports.CommonLogic.FORGOT_TO_RENDER_PROMPT_INFO,
-              promptQuestion: markdown_here.imports.CommonLogic.FORGOT_TO_RENDER_PROMPT_QUESTION},
+              promptInfo: markdown_here.imports.Utils.getMessage('forgot_to_render_prompt_info'),
+              promptQuestion: markdown_here.imports.Utils.getMessage('forgot_to_render_prompt_question'),
+              promptBackButton: markdown_here.imports.Utils.getMessage('forgot_to_render_back_button'),
+              promptSendButton: markdown_here.imports.Utils.getMessage('forgot_to_render_send_button') },
             out:null
           };
           window.openDialog(

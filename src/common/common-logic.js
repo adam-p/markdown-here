@@ -34,7 +34,7 @@ if (typeof(Utils) === 'undefined' && typeof(Components) !== 'undefined') {
 }
 
 
-var DEBUG = false;
+var DEBUG = true;
 function debugLog() {
   var i, log = '';
   if (!DEBUG) {
@@ -88,6 +88,12 @@ function getForgotToRenderPromptContent(responseCallback) {
     Utils.getLocalURL('/common/forgot-to-render-prompt.html'),
     'text/html',
     function(html) {
+      html = html.replace('{{forgot_to_render_prompt_title}}', Utils.getMessage('forgot_to_render_prompt_title'))
+                 .replace('{{forgot_to_render_prompt_info}}', Utils.getMessage('forgot_to_render_prompt_info'))
+                 .replace('{{forgot_to_render_prompt_question}}', Utils.getMessage('forgot_to_render_prompt_question'))
+                 .replace('{{forgot_to_render_back_button}}', Utils.getMessage('forgot_to_render_back_button'))
+                 .replace('{{forgot_to_render_send_button}}', Utils.getMessage('forgot_to_render_send_button'));
+
       // Get the logo image data
       Utils.getLocalFileAsBase64(
         Utils.getLocalURL('/common/images/icon24.png'),
@@ -129,8 +135,6 @@ var ESCAPE_KEYCODE = 27;
 
 var WATCHED_PROPERTY = 'markdownHereForgotToRenderWatched';
 
-var FORGOT_TO_RENDER_PROMPT_INFO = "It looks like you wrote this email in Markdown but forgot to make it pretty.";
-var FORGOT_TO_RENDER_PROMPT_QUESTION = "Send it anyway?";
 
 // This function encapsulates the logic required to prevent accidental sending
 // of email that the user wrote in Markdown but forgot to render.
@@ -412,8 +416,10 @@ function showForgotToRenderPromptAndRespond(composeElem, composeSendButton) {
   if (typeof(composeElem.ownerDocument.defaultView.openDialog) !== 'undefined') {
     var promptParams = {
       inn:{
-        promptInfo: FORGOT_TO_RENDER_PROMPT_INFO,
-        promptQuestion: FORGOT_TO_RENDER_PROMPT_QUESTION},
+        promptInfo: Utils.getMessage('forgot_to_render_prompt_info'),
+        promptQuestion: Utils.getMessage('forgot_to_render_prompt_question'),
+        promptBackButton: Utils.getMessage('forgot_to_render_back_button'),
+        promptSendButton: Utils.getMessage('forgot_to_render_send_button') },
       out:null
     };
     composeElem.ownerDocument.defaultView.openDialog(
@@ -565,8 +571,7 @@ CommonLogic.getUpgradeNotification = getUpgradeNotification;
 CommonLogic.getForgotToRenderPromptContent = getForgotToRenderPromptContent;
 CommonLogic.forgotToRenderIntervalCheck = forgotToRenderIntervalCheck;
 CommonLogic.probablyWritingMarkdown = probablyWritingMarkdown;
-CommonLogic.FORGOT_TO_RENDER_PROMPT_INFO = FORGOT_TO_RENDER_PROMPT_INFO;
-CommonLogic.FORGOT_TO_RENDER_PROMPT_QUESTION = FORGOT_TO_RENDER_PROMPT_QUESTION;
+
 
 CommonLogic.__defineSetter__('global', function(val) { CommonLogic._global = val; });
 CommonLogic.__defineGetter__('global', function() {

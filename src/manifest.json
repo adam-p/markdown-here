@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
-  "name": "Markdown Here",
+  "name": "__MSG_app_name__",
   "version": "2.9.4",
-  "description": "Write your email in Markdown, then make it pretty.",
+  "description": "__MSG_app_slogan__",
   "homepage_url": "http://markdown-here.com",
   "minimum_chrome_version": "6",
   "default_locale": "en",

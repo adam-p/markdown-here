@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet href="chrome://markdown_here/skin/overlay.css" type="text/css"?>
-<!DOCTYPE overlay SYSTEM "chrome://markdown_here/locale/overlay.dtd">
+<!DOCTYPE overlay SYSTEM "chrome://markdown_here/locale/strings.dtd">
 
 <?xml-stylesheet href="chrome://markdown_here/skin/toolbar.css" type="text/css"?>
 
@@ -10,8 +10,8 @@
 
   <popup id="contentAreaContextMenu">
     <menuseparator id="context-markdown_here-separator" insertafter="context-selectall"/>
-    <menuitem id="context-markdown_here" label="&markdown_hereContext.label;"
-              accesskey="&markdown_hereContext.accesskey;"
+    <menuitem id="context-markdown_here" label="&context_menu_item;"
+              accesskey="&context_menu_item_shortcut;"
               insertafter="context-markdown_here-separator"
               class="menuitem-iconic"
               image="resource://markdown_here_common/images/icon16.png"
@@ -22,14 +22,14 @@
     <image id="pageAction-markdown_here" insertafter="star-button"
            src="resource://markdown_here_common/images/icon16.png"
            onclick="markdown_here.onToolbarButtonCommand(event)"
-           tooltiptext="&markdown_hereButton.tooltiptext;" />
+           tooltiptext="&toggle_button_tooltip;" />
   </hbox>
 
   <toolbarpalette id="BrowserToolbarPalette">
     <toolbarbutton id="toolbarButton-markdown_here"
                    class="toolbarbutton-1 chromeclass-toolbar-additional"
-                   label="&markdown_hereButton.label;"
-                   tooltiptext="&markdown_hereButton.tooltiptext;"
+                   label="&toggle_button_text;"
+                   tooltiptext="&toggle_button_tooltip;"
                    oncommand="markdown_here.onToolbarButtonCommand(event)" />
   </toolbarpalette>
 </overlay>

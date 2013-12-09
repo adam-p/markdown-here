@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet href="chrome://markdown_here/skin/overlay.css" type="text/css"?>
-<!DOCTYPE overlay SYSTEM "chrome://markdown_here/locale/overlay.dtd">
+<!DOCTYPE overlay SYSTEM "chrome://markdown_here/locale/strings.dtd">
 
 <?xml-stylesheet href="chrome://markdown_here/skin/toolbar.css" type="text/css"?>
 
@@ -15,8 +15,8 @@
           <menu id="fileMenu">
             <menupopup id="menu_FilePopup">
               <menuseparator id="context-markdown_here-separator" insertafter="menu_newCollection"/>
-              <menuitem id="context-markdown_here" label="&markdown_hereContext.label;"
-            accesskey="&markdown_hereContext.accesskey;"
+              <menuitem id="context-markdown_here" label="&context_menu_item;"
+            accesskey="&context_menu_item_shortcut;"
             insertafter="context-markdown_here-separator"
             class="menuitem-iconic"
             image="resource://markdown_here_common/images/icon16.png"

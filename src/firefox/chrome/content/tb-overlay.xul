@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE overlay SYSTEM "chrome://markdown_here/locale/overlay.dtd">
+<!DOCTYPE overlay SYSTEM "chrome://markdown_here/locale/strings.dtd">
 
 <?xml-stylesheet href="chrome://markdown_here/skin/toolbar.css" type="text/css"?>
 
@@ -9,8 +9,8 @@
 
   <popup id="msgComposeContext">
     <menuseparator id="context-markdown_here-separator" insertafter="context-selectall"/>
-    <menuitem id="context-markdown_here" label="&markdown_hereContext.label;"
-              accesskey="&markdown_hereContext.accesskey;"
+    <menuitem id="context-markdown_here" label="&context_menu_item;"
+              accesskey="&context_menu_item_shortcut;"
               insertafter="context-markdown_here-separator"
               class="menuitem-iconic"
               image="resource://markdown_here_common/images/icon16.png"
@@ -20,8 +20,8 @@
   <toolbarpalette id="MsgComposeToolbarPalette">
     <toolbarbutton id="composeToolbarButton-markdown_here"
                    class="toolbarbutton-1 chromeclass-toolbar-additional"
-                   label="&markdown_hereButton.label;"
-                   tooltiptext="&markdown_hereButton.tooltiptext;"
+                   label="&toggle_button_text;"
+                   tooltiptext="&toggle_button_tooltip;"
                    oncommand="markdown_here.onToolbarButtonCommand(event)" />
   </toolbarpalette>
 
@@ -29,8 +29,8 @@
     <toolbarbutton id="formatToolbarButton-markdown_here"
                    class="formatting-button toolbarbutton-1 chromeclass-toolbar-additional"
                    insertbefore="smileButtonMenu"
-                   label="&markdown_hereButton.label;"
-                   tooltiptext="&markdown_hereButton.tooltiptext;"
+                   label="&toggle_button_text;"
+                   tooltiptext="&toggle_button_tooltip;"
                    image="resource://markdown_here_common/images/icon19.png"
                    oncommand="markdown_here.onToolbarButtonCommand(event)" />
   </toolbar>

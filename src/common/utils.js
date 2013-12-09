@@ -545,10 +545,8 @@ function getMessage(messageID) {
   else { // Mozilla
     if (g_mozStringBundle) {
       message = g_mozStringBundle[messageID];
-      consoleLog(messageID + g_mozStringBundle[messageID]);
     }
     else {
-      consoleLog(messageID, 'nada');
       // We don't yet have the string bundle available
       return '';
     }

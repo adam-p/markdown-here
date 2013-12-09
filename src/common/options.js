@@ -445,7 +445,7 @@ function hotkeyChangeHandler() {
 
       $.each(hotkeyPieces, function(idx, piece) {
         if (idx > 0) {
-          $hotkeyElem.append(document.createTextNode('+'));
+          $hotkeyElem.append(document.createTextNode(Utils.getMessage('options_page__hotkey_plus')));
         }
         $('<kbd>').text(piece).appendTo($hotkeyElem);
       });
