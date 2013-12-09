@@ -11,10 +11,6 @@
   persist=""
   windowtype="mdhDialogWindowType">
 
-  <stringbundleset id="stringbundleset">
-    <stringbundle id="markdown_here-strings" src="chrome://markdown_here/locale/overlay.properties"/>
-  </stringbundleset>
-
   <script type="application/javascript" src="chrome://markdown_here/content/confirm-prompt.js"/>
 
   <vbox>

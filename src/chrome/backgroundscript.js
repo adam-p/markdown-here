@@ -54,7 +54,7 @@ function upgradeCheck() {
 // Create the context menu that will signal our main code.
 chrome.contextMenus.create({
   contexts: ['editable'],
-  title: 'Mar&kdown Toggle',
+  title: Utils.getMessage('context_menu_item_with_shortcut'),
   onclick: function(info, tab) {
     chrome.tabs.sendMessage(tab.id, {action: 'context-click'});
   }

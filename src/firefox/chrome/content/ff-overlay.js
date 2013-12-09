@@ -100,7 +100,6 @@ var markdown_here = {
 
     // initialization code
     this.initialized = true;
-    this.strings = document.getElementById('markdown_here-strings');
 
     contextMenu = document.getElementById('contentAreaContextMenu');
     if (!contextMenu) contextMenu = document.getElementById('msgComposeContext');
@@ -271,26 +270,20 @@ var markdown_here = {
       // Toolbar button
       btn = document.getElementById('toolbarButton-markdown_here');
       if (btn) {
-        var stringsBundle = document.getElementById('markdown_here-strings');
-
         if (show) {
           btn.removeAttribute('disabled');
 
-          if (stringsBundle) {
-            tooltipString = stringsBundle.getString('markdown_hereButton.tooltiptext');
-            if (tooltipString) {
-              btn.setAttribute('tooltiptext', tooltipString);
-            }
+          tooltipString = markdown_here.imports.Utils.getMessage('toggle_button_tooltip');
+          if (tooltipString) {
+            btn.setAttribute('tooltiptext', tooltipString);
           }
         }
         else {
           btn.setAttribute('disabled', 'true');
 
-          if (stringsBundle) {
-            tooltipString = stringsBundle.getString('markdown_hereButton.disabledtooltiptext');
-            if (tooltipString) {
-              btn.setAttribute('tooltiptext', tooltipString);
-            }
+          tooltipString = markdown_here.imports.Utils.getMessage('toggle_button_tooltip_disabled');
+          if (tooltipString) {
+            btn.setAttribute('tooltiptext', tooltipString);
           }
         }
       }

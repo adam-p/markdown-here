@@ -1,4 +1,16 @@
 {
+  "toggle_button_tooltip": {
+    "message": "Click to toggle Markdown rendering(en)",
+    "description": "text shown when user hovers mouse over Markdown Toggle button"
+  },
+  "toggle_button_tooltip_disabled": {
+    "message": "The selected field is not valid for Markdown rendering(en)",
+    "description": "text shown when user hover mouse over disabled Markdown Toggle button"
+  },
+  "context_menu_item_with_shortcut": {
+    "message": "Mar&kdown Toggle(en)",
+    "description": "Text shown on the context menu. The '&' comes before the shortcut character."
+  },
   "options_page__page_title": {
     "message": "Markdown Here Options(en)"
   },
@@ -121,7 +133,8 @@
     "description": "heading for customization and use info"
   },
   "options_page__tex_math_customization_1": {
-    "message": "If this feature is enabled, text between dollar signs -- <code>$</code> -- will be interpreted as mathematical formulae. For example, <code>$\\Delta$</code> would be rendered as a delta symbol.(en)"
+    "message": "If this feature is enabled, text between dollar signs — <code>$$</code> — will be interpreted as mathematical formulae. For example, <code>$$\\Delta$$</code> would be rendered as a delta symbol.(en)",
+    "description": "Note: Double dollar signs ($$) are necessary to get a single dollar sign."
   },
   "options_page__tex_math_customization_2": {
     "message": "For render customization options, see the <a href=\"https://developers.google.com/chart/infographics/docs/formulas\" target=\"_blank\">Google Charts documentation</a> for this service.(en)"
@@ -137,8 +150,8 @@
     "description": "Please do not translate {mathcode} and {urlmathcode}"
   },
   "options_page__tex_math_customization_5_1": {
-    "message": "<code>{mathcode}</code>: The text between the <code>$</code> symbols -- i.e., the raw TeX formula; like <code>\\Delta</code>.(en)",
-    "description": "Please do not translate {mathcode} and {urlmathcode}"
+    "message": "<code>{mathcode}</code>: The text between the <code>$$</code> symbols — i.e., the raw TeX formula; like <code>\\Delta</code>.(en)",
+    "description": "Please do not translate {mathcode} and {urlmathcode}. Note: Double dollar signs ($$) are necessary to get a single dollar sign."
   },
   "options_page__tex_math_customization_5_2": {
     "message": "<code>{urlmathcode}</code>: The URL-encoded form of the TeX formula; like <code>%5CDelta</code>.(en)",
@@ -226,5 +239,13 @@
   "options_page__preview_markdown": {
     "message": "```javascript<br>\nfunction syntaxHighlighting() {<br>\n&nbsp; var n = 33;<br>\n&nbsp; var s = \"hi\";<br>\n&nbsp; console.log(s);<br>\n}<br>\n```<br>\n<br>\n* plain<br>\n* *emphasis*<br>\n&nbsp; * **strong emphasis**<br>\n&nbsp; &nbsp; * ~~strikethrough~~<br>\n* `inline code`<br>\n<br>\n1. Numbered list<br>\n2. [Link](https://www.google.com)<br>\n<br>\n<br>\nAn image: ![Markdown Here logo](http://adam-p.github.io/markdown-here/img/icon24.png)\n<br>\n<br>\n> Block quote.&nbsp; <br>\n> *With* **some** `markdown`.<br>\n<br>\nIf **TeX Math** support is enabled, this is the quadratic equation:&nbsp;<br>\n$$-b \\pm \\sqrt{b^2 - 4ac} \\over 2a$$<br>\n<br>\n# Header 1<br>\n## Header 2<br>\n### Header 3<br>\n#### Header 4<br>\n##### Header 5<br>\n###### Header 6<br>\n&nbsp; <br>\n| Tables        | Are           | Cool  |<br>\n| ------------- |:-------------:| -----:|<br>\n| column 3 is   | right-aligned | $$1600 |<br>\n| column 2 is   | centered      |   $$12 |<br>\n| zebra stripes | are neat      |    $$1 |<br>\n<br>\nHere's a horizontal rule:<br>\n<br>\n---<br>\n<br>\n```<br>\ncode block<br>\nwith no highlighting<br>\n```<br>\n<br>\n(en)",
     "description": "The raw Markdown used for previewing user styling changes. Also shows users what can be done with Markdown. Please note that the double dollar signs ($$) are needed to make a single dollar sign in the application."
+  },
+  "currently_in_use": {
+    "message": "Currently in use(en)",
+    "description": "Indicates the syntax highlighting theme that the user is currently using"
+  },
+  "new_changelist_items": {
+    "message": "NEW(en)",
+    "description": "Used to highlight the part of the changelist that is new"
   }
 }

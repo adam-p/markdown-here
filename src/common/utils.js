@@ -16,6 +16,19 @@
 /*global module:false, chrome:false, safari:false*/
 
 
+var Utils = {};
+
+// For some reason the other two ways of creating properties don't work.
+Utils.__defineSetter__('global', function(val) { Utils._global = val; });
+Utils.__defineGetter__('global', function() {
+  if (typeof(Utils._global) === 'function') {
+    return Utils._global.call();
+  }
+  return Utils._global;
+});
+Utils.global = this;
+
+
 function consoleLog(logString) {
   if (typeof(console) !== 'undefined') {
     console.log(logString);
@@ -462,7 +475,7 @@ function getTopURL(win, justHostname) {
 
 // Sets a short timeout and then calls callback
 function nextTick(callback, context) {
-  var runner = function() {
+  var runner = function nextTickInner() {
     callback.call(context);
   };
 
@@ -471,7 +484,7 @@ function nextTick(callback, context) {
 
 // `context` is optional. Will be `this` when `callback` is called.
 function nextTickFn(callback, context) {
-  return function() {
+  return function nextTickFnInner() {
     var args = arguments;
     var runner = function() {
       callback.apply(context, args);
@@ -482,6 +495,41 @@ function nextTickFn(callback, context) {
 }
 
 
+if (typeof(chrome) === 'undefined' && typeof(safari) === 'undefined') {
+  var g_mozStringBundle = getMozStringBundle();
+  if (!g_mozStringBundle && Utils.global.setTimeout) {
+    Utils.global.setTimeout(function requestMozStringBundle() {
+      makeRequestToPrivilegedScript(Utils.global.document, {action: 'get-string-bundle'}, function(response) {
+        g_mozStringBundle = response;
+      });
+    }, 0);
+  }
+}
+
+// Must only be called from a priviledged Mozilla script
+function getMozStringBundle() {
+  if (typeof(Components) === 'undefined' || typeof(Components.classes) === 'undefined') {
+    return false;
+  }
+
+  // Adapted from: https://developer.mozilla.org/en-US/docs/Code_snippets/Miscellaneous#Using_string_bundles_from_JavaScript
+  // and: https://developer.mozilla.org/en-US/docs/Using_nsISimpleEnumerator
+
+  var stringBundleObj = {};
+
+  var stringBundle = Utils.global.Components.classes["@mozilla.org/intl/stringbundle;1"]
+                        .getService(Components.interfaces.nsIStringBundleService)
+                        .createBundle("chrome://markdown_here/locale/strings.properties");
+
+  var stringBundleEnum = stringBundle.getSimpleEnumeration();
+  while (stringBundleEnum.hasMoreElements()) {
+    var property = stringBundleEnum.getNext().QueryInterface(Components.interfaces.nsIPropertyElement);
+    stringBundleObj[property.key] = property.value;
+  }
+
+  return stringBundleObj;
+}
+
 // Get the translated string indicated by `messageID`.
 // Note that there's no support for placeholders as yet.
 // Throws exception if message is not found or if the platform doesn't support
@@ -490,12 +538,24 @@ function getMessage(messageID) {
   var message = '';
   if (typeof(chrome) !== 'undefined') {
     message = chrome.i18n.getMessage(messageID);
-    if (!message) {
-      throw new Error('Could not find message ID: ' + messageID);
+  }
+  else if (typeof(safari) !== 'undefined') {
+    throw new Error('Translation not yet supported in Safari');
+  }
+  else { // Mozilla
+    if (g_mozStringBundle) {
+      message = g_mozStringBundle[messageID];
+      consoleLog(messageID + g_mozStringBundle[messageID]);
+    }
+    else {
+      consoleLog(messageID, 'nada');
+      // We don't yet have the string bundle available
+      return '';
     }
   }
-  else {
-    throw new Error('Translation not supported on this platform');
+
+  if (!message) {
+    throw new Error('Could not find message ID: ' + messageID);
   }
 
   return message;
@@ -503,17 +563,6 @@ function getMessage(messageID) {
 
 
 // Expose these functions
-var Utils = {};
-
-// For some reason the other two ways of creating properties don't work.
-Utils.__defineSetter__('global', function(val) { Utils._global = val; });
-Utils.__defineGetter__('global', function() {
-  if (typeof(Utils._global) === 'function') {
-    return Utils._global.call();
-  }
-  return Utils._global;
-});
-Utils.global = this;
 
 Utils.saferSetInnerHTML = saferSetInnerHTML;
 Utils.saferSetOuterHTML = saferSetOuterHTML;
@@ -532,6 +581,7 @@ Utils.setFocus = setFocus;
 Utils.getTopURL = getTopURL;
 Utils.nextTick = nextTick;
 Utils.nextTickFn = nextTickFn;
+Utils.getMozStringBundle = getMozStringBundle;
 Utils.getMessage = getMessage;
 
 

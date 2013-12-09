@@ -55,7 +55,7 @@ function onLoad() {
         cssSyntaxSelect.options.add(new Option(name, syntaxStyles[name]));
       }
 
-      cssSyntaxSelect.options.add(new Option('Currently in use', ''));
+      cssSyntaxSelect.options.add(new Option(Utils.getMessage('currently_in_use'), ''));
       cssSyntaxSelect.selectedIndex = cssSyntaxSelect.options.length - 1;
 
       cssSyntaxSelect.addEventListener('change', cssSyntaxSelectChange);
@@ -143,6 +143,22 @@ function previewIframeLoaded() {
 document.addEventListener('options-iframe-loaded', previewIframeLoaded);
 
 
+function localize() {
+  // i18n/l10n is not yet supported on all of our platforms, so we'll catch the
+  // exception and just continue on.
+  try {
+    $('[data-i18n]').each(function() {
+      console.log($(this).data('i18n'));
+      var messageID = 'options_page__' + $(this).data('i18n');
+      Utils.saferSetInnerHTML(this, Utils.getMessage(messageID));
+    });
+  }
+  catch (e) {
+    // pass
+  }
+}
+
+
 // Shows/hide page elements depending on the current platform.
 // E.g., not all usage instructions apply to all clients.
 function showPlatformElements() {
@@ -153,21 +169,6 @@ function showPlatformElements() {
   else {
     // Mozilla-derived platforms
     $('#need-page-reload').css('display', '');
-  }
-}
-
-
-function localize() {
-  // i18n/l10n is not yet supported on all of our platforms, so we'll catch the
-  // exception and just continue on.
-  try {
-    $('[data-i18n]').each(function() {
-      var messageID = 'options_page__' + $(this).data('i18n');
-      Utils.saferSetInnerHTML(this, Utils.getMessage(messageID));
-    });
-  }
-  catch (e) {
-    // pass
   }
 }
 
@@ -370,7 +371,10 @@ function loadChangelist() {
         prevVer = prevVer[1]; // capture group
 
         var prevVerStart = $('#changelist h2').filter(function() { return $(this).text().match(new RegExp('v'+prevVer+'$')); });
-        $('#changelist').find('h1:first').after('<h2>NEW</h2>').nextUntil(prevVerStart).wrapAll('<div class="changelist-new"></div>');
+        $('#changelist').find('h1:first')
+          .after('<h2>' + Utils.getMessage('new_changelist_items') + '</h2>')
+          .nextUntil(prevVerStart)
+          .wrapAll('<div class="changelist-new"></div>');
 
         // Move the changelist section up in the page
         $('#changelist-container').insertAfter('#pagehead');

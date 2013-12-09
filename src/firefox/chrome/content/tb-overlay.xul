@@ -5,10 +5,6 @@
 
 <overlay id="markdown_here-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
-  <stringbundleset id="stringbundleset">
-    <stringbundle id="markdown_here-strings" src="chrome://markdown_here/locale/overlay.properties"/>
-  </stringbundleset>
-
   <script src="chrome://markdown_here/content/ff-overlay.js"/>
 
   <popup id="msgComposeContext">

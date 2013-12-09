@@ -102,6 +102,10 @@ document.addEventListener(imports.Utils.PRIVILEGED_REQUEST_EVENT_NAME, function(
       responseCallback({html: html});
     });
   }
+  else if (request.action === 'get-string-bundle') {
+    asyncResponseCallback = false;
+    responseCallback(getStringBundleHandler());
+  }
   else if (request.action === 'test-request') {
     asyncResponseCallback = false;
     responseCallback('test-request-good');
@@ -166,6 +170,11 @@ function prefsAccessRequestHandler(request) {
   }
 
   return alert('Error: no matching prefs access verb');
+}
+
+
+function getStringBundleHandler() {
+  return imports.Utils.getMozStringBundle();
 }
 
 
