@@ -68,6 +68,18 @@
     "message": "Send(en)",
     "description": "Text on the Send (continue) button of the prompt that's shown when it's detected that a user may have forgotten to render the Markdown in their email"
   },
+  "upgrade_notification_text": {
+    "message": "Markdown Here updated(en)",
+    "description": "Text on the notification shown when Markdown Here has been updated"
+  },
+  "upgrade_notification_changes_tooltip": {
+    "message": "Click to the see the changes in this release(en)",
+    "description": "Tooltip text on the link that opens the changes list"
+  },
+  "upgrade_notification_dismiss_tooltip": {
+    "message": "Dismiss this notification(en)",
+    "description": "Tooltip text on the link that dismisses the notification"
+  },
   "options_page__page_title": {
     "message": "Markdown Here Options(en)"
   },

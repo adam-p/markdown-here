@@ -34,7 +34,7 @@ if (typeof(Utils) === 'undefined' && typeof(Components) !== 'undefined') {
 }
 
 
-var DEBUG = true;
+var DEBUG = false;
 function debugLog() {
   var i, log = '';
   if (!DEBUG) {
@@ -63,7 +63,10 @@ function getUpgradeNotification(optionsURL, responseCallback) {
         function(logoBase64) {
           // Do some rough template replacement
           html = html.replace('{{optionsURL}}', optionsURL)
-                     .replace('{{logoBase64}}', logoBase64);
+                     .replace('{{logoBase64}}', logoBase64)
+                     .replace('{{upgrade_notification_changes_tooltip}}', Utils.getMessage('upgrade_notification_changes_tooltip'))
+                     .replace('{{upgrade_notification_text}}', Utils.getMessage('upgrade_notification_text'))
+                     .replace('{{upgrade_notification_dismiss_tooltip}}', Utils.getMessage('upgrade_notification_dismiss_tooltip'));
 
           debugLog('getUpgradeNotification', 'got');
           return responseCallback(html);
