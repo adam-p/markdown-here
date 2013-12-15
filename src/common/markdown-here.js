@@ -466,7 +466,7 @@ function markdownHere(document, markdownRenderer, logger, renderComplete) {
     range = getOperationalRange(focusedElem);
 
     if (!range) {
-      return 'Nothing found to render or revert';
+      return Utils.getMessage('nothing_to_render');
     }
 
     // Look for wrappers in the range under consideration.
@@ -482,7 +482,7 @@ function markdownHere(document, markdownRenderer, logger, renderComplete) {
       if (wrappers[i].getAttribute('markdown-here-wrapper-content-modified') &&
           !yesToAll) {
 
-          if (wrappers[i].ownerDocument.defaultView.confirm('The rendered Markdown appears to have been modifed.\nIf you unrender it, your changes since rendering will be lost.\n\nAre you sure you wish to unrender?')) {
+          if (wrappers[i].ownerDocument.defaultView.confirm(Utils.getMessage('unrendering_modified_markdown_warning'))) {
             yesToAll = true;
           }
           else {

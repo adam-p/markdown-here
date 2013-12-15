@@ -112,7 +112,7 @@ document.addEventListener(imports.Utils.PRIVILEGED_REQUEST_EVENT_NAME, function(
   }
   else {
     imports.Utils.consoleLog('Markdown Here background script request handler: unmatched request action: ' + request.action);
-    throw 'unmatched request action: ' + request.action;
+    throw new Error('unmatched request action: ' + request.action);
   }
 
   // If the specific request handler hasn't indicated that it'll respond

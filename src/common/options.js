@@ -148,7 +148,6 @@ function localize() {
   // exception and just continue on.
   try {
     $('[data-i18n]').each(function() {
-      console.log($(this).data('i18n'));
       var messageID = 'options_page__' + $(this).data('i18n');
       Utils.saferSetInnerHTML(this, Utils.getMessage(messageID));
     });

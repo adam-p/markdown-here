@@ -94,6 +94,7 @@ function getForgotToRenderPromptContent(responseCallback) {
       html = html.replace('{{forgot_to_render_prompt_title}}', Utils.getMessage('forgot_to_render_prompt_title'))
                  .replace('{{forgot_to_render_prompt_info}}', Utils.getMessage('forgot_to_render_prompt_info'))
                  .replace('{{forgot_to_render_prompt_question}}', Utils.getMessage('forgot_to_render_prompt_question'))
+                 .replace('{{forgot_to_render_prompt_close_hover}}', Utils.getMessage('forgot_to_render_prompt_close_hover'))
                  .replace('{{forgot_to_render_back_button}}', Utils.getMessage('forgot_to_render_back_button'))
                  .replace('{{forgot_to_render_send_button}}', Utils.getMessage('forgot_to_render_send_button'));
 
