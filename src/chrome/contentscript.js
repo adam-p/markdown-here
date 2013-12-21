@@ -1,5 +1,5 @@
 /*
- * Copyright Adam Pritchard 2012
+ * Copyright Adam Pritchard 2013
  * MIT License : http://adampritchard.mit-license.org/
  */
 
@@ -20,8 +20,8 @@ function requestHandler(request, sender, sendResponse) {
   var focusedElem, mdReturn;
 
   if (request && (request.action === 'context-click' ||
-                request.action === 'hotkey' ||
-                request.action === 'button-click')) {
+                  request.action === 'hotkey' ||
+                  request.action === 'button-click')) {
 
     // Check if the focused element is a valid render target
     focusedElem = markdownHere.findFocusedElem(window.document);

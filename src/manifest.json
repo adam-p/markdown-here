@@ -31,7 +31,7 @@
   ],
   "browser_action": {
     "default_icon": "common/images/icon38.png",
-    "default_title": "Markdown Toggle"
+    "default_title": "__MSG_toggle_button_tooltip__"
   },
   "options_page": "common/options.html"
 }
