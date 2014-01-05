@@ -305,6 +305,9 @@
   "options_page__contributing_1": {
     "message": "<strong>If you have ever put a code block into an email, then you can help make Markdown Here better.</strong> <a href=\"https://github.com/adam-p/markdown-here/blob/development/CONTRIBUTE.md\" target=\"_blank\">CONTRIBUTE.md</a>"
   },
+  "options_page__contributing_2": {
+    "message": "Translations are welcome. Help make Markdown Here available in your language. Visit our <a href=\"https://crowdin.net/project/markdown-here\" target=\"_blank\">Crowdin page</a> to help out."
+  },
   "options_page__footer_1": {
     "message": "<em>Markdown Here</em> is open source. To ask questions, report bugs, request features, or contribute, visit the <a target=\"_blank\" href=\"https://github.com/adam-p/markdown-here\">Github project page</a> or the <a target=\"_blank\" href=\"https://groups.google.com/forum/?fromgroups=#!forum/markdown-here\">\"markdown-here\" Google Group</a>.",
     "description": "part of the page footer text"

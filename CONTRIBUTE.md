@@ -10,3 +10,10 @@ But the general idea is: It's not hard to get involved and help out. Feel free t
 * Google Group: https://groups.google.com/forum/#!forum/markdown-here
 * Website: http://markdown-here.com
 * Email me: pritchard.adam@gmail.com
+
+
+## Contributors
+
+### Translators
+
+* [Alice](https://github.com/lambdalice)
