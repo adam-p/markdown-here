@@ -82,8 +82,11 @@ function processLocale(locale) {
   var mozDtdFilename = '../src/firefox/chrome/locale/' + locale + '/strings.dtd';
   fs.truncateSync(mozDtdFilename, 0);
 
-  var key, message;
-  for (key in stringBundle) {
+  // We'll iterate through the keys in sorted order, to help keep the diffs stable.
+  var keys, i, key, message;
+  keys = Object.keys(stringBundle).sort();
+  for (i = 0; i < keys.length; i++) {
+    key = keys[i];
     message = stringBundle[key]['message'];
 
     // Chrome i18n strings use dollar signs as placeholders, so $$ is actually a

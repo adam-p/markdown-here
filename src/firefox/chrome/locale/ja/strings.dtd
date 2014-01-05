@@ -1,6 +1,8 @@
 <!ENTITY app_name "Markdown Here">
-<!ENTITY toggle_button_text "MD Toggle">
-<!ENTITY toggle_button_tooltip "Click to toggle Markdown rendering">
-<!ENTITY toggle_button_tooltip_disabled "このフィールドではレンダリングできません">
 <!ENTITY context_menu_item "Markdownを有効化/無効化">
 <!ENTITY context_menu_item_shortcut "k">
+<!ENTITY forgot_to_render_back_button "戻る">
+<!ENTITY forgot_to_render_send_button "送る">
+<!ENTITY toggle_button_tooltip "Click to toggle Markdown rendering">
+<!ENTITY toggle_button_text "MD Toggle">
+<!ENTITY toggle_button_tooltip_disabled "このフィールドではレンダリングできません">

@@ -62,11 +62,13 @@
   },
   "forgot_to_render_back_button":{
     "message":"戻る",
-    "description":"Text on the Back (cancel) button of the prompt that's shown when it's detected that a user may have forgotten to render the Markdown in their email"
+    "description":"Text on the Back (cancel) button of the prompt that's shown when it's detected that a user may have forgotten to render the Markdown in their email",
+    "inMozDTD": true
   },
   "forgot_to_render_send_button":{
     "message":"送る",
-    "description":"Text on the Send (continue) button of the prompt that's shown when it's detected that a user may have forgotten to render the Markdown in their email"
+    "description":"Text on the Send (continue) button of the prompt that's shown when it's detected that a user may have forgotten to render the Markdown in their email",
+    "inMozDTD": true
   },
   "forgot_to_render_prompt_close_hover":{
     "message":"Dismiss this notification",
