@@ -115,8 +115,8 @@
     "description": "A step in the basic usage instructions"
   },
   "options_page__pretty_cool": {
-    "message": "Start a new email message.",
-    "description": "The message should now look pretty cool. Send it to your friends!"
+    "message": "The message should now look pretty cool. Send it to your friends!",
+    "description": "A step in the basic usage instructions"
   },
   "options_page__resources_title": {
     "message": "Resources and Links",
