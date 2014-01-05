@@ -50,8 +50,8 @@
         <em:localized>
           <Description>
             <em:locale>ja</em:locale>
-            <em:name>Markdown Here(ja)</em:name>
-            <em:description>Write your email in Markdown, then make it pretty.(ja)</em:description>
+            <em:name>Markdown Here</em:name>
+            <em:description>Markdownで電子メールを美しく</em:description>
           </Description>
         </em:localized>
 
