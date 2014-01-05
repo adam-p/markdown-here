@@ -1,7 +1,12 @@
 content   markdown_here                 firefox/chrome/content/
 skin      markdown_here   classic/1.0   firefox/chrome/skin/
-locale    markdown_here   en-US         firefox/chrome/locale/en-US/
+locale    markdown_here   en            firefox/chrome/locale/en/
+locale    markdown_here   ja            firefox/chrome/locale/ja/
 resource  markdown_here_common          common/
+
+# This is a bit of a hack to allow us to get direct access to specific locale
+# string bundles (other than the locale that the browser is set to).
+resource  markdown_here_locale          firefox/chrome/locale/
 
 style chrome://global/content/customizeToolbar.xul chrome://markdown_here/skin/toolbar.css
 

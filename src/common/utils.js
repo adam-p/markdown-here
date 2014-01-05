@@ -515,15 +515,30 @@ function getMozStringBundle() {
   // Adapted from: https://developer.mozilla.org/en-US/docs/Code_snippets/Miscellaneous#Using_string_bundles_from_JavaScript
   // and: https://developer.mozilla.org/en-US/docs/Using_nsISimpleEnumerator
 
-  var stringBundleObj = {};
+  var stringBundleObj = {}, stringBundle, stringBundleEnum, property;
 
-  var stringBundle = Utils.global.Components.classes["@mozilla.org/intl/stringbundle;1"]
+  // First load the English fallback strings
+
+  stringBundle = Utils.global.Components.classes["@mozilla.org/intl/stringbundle;1"]
+                        .getService(Components.interfaces.nsIStringBundleService)
+                        // Notice the explicit locale in this path:
+                        .createBundle("resource://markdown_here_locale/en/strings.properties");
+
+  stringBundleEnum = stringBundle.getSimpleEnumeration();
+  while (stringBundleEnum.hasMoreElements()) {
+    property = stringBundleEnum.getNext().QueryInterface(Components.interfaces.nsIPropertyElement);
+    stringBundleObj[property.key] = property.value;
+  }
+
+  // Then load the strings that are overridden for the current locale
+
+  stringBundle = Utils.global.Components.classes["@mozilla.org/intl/stringbundle;1"]
                         .getService(Components.interfaces.nsIStringBundleService)
                         .createBundle("chrome://markdown_here/locale/strings.properties");
 
-  var stringBundleEnum = stringBundle.getSimpleEnumeration();
+  stringBundleEnum = stringBundle.getSimpleEnumeration();
   while (stringBundleEnum.hasMoreElements()) {
-    var property = stringBundleEnum.getNext().QueryInterface(Components.interfaces.nsIPropertyElement);
+    property = stringBundleEnum.getNext().QueryInterface(Components.interfaces.nsIPropertyElement);
     stringBundleObj[property.key] = property.value;
   }
 

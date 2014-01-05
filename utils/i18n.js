@@ -29,6 +29,21 @@ var locales = fs.readdirSync(LOCALES_DIR);
 locales.forEach(processLocale);
 
 
+// Make sure that the necessary directories and entries are present.
+function checkLocaleSanity(locale) {
+  var mozLocaleDirectory = '../src/firefox/chrome/locale/' + locale;
+  if (!fs.existsSync(mozLocaleDirectory)) {
+    throw new Error('Mozilla locale directory missing: ' + locale);
+  }
+
+  var mozManifestFilename = '../src/chrome.manifest';
+  var mozManifest = fs.readFileSync(mozManifestFilename, 'utf8');
+  if (mozManifest.indexOf('locale') < 0) {
+    throw new Error('Mozilla chrome.manifest missing locale entry: ' + locale);
+  }
+}
+
+
 function resetInstallRdf() {
   // Blow away the generated part of install.rdf
 
@@ -56,6 +71,8 @@ function addEntryToInstallRdf(rdfEntry) {
 
 
 function processLocale(locale) {
+  checkLocaleSanity(locale);
+
   // message.json is authoritative. The Firefox files are derived from it.
   var stringBundle = JSON.parse(fs.readFileSync(LOCALES_DIR + locale + '/messages.json'));
 

@@ -1,0 +1,50 @@
+{
+  "app_name": {
+    "message": "Markdown Here(ja)",
+    "description": "the name of the extension",
+    "inMozDTD": true
+  },
+  "app_slogan": {
+    "message": "Write your email in Markdown, then make it pretty.(ja)",
+    "description": "shown as subtitle for Markdown Here in the browser extensions list"
+  },
+  "toggle_button_text":{
+    "message": "MD Toggle(ja)",
+    "description": "Text shown underneath the render toggle button. Make it as short as possible.",
+    "inMozDTD": true
+  },
+  "toggle_button_tooltip": {
+    "message": "Click to toggle Markdown rendering(ja)",
+    "description": "text shown when user hovers mouse over Markdown Toggle button",
+    "inMozDTD": true
+  },
+  "toggle_button_tooltip_disabled": {
+    "message": "The selected field is not valid for Markdown rendering(ja)",
+    "description": "text shown when user hover mouse over disabled Markdown Toggle button",
+    "inMozDTD": true
+  },
+  "context_menu_item": {
+    "message": "Markdown Toggle(ja)",
+    "description": "Text shown on the context menu.",
+    "inMozDTD": true
+  },
+  "context_menu_item_with_shortcut": {
+    "message": "Mar&kdown Toggle(ja)",
+    "description": "Text shown on the context menu. The '&' comes before the shortcut character."
+  },
+  "context_menu_item_shortcut": {
+    "message": "k",
+    "description": "The shortcut key for the context menu. Must be one of the letters in the context menu item text",
+    "inMozDTD": true
+  },
+  "options_page__page_title": {
+    "message": "Markdown Here Options(ja)"
+  },
+  "options_page__resources_title": {
+    "message": "Resources and Links(ja)",
+    "description": "A section title"
+  },
+  "options_page__basic_usage": {
+    "message": "Basic Usage(ja)"
+  }
+}
