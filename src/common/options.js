@@ -149,10 +149,17 @@ function localize() {
   try {
     $('[data-i18n]').each(function() {
       var messageID = 'options_page__' + $(this).data('i18n');
-      Utils.saferSetInnerHTML(this, Utils.getMessage(messageID));
+      if (this.tagName.toUpperCase() === 'TITLE') {
+        this.innerText = Utils.getMessage(messageID);
+      }
+      else {
+        Utils.saferSetInnerHTML(this, Utils.getMessage(messageID));
+      }
     });
   }
   catch (e) {
+    Utils.consoleLog('localize() failed with:');
+    Utils.consoleLog(e);
     // pass
   }
 }
