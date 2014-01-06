@@ -1,5 +1,5 @@
 /*
- * Copyright Adam Pritchard 2013
+ * Copyright Adam Pritchard 2014
  * MIT License : http://adampritchard.mit-license.org/
  */
 
@@ -242,7 +242,7 @@ function getLocalURL(url) {
 // Makes an asynchrous XHR request for a local file (basically a thin wrapper).
 // `mimetype` is optional. `callback` will be called with the responseText as
 // argument.
-// Throws exception on error. This should never happen.
+// If error occurs, `callback`'s second parameter will be an error.
 function getLocalFile(url, mimetype, callback) {
   if (!callback) {
     // optional mimetype not provided
@@ -255,19 +255,23 @@ function getLocalFile(url, mimetype, callback) {
     xhr.overrideMimeType(mimetype);
   }
   xhr.open('GET', url);
-  xhr.onreadystatechange = function() {
-    if (this.readyState === this.DONE) {
-      // Assume 200 OK -- it's just a local call
-      callback(this.responseText);
-    }
+
+  xhr.onload = function() {
+    callback(this.responseText);
   };
 
   xhr.onerror = function(e) {
-    // We're only requesting local files, so this should not happen.
-    throw e;
+    callback(null, e);
   };
 
-  xhr.send();
+  try {
+    // xhr.send seems to throw on error in Safari, but still calls onerror, so
+    // we'll catch and carry on.
+    xhr.send();
+  }
+  catch(e) {
+    // pass
+  }
 }
 
 
@@ -275,36 +279,40 @@ function getLocalFile(url, mimetype, callback) {
 // Base64-encoded.
 // Intended to be used get the logo image file in a form that can be put in a
 // data-url image element.
-// Throws exception on error. This should never happen.
+// If error occurs, `callback`'s second parameter will be an error.
 function getLocalFileAsBase64(url, callback) {
   var xhr = new Utils.global.XMLHttpRequest();
   xhr.open('GET', url);
   xhr.responseType = 'arraybuffer';
 
   xhr.onload = function() {
-    if (this.readyState === this.DONE) {
-      // Assume 200 OK -- we only use this for local requests
-      var uInt8Array = new Uint8Array(this.response);
-      var i = uInt8Array.length;
-      var binaryString = new Array(i);
-      while (i--)
-      {
-        binaryString[i] = String.fromCharCode(uInt8Array[i]);
-      }
-      var data = binaryString.join('');
-
-      var base64Data = Utils.global.btoa(data);
-
-      callback(base64Data);
+    var uInt8Array = new Uint8Array(this.response);
+    var i = uInt8Array.length;
+    var binaryString = new Array(i);
+    while (i--)
+    {
+      binaryString[i] = String.fromCharCode(uInt8Array[i]);
     }
+    var data = binaryString.join('');
+
+    var base64Data = Utils.global.btoa(data);
+
+    callback(base64Data);
   };
 
   xhr.onerror = function(e) {
     // We're only requesting local files, so this should not happen.
-    throw e;
+    callback(null, e);
   };
 
-  xhr.send();
+  try {
+    // xhr.send seems to throw on error in Safari, but still calls onerror, so
+    // we'll catch and carry on.
+    xhr.send();
+  }
+  catch(e) {
+    // pass
+  }
 }
 
 
@@ -495,21 +503,46 @@ function nextTickFn(callback, context) {
 }
 
 
-if (typeof(chrome) === 'undefined' && typeof(safari) === 'undefined') {
-  var g_mozStringBundle = getMozStringBundle();
-  if (!g_mozStringBundle && Utils.global.setTimeout) {
-    Utils.global.setTimeout(function requestMozStringBundle() {
-      makeRequestToPrivilegedScript(Utils.global.document, {action: 'get-string-bundle'}, function(response) {
-        g_mozStringBundle = response;
-      });
-    }, 0);
-  }
-}
+/*
+ * i18n/l10n
+ */
+/*
+This is a much bigger hassle than it should be. i18n support is great on Chrome,
+a bit of a hassle on Firefox/Thunderbird, and basically nonexistent on Safari.
+
+In Chrome, we can use `chrome.i18n.getMessage` to just get the string we want,
+in either content or background scripts, synchronously and with no extra prep
+work.
+
+In Firefox, we need to load the `strings.properties` string bundle for both the
+current locale and English (our fallback language) and combine them. This can
+only be done from a privileged script. Then we can use the strings. The loading
+is synchronous for the privileged script, but asynchronous for the unprivileged
+script (because it needs to make a request to the privileged script).
+
+In Safari, we need to read in the JSON files for the current locale and English
+(our fallback language) and combine them. This can only be done from a privileged
+script. Then we can use the strings. The loading is asynchronous for both
+privileged and unprivileged scripts (because async XHR is used for the former
+and a request is made to the privileged script for the latter).
+
+It can happen that attempts to access the strings are made before the loading
+has actually occurred. This has been observed on Safari in the MDH Options page.
+This necessitated the addition of `registerStringBundleLoadListener` and
+`triggerStringBundleLoadListeners`, which may be used to ensure that `getMessage`
+calls wait until the loading is complete.
+*/
 
 // Must only be called from a priviledged Mozilla script
 function getMozStringBundle() {
   if (typeof(Components) === 'undefined' || typeof(Components.classes) === 'undefined') {
     return false;
+  }
+
+  // Return a cached bundle, if we have one
+  if (typeof(g_mozStringBundle) !== 'undefined' &&
+      Object.keys(g_mozStringBundle).length > 0) {
+    return g_mozStringBundle;
   }
 
   // Adapted from: https://developer.mozilla.org/en-US/docs/Code_snippets/Miscellaneous#Using_string_bundles_from_JavaScript
@@ -545,6 +578,135 @@ function getMozStringBundle() {
   return stringBundleObj;
 }
 
+// Load the Mozilla string bundle
+if (typeof(chrome) === 'undefined' && typeof(safari) === 'undefined') {
+  var g_mozStringBundle = getMozStringBundle();
+
+  if ((!g_mozStringBundle || Objects.keys(g_mozStringBundle).length === 0) &&
+      Utils.global.setTimeout) {
+    Utils.global.setTimeout(function requestMozStringBundle() {
+      makeRequestToPrivilegedScript(Utils.global.document, {action: 'get-string-bundle'}, function(response) {
+        g_mozStringBundle = response;
+        triggerStringBundleLoadListeners();
+      });
+    }, 0);
+  }
+  else {
+    // g_mozStringBundle is filled in
+    triggerStringBundleLoadListeners();
+  }
+}
+
+
+// Will only succeed when called from a privileged Safari script.
+// `callback(data, err)` is passed a non-null value for err in case of total
+// failure, which should be interpreted as being called from a non-privileged
+// (content) script.
+// Otherwise `data` will contain the string bundle object.
+function getSafariStringBundle(callback) {
+  // Can't use Utils.functionname in this function, since the exports haven't
+  // been set up at the time it's called.
+
+  var stringBundle = {};
+
+  // Return a cached bundle, if we have one
+  if (typeof(g_safariStringBundle) !== 'undefined' &&
+      Object.keys(g_safariStringBundle).length > 0) {
+    nextTickFn(callback)(g_safariStringBundle);
+    return;
+  }
+
+  // Get the English fallback
+  getStringBundle('en', function(data, err) {
+    if (err) {
+      consoleLog('Error getting English string bundle:');
+      consoleLog(err);
+      return callback(null, err);
+    }
+
+    extendBundle(stringBundle, data);
+
+    var locale = Utils.global.navigator.language;
+    if (locale.indexOf('en') === 0) {
+      // The locale is English, nothing more to do
+      return callback(stringBundle, null);
+    }
+
+    // Get the actual locale string bundle
+    getStringBundle(locale, function(data, err) {
+      if (err) {
+        // The locale in navigator.language typically looks like "ja-JP", but
+        // MDH's locale typically looks like "ja".
+        locale = locale.split('-')[0];
+        getStringBundle(locale, function(data, err) {
+          if (err) {
+            // Couldn't find it. We'll just have to use the fallback.
+            consoleLog('Markdown Here has no language support for: ' + locale);
+            return callback(stringBundle);
+          }
+
+          extendBundle(stringBundle, data);
+          return callback(stringBundle);
+        });
+      }
+
+      extendBundle(stringBundle, data);
+      return callback(stringBundle);
+    });
+  });
+
+
+  function getStringBundle(locale, callback) {
+    var url = getLocalURL('/_locales/' + locale + '/messages.json');
+    getLocalFile(url, 'application/json', function(data, err) {
+      if (err) {
+        return callback(null, err);
+      }
+
+      return callback(JSON.parse(data));
+    });
+  }
+
+  function extendBundle(intoBundle, fromObj) {
+    var key;
+    for (key in fromObj) {
+      intoBundle[key] = fromObj[key].message;
+    }
+  }
+}
+
+// Load the Safari string bundle
+if (typeof(safari) !== 'undefined') {
+  var g_safariStringBundle = {};
+  // This is effectively checking if we're calling from a privileged script.
+  // We could instead just try getSafariStringBundle() and check the error, but
+  // that's surely less efficient.
+  if (typeof(safari.application) !== 'undefined') {
+    // calling from a privileged script
+    getSafariStringBundle(function(data, err) {
+      if (err) {
+        consoleLog('Markdown Here: privileged script failed to load string bundle: ' + err);
+        return;
+      }
+      g_safariStringBundle = data;
+      triggerStringBundleLoadListeners();
+    });
+  }
+  else {
+    // Call from the privileged script
+    makeRequestToPrivilegedScript(Utils.global.document, {action: 'get-string-bundle'}, function(response) {
+      if (response) {
+        g_safariStringBundle = response;
+        triggerStringBundleLoadListeners();
+      }
+      else {
+        consoleLog('Markdown Here: content script failed to get string bundle from privileged script');
+      }
+    });
+  }
+}
+
+
 // Get the translated string indicated by `messageID`.
 // Note that there's no support for placeholders as yet.
 // Throws exception if message is not found or if the platform doesn't support
@@ -555,7 +717,13 @@ function getMessage(messageID) {
     message = chrome.i18n.getMessage(messageID);
   }
   else if (typeof(safari) !== 'undefined') {
-    throw new Error('Translation not yet supported in Safari');
+    if (g_safariStringBundle) {
+      message = g_safariStringBundle[messageID];
+    }
+    else {
+      // We don't yet have the string bundle available
+      return '';
+    }
   }
   else { // Mozilla
     if (g_mozStringBundle) {
@@ -574,6 +742,28 @@ function getMessage(messageID) {
   return message;
 }
 
+
+var g_stringBundleLoadListeners = [];
+
+function registerStringBundleLoadListener(callback) {
+  if (typeof(chrome) !== 'undefined' ||
+      (typeof(g_mozStringBundle) === 'object' && Object.keys(g_mozStringBundle).length > 0) ||
+      (typeof(g_safariStringBundle) === 'object' && Object.keys(g_safariStringBundle).length > 0)) {
+    // Already loaded
+    Utils.nextTick(callback);
+    return;
+  }
+
+  g_stringBundleLoadListeners.push(callback);
+}
+
+function triggerStringBundleLoadListeners() {
+  var listener;
+  while (g_stringBundleLoadListeners.length > 0) {
+    listener = g_stringBundleLoadListeners.pop();
+    listener();
+  }
+}
 
 // Expose these functions
 
@@ -595,6 +785,8 @@ Utils.getTopURL = getTopURL;
 Utils.nextTick = nextTick;
 Utils.nextTickFn = nextTickFn;
 Utils.getMozStringBundle = getMozStringBundle;
+Utils.getSafariStringBundle = getSafariStringBundle;
+Utils.registerStringBundleLoadListener = registerStringBundleLoadListener;
 Utils.getMessage = getMessage;
 
 

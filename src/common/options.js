@@ -144,9 +144,7 @@ document.addEventListener('options-iframe-loaded', previewIframeLoaded);
 
 
 function localize() {
-  // i18n/l10n is not yet supported on all of our platforms, so we'll catch the
-  // exception and just continue on.
-  try {
+  Utils.registerStringBundleLoadListener(function localizeHelper() {
     $('[data-i18n]').each(function() {
       var messageID = 'options_page__' + $(this).data('i18n');
       if (this.tagName.toUpperCase() === 'TITLE') {
@@ -156,12 +154,7 @@ function localize() {
         Utils.saferSetInnerHTML(this, Utils.getMessage(messageID));
       }
     });
-  }
-  catch (e) {
-    Utils.consoleLog('localize() failed with:');
-    Utils.consoleLog(e);
-    // pass
-  }
+  });
 }
 
 

@@ -1,5 +1,5 @@
 /*
- * Copyright Adam Pritchard 2013
+ * Copyright Adam Pritchard 2014
  * MIT License : http://adampritchard.mit-license.org/
  */
 
@@ -266,6 +266,13 @@ describe('Utils', function() {
 
       Utils.getLocalFile('../options.html', callback);
     });
+
+    it('should supply an error arg to callback if file not found', function(done) {
+      Utils.getLocalFile('badfilename', function(val, err) {
+        expect(err).to.be.ok;
+        done();
+      });
+    });
   });
 
   describe('getLocalFileAsBase64', function() {
@@ -278,6 +285,13 @@ describe('Utils', function() {
       };
 
       Utils.getLocalFileAsBase64('../images/icon16.png', callback);
+    });
+
+    it('should supply an error arg to callback if file not found', function(done) {
+      Utils.getLocalFile('badfilename', function(val, err) {
+        expect(err).to.be.ok;
+        done();
+      });
     });
   });
 
@@ -431,6 +445,36 @@ describe('Utils', function() {
     it('should throw on bad message ID', function() {
       var fn = _.partial(Utils.getMessage, 'BAADF00D');
       expect(fn).to.throw(Error);
+    });
+  });
+
+  describe('registerStringBundleLoadListener', function() {
+    it('should get called eventually', function(done) {
+      Utils.registerStringBundleLoadListener(done);
+    });
+  });
+
+  describe('getMoz/SafariStringBundle', function() {
+    it('should get the string bundle', function(done) {
+      if (typeof(chrome) !== 'undefined') {
+        // not applicable
+        done();
+        return;
+      }
+      else if (typeof(safari) !== 'undefined') {
+        Utils.getSafariStringBundle(function(data, err) {
+          expect(err).to.not.be.ok;
+          expect(data).to.be.an('object');
+          done();
+        });
+      }
+      else {
+        Utils.getMozStringBundle(function(data, err) {
+          expect(err).to.not.be.ok;
+          expect(data).to.be.an('object');
+          done();
+        });
+      }
     });
   });
 

@@ -14,7 +14,7 @@
     "inMozDTD":true
   },
   "toggle_button_tooltip":{
-    "message":"Click to toggle Markdown rendering",
+    "message":"Click to toggle Markdown rendering(ja)",
     "description":"text shown when user hovers mouse over Markdown Toggle button",
     "inMozDTD":true
   },

@@ -1,5 +1,5 @@
 /*
- * Copyright Adam Pritchard 2012
+ * Copyright Adam Pritchard 2014
  * MIT License : http://adampritchard.mit-license.org/
  */
 
@@ -15,7 +15,8 @@
 /*global module:false*/
 
 // In Firefox/Thunderbird, Utils won't already exist.
-if (typeof(Utils) === 'undefined') {
+if (typeof(Utils) === 'undefined' &&
+    typeof(safari) === 'undefined' && typeof(chrome) === 'undefined') {
   Components.utils.import('resource://markdown_here_common/utils.js');
 }
 
