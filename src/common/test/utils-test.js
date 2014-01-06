@@ -468,12 +468,19 @@ describe('Utils', function() {
           done();
         });
       }
-      else {
-        Utils.getMozStringBundle(function(data, err) {
-          expect(err).to.not.be.ok;
+      else { // Mozilla
+        var data = Utils.getMozStringBundle();
+        if (data) {
           expect(data).to.be.an('object');
           done();
-        });
+        }
+        else {
+          // HACK: make a call to the privileged script
+          Utils.makeRequestToPrivilegedScript(document, {action: 'get-string-bundle'}, function(response) {
+            expect(response).to.be.an('object');
+            done();
+          });
+        }
       }
     });
   });

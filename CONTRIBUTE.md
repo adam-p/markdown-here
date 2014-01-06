@@ -11,9 +11,15 @@ But the general idea is: It's not hard to get involved and help out. Feel free t
 * Website: http://markdown-here.com
 * Email me: pritchard.adam@gmail.com
 
+## Translation
+
+We use Crowdin for crowd-sourced translation. If you visit the [Markdown Here Crowdin project page](https://crowdin.net/project/markdown-here) you'll find that it's quite easy to contribute. Feel free to add new translations, improve existing ones, or even create new language categories.
+
+If you do make any translation changes, or if you have any questions or problems, please post to the MDH Google Group or create a Github issue. (I can't figure out a way to get notified when translations are updated, so you'll have to let me know that there are new ones to integrate.)
 
 ## Contributors
 
 ### Translators
 
-* [Alice](https://github.com/lambdalice)
+* [lambdalice](https://github.com/lambdalice)
+  - Provided an entire Japanese translation and forced the MDH i18n work to get done.
