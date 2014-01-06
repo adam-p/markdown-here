@@ -257,20 +257,30 @@ function getLocalFile(url, mimetype, callback) {
   xhr.open('GET', url);
 
   xhr.onload = function() {
-    callback(this.responseText);
+    if (callback) {
+     callback(this.responseText);
+     callback = null;
+    }
   };
 
   xhr.onerror = function(e) {
-    callback(null, e);
+    if (callback) {
+      callback(null, e);
+      callback = null;
+    }
   };
 
   try {
-    // xhr.send seems to throw on error in Safari, but still calls onerror, so
-    // we'll catch and carry on.
+    // On some platforms, xhr.send throws an error if the url is not found.
+    // On some platforms, it will call onerror and on some it won't.
     xhr.send();
   }
   catch(e) {
-    // pass
+    if (callback) {
+      callback(null, e);
+      callback = null;
+      return;
+    }
   }
 }
 
@@ -297,21 +307,30 @@ function getLocalFileAsBase64(url, callback) {
 
     var base64Data = Utils.global.btoa(data);
 
-    callback(base64Data);
+    if (callback) {
+      callback(base64Data);
+      callback = null;
+    }
   };
 
   xhr.onerror = function(e) {
-    // We're only requesting local files, so this should not happen.
-    callback(null, e);
+    if (callback) {
+      callback(null, e);
+      callback = null;
+    }
   };
 
   try {
-    // xhr.send seems to throw on error in Safari, but still calls onerror, so
-    // we'll catch and carry on.
+    // On some platforms, xhr.send throws an error if the url is not found.
+    // On some platforms, it will call onerror and on some it won't.
     xhr.send();
   }
   catch(e) {
-    // pass
+    if (callback) {
+      callback(null, e);
+      callback = null;
+      return;
+    }
   }
 }
 
