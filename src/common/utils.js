@@ -533,6 +533,29 @@ This necessitated the addition of `registerStringBundleLoadListener` and
 calls wait until the loading is complete.
 */
 
+var g_stringBundleLoadListeners = [];
+
+function registerStringBundleLoadListener(callback) {
+  if (typeof(chrome) !== 'undefined' ||
+      (typeof(g_mozStringBundle) === 'object' && Object.keys(g_mozStringBundle).length > 0) ||
+      (typeof(g_safariStringBundle) === 'object' && Object.keys(g_safariStringBundle).length > 0)) {
+    // Already loaded
+    Utils.nextTick(callback);
+    return;
+  }
+
+  g_stringBundleLoadListeners.push(callback);
+}
+
+function triggerStringBundleLoadListeners() {
+  var listener;
+  while (g_stringBundleLoadListeners.length > 0) {
+    listener = g_stringBundleLoadListeners.pop();
+    listener();
+  }
+}
+
+
 // Must only be called from a priviledged Mozilla script
 function getMozStringBundle() {
   if (typeof(Components) === 'undefined' || typeof(Components.classes) === 'undefined') {
@@ -582,7 +605,7 @@ function getMozStringBundle() {
 if (typeof(chrome) === 'undefined' && typeof(safari) === 'undefined') {
   var g_mozStringBundle = getMozStringBundle();
 
-  if ((!g_mozStringBundle || Objects.keys(g_mozStringBundle).length === 0) &&
+  if ((!g_mozStringBundle || Object.keys(g_mozStringBundle).length === 0) &&
       Utils.global.setTimeout) {
     Utils.global.setTimeout(function requestMozStringBundle() {
       makeRequestToPrivilegedScript(Utils.global.document, {action: 'get-string-bundle'}, function(response) {
@@ -742,28 +765,6 @@ function getMessage(messageID) {
   return message;
 }
 
-
-var g_stringBundleLoadListeners = [];
-
-function registerStringBundleLoadListener(callback) {
-  if (typeof(chrome) !== 'undefined' ||
-      (typeof(g_mozStringBundle) === 'object' && Object.keys(g_mozStringBundle).length > 0) ||
-      (typeof(g_safariStringBundle) === 'object' && Object.keys(g_safariStringBundle).length > 0)) {
-    // Already loaded
-    Utils.nextTick(callback);
-    return;
-  }
-
-  g_stringBundleLoadListeners.push(callback);
-}
-
-function triggerStringBundleLoadListeners() {
-  var listener;
-  while (g_stringBundleLoadListeners.length > 0) {
-    listener = g_stringBundleLoadListeners.pop();
-    listener();
-  }
-}
 
 // Expose these functions
 

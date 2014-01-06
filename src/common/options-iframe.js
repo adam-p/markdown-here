@@ -18,8 +18,6 @@ function onLoad() {
     document.body.appendChild(contentscript);
   }
 
-  localize();
-
   // The body of the iframe needs to have a (collapsed) selection range for
   // Markdown Here to work (simulating focus/cursor).
   var range = document.createRange();
@@ -28,25 +26,34 @@ function onLoad() {
   sel.removeAllRanges();
   sel.addRange(range);
 
-  // Let our owner page know that we've loaded.
-  var e = top.document.createEvent('HTMLEvents');
-  e.initEvent('options-iframe-loaded', true, true);
-  top.document.dispatchEvent(e);
+  // This is an asynchrous call that must complete before we notify the parent
+  // window that we've completed loading.
+  localize();
 }
 document.addEventListener('DOMContentLoaded', onLoad, false);
 
 
-// Copied from options.js
+// Basically copied from options.js
 function localize() {
-  // i18n/l10n is not yet supported on all of our platforms, so we'll catch the
-  // exception and just continue on.
-  try {
+  Utils.registerStringBundleLoadListener(function localizeHelper() {
     $('[data-i18n]').each(function() {
       var messageID = 'options_page__' + $(this).data('i18n');
-      Utils.saferSetInnerHTML(this, Utils.getMessage(messageID));
+      if (this.tagName.toUpperCase() === 'TITLE') {
+        this.innerText = Utils.getMessage(messageID);
+      }
+      else {
+        Utils.saferSetInnerHTML(this, Utils.getMessage(messageID));
+      }
     });
-  }
-  catch (e) {
-    // pass
-  }
+
+    notifyIframeLoaded();
+  });
+}
+
+
+function notifyIframeLoaded() {
+  // Let our owner page know that we've loaded.
+  var e = top.document.createEvent('HTMLEvents');
+  e.initEvent('options-iframe-loaded', true, true);
+  top.document.dispatchEvent(e);
 }

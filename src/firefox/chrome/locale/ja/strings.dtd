@@ -3,6 +3,6 @@
 <!ENTITY context_menu_item_shortcut "k">
 <!ENTITY forgot_to_render_back_button "戻る">
 <!ENTITY forgot_to_render_send_button "送る">
-<!ENTITY toggle_button_tooltip "Click to toggle Markdown rendering">
-<!ENTITY toggle_button_text "MD Toggle">
+<!ENTITY toggle_button_text "MD 切り替え">
+<!ENTITY toggle_button_tooltip "クリックでMarkdownにレンダリング">
 <!ENTITY toggle_button_tooltip_disabled "このフィールドではレンダリングできません">

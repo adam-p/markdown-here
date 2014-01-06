@@ -26,7 +26,14 @@ var LOCALES_DIR = '../src/_locales/';
 
 var locales = fs.readdirSync(LOCALES_DIR);
 
-locales.forEach(processLocale);
+locales.forEach(function(locale) {
+  // Skip .DS_Store. No locale dirs should start with '.'
+  if (locale[0] === '.') {
+    return;
+  }
+
+  processLocale(locale);
+});
 
 
 // Make sure that the necessary directories and entries are present.

@@ -9,12 +9,12 @@
     "description":"shown as subtitle for Markdown Here in the browser extensions list"
   },
   "toggle_button_text":{
-    "message":"MD Toggle",
+    "message":"MD 切り替え",
     "description":"Text shown underneath the render toggle button. Make it as short as possible.",
     "inMozDTD":true
   },
   "toggle_button_tooltip":{
-    "message":"Click to toggle Markdown rendering(ja)",
+    "message":"クリックでMarkdownにレンダリング",
     "description":"text shown when user hovers mouse over Markdown Toggle button",
     "inMozDTD":true
   },
@@ -63,15 +63,15 @@
   "forgot_to_render_back_button":{
     "message":"戻る",
     "description":"Text on the Back (cancel) button of the prompt that's shown when it's detected that a user may have forgotten to render the Markdown in their email",
-    "inMozDTD": true
+    "inMozDTD":true
   },
   "forgot_to_render_send_button":{
     "message":"送る",
     "description":"Text on the Send (continue) button of the prompt that's shown when it's detected that a user may have forgotten to render the Markdown in their email",
-    "inMozDTD": true
+    "inMozDTD":true
   },
   "forgot_to_render_prompt_close_hover":{
-    "message":"Dismiss this notification",
+    "message":"この通知を無視",
     "description":"Text that shows when the user hovers over the 'X' that will close the prompt"
   },
   "upgrade_notification_text":{
@@ -79,15 +79,15 @@
     "description":"Text on the notification shown when Markdown Here has been updated"
   },
   "upgrade_notification_changes_tooltip":{
-    "message":"Click to the see the changes in this release",
+    "message":"クリックでこのリリースでの変更点を参照",
     "description":"Tooltip text on the link that opens the changes list"
   },
   "upgrade_notification_dismiss_tooltip":{
-    "message":"Dismiss this notification",
+    "message":"この通知を無視",
     "description":"Tooltip text on the link that dismisses the notification"
   },
   "nothing_to_render":{
-    "message":"Nothing found to render or revert",
+    "message":"レンダリングするものも元に戻すものも見つかりませんでした。",
     "description":"Error message shown to user if there's nothing found to revert or render."
   },
   "unrendering_modified_markdown_warning":{
@@ -152,7 +152,7 @@
     "message":"Markdown HereがChrome、 Firefox、 Thunderbird、 Postbox、 Safari、 Opera、 Gmail、 Yahoo、 Hotmail、 Blogger、 Evernote、などなどでの動作を保つのに役立ってるものを知りたいかい？ <strong>コーヒーだ!<\/strong>"
   },
   "options_page__other_donation_options":{
-    "message":"Other donation options",
+    "message":"その他の寄付方法",
     "description":"Link to a page that provides other ways to donate"
   },
   "options_page__primary_css_title":{
@@ -307,12 +307,15 @@
   "options_page__contributing_1":{
     "message":"<strong>もしメールにコードブロックを書いたことがあるなら、Markdown Hereをより良くすることができます。<\/strong> <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/blob\/development\/CONTRIBUTE.md\" target=\"_blank\">CONTRIBUTE.md<\/a>"
   },
+  "options_page__contributing_2":{
+    "message":"翻訳への協力もぜひお願いします。あなたの言語でMarkdown Hereを\n使えるようにしてください。 <a href=\"https:\/\/crowdin.net\/project\/markdown-here\" target=\"_blank\">Crowdin のページ<\/a> で翻訳に参加することができます。"
+  },
   "options_page__footer_1":{
     "message":"<em>Markdown Here<\/em> はオープンソースです。 質問をしたり、バグを報告したり、機能追加の要望をしたり、開発に協力するには、 <a target=\"_blank\" href=\"https:\/\/github.com\/adam-p\/markdown-here\">Github のプロジェクトページ<\/a> か <a target=\"_blank\" href=\"https:\/\/groups.google.com\/forum\/?fromgroups=#!forum\/markdown-here\">Google Group<\/a> を訪れてください。",
     "description":"part of the page footer text"
   },
   "options_page__footer_2":{
-    "message":"Created by <a target=\"_blank\" href=\"http:\/\/adam-p.github.com\/\">Adam Pritchard<\/a>.",
+    "message":"このソフトウェアは <a target=\"_blank\" href=\"http:\/\/adam-p.github.com\/\">Adam Pritchard<\/a> によって開発されました。",
     "description":"part of the page footer text"
   },
   "options_page__changes_saved":{
@@ -328,7 +331,7 @@
     "description":"Indicates the syntax highlighting theme that the user is currently using"
   },
   "new_changelist_items":{
-    "message":"NEW",
+    "message":"新しい機能",
     "description":"Used to highlight the part of the changelist that is new"
   }
 }
