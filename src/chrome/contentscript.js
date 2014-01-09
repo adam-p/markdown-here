@@ -61,7 +61,7 @@ function requestHandler(request, sender, sendResponse) {
     return false;
   }
 }
-chrome.runtime.onMessage.addListener(requestHandler);
+chrome.extension.onMessage.addListener(requestHandler);
 
 
 // The rendering service provided to the content script.
