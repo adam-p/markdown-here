@@ -62,7 +62,7 @@ chrome.contextMenus.create({
 
 // Handle rendering requests from the content script.
 // See the comment in markdown-render.js for why we do this.
-chrome.runtime.onMessage.addListener(function(request, sender, responseCallback) {
+chrome.extension.onMessage.addListener(function(request, sender, responseCallback) {
   // The content script can load in a not-real tab (like the search box), which
   // has an invalid `sender.tab` value. We should just ignore these pages.
   if (typeof(sender.tab) === 'undefined' ||
