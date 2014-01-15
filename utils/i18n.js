@@ -103,10 +103,10 @@ function processLocale(locale) {
 
     message = message.replace(/\\/g, '\\\\').replace(/\n/g, '\\n').replace(/"/g, '\\"');
 
-    fs.appendFile(mozPropertiesFilename, key + '=' + message + '\n');
+    fs.appendFileSync(mozPropertiesFilename, key + '=' + message + '\n');
 
     if (stringBundle[key]['inMozDTD']) {
-      fs.appendFile(mozDtdFilename, '<!ENTITY ' + key + ' "' + message + '">\n' );
+      fs.appendFileSync(mozDtdFilename, '<!ENTITY ' + key + ' "' + message + '">\n' );
     }
   }
 
