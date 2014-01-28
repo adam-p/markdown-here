@@ -241,7 +241,7 @@
     "description":"Please do not translate {mathcode} and {urlmathcode}"
   },
   "options_page__tex_math_customization_6":{
-    "message":"<code>&lt;img&gt;<\/code> タグをカスタマイズした場合。 <code>alt<\/code> できれば属性で人間が読める説明を加えてください (たとえば: <code>{mathcode}<\/code>)。 この値はメールをプレーンテキストとして読む際に代わりに表示され (Gmail や Thunderbird から送った場合) 、目が不自由な方のための文章読み上げ機能で使われます。",
+    "message":"<code>&lt;img&gt;<\/code> タグをカスタマイズした場合。 できれば<code>alt<\/code>属性で人間が読める説明を加えてください (たとえば: <code>{mathcode}<\/code>)。 この値はメールをプレーンテキストとして読む際に代わりに表示され (Gmail や Thunderbird から送った場合) 、目が不自由な方のための文章読み上げ機能で使われます。",
     "description":"Please do not translate {mathcode} and {urlmathcode}"
   },
   "options_page__hotkey_title":{
@@ -333,5 +333,15 @@
   "new_changelist_items":{
     "message":"新しい機能",
     "description":"Used to highlight the part of the changelist that is new"
+  },
+  "options_page__header_anchors_enabled_label":{
+    "message":"<b>ヘッダーにアンカーリンクを自動で設定する<\/b>",
+    "description":"Label for the checkbox that enables the automatic header anchors feature. This means that an 'anchor' is created at every heading (H1, H2, etc.) in the user's Markdown. The user can then create links that will jump to these anchors, like in the table of contents of a document."
+  },
+  "options_page__header_anchors_enabled_1":{
+    "message":"文書に目次やその他の内部リンクを設置したい場合に便利です。<a href=\"https:\/\/github.com\/adam-p\/markdown-here\/wiki\/Tips-and-Tricks#wiki-header-anchors\" target=\"_blank\">Wikiにて使い方を確認してください。<\/a>"
+  },
+  "options_page__header_anchors_enabled_2":{
+    "message":"<a href=\"https:\/\/github.com\/adam-p\/markdown-here\/issues\/155\" target=\"_blank\">Thunderbird で見た目が汚くなる<\/a>ため、デフォルトでは無効にされています(また、ほとんどの人はこの機能を必要としないでしょう)。"
   }
 }
