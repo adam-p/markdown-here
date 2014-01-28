@@ -19,6 +19,11 @@ If you do make any translation changes, or if you have any questions or problems
 
 ## Contributors
 
+* [Emanuele D'Osualdo](https://github.com/bordaigorl) ([TeX math rendering](https://github.com/adam-p/markdown-here/issues/26))
+
+* [Dustin Engstrom](https://github.com/engstrom) ([PR #151](https://github.com/adam-p/markdown-here/pull/151))
+
+
 ### Translators
 
 * [lambdalice](https://github.com/lambdalice)
