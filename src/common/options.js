@@ -14,7 +14,7 @@
 
 var cssEdit, cssSyntaxEdit, cssSyntaxSelect, rawMarkdownIframe, savedMsg,
     mathEnable, mathEdit, hotkeyShift, hotkeyCtrl, hotkeyAlt, hotkeyKey,
-    forgotToRenderCheckEnabled, loaded = false;
+    forgotToRenderCheckEnabled, headerAnchorsEnabled, loaded = false;
 
 function onLoad() {
   var xhr;
@@ -37,6 +37,7 @@ function onLoad() {
   hotkeyAlt = document.getElementById('hotkey-alt');
   hotkeyKey = document.getElementById('hotkey-key');
   forgotToRenderCheckEnabled = document.getElementById('forgot-to-render-check-enabled');
+  headerAnchorsEnabled = document.getElementById('header-anchors-enabled');
 
   //
   // Syntax highlighting styles and selection
@@ -82,6 +83,8 @@ function onLoad() {
     hotkeyChangeHandler();
 
     forgotToRenderCheckEnabled.checked = prefs['forgot-to-render-check-enabled'];
+
+    headerAnchorsEnabled.checked = prefs['header-anchors-enabled'];
 
     // Start watching for changes to the styles.
     setInterval(checkChange, 100);
@@ -183,7 +186,7 @@ function checkChange() {
         cssEdit.value + cssSyntaxEdit.value +
         mathEnable.checked + mathEdit.value +
         hotkeyShift.checked + hotkeyCtrl.checked + hotkeyAlt.checked + hotkeyKey.value +
-        forgotToRenderCheckEnabled.checked;
+        forgotToRenderCheckEnabled.checked + headerAnchorsEnabled.checked;
 
   if (newOptions !== lastOptions) {
     // CSS has changed.
@@ -212,7 +215,8 @@ function checkChange() {
                       altKey: hotkeyAlt.checked,
                       key: hotkeyKey.value
                     },
-          'forgot-to-render-check-enabled': forgotToRenderCheckEnabled.checked
+          'forgot-to-render-check-enabled': forgotToRenderCheckEnabled.checked,
+          'header-anchors-enabled': headerAnchorsEnabled.checked
         },
         function() {
           updateMarkdownRender();

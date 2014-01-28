@@ -333,5 +333,15 @@
   "new_changelist_items": {
     "message": "NEW",
     "description": "Used to highlight the part of the changelist that is new"
+  },
+  "options_page__header_anchors_enabled_label": {
+    "message": "<b>Enable automatic header anchors.</b>",
+    "description": "Label for the checkbox that enables the automatic header anchors feature. This means that an 'anchor' is created at every heading (H1, H2, etc.) in the user's Markdown. The user can then create links that will jump to these anchors, like in the table of contents of a document."
+  },
+  "options_page__header_anchors_enabled_1": {
+    "message": "This is great if you want to put a table of contents or other internal links into your content. <a href=\"https://github.com/adam-p/markdown-here/wiki/Tips-and-Tricks#wiki-header-anchors\" target=\"_blank\">Learn about how to use it in the MDH wiki.</a>"
+  },
+  "options_page__header_anchors_enabled_2": {
+    "message": "It's disabled by default because it <a href=\"https://github.com/adam-p/markdown-here/issues/155\" target=\"_blank\">creates visual noise in Thunderbird</a>. (And most people probably won't use the feature.)"
   }
 }
