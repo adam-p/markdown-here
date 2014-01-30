@@ -1,11 +1,11 @@
 Change Log
 ==========
 
-2014-01-??: v2.10.0
+2014-01-29: v2.10.0
 -------------------
 
 * Markdown Here has been **translated into Japanese**! It's also **ready to be translated into your language**, so please take a look at [CONTRIBUTE.md](https://github.com/adam-p/markdown-here/blob/development/CONTRIBUTE.md) and our [Crowdin project](https://crowdin.net/project/markdown-here). Getting involved is super easy.
-  * Huge thanks to [lambdaalice](https://github.com/lambdalice), who provided a [full Japanese translation](https://groups.google.com/forum/#!topic/markdown-here/2XoUrKY_CpQ) out of the blue, forcing me to [do the work](https://github.com/adam-p/markdown-here/issues/143) to be able to use it. 
+  * Huge thanks to [lambdaalice](https://github.com/lambdalice), who provided a [full Japanese translation](https://groups.google.com/forum/#!topic/markdown-here/2XoUrKY_CpQ) out of the blue, forcing me to [do the work](https://github.com/adam-p/markdown-here/issues/143) to be able to use it.
 
 * The **automatic addition of anchors to headings** is now an option and **disabled by default**. Guido Hoermann quite rightly [pointed out](https://groups.google.com/d/msg/markdown-here/eaq1JoNhyws/s02CV8rTJ30J) that it creates annoying visual noise in Thunderbird. It's probably not used enough to justify being enabled by default, and it's very easy to re-enable it (bottom of the options page).
 
