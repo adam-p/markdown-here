@@ -57,6 +57,10 @@
 
 <!-- /i18n -->
 
+        <!-- There also needs to be a top-level copy of these fields. -->
+        <em:name>Markdown Here</em:name>
+        <em:description>Write your email in Markdown, then make it pretty.</em:description>
+
         <em:iconURL>resource://markdown_here_common/images/icon128.png</em:iconURL>
         <em:homepageURL>https://github.com/adam-p/markdown-here</em:homepageURL>
 
