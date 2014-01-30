@@ -705,6 +705,10 @@ function getSafariStringBundle(callback) {
         return callback(null, err);
       }
 
+      // Chrome's messages.json uses "$" as placeholders and "$$" as an explicit
+      // "$". We're not yet using placeholders, so we'll just convert double to singles.
+      data = data.replace(/\$\$/g, '$');
+
       return callback(JSON.parse(data));
     });
   }
