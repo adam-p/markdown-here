@@ -128,6 +128,10 @@ a.anchor {
   font-size: 0.6em;
 }
 
+.donation-cryptocoin-address {
+  font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+}
+
 /*
  * Live demo styles
  */
