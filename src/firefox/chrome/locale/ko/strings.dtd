@@ -1,0 +1,8 @@
+<!ENTITY app_name "Markdown Here">
+<!ENTITY context_menu_item "마크다운 토글">
+<!ENTITY context_menu_item_shortcut "k">
+<!ENTITY forgot_to_render_back_button "뒤로">
+<!ENTITY forgot_to_render_send_button "보내기">
+<!ENTITY toggle_button_text "마크다운 토글">
+<!ENTITY toggle_button_tooltip "Click to toggle Markdown rendering">
+<!ENTITY toggle_button_tooltip_disabled "The selected field is not valid for Markdown rendering">

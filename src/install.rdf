@@ -55,6 +55,14 @@
           </Description>
         </em:localized>
 
+        <em:localized>
+          <Description>
+            <em:locale>ko</em:locale>
+            <em:name>Markdown Here</em:name>
+            <em:description>Write your email in Markdown, then make it pretty.</em:description>
+          </Description>
+        </em:localized>
+
 <!-- /i18n -->
 
         <!-- There also needs to be a top-level copy of these fields. -->

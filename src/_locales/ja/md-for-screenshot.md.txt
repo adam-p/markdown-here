@@ -1,0 +1,35 @@
+## 楽しいMarkdownのスクリーンショット
+
+*Markdown Here* は、電子メールを Markdown で書いて送る前にレンダリングできる Google Chrome と Firefox、 Thuderbird の拡張機能です。
+
+* Markdown は **かっこいい**。 `コード` を内部に埋め込めます。
+* [リンク](https://github.com/adam-p/markdown-here)を貼るのも簡単。
+* 文章を綺麗に配置したい？  **それと** サブリストも？
+  1. はい、
+  2. できます。
+
+実際にあったレビューを引用してみましょう：
+
+> まさに私が必要としていたものです。 電子メールで面倒くさいことなしにMarkdownを使えます。
+
+### シンタックスハイライティング：超イカしてる
+
+ちょっとした JavaScript：
+
+```javascript
+alert('Markdownだよ!');
+```
+
+ちょっと変わった例 ― diff:
+
+```diff
+diff --git a/src/common/markdown-here.js b/src/common/markdown-here.js
+index 24dcb97..20c36a1 100644
+--- a/src/common/markdown-here.js
++++ b/src/common/markdown-here.js
+@@ -201,12 +179,14 @@ function makeStylesExplicit(wrapperElem, css) {
+-        applyStyleToElement(rule.style, selectorMatches[j]);
++        styleAttr = selectorMatches[j].getAttribute('style') || '';
++        styleAttr += rule.style.cssText;
++        selectorMatches[j].setAttribute('style', styleAttr);
+```
