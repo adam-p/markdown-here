@@ -30,23 +30,17 @@ describe('Markdown-Render', function() {
       expect(MarkdownRender.markdownRender('', userprefs, marked, hljs)).to.equal('');
     });
 
-    // Busted due to https://github.com/adam-p/markdown-here/issues/51, which
-    // is busted due to https://github.com/chjj/marked/issues/56
-    it('should NOT correctly handle links with URL text (busted due to issue #51)', function() {
+    // Test the fix for https://github.com/adam-p/markdown-here/issues/51
+    it('should correctly handle links with URL text', function() {
       var s = '[http://example1.com](http://example2.com)';
-
-      // Real target
-      //var target = '<a href="http://example1.com>http://example2.com</a>';
-      var target = '<a href="http://example1.com">http://example1.com</a>';
+      var target = '<a href="http://example2.com">http://example1.com</a>';
       expect(MarkdownRender.markdownRender(s, userprefs, marked, hljs)).to.contain(target);
     });
 
-    it('should NOT quite correctly handle pre-formatted links with URL text (busted due to issue #51)', function() {
+    // Test the fix for https://github.com/adam-p/markdown-here/issues/51
+    it('should quite correctly handle pre-formatted links with URL text', function() {
       var s = '<a href="http://example1.com">http://example2.com</a>';
-
-      // Real target
-      //var target = '<a href="http://example1.com>http://example2.com</a>';
-      var target = '<a href="http://example1.com"><a href="http://example2.com">http://example2.com</a></a>';
+      var target = '<a href="http://example1.com">http://example2.com</a>';
       expect(MarkdownRender.markdownRender(s, userprefs, marked, hljs)).to.contain(target);
     });
 
@@ -197,23 +191,16 @@ describe('Markdown-Render', function() {
       expect(fullRender('')).to.equal('');
     });
 
-    // Busted due to https://github.com/adam-p/markdown-here/issues/51, which
-    // is busted due to https://github.com/chjj/marked/issues/56
-    it('should NOT correctly handle links with URL text (busted due to issue #51)', function() {
+    // Check fix for https://github.com/adam-p/markdown-here/issues/51, which
+    it('should correctly handle links with URL text', function() {
       var s = '[http://example1.com](http://example2.com)';
-
-      // Real target
-      //var target = '<a href="http://example1.com>http://example2.com</a>';
-      var target = '<a href="http://example1.com">http://example1.com</a>';
+      var target = '<a href="http://example2.com">http://example1.com</a>';
       expect(fullRender(s)).to.contain(target);
     });
 
-    it('should NOT quite correctly handle pre-formatted links with URL text (busted due to issue #51)', function() {
-      var s = '<a href="http://example1.com">http://example2.com</a>';
-
-      // Real target
-      //var target = '<a href="http://example1.com>http://example2.com</a>';
-      var target = '<a href="http://example1.com"><a href="http://example2.com">http://example2.com</a></a>';
+    it('should quite correctly handle pre-formatted links with URL text', function() {
+      var s = '<a href="http://example2.com">http://example1.com</a>';
+      var target = '<a href="http://example2.com">http://example1.com</a>';
       expect(fullRender(s)).to.contain(target);
     });
 
