@@ -118,7 +118,8 @@ var ChromeOptionsStore = {
     'math-value': '<img src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}" alt="{mathcode}">',
     'hotkey': { shiftKey: false, ctrlKey: true, altKey: true, key: 'M' },
     'forgot-to-render-check-enabled': true,
-    'header-anchors-enabled': false
+    'header-anchors-enabled': false,
+    'gfm-line-breaks-enabled': true
   },
 
   // Stored string pieces look like: {'key##0': 'the quick ', 'key##1': 'brown fox'}
@@ -279,7 +280,8 @@ var MozillaOptionsStore = {
     'hotkey': { shiftKey: false, ctrlKey: true, altKey: true, key: 'M' },
     'local-first-run': true,
     'forgot-to-render-check-enabled': true,
-    'header-anchors-enabled': false
+    'header-anchors-enabled': false,
+    'gfm-line-breaks-enabled': true
   },
 
   // This is called both from content and background scripts, and we need vastly
@@ -444,7 +446,8 @@ var SafariOptionsStore = {
     'math-value': '<img src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}" alt="{mathcode}">',
     'hotkey': { shiftKey: false, ctrlKey: true, altKey: true, key: 'M' },
     'forgot-to-render-check-enabled': true,
-    'header-anchors-enabled': false
+    'header-anchors-enabled': false,
+    'gfm-line-breaks-enabled': true
   }
 };
 

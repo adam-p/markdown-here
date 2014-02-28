@@ -14,7 +14,8 @@
 
 var cssEdit, cssSyntaxEdit, cssSyntaxSelect, rawMarkdownIframe, savedMsg,
     mathEnable, mathEdit, hotkeyShift, hotkeyCtrl, hotkeyAlt, hotkeyKey,
-    forgotToRenderCheckEnabled, headerAnchorsEnabled, loaded = false;
+    forgotToRenderCheckEnabled, headerAnchorsEnabled, gfmLineBreaksEnabled,
+    loaded = false;
 
 function onLoad() {
   var xhr;
@@ -38,6 +39,7 @@ function onLoad() {
   hotkeyKey = document.getElementById('hotkey-key');
   forgotToRenderCheckEnabled = document.getElementById('forgot-to-render-check-enabled');
   headerAnchorsEnabled = document.getElementById('header-anchors-enabled');
+  gfmLineBreaksEnabled = document.getElementById('gfm-line-breaks-enabled');
 
   //
   // Syntax highlighting styles and selection
@@ -85,6 +87,8 @@ function onLoad() {
     forgotToRenderCheckEnabled.checked = prefs['forgot-to-render-check-enabled'];
 
     headerAnchorsEnabled.checked = prefs['header-anchors-enabled'];
+
+    gfmLineBreaksEnabled.checked = prefs['gfm-line-breaks-enabled'];
 
     // Start watching for changes to the styles.
     setInterval(checkChange, 100);
@@ -186,7 +190,8 @@ function checkChange() {
         cssEdit.value + cssSyntaxEdit.value +
         mathEnable.checked + mathEdit.value +
         hotkeyShift.checked + hotkeyCtrl.checked + hotkeyAlt.checked + hotkeyKey.value +
-        forgotToRenderCheckEnabled.checked + headerAnchorsEnabled.checked;
+        forgotToRenderCheckEnabled.checked + headerAnchorsEnabled.checked +
+        gfmLineBreaksEnabled.checked;
 
   if (newOptions !== lastOptions) {
     // CSS has changed.
@@ -216,7 +221,8 @@ function checkChange() {
                       key: hotkeyKey.value
                     },
           'forgot-to-render-check-enabled': forgotToRenderCheckEnabled.checked,
-          'header-anchors-enabled': headerAnchorsEnabled.checked
+          'header-anchors-enabled': headerAnchorsEnabled.checked,
+          'gfm-line-breaks-enabled': gfmLineBreaksEnabled.checked
         },
         function() {
           updateMarkdownRender();

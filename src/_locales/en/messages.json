@@ -343,5 +343,9 @@
   },
   "options_page__header_anchors_enabled_2": {
     "message": "It's disabled by default because it <a href=\"https://github.com/adam-p/markdown-here/issues/155\" target=\"_blank\">creates visual noise in Thunderbird</a>. (And most people probably won't use the feature.)"
+  },
+  "options_page__gfm_line_breaks_enabled_label": {
+    "message": "<b>Enable GFM line breaks.</b>",
+    "description": "Label for the checkbox that enables the support of 'Github-flavored Markdown' line breaks."
   }
 }

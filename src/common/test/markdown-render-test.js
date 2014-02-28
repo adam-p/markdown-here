@@ -22,7 +22,8 @@ describe('Markdown-Render', function() {
       userprefs = {
         'math-value': null,
         'math-enabled': false,
-        'header-anchors-enabled': false
+        'header-anchors-enabled': false,
+        'gfm-line-breaks-enabled': true
       };
     });
 
@@ -166,6 +167,24 @@ describe('Markdown-Render', function() {
       // And should not break headers or m-dashes
       md = 'Arrows\n==\nAnd friends\n--\n--> <-- <--> ==> <== <==> -- m-dash';
       target = '<h1 id="arrows">Arrows</h1>\n<h2 id="and-friends">And friends</h2>\n<p>→ ← ↔ ⇒ ⇐ ⇔ — m-dash</p>\n';
+      expect(MarkdownRender.markdownRender(md, userprefs, marked, hljs)).to.equal(target);
+    });
+
+    // Test issue #103: option to disable GFM line breaks
+    it('should use GFM line breaks when enabled', function() {
+      userprefs['gfm-line-breaks-enabled'] = true;
+
+      var md = 'aaa\nbbb\nccc';
+      var target = '<p>aaa<br>bbb<br>ccc</p>\n';
+      expect(MarkdownRender.markdownRender(md, userprefs, marked, hljs)).to.equal(target);
+    });
+
+    // Test issue #103: option to disable GFM line breaks
+    it('should not use GFM line breaks when disabled', function() {
+      userprefs['gfm-line-breaks-enabled'] = false;
+
+      var md = 'aaa\nbbb\nccc';
+      var target = '<p>aaa\nbbb\nccc</p>\n';
       expect(MarkdownRender.markdownRender(md, userprefs, marked, hljs)).to.equal(target);
     });
 

@@ -79,7 +79,7 @@ function markdownRender(mdText, userprefs, marked, hljs) {
     sanitize: false,
     tables: true,
     smartLists: true,
-    breaks: true,
+    breaks: userprefs['gfm-line-breaks-enabled'],
     smartypants: true,
     langPrefix: 'language-',
     math: userprefs['math-enabled'] ? mathify : null,
