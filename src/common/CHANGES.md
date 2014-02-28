@@ -4,6 +4,9 @@ Change Log
 2014-xx-yy: v2.10.1
 -------------------
 
+* Added ability to disable GFM line breaks.
+  * Thanks to [ase34](https://github.com/ase34) and [violahs](https://github.com/violahs) for [requesting this](https://github.com/adam-p/markdown-here/issues/103).
+
 * [Fixed bug](https://github.com/adam-p/markdown-here/issues/51): Links with URL text (like `[http://example.com](http://example.com`) weren't rendering properly.
   * Thanks to [Christopher Jeffrey](https://github.com/chjj) -- the author of [the rendering library](https://github.com/chjj/marked) that Markdown Here uses! -- for this fix.
   
