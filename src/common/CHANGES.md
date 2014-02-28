@@ -1,6 +1,13 @@
 Change Log
 ==========
 
+2014-xx-yy: v2.10.1
+-------------------
+
+* [Fixed bug](https://github.com/adam-p/markdown-here/issues/51): Links with URL text (like `[http://example.com](http://example.com`) weren't rendering properly.
+  * Thanks to [Christopher Jeffrey](https://github.com/chjj) -- the author of [the rendering library](https://github.com/chjj/marked) that Markdown Here uses! -- for this fix.
+  
+
 2014-01-29: v2.10.0
 -------------------
 
