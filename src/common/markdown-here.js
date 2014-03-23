@@ -28,6 +28,20 @@ var mylog = function() {};
 function findFocusedElem(document) {
   var focusedElem = document.activeElement;
 
+  // Fix #173: https://github.com/adam-p/markdown-here/issues/173
+  // If the focus is in an iframe with a different origin, then attempting to
+  // access focusedElem.contentDocument will fail with a `SecurityError`:
+  // "Failed to read the 'contentDocument' property from 'HTMLIFrameElement': Blocked a frame with origin "http://jsbin.io" from accessing a cross-origin frame."
+  // Rather than spam the console with exceptions, we'll treat this as an
+  // unrenderable situation (which it is).
+  try {
+    var accessTest = focusedElem.contentDocument;
+  }
+  catch (e) {
+    // TODO: Check that this is actually a SecurityError and re-throw if it's not?
+    return null;
+  }
+
   // If the focus is within an iframe, we'll have to drill down to get to the
   // actual element.
   while (focusedElem && focusedElem.contentDocument) {
