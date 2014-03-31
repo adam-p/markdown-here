@@ -133,6 +133,69 @@ function walkDOM(node, func) {
 }
 
 
+// Next three functions from: http://stackoverflow.com/a/1483487/729729
+// Returns true if `node` is in `range`.
+function rangeIntersectsNode(range, node) {
+    var nodeRange;
+    if (range.intersectsNode) {
+        return range.intersectsNode(node);
+    } else {
+        nodeRange = node.ownerDocument.createRange();
+        try {
+            nodeRange.selectNode(node);
+        } catch (e) {
+            nodeRange.selectNodeContents(node);
+        }
+
+        return range.compareBoundaryPoints(Range.END_TO_START, nodeRange) == -1 &&
+            range.compareBoundaryPoints(Range.START_TO_END, nodeRange) == 1;
+    }
+}
+
+
+// Returns array of elements in selection.
+function getSelectedElementsInDocument(doc) {
+  var range, sel, containerElement;
+  sel = doc.getSelection();
+  if (sel.rangeCount > 0) {
+    range = sel.getRangeAt(0);
+  }
+
+  if (!range) {
+    return [];
+  }
+
+  return getSelectedElementsInRange(range);
+}
+
+
+// Returns array of elements in range
+function getSelectedElementsInRange(range) {
+  var elems = [], treeWalker, containerElement;
+
+  if (range) {
+    containerElement = range.commonAncestorContainer;
+    if (containerElement.nodeType != 1) {
+      containerElement = containerElement.parentNode;
+    }
+
+    treeWalker = doc.createTreeWalker(
+        containerElement,
+        NodeFilter.SHOW_ELEMENT,
+        function(node) { return rangeIntersectsNode(range, node) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT; },
+        false
+    );
+
+    elems = [treeWalker.currentNode];
+    while (treeWalker.nextNode()) {
+      elems.push(treeWalker.currentNode);
+    }
+  }
+
+  return elems;
+}
+
+
 function isElementinDocument(element) {
   var doc = element.ownerDocument;
   while (!!(element = element.parentNode)) {
@@ -794,6 +857,7 @@ function getMessage(messageID) {
 Utils.saferSetInnerHTML = saferSetInnerHTML;
 Utils.saferSetOuterHTML = saferSetOuterHTML;
 Utils.sanitizeDocumentFragment = sanitizeDocumentFragment;
+Utils.rangeIntersectsNode = rangeIntersectsNode;
 Utils.getDocumentFragmentHTML = getDocumentFragmentHTML;
 Utils.isElementDescendant = isElementDescendant;
 Utils.getLocalURL = getLocalURL;

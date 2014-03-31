@@ -9,10 +9,40 @@
  * actually does it (calling out for the final render).
  */
 
+/*
+Regarding our rendered Markdown "wrappers": When we render a some Markdown
+-- whether it's the entire content or sub-selection -- we need to save the
+original Markdown (actually, Markdown-in-HTML) somewhere so that we can later
+unrender if the user requests it. Where to save the original markdown is a
+difficult decision, since many web interface will disallow or strip certain
+attributes or attribute values (etc.).
+
+We have found that the `title` attribute of a `<div>` element is preserved. (In
+the sites tested at the time of writing.) So we're create an empty `<div>`, and
+store the original MD in the `title` attribute, prefixed with a marker (`MDH:`)
+to help prevent false positives when looking for wrappers.
+
+Then, looking for "wrappers" will involve looking for the "div with original MD
+in title" and then getting its parent.
+
+(The reason that we're not storing the MD in the title of the wrapper itself is
+that that will result in the raw MD being shown as a tooltip when the user
+hovers over the wrapper. The extra empty div won't have any size, so there
+won't be a hover problem.)
+
+For info about the ideas we had and experiments we ran, see:
+https://github.com/adam-p/markdown-here/issues/85
+*/
+
+
 ;(function() {
 
 "use strict";
 /*global module:false*/
+
+
+var WRAPPER_TITLE_PREFIX = 'MDH:';
+
 
 // In Firefox/Thunderbird, Utils won't already exist.
 if (typeof(Utils) === 'undefined' &&
@@ -301,6 +331,28 @@ function hasParentElementOfTagName(element, tagName) {
   return false;
 }
 
+
+function isWrapperElem(elem) {
+  // Make sure the candidate is an element node
+  if (elem.nodeType === elem.ELEMENT_NODE) {
+    // A MDH wrapper has a child element with a specially prefixed title.
+    var rawHolder = elem.querySelector('[title^="' + WRAPPER_TITLE_PREFIX + '"]');
+
+    if (rawHolder &&
+        // The above `querySelector` will also look at grandchildren of
+        // `elem`, which we don't want.
+        rawHolder.parentElement === elem &&
+        // Skip all wrappers that are in a `blockquote`. We don't want to revert
+        // Markdown that was sent to us.
+        !hasParentElementOfTagName(elem, 'BLOCKQUOTE')) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+
 // Find the wrapper element that's above the current cursor position and returns
 // it. Returns falsy if there is no wrapper.
 function findMarkdownHereWrapper(focusedElem) {
@@ -322,62 +374,47 @@ function findMarkdownHereWrapper(focusedElem) {
   range = selection.getRangeAt(0);
 
   wrapper = range.commonAncestorContainer;
-  while (wrapper) {
-    // Skip all wrappers that are in a `blockquote`. We don't want to revert
-    // Markdown that was sent to us.
-    if (wrapper.classList && wrapper.classList.contains('markdown-here-wrapper') &&
-        wrapper.attributes && wrapper.attributes.getNamedItem('data-md-original') &&
-        !hasParentElementOfTagName(wrapper, 'BLOCKQUOTE')) {
-      break;
-    }
-
+  while (wrapper && !isWrapperElem(wrapper)) {
     wrapper = wrapper.parentNode;
   }
 
   return wrapper;
 }
 
+
 // Finds all Markdown Here wrappers in the given range. Returns an array of the
 // wrapper elements, or null if no wrappers found.
 function findMarkdownHereWrappersInRange(range) {
-  var documentFragment, cloneWrappers, wrappers, selection, i;
+  // Adapted from: http://stackoverflow.com/a/1483487/729729
+  var containerElement = range.commonAncestorContainer;
+  if (containerElement.nodeType != containerElement.ELEMENT_NODE) {
+    containerElement = containerElement.parentNode;
+  }
 
-  // Finding elements in a range isn't very simple...
-
-  // Clone the contents of the range.
-  documentFragment = range.cloneContents();
-
-  // Find all wrappers. Require the presence of the `data-md-original` attribute.
-  cloneWrappers = documentFragment.querySelectorAll('.markdown-here-wrapper[data-md-original]');
-
-  if (cloneWrappers && cloneWrappers.length > 0) {
-    // Now we have an array of *copies* of the wrappers in the DOM. Find them in
-    // the DOM from their IDs. This is why we need unique IDs for our wrappers.
-
-    wrappers = [];
-
-    for (i = 0; i < cloneWrappers.length; i++) {
-
-      // Require that the `data-md-original` attribute actually have content.
-      if (!cloneWrappers[i].attributes.getNamedItem('data-md-original')) {
-        continue;
-      }
-
-      // Skip all wrappers that are in a `blockquote`. We don't want to revert
-      // Markdown that was sent to us.
-      if (hasParentElementOfTagName(cloneWrappers[i], 'BLOCKQUOTE')) {
-        continue;
-      }
-
-      wrappers.push(range.commonAncestorContainer.ownerDocument.getElementById(cloneWrappers[i].id));
+  var nodeTester = function(node) {
+    if (!Utils.rangeIntersectsNode(range, node) ||
+        !isWrapperElem(node)) {
+      return NodeFilter.FILTER_REJECT;
     }
 
-    return wrappers;
+    return NodeFilter.FILTER_ACCEPT;
+  };
+
+  var treeWalker = containerElement.ownerDocument.createTreeWalker(
+      containerElement,
+      NodeFilter.SHOW_ELEMENT,
+      nodeTester,
+      false
+  );
+
+  var elems = [];
+  while (treeWalker.nextNode()) {
+    elems.push(treeWalker.currentNode);
   }
-  else {
-    return null;
-  }
+
+  return elems.length ? elems : null;
 }
+
 
 // Converts the Markdown in the user's compose element to HTML and replaces it.
 // If `selectedRange` is null, then the entire email is being rendered.
@@ -386,21 +423,23 @@ function renderMarkdown(focusedElem, selectedRange, markdownRenderer, renderComp
 
   // Call to the extension main code to actually do the md->html conversion.
   markdownRenderer(focusedElem, selectedRange, function(mdHtml, mdCss) {
-    var wrapper;
+    var wrapper, rawHolder;
+
+    // Store the original Markdown-in-HTML to the `title` attribute of a separate,
+    // invisible-ish `div`. We have found that Gmail, Evernote, etc. leave the
+    // title intact when saving.
+    rawHolder = '<div title="' + WRAPPER_TITLE_PREFIX + encodeURIComponent(originalHtml) + '"></div>';
 
     // Wrap our pretty HTML in a <div> wrapper.
     // We'll use the wrapper as a marker to indicate that we're in a rendered state.
     mdHtml =
       '<div class="markdown-here-wrapper" ' +
-           'data-md-url="' + Utils.getTopURL(focusedElem.ownerDocument.defaultView, true) + '" ' +
-           'id="markdown-here-wrapper-' + Math.floor(Math.random()*1000000) + '">' +
+           'data-md-url="' + Utils.getTopURL(focusedElem.ownerDocument.defaultView, true) + '">' +
         mdHtml +
+        rawHolder +
       '</div>';
 
-    // Store the original Markdown-in-HTML to a data attribute on the wrapper
-    // element. We'll use this later if we need to unrender back to Markdown.
     wrapper = replaceRange(selectedRange, mdHtml);
-    wrapper.setAttribute('data-md-original', encodeURIComponent(originalHtml));
 
     // Some webmail (Gmail) strips off any external style block. So we need to go
     // through our styles, explicitly applying them to matching elements.
@@ -429,7 +468,12 @@ function renderMarkdown(focusedElem, selectedRange, markdownRenderer, renderComp
 
 // Revert the rendered Markdown wrapperElem back to its original form.
 function unrenderMarkdown(wrapperElem) {
-  var originalMdHtml = decodeURIComponent(wrapperElem.getAttribute('data-md-original'));
+  var rawHolder = wrapperElem.querySelector('[title^="' + WRAPPER_TITLE_PREFIX + '"]');
+
+  var originalMdHtml = rawHolder.getAttribute('title');
+  originalMdHtml = originalMdHtml.slice(WRAPPER_TITLE_PREFIX.length);
+  originalMdHtml = decodeURIComponent(originalMdHtml);
+
   Utils.saferSetOuterHTML(wrapperElem, originalMdHtml);
 }
 
