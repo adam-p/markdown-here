@@ -394,7 +394,7 @@ function findMarkdownHereWrappersInRange(range) {
   var nodeTester = function(node) {
     if (!Utils.rangeIntersectsNode(range, node) ||
         !isWrapperElem(node)) {
-      return NodeFilter.FILTER_REJECT;
+      return NodeFilter.FILTER_SKIP;
     }
 
     return NodeFilter.FILTER_ACCEPT;
