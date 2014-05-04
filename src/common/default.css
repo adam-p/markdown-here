@@ -124,11 +124,12 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
   font-size: 1.6em;
+  border-bottom: 1px solid #ddd;
 }
 
 h2 {
   font-size: 1.4em;
-  border-bottom: 1px solid #CCC;
+  border-bottom: 1px solid #eee;
 }
 
 h3 {
