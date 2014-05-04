@@ -34,6 +34,17 @@ TODO: Notes about MDH performance goals and decisions. Like:
 - I don't really have a good idea of how much JS loaded into a page is too much, etc.
 
 
+### Postbox
+
+Postbox has some annoying deviations from the other platforms.
+
+Postbox uses an annoying old version of Gecko (v7, based on `userAgent`), which means that it's not compatible with some JavaScript that can be safely used in Blink, Webkit, and Mozilla-Gecko. Conflicts found:
+
+* According to the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/API/document.createTreeWalker#Browser_compatibility), the `whatToShow` and `filter` arguments of `createTreeWalker()` aren't used.
+
+* There's a bug (I think) in Postbox's `Range.compareBoundaryPoints`. Details [here](https://github.com/adam-p/markdown-here/issues/179).
+
+
 ## Miscellaneous
 
 * Update selection conversion screenshot to not be all about replies.
@@ -48,7 +59,7 @@ TODO: Notes about MDH performance goals and decisions. Like:
 
 * If a selection conversion is *inside* a paragraph, then it shouldn't add a paragraph to the newly rendered text. That way the text flow won't be totally broken, and the user could actually render just part of a sentence or paragraph.
 
-* I've talked to at least one person who wants Markdown Here to be able unrender an email *after it's sent*. This would allow him to modify and re-send it, or allow his recipients to modify and send it.
+* I've talked to at least one person who wants Markdown Here to be able to unrender an email *after it's sent*. This would allow him to modify and re-send it, or allow his recipients to modify and send it.
   * This is a bit tricky, since all webmail clients (not Thunderbird) strip the `data-md-original` attribute from the `markdown-here-wrapper` element.
   * Idea: base64-encode the original MD, then set it as an inline-data `src` attribute for a very small inline image. The image won't display properly, of course, but the data will be intact and extractable.
 
@@ -106,6 +117,7 @@ Maybe there should be separate projects for some of the structurally distinct co
 
 * [MathJax](http://www.mathjax.org/) is a JS LaTeX and MathML renderer. 
 * [Fountain](http://fountain.io/dingus) is a screenplay markup language.
+* [StrictDown](https://github.com/jakwings/strictdown) is a new Markdown variant (forked from Marked).
 
 
 ## Advanced styling

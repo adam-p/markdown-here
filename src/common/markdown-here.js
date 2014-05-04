@@ -104,14 +104,7 @@ function elementCanBeRendered(elem) {
 function getOperationalRange(focusedElem) {
   var selection, range, sig;
 
-  selection = focusedElem.ownerDocument.getSelection();
-
-  // For some reason Postbox requires window.getSelection() rather than
-  // document.getSelection(). It doesn't fail, but there's a deprecation
-  // warning, and then selection.getRangeAt() fails as undefined.
-  if (typeof(selection.getRangeAt) === 'undefined') {
-    selection = focusedElem.ownerDocument.defaultView.getSelection();
-  }
+  selection = focusedElem.ownerDocument.defaultView.getSelection();
 
   if (selection.rangeCount < 1) {
     return null;
@@ -358,14 +351,7 @@ function isWrapperElem(elem) {
 function findMarkdownHereWrapper(focusedElem) {
   var selection, range, wrapper = null;
 
-  selection = focusedElem.ownerDocument.getSelection();
-
-  // For some reason Postbox requires window.getSelection() rather than
-  // document.getSelection(). It doesn't fail, but there's a deprecation
-  // warning, and then selection.getRangeAt() fails as undefined.
-  if (typeof(selection.getRangeAt) === 'undefined') {
-    selection = focusedElem.ownerDocument.defaultView.getSelection();
-  }
+  selection = focusedElem.ownerDocument.defaultView.getSelection();
 
   if (selection.rangeCount < 1) {
     return null;
@@ -391,26 +377,43 @@ function findMarkdownHereWrappersInRange(range) {
     containerElement = containerElement.parentNode;
   }
 
+  var elems = [];
+
+  var nodeTester = function(elem) {
+    if (elem.nodeType === elem.ELEMENT_NODE &&
+        Utils.rangeIntersectsNode(range, elem) &&
+        isWrapperElem(elem)) {
+          elems.push(elem);
+    }
+  };
+
+  Utils.walkDOM(containerElement, nodeTester);
+
+  /*
+  // This code is probably superior, but TreeWalker is not supported by Postbox.
+  // If this ends up getting used, it should probably be moved into walkDOM
+  // (or walkDOM should be removed).
   var nodeTester = function(node) {
-    if (!Utils.rangeIntersectsNode(range, node) ||
+    if (node.nodeType !== node.ELEMENT_NODE ||
+        !Utils.rangeIntersectsNode(range, node) ||
         !isWrapperElem(node)) {
-      return NodeFilter.FILTER_SKIP;
+      return node.ownerDocument.defaultView.NodeFilter.FILTER_SKIP;
     }
 
-    return NodeFilter.FILTER_ACCEPT;
+    return node.ownerDocument.defaultView.NodeFilter.FILTER_ACCEPT;
   };
 
   var treeWalker = containerElement.ownerDocument.createTreeWalker(
       containerElement,
-      NodeFilter.SHOW_ELEMENT,
+      containerElement.ownerDocument.defaultView.NodeFilter.SHOW_ELEMENT,
       nodeTester,
-      false
-  );
+      false);
 
   var elems = [];
   while (treeWalker.nextNode()) {
     elems.push(treeWalker.currentNode);
   }
+  */
 
   return elems.length ? elems : null;
 }
@@ -469,6 +472,8 @@ function renderMarkdown(focusedElem, selectedRange, markdownRenderer, renderComp
 // Revert the rendered Markdown wrapperElem back to its original form.
 function unrenderMarkdown(wrapperElem) {
   var rawHolder = wrapperElem.querySelector('[title^="' + WRAPPER_TITLE_PREFIX + '"]');
+  // Not checking for success of that call, since we shouldn't be here if there
+  // isn't a wrapper.
 
   var originalMdHtml = rawHolder.getAttribute('title');
   originalMdHtml = originalMdHtml.slice(WRAPPER_TITLE_PREFIX.length);

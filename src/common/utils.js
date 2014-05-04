@@ -135,20 +135,27 @@ function walkDOM(node, func) {
 
 // Next three functions from: http://stackoverflow.com/a/1483487/729729
 // Returns true if `node` is in `range`.
+// NOTE: This function is broken in Postbox: https://github.com/adam-p/markdown-here/issues/179
 function rangeIntersectsNode(range, node) {
     var nodeRange;
     if (range.intersectsNode) {
-        return range.intersectsNode(node);
-    } else {
-        nodeRange = node.ownerDocument.createRange();
-        try {
-            nodeRange.selectNode(node);
-        } catch (e) {
-            nodeRange.selectNodeContents(node);
-        }
+      return range.intersectsNode(node);
+    }
+    else {
+      nodeRange = node.ownerDocument.createRange();
+      try {
+        nodeRange.selectNode(node);
+      }
+      catch (e) {
+        nodeRange.selectNodeContents(node);
+      }
 
-        return range.compareBoundaryPoints(Range.END_TO_START, nodeRange) == -1 &&
-            range.compareBoundaryPoints(Range.START_TO_END, nodeRange) == 1;
+      return range.compareBoundaryPoints(
+                node.ownerDocument.defaultView.Range.END_TO_START,
+                nodeRange) === -1 &&
+             range.compareBoundaryPoints(
+                node.ownerDocument.defaultView.Range.START_TO_END,
+                nodeRange) === 1;
     }
 }
 
@@ -179,10 +186,25 @@ function getSelectedElementsInRange(range) {
       containerElement = containerElement.parentNode;
     }
 
+    elems = [treeWalker.currentNode];
+
+    walkDOM(
+      containerElement,
+        function(node) {
+          if (rangeIntersectsNode(range, node)) {
+            elems.push(node);
+          }
+      });
+
+    /*
+    // This code is probably superior, but TreeWalker is not supported by Postbox.
+    // If this ends up getting used, it should probably be moved into walkDOM
+    // (or walkDOM should be removed).
+
     treeWalker = doc.createTreeWalker(
         containerElement,
-        NodeFilter.SHOW_ELEMENT,
-        function(node) { return rangeIntersectsNode(range, node) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT; },
+        range.commonAncestorContainerownerDocument.defaultView.NodeFilter.SHOW_ELEMENT,
+        function(node) { return rangeIntersectsNode(range, node) ? range.commonAncestorContainerownerDocument.defaultView.NodeFilter.FILTER_ACCEPT : range.commonAncestorContainerownerDocument.defaultView.NodeFilter.FILTER_REJECT; },
         false
     );
 
@@ -190,6 +212,7 @@ function getSelectedElementsInRange(range) {
     while (treeWalker.nextNode()) {
       elems.push(treeWalker.currentNode);
     }
+    */
   }
 
   return elems;
@@ -856,6 +879,7 @@ function getMessage(messageID) {
 
 Utils.saferSetInnerHTML = saferSetInnerHTML;
 Utils.saferSetOuterHTML = saferSetOuterHTML;
+Utils.walkDOM = walkDOM;
 Utils.sanitizeDocumentFragment = sanitizeDocumentFragment;
 Utils.rangeIntersectsNode = rangeIntersectsNode;
 Utils.getDocumentFragmentHTML = getDocumentFragmentHTML;
