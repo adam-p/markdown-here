@@ -431,7 +431,9 @@ function renderMarkdown(focusedElem, selectedRange, markdownRenderer, renderComp
     // Store the original Markdown-in-HTML to the `title` attribute of a separate,
     // invisible-ish `div`. We have found that Gmail, Evernote, etc. leave the
     // title intact when saving.
-    rawHolder = '<div title="' + WRAPPER_TITLE_PREFIX + encodeURIComponent(originalHtml) + '"></div>';
+    // `&#8203;` is a zero-width space: https://en.wikipedia.org/wiki/Zero-width_space
+    // Thunderbird will discard the `div` if there's no content.
+    rawHolder = '<div title="' + WRAPPER_TITLE_PREFIX + encodeURIComponent(originalHtml) + '">&#8203;</div>';
 
     // Wrap our pretty HTML in a <div> wrapper.
     // We'll use the wrapper as a marker to indicate that we're in a rendered state.
