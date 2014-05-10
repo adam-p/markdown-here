@@ -334,7 +334,7 @@ function isWrapperElem(elem) {
     if (rawHolder &&
         // The above `querySelector` will also look at grandchildren of
         // `elem`, which we don't want.
-        rawHolder.parentElement === elem &&
+        rawHolder.parentNode === elem &&
         // Skip all wrappers that are in a `blockquote`. We don't want to revert
         // Markdown that was sent to us.
         !hasParentElementOfTagName(elem, 'BLOCKQUOTE')) {

@@ -36,7 +36,7 @@ function consoleLog(logString) {
   else {
     var consoleService = Components.classes['@mozilla.org/consoleservice;1']
                                    .getService(Components.interfaces.nsIConsoleService);
-    consoleService.logStringMessage(logString);
+    consoleService.logStringMessage(String(logString));
   }
 }
 
