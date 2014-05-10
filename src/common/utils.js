@@ -137,26 +137,31 @@ function walkDOM(node, func) {
 // Returns true if `node` is in `range`.
 // NOTE: This function is broken in Postbox: https://github.com/adam-p/markdown-here/issues/179
 function rangeIntersectsNode(range, node) {
-    var nodeRange;
-    if (range.intersectsNode) {
-      return range.intersectsNode(node);
+  var nodeRange;
+  if (range.intersectsNode) {
+    return range.intersectsNode(node);
+  }
+  else {
+    nodeRange = node.ownerDocument.createRange();
+    try {
+      nodeRange.selectNode(node);
     }
-    else {
-      nodeRange = node.ownerDocument.createRange();
-      try {
-        nodeRange.selectNode(node);
-      }
-      catch (e) {
-        nodeRange.selectNodeContents(node);
-      }
+    catch (e) {
+      nodeRange.selectNodeContents(node);
+    }
 
-      return range.compareBoundaryPoints(
-                node.ownerDocument.defaultView.Range.END_TO_START,
-                nodeRange) === -1 &&
-             range.compareBoundaryPoints(
-                node.ownerDocument.defaultView.Range.START_TO_END,
-                nodeRange) === 1;
-    }
+    // Workaround for this old Mozilla bug, which is still present in Postbox:
+    // https://bugzilla.mozilla.org/show_bug.cgi?id=665279
+    var END_TO_START = node.ownerDocument.defaultView.Range.END_TO_START || Utils.global.Range.END_TO_START;
+    var START_TO_END = node.ownerDocument.defaultView.Range.START_TO_END || Utils.global.Range.START_TO_END;
+
+    return range.compareBoundaryPoints(
+              END_TO_START,
+              nodeRange) === -1 &&
+           range.compareBoundaryPoints(
+              START_TO_END,
+              nodeRange) === 1;
+  }
 }
 
 
