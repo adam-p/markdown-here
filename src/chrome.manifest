@@ -21,4 +21,3 @@ overlay chrome://messenger/content/specialTabs.xul chrome://markdown_here/conten
 
 overlay chrome://zotero/content/standalone/standalone.xul  chrome://markdown_here/content/zotero-overlay.xul application=zotero@chnm.gmu.edu
 overlay chrome://zotero/content/standalone/standalone.xul  chrome://markdown_here/content/background-services-overlay.xul application=zotero@chnm.gmu.edu
-

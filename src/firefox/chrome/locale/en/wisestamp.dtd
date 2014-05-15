@@ -1,0 +1,15 @@
+<!ENTITY wisestampContext.label "Insert Signature">
+<!ENTITY wisestampContext.accesskey "I">
+<!ENTITY wisestamp.statusbar.label "WiseStamp">
+<!ENTITY wisestamp.menuitem.label "WiseStamp">
+<!ENTITY wisestamp.popup.disable "Disable">
+<!ENTITY wisestamp.popup.enable "Enable">
+<!ENTITY wisestamp.popup.edit "Open WiseStamp">
+<!ENTITY wisestamp.popup.personal "Use personal signature">
+<!ENTITY wisestamp.popup.business "Use business signature">
+<!ENTITY wisestamp.context.personal "Insert personal signature">
+<!ENTITY wisestamp.context.business "Insert business signature">
+<!ENTITY wisestamp.popup.none "Don't use a signature">
+<!ENTITY wisestamp.popup.help "Help">
+<!ENTITY preview.title "WiseStamp Preview">
+<!ENTITY preview.close "Close Preview">

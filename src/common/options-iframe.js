@@ -22,7 +22,7 @@ function onLoad() {
   // Markdown Here to work (simulating focus/cursor).
   var range = document.createRange();
   range.setStart(document.body, 0);
-  var sel = document.getSelection();
+  var sel = window.getSelection();
   sel.removeAllRanges();
   sel.addRange(range);
 
@@ -53,7 +53,7 @@ function localize() {
 
 function notifyIframeLoaded() {
   // Let our owner page know that we've loaded.
-  var e = top.document.createEvent('HTMLEvents');
+  var e = parent.document.createEvent('HTMLEvents');
   e.initEvent('options-iframe-loaded', true, true);
-  top.document.dispatchEvent(e);
+  parent.document.dispatchEvent(e);
 }

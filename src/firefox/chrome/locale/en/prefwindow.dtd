@@ -1,0 +1,128 @@
+<!ENTITY prefwindow.title "WiseStamp preferences">
+<!ENTITY pane1.title "WiseStamp preferences">
+<!ENTITY general.title "General">
+<!ENTITY settings.title "Settings">
+<!ENTITY sync.title "Synchronize">
+<!ENTITY wisestamp.about "About">
+<!ENTITY wisestamp.help "Help">
+<!ENTITY type.caption "Choose Signature">
+<!ENTITY type.personal "Personal ID">
+<!ENTITY type.business "Business ID">
+<!ENTITY type.setdefault "Set As Default">
+<!ENTITY type.default "(Default)">
+<!ENTITY getextra "Get extra now">
+<!ENTITY details.label "Details">
+<!ENTITY social.label "Social ID">
+<!ENTITY showwysiwyg "Visual">
+<!ENTITY showhtml "HTML">
+<!ENTITY signature.save "Save">
+<!ENTITY signature.apply "Apply">
+<!ENTITY signature.preview "Preview">
+<!ENTITY signature.create.caption "Create New Signature">
+<!ENTITY signature.premium.caption "Upgrade for more signatures!">
+<!ENTITY advanced.show "Show Advanced">
+<!ENTITY advanced.hide "Hide Advanced">
+<!ENTITY advanced.description "Advanced Html/Text - will show up under social profiles:">
+<!ENTITY details.add.caption "Your Details">
+<!ENTITY details.yoursig.1 "Your signature: ">
+<!ENTITY details.yoursig.2 "(name, company, email, phone, site)">
+<!ENTITY details.example "Example">
+<!ENTITY details.seemoreexamples "More Examples">
+<!ENTITY details.preview "Preview">
+<!ENTITY details.save "Save">
+<!ENTITY service.tab.social "Social">
+<!ENTITY service.tab.im "IM">
+<!ENTITY service.tab.rss "RSS">
+<!ENTITY service.tab.appearance "Appearance">
+<!ENTITY service.socialservices.label "Add your social profiles:">
+<!ENTITY service.rss.label "Add an RSS Feed - share your blog, status, pictures, daily quotes, news and more...">
+<!ENTITY service.rss.learn "Get more ideas!">
+<!ENTITY service.IM "Add your instant messaging services: ">
+<!ENTITY service.suggest "Suggest a service">
+<!ENTITY service.addmore "Add new profile">
+<!ENTITY service.format "Edit settings...">
+<!ENTITY im.addmore "Add new IM">
+<!ENTITY im.format "Edit settings...">
+<!ENTITY appearance.frameType.label "Choose signature framing:">
+<!ENTITY appearance.frameType.none "None">
+<!ENTITY appearance.frameType.border "Border around the signature">
+<!ENTITY appearance.frameType.line "Horizontal line above the signature">
+<!ENTITY settings.general "General">
+<!ENTITY settings.autoinsert_compose "Automatically insert signature into new message">
+<!ENTITY settings.autoinsert_thread "Automatically insert signature on reply/forward">
+<!ENTITY settings.hidebuttons "Hide WiseStamp icon on webmail toolbar">
+<!ENTITY settings.hidestatusbar "Hide WiseStamp icon on status bar">
+<!ENTITY settings.format "Signature Format">
+<!ENTITY settings.format.moved "These settings were moved to the General tab.">
+<!ENTITY settings.format.moved.learn "Click here to learn more!">
+<!ENTITY settings.socialservices "Social Profiles:">
+<!ENTITY settings.supportnpromote "Support and Promote">
+<!ENTITY settings.promotionSettings "WiseStamp promotion settings">
+<!ENTITY settings.promoteChk "Promote WiseStamp project - show promotion link">
+<!ENTITY settings.support "Support WiseStamp">
+<!ENTITY settings.helpus "You can help us">
+<!ENTITY settings.help "Help us improve WiseStamp - Donate now">
+<!ENTITY settings.spreadtheword "spread the word">
+<!ENTITY settings.im "IM:">
+<!ENTITY settings.serviceslinksonly "Show services as text only (no icons)">
+<!ENTITY settings.servicesiconsonly "Show services as icons only (no text)">
+<!ENTITY settings.servicesiconslinks "Show services as icons and text">
+<!ENTITY settings.imtextonly "Show IM as text only (no icons)">
+<!ENTITY settings.imiconsonly "Show IM as icons only (no text)">
+<!ENTITY settings.imiconstext "Show IM as icons and text">
+<!ENTITY settings.hidecontactme "Hide services headline">
+<!ENTITY settings.hidechat "Hide IM headline">
+<!ENTITY settings.manage.caption "Manage Signatures">
+<!ENTITY settings.manage.delete "Delete">
+<!ENTITY settings.manage.new "New Signature">
+
+<!ENTITY account.title "Account">
+<!ENTITY account.settings.title "Login settings">
+<!ENTITY account.settings.email.label "Email:">
+<!ENTITY account.settings.password.label "Password:">
+<!ENTITY account.settings.buttons.login "Login">
+<!ENTITY account.settings.buttons.logout "Logout">
+<!ENTITY account.settings.buttons.register "Register">
+<!ENTITY account.settings.forgot_password.label "Forgot your password?">
+<!ENTITY account.settings.forgot_password.link "Click here.">
+<!ENTITY account.purchase.label "Want to use our premium version?">
+<!ENTITY account.purchase.link "Purchase now!">
+<!ENTITY account.sync.title "Manual Synchronization">
+<!ENTITY account.sync.buttons.load "Load signatures">
+<!ENTITY account.sync.buttons.load.desc "Load signatures from the WiseStamp server to the addon. Please note: your current signatures will be overridden with the ones previously saved on our servers.">
+<!ENTITY account.sync.buttons.save "Save signatures">
+<!ENTITY account.sync.buttons.save.desc "Save the current signatures on the WiseStamp server.">
+
+<!ENTITY advanced.title "Advanced">
+<!ENTITY advanced.settings.title "Settings">
+<!ENTITY advanced.buttons.export "Export Settings...">
+<!ENTITY advanced.buttons.import "Import Settings...">
+<!ENTITY advanced.buttons.reset "Reset All Settings">
+<!ENTITY advanced.buttons.exportLog "Export Log...">
+<!ENTITY advanced.logging.title "Logging">
+
+<!ENTITY registerDlg.title "Register an account on WiseStamp">
+<!ENTITY registerDlg.email.label "Email:">
+<!ENTITY registerDlg.password.label "Password:">
+<!ENTITY registerDlg.first_name.label "First name:">
+<!ENTITY registerDlg.last_name.label "Last name:">
+
+<!ENTITY SocialFormatDlg.title "Social Services Settings">
+
+<!ENTITY ImFormatDlg.title "IM Services Settings">
+<!ENTITY editor.bold.tooltip "Bold">
+<!ENTITY editor.italic.tooltip "Italic">
+<!ENTITY editor.underline.tooltip "Underline">
+<!ENTITY editor.fontstyle.tooltip "Font Style">
+<!ENTITY editor.fontsize.tooltip "Font Size">
+<!ENTITY editor.textcolor.tooltip "Text Color">
+<!ENTITY editor.highlightcolor.tooltip "Highlight Color">
+<!ENTITY editor.link.tooltip "Add a Link">
+<!ENTITY editor.addimage.tooltip "Add an Image">
+<!ENTITY editor.alignleft.tooltip "Align Left">
+<!ENTITY editor.aligncenter.tooltip "Align Center">
+<!ENTITY editor.alignright.tooltip "Align Right">
+<!ENTITY editor.ltr.tooltip "Left to Right">
+<!ENTITY editor.rtl.tooltip "Right to Left">
+<!ENTITY editor.switchtohtml.tooltip "Switch to HTML">
+<!ENTITY editor.switchtowysiwyg.tooltip "Switch to WYSIWYG">

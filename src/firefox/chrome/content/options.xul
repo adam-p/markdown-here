@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://mozapps/content/preferences/preferences.css" type="text/css"?>
+<!DOCTYPE dialog [
+<!ENTITY % prefwindowDTD SYSTEM "chrome://markdown_here/locale/prefwindow.dtd" >
+%prefwindowDTD;
+<!ENTITY % textcontextDTD SYSTEM "chrome://global/locale/textcontext.dtd" >
+%textcontextDTD;
+]>
+<dialog 
+  id="BrowserPreferences"
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+  xmlns:xhtml="http://www.w3.org/TR/xhtml1/strict"
+  xmlns:html="http://www.w3.org/1999/xhtml"
+  title="&prefwindow.title;" type="wisestamp:settings" spacerflex="0"
+  buttons=","
+  ondialogaccept="return false;"
+  ondialogcancel="return WiseStampOptions.onCancel();" 
+  onload="document.getElementById('iframe').contentWindow.onLoad()"
+  style="padding:0"
+  contextmenu="contentAreaContextMenu"
+>
+
+  
+  <popupset id="mainPopupSet">
+    <menupopup id="contentAreaContextMenu" onpopupshowing="wsEditorContextMenu.onPopupShowing(event)" onpopuphiding="wsEditorContextMenu.onPopupHiding(event)">
+      <menuitem id="context-cut" label="&cutCmd.label;" accesskey="&cutCmd.accesskey;" />
+      <menuitem id="context-copy" label="&copyCmd.label;" accesskey="&copyCmd.accesskey;" />
+      <menuitem id="context-paste" label="&pasteCmd.label;" accesskey="&pasteCmd.accesskey;" />
+      <menuitem id="context-delete" label="&deleteCmd.label;" accesskey="&deleteCmd.accesskey;" />
+      <menuseparator id="context-sep-paste" />
+      <menuitem id="context-selectAll" label="&selectAllCmd.label;" accesskey="&selectAllCmd.accesskey;" />
+    </menupopup>
+  </popupset>
+
+  <!-- width = WISESTAMP_WIN_WIDTH-1, height = WISESTAMP_WIN_HEIGHT + 5 -->
+  <html:iframe id='iframe' flex="1" width="601" height="" src="resource://markdown_here_common/options.html" frameborder="0" marginheight="0" marginwidth="0" />
+  
+</dialog>

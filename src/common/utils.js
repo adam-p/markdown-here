@@ -668,7 +668,7 @@ function triggerStringBundleLoadListeners() {
 
 // Must only be called from a priviledged Mozilla script
 function getMozStringBundle() {
-  if (typeof(Components) === 'undefined' || typeof(Components.classes) === 'undefined') {
+  if (true || typeof(Components) === 'undefined' || typeof(Components.classes) === 'undefined') {
     return false;
   }
 

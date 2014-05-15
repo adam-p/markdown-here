@@ -1,0 +1,498 @@
+<!--[if IE]><!doctype html><![endif]-->
+<html>
+<head>
+	<title data-locale_message="editor_html_wisestamp_editor">WiseStamp Editor</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+</head>
+
+<body>
+	<div id="wrap">
+		<div id="content">
+			<div class="header">
+				<table width=100% border=0 cellpadding=0 cellspacing=0>
+					<tr valign="top">
+						<td width=45px style='padding-left:10px'><img id="logo" src="../img/wisestamp_logo_32.png" /></td>
+						<td>
+							<h1 data-locale_message="editor_html_title">WiseStamp</h1>
+							<div class="usermenu hidden" id="facebookConnect">
+								&nbsp;|
+								<a id="fbconnect"><img src="../img/fbLogin.png" /></a>
+							</div>
+							<div class="usermenu" id="loggedout">
+								<a class="login-action" data-locale_message="editor_html_sign_in">Sign in</a> |
+								<a class="register-action" data-locale_message="editor_html_create_account">Create Account</a>
+							</div>
+							<div class="usermenu" id="loggedin">
+								<span id="name"></span> |
+								<!-- <a id=account>Account</a> |  -->
+								<a id="logout" data-locale_message="editor_html_sign_out">Sign out</a>
+							</div>
+							<div style="clear:both"></div>
+							<span class="menu">
+								<a id="settings" data-locale_message="editor_html_settings">Settings</a> |
+								<a id="help" data-locale_message="editor_html_help">Help</a> |
+								<a id="signatureExamples" data-locale_message="editor_html_sig_examples">Signature Examples</a>
+								<span id="upgrade_span">| <a id="upgrade" data-locale_message="editor_html_go_pro">Go Pro</a></span>
+								<span id="updateWiseStamp">| <a><img src="../img/update_icon_arrow.png" /><span data-locale_message="editor_html_update">Update</span></a></span>
+							</span>
+						</td>
+					</tr>
+				</table>
+			</div>
+
+			<div id="tabs-main">
+				<div id="signatureMgr">
+					<table width=100%><tr valign="middle">
+						<td width=180px>
+							<select id="signatureSelect"></select>
+						<td width=5px>&nbsp;</td>
+						<td id="signatureActions">
+							<div class="popupMenu" id="signatures">
+								<div class="title"><img src='../img/gear.png' width=13 /><img src='../img/arrowdown.png' id="arrow" /></div>
+								<ul class="items">
+									<li class="action" id="default" data-locale_message="editor_html_set_defaults">Set defaults...</li>
+									<li class="separator">
+									<li class="action" id="rename" data-locale_message="editor_html_rename">Rename</li>
+									<li class="action premiumElement" id="delete" data-locale_message="editor_html_delete">Delete</li>
+									<li class="action premiumElement" id="create" data-locale_message="editor_html_add_sig">Add Signature</li>
+									<li class="action" id="open_wizard" data-locale_message="editor_html_start_wizard">Start Wizard</li>
+								</ul>
+							</div>
+						</td>
+						<td class="premiumElement" style="text-align: right; padding-right: 8px;">
+							<a class="action hidden" id="wizard-link" data-locale_message="editor_html_wizard">Wizard</a>
+
+							<a id="templates-icon"><img src='../img/templates.png' style='vertical-align: middle; padding-bottom: 5px'/></a>
+							<a class="action" id="templates-text" data-locale_message="editor_html_templates">Templates</a>
+						</td>
+					</tr></table>
+
+				</div>
+
+				<textarea name="content" id="textarea" style="width:100%; margin: 0; height: 10em;"></textarea>
+
+				<div id="tabs">
+					<ul>
+						<li><a class="tab" id="social" href="#tabs-social" data-locale_message="editor_html_social_icons">Social Icons</a></li>
+						<li><a class="tab" id="apps" style='display:none' href="#tabs-apps" data-locale_message="editor_html_email_apps">Email Apps</a></li>
+						<li><a class="tab" id="im" href="#tabs-im" data-locale_message="editor_html_im_icons">IM Icons</a></li>
+						<li><a class="tab" id="rss" style='display:none' href="#tabs-rss" data-locale_message="editor_html_rss">RSS</a></li>
+						<li style='float: right;'><a class="tab" id="appearance" href="#tabs-appearance" data-locale_message="editor_html_design">Design</a></li>
+					</ul>
+					<div class="tab" id="tabs-apps">
+					</div>
+					<div class="tab" id="tabs-social">
+						<div class="services">
+							<h2 data-locale_message="editor_html_social_profiles">Add links to your social services profiles.</h2>
+							<div class="container">
+								<table width="100%" id='socialServices'></table>
+							</div>
+
+							<div class="add">
+								<span id="add-social">
+									<a><img src='../img/add.png' style='vertical-align: middle; padding-bottom: 5px'/></a>
+									<a data-locale_message="editor_html_add">Add</a>
+								</span>
+								&nbsp;
+								<span id="edit-social">
+									<a><img src='../img/gear.png' width=12px style='vertical-align: middle; padding-bottom: 5px'/></a>
+									<a data-locale_message="editor_html_format">Format</a>
+								</span>
+								&nbsp;
+								<span id="edit-social-custom">
+									<a class="premiumElement"><img src='../img/custom.png' style='vertical-align: middle; padding-bottom: 5px'/></a>
+									<a class="premiumElement" data-locale_message="editor_html_my_icons">My Icons</a>
+								</span>
+
+								<div style="float: right; font-size: 85%; color: #aaa;" data-locale_message="editor_html_paste_link">* You can use Ctrl-V to paste the link</div>
+							</div>
+
+						</div>
+					</div>
+					<div class="tab" id="tabs-im">
+						<div class="services">
+							<h2 data-locale_message="editor_html_username_in_im_services">Add your username in the Instant Messaging services you use.</h2>
+							<div class="container">
+								<table width=100% id='imServices'></table>
+							</div>
+
+							<div class="add">
+								<span id="add-im">
+									<a><img src='../img/add.png' style='vertical-align: middle; padding-bottom: 5px'/></a>
+									<a data-locale_message="editor_html_add">Add</a>
+								</span>
+								&nbsp;
+								<span id="edit-im">
+									<a><img src='../img/gear.png' width=12px style='vertical-align: middle; padding-bottom: 5px'/></a>
+									<a data-locale_message="editor_html_format">Format</a>
+								</span>
+								&nbsp;
+								<span id="edit-im-custom">
+									<a class="premiumElement"><img src='../img/custom.png' style='vertical-align: middle; padding-bottom: 5px'/></a>
+									<a class="premiumElement" data-locale_message="editor_html_my_icons">My Icons</a>
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="tab" id="tabs-rss">
+					</div>
+					<div class="tab" id="tabs-appearance">
+						<table width="100%" border=0>
+							<tr>
+								<td width="25%" data-locale_message="editor_html_border_type">Border type:</td>
+								<td>
+									<select id="borderType">
+										<option id="none" data-locale_message="editor_html_none">None</option>
+										<option id="box" data-locale_message="editor_html_box">Box</option>
+										<option id="top" data-locale_message="editor_html_top_line">Top line</option>
+										<!--
+											<option id=3dbox>3D box</option>
+										 -->
+									</select>
+								</td>
+							</tr><tr>
+								<td data-locale_message="editor_html_background_color">Background color:</td>
+								<td>
+									<select id="bgColor">
+										<option id="none" data-locale_message="editor_html_none">None</option>
+										<option id="lightgray" data-locale_message="editor_html_light_gray">Light gray</option>
+									</select>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+
+			<table width=100% class="buttons"><tr>
+				<td>
+					<input type="button" value="Preview" data-locale_message="editor_html_preview" id='preview-button' />
+				</td>
+				<td width=1%>
+					<input type="button" value="Apply" data-locale_message="editor_html_apply" id='apply-button' />
+				</td>
+				<td width=1%>
+					<input type="button" value="OK" data-locale_message="editor_html_ok" id='ok-button' />
+				</td>
+				<td width=1%>
+					<input type="button" value="Cancel" data-locale_message="editor_html_cancel" id='cancel-button' />
+				</td>
+			</tr></table>
+			<div class="clearFloats"></div>
+		</div>
+
+		<div id="footer">
+			<table width="100%" border="0">
+				<tr valign="bottom">
+					<td data-locale_message="editor_html_copyright">&#x00A9; 2013 <a id="home" data-locale_message="editor_html_wisestamp_dot_com">wisestamp.com</a></td>
+					<td style='text-align: right' id="footerSocialButtons">
+						<!--
+						Share WiseStamp with friends:
+						<a id=shareOnFacebook title="Click to share WiseStamp on Facebook"><img src='../icons/facebook.png' /></a>
+						<a id=shareOnTwitter title="Click to share WiseStamp on Twitter"><img src='../icons/twitter2.png' /></a>
+
+						Note: Now using WiseStampEditor.footerSocialButtons() to insert content
+						-->
+					</td>
+				</tr>
+			</table>
+		</div>
+
+	</div>
+	<div id="alert" style="display:none"></div>
+
+	<div id="statusbar">
+		<div class="clear"></div>
+	</div>
+
+
+	<!-- dialogs -->
+	<div style='display: none' id="settingsDlg">
+		<div id="tabs-settings">
+			<ul>
+				<li class="premiumElement"><a class="tab" id="account" href="#tabs-account" data-locale_message="editor_html_account">Account</a></li>
+				<li><a class="tab" id="defaults" href="#tabs-defaults" data-locale_message="editor_html_sig_insertions">Signature Insertion</a></li>
+				<li class="premiumElement"><a class="tab" id="sync" href="#tabs-sync" data-locale_message="editor_html_sync">Sync</a></li>
+				<li><a class="tab" id="advanced" href="#tabs-advanced" data-locale_message="editor_html_advanced">Advanced</a></li>
+			</ul>
+
+			<div class="tab" id="tabs-account">
+				<div id="accountDialog">
+					<h1 data-locale_message="editor_html_account_details">Account Details</h1>
+					<div id="account-details">
+						<div class="notpro right" id="account-upgrade-button">
+							<div id="colorButtonContainer">
+								<a class="upgrade colorButton">
+									<div class="colorButton" data-locale_message="editor_html_upgrade_now">Upgrade Now</div>
+								</a>
+							</div>
+						</div>
+
+						<table cellspacing="0" cellpadding="0">
+							<tr>
+								<th data-locale_message="editor_html_your_email">Your Email:</th>
+								<td>
+									<span class="hidden signedin">
+										<input type="text" id="username" readonly="readonly"/><span class="hidden viaFacebook" data-locale_message="editor_html_via_facebook"> (via Facebook)</span>
+									</span>
+									<span class="hidden notsigned">
+										<i><a class="login-action" class="underlined" data-locale_message="editor_html_sign_in">Sign in</a><span data-locale_message="editor_html_or"> or </span><a class="register-action" class="underlined" data-locale_message="editor_html_create_an_account">create an account</a><span data-locale_message="editor_html_its_free"> - it's free!</span></i>
+									</span>
+								</td>
+							</tr>
+							<tr>
+								<th data-locale_message="editor_html_plan">Plan:</th>
+								<td>
+									<b id="plan" data-locale_message="editor_html_free">Free</b>
+									<span class="hidden pro">
+										<a class="underlined" id="manage-subscription" data-locale_message="editor_html_manage_subscription">manage subscription</a>
+									</span>
+									<span class="hidden" id="expired-indication">
+										<span data-locale_message="editor_html_expired">(expired)</span>
+									</span>
+								</td>
+							</tr>
+							<tr>
+								<th data-locale_message="editor_html_version">Version:</th>
+								<td><b><span data-locale_message="editor_html_wisestamp">WiseStamp </span><span id="version"></span></b></td>
+							</tr>
+							<tr class="hidden signedin">
+								<th data-locale_message="editor_html_password">Password:</th>
+								<td>
+									<a class="underlined" id="change-password" data-locale_message="editor_html_change">change</a>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<br />
+
+					<h1 data-locale_message="editor_html_promote">Support and promote</h1>
+					<input type="checkbox" id="addPromotionTag" /><label for="addPromotionTag" data-locale_message="editor_html_keep_credit"> Keep WiseStamp credit in the signatures</label>
+					<br/>
+					<input type="checkbox" id="addEmailAppsTag" /><label for="addEmailAppsTag" data-locale_message="editor_html_keep_tag"> Keep WiseStamp tag on the bottom of the email apps</label>
+
+					<div id="support">
+<!--
+						<div style='border-right: 1px solid #dddddd;'>
+							Become part of WiseStamp!<br/><br/>
+						</div>
+-->
+						<span data-locale_message="editor_html_share">Share WiseStamp with friends!</span>
+						<br/><br/>
+<!--
+						<a target="_blank" href='https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9813775'><img src='../img/paypal.png' /></a>
+-->
+						<a id="shareOnFacebook"><img src='../img/facebook_32.png' /></a>
+						&nbsp;
+						<a id="shareOnTwitter"><img src='../img/twitter_32.png' /></a>
+					</div>
+				</div>
+			</div>
+
+			<div class="tab" id="tabs-defaults">
+				<div id="mappingsDialog">
+					<h1 id="accounts"><span data-locale_message="editor_html_default_sig">Default signatures</span>
+						<span class="helpMark premiumElement" link="http://www.wisestamp.com/premium-features-faq#faq_128"></span>
+					</h1>
+					<span data-locale_message="editor_html_choose_sig">Choose which signature to use when composing or replying to emails</span>
+					<br/>
+					<div class="note rounded2 hidden" id="noaccounts">
+						<span data-locale_message="editor_html_manually_change">To use this feature you will need to manually change the signature for an email account in the compose window. Then the account will appear here for more configuration.</span>
+					</div>
+					<div id="mappings-wrapper">
+						<table id="mappings" cellpadding="0" cellspacing="0">
+						</table>
+					</div>
+					<div class="controls">
+						<a class="add"><img src='../img/add.png' style='vertical-align: middle; padding-bottom: 5px' /></a>
+						<a class="add" data-locale_message="editor_html_add_account">Add Email Account</a>
+					</div>
+					<br/>
+
+					<h1 data-locale_message="editor_html_sig_position">Signature position</h1>
+					<!--
+					<input type=checkbox id=insertOnCompose /><label for=insertOnCompose> Insert automatically on compose</label>
+					<br/>
+					<input type=checkbox id=insertOnReply /><label for=insertOnReply> Insert automatically on reply/forward</label>
+					<hr class=spacer />
+					 -->
+					<input type="checkbox" id="insertAboveQuote" /><label for="insertAboveQuote" data-locale_message="editor_html_position_sig_above"> Position signature above quoted text when replying or forwarding</label><div class="notes thunderbird"><span data-locale_message="editor_html_position_sig_thunderbird_start">In Thunderbird signature position should be changed using <a id="composition-and-addressing-link" data-locale_message="editor_html_position_sig_thunderbird_link">Composition & Addressing</a> <span data-locale_message="editor_html_position_sig_thunderbird_end">in Account Settings</span></div>
+				</div>
+			</div>
+
+			<div class="tab" id="tabs-sync">
+				<div id="syncDialog">
+					<h1 data-locale_message="editor_html_sync_and_backup">Sync and Backup</h1>
+					<table width="100%" id="syncActions" border="0" cellpadding="0" cellspacing="0">
+						<tr valign="top">
+							<td><input type="submit" value='Save & Backup' data-locale_message="editor_html_save_and_backup" id="store-settings" /></td>
+							<td class="note" data-locale_message="editor_html_save_to_server">Save your signatures and settings to the WiseStamp server.</td>
+						</tr>
+						<tr valign="top">
+							<td><input type="submit" value='Load Settings' data-locale_message="editor_html_load_settings" id="load-settings" /></td>
+							<td class="note" data-locale_message="editor_html_load_from_server">Load your stored signatures and settings from the WiseStamp server.</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+
+			<div class="tab" id="tabs-advanced">
+				<div id="advancedDialog">
+					<h1 data-locale_message="editor_html_reset">Reset settings</h1>
+					<input type="submit" data-locale_message="editor_html_reset_button" id="resetSettings" value="Reset" />
+					<span data-locale_message="editor_html_reset_all">Reset all WiseStamp settings to default and start over.</span>
+
+					<br/><br/>
+					<h1 data-locale_message="editor_html_repair">Repair</h1>
+					<input type="submit" data-locale_message="editor_html_repair" id="repair" value="Repair" />
+					<span data-locale_message="editor_html_repair_install">Repair WiseStamp installation</span>
+					<br/><br/>
+
+					<div id="testers" class="hidden">
+						<h1 data-locale_message="editor_html_testers">Testers options</h1>
+						<div id="promoSelect" class="hidden">
+							<h2 data-locale_message="editor_html_select_promo">Select promotion</h2>
+							<input type="submit" id="change-promotion" data-locale_message="editor_html_change_promo" value="Change promotion" />
+							&nbsp;&nbsp;<span data-locale_message="editor_html_current_promo">Current promotion id - </span><span id="currentPromotionId"></span>
+						</div>
+						<br/>
+
+						<div id="config">
+							<!-- content is inserted via settingsDlg.js -->
+						</div>
+						<br />
+
+						<div id="findUpdate">
+							<h2 data-locale_message="editor_html_update">Update</h2>
+							<input type="submit" id="findUpdateButton" data-locale_message="editor_html_find_update" value="Find update" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="preview" title='Preview'></div>
+	<div id="submitBug" title='Submit Bug'></div>
+
+	<div id="templatesDialog">
+		<h2 data-locale_message="editor_html_click_template">Click on the template you like and it will be added to the editor.</h2>
+
+		<div class="templates-container">
+		</div>
+
+		<div class="rounded4 upgrade">
+			<a>
+				<div class="colorButton" id="upgrade-from-templates" data-locale_message="editor_html_upgrade">Upgrade now</div>
+			</a>
+			<h2 data-locale_message="editor_html_get_more">Get more with WiseStamp premium</h2>
+			<h3 data-locale_message="editor_html_upgrade_benefits">Upgrade now to enjoy more templates and more features! Find the best plan for you and enjoy the benefits.</h3>
+		</div>
+
+		<div class="pro-templates-container rounded4">
+			<h2 data-locale_message="editor_html_premium_templates">Premium Templates</h2>
+			<div style="clear:both"></div>
+			<div id="templatesPro">
+			</div>
+		</div>
+	</div>
+
+	<div id="helpDialog">
+		<div id="loading" style="position: absolute">
+			<img src='../img/loading.gif'/> <span data-locale_message="editor_html_loading">Loading...</span>
+		</div>
+		<div id="helpContent">
+			<div id="remote">
+			</div>
+			<h2 data-locale_message="editor_html_more_help">More help?</h2>
+			<span data-locale_message="editor_html_go_to">Go to our</span> <a id="helpOnline" class="underlined" data-locale_message="editor_html_help_center">Help Center</a><span data-locale_message="editor_html_or"> or </span><button id="submitBug" type="button" class="ui-state-default ui-corner-all" data-locale_message="editor_html_submit_bug">Submit a bug</button>
+		</div>
+	</div>
+
+	<div id="fbRegisterDialog">
+	</div>
+
+	<div id="customIconsDialog" style="display:none">
+		<h2 data-locale_message="editor_html_custom_icons_added">Custom icons added here will be available in the social icons list.</h2><br/>
+		<table width=100% border=0 cellpadding=0 cellspacing=0>
+			<tr class="header">
+				<td data-locale_message="editor_html_icon">Icon</td>
+				<td data-locale_message="editor_html_name">Name</td>
+				<td data-locale_message="editor_html_location">Location</td>
+				<td></td>
+			</tr>
+		</table>
+		<div style="margin-top: 1em;">
+			<a id="addCustomIcon"><img src='../img/add.png' style='vertical-align: middle; padding-bottom: 5px'/></a>
+			<a id="addCustomIcon" data-locale_message="editor_html_add">Add</a>
+		</div>
+	</div>
+
+	<div style="display:none">
+		<div id="afterRegisterPopup">
+			<h1 data-locale_message="editor_html_account_created">Congratulations! Your account was created!</h1>
+			<span data-locale_message="editor_html_you_can_sync">You can now go to Settings => Sync to backup your settings.</span>
+			<h2 data-locale_message="editor_html_want_more">Want to get more features from WiseStamp?</h2>
+			<ul>
+				<li><span data-locale_message="editor_html_multiple_sigs">Multiple signatures</span>
+				<li><span data-locale_message="editor_html_assigning_sigs">Assigning signatures to accounts</span>
+				<li><span data-locale_message="editor_html_sig_templates">Signatures templates</span>
+				<li><span data-locale_message="editor_html_custom_icons">Custom social and IM icons</span>
+				<li><span data-locale_message="editor_html_more">And more!</span>
+			</ul>
+			<div class="colorButtonContainer">
+				<a class="colorButton" id="upgrade-from-popup">
+					<div class="colorButton">
+						<span data-locale_message="editor_html_upgrade_now">Upgrade Now!</span><br/>
+						<span class="note" data-locale_message="editor_html_30_days">30 days money back guaranteed</span>
+					</div>
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<div id="wizard" class="hidden"><iframe type="content" src="about:blank"></iframe></div>
+	<div style="display:none">
+		<form method="post" action="about:blank" id="upload-form" name="upload-form">
+			<input type="hidden" name="u" id="post-user" />
+			<input type="hidden" name="p" id="post-password" />
+			<input type="hidden" name="img" id="post-upload" size="15" />
+		</form>
+	</div>
+
+	<div id="hidden-dialogs"></div>
+
+	<div id="wrapper_cont" class="hidden">
+		<div class="sig_wrapper">
+			<div class="sig_title" data-locale_message="editor_html_how_sig_appears">This is how your signature will appear in your emails</div>
+			<div class="emailExample">
+				<div class="emailOverlay">&nbsp;</div>
+				<label>To:</label> <input type="text">
+				<br>
+				<label>Subject:</label> <input type="text">
+
+				<div class="emailContent">
+					<div class="emailText">
+						<div class="currentSignature side"></div>
+						Dear Mr. Brown,
+						<p>With reference to our telephone conversation today, I am writing to confirm your order for Cheddar.
+							The order will be shipped within three days.</p>
+						<p>All the best,<br/>James</p>
+					</div>
+					<div class="currentSignature bottom"></div>
+				</div>
+			</div>​
+		</div>
+	</div>
+
+	<!-- globalLoadingOverlay is IE only because it causes issues with WiseStampEditor.adjustHeightAndWidth -->
+	<!--[if IE]>-->
+		<span id="globalLoadingOverlay">
+			<div class="waiting"></div>
+			<div class="waiting icon" data-locale_message="editor_html_loading">Loading...</div>
+		</span>
+
+
+</body>
+</html>

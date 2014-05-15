@@ -292,12 +292,12 @@ var MozillaOptionsStore = {
   // service.
   _sendRequest: function(data, callback) { // analogue of chrome.extension.sendMessage
     var prefs, prefKeys, prefsObj, request, sender, i;
-
+throw Utils.global.Components.classes;
     try {
       prefs = Utils.global.Components.classes['@mozilla.org/preferences-service;1']
                           .getService(Components.interfaces.nsIPrefService)
                           .getBranch('extensions.markdown-here.');
-
+                          alert('asdf')
       if (data.verb === 'get') {
         prefKeys = prefs.getChildList('');
         prefsObj = {};

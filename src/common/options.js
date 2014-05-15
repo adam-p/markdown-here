@@ -70,7 +70,7 @@ function onLoad() {
   // Restore previously set options (asynchronously)
   //
 
-  OptionsStore.get(function(prefs) {
+  OptionsStore.get(function(prefs) {alert('asdf')
     cssEdit.value = prefs['main-css'];
     cssSyntaxEdit.value = prefs['syntax-css'];
 

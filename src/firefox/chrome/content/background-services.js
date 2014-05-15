@@ -132,7 +132,7 @@ function prefsAccessRequestHandler(request) {
 
   prefs = Components.classes['@mozilla.org/preferences-service;1']
                     .getService(Components.interfaces.nsIPrefService)
-                    .getBranch('extensions.markdown-here.');
+                    .getBranch('extensions.markdown-here.');alert(prefs)
 
   if (request.verb === 'get') {
     prefKeys = prefs.getChildList('');
