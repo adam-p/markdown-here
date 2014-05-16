@@ -1,15 +1,24 @@
 Change Log
 ==========
 
-2014-xx-yy: v2.10.1
+2014-xx-yy: v2.11.0
 -------------------
+
+* Added ability to **de-render after saving**. After you render and save an **email draft** or an **Evernote** Note or a **Google Group post** or a **Blogger post** (or etc.), you can go back, edit it, and de-render it back to Markdown. 
+  * Fixes [#85](https://github.com/adam-p/markdown-here/issues/85) and [#86](https://github.com/adam-p/markdown-here/issues/86). Thanks to [Alfredo Canziani](https://github.com/Atcold), [HU, Pili](https://github.com/hupili), [Dima Tisnek](https://github.com/dimaqq), [dayer4b](https://github.com/dayer4b), [Bryan Cribbs](https://github.com/bdcribbs), [jmerlevede](https://github.com/jmerlevede), [portmantoad](https://github.com/portmantoad), and [Kurtis Rainbolt-Greene](https://github.com/krainboltgreene) for reporting the issue, suggesting solutions, and helping to test.
+  * Details for nerds: Below the rendered MD, in the same wrapper `div`, there is now a `div` with its `title` attribute set to the original MD (base64), containing a zero-width space, and styled to be zero-height. This delightful hack was the best combination of factors that ensured the raw MD would survive.
 
 * Added ability to disable GFM line breaks.
   * Thanks to [ase34](https://github.com/ase34) and [violahs](https://github.com/violahs) for [requesting this](https://github.com/adam-p/markdown-here/issues/103).
 
-* [Fixed bug](https://github.com/adam-p/markdown-here/issues/51): Links with URL text (like `[http://example.com](http://example.com`) weren't rendering properly.
+* [Fixed bug #51](https://github.com/adam-p/markdown-here/issues/51): Links with URL text (like `[http://example.com](http://example.com`) weren't rendering properly.
   * Thanks to [Christopher Jeffrey](https://github.com/chjj) -- the author of [the rendering library](https://github.com/chjj/marked) that Markdown Here uses! -- for this fix.
-  
+
+* Altered default H1 and H2 header styles to match new GitHub styling. You'll have to click "Reset to Default" to get these styles.
+  * Fixes [#177](https://github.com/adam-p/markdown-here/issues/177). Thanks to [Steven Willis](https://github.com/onlynone).
+
+* [Fixed bug #173](https://github.com/adam-p/markdown-here/issues/173): Markdown Here was generating lots of errors in the console on sites with an `iframe` that use tight security  (like jsbin.com). Thanks to [Devin Weaver](https://github.com/sukima).
+
 
 2014-01-29: v2.10.0
 -------------------
