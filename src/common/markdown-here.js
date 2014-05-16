@@ -433,7 +433,10 @@ function renderMarkdown(focusedElem, selectedRange, markdownRenderer, renderComp
     // title intact when saving.
     // `&#8203;` is a zero-width space: https://en.wikipedia.org/wiki/Zero-width_space
     // Thunderbird will discard the `div` if there's no content.
-    rawHolder = '<div title="' + WRAPPER_TITLE_PREFIX + btoa(originalHtml) + '">&#8203;</div>';
+    rawHolder = '<div ' +
+                'title="' + WRAPPER_TITLE_PREFIX + Utils.utf8StringToBase64(originalHtml) + '" ' +
+                'style="height:0;font-size:0em" ' +
+                '>&#8203;</div>';
 
     // Wrap our pretty HTML in a <div> wrapper.
     // We'll use the wrapper as a marker to indicate that we're in a rendered state.
@@ -484,7 +487,7 @@ function unrenderMarkdown(wrapperElem) {
   // wrecks our ability to un-base64 it. So strip whitespace.
   originalMdHtml = originalMdHtml.replace(/\s/g, '');
 
-  originalMdHtml = atob(originalMdHtml);
+  originalMdHtml = Utils.base64ToUTF8String(originalMdHtml);
 
   Utils.saferSetOuterHTML(wrapperElem, originalMdHtml);
 }
