@@ -1,7 +1,7 @@
 Change Log
 ==========
 
-2014-xx-yy: v2.11.0
+2014-05-17: v2.11.0
 -------------------
 
 * Added ability to **de-render after saving**. After you render and save an **email draft** or an **Evernote** Note or a **Google Group post** or a **Blogger post** (or etc.), you can go back, edit it, and de-render it back to Markdown. 
