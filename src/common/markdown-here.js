@@ -435,7 +435,7 @@ function renderMarkdown(focusedElem, selectedRange, markdownRenderer, renderComp
     // Thunderbird will discard the `div` if there's no content.
     rawHolder = '<div ' +
                 'title="' + WRAPPER_TITLE_PREFIX + Utils.utf8StringToBase64(originalHtml) + '" ' +
-                'style="height:0;font-size:0em" ' +
+                'style="height:0;font-size:0em;padding:0;margin:0;" ' +
                 '>&#8203;</div>';
 
     // Wrap our pretty HTML in a <div> wrapper.
