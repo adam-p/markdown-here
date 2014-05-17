@@ -138,7 +138,11 @@ function walkDOM(node, func) {
 // NOTE: This function is broken in Postbox: https://github.com/adam-p/markdown-here/issues/179
 function rangeIntersectsNode(range, node) {
   var nodeRange;
-  if (range.intersectsNode) {
+
+  // adam-p: I have found that Range.intersectsNode gives incorrect results in
+  // Chrome (but not Firefox). So we're going to use the fail-back code always,
+  // regardless of whether the current platform implements Range.intersectsNode.
+  if (false && range.intersectsNode) {
     return range.intersectsNode(node);
   }
   else {
@@ -1077,7 +1081,6 @@ Utils.getMozStringBundle = getMozStringBundle;
 Utils.getSafariStringBundle = getSafariStringBundle;
 Utils.registerStringBundleLoadListener = registerStringBundleLoadListener;
 Utils.getMessage = getMessage;
-Utils.base64EncArr = base64EncArr;
 Utils.utf8StringToBase64 = utf8StringToBase64;
 Utils.base64ToUTF8String = base64ToUTF8String;
 

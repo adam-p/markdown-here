@@ -485,4 +485,76 @@ describe('Utils', function() {
     });
   });
 
+  describe('walkDOM', function() {
+    beforeEach(function() {
+      $('body').append($('<div id="test-container" style="display:none"><div id="test-elem"></div></div>'));
+    });
+
+    afterEach(function() {
+      $('#test-container').remove();
+    });
+
+    it('should find an element in the DOM', function() {
+      var found = false;
+      Utils.walkDOM($('body')[0], function(node) {
+        found = found || node.id === 'test-elem';
+      });
+      expect(found).to.be.true;
+    });
+  });
+
+  describe('utf8StringToBase64', function() {
+    it('should correctly encode a foreign-character string', function() {
+      var str = 'hello, こんにちは';
+      var base64 = 'aGVsbG8sIOOBk+OCk+OBq+OBoeOBrw==';
+      expect(Utils.utf8StringToBase64(str)).to.equal(base64);
+    });
+  });
+
+  describe('base64ToUTF8String', function() {
+    it('should correctly encode a foreign-character string', function() {
+      var str = 'این یک جمله آزمون است.';
+      var base64 = '2KfbjNmGINuM2qkg2KzZhdmE2Ycg2KLYstmF2YjZhiDYp9iz2Kou';
+      expect(Utils.base64ToUTF8String(base64)).to.equal(str);
+    });
+  });
+
+  describe('rangeIntersectsNode', function() {
+    beforeEach(function() {
+      $('body').append($('<div id="test-container" style="display:none"><div id="test-elem-1"></div><div id="test-elem-2"></div></div>'));
+    });
+
+    afterEach(function() {
+      $('#test-container').remove();
+    });
+
+    it('should detect a node in a range', function() {
+      var range = document.createRange();
+      range.selectNode($('#test-container')[0]);
+
+      // Check the node that is selected.
+      expect(Utils.rangeIntersectsNode(range, $('#test-container')[0])).to.be.true;
+
+      // Check a node that is within the node that is selected.
+      expect(Utils.rangeIntersectsNode(range, $('#test-elem-2')[0])).to.be.true;
+    });
+
+    it('should not detect a node not in a range', function() {
+      var range = document.createRange();
+      range.selectNode($('#test-elem-1')[0]);
+
+      // The parent of the selected node *is* intersected.
+      expect(Utils.rangeIntersectsNode(range, $('#test-container')[0])).to.be.true;
+
+      // The sibling of the selected node *is not* intersected.
+      expect(Utils.rangeIntersectsNode(range, $('#test-elem-2')[0])).to.be.false;
+
+      // I have found that Range.intersectsNode is broken on Chrome. I'm adding
+      // test to see if/when it gets fixed.
+      if (typeof(window.chrome) !== 'undefined') {
+        expect(range.intersectsNode($('#test-elem-2')[0])).to.be.true;
+      }
+    });
+  });
+
 });
