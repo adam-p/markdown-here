@@ -8,6 +8,9 @@ Change Log
   * Fixes [#85](https://github.com/adam-p/markdown-here/issues/85) and [#86](https://github.com/adam-p/markdown-here/issues/86). Thanks to [Alfredo Canziani](https://github.com/Atcold), [HU, Pili](https://github.com/hupili), [Dima Tisnek](https://github.com/dimaqq), [dayer4b](https://github.com/dayer4b), [Bryan Cribbs](https://github.com/bdcribbs), [jmerlevede](https://github.com/jmerlevede), [portmantoad](https://github.com/portmantoad), and [Kurtis Rainbolt-Greene](https://github.com/krainboltgreene) for reporting the issue, suggesting solutions, and helping to test.
   * Details for nerds: Below the rendered MD, in the same wrapper `div`, there is now a `div` with its `title` attribute set to the original MD (base64), containing a zero-width space, and styled to be zero-height. This delightful hack was the best combination of factors that ensured the raw MD would survive.
 
+* Added a partial Korean translation, thanks to [dotvezz](https://crowdin.net/profile/dotvezz). 
+  * **Do you speak something in addition to English?** [At least half](https://addons.mozilla.org/en-US/firefox/addon/markdown-here/statistics/usage/languages/?last=30) of all Markdown Here users are not English, but Japanese is the only complete translation we have. **It's easy to help with translations** -- just try out the [Crowdin project for Markdown Here](https://crowdin.net/project/markdown-here). Thanks!
+
 * Added ability to disable GFM line breaks.
   * Thanks to [ase34](https://github.com/ase34) and [violahs](https://github.com/violahs) for [requesting this](https://github.com/adam-p/markdown-here/issues/103).
 
