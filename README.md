@@ -144,7 +144,7 @@ The *Markdown Here* Options page can be accessed via the Chrome, Firefox, Safari
 
 For Chrome and Firefox, any changes made in the *Markdown Here* Options are automatically synchronized between your other installations of that browser (if you have the sync feature enabled in the browser). 
 
-![screenshot of options](https://raw.github.com/adam-p/markdown-here/master/store-assets/markdown-here-chrome-options.gimp.png)
+![screenshot of options](https://raw.githubusercontent.com/adam-p/markdown-here/master/store-assets/markdown-here-chrome-options-1.gimp.png)
 
 ## Troubleshooting
 
