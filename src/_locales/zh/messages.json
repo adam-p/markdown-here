@@ -79,7 +79,7 @@
     "description": "Text on the notification shown when Markdown Here has been updated"
   },
   "upgrade_notification_changes_tooltip": {
-    "message": "Click to the see the changes in this release",
+    "message": "单击以查看这个版本的改动",
     "description": "Tooltip text on the link that opens the changes list"
   },
   "upgrade_notification_dismiss_tooltip": {
