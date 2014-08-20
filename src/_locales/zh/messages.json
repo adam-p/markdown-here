@@ -79,7 +79,7 @@
     "description": "Text on the notification shown when Markdown Here has been updated"
   },
   "upgrade_notification_changes_tooltip": {
-    "message": "单击以查看这个版本的改动",
+    "message": "单击查看这个版本的更新日志",
     "description": "Tooltip text on the link that opens the changes list"
   },
   "upgrade_notification_dismiss_tooltip": {
@@ -125,7 +125,7 @@
     "description": "A section title"
   },
   "options_page__resources_cheatsheet_link": {
-    "message": "如果你刚开始接触Markdown， <a href=\"https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet\" target=\"_blank\">Markdown Here Cheatsheet</a> 是本入门手册."
+    "message": "如果你刚开始接触Markdown， <a href=\"https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet\" target=\"_blank\">Markdown Here Cheatsheet</a> 是本不错的入门手册."
   },
   "options_page__advanced_usage": {
     "message": "如果要查看更多信息和用法，参见 <a href=\"https://github.com/adam-p/markdown-here\" target=\"_blank\">Markdown Here项目主页</a>. 你会在下方看到选项."
@@ -134,102 +134,102 @@
     "message": "资询， 讨论，或者只是和同道中人打个招呼，戳 <a href=\"https://groups.google.com/forum/?fromgroups=#!forum/markdown-here\" target=\"_blank\">markdown-here Google Group</a>."
   },
   "options_page__mdh_wiki": {
-    "message": "Visit the <a href=\"https://github.com/adam-p/markdown-here/wiki\" target=\"_blank\">Markdown Here wiki</a> for info about <a href=\"https://github.com/adam-p/markdown-here/wiki/Compatibility\" target=\"_blank\">where else MDH works</a> and more <a href=\"https://github.com/adam-p/markdown-here/wiki/Tips-and-Tricks\" target=\"_blank\">tips and tricks</a>."
+    "message": "访问 <a href=\"https://github.com/adam-p/markdown-here/wiki\" target=\"_blank\">Markdown Here wiki</a> 以查看 <a href=\"https://github.com/adam-p/markdown-here/wiki/Compatibility\" target=\"_blank\">MDH适用的服务</a> 以及更多 <a href=\"https://github.com/adam-p/markdown-here/wiki/Tips-and-Tricks\" target=\"_blank\">使用提示和窍门</a>."
   },
   "options_page__next_steps": {
-    "message": "If you're interested in what the future holds for Markdown Here, check out the <a href=\"https://github.com/adam-p/markdown-here#next-steps\" target=\"_blank\">Next Steps section</a> of the README."
+    "message": "如果你对Markdown Here的未来发展感兴趣, 查看 <a href=\"https://github.com/adam-p/markdown-here#next-steps\" target=\"_blank\">README的Next Steps部分</a>。"
   },
   "options_page__donate_plea_1": {
     "message": "Once you decide Markdown Here is pretty sweet, please help me to buy some flowers for my wife so she's not too upset about how much time I spend working on it. <strong>Thank you!</strong>"
   },
   "options_page__donate_plea_2": {
-    "message": "<strong>Help make Markdown Here better!</strong>"
+    "message": "<strong>帮助Markdown Here变的更好!</strong>"
   },
   "options_page__donate_plea_3": {
-    "message": "<strong>Help support the development of Markdown Here!</strong>"
+    "message": "<strong>帮助支持Markdown Here的发展!</strong>"
   },
   "options_page__donate_plea_4": {
     "message": "You know what makes it easier to keep Markdown Here working on Chrome, Firefox, Thunderbird, Postbox, Safari, Opera, Gmail, Yahoo, Hotmail, Blogger, Evernote, etc.? <strong>Coffee!</strong>"
   },
   "options_page__other_donation_options": {
-    "message": "Other donation options",
+    "message": "其它捐赠选项",
     "description": "Link to a page that provides other ways to donate"
   },
   "options_page__primary_css_title": {
-    "message": "Primary Styling CSS",
+    "message": "基本渲染CSS",
     "description": "section title"
   },
   "options_page__reset_primary_css": {
-    "message": "Reset to Default",
+    "message": "恢复默认",
     "description": "text on button to reset Primary Styling CSS"
   },
   "options_page__syntax_highlighting_css_title": {
-    "message": "Syntax Highlighting CSS",
+    "message": "语法高亮CSS",
     "description": "section title"
   },
   "options_page__syntax_highlighting_theme_label": {
-    "message": "Theme:",
+    "message": "主题:",
     "description": "label for the syntax highlighting theme combox box"
   },
   "options_page__preview_title": {
-    "message": "Preview",
+    "message": "预览",
     "description": "section title for the Markdown preview section"
   },
   "options_page__markdown_toggle_button_text": {
-    "message": "Markdown Toggle",
+    "message": "Markdown转换",
     "description": "button text for Markdown Toggle button"
   },
   "options_page__notes_title": {
-    "message": "Notes",
+    "message": "注意",
     "description": "section title"
   },
   "options_page__note_options_sync": {
-    "message": "Changes are automatically saved and synchronized (if sync is enabled in your browser)."
+    "message": "改动会自动保存并同步 (如果你的浏览器启用了同步)."
   },
   "options_page__note_syntax_styles_after_primary": {
-    "message": "The syntax highlighting styles are applied after the primary styling, and so take precedence."
+    "message": "语法高亮样式会在基本渲染完成后生效, 所以有较高优先级。"
   },
   "options_page__note_default_client_styles": {
-    "message": "Some email editors and browsers impose their own styles. Those may not be apparent here."
+    "message": "一些电子邮件编辑器和浏览器会加入自己的风格。这里可能显示不出来."
   },
   "options_page__tex_math_title": {
-    "message": "TeX Mathematical Formulae Support"
+    "message": "TeX数学公式支持"
   },
   "options_page__tex_math_reset_button": {
-    "message": "Reset to Default",
+    "message": "恢复默认",
     "description": "text on button to reset TeX math option"
   },
   "options_page__tex_math_privacy_heading": {
-    "message": "<strong>Privacy Issues:</strong>",
+    "message": "<strong>隐私问题:</strong>",
     "description": "heading for warnings about TeX math privacy concerns"
   },
   "options_page__tex_math_privacy_issue_1": {
-    "message": "To generate the image for the formula, a request is sent to Google. That effectively means that you are sharing your formula with Google. It also means that recipients of your message will be making a request to Google to have the image rendered. That's why this option is disabled by default.",
+    "message": "为了生成公式的图片, 浏览器会向谷歌发送请求. 这事实上意味着你在和谷歌分享公式。 就是说你编辑的信息会被发给谷歌以转换成图片，所以这个选项默认是关闭的。",
     "description": "one of the TeX math privacy concerns"
   },
   "options_page__tex_math_privacy_issue_2": {
-    "message": "If you customize the formula rendering tag, you should use a secure (https://) path. Not all rendering services provide a secure option.",
+    "message": "如果你自定义了公式转换标签, 你应该使用安全 (https://) 路径.不是所有的转换服务都支持安全选项。",
     "description": "one of the TeX math privacy concerns"
   },
   "options_page__tex_math_customization_heading": {
-    "message": "<strong>Customization and Use:</strong>",
+    "message": "<strong>定制和使用:</strong>",
     "description": "heading for customization and use info"
   },
   "options_page__tex_math_customization_1": {
-    "message": "If this feature is enabled, text between dollar signs — <code>$$</code> — will be interpreted as mathematical formulae. For example, <code>$$\\Delta$$</code> would be rendered as a delta symbol.",
+    "message": "如果启用此功能，美元符号之间的文本 — <code>$$</code> — 将被解释为数学公式。例如， <code>$$\\Delta$$</code> 将显示为一个delta符号。",
     "description": "Note: Double dollar signs ($$) are necessary to get a single dollar sign."
   },
   "options_page__tex_math_customization_2": {
-    "message": "For render customization options, see the <a href=\"https://developers.google.com/chart/infographics/docs/formulas\" target=\"_blank\">Google Charts documentation</a> for this service."
+    "message": "为了定制公式转换, 戳 <a href=\"https://developers.google.com/chart/infographics/docs/formulas\" target=\"_blank\">Google Charts documentation</a> 查看这项服务。"
   },
   "options_page__tex_math_customization_3": {
-    "message": "A good resource for creating TeX formulae is the <a href=\"https://www.codecogs.com/latex/about.php\" target=\"_blank\">CodeCogs Equation Editor</a>."
+    "message": "用于创建TeX公式的一个很好的资源是 <a href=\"https://www.codecogs.com/latex/about.php\" target=\"_blank\">codecogs公式编辑器</a>."
   },
   "options_page__tex_math_customization_4": {
-    "message": "Formulae are rendered to images, so email recipients will have to enable images to be shown to see the rendering."
+    "message": "公式会被转换为图片,所以电邮收件人必须启用图像显示才能看到公式。"
   },
   "options_page__tex_math_customization_5": {
-    "message": "If you customize the rendering tag, you can (and should) use either or both of <code>{mathcode}</code> and <code>{urlmathcode}</code> as placeholders.",
+    "message": "如果你要定制转换标签, 你可以（也应该）使用 <code>{mathcode}</code> 和 <code>{urlmathcode}</code> 作为占位符.",
     "description": "Please do not translate {mathcode} and {urlmathcode}"
   },
   "options_page__tex_math_customization_5_1": {
@@ -241,11 +241,11 @@
     "description": "Please do not translate {mathcode} and {urlmathcode}"
   },
   "options_page__tex_math_customization_6": {
-    "message": "If you customize the <code>&lt;img&gt;</code> tag, you should include an <code>alt</code> attribute that has as human-readable a value as possible, like <code>{mathcode}</code>. This value of this attribute will be used for the plaintext version of the email (when sent from Gmail and Thunderbird), and used by screen readers for sight-impaired recipients.",
+    "message": "如果你要定制 <code>&lt;img&gt;</code> 标签, 你应该使用 <code>alt</code> 属性 that has as human-readable a value as possible, like <code>{mathcode}</code>. This value of this attribute will be used for the plaintext version of the email (when sent from Gmail and Thunderbird), and used by screen readers for sight-impaired recipients.",
     "description": "Please do not translate {mathcode} and {urlmathcode}"
   },
   "options_page__hotkey_title": {
-    "message": "Hotkey (aka keyboard shortcut)",
+    "message": "快捷键",
     "description": "A section title"
   },
   "options_page__hotkey_shift_key": {
@@ -265,37 +265,37 @@
     "description": "plus sign that connects the hotkey buttons"
   },
   "options_page__hotkey_warning": {
-    "message": "Is the key an alphanumeric value?",
+    "message": "这是一个字母或数字吗?",
     "description": "warning shown if the user chooses an illegal hotkey value"
   },
   "options_page__hotkey_note_1": {
-    "message": "Chrome: You must reload your email web page for the new hotkey setting to take effect."
+    "message": "Chrome: 你必须重新载入您的电子邮件页面，以使新的热键设置生效."
   },
   "options_page__hotkey_note_2": {
-    "message": "Firefox and Thunderbird: You must restart the application for the new hotkey setting to take effect."
+    "message": "Firefox and Thunderbird: 你必须重启应用以使新的热键设置生效."
   },
   "options_page__hotkey_note_3": {
-    "message": "You must use an alphanumeric key for the shortcut (varies by language and keyboard)."
+    "message": "你必须使用字母或数字作为快捷键（因语言和键盘而异）."
   },
   "options_page__hotkey_note_4": {
-    "message": "The Windows key and the OS X &#8984; key cannot be used in the shortcut."
+    "message": "Windows键和OS X &#8984; 键不能被用作快捷键."
   },
   "options_page__hotkey_note_5": {
-    "message": "To disable the use of this hotkey, leave the \"key\" text box empty."
+    "message": "要禁用快捷键, 留空 \"key\" ."
   },
   "options_page__advanced_title": {
-    "message": "Advanced and Miscellaneous",
+    "message": "高级选项及其它",
     "description": "A section title"
   },
   "options_page__forgot_to_render_label": {
-    "message": "<b>Enable \"forgot-to-render\" check.</b>",
+    "message": "<b>启用 \"忘记转换\" 检查.</b>",
     "description": "Label for the checkbox that enables the forgot-to-render feature"
   },
   "options_page__forgot_to_render_1": {
-    "message": "Currently only supported in the Gmail web interface and Thunderbird (and Postbox and Icedove)."
+    "message": "目前只支持Gmail网页版和Thunderbird (还有Postbox 和 Icedove)."
   },
   "options_page__forgot_to_render_2": {
-    "message": "When you send an email, this checks the content to see if it looks like you wrote it in Markdown, but forgot to render it (i.e., click \"Markdown Toggle\") before sending. This may need to be disabled if it interferes with your ability to send email."
+    "message": "当你发送电邮时, 这个选项会检查邮件内容是不是未转换的Markdown. 这可能会干扰你正常发送邮件."
   },
   "options_page__forgot_to_render_3": {
     "message": "If you find yourself disabling this, <em>please</em> let me know why and how it could be better. Create <a href=\"https://groups.google.com/forum/#!forum/markdown-here\" target=\"_blank\">a post on the \"markdown-here\" Google Group</a> or <a href=\"https://github.com/adam-p/markdown-here/issues\" target=\"_blank\">an issue in the Github project</a>. Thanks."
@@ -345,7 +345,7 @@
     "message": "It's disabled by default because it <a href=\"https://github.com/adam-p/markdown-here/issues/155\" target=\"_blank\">creates visual noise in Thunderbird</a>. (And most people probably won't use the feature.)"
   },
   "options_page__gfm_line_breaks_enabled_label": {
-    "message": "<b>Enable GFM line breaks.</b>",
+    "message": "<b>启用GFM换行。</b>",
     "description": "Label for the checkbox that enables the support of 'Github-flavored Markdown' line breaks."
   }
 }
