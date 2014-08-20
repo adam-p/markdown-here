@@ -241,7 +241,7 @@
     "description": "Please do not translate {mathcode} and {urlmathcode}"
   },
   "options_page__tex_math_customization_6": {
-    "message": "如果你要定制 <code>&lt;img&gt;</code> 标签, 你应该使用 <code>alt</code> 属性 that has as human-readable a value as possible, like <code>{mathcode}</code>. This value of this attribute will be used for the plaintext version of the email (when sent from Gmail and Thunderbird), and used by screen readers for sight-impaired recipients.",
+    "message": "如果你要定制 <code>&lt;img&gt;</code> 标签, 你应该使 <code>alt</code> 属性包含尽可能可读的值, 如 <code>{mathcode}</code>. 此属性的值将被用于电子邮件的纯文本版（当从Gmail和Thunderbird发送时），并被使用屏幕阅读器的视力受损者所使用.",
     "description": "Please do not translate {mathcode} and {urlmathcode}"
   },
   "options_page__hotkey_title": {
@@ -339,10 +339,10 @@
     "description": "Label for the checkbox that enables the automatic header anchors feature. This means that an 'anchor' is created at every heading (H1, H2, etc.) in the user's Markdown. The user can then create links that will jump to these anchors, like in the table of contents of a document."
   },
   "options_page__header_anchors_enabled_1": {
-    "message": "This is great if you want to put a table of contents or other internal links into your content. <a href=\"https://github.com/adam-p/markdown-here/wiki/Tips-and-Tricks#wiki-header-anchors\" target=\"_blank\">Learn about how to use it in the MDH wiki.</a>"
+    "message": "如果你想把一个表的内容或其他内部链接加入到你的内容中，这会很有用. <a href=\"https://github.com/adam-p/markdown-here/wiki/Tips-and-Tricks#wiki-header-anchors\" target=\"_blank\">在MDH wiki中查看如何使用.</a>"
   },
   "options_page__header_anchors_enabled_2": {
-    "message": "It's disabled by default because it <a href=\"https://github.com/adam-p/markdown-here/issues/155\" target=\"_blank\">creates visual noise in Thunderbird</a>. (And most people probably won't use the feature.)"
+    "message": "默认禁用，因为它会 <a href=\"https://github.com/adam-p/markdown-here/issues/155\" target=\"_blank\">在Thunderbird产生视觉干扰</a>. (况且大多数人用不到.)"
   },
   "options_page__gfm_line_breaks_enabled_label": {
     "message": "<b>启用GFM换行。</b>",
