@@ -91,33 +91,33 @@
     "description": "Error message shown to user if there's nothing found to revert or render."
   },
   "unrendering_modified_markdown_warning": {
-    "message": "The rendered Markdown appears to have been modifed.\nIf you unrender it, your changes since rendering will be lost.\n\nAre you sure you wish to unrender?",
+    "message": "已转换的Markdown内容好像有了新改动.\n如果你再次转换它，新改动的内容会丢失。\n\n你确定要转换吗?",
     "description": "Warning shown to the user if she tries to revert some rendered Markdown that they've modified since rendering. The user will lose their modifications if they proceed."
   },
   "options_page__page_title": {
-    "message": "Markdown Here Options"
+    "message": "Markdown Here选项"
   },
   "options_page__basic_usage": {
-    "message": "Basic Usage"
+    "message": "基本用法"
   },
   "options_page__reload_restart": {
-    "message": "Reload your email web page or restart your web browser.",
+    "message": "重载你的电子邮件页面或者重启浏览器。",
     "description": "A step in the basic usage instructions"
   },
   "options_page__start_new_message": {
-    "message": "Start a new email message.",
+    "message": "开始写一封新的电邮。",
     "description": "A step in the basic usage instructions"
   },
   "options_page__type_some_markdown": {
-    "message": "Type some Markdown into the email.<br/>Try this: <code>_Hello_ `Markdown` **Here**!</code>",
+    "message": "在你的电邮里输入一些Markdown内容.<br/>试试这个: <code>_Hello_ `Markdown` **Here**!</code>",
     "description": "A step in the basic usage instructions"
   },
   "options_page__click_toggle": {
-    "message": "Right-click in the email and then click \"Markdown Toggle\". (Or click the <img src=\"images/icon16.png\"/> button on the toolbar.<span class=\"hotkey-display-wrapper\"> Or press <span class=\"hotkey-display\"><kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>M</kbd></span></span>)",
+    "message": "在你的电子邮件上右击然后选择\"Markdown转换\". (或者单击扩展工具栏上的<img src=\"images/icon16.png\"/>按钮。<span class=\"hotkey-display-wrapper\"> 也可以试试快捷键 <span class=\"hotkey-display\"><kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>M</kbd></span></span>)",
     "description": "A step in the basic usage instructions"
   },
   "options_page__pretty_cool": {
-    "message": "The message should now look pretty cool. Send it to your friends!",
+    "message": "你的消息现在看起来应该棒极了，发给你的朋友们吧!",
     "description": "A step in the basic usage instructions"
   },
   "options_page__resources_title": {
