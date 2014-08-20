@@ -241,7 +241,7 @@
     "description": "Please do not translate {mathcode} and {urlmathcode}"
   },
   "options_page__tex_math_customization_6": {
-    "message": "如果你要定制 <code>&lt;img&gt;</code> 标签, 你应该使 <code>alt</code> 属性包含尽可能可读的值, 如 <code>{mathcode}</code>. 此属性的值将被用于电子邮件的纯文本版（当从Gmail和Thunderbird发送时），并被使用屏幕阅读器的视力受损者所使用.",
+    "message": "如果你要定制 <code>&lt;img&gt;</code> 标签, 你应该使 <code>alt</code> 属性包含尽可能可读的值, 如 <code>{mathcode}</code>. 此属性的值将被用于电子邮件的纯文本版（当从Gmail和Thunderbird发送时）.",
     "description": "Please do not translate {mathcode} and {urlmathcode}"
   },
   "options_page__hotkey_title": {
