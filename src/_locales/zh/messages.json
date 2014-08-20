@@ -5,31 +5,31 @@
     "inMozDTD": true
   },
   "app_slogan": {
-    "message": "Write your email in Markdown, then make it pretty.",
+    "message": "用Markdown写一封漂亮的电子邮件。",
     "description": "shown as subtitle for Markdown Here in the browser extensions list"
   },
   "toggle_button_text":{
-    "message": "MD Toggle",
+    "message": "转换",
     "description": "Text shown underneath the render toggle button. Make it as short as possible.",
     "inMozDTD": true
   },
   "toggle_button_tooltip": {
-    "message": "Click to toggle Markdown rendering",
+    "message": "单击转换Markdown",
     "description": "text shown when user hovers mouse over Markdown Toggle button",
     "inMozDTD": true
   },
   "toggle_button_tooltip_disabled": {
-    "message": "The selected field is not valid for Markdown rendering",
+    "message": "选定的区域不支持Markdown转换",
     "description": "text shown when user hover mouse over disabled Markdown Toggle button",
     "inMozDTD": true
   },
   "context_menu_item": {
-    "message": "Markdown Toggle",
+    "message": "Markdown转换",
     "description": "Text shown on the context menu.",
     "inMozDTD": true
   },
   "context_menu_item_with_shortcut": {
-    "message": "Mar&kdown Toggle",
+    "message": "Mar&kdown转换",
     "description": "Text shown on the context menu. The '&' comes before the shortcut character."
   },
   "context_menu_item_shortcut": {
@@ -38,44 +38,44 @@
     "inMozDTD": true
   },
   "invalid_field": {
-    "message": "The selected field is not valid for Markdown rendering. Please use a rich editor.",
+    "message": "选定的区域不支持Markdown转换，请使用富文本编辑器。",
     "description": "Shown in an alert dialog if the user tries to render a field that cannot be rendered"
   },
   "plain_text_compose": {
-    "message": "You are using a plain-text compose editor. You must change to a rich editor to use Markdown Here.",
+    "message": "你正在使用纯文本编辑器，你必须使用富文本编辑器才能使用Markdown Here。",
     "description": "Shown in an alert dialog if the user has their email compose app set to plain text"
   },
   "cursor_into_compose": {
-    "message": "Please put the cursor into the compose box."
+    "message": "请把光标定位在编辑区。"
   },
   "forgot_to_render_prompt_title": {
-    "message": "Forget to toggle Markdown?",
+    "message": "忘了转换Markdown?",
     "description": "Title of the prompt that's shown when it's detected that a user may have forgotten to render the Markdown in their email"
   },
   "forgot_to_render_prompt_info": {
-    "message": "It looks like you wrote this email in Markdown but forgot to make it pretty.",
+    "message": "你好像用Markdown写了这封电邮，但却忘了让它变得更漂亮。",
     "description": "Informational part of the prompt that's shown when it's detected that a user may have forgotten to render the Markdown in their email"
   },
   "forgot_to_render_prompt_question": {
-    "message": "Send it anyway?",
+    "message": "坚持发送?",
     "description": "Question part of the prompt that's shown when it's detected that a user may have forgotten to render the Markdown in their email"
   },
   "forgot_to_render_back_button": {
-    "message": "Back",
+    "message": "返回",
     "description": "Text on the Back (cancel) button of the prompt that's shown when it's detected that a user may have forgotten to render the Markdown in their email",
     "inMozDTD": true
   },
   "forgot_to_render_send_button": {
-    "message": "Send",
+    "message": "发送",
     "description": "Text on the Send (continue) button of the prompt that's shown when it's detected that a user may have forgotten to render the Markdown in their email",
     "inMozDTD": true
   },
   "forgot_to_render_prompt_close_hover": {
-    "message": "Dismiss this notification",
+    "message": "忽略这条通知",
     "description": "Text that shows when the user hovers over the 'X' that will close the prompt"
   },
   "upgrade_notification_text": {
-    "message": "Markdown Here updated",
+    "message": "Markdown Here已更新",
     "description": "Text on the notification shown when Markdown Here has been updated"
   },
   "upgrade_notification_changes_tooltip": {
@@ -83,11 +83,11 @@
     "description": "Tooltip text on the link that opens the changes list"
   },
   "upgrade_notification_dismiss_tooltip": {
-    "message": "Dismiss this notification",
+    "message": "忽略这条通知",
     "description": "Tooltip text on the link that dismisses the notification"
   },
   "nothing_to_render": {
-    "message": "Nothing found to render or revert",
+    "message": "没有可转换或可恢复的内容",
     "description": "Error message shown to user if there's nothing found to revert or render."
   },
   "unrendering_modified_markdown_warning": {
