@@ -10,9 +10,9 @@ This is great for anyone who doesn't like fiddling around with formatting button
 
 Markdown Here is primarily targeted to work with Gmail and Thunderbird, but it also works pretty well with Yahoo and Hotmail. Additionally, it works great with Google Groups and Sites, Evernote's web interface, Blogger, Wordpress, and more!
 
-Syntax highlighting note: Used fenced code blocks and specify the language name. See the project page for an example.
+Syntax highlighting note: Use fenced code blocks and specify the language name. See the project page for an example.
 
-Privacy: Markdown Here accesses and modifies the content of your email. It can, in theory, access other web content, but does not. It also makes no Internet requests itself whatsoever. You data is modified when and where you choose, and does not leave your browser.
+Privacy: Markdown Here accesses and modifies web content when you activate it. It can, in theory, access other web content, but does not. It also makes no Internet requests whatsoever. Your data is modified when and where you choose, and does not leave your browser.
 
 Available as a Chrome, Firefox, Safari, Opera, and Thunderbird extension.
 
