@@ -1,0 +1,8 @@
+<!ENTITY app_name "Markdown Here">
+<!ENTITY context_menu_item "Переключить Markdown">
+<!ENTITY context_menu_item_shortcut "k">
+<!ENTITY forgot_to_render_back_button "Назад">
+<!ENTITY forgot_to_render_send_button "Отправить">
+<!ENTITY toggle_button_text "Переключить MD">
+<!ENTITY toggle_button_tooltip "Нажмите для переключения Markdown рендеринга">
+<!ENTITY toggle_button_tooltip_disabled "Рендеринг Markdown не применим к выбранному полю">

@@ -1,0 +1,18 @@
+El miércoles, 16 de mayo de 2012 a las 21:51, Fulano <fulano@ejemplo.es> escribió
+
+> ¡Hola amigo!
+
+Hola Fulano.
+
+> ¿Puedes enviarme algo de dulce código?
+
+**Este** es genial:
+
+```clojure
+(defn hello [x] (str "Hello", x))
+(hello "Clojure")
+```
+
+> ¡Gracias de antemano!
+
+Sin problema.

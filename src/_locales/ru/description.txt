@@ -1,0 +1,23 @@
+Markdown Here поможет вам написать емейл в Markdown и отрендерить его (сделать стильным!) перед отправкой.
+
+Это отлично подходит тем, кто не любит возиться с кнопками форматирования текста во время написания емейлов. Особенно это подойдет программистам, которым приходится писать письма, содержащие программный код -- Markdown Here поддерживает подсветку синтаксиса. Не останутся в стороне и математики -- Markdown Here также поддерживает рендеринг формул TeX.
+
+Абсолютно прост в использовании:
+1. Напишите свое сообщение в окне WYSIWYG  редактора вашего емайл клиента используя формат Markdown принятый на Github.
+2. Щелкните правой кнопкой мыши в окне создания сообщения и нажмите «Переключить Markdown».
+3. Теперь ваше сообщение выглядит прекрасно! (То есть, оно было сконвертировано в HTML.)
+4. Если вам нравится результат, то просто отправьте сообщение. Если вы хотите изменить или добавить что-то, нажмите кнопку «Переключить Markdown», чтобы снова вернуться к оригиналу.
+5. Repeat as necessary.
+
+Markdown Here в первую очередь ориентирован на работу с Gmail и Thunderbird, но он также очень хорошо работает с Yahoo и Hotmail. Кроме того он прекрасно работает с Google Groups,  Google Sites, веб-интерфейсом Evernote, Blogger, Wordpress и другими!
+
+Syntax highlighting note: Use fenced code blocks and specify the language name. Смотрите в качестве примера страницу проекта.
+
+Privacy: Markdown Here accesses and modifies web content when you activate it. Теоретически, Markdown Here может получить доступ и к другому веб-контенту, но, на практике, не делает этого. It also makes no Internet requests whatsoever. Your data is modified when and where you choose, and does not leave your browser.
+
+Доступно как расширение Chrome, Firefox, Safari, Opera и Thunderbird.
+
+Это проект с открытым кодом. Посетите страницу Markdown Here на Github для получения более полных инструкций, чтобы узнать больше информации, для сообщения об ошибках, или чтобы внести свой вклад.
+
+http://markdown-here.com
+https://github.com/adam-p/markdown-here

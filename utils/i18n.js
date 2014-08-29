@@ -1,5 +1,5 @@
 /*
- * Copyright Adam Pritchard 2013
+ * Copyright Adam Pritchard 2014
  * MIT License : http://adampritchard.mit-license.org/
  */
 
@@ -61,7 +61,7 @@ function resetInstallRdf() {
   var newRdf = oldRdf.replace(regex, MOZ_RDF_I18N_SECTION_START + '\n' + MOZ_RDF_I18N_SECTION_END);
 
   if (oldRdf === newRdf) {
-    console.log('WARNING: empty or missing i18n setion in install.rdf');
+    console.log('WARNING: empty or missing i18n section in install.rdf');
   }
 
   fs.writeFileSync(MOZ_RDF_FILENAME, newRdf);

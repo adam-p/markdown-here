@@ -1,0 +1,18 @@
+On Wed, May 16, 2012 at 9:51 PM, Buddy <buddy@example.com> wrote:
+
+> Hey pal!
+
+Hi Buddy.
+
+> Can you send me some sweet code?
+
+**This** is pretty great:
+
+```clojure
+(defn hello [x] (str "Hello", x))
+(hello "Clojure")
+```
+
+> Thanks in advance!
+
+No problem.

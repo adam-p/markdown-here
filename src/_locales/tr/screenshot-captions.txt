@@ -1,0 +1,5 @@
+Markdown ile email yazın...
+
+...sonra da güzelleştirin!
+
+Markdown'u emailinizin sadece bir kısmı için kullanmak mı istiyorsunuz? Yeter ki seçin ve dönüştürün!

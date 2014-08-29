@@ -41,9 +41,33 @@
 <!-- i18n -->
         <em:localized>
           <Description>
+            <em:locale>de</em:locale>
+            <em:name>Markdown Here</em:name>
+            <em:description>E-Mail in Markdown schreiben, dann schön-rendern.</em:description>
+          </Description>
+        </em:localized>
+
+        <em:localized>
+          <Description>
             <em:locale>en</em:locale>
             <em:name>Markdown Here</em:name>
             <em:description>Write your email in Markdown, then make it pretty.</em:description>
+          </Description>
+        </em:localized>
+
+        <em:localized>
+          <Description>
+            <em:locale>es</em:locale>
+            <em:name>Markdown Here</em:name>
+            <em:description>Escribe tu correo electrónico en Markdown, y hazlo bonito.</em:description>
+          </Description>
+        </em:localized>
+
+        <em:localized>
+          <Description>
+            <em:locale>fr</em:locale>
+            <em:name>Markdown Here</em:name>
+            <em:description>Écrivez votre courriel avec Markdown, puis rendez-le attrayant.</em:description>
           </Description>
         </em:localized>
 
@@ -60,6 +84,22 @@
             <em:locale>ko</em:locale>
             <em:name>Markdown Here</em:name>
             <em:description>Write your email in Markdown, then make it pretty.</em:description>
+          </Description>
+        </em:localized>
+
+        <em:localized>
+          <Description>
+            <em:locale>ru</em:locale>
+            <em:name>Markdown Here</em:name>
+            <em:description>Напишите ваш емейл в Markdown и сделайте его стильным.</em:description>
+          </Description>
+        </em:localized>
+
+        <em:localized>
+          <Description>
+            <em:locale>tr</em:locale>
+            <em:name>Markdown Here</em:name>
+            <em:description>Markdown ile email yaz, sonra da güzelleştir.</em:description>
           </Description>
         </em:localized>
 

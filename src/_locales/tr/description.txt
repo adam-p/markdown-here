@@ -1,0 +1,23 @@
+Markdown Here e-maillerinizi Markdown ile yazmanızı sağlar, göndermeden önce daha zarıf kılar.
+
+E-mail yazarken bir çok format düğmesiyle uğraşmak istemeyenler için idealdir. Özellikle e-maillerde kod da yazmak isteyen programcılar için yararlıdır-sözdizimi vurgulamasını bile destekler. Ve aramızdaki matematikçiler için: Markdown Here, Tex formüllerini de kılar.
+
+Kullanımı çok basittir:
+1. Posta istemcinizin gelişmiş metin editöründe, Github-aromalı Markdown kullanarak email yazın.
+2. Yazı alanında sağ tuşlayarak "Markdown Toggle" seçiniz.
+3. E-mailiniz şimdi çok zarif olmuşdur! (Yani, HTML'e kılınmışdır.)
+4. Göründüğü şekli beğendiyseniz, gönderebilirsiniz. Bir şey eklemek veya değiştirmek isterseniz, orijinal Markdownunuza geri dönmek için "Markdown Toggle"'a geri basınız.
+5. Repeat as necessary.
+
+Markdown Here öncelikle Gmail ve Thunderbird ile çalışması hedeflenmişdir, ama Yahoo ve Hotmail ile de oldukça iyi çalışır. Ayrıca, Google Groups ve Sites, Evernote'un web arayüzü, Blogger, Wordpress ve başkaları ile de çalışır!
+
+Syntax highlighting note: Use fenced code blocks and specify the language name. Örnek için proje sayfasına bakın.
+
+Privacy: Markdown Here accesses and modifies web content when you activate it. Teorik olarak başka web içeriğini de erişebilir, ama yapmaz. It also makes no Internet requests whatsoever. Your data is modified when and where you choose, and does not leave your browser.
+
+Chrome, Firefox, Safari, Opera, ve Thunderbird eki olarak vardır.
+
+Bu açık kaynak projesidir. Daha çok bilgi, tam talimatlar, hata raporları veya katkıda bulunmak için Markdown Here'in Github sayfasını ziyret edebilirsiniz.
+
+http://markdown-here.com
+https://github.com/adam-p/markdown-here
