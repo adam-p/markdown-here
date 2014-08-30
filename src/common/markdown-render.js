@@ -88,7 +88,7 @@ function markdownRender(mdText, userprefs, marked, hljs) {
     highlight: function(codeText, codeLanguage) {
         if (codeLanguage &&
             hljs.getLanguage(codeLanguage.toLowerCase())) {
-          return hljs.highlight(codeLanguage, codeText).value;
+          return hljs.highlight(codeLanguage.toLowerCase(), codeText).value;
         }
 
         return codeText;
