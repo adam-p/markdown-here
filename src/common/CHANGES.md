@@ -9,7 +9,7 @@ Change Log
 
 * **Updated [Highglight.js](http://highlightjs.org/)**, which is the syntax highlighting library used by Markdown Here.
   * **NOTE**: If your syntax higlighting looks wrong, switch your theme. Your styling might be stale.
-  * Now supports **language aliases**. For example, `js` works as well as `javascript`, and `html` works as well as `xml`.
+  * Now supports **language aliases**. For example, `js` is an alias for `javascript`, `html` is an alias for `xml`, and `coffee`, `cson`, and `iced` are aliases for `coffeescript`. You can see the [complete list here](http://highlightjs.readthedocs.org/en/latest/css-classes-reference.html).
   * New languages: Makefile, Scilab, LiveCode Server, OCaml, Oxygene, Mathematica, Autohotkey, Gherkin, Elixir, NSIS, VIM script, Protocol Buffers, Nix, x86asm, Cap’n Proto and Thrift, Monkey, TypeScript, Nimrod, Gradle, Haxe, Swift, Groovy, Dart, Dust, Scheme, G-Code, Q.
   * New themes: Atelier, Paraíso, Kimbie, Colorbrewer, Codepen.io embed, Hybrid.
   * Lots of theme and language improvements.
