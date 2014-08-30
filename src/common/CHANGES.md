@@ -1,6 +1,21 @@
 Change Log
 ==========
 
+2014-08-xx: v2.11.1
+-------------------
+
+* [Fixed annoying bug #188](https://github.com/adam-p/markdown-here/issues/188): Keyboard shortcut was not working in Chrome+Gmail.
+  - Thanks to: [Paulo Diovani Gonçalves](https://github.com/paulodiovani), [Edmundo Junior](https://github.com/edmundojr), [Mike Lindegarde](https://github.com/mlindegarde), [Jordi Gerona](https://github.com/jordi9), [Dilek](https://github.com/averagewizard), [Hrusikesh Panda](https://github.com/mrchief), [Clay McKell](https://github.com/kcmckell), [Trey Harris](https://groups.google.com/forum/#!topic/markdown-here/SnQ4fVtQvQQ).
+
+* **Updated [Highglight.js](http://highlightjs.org/)**, which is the syntax highlighting library used by Markdown Here.
+  * Now supports **language aliases**. For example, `js` works as well as `javascript`, and `html` works as well as `xml`.
+  * New languages: Makefile, Scilab, LiveCode Server, OCaml, Oxygene. Mathematica, Autohotkey, Gherkin, Elixir, NSIS, VIM script, Protocol Buffers, Nix, x86asm, Cap’n Proto and Thrift, Monkey, TypeScript, Nimrod, Gradle, Haxe, Swift.
+  * New themes: Atelier, Paraíso, Kimbie, Colorbrewer, Codepen.io embed, Hybrid, Groovy, Dart, Dust, Scheme, G-Code, Q.
+  * And lots of theme and language improvements.
+  * This resolves MDH issues [#193](https://github.com/adam-p/markdown-here/issues/193) and [#196](https://github.com/adam-p/markdown-here/issues/196).
+  * Make no mistake, all credit for this goes to [Ivan Sagalaev](https://github.com/isagalaev) and the [Hightlight.js contributors](https://github.com/isagalaev/highlight.js/blob/master/AUTHORS.en.txt).
+
+
 2014-05-17: v2.11.0
 -------------------
 
