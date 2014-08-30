@@ -1,6 +1,8 @@
 /*
 
-Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org>
+Colorbrewer theme
+Original: https://github.com/mbostock/colorbrewer-theme (c) Mike Bostock <mike@ocks.org>
+Ported by Fabrício Tavares de Oliveira
 
 */
 
@@ -8,7 +10,7 @@ Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiac
   display: block;
   overflow-x: auto;
   padding: 0.5em;
-  background: #f0f0f0;
+  background: #fff;
   -webkit-text-size-adjust: none;
 }
 
@@ -16,7 +18,7 @@ Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiac
 .hljs-subst,
 .hljs-tag .hljs-title,
 .nginx .hljs-title {
-  color: black;
+  color: #000;
 }
 
 .hljs-string,
@@ -45,7 +47,7 @@ Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiac
 .asciidoc .hljs-header,
 .markdown .hljs-header,
 .coffeescript .hljs-attribute {
-  color: #800;
+  color: #756bb1;
 }
 
 .smartquote,
@@ -56,7 +58,7 @@ Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiac
 .hljs-chunk,
 .asciidoc .hljs-blockquote,
 .markdown .hljs-blockquote {
-  color: #888;
+  color: #636363;
 }
 
 .hljs-number,
@@ -74,7 +76,7 @@ Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiac
 .markdown .hljs-bullet,
 .asciidoc .hljs-link_url,
 .markdown .hljs-link_url {
-  color: #080;
+  color: #31a354;
 }
 
 .hljs-label,
@@ -95,6 +97,7 @@ Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiac
 .hljs-shebang,
 .apache .hljs-sqbracket,
 .nginx .hljs-built_in,
+.hljs-list .hljs-built_in,
 .tex .hljs-formula,
 .erlang_repl .hljs-reserved,
 .hljs-prompt,
@@ -108,6 +111,8 @@ Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiac
 .hljs-phony {
   color: #88f;
 }
+
+
 
 .hljs-keyword,
 .hljs-id,
@@ -129,7 +134,7 @@ Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiac
 .markdown .hljs-strong,
 .hljs-request,
 .hljs-status {
-  font-weight: bold;
+  color: #3182bd;
 }
 
 .asciidoc .hljs-emphasis,
@@ -150,4 +155,15 @@ Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiac
 .xml .css,
 .xml .hljs-cdata {
   opacity: 0.5;
+}
+
+.css .hljs-attribute,
+.html .hljs-attribute {
+  color: #e6550d;
+}
+
+.css .hljs-class,
+.html .hljs-tag,
+.html .hljs-title {
+  color: #3182bd;
 }

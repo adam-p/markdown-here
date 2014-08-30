@@ -1,14 +1,15 @@
-/* Tomorrow Night Eighties Theme */
-/* Original theme - https://github.com/chriskempson/tomorrow-theme */
-/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Base16 Atelier Dune Dark - Theme */
+/* by Bram de Haan (http://atelierbram.github.io/syntax-highlighting/atelier-schemes/dune) */
+/* Original Base16 color scheme by Chris Kempson (https://github.com/chriskempson/base16) */
+/* https://github.com/jmblog/color-themes-for-highlightjs */
 
-/* Tomorrow Comment */
+/* Atelier Dune Dark Comment */
 .hljs-comment,
 .hljs-title {
-  color: #999999;
+  color: #999580;
 }
 
-/* Tomorrow Red */
+/* Atelier Dune Dark Red */
 .hljs-variable,
 .hljs-attribute,
 .hljs-tag,
@@ -21,10 +22,10 @@
 .css .hljs-id,
 .css .hljs-class,
 .css .hljs-pseudo {
-  color: #f2777a;
+  color: #d73737;
 }
 
-/* Tomorrow Orange */
+/* Atelier Dune Dark Orange */
 .hljs-number,
 .hljs-preprocessor,
 .hljs-pragma,
@@ -32,31 +33,31 @@
 .hljs-literal,
 .hljs-params,
 .hljs-constant {
-  color: #f99157;
+  color: #b65611;
 }
 
-/* Tomorrow Yellow */
+/* Atelier Dune Dark Yellow */
 .ruby .hljs-class .hljs-title,
 .css .hljs-rules .hljs-attribute {
-  color: #ffcc66;
+  color: #cfb017;
 }
 
-/* Tomorrow Green */
+/* Atelier Dune Dark Green */
 .hljs-string,
 .hljs-value,
 .hljs-inheritance,
 .hljs-header,
 .ruby .hljs-symbol,
 .xml .hljs-cdata {
-  color: #99cc99;
+  color: #60ac39;
 }
 
-/* Tomorrow Aqua */
+/* Atelier Dune Dark Aqua */
 .css .hljs-hexcolor {
-  color: #66cccc;
+  color: #1fad83;
 }
 
-/* Tomorrow Blue */
+/* Atelier Dune Dark Blue */
 .hljs-function,
 .python .hljs-decorator,
 .python .hljs-title,
@@ -65,20 +66,20 @@
 .perl .hljs-sub,
 .javascript .hljs-title,
 .coffeescript .hljs-title {
-  color: #6699cc;
+  color: #6684e1;
 }
 
-/* Tomorrow Purple */
+/* Atelier Dune Dark Purple */
 .hljs-keyword,
 .javascript .hljs-function {
-  color: #cc99cc;
+  color: #b854d4;
 }
 
 .hljs {
   display: block;
   overflow-x: auto;
-  background: #2d2d2d;
-  color: #cccccc;
+  background: #292824;
+  color: #a6a28c;
   padding: 0.5em;
   -webkit-text-size-adjust: none;
 }

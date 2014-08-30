@@ -6,108 +6,131 @@ Version: 1.0
 Date: 2013-04-02
 */
 
-pre code {
-  display: block; padding: 0.5em;
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
   background: #eee;
+  -webkit-text-size-adjust: none;
 }
 
-pre .decorator,
-pre .annotation {
+.hljs-header,
+.hljs-decorator,
+.hljs-annotation {
   color: #000077;
 }
 
-pre .attribute {
+.hljs-horizontal_rule,
+.hljs-link_url,
+.hljs-emphasis,
+.hljs-attribute {
   color: #070;
 }
 
-pre .value,
-pre .string,
-pre .scss .value .string {
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-link_label,
+.hljs-strong,
+.hljs-value,
+.hljs-string,
+.scss .hljs-value .hljs-string {
   color: #d14;
 }
 
-pre .comment {
+.hljs-strong {
+  font-weight: bold;
+}
+
+.hljs-blockquote,
+.hljs-comment {
   color: #998;
   font-style: italic;
 }
 
-pre .function .title {
+.asciidoc .hljs-title,
+.hljs-function .hljs-title {
   color: #900;
 }
 
-pre .class {
+.hljs-class {
   color: #458;
 }
 
-pre .id,
-pre .pseudo,
-pre .constant,
-pre .hexcolor {
+.hljs-id,
+.hljs-pseudo,
+.hljs-constant,
+.hljs-hexcolor {
   color: teal;
 }
 
-pre .variable {
+.hljs-variable {
   color: #336699;
 }
 
-pre .javadoc {
+.hljs-bullet,
+.hljs-javadoc {
   color: #997700;
 }
 
-pre .pi,
-pre .doctype {
+.hljs-pi,
+.hljs-doctype {
   color: #3344bb;
 }
 
-pre .number {
+.hljs-code,
+.hljs-number {
   color: #099;
 }
 
-pre .important {
+.hljs-important {
   color: #f00;
 }
 
-pre .label {
+.smartquote,
+.hljs-label {
   color: #970;
 }
 
-pre .preprocessor {
+.hljs-preprocessor,
+.hljs-pragma {
   color: #579;
 }
 
-pre .reserved,
-pre .keyword,
-pre .scss .value {
+.hljs-reserved,
+.hljs-keyword,
+.scss .hljs-value {
   color: #000;
 }
 
-pre .regexp {
+.hljs-regexp {
   background-color: #fff0ff;
   color: #880088;
 }
 
-pre .symbol {
+.hljs-symbol {
   color: #990073;
 }
 
-pre .symbol .string {
+.hljs-symbol .hljs-string {
   color: #a60;
 }
 
-pre .tag {
+.hljs-tag {
   color: #007700;
 }
 
-pre .at_rule,
-pre .at_rule .keyword {
+.hljs-at_rule,
+.hljs-at_rule .hljs-keyword {
   color: #088;
 }
 
-pre .at_rule .preprocessor {
+.hljs-at_rule .hljs-preprocessor {
   color: #808;
 }
 
-pre .scss .tag,
-pre .scss .attribute {
+.scss .hljs-tag,
+.scss .hljs-attribute {
   color: #339;
 }

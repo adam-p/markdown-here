@@ -1,14 +1,15 @@
-/* Tomorrow Night Eighties Theme */
-/* Original theme - https://github.com/chriskempson/tomorrow-theme */
-/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Base16 Atelier Seaside Dark - Theme */
+/* by Bram de Haan (http://atelierbram.github.io/syntax-highlighting/atelier-schemes/seaside/) */
+/* Original Base16 color scheme by Chris Kempson (https://github.com/chriskempson/base16) */
+/* https://github.com/jmblog/color-themes-for-highlightjs */
 
-/* Tomorrow Comment */
+/* Atelier Seaside Dark Comment */
 .hljs-comment,
 .hljs-title {
-  color: #999999;
+  color: #809980;
 }
 
-/* Tomorrow Red */
+/* Atelier Seaside Dark Red */
 .hljs-variable,
 .hljs-attribute,
 .hljs-tag,
@@ -21,10 +22,10 @@
 .css .hljs-id,
 .css .hljs-class,
 .css .hljs-pseudo {
-  color: #f2777a;
+  color: #e6193c;
 }
 
-/* Tomorrow Orange */
+/* Atelier Seaside Dark Orange */
 .hljs-number,
 .hljs-preprocessor,
 .hljs-pragma,
@@ -32,31 +33,31 @@
 .hljs-literal,
 .hljs-params,
 .hljs-constant {
-  color: #f99157;
+  color: #87711d;
 }
 
-/* Tomorrow Yellow */
-.ruby .hljs-class .hljs-title,
+/* Atelier Seaside Dark Yellow */
+.hljs-ruby .hljs-class .hljs-title,
 .css .hljs-rules .hljs-attribute {
-  color: #ffcc66;
+  color: #c3c322;
 }
 
-/* Tomorrow Green */
+/* Atelier Seaside Dark Green */
 .hljs-string,
 .hljs-value,
 .hljs-inheritance,
 .hljs-header,
 .ruby .hljs-symbol,
 .xml .hljs-cdata {
-  color: #99cc99;
+  color: #29a329;
 }
 
-/* Tomorrow Aqua */
+/* Atelier Seaside Dark Aqua */
 .css .hljs-hexcolor {
-  color: #66cccc;
+  color: #1999b3;
 }
 
-/* Tomorrow Blue */
+/* Atelier Seaside Dark Blue */
 .hljs-function,
 .python .hljs-decorator,
 .python .hljs-title,
@@ -65,20 +66,20 @@
 .perl .hljs-sub,
 .javascript .hljs-title,
 .coffeescript .hljs-title {
-  color: #6699cc;
+  color: #3d62f5;
 }
 
-/* Tomorrow Purple */
+/* Atelier Seaside Dark Purple */
 .hljs-keyword,
 .javascript .hljs-function {
-  color: #cc99cc;
+  color: #ad2bee;
 }
 
 .hljs {
   display: block;
   overflow-x: auto;
-  background: #2d2d2d;
-  color: #cccccc;
+  background: #242924;
+  color: #8ca68c;
   padding: 0.5em;
   -webkit-text-size-adjust: none;
 }

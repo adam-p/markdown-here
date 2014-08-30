@@ -4,126 +4,124 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 
 */
 
-pre code {
-  display: block; padding: 0.5em;
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
   color: #333;
-  background: #f8f8ff
+  background: #f8f8f8;
+  -webkit-text-size-adjust: none;
 }
 
-pre .comment,
-pre .template_comment,
-pre .diff .header,
-pre .javadoc {
+.hljs-comment,
+.hljs-template_comment,
+.diff .hljs-header,
+.hljs-javadoc {
   color: #998;
-  font-style: italic
+  font-style: italic;
 }
 
-pre .keyword,
-pre .css .rule .keyword,
-pre .winutils,
-pre .javascript .title,
-pre .nginx .title,
-pre .subst,
-pre .request,
-pre .status {
+.hljs-keyword,
+.css .rule .hljs-keyword,
+.hljs-winutils,
+.javascript .hljs-title,
+.nginx .hljs-title,
+.hljs-subst,
+.hljs-request,
+.hljs-status {
   color: #333;
-  font-weight: bold
+  font-weight: bold;
 }
 
-pre .number,
-pre .hexcolor,
-pre .ruby .constant {
-  color: #099;
+.hljs-number,
+.hljs-hexcolor,
+.ruby .hljs-constant {
+  color: #008080;
 }
 
-pre .string,
-pre .tag .value,
-pre .phpdoc,
-pre .tex .formula {
-  color: #d14
+.hljs-string,
+.hljs-tag .hljs-value,
+.hljs-phpdoc,
+.hljs-dartdoc,
+.tex .hljs-formula {
+  color: #d14;
 }
 
-pre .title,
-pre .id,
-pre .coffeescript .params,
-pre .scss .preprocessor {
+.hljs-title,
+.hljs-id,
+.scss .hljs-preprocessor {
   color: #900;
-  font-weight: bold
+  font-weight: bold;
 }
 
-pre .javascript .title,
-pre .lisp .title,
-pre .clojure .title,
-pre .subst {
-  font-weight: normal
+.javascript .hljs-title,
+.hljs-list .hljs-keyword,
+.hljs-subst {
+  font-weight: normal;
 }
 
-pre .class .title,
-pre .haskell .type,
-pre .vhdl .literal,
-pre .tex .command {
+.hljs-class .hljs-title,
+.hljs-type,
+.vhdl .hljs-literal,
+.tex .hljs-command {
   color: #458;
-  font-weight: bold
+  font-weight: bold;
 }
 
-pre .tag,
-pre .tag .title,
-pre .rules .property,
-pre .django .tag .keyword {
+.hljs-tag,
+.hljs-tag .hljs-title,
+.hljs-rules .hljs-property,
+.django .hljs-tag .hljs-keyword {
   color: #000080;
-  font-weight: normal
+  font-weight: normal;
 }
 
-pre .attribute,
-pre .variable,
-pre .lisp .body {
-  color: #008080
+.hljs-attribute,
+.hljs-variable,
+.lisp .hljs-body {
+  color: #008080;
 }
 
-pre .regexp {
-  color: #009926
+.hljs-regexp {
+  color: #009926;
 }
 
-pre .class {
-  color: #458;
-  font-weight: bold
+.hljs-symbol,
+.ruby .hljs-symbol .hljs-string,
+.lisp .hljs-keyword,
+.clojure .hljs-keyword,
+.scheme .hljs-keyword,
+.tex .hljs-special,
+.hljs-prompt {
+  color: #990073;
 }
 
-pre .symbol,
-pre .ruby .symbol .string,
-pre .lisp .keyword,
-pre .tex .special,
-pre .prompt {
-  color: #990073
+.hljs-built_in {
+  color: #0086b3;
 }
 
-pre .built_in,
-pre .lisp .title,
-pre .clojure .built_in {
-  color: #0086b3
-}
-
-pre .preprocessor,
-pre .pi,
-pre .doctype,
-pre .shebang,
-pre .cdata {
+.hljs-preprocessor,
+.hljs-pragma,
+.hljs-pi,
+.hljs-doctype,
+.hljs-shebang,
+.hljs-cdata {
   color: #999;
-  font-weight: bold
+  font-weight: bold;
 }
 
-pre .deletion {
-  background: #fdd
+.hljs-deletion {
+  background: #fdd;
 }
 
-pre .addition {
-  background: #dfd
+.hljs-addition {
+  background: #dfd;
 }
 
-pre .diff .change {
-  background: #0086b3
+.diff .hljs-change {
+  background: #0086b3;
 }
 
-pre .chunk {
-  color: #aaa
+.hljs-chunk {
+  color: #aaa;
 }

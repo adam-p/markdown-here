@@ -3,86 +3,92 @@
 Visual Studio-like style based on original C# coloring by Jason Diamond <jason@diamond.name>
 
 */
-pre code {
-  display: block; padding: 0.5em;
-  background: white; color: black;
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: white;
+  color: black;
+  -webkit-text-size-adjust: none;
 }
 
-pre .comment,
-pre .annotation,
-pre .template_comment,
-pre .diff .header,
-pre .chunk,
-pre .apache .cbracket {
-  color: rgb(0, 128, 0);
+.hljs-comment,
+.hljs-annotation,
+.hljs-template_comment,
+.diff .hljs-header,
+.hljs-chunk,
+.apache .hljs-cbracket {
+  color: #008000;
 }
 
-pre .keyword,
-pre .id,
-pre .built_in,
-pre .smalltalk .class,
-pre .winutils,
-pre .bash .variable,
-pre .tex .command,
-pre .request,
-pre .status,
-pre .nginx .title,
-pre .xml .tag,
-pre .xml .tag .value {
-  color: rgb(0, 0, 255);
+.hljs-keyword,
+.hljs-id,
+.hljs-built_in,.css
+.smalltalk .hljs-class,
+.hljs-winutils,
+.bash .hljs-variable,
+.tex .hljs-command,
+.hljs-request,
+.hljs-status,
+.nginx .hljs-title,
+.xml .hljs-tag,
+.xml .hljs-tag .hljs-value {
+  color: #00f;
 }
 
-pre .string,
-pre .title,
-pre .parent,
-pre .tag .value,
-pre .rules .value,
-pre .rules .value .number,
-pre .ruby .symbol,
-pre .ruby .symbol .string,
-pre .aggregate,
-pre .template_tag,
-pre .django .variable,
-pre .addition,
-pre .flow,
-pre .stream,
-pre .apache .tag,
-pre .date,
-pre .tex .formula,
-pre .coffeescript .attribute {
-  color: rgb(163, 21, 21);
+.hljs-string,
+.hljs-title,
+.hljs-parent,
+.hljs-tag .hljs-value,
+.hljs-rules .hljs-value,
+.ruby .hljs-symbol,
+.ruby .hljs-symbol .hljs-string,
+.hljs-template_tag,
+.django .hljs-variable,
+.hljs-addition,
+.hljs-flow,
+.hljs-stream,
+.apache .hljs-tag,
+.hljs-date,
+.tex .hljs-formula,
+.coffeescript .hljs-attribute {
+  color: #a31515;
 }
 
-pre .ruby .string,
-pre .decorator,
-pre .filter .argument,
-pre .localvars,
-pre .array,
-pre .attr_selector,
-pre .pseudo,
-pre .pi,
-pre .doctype,
-pre .deletion,
-pre .envvar,
-pre .shebang,
-pre .preprocessor,
-pre .userType,
-pre .apache .sqbracket,
-pre .nginx .built_in,
-pre .tex .special,
-pre .prompt {
-  color: rgb(43, 145, 175);
+.ruby .hljs-string,
+.hljs-decorator,
+.hljs-filter .hljs-argument,
+.hljs-localvars,
+.hljs-array,
+.hljs-attr_selector,
+.hljs-pseudo,
+.hljs-pi,
+.hljs-doctype,
+.hljs-deletion,
+.hljs-envvar,
+.hljs-shebang,
+.hljs-preprocessor,
+.hljs-pragma,
+.userType,
+.apache .hljs-sqbracket,
+.nginx .hljs-built_in,
+.tex .hljs-special,
+.hljs-prompt {
+  color: #2b91af;
 }
 
-pre .phpdoc,
-pre .javadoc,
-pre .xmlDocTag {
-  color: rgb(128, 128, 128);
+.hljs-phpdoc,
+.hljs-dartdoc,
+.hljs-javadoc,
+.hljs-xmlDocTag {
+  color: #808080;
 }
 
-pre .vhdl .typename { font-weight: bold; }
-pre .vhdl .string { color: #666666; }
-pre .vhdl .literal { color: rgb(163, 21, 21); }
-pre .vhdl .attribute { color: #00B0E8; }
+.hljs-type,
+.hljs-typename { font-weight: bold; }
 
-pre .xml .attribute { color: rgb(255, 0, 0); }
+.vhdl .hljs-string { color: #666666; }
+.vhdl .hljs-literal { color: #a31515; }
+.vhdl .hljs-attribute { color: #00b0e8; }
+
+.xml .hljs-attribute { color: #f00; }

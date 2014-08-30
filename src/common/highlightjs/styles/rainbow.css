@@ -4,114 +4,106 @@ Style with support for rainbow parens
 
 */
 
-/* adam-p: commented these out -- the first line causes an error in Chrome,
-   and the selection style doesn't seem to be working quite right anyway.
-pre ::-moz-selection{ background: #FF5E99; color:#fff; text-shadow: none; }
-pre ::selection { background:#FF5E99; color:#fff; text-shadow: none; }
-*/
-
-pre code {
-  display: block; padding: 0.5em;
-  background: #474949; color: #D1D9E1;
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: #474949;
+  color: #d1d9e1;
+  -webkit-text-size-adjust: none;
 }
 
 
-pre .body,
-pre .collection {
-   color: #D1D9E1;
+.hljs-body,
+.hljs-collection {
+   color: #d1d9e1;
 }
 
-pre .comment,
-pre .template_comment,
-pre .diff .header,
-pre .doctype,
-pre .lisp .string,
-pre .javadoc {
+.hljs-comment,
+.hljs-template_comment,
+.diff .hljs-header,
+.hljs-doctype,
+.lisp .hljs-string,
+.hljs-javadoc {
   color: #969896;
   font-style: italic;
 }
 
-pre .keyword,
-pre .clojure .attribute,
-pre .winutils,
-pre .javascript .title,
-pre .addition,
-pre .css .tag {
+.hljs-keyword,
+.clojure .hljs-attribute,
+.hljs-winutils,
+.javascript .hljs-title,
+.hljs-addition,
+.css .hljs-tag {
   color: #cc99cc;
 }
 
-pre .number { color: #f99157; }
+.hljs-number { color: #f99157; }
 
-pre .command,
-pre .string,
-pre .tag .value,
-pre .phpdoc,
-pre .tex .formula,
-pre .regexp,
-pre .hexcolor {
+.hljs-command,
+.hljs-string,
+.hljs-tag .hljs-value,
+.hljs-phpdoc,
+.hljs-dartdoc,
+.tex .hljs-formula,
+.hljs-regexp,
+.hljs-hexcolor {
   color: #8abeb7;
 }
 
-pre .title,
-pre .localvars,
-pre .function .title,
-pre .chunk,
-pre .decorator,
-pre .built_in,
-pre .lisp .title,
-pre .identifier
-{
+.hljs-title,
+.hljs-localvars,
+.hljs-function .hljs-title,
+.hljs-chunk,
+.hljs-decorator,
+.hljs-built_in,
+.hljs-identifier {
   color: #b5bd68;
 }
 
-pre .class .keyword
-{
+.hljs-class .hljs-keyword {
   color: #f2777a;
 }
 
-pre .variable,
-pre .lisp .body,
-pre .smalltalk .number,
-pre .constant,
-pre .class .title,
-pre .parent,
-pre .haskell .label,
-pre .id,
-pre .lisp .title,
-pre .clojure .title .built_in {
+.hljs-variable,
+.smalltalk .hljs-number,
+.hljs-constant,
+.hljs-class .hljs-title,
+.hljs-parent,
+.haskell .hljs-label,
+.hljs-id {
    color: #ffcc66;
 }
 
-pre .tag .title,
-pre .rules .property,
-pre .django .tag .keyword,
-pre .clojure .title .built_in {
+.hljs-tag .hljs-title,
+.hljs-rules .hljs-property,
+.django .hljs-tag .hljs-keyword {
   font-weight: bold;
 }
 
-pre .attribute,
-pre .clojure .title {
+.hljs-attribute {
   color: #81a2be;
 }
 
-pre .preprocessor,
-pre .pi,
-pre .shebang,
-pre .symbol,
-pre .symbol .string,
-pre .diff .change,
-pre .special,
-pre .attr_selector,
-pre .important,
-pre .subst,
-pre .cdata {
+.hljs-preprocessor,
+.hljs-pragma,
+.hljs-pi,
+.hljs-shebang,
+.hljs-symbol,
+.hljs-symbol .hljs-string,
+.diff .hljs-change,
+.hljs-special,
+.hljs-attr_selector,
+.hljs-important,
+.hljs-subst,
+.hljs-cdata {
   color: #f99157;
 }
 
-pre .deletion {
+.hljs-deletion {
   color: #dc322f;
 }
 
-pre .tex .formula {
+.tex .hljs-formula {
   background: #eee8d5;
 }
