@@ -1,7 +1,7 @@
 Change Log
 ==========
 
-2014-08-xx: v2.11.1
+2014-08-31: v2.11.1
 -------------------
 
 * [Fixed annoying bug #188](https://github.com/adam-p/markdown-here/issues/188): Keyboard shortcut was not working in Chrome+Gmail.
