@@ -103,6 +103,14 @@
           </Description>
         </em:localized>
 
+        <em:localized>
+          <Description>
+            <em:locale>zh-CN</em:locale>
+            <em:name>Markdown Here</em:name>
+            <em:description>用Markdown写一封漂亮的电子邮件。</em:description>
+          </Description>
+        </em:localized>
+
 <!-- /i18n -->
 
         <!-- There also needs to be a top-level copy of these fields. -->

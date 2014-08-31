@@ -8,6 +8,7 @@ locale    markdown_here   ru            firefox/chrome/locale/ru/
 locale    markdown_here   tr            firefox/chrome/locale/tr/
 locale    markdown_here   de            firefox/chrome/locale/de/
 locale    markdown_here   es            firefox/chrome/locale/es/
+locale    markdown_here   zh-CN         firefox/chrome/locale/zh_CN/
 resource  markdown_here_common          common/
 
 # This is a bit of a hack to allow us to get direct access to specific locale
