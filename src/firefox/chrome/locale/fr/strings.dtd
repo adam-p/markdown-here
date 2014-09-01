@@ -1,0 +1,8 @@
+<!ENTITY app_name "Markdown Here">
+<!ENTITY context_menu_item "Basculer Markdown">
+<!ENTITY context_menu_item_shortcut "k">
+<!ENTITY forgot_to_render_back_button "Retour">
+<!ENTITY forgot_to_render_send_button "Envoyer">
+<!ENTITY toggle_button_text "Basculer MD">
+<!ENTITY toggle_button_tooltip "Cliquez pour basculer le rendu Markdown">
+<!ENTITY toggle_button_tooltip_disabled "Le champ sélectionné n'est pas valide pour un rendu avec Markdown">

@@ -1,50 +1,53 @@
-/*
+﻿/*
 
 Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org>
 
 */
 
-pre code {
-  display: block; padding: 0.5em;
-  background: white; color: black;
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: white;
+  color: black;
+  -webkit-text-size-adjust: none;
 }
 
-pre .string,
-pre .tag .value,
-pre .filter .argument,
-pre .addition,
-pre .change,
-pre .apache .tag,
-pre .apache .cbracket,
-pre .nginx .built_in,
-pre .tex .formula {
+.hljs-string,
+.hljs-tag .hljs-value,
+.hljs-filter .hljs-argument,
+.hljs-addition,
+.hljs-change,
+.apache .hljs-tag,
+.apache .hljs-cbracket,
+.nginx .hljs-built_in,
+.tex .hljs-formula {
   color: #888;
 }
 
-pre .comment,
-pre .template_comment,
-pre .shebang,
-pre .doctype,
-pre .pi,
-pre .javadoc,
-pre .deletion,
-pre .apache .sqbracket {
-  color: #CCC;
+.hljs-comment,
+.hljs-template_comment,
+.hljs-shebang,
+.hljs-doctype,
+.hljs-pi,
+.hljs-javadoc,
+.hljs-deletion,
+.apache .hljs-sqbracket {
+  color: #ccc;
 }
 
-pre .keyword,
-pre .tag .title,
-pre .ini .title,
-pre .lisp .title,
-pre .clojure .title,
-pre .http .title,
-pre .nginx .title,
-pre .css .tag,
-pre .winutils,
-pre .flow,
-pre .apache .tag,
-pre .tex .command,
-pre .request,
-pre .status {
+.hljs-keyword,
+.hljs-tag .hljs-title,
+.ini .hljs-title,
+.lisp .hljs-title,
+.http .hljs-title,
+.nginx .hljs-title,
+.css .hljs-tag,
+.hljs-winutils,
+.hljs-flow,
+.apache .hljs-tag,
+.tex .hljs-command,
+.hljs-request,
+.hljs-status {
   font-weight: bold;
 }

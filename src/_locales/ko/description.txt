@@ -6,13 +6,14 @@ This is great for anyone who doesn't like fiddling around with formatting button
 1. Write your email in your email client's rich editor using Github-flavoured Markdown.
 2. Right-click in the compose area and then click "Markdown Toggle".
 3. 쓰신 이메일은 이제 예뻐졌습니다! (즉 일반 문자에서 HTML로 바뀌게 되었습니다)
-4. 모습이 마음에 드신다면 그대로 보내셔도 좋습니다. 만약 바꾸거나 혹은 추가하고 싶은 것이 있으시다면 "마크다운 토글"을 클릭하신 다음에 다시 마크다운으로 될테고 편집하실 수 있습니다.  
+4. 모습이 마음에 드신다면 그대로 보내셔도 좋습니다. 만약 바꾸거나 혹은 추가하고 싶은 것이 있으시다면 "마크다운 토글"을 클릭하신 다음에 다시 마크다운으로 될테고 편집하실 수 있습니다.
+5. Repeat as necessary.
 
 Markdown Here is primarily targeted to work with Gmail and Thunderbird, but it also works pretty well with Yahoo and Hotmail. Additionally, it works great with Google Groups and Sites, Evernote's web interface, Blogger, Wordpress, and more!
 
-Syntax highlighting note: Used fenced code blocks and specify the language name. See the project page for an example.
+Syntax highlighting note: Use fenced code blocks and specify the language name. See the project page for an example.
 
-Privacy: Markdown Here accesses and modifies the content of your email. It can, in theory, access other web content, but does not. It also makes no Internet requests itself whatsoever. You data is modified when and where you choose, and does not leave your browser.
+Privacy: Markdown Here accesses and modifies web content when you activate it. It can, in theory, access other web content, but does not. It also makes no Internet requests whatsoever. Your data is modified when and where you choose, and does not leave your browser.
 
 Available as a Chrome, Firefox, Safari, Opera, and Thunderbird extension.
 

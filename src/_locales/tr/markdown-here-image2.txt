@@ -1,0 +1,18 @@
+16 Mayıs, Çarşamba 2012, 21:51 de, Buddy <buddy@example.com> yazdı:
+
+> Naber kanka!
+
+Merhaba Buddy.
+
+> Bana biraz kod göndersen olur mu?
+
+**Bu** oldukça süper:
+
+```clojure
+(defn hello [x] (str "Hello", x))
+(hello "Clojure")
+```
+
+> Şimdiden sağol!
+
+Sorun değil.

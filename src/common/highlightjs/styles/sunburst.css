@@ -4,156 +4,162 @@ Sunburst-like style (c) Vasily Polovnyov <vast@whiteants.net>
 
 */
 
-pre code {
-  display: block; padding: 0.5em;
-  background: #000; color: #f8f8f8;
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: #000;
+  color: #f8f8f8;
+  -webkit-text-size-adjust: none;
 }
 
-pre .comment,
-pre .template_comment,
-pre .javadoc {
+.hljs-comment,
+.hljs-template_comment,
+.hljs-javadoc {
   color: #aeaeae;
   font-style: italic;
 }
 
-pre .keyword,
-pre .ruby .function .keyword,
-pre .request,
-pre .status,
-pre .nginx .title {
-  color: #E28964;
+.hljs-keyword,
+.ruby .hljs-function .hljs-keyword,
+.hljs-request,
+.hljs-status,
+.nginx .hljs-title {
+  color: #e28964;
 }
 
-pre .function .keyword,
-pre .sub .keyword,
-pre .method,
-pre .list .title {
-  color: #99CF50;
+.hljs-function .hljs-keyword,
+.hljs-sub .hljs-keyword,
+.method,
+.hljs-list .hljs-title {
+  color: #99cf50;
 }
 
-pre .string,
-pre .tag .value,
-pre .cdata,
-pre .filter .argument,
-pre .attr_selector,
-pre .apache .cbracket,
-pre .date,
-pre .tex .command,
-pre .coffeescript .attribute {
-  color: #65B042;
+.hljs-string,
+.hljs-tag .hljs-value,
+.hljs-cdata,
+.hljs-filter .hljs-argument,
+.hljs-attr_selector,
+.apache .hljs-cbracket,
+.hljs-date,
+.tex .hljs-command,
+.coffeescript .hljs-attribute {
+  color: #65b042;
 }
 
-pre .subst {
-  color: #DAEFA3;
+.hljs-subst {
+  color: #daefa3;
 }
 
-pre .regexp {
-  color: #E9C062;
+.hljs-regexp {
+  color: #e9c062;
 }
 
-pre .title,
-pre .sub .identifier,
-pre .pi,
-pre .tag,
-pre .tag .keyword,
-pre .decorator,
-pre .shebang,
-pre .prompt {
-  color: #89BDFF;
+.hljs-title,
+.hljs-sub .hljs-identifier,
+.hljs-pi,
+.hljs-tag,
+.hljs-tag .hljs-keyword,
+.hljs-decorator,
+.hljs-shebang,
+.hljs-prompt {
+  color: #89bdff;
 }
 
-pre .class .title,
-pre .haskell .type,
-pre .smalltalk .class,
-pre .javadoctag,
-pre .yardoctag,
-pre .phpdoc {
+.hljs-class .hljs-title,
+.hljs-type,
+.smalltalk .hljs-class,
+.hljs-javadoctag,
+.hljs-yardoctag,
+.hljs-phpdoc,
+.hljs-dartdoc {
   text-decoration: underline;
 }
 
-pre .symbol,
-pre .ruby .symbol .string,
-pre .number {
-  color: #3387CC;
+.hljs-symbol,
+.ruby .hljs-symbol .hljs-string,
+.hljs-number {
+  color: #3387cc;
 }
 
-pre .params,
-pre .variable,
-pre .clojure .attribute {
-  color: #3E87E3;
+.hljs-params,
+.hljs-variable,
+.clojure .hljs-attribute {
+  color: #3e87e3;
 }
 
-pre .css .tag,
-pre .rules .property,
-pre .pseudo,
-pre .tex .special {
-  color: #CDA869;
+.css .hljs-tag,
+.hljs-rules .hljs-property,
+.hljs-pseudo,
+.tex .hljs-special {
+  color: #cda869;
 }
 
-pre .css .class {
-  color: #9B703F;
+.css .hljs-class {
+  color: #9b703f;
 }
 
-pre .rules .keyword {
-  color: #C5AF75;
+.hljs-rules .hljs-keyword {
+  color: #c5af75;
 }
 
-pre .rules .value {
-  color: #CF6A4C;
+.hljs-rules .hljs-value {
+  color: #cf6a4c;
 }
 
-pre .css .id {
-  color: #8B98AB;
+.css .hljs-id {
+  color: #8b98ab;
 }
 
-pre .annotation,
-pre .apache .sqbracket,
-pre .nginx .built_in {
-  color: #9B859D;
+.hljs-annotation,
+.apache .hljs-sqbracket,
+.nginx .hljs-built_in {
+  color: #9b859d;
 }
 
-pre .preprocessor {
-  color: #8996A8;
+.hljs-preprocessor,
+.hljs-pragma {
+  color: #8996a8;
 }
 
-pre .hexcolor,
-pre .css .value .number {
-  color: #DD7B3B;
+.hljs-hexcolor,
+.css .hljs-value .hljs-number {
+  color: #dd7b3b;
 }
 
-pre .css .function {
-  color: #DAD085;
+.css .hljs-function {
+  color: #dad085;
 }
 
-pre .diff .header,
-pre .chunk,
-pre .tex .formula {
-  background-color: #0E2231;
-  color: #F8F8F8;
+.diff .hljs-header,
+.hljs-chunk,
+.tex .hljs-formula {
+  background-color: #0e2231;
+  color: #f8f8f8;
   font-style: italic;
 }
 
-pre .diff .change {
-  background-color: #4A410D;
-  color: #F8F8F8;
+.diff .hljs-change {
+  background-color: #4a410d;
+  color: #f8f8f8;
 }
 
-pre .addition {
-  background-color: #253B22;
-  color: #F8F8F8;
+.hljs-addition {
+  background-color: #253b22;
+  color: #f8f8f8;
 }
 
-pre .deletion {
-  background-color: #420E09;
-  color: #F8F8F8;
+.hljs-deletion {
+  background-color: #420e09;
+  color: #f8f8f8;
 }
 
-pre .coffeescript .javascript,
-pre .javascript .xml,
-pre .tex .formula,
-pre .xml .javascript,
-pre .xml .vbscript,
-pre .xml .css,
-pre .xml .cdata {
+.coffeescript .javascript,
+.javascript .xml,
+.tex .hljs-formula,
+.xml .javascript,
+.xml .vbscript,
+.xml .css,
+.xml .hljs-cdata {
   opacity: 0.5;
 }

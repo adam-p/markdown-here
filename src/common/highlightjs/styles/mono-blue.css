@@ -1,59 +1,70 @@
 /*
   Five-color theme from a single blue hue.
 */
-pre code {
-  display: block; padding: 0.5em;
-  background: #EAEEF3; color: #00193A;
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: #eaeef3;
+  -webkit-text-size-adjust: none;
 }
 
-pre .keyword,
-pre .title,
-pre .important,
-pre .request,
-pre .header,
-pre .javadoctag {
+.hljs,
+.hljs-list .hljs-built_in {
+  color: #00193a;
+}
+
+.hljs-keyword,
+.hljs-title,
+.hljs-important,
+.hljs-request,
+.hljs-header,
+.hljs-javadoctag {
   font-weight: bold;
 }
 
-pre .comment,
-pre .chunk,
-pre .template_comment {
+.hljs-comment,
+.hljs-chunk,
+.hljs-template_comment {
   color: #738191;
 }
 
-pre .string,
-pre .title,
-pre .parent,
-pre .built_in,
-pre .literal,
-pre .filename,
-pre .value,
-pre .addition,
-pre .tag,
-pre .argument,
-pre .link_label,
-pre .blockquote,
-pre .header {
-  color: #0048AB;
+.hljs-string,
+.hljs-title,
+.hljs-parent,
+.hljs-built_in,
+.hljs-literal,
+.hljs-filename,
+.hljs-value,
+.hljs-addition,
+.hljs-tag,
+.hljs-argument,
+.hljs-link_label,
+.hljs-blockquote,
+.hljs-header {
+  color: #0048ab;
 }
 
-pre .decorator,
-pre .prompt,
-pre .yardoctag,
-pre .subst,
-pre .symbol,
-pre .doctype,
-pre .regexp,
-pre .preprocessor,
-pre .pi,
-pre .attribute,
-pre .attr_selector,
-pre .javadoc,
-pre .xmlDocTag,
-pre .deletion,
-pre .shebang,
-pre .string .variable,
-pre .link_url,
-pre .bullet {
-  color: #4C81C9;
+.hljs-decorator,
+.hljs-prompt,
+.hljs-yardoctag,
+.hljs-subst,
+.hljs-symbol,
+.hljs-doctype,
+.hljs-regexp,
+.hljs-preprocessor,
+.hljs-pragma,
+.hljs-pi,
+.hljs-attribute,
+.hljs-attr_selector,
+.hljs-javadoc,
+.hljs-xmlDocTag,
+.hljs-deletion,
+.hljs-shebang,
+.hljs-string .hljs-variable,
+.hljs-link_url,
+.hljs-bullet,
+.hljs-sqbracket,
+.hljs-phony {
+  color: #4c81c9;
 }

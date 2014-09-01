@@ -1,0 +1,36 @@
+## Классный скриншот Markdown
+
+* Markdown Here* — расширение Google Chrome, Firefox и Thunderbird, которое позволяет вам написать письмо в Markdown и отрендерить его перед отправкой.
+
+* Markdown -- это **круто**. Запишем `код в строку`.
+* Ссылки на разные штуки, такие как [этот проект] (https://github.com/adam-p/markdown-here).
+* Упорядоченный вы сказали? **И** подсписок?
+  1. Есть.
+  2. И есть.
+
+Цитата из фактического обзора:
+
+> Делает именно то что мне нужно: практическая поддержка Markdown в емейлах.
+
+### Подсветка: супер
+
+Немного JavaScript:
+
+```javascript
+alert('Hello Markdown');
+```
+
+Как насчет необычнoго примера --diff:
+
+```diff
+diff --git a/src/common/markdown-here.js b/src/common/markdown-here.js
+index 24dcb97..20c36a1 100644
+--- a/src/common/markdown-here.js
++++ b/src/common/markdown-here.js
+@@ -201,12 +179,14 @@ function makeStylesExplicit(wrapperElem, css) {
+-        applyStyleToElement(rule.style, selectorMatches[j]);
++        styleAttr = selectorMatches[j].getAttribute('style') || '';
++        styleAttr += rule.style.cssText;
++        selectorMatches[j].setAttribute('style', styleAttr);
+```
+

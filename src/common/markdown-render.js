@@ -81,13 +81,14 @@ function markdownRender(mdText, userprefs, marked, hljs) {
     smartLists: true,
     breaks: userprefs['gfm-line-breaks-enabled'],
     smartypants: true,
-    langPrefix: 'language-',
+    // Bit of a hack: highlight.js uses a `hljs` class to style the code block,
+    // so we'll add it by sneaking it into this config field.
+    langPrefix: 'hljs language-',
     math: userprefs['math-enabled'] ? mathify : null,
     highlight: function(codeText, codeLanguage) {
         if (codeLanguage &&
-            ((codeLanguage in hljs.LANGUAGES) ||
-             ((codeLanguage = codeLanguage.toLowerCase()) in hljs.LANGUAGES))) {
-          return hljs.highlight(codeLanguage, codeText).value;
+            hljs.getLanguage(codeLanguage.toLowerCase())) {
+          return hljs.highlight(codeLanguage.toLowerCase(), codeText).value;
         }
 
         return codeText;

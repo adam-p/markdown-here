@@ -1,0 +1,5 @@
+Écrivez votre courriel avec Markdown...
+
+...puis rendez-le attrayant!
+
+Vous souhaitez utiliser Markdown pour une partie de votre courriel seulement? Sélectionnez-la simplement, puis convertissez-la!

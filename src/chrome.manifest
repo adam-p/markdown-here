@@ -2,6 +2,13 @@ content   markdown_here                 firefox/chrome/content/
 skin      markdown_here   classic/1.0   firefox/chrome/skin/
 locale    markdown_here   en            firefox/chrome/locale/en/
 locale    markdown_here   ja            firefox/chrome/locale/ja/
+locale    markdown_here   fr            firefox/chrome/locale/fr/
+locale    markdown_here   ko            firefox/chrome/locale/ko/
+locale    markdown_here   ru            firefox/chrome/locale/ru/
+locale    markdown_here   tr            firefox/chrome/locale/tr/
+locale    markdown_here   de            firefox/chrome/locale/de/
+locale    markdown_here   es            firefox/chrome/locale/es/
+locale    markdown_here   zh-CN         firefox/chrome/locale/zh_CN/
 resource  markdown_here_common          common/
 
 # This is a bit of a hack to allow us to get direct access to specific locale

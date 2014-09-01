@@ -33,3 +33,4 @@ index 24dcb97..20c36a1 100644
 +        styleAttr += rule.style.cssText;
 +        selectorMatches[j].setAttribute('style', styleAttr);
 ```
+

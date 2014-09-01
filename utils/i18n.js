@@ -1,5 +1,5 @@
 /*
- * Copyright Adam Pritchard 2013
+ * Copyright Adam Pritchard 2014
  * MIT License : http://adampritchard.mit-license.org/
  */
 
@@ -19,12 +19,15 @@ var INSTALL_RDF_I18N_TEMPLATE =
 '            <em:description>{{app_slogan}}</em:description>\n' +
 '          </Description>\n' +
 '        </em:localized>\n';
+var MOZ_MANIFEST_FILENAME = '../src/chrome.manifest';
+var mozManifest = fs.readFileSync(MOZ_MANIFEST_FILENAME, 'utf8');
 
 resetInstallRdf();
 
 var LOCALES_DIR = '../src/_locales/';
 
 var locales = fs.readdirSync(LOCALES_DIR);
+var mozLocaleMappings = getMozillaLocaleMappings();
 
 locales.forEach(function(locale) {
   // Skip .DS_Store. No locale dirs should start with '.'
@@ -43,9 +46,7 @@ function checkLocaleSanity(locale) {
     throw new Error('Mozilla locale directory missing: ' + locale);
   }
 
-  var mozManifestFilename = '../src/chrome.manifest';
-  var mozManifest = fs.readFileSync(mozManifestFilename, 'utf8');
-  if (mozManifest.indexOf('locale') < 0) {
+  if (!(locale in mozLocaleMappings)) {
     throw new Error('Mozilla chrome.manifest missing locale entry: ' + locale);
   }
 }
@@ -61,7 +62,7 @@ function resetInstallRdf() {
   var newRdf = oldRdf.replace(regex, MOZ_RDF_I18N_SECTION_START + '\n' + MOZ_RDF_I18N_SECTION_END);
 
   if (oldRdf === newRdf) {
-    console.log('WARNING: empty or missing i18n setion in install.rdf');
+    console.log('WARNING: empty or missing i18n section in install.rdf');
   }
 
   fs.writeFileSync(MOZ_RDF_FILENAME, newRdf);
@@ -79,6 +80,9 @@ function addEntryToInstallRdf(rdfEntry) {
 
 function processLocale(locale) {
   checkLocaleSanity(locale);
+
+  // This is used in logic, but not in file paths.
+  var mozLocale = mozLocaleMappings[locale];
 
   // message.json is authoritative. The Firefox files are derived from it.
   var stringBundle = JSON.parse(fs.readFileSync(LOCALES_DIR + locale + '/messages.json'));
@@ -111,10 +115,24 @@ function processLocale(locale) {
   }
 
   var rdfEntry = INSTALL_RDF_I18N_TEMPLATE
-                  .replace('{{locale}}', locale)
+                  .replace('{{locale}}', mozLocale)
                   .replace('{{app_name}}', stringBundle['app_name'].message)
                   .replace('{{app_slogan}}', stringBundle['app_slogan'].message);
 
   addEntryToInstallRdf(rdfEntry);
 }
 
+
+function getMozillaLocaleMappings() {
+  var lines = mozManifest.split('\n'),
+      mappings = {},
+      i, match;
+  for (var i = 0; i < lines.length; i++) {
+    match = lines[i].match(/^locale\s+markdown_here\s+([a-zA-Z_-]+)\s+firefox\/chrome\/locale\/([a-zA-Z_-]+)\/$/);
+    if (match) {
+      mappings[match[2]] = match[1];
+    }
+  }
+
+  return mappings;
+}

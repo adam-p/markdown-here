@@ -1,6 +1,26 @@
 Change Log
 ==========
 
+2014-08-31: v2.11.1
+-------------------
+
+* [Fixed annoying bug #188](https://github.com/adam-p/markdown-here/issues/188): Keyboard shortcut was not working in Chrome+Gmail.
+  - Thanks to: [Paulo Diovani Gonçalves](https://github.com/paulodiovani), [Edmundo Junior](https://github.com/edmundojr), [Mike Lindegarde](https://github.com/mlindegarde), [Jordi Gerona](https://github.com/jordi9), [Dilek](https://github.com/averagewizard), [Hrusikesh Panda](https://github.com/mrchief), [Clay McKell](https://github.com/kcmckell), [Trey Harris](https://groups.google.com/forum/#!topic/markdown-here/SnQ4fVtQvQQ).
+
+* With the help of our hard-working translators, **six new translations** were added. They are: Chinese, French, German, Russian, Spanish, and Turkish.
+  - Thanks to: [Antoine Proulx](https://crowdin.com/profile/magicienap), [ebouchut](https://crowdin.com/profile/ebouchut), [Lennaick](https://crowdin.com/profile/lennaick), [leftaroundabout](https://crowdin.com/profile/leftaroundabout), [Pierre Quillery](dandelionmood), [Ko-Chih Wu](https://crowdin.com/profile/mecca831), [Masahiro Umegaki](https://crowdin.com/profile/ume), [dlkgenc](https://crowdin.com/profile/dlkgenc), [turkish123](https://crowdin.com/profile/turkish123), [sergiolunagarcia](https://crowdin.com/profile/sergiolunagarcia), [Alexis Morelle](https://crowdin.com/profile/almorelle), and my friend and co-worker [Eugene Fryntov](https://crowdin.com/profile/efryntov). (You're all also in the [contributors list](https://github.com/adam-p/markdown-here/blob/development/CONTRIBUTE.md).)
+  - If you'd like to start a new language, add to a not-quite-complete translation, or fix up something, please visit the [Markdown Here translation project on Crowdin](https://crowdin.com/project/markdown-here).
+
+* **Updated [Highglight.js](http://highlightjs.org/)**, which is the syntax highlighting library used by Markdown Here.
+  * **NOTE**: If your syntax higlighting looks wrong, switch your theme. Your styling might be stale.
+  * Now supports **language aliases**. For example, `js` is an alias for `javascript`, `html` is an alias for `xml`, and `coffee`, `cson`, and `iced` are aliases for `coffeescript`. You can see the [complete list here](http://highlightjs.readthedocs.org/en/latest/css-classes-reference.html).
+  * New languages: Makefile, Scilab, LiveCode Server, OCaml, Oxygene, Mathematica, Autohotkey, Gherkin, Elixir, NSIS, VIM script, Protocol Buffers, Nix, x86asm, Cap’n Proto and Thrift, Monkey, TypeScript, Nimrod, Gradle, Haxe, Swift, Groovy, Dart, Dust, Scheme, G-Code, Q.
+  * New themes: Atelier, Paraíso, Kimbie, Colorbrewer, Codepen.io embed, Hybrid.
+  * Lots of theme and language improvements.
+  * This resolves MDH issues [#193](https://github.com/adam-p/markdown-here/issues/193) and [#196](https://github.com/adam-p/markdown-here/issues/196).
+  * Make no mistake, all credit for this goes to [Ivan Sagalaev](https://github.com/isagalaev) and the [Hightlight.js contributors](https://github.com/isagalaev/highlight.js/blob/master/AUTHORS.en.txt).
+
+
 2014-05-17: v2.11.0
 -------------------
 

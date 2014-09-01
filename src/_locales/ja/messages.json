@@ -30,11 +30,11 @@
   },
   "context_menu_item_with_shortcut":{
     "message":"Mar&kdownを有効化\/無効化",
-    "description":"Text shown on the context menu. The '&' comes before the shortcut character."
+    "description":"Text shown on the context menu. The '&' comes before the shortcut character. If a shortcut key doesn't make sense for your language\/locale\/keyboard, you can just leave out the '&'."
   },
   "context_menu_item_shortcut":{
     "message":"k",
-    "description":"The shortcut key for the context menu. Must be one of the letters in the context menu item text",
+    "description":"The shortcut key for the context menu. Must be one of the letters in the context menu item text. If you excluded '&' in 'context_menu_item_with_shortcut', then you can leave this blank.",
     "inMozDTD":true
   },
   "invalid_field":{
@@ -79,7 +79,7 @@
     "description":"Text on the notification shown when Markdown Here has been updated"
   },
   "upgrade_notification_changes_tooltip":{
-    "message":"クリックでこのリリースでの変更点を参照",
+    "message":"Click to see the changes in this release",
     "description":"Tooltip text on the link that opens the changes list"
   },
   "upgrade_notification_dismiss_tooltip":{
@@ -323,7 +323,7 @@
     "description":"message that shows when user changes have been saved"
   },
   "options_page__preview_markdown":{
-    "message":"```javascript<br>\nfunction syntaxHighlighting() {<br>\n&nbsp; var n = 33;<br>\n&nbsp; var s = \"こんにちは\";<br>\n&nbsp; console.log(s);<br>\n}<br>\n```<br>\n<br>\n* ふつう<br>\n* *強調*<br>\n&nbsp; * **すごく強調**<br>\n&nbsp; &nbsp; * ~~取り消し線~~<br>\n* `ソースコード`<br>\n<br>\n1. 番号付きリスト<br>\n2. [リンク](https:\/\/www.google.com)<br>\n<br>\n<br>\n画像: ![Markdown Hereのロゴ](http:\/\/adam-p.github.io\/markdown-here\/img\/icon24.png)\n<br>\n<br>\n> 引用文&nbsp; <br>\n> *いくつかの* **Markdown** `を含む`。<br>\n<br>\nもし **TeX 数式** のサポートが有効化されていれば、これは二次方程式です:&nbsp;<br>\n$$-b \\pm \\sqrt{b^2 - 4ac} \\over 2a$$<br>\n<br>\n# ヘッダー 1<br>\n## ヘッダー 2<br>\n### ヘッダー 3<br>\n#### ヘッダー 4<br>\n##### ヘッダー 5<br>\n###### ヘッダー 6<br>\n&nbsp; <br>\n| 表は          | とても        | 美しい |<br>\n| ------------- |:-------------:| ------:|<br>\n| 三列目は      | 右合わせ      | 16万円 |<br>\n| 二列目は      | 中央合わせ    | 1200円 |<br>\n| 縞々模様は    | きれい        |  100円 |<br>\n<br>\nこれは平行線です:<br>\n<br>\n---<br>\n<br>\n```<br>\nコードブロック<br>\nハイライティングなし<br>\n```<br>\n<br>",
+    "message":"```javascript<br>\nfunction syntaxHighlighting() {<br>\n&nbsp; var n = 33;<br>\n&nbsp; var s = \"hello, こんにちは\";<br>\n&nbsp; console.log(s);<br>\n}<br>\n```<br>\n<br>\n* plain<br>\n* *emphasis*<br>\n&nbsp; * **strong emphasis**<br>\n&nbsp; &nbsp; * ~~strikethrough~~<br>\n* `inline code`<br>\n<br>\n1. Numbered list<br>\n2. [Link](https:\/\/www.google.com)<br>\n<br>\n<br>\nAn image: ![Markdown Here logo](http:\/\/adam-p.github.io\/markdown-here\/img\/icon24.png)\n<br>\n<br>\n> Block quote.&nbsp; <br>\n> *With* **some** `markdown`.<br>\n<br>\nIf **TeX Math** support is enabled, this is the quadratic equation:&nbsp;<br>\n$$-b \\pm \\sqrt{b^2 - 4ac} \\over 2a$$<br>\n<br>\n# Header 1<br>\n## Header 2<br>\n### Header 3<br>\n#### Header 4<br>\n##### Header 5<br>\n###### Header 6<br>\n&nbsp; <br>\n| Tables        | Are           | Cool  |<br>\n| ------------- |:-------------:| -----:|<br>\n| column 3 is   | right-aligned | $$1600 |<br>\n| column 2 is   | centered      |   $$12 |<br>\n| zebra stripes | are neat      |    $$1 |<br>\n<br>\nHere's a horizontal rule:<br>\n<br>\n---<br>\n<br>\n```<br>\ncode block<br>\nwith no highlighting<br>\n```<br>\n<br>\n",
     "description":"The raw Markdown used for previewing user styling changes. Also shows users what can be done with Markdown. Please note that the double dollar signs ($$) are needed to make a single dollar sign in the application."
   },
   "currently_in_use":{
@@ -343,5 +343,9 @@
   },
   "options_page__header_anchors_enabled_2":{
     "message":"<a href=\"https:\/\/github.com\/adam-p\/markdown-here\/issues\/155\" target=\"_blank\">Thunderbird で見た目が汚くなる<\/a>ため、デフォルトでは無効にされています(また、ほとんどの人はこの機能を必要としないでしょう)。"
+  },
+  "options_page__gfm_line_breaks_enabled_label":{
+    "message":"<b>Enable GFM line breaks.<\/b>",
+    "description":"Label for the checkbox that enables the support of 'Github-flavored Markdown' line breaks."
   }
 }

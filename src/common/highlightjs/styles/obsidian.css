@@ -3,151 +3,152 @@
  * ported by Alexander Marenin (http://github.com/ioncreature)
  */
 
-pre code {
-    display: block; padding: 0.5em;
-    background: #282B2E;
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: #282b2e;
+  -webkit-text-size-adjust: none;
 }
 
-pre .keyword,
-pre .literal,
-pre .change,
-pre .winutils,
-pre .flow,
-pre .lisp .title,
-pre .clojure .built_in,
-pre .nginx .title,
-pre .css .id,
-pre .tex .special {
-    color: #93C763;
+.hljs-keyword,
+.hljs-literal,
+.hljs-change,
+.hljs-winutils,
+.hljs-flow,
+.nginx .hljs-title,
+.css .hljs-id,
+.tex .hljs-special {
+  color: #93c763;
 }
 
-pre .number {
-    color: #FFCD22;
+.hljs-number {
+  color: #ffcd22;
 }
 
-pre code {
-    color: #E0E2E4;
+.hljs {
+  color: #e0e2e4;
 }
 
-pre .css .tag,
-pre .css .pseudo {
-    color: #D0D2B5;
+.css .hljs-tag,
+.css .hljs-pseudo {
+  color: #d0d2b5;
 }
 
-pre .attribute,
-pre code .constant {
-    color: #668BB0;
+.hljs-attribute,
+.hljs .hljs-constant {
+  color: #668bb0;
 }
 
-pre .xml .attribute {
-    color: #B3B689;
+.xml .hljs-attribute {
+  color: #b3b689;
 }
 
-pre .xml .tag .value {
-    color: #E8E2B7;
+.xml .hljs-tag .hljs-value {
+  color: #e8e2b7;
 }
 
-pre .code,
-pre .class .title,
-pre .header {
-    color: white;
+.hljs-code,
+.hljs-class .hljs-title,
+.hljs-header {
+  color: white;
 }
 
-pre .class,
-pre .hexcolor {
-    color: #93C763;
+.hljs-class,
+.hljs-hexcolor {
+  color: #93c763;
 }
 
-pre .regexp {
-    color: #D39745;
+.hljs-regexp {
+  color: #d39745;
 }
 
-pre .at_rule,
-pre .at_rule .keyword {
-    color: #A082BD;
+.hljs-at_rule,
+.hljs-at_rule .hljs-keyword {
+  color: #a082bd;
 }
 
-pre .doctype {
-    color: #557182;
+.hljs-doctype {
+  color: #557182;
 }
 
-pre .link_url,
-pre .tag,
-pre .tag .title,
-pre .bullet,
-pre .subst,
-pre .emphasis,
-pre .haskell .type,
-pre .preprocessor,
-pre .ruby .class .parent,
-pre .built_in,
-pre .sql .aggregate,
-pre .django .template_tag,
-pre .django .variable,
-pre .smalltalk .class,
-pre .javadoc,
-pre .django .filter .argument,
-pre .smalltalk .localvars,
-pre .smalltalk .array,
-pre .attr_selector,
-pre .pseudo,
-pre .addition,
-pre .stream,
-pre .envvar,
-pre .apache .tag,
-pre .apache .cbracket,
-pre .tex .command,
-pre .prompt {
-    color: #8CBBAD;
+.hljs-link_url,
+.hljs-tag,
+.hljs-tag .hljs-title,
+.hljs-bullet,
+.hljs-subst,
+.hljs-emphasis,
+.hljs-type,
+.hljs-preprocessor,
+.hljs-pragma,
+.ruby .hljs-class .hljs-parent,
+.hljs-built_in,
+.django .hljs-template_tag,
+.django .hljs-variable,
+.smalltalk .hljs-class,
+.hljs-javadoc,
+.django .hljs-filter .hljs-argument,
+.smalltalk .hljs-localvars,
+.smalltalk .hljs-array,
+.hljs-attr_selector,
+.hljs-pseudo,
+.hljs-addition,
+.hljs-stream,
+.hljs-envvar,
+.apache .hljs-tag,
+.apache .hljs-cbracket,
+.tex .hljs-command,
+.hljs-prompt {
+  color: #8cbbad;
 }
 
-pre .string {
-    color: #EC7600;
+.hljs-string {
+  color: #ec7600;
 }
 
-pre .comment,
-pre .java .annotation,
-pre .blockquote,
-pre .horizontal_rule,
-pre .python .decorator,
-pre .template_comment,
-pre .pi,
-pre .deletion,
-pre .shebang,
-pre .apache .sqbracket,
-pre .tex .formula {
-    color: #818E96;
+.hljs-comment,
+.hljs-annotation,
+.hljs-blockquote,
+.hljs-horizontal_rule,
+.hljs-decorator,
+.hljs-template_comment,
+.hljs-pi,
+.hljs-deletion,
+.hljs-shebang,
+.apache .hljs-sqbracket,
+.tex .hljs-formula {
+  color: #818e96;
 }
 
-pre .keyword,
-pre .literal,
-pre .css .id,
-pre .phpdoc,
-pre .title,
-pre .header,
-pre .haskell .type,
-pre .vbscript .built_in,
-pre .sql .aggregate,
-pre .rsl .built_in,
-pre .smalltalk .class,
-pre .diff .header,
-pre .chunk,
-pre .winutils,
-pre .bash .variable,
-pre .apache .tag,
-pre .tex .special,
-pre .request,
-pre .at_rule .keyword,
-pre .status {
-    font-weight: bold;
+.hljs-keyword,
+.hljs-literal,
+.css .hljs-id,
+.hljs-phpdoc,
+.hljs-dartdoc,
+.hljs-title,
+.hljs-header,
+.hljs-type,
+.vbscript .hljs-built_in,
+.rsl .hljs-built_in,
+.smalltalk .hljs-class,
+.diff .hljs-header,
+.hljs-chunk,
+.hljs-winutils,
+.bash .hljs-variable,
+.apache .hljs-tag,
+.tex .hljs-special,
+.hljs-request,
+.hljs-at_rule .hljs-keyword,
+.hljs-status {
+  font-weight: bold;
 }
 
-pre .coffeescript .javascript,
-pre .javascript .xml,
-pre .tex .formula,
-pre .xml .javascript,
-pre .xml .vbscript,
-pre .xml .css,
-pre .xml .cdata {
-    opacity: 0.5;
+.coffeescript .javascript,
+.javascript .xml,
+.tex .hljs-formula,
+.xml .javascript,
+.xml .vbscript,
+.xml .css,
+.xml .hljs-cdata {
+  opacity: 0.5;
 }

@@ -1,0 +1,35 @@
+## Sweet Screenshot Markdown
+
+*Markdown Here* is a Google Chrome, Firefox, and Thunderbird extension that lets you write email in Markdown and render it before sending.
+
+* Markdown is **cool**. Put `code inline`.
+* Link to stuff, like [this project](https://github.com/adam-p/markdown-here).
+* Ordered, you say? **And** a sub-list?
+  1. Done.
+  2. And done.
+
+Actual review quote:
+
+> Does exactly what I need it to do. Markdown support in email without getting in the way.
+
+### Syntax highlighting: super rad
+
+Some JavaScript:
+
+```javascript
+alert('Hello Markdown');
+```
+
+How about an unusual example -- a diff:
+
+```diff
+diff --git a/src/common/markdown-here.js b/src/common/markdown-here.js
+index 24dcb97..20c36a1 100644
+--- a/src/common/markdown-here.js
++++ b/src/common/markdown-here.js
+@@ -201,12 +179,14 @@ function makeStylesExplicit(wrapperElem, css) {
+-        applyStyleToElement(rule.style, selectorMatches[j]);
++        styleAttr = selectorMatches[j].getAttribute('style') || '';
++        styleAttr += rule.style.cssText;
++        selectorMatches[j].setAttribute('style', styleAttr);
+```

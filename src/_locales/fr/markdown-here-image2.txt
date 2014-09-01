@@ -1,0 +1,18 @@
+Le mer. 16 mai 2012 à 21 h 51, Ami <ami@example.com> a écrit :
+
+> Bonjour à toi!
+
+Bonjour l'ami.
+
+> Peux-tu m'envoyer un bout de code intéressant?
+
+**Ceci** est plutôt bien :
+
+```clojure
+(defn bonjour [x] (str "Bonjour", x))
+(bonjour "Clojure")
+```
+
+> Merci d'avance!
+
+Il n'y a pas de quoi.

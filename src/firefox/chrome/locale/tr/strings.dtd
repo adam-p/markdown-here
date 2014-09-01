@@ -1,0 +1,8 @@
+<!ENTITY app_name "Markdown Here">
+<!ENTITY context_menu_item "Markdown Toggle">
+<!ENTITY context_menu_item_shortcut "k">
+<!ENTITY forgot_to_render_back_button "Geri">
+<!ENTITY forgot_to_render_send_button "Gönder">
+<!ENTITY toggle_button_text "MD Toggle">
+<!ENTITY toggle_button_tooltip "Markdown haline dönüştürmek için bas">
+<!ENTITY toggle_button_tooltip_disabled "Seçilen alan Markdown dönüşümü için geçerli değildir">

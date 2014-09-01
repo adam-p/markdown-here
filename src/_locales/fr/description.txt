@@ -1,0 +1,23 @@
+Markdown Here permet d'écrire un courriel avec Mardown et de le convertir (afin qu'il soit attrayant!) avant de l'envoyer.
+
+C'est parfait pour tous ceux qui n'aiment pas travailler avec des boutons de formatage pendant qu'ils écrivent un courriel. C'est particulièrement utile pour les programmeurs qui écrivent des courriels qui incluent du code -- la coloration syntaxique est également supportée. Et pour les mathématiciens parmi nous : Markdown Here convertira tout aussi bien les formules TeX.
+
+Tout à fait simple à utiliser :
+1. Écrivez votre courriel dans l'éditeur de texte enrichi de votre client de messagerie en utilisant Markdown (Github-flavoured Markdown).
+2. Faites un clic droit dans la zone de texte du corps de votre courriel, puis cliquez sur « Basculer Markdown ».
+3. Votre courriel est maintenant attrayant! (C'est-à-dire qu'il a été converti en HTML.)
+4. Si vous aimez l'aspect de votre courriel, il ne vous reste qu'à l'envoyer. Si vous souhaitez changer ou ajouter quelque chose, cliquez à nouveau sur « Basculer Markdown » afin de retrouver votre Markdown d'origine.
+5. Répéter au besoin.
+
+Markdown Here est principalement destiné à être utilisé avec Gmail et Thunderbird, mais il fonctionne également très bien avec Yahoo et Hotmail. De plus, il fonctionne bien avec Google Groupes et Sites, avec l'interface Web d'Evernote, Blogger, Wordpress et plus encore!
+
+Remarque concernant la coloration syntaxique : utilisez des blocs de code balisés et spécifiez le nom du langage. Voyez la page du projet pour un exemple.
+
+Vie privée : Markdown Here accède et modifie le contenu web quand vous l'activez. Il peut aussi, en théorie accéder à d'autre contenu Web, mais il ne le fait pas. Il ne fait également aucune autre requête Internet que ce soit. Vos données sont modifiées quand et où vous le choisissez et elles ne quittent pas votre navigateur.
+
+Disponible en tant qu'extension Chrome, Firefox, Safari, Opera et Thunderbird.
+
+Il s'agit d'un projet libre. Visitez la page Github de Markdown Here pour les instructions complètes, pour plus d'information, pour les rapports de bogue ou pour contribuer à ce projet.
+
+http://markdown-here.com (en anglais)
+https://github.com/adam-p/markdown-here (en anglais)

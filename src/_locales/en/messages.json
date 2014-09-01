@@ -30,11 +30,11 @@
   },
   "context_menu_item_with_shortcut": {
     "message": "Mar&kdown Toggle",
-    "description": "Text shown on the context menu. The '&' comes before the shortcut character."
+    "description": "Text shown on the context menu. The '&' comes before the shortcut character. If a shortcut key doesn't make sense for your language/locale/keyboard, you can just leave out the '&'."
   },
   "context_menu_item_shortcut": {
     "message": "k",
-    "description": "The shortcut key for the context menu. Must be one of the letters in the context menu item text",
+    "description": "The shortcut key for the context menu. Must be one of the letters in the context menu item text. If you excluded '&' in 'context_menu_item_with_shortcut', then you can leave this blank.",
     "inMozDTD": true
   },
   "invalid_field": {
@@ -79,7 +79,7 @@
     "description": "Text on the notification shown when Markdown Here has been updated"
   },
   "upgrade_notification_changes_tooltip": {
-    "message": "Click to the see the changes in this release",
+    "message": "Click to see the changes in this release",
     "description": "Tooltip text on the link that opens the changes list"
   },
   "upgrade_notification_dismiss_tooltip": {

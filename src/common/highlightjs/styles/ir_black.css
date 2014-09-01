@@ -2,104 +2,109 @@
   IR_Black style (c) Vasily Mikhailitchenko <vaskas@programica.ru>
 */
 
-pre code {
-  display: block; padding: 0.5em;
-  background: #000; color: #f8f8f8;
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: #000;
+  color: #f8f8f8;
+  -webkit-text-size-adjust: none;
 }
 
-pre .shebang,
-pre .comment,
-pre .template_comment,
-pre .javadoc {
+.hljs-shebang,
+.hljs-comment,
+.hljs-template_comment,
+.hljs-javadoc {
   color: #7c7c7c;
 }
 
-pre .keyword,
-pre .tag,
-pre .tex .command,
-pre .request,
-pre .status,
-pre .clojure .attribute {
-  color: #96CBFE;
+.hljs-keyword,
+.hljs-tag,
+.tex .hljs-command,
+.hljs-request,
+.hljs-status,
+.clojure .hljs-attribute {
+  color: #96cbfe;
 }
 
-pre .sub .keyword,
-pre .method,
-pre .list .title,
-pre .nginx .title {
-  color: #FFFFB6;
+.hljs-sub .hljs-keyword,
+.method,
+.hljs-list .hljs-title,
+.nginx .hljs-title {
+  color: #ffffb6;
 }
 
-pre .string,
-pre .tag .value,
-pre .cdata,
-pre .filter .argument,
-pre .attr_selector,
-pre .apache .cbracket,
-pre .date,
-pre .coffeescript .attribute {
-  color: #A8FF60;
+.hljs-string,
+.hljs-tag .hljs-value,
+.hljs-cdata,
+.hljs-filter .hljs-argument,
+.hljs-attr_selector,
+.apache .hljs-cbracket,
+.hljs-date,
+.coffeescript .hljs-attribute {
+  color: #a8ff60;
 }
 
-pre .subst {
-  color: #DAEFA3;
+.hljs-subst {
+  color: #daefa3;
 }
 
-pre .regexp {
-  color: #E9C062;
+.hljs-regexp {
+  color: #e9c062;
 }
 
-pre .title,
-pre .sub .identifier,
-pre .pi,
-pre .decorator,
-pre .tex .special,
-pre .haskell .type,
-pre .constant,
-pre .smalltalk .class,
-pre .javadoctag,
-pre .yardoctag,
-pre .phpdoc,
-pre .nginx .built_in {
-  color: #FFFFB6;
+.hljs-title,
+.hljs-sub .hljs-identifier,
+.hljs-pi,
+.hljs-decorator,
+.tex .hljs-special,
+.hljs-type,
+.hljs-constant,
+.smalltalk .hljs-class,
+.hljs-javadoctag,
+.hljs-yardoctag,
+.hljs-phpdoc,
+.hljs-dartdoc,
+.nginx .hljs-built_in {
+  color: #ffffb6;
 }
 
-pre .symbol,
-pre .ruby .symbol .string,
-pre .number,
-pre .variable,
-pre .vbscript,
-pre .literal {
-  color: #C6C5FE;
+.hljs-symbol,
+.ruby .hljs-symbol .hljs-string,
+.hljs-number,
+.hljs-variable,
+.vbscript,
+.hljs-literal {
+  color: #c6c5fe;
 }
 
-pre .css .tag {
-  color: #96CBFE;
+.css .hljs-tag {
+  color: #96cbfe;
 }
 
-pre .css .rules .property,
-pre .css .id {
-  color: #FFFFB6;
+.css .hljs-rules .hljs-property,
+.css .hljs-id {
+  color: #ffffb6;
 }
 
-pre .css .class {
-  color: #FFF;
+.css .hljs-class {
+  color: #fff;
 }
 
-pre .hexcolor {
-  color: #C6C5FE;
+.hljs-hexcolor {
+  color: #c6c5fe;
 }
 
-pre .number {
-  color:#FF73FD;
+.hljs-number {
+  color:#ff73fd;
 }
 
-pre .coffeescript .javascript,
-pre .javascript .xml,
-pre .tex .formula,
-pre .xml .javascript,
-pre .xml .vbscript,
-pre .xml .css,
-pre .xml .cdata {
+.coffeescript .javascript,
+.javascript .xml,
+.tex .hljs-formula,
+.xml .javascript,
+.xml .vbscript,
+.xml .css,
+.xml .hljs-cdata {
   opacity: 0.7;
 }

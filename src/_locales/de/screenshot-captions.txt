@@ -1,0 +1,5 @@
+E-Mail in Markdown schreiben...
+
+...und dann schön-rendern!
+
+Markdown nur für einen Teil der Mail benutzen? Einfach auswählen und Konvertieren!
