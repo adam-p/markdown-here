@@ -28,3 +28,27 @@ If you do make any translation changes, or if you have any questions or problems
 
 * [lambdalice](https://github.com/lambdalice)
   - Provided an entire Japanese translation and forced the MDH i18n work to get done.
+
+* [Antoine Proulx](https://crowdin.com/profile/magicienap)
+
+* [ebouchut](https://crowdin.com/profile/ebouchut)
+
+* [Lennaick](https://crowdin.com/profile/lennaick)
+
+* [leftaroundabout](https://crowdin.com/profile/leftaroundabout)
+
+* [Pierre Quillery](dandelionmood)
+
+* [Ko-Chih Wu](https://crowdin.com/profile/mecca831)
+
+* [Masahiro Umegaki](https://crowdin.com/profile/ume)
+
+* [dlkgenc](https://crowdin.com/profile/dlkgenc)
+
+* [turkish123](https://crowdin.com/profile/turkish123)
+
+* [sergiolunagarcia](https://crowdin.com/profile/sergiolunagarcia)
+
+* [Alexis Morelle](https://crowdin.com/profile/almorelle)
+
+* [Eugene Fryntov](https://crowdin.com/profile/efryntov)
