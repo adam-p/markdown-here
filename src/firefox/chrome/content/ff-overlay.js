@@ -16,10 +16,11 @@ var markdown_here = {
 
   imports: {},
 
-  // Components.utils is somewhat more performant than mozIJSSubScriptLoader, so
-  // we'll use it when possible. However, Components.utils usually requires
-  // modifications to the source file, which isn't allowed for some 3rd party
-  // code (Highlight.js, in particular) -- in that case we use mozIJSSubScriptLoader.
+  // Components.utils is somewhat more performant than mozIJSSubScriptLoader,
+  // but it doesn't expose the global `window` to the code, which introduces
+  // tons of headaches (see https://github.com/adam-p/markdown-here/issues/141).
+  // The correct way to deal with that is probably to pass `window` into every
+  // single call, but that seems onerous.
   // For details on the difference, see:
   // https://developer.mozilla.org/en-US/docs/Components.utils.import
   scriptLoader: Components.classes["@mozilla.org/moz/jssubscript-loader;1"]
@@ -87,16 +88,25 @@ var markdown_here = {
   onLoad: function() {
     var contextMenu;
 
-    Components.utils.import('resource://markdown_here_common/utils.js', markdown_here.imports);
-    Components.utils.import('resource://markdown_here_common/common-logic.js', markdown_here.imports);
-    Components.utils.import('resource://markdown_here_common/jsHtmlToText.js', markdown_here.imports);
-    Components.utils.import('resource://markdown_here_common/marked.js', markdown_here.imports);
-    Components.utils.import('resource://markdown_here_common/markdown-here.js', markdown_here.imports);
-    Components.utils.import('resource://markdown_here_common/mdh-html-to-text.js', markdown_here.imports);
-    Components.utils.import('resource://markdown_here_common/markdown-render.js', markdown_here.imports);
-    Components.utils.import('resource://markdown_here_common/options-store.js', markdown_here.imports);
-
-    markdown_here.scriptLoader.loadSubScript('resource://markdown_here_common/highlightjs/highlight.js', markdown_here.imports);
+    // scriptLoader loads stuff into `window`.
+    markdown_here.scriptLoader.loadSubScript('resource://markdown_here_common/utils.js');
+    markdown_here.imports.Utils = window.Utils;
+    markdown_here.scriptLoader.loadSubScript('resource://markdown_here_common/common-logic.js');
+    markdown_here.imports.CommonLogic = window.CommonLogic;
+    markdown_here.scriptLoader.loadSubScript('resource://markdown_here_common/jsHtmlToText.js');
+    markdown_here.imports.htmlToText = window.htmlToText;
+    markdown_here.scriptLoader.loadSubScript('resource://markdown_here_common/marked.js');
+    markdown_here.imports.marked = window.marked;
+    markdown_here.scriptLoader.loadSubScript('resource://markdown_here_common/markdown-here.js');
+    markdown_here.imports.markdownHere = window.markdownHere;
+    markdown_here.scriptLoader.loadSubScript('resource://markdown_here_common/mdh-html-to-text.js');
+    markdown_here.imports.MdhHtmlToText = window.MdhHtmlToText;
+    markdown_here.scriptLoader.loadSubScript('resource://markdown_here_common/markdown-render.js');
+    markdown_here.imports.MarkdownRender = window.MarkdownRender;
+    markdown_here.scriptLoader.loadSubScript('resource://markdown_here_common/options-store.js');
+    markdown_here.imports.OptionsStore = OptionsStore;
+    markdown_here.scriptLoader.loadSubScript('resource://markdown_here_common/highlightjs/highlight.js');
+    markdown_here.imports.hljs = window.hljs;
 
     // initialization code
     this.initialized = true;

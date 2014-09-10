@@ -24,22 +24,22 @@
 
 var scriptLoader, imports = {};
 
+// See comment in ff-overlay.js for info about module loading.
 scriptLoader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"]
                              .getService(Components.interfaces.mozIJSSubScriptLoader);
 
-Components.utils.import('resource://markdown_here_common/utils.js', imports);
-imports.Utils.global = window;
-
-Components.utils.import('resource://markdown_here_common/common-logic.js', imports);
-imports.CommonLogic.global = window;
-
-Components.utils.import('resource://markdown_here_common/marked.js', imports);
-
-Components.utils.import('resource://markdown_here_common/markdown-render.js', imports);
-
-scriptLoader.loadSubScript('resource://markdown_here_common/highlightjs/highlight.js', imports);
-
-Components.utils.import('resource://markdown_here_common/options-store.js', imports);
+scriptLoader.loadSubScript('resource://markdown_here_common/highlightjs/highlight.js');
+imports.hljs = window.hljs;
+scriptLoader.loadSubScript('resource://markdown_here_common/utils.js');
+imports.Utils = window.Utils;
+scriptLoader.loadSubScript('resource://markdown_here_common/common-logic.js');
+imports.CommonLogic = window.CommonLogic;
+scriptLoader.loadSubScript('resource://markdown_here_common/marked.js');
+imports.marked = window.marked;
+scriptLoader.loadSubScript('resource://markdown_here_common/markdown-render.js');
+imports.MarkdownRender = window.MarkdownRender;
+scriptLoader.loadSubScript('resource://markdown_here_common/options-store.js');
+imports.OptionsStore = window.OptionsStore;
 
 
 /*

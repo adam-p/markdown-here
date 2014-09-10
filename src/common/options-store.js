@@ -34,7 +34,9 @@
 
 
 if (typeof(Utils) === 'undefined' && typeof(Components) !== 'undefined') {
-  Components.utils.import('resource://markdown_here_common/utils.js');
+  var scriptLoader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"]
+                               .getService(Components.interfaces.mozIJSSubScriptLoader);
+  scriptLoader.loadSubScript('resource://markdown_here_common/utils.js');
 }
 
 
@@ -294,7 +296,7 @@ var MozillaOptionsStore = {
     var prefs, prefKeys, prefsObj, request, sender, i;
 
     try {
-      prefs = Utils.global.Components.classes['@mozilla.org/preferences-service;1']
+      prefs = window.Components.classes['@mozilla.org/preferences-service;1']
                           .getService(Components.interfaces.nsIPrefService)
                           .getBranch('extensions.markdown-here.');
 
@@ -303,7 +305,7 @@ var MozillaOptionsStore = {
         prefsObj = {};
 
         for (i = 0; i < prefKeys.length; i++) {
-          prefsObj[prefKeys[i]] = Utils.global.JSON.parse(prefs.getCharPref(prefKeys[i]));
+          prefsObj[prefKeys[i]] = window.JSON.parse(prefs.getCharPref(prefKeys[i]));
         }
 
         callback(prefsObj);
@@ -311,7 +313,7 @@ var MozillaOptionsStore = {
       }
       else if (data.verb === 'set') {
         for (i in data.obj) {
-          prefs.setCharPref(i, Utils.global.JSON.stringify(data.obj[i]));
+          prefs.setCharPref(i, window.JSON.stringify(data.obj[i]));
         }
 
         if (callback) callback();
@@ -488,7 +490,7 @@ this.OptionsStore._fillDefaults = function(prefsObj, callback) {
     // Only take action if the key doesn't already have a value set.
     if (typeof(prefsObj[key]) === 'undefined') {
       if (that.defaults[key].hasOwnProperty('__defaultFromFile__')) {
-        var xhr = new Utils.global.XMLHttpRequest();
+        var xhr = new window.XMLHttpRequest();
 
         if (that.defaults[key]['__mimeType__']) {
           xhr.overrideMimeType(that.defaults[key]['__mimeType__']);

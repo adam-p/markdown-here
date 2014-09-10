@@ -19,8 +19,10 @@ var exports = {};
 if (typeof(htmlToText) === 'undefined' &&
     typeof(Components) !== 'undefined' &&
     typeof(Components.utils) !== 'undefined') {
-  Components.utils.import('resource://markdown_here_common/jsHtmlToText.js');
-  Components.utils.import('resource://markdown_here_common/utils.js');
+  var scriptLoader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"]
+                               .getService(Components.interfaces.mozIJSSubScriptLoader);
+  scriptLoader.loadSubScript('resource://markdown_here_common/jsHtmlToText.js');
+  scriptLoader.loadSubScript('resource://markdown_here_common/utils.js');
 }
 
 
