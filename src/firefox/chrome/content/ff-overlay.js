@@ -23,6 +23,7 @@ var markdown_here = {
   // single call, but that seems onerous.
   // For details on the difference, see:
   // https://developer.mozilla.org/en-US/docs/Components.utils.import
+  // https://developer.mozilla.org/en-US/Add-ons/Overlay_Extensions/XUL_School/Appendix_D:_Loading_Scripts#The_Sub-Script_Loader
   scriptLoader: Components.classes["@mozilla.org/moz/jssubscript-loader;1"]
                           .getService(Components.interfaces.mozIJSSubScriptLoader),
 
