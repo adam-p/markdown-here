@@ -1,6 +1,13 @@
 Change Log
 ==========
 
+2014-09-xx: v2.11.2
+-------------------
+
+* [Fixed bug #141](https://github.com/adam-p/markdown-here/issues/141): Markdown Here in Firefox would mysteriously stop working after a while (aka "ReferenceError: document is not defined"). It turns out that opening and closing a new browser window would trigger the bug. 
+  - Thanks to everyone who reported this and helped diagnose it: [Ryan Heaton](https://github.com/stoicflame) (who [originally reported the bug](https://groups.google.com/forum/#!topic/markdown-here/ikXFqkP77Ws)), [darickard](https://github.com/darickard), [JacobEvelyn](https://github.com/JacobEvelyn), [Lennaick](https://github.com/lennaick), [Sherwood Botsford](https://plus.google.com/u/0/+SherwoodBotsford), and [iagobozza](https://github.com/iagobozza), who [shared a screencast](https://github.com/adam-p/markdown-here/issues/189) that finally provided a reproduction scenario and allowed us to figure out the bug.
+
+
 2014-08-31: v2.11.1
 -------------------
 
@@ -8,7 +15,7 @@ Change Log
   - Thanks to: [Paulo Diovani Gonçalves](https://github.com/paulodiovani), [Edmundo Junior](https://github.com/edmundojr), [Mike Lindegarde](https://github.com/mlindegarde), [Jordi Gerona](https://github.com/jordi9), [Dilek](https://github.com/averagewizard), [Hrusikesh Panda](https://github.com/mrchief), [Clay McKell](https://github.com/kcmckell), [Trey Harris](https://groups.google.com/forum/#!topic/markdown-here/SnQ4fVtQvQQ).
 
 * With the help of our hard-working translators, **six new translations** were added. They are: Chinese, French, German, Russian, Spanish, and Turkish.
-  - Thanks to: [Antoine Proulx](https://crowdin.com/profile/magicienap), [ebouchut](https://crowdin.com/profile/ebouchut), [Lennaick](https://crowdin.com/profile/lennaick), [leftaroundabout](https://crowdin.com/profile/leftaroundabout), [Pierre Quillery](dandelionmood), [Ko-Chih Wu](https://crowdin.com/profile/mecca831), [Masahiro Umegaki](https://crowdin.com/profile/ume), [dlkgenc](https://crowdin.com/profile/dlkgenc), [turkish123](https://crowdin.com/profile/turkish123), [sergiolunagarcia](https://crowdin.com/profile/sergiolunagarcia), [Alexis Morelle](https://crowdin.com/profile/almorelle), and my friend and co-worker [Eugene Fryntov](https://crowdin.com/profile/efryntov). (You're all also in the [contributors list](https://github.com/adam-p/markdown-here/blob/development/CONTRIBUTE.md).)
+  - Thanks to: [Antoine Proulx](https://crowdin.com/profile/magicienap), [ebouchut](https://crowdin.com/profile/ebouchut), [Lennaick](https://crowdin.com/profile/lennaick), [leftaroundabout](https://crowdin.com/profile/leftaroundabout), [Pierre Quillery](https://crowdin.com/profile/dandelionmood), [Ko-Chih Wu](https://crowdin.com/profile/mecca831), [Masahiro Umegaki](https://crowdin.com/profile/ume), [dlkgenc](https://crowdin.com/profile/dlkgenc), [turkish123](https://crowdin.com/profile/turkish123), [sergiolunagarcia](https://crowdin.com/profile/sergiolunagarcia), [Alexis Morelle](https://crowdin.com/profile/almorelle), and my friend and co-worker [Eugene Fryntov](https://crowdin.com/profile/efryntov). (You're all also in the [contributors list](https://github.com/adam-p/markdown-here/blob/development/CONTRIBUTE.md).)
   - If you'd like to start a new language, add to a not-quite-complete translation, or fix up something, please visit the [Markdown Here translation project on Crowdin](https://crowdin.com/project/markdown-here).
 
 * **Updated [Highglight.js](http://highlightjs.org/)**, which is the syntax highlighting library used by Markdown Here.
