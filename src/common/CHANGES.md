@@ -7,6 +7,8 @@ Change Log
 * [Fixed bug #141](https://github.com/adam-p/markdown-here/issues/141): Markdown Here in Firefox would mysteriously stop working after a while (aka "ReferenceError: document is not defined"). It turns out that opening and closing a new browser window would trigger the bug. 
   - Thanks to everyone who reported this and helped diagnose it: [Ryan Heaton](https://github.com/stoicflame) (who [originally reported the bug](https://groups.google.com/forum/#!topic/markdown-here/ikXFqkP77Ws)), [darickard](https://github.com/darickard), [JacobEvelyn](https://github.com/JacobEvelyn), [Lennaick](https://github.com/lennaick), [Sherwood Botsford](https://plus.google.com/u/0/+SherwoodBotsford), and [iagobozza](https://github.com/iagobozza), who [shared a screencast](https://github.com/adam-p/markdown-here/issues/189) that finally provided a reproduction scenario and allowed us to figure out the bug.
 
+* Updated Spanish translation. Thanks to [Oscar del Pozo](https://crowdin.com/profile/oskar7) and [Rafa Couto](https://crowdin.com/profile/rafacouto).
+
 
 2014-08-31: v2.11.1
 -------------------

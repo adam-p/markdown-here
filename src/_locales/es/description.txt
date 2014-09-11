@@ -5,17 +5,17 @@ Esto es estupendo para cualquiera al que no le guste juguetear con los botones d
 Totalmente fácil de usar:
 1. Escribe tu correo electrónico en el editor de texto enriquecido de tu cliente de correo electrónico usando Markdown con sabor a Github.
 2. Haz clic con el botón derecho en el área de escritura y entonces clic en "Markdown Toggle".
-3. ¡Tu correo electrónico es bonito ahora! (Esto es, ha sido renderizado a HTML).
+3. ¡Ahora tu correo electrónico es bonito! (Esto es, ha sido renderizado a HTML).
 4. Si te gusta cómo ha quedado, simplemente envíalo. Si quieres cambiarlo o añadir algo, haz clic en "Markdown Toggle" de nuevo para volver a tu Markdown original.
-5. Repeat as necessary.
+5. Repetir tantas veces como sea necesario.
 
 Markdown Here está enfocado principalmente para trabajar con Gmail y Thunderbird, pero también funciona bastante bien con Yahoo y Hotmail. Además, funciona muy bien con Google Groups y Sites, la interfaz web de Evernote, Blogger, Wordpress, ¡y muchos más!
 
-Syntax highlighting note: Use fenced code blocks and specify the language name. Consulta la página del proyecto para ver un ejemplo.
+Nota de resaltado de sintaxis: Usa secciones de código delimitadas y especifica el lenguaje. Consulta la página del proyecto para ver un ejemplo.
 
-Privacy: Markdown Here accesses and modifies web content when you activate it. Puede, en teoría, acceder a otros contenidos web, pero no lo hace. It also makes no Internet requests whatsoever. Your data is modified when and where you choose, and does not leave your browser.
+Privacidad: Markdown Here accede y modifica el contenido web cuando lo activas. Puede, en teoría, acceder a otros contenidos web, pero no lo hace. Tampoco hace ninguna petición web. Tu información es modificada cuando y donde tu eliges, y no sale de tu navegador.
 
-Disponible como extensión para Chrome, Firefox, Safari, Opera y Thunderbird.
+Extensiones disponibles para para Chrome, Firefox, Safari, Opera y Thunderbird.
 
 Éste es un proyecto de código fuente abierto. Visita la página Github de Markdown Here para encontrar las instrucciones completas, más información, informes de errores o para contribuir.
 
