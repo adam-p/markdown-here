@@ -8,6 +8,8 @@ Change Log
   - This also manifested as ["Problem related with Zotero"](https://github.com/adam-p/markdown-here/issues/189) and ["Thunderbird: does not toggle when only the Write window is open"](https://github.com/adam-p/markdown-here/issues/175).
   - Thanks to everyone who reported this and helped diagnose it: [Ryan Heaton](https://github.com/stoicflame) (who [originally reported the bug](https://groups.google.com/forum/#!topic/markdown-here/ikXFqkP77Ws)), [darickard](https://github.com/darickard), [JacobEvelyn](https://github.com/JacobEvelyn), [Lennaick](https://github.com/lennaick), [Sherwood Botsford](https://plus.google.com/u/0/+SherwoodBotsford), [Cyrus David](https://github.com/vohof), and [iagobozza](https://github.com/iagobozza), who [shared a screencast](https://github.com/adam-p/markdown-here/issues/189) that finally provided a reproduction scenario and allowed us to figure out the bug.
 
+* [Fixed bug #202](https://github.com/adam-p/markdown-here/issues/202): On Options page, Markdown preview wasn't initially rendering.
+
 * Updated Spanish translation. Thanks to [Oscar del Pozo](https://crowdin.com/profile/oskar7) and [Rafa Couto](https://crowdin.com/profile/rafacouto).
 
 
