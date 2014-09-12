@@ -42,7 +42,7 @@ function getUpgradeNotification(optionsURL, responseCallback) {
     function(html) {
       // Get the logo image data
       Utils.getLocalFileAsBase64(
-        Utils.getLocalURL('/common/images/icon16.png'),
+        Utils.getLocalURL('/common/images/icon32.png'),
         function(logoBase64) {
           // Do some rough template replacement
           html = html.replace('{{optionsURL}}', optionsURL)
@@ -83,7 +83,7 @@ function getForgotToRenderPromptContent(responseCallback) {
 
       // Get the logo image data
       Utils.getLocalFileAsBase64(
-        Utils.getLocalURL('/common/images/icon24.png'),
+        Utils.getLocalURL('/common/images/icon48.png'),
         function(logoBase64) {
           // Do some rough template replacement
           html = html.replace('{{logoBase64}}', logoBase64);

@@ -15,7 +15,7 @@
 
   <vbox>
     <hbox>
-      <image src="resource://markdown_here_common/images/icon38.png"/>
+      <image style="width:38px" src="resource://markdown_here_common/images/icon76.png"/>
       <vbox>
         <label id="promptInfo" value=""/>
         <label id="promptQuestion" value=""/>

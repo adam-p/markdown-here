@@ -156,6 +156,14 @@ function localize() {
         Utils.saferSetInnerHTML(this, Utils.getMessage(messageID));
       }
     });
+
+    // Take this opportunity to show appropriate size images for the pixel
+    // density. This saves us from having to make the `img` tags in the
+    // translated content more complex.
+    if (window.devicePixelRatio === 2) {
+      $('img[src="images/icon16.png"]').css('width', '16px')
+                                       .attr('src', 'images/icon16@2x.png');
+    }
   });
 }
 

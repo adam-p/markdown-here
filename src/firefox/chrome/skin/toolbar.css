@@ -1,21 +1,173 @@
-#toolbarButton-markdown_here, #composeToolbarButton-markdown_here, #formatToolbarButton-markdown_here {
-  list-style-image: url("resource://markdown_here_common/images/icon24.png");
+/*
+ * Page action (button in address bar)
+ */
+
+/* Note that `#pageAction-markdown_here` is an `<image>`, so the `width` can be
+   set directly. */
+#pageAction-markdown_here {
+  list-style-image: url("resource://markdown_here_common/images/icon14.png");
+  width: 14px;
+  height: 14px;
 }
 
-#toolbarButton-markdown_here[disabled="true"],
-#composeToolbarButton-markdown_here[disabled="true"],
-#formatToolbarButton-markdown_here[disabled="true"] {
-  list-style-image: url("resource://markdown_here_common/images/icon24-bw.png");
+@media (min-resolution: 2dppx) {
+  #pageAction-markdown_here {
+    list-style-image: url("resource://markdown_here_common/images/icon14@2x.png");
+  }
 }
 
-toolbar[iconsize="small"] #toolbarButton-markdown_here,
-toolbar[iconsize="small"] #composeToolbarButton-markdown_here,
-toolbar[iconsize="small"] #formatToolbarButton-markdown_here {
+
+/*
+ * Context menu
+ */
+
+#context-markdown_here {
   list-style-image: url("resource://markdown_here_common/images/icon16.png");
 }
 
-toolbar[iconsize="small"] #toolbarButton-markdown_here[disabled="true"],
-toolbar[iconsize="small"] #composeToolbarButton-markdown_here[disabled="true"],
-toolbar[iconsize="small"] #formatToolbarButton-markdown_here[disabled="true"] {
+@media (min-resolution: 2dppx) {
+  #context-markdown_here {
+    list-style-image: url("resource://markdown_here_common/images/icon16@2x.png");
+  }
+
+  /* Not sure if this is necessary or does anything */
+  #context-markdown_here .menu-iconic-icon {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+
+/*
+ * Firefox toolbar
+ */
+
+/* The not-small toolbar (which doesn't seem to be used in modern Firefox). */
+/* This also controls how the icon will look in the toolbar customize palette. */
+
+#toolbarButton-markdown_here {
+  list-style-image: url("resource://markdown_here_common/images/icon24.png");
+}
+
+@media (min-resolution: 2dppx) {
+  #toolbarButton-markdown_here {
+    list-style-image: url("resource://markdown_here_common/images/icon24@2x.png");
+  }
+
+  #toolbarButton-markdown_here > .toolbarbutton-icon {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+#toolbarButton-markdown_here[disabled="true"] {
+  list-style-image: url("resource://markdown_here_common/images/icon24-bw.png");
+}
+
+@media (min-resolution: 2dppx) {
+  #toolbarButton-markdown_here[disabled="true"] {
+    list-style-image: url("resource://markdown_here_common/images/icon24-bw@2x.png");
+  }
+
+  #toolbarButton-markdown_here[disabled="true"] > .toolbarbutton-icon {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* The "small" icon toolbar, which is the standard. */
+
+toolbar[iconsize="small"] #toolbarButton-markdown_here {
+  list-style-image: url("resource://markdown_here_common/images/icon16.png");
+}
+
+@media (min-resolution: 2dppx) {
+  toolbar[iconsize="small"] #toolbarButton-markdown_here {
+    list-style-image: url("resource://markdown_here_common/images/icon16@2x.png");
+  }
+
+  toolbar[iconsize="small"] #toolbarButton-markdown_here > .toolbarbutton-icon {
+    /* HACK! This *ought* to be set to 16px, but testing has shown that it needs
+       to be 32px to look right. Additionally, you *can't* set the `height` to
+       32px (or 16px) -- it seems like 24px works, but leaving it unset will
+       also work.
+       This is really bizarre and will surely break and become a problem for us
+       later. */
+    width: 32px;
+  }
+}
+
+toolbar[iconsize="small"] #toolbarButton-markdown_here[disabled="true"] {
   list-style-image: url("resource://markdown_here_common/images/icon16-bw.png");
+}
+
+@media (min-resolution: 2dppx) {
+  toolbar[iconsize="small"] #toolbarButton-markdown_here[disabled="true"] {
+    list-style-image: url("resource://markdown_here_common/images/icon16-bw@2x.png");
+  }
+
+  toolbar[iconsize="small"] #toolbarButton-markdown_here[disabled="true"] > .toolbarbutton-icon {
+    width: 32px;
+  }
+}
+
+
+/*
+ * Thunderbird and Postbox compose window toolbar.
+ * Note that Postbox doesn't seem to support pixel density media queries.
+ */
+
+/* The "normal" size, which is small. */
+
+#composeToolbarButton-markdown_here {
+  list-style-image: url("resource://markdown_here_common/images/icon16.png");
+}
+
+@media (min-resolution: 2dppx) {
+  #composeToolbarButton-markdown_here {
+    list-style-image: url("resource://markdown_here_common/images/icon16@2x.png");
+  }
+
+  #composeToolbarButton-markdown_here > .toolbarbutton-icon {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* The "large" size. Modern Thunderbird doesn't seem to support this, but
+   Postbox does. */
+
+toolbar[iconsize="large"] #composeToolbarButton-markdown_here {
+  list-style-image: url("resource://markdown_here_common/images/icon24.png");
+}
+
+@media (min-resolution: 2dppx) {
+  toolbar[iconsize="large"] #composeToolbarButton-markdown_here {
+    list-style-image: url("resource://markdown_here_common/images/icon24@2x.png");
+  }
+
+  toolbar[iconsize="large"] #composeToolbarButton-markdown_here > .toolbarbutton-icon {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+
+/*
+ * Thunderbird formatting toolbar.
+ */
+
+#formatToolbarButton-markdown_here {
+  list-style-image: url("resource://markdown_here_common/images/icon16.png");
+}
+
+@media (min-resolution: 2dppx) {
+  #formatToolbarButton-markdown_here {
+    list-style-image: url("resource://markdown_here_common/images/icon16@2x.png");
+  }
+
+  #formatToolbarButton-markdown_here > .toolbarbutton-icon {
+    width: 16px;
+    height: 16px;
+  }
 }

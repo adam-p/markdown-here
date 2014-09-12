@@ -16,11 +16,10 @@
             <menupopup id="menu_FilePopup">
               <menuseparator id="context-markdown_here-separator" insertafter="menu_newCollection"/>
               <menuitem id="context-markdown_here" label="&context_menu_item;"
-            accesskey="&context_menu_item_shortcut;"
-            insertafter="context-markdown_here-separator"
-            class="menuitem-iconic"
-            image="resource://markdown_here_common/images/icon16.png"
-            oncommand="markdown_here.onMenuItemCommand(event)"/>
+                        accesskey="&context_menu_item_shortcut;"
+                        insertafter="context-markdown_here-separator"
+                        class="menuitem-iconic"
+                        oncommand="markdown_here.onMenuItemCommand(event)"/>
             </menupopup>
           </menu>
         </menubar>
