@@ -25,12 +25,6 @@
   list-style-image: url("resource://markdown_here_common/images/icon16.png");
 }
 
-/* Not sure if this is necessary or does anything */
-#context-markdown_here .menu-iconic-icon {
-  width: 16px;
-  height: 16px;
-}
-
 @media (min-resolution: 2dppx) {
   #context-markdown_here {
     list-style-image: url("resource://markdown_here_common/images/icon16@2x.png");
@@ -47,11 +41,6 @@
 
 #toolbarButton-markdown_here {
   list-style-image: url("resource://markdown_here_common/images/icon24.png");
-}
-
-#toolbarButton-markdown_here > .toolbarbutton-icon {
-  width: 24px;
-  height: 24px;
 }
 
 @media (min-resolution: 2dppx) {
@@ -74,11 +63,6 @@
 
 toolbar[iconsize="small"] #toolbarButton-markdown_here {
   list-style-image: url("resource://markdown_here_common/images/icon16.png");
-}
-
-toolbar[iconsize="small"] #toolbarButton-markdown_here > .toolbarbutton-icon {
-  width: 16px;
-  height: 16px;
 }
 
 @media (min-resolution: 2dppx) {
