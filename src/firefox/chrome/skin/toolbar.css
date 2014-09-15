@@ -25,15 +25,15 @@
   list-style-image: url("resource://markdown_here_common/images/icon16.png");
 }
 
+/* Not sure if this is necessary or does anything */
+#context-markdown_here .menu-iconic-icon {
+  width: 16px;
+  height: 16px;
+}
+
 @media (min-resolution: 2dppx) {
   #context-markdown_here {
     list-style-image: url("resource://markdown_here_common/images/icon16@2x.png");
-  }
-
-  /* Not sure if this is necessary or does anything */
-  #context-markdown_here .menu-iconic-icon {
-    width: 16px;
-    height: 16px;
   }
 }
 
@@ -49,14 +49,14 @@
   list-style-image: url("resource://markdown_here_common/images/icon24.png");
 }
 
+#toolbarButton-markdown_here > .toolbarbutton-icon {
+  width: 24px;
+  height: 24px;
+}
+
 @media (min-resolution: 2dppx) {
   #toolbarButton-markdown_here {
     list-style-image: url("resource://markdown_here_common/images/icon24@2x.png");
-  }
-
-  #toolbarButton-markdown_here > .toolbarbutton-icon {
-    width: 24px;
-    height: 24px;
   }
 }
 
@@ -68,17 +68,17 @@
   #toolbarButton-markdown_here[disabled="true"] {
     list-style-image: url("resource://markdown_here_common/images/icon24-bw@2x.png");
   }
-
-  #toolbarButton-markdown_here[disabled="true"] > .toolbarbutton-icon {
-    width: 24px;
-    height: 24px;
-  }
 }
 
 /* The "small" icon toolbar, which is the standard. */
 
 toolbar[iconsize="small"] #toolbarButton-markdown_here {
   list-style-image: url("resource://markdown_here_common/images/icon16.png");
+}
+
+toolbar[iconsize="small"] #toolbarButton-markdown_here > .toolbarbutton-icon {
+  width: 16px;
+  height: 16px;
 }
 
 @media (min-resolution: 2dppx) {
@@ -123,14 +123,14 @@ toolbar[iconsize="small"] #toolbarButton-markdown_here[disabled="true"] {
   list-style-image: url("resource://markdown_here_common/images/icon16.png");
 }
 
+#composeToolbarButton-markdown_here > .toolbarbutton-icon {
+  width: 16px;
+  height: 16px;
+}
+
 @media (min-resolution: 2dppx) {
   #composeToolbarButton-markdown_here {
     list-style-image: url("resource://markdown_here_common/images/icon16@2x.png");
-  }
-
-  #composeToolbarButton-markdown_here > .toolbarbutton-icon {
-    width: 16px;
-    height: 16px;
   }
 }
 
@@ -141,14 +141,14 @@ toolbar[iconsize="large"] #composeToolbarButton-markdown_here {
   list-style-image: url("resource://markdown_here_common/images/icon24.png");
 }
 
+toolbar[iconsize="large"] #composeToolbarButton-markdown_here > .toolbarbutton-icon {
+  width: 24px;
+  height: 24px;
+}
+
 @media (min-resolution: 2dppx) {
   toolbar[iconsize="large"] #composeToolbarButton-markdown_here {
     list-style-image: url("resource://markdown_here_common/images/icon24@2x.png");
-  }
-
-  toolbar[iconsize="large"] #composeToolbarButton-markdown_here > .toolbarbutton-icon {
-    width: 24px;
-    height: 24px;
   }
 }
 
@@ -161,13 +161,13 @@ toolbar[iconsize="large"] #composeToolbarButton-markdown_here {
   list-style-image: url("resource://markdown_here_common/images/icon16.png");
 }
 
+#formatToolbarButton-markdown_here > .toolbarbutton-icon {
+  width: 16px;
+  height: 16px;
+}
+
 @media (min-resolution: 2dppx) {
   #formatToolbarButton-markdown_here {
     list-style-image: url("resource://markdown_here_common/images/icon16@2x.png");
-  }
-
-  #formatToolbarButton-markdown_here > .toolbarbutton-icon {
-    width: 16px;
-    height: 16px;
   }
 }
