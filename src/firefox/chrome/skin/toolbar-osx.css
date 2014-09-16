@@ -1,0 +1,31 @@
+/*
+ * Firefox toolbar
+ */
+
+toolbar[iconsize="small"] #toolbarButton-markdown_here > .toolbarbutton-icon {
+  width: 18px;
+}
+
+toolbar[iconsize="small"] #toolbarButton-markdown_here[disabled="true"] > .toolbarbutton-icon {
+  width: 18px;
+}
+
+
+/*
+ * Thunderbird formatting toolbar.
+ */
+
+#formatToolbarButton-markdown_here {
+  list-style-image: url("resource://markdown_here_common/images/icon12.png");
+}
+
+#formatToolbarButton-markdown_here > .toolbarbutton-icon {
+  width: 12px;
+  height: 12px;
+}
+
+@media (min-resolution: 2dppx) {
+  #formatToolbarButton-markdown_here {
+    list-style-image: url("resource://markdown_here_common/images/icon12@2x.png");
+  }
+}

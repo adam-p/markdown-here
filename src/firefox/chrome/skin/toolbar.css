@@ -36,6 +36,11 @@
  * Firefox toolbar
  */
 
+/* We will *not* set explicit sizes here. Firefox on Xubuntu chokes when there's
+   and explicit size and either requires it to be changed to a weird number (as
+   it is for 2dppx), or set to `initial`. Firefox on OS X is being overridden
+   anyway, so we just won't set it here. */
+
 /* The not-small toolbar (which doesn't seem to be used in modern Firefox). */
 /* This also controls how the icon will look in the toolbar customize palette. */
 
@@ -69,16 +74,6 @@ toolbar[iconsize="small"] #toolbarButton-markdown_here {
   toolbar[iconsize="small"] #toolbarButton-markdown_here {
     list-style-image: url("resource://markdown_here_common/images/icon16@2x.png");
   }
-
-  toolbar[iconsize="small"] #toolbarButton-markdown_here > .toolbarbutton-icon {
-    /* HACK! This *ought* to be set to 16px, but testing has shown that it needs
-       to be 32px to look right. Additionally, you *can't* set the `height` to
-       32px (or 16px) -- it seems like 24px works, but leaving it unset will
-       also work.
-       This is really bizarre and will surely break and become a problem for us
-       later. */
-    width: 32px;
-  }
 }
 
 toolbar[iconsize="small"] #toolbarButton-markdown_here[disabled="true"] {
@@ -88,10 +83,6 @@ toolbar[iconsize="small"] #toolbarButton-markdown_here[disabled="true"] {
 @media (min-resolution: 2dppx) {
   toolbar[iconsize="small"] #toolbarButton-markdown_here[disabled="true"] {
     list-style-image: url("resource://markdown_here_common/images/icon16-bw@2x.png");
-  }
-
-  toolbar[iconsize="small"] #toolbarButton-markdown_here[disabled="true"] > .toolbarbutton-icon {
-    width: 32px;
   }
 }
 
@@ -118,8 +109,7 @@ toolbar[iconsize="small"] #toolbarButton-markdown_here[disabled="true"] {
   }
 }
 
-/* The "large" size. Modern Thunderbird doesn't seem to support this, but
-   Postbox does. */
+/* The "large" size. This is available in Thunderbird+Xubuntu and Postbox. */
 
 toolbar[iconsize="large"] #composeToolbarButton-markdown_here {
   list-style-image: url("resource://markdown_here_common/images/icon24.png");

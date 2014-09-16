@@ -8,9 +8,11 @@
   <!-- Postbox freaks out if there's no `image` attribute here, but Thunderbird
        won't display the icon as retina if there *is* an `image` attribute. -->
   <toolbar class="chromeclass-toolbar" id="FormatToolbar">
+    <spacer id="formatToolbarButton-spacer-markdown_here"
+            class="formattoolbar-button-spacer"
+            insertbefore="formatToolbarButton-markdown_here" />
     <toolbarbutton id="formatToolbarButton-markdown_here"
-                   class="formatting-button toolbarbutton-1 chromeclass-toolbar-additional"
-                   insertbefore="smileButtonMenu"
+                   class=""
                    label="&toggle_button_text;"
                    tooltiptext="&toggle_button_tooltip;"
                    image="resource://markdown_here_common/images/icon16.png"

@@ -1,0 +1,16 @@
+
+@media (min-resolution: 2dppx) {
+  toolbar[iconsize="small"] #toolbarButton-markdown_here > .toolbarbutton-icon {
+    /* HACK! This *ought* to be set to 16px, but testing has shown that it needs
+       to be 32px to look right. Additionally, you *can't* set the `height` to
+       32px (or 16px) -- it seems like 24px works, but leaving it unset will
+       also work.
+       This is really bizarre and will surely break and become a problem for us
+       later. */
+    width: 32px;
+  }
+
+  toolbar[iconsize="small"] #toolbarButton-markdown_here[disabled="true"] > .toolbarbutton-icon {
+    width: 32px;
+  }
+}
