@@ -223,7 +223,7 @@ Short answer: Gmail and Thunderbird are great. More info about some clients can 
     <td>Inline code displays in non-monospace font, but is correct in preview and final post.</td>
     <td>&#x2713;</td>
     <td>&#x2713;</td>
-    <td>See the <a href="https://github.com/adam-p/markdown-here/wiki/Compatibility">Compatibility wiki page</a> for full details and tips</td>
+    <td>See the <a href="https://github.com/adam-p/markdown-here/wiki/Compatibility#wordpress">Compatibility wiki page</a> for full details and tips</td>
   </tr>
   <tr>
     <th>Postbox</th>
