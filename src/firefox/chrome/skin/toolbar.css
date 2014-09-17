@@ -31,6 +31,11 @@
   }
 }
 
+/* Ubuntu doesn't show the menu item icon without coaxing. */
+#context-markdown_here > .menu-iconic-left {
+  visibility: visible !important;
+}
+
 
 /*
  * Firefox toolbar
