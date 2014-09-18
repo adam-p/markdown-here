@@ -1,21 +1,152 @@
-#toolbarButton-markdown_here, #composeToolbarButton-markdown_here, #formatToolbarButton-markdown_here {
-  list-style-image: url("resource://markdown_here_common/images/icon24.png");
+/*
+ * Page action (button in address bar)
+ */
+
+/* Note that `#pageAction-markdown_here` is an `<image>`, so the `width` can be
+   set directly. */
+#pageAction-markdown_here {
+  list-style-image: url("resource://markdown_here_common/images/icon14.png");
+  width: 14px;
+  height: 14px;
 }
 
-#toolbarButton-markdown_here[disabled="true"],
-#composeToolbarButton-markdown_here[disabled="true"],
-#formatToolbarButton-markdown_here[disabled="true"] {
-  list-style-image: url("resource://markdown_here_common/images/icon24-bw.png");
+@media (min-resolution: 2dppx) {
+  #pageAction-markdown_here {
+    list-style-image: url("resource://markdown_here_common/images/icon14@2x.png");
+  }
 }
 
-toolbar[iconsize="small"] #toolbarButton-markdown_here,
-toolbar[iconsize="small"] #composeToolbarButton-markdown_here,
-toolbar[iconsize="small"] #formatToolbarButton-markdown_here {
+
+/*
+ * Context menu
+ */
+
+#context-markdown_here {
   list-style-image: url("resource://markdown_here_common/images/icon16.png");
 }
 
-toolbar[iconsize="small"] #toolbarButton-markdown_here[disabled="true"],
-toolbar[iconsize="small"] #composeToolbarButton-markdown_here[disabled="true"],
-toolbar[iconsize="small"] #formatToolbarButton-markdown_here[disabled="true"] {
+@media (min-resolution: 2dppx) {
+  #context-markdown_here {
+    list-style-image: url("resource://markdown_here_common/images/icon16@2x.png");
+  }
+}
+
+/* Ubuntu doesn't show the menu item icon without coaxing. */
+#context-markdown_here > .menu-iconic-left {
+  visibility: visible !important;
+}
+
+
+/*
+ * Firefox toolbar
+ */
+
+/* We will *not* set explicit sizes here. Firefox on Xubuntu chokes when there's
+   and explicit size and either requires it to be changed to a weird number (as
+   it is for 2dppx), or set to `initial`. Firefox on OS X is being overridden
+   anyway, so we just won't set it here. */
+
+/* The not-small toolbar (which doesn't seem to be used in modern Firefox). */
+/* This also controls how the icon will look in the toolbar customize palette. */
+
+#toolbarButton-markdown_here {
+  list-style-image: url("resource://markdown_here_common/images/icon24.png");
+}
+
+@media (min-resolution: 2dppx) {
+  #toolbarButton-markdown_here {
+    list-style-image: url("resource://markdown_here_common/images/icon24@2x.png");
+  }
+}
+
+#toolbarButton-markdown_here[disabled="true"] {
+  list-style-image: url("resource://markdown_here_common/images/icon24-bw.png");
+}
+
+@media (min-resolution: 2dppx) {
+  #toolbarButton-markdown_here[disabled="true"] {
+    list-style-image: url("resource://markdown_here_common/images/icon24-bw@2x.png");
+  }
+}
+
+/* The "small" icon toolbar, which is the standard. */
+
+toolbar[iconsize="small"] #toolbarButton-markdown_here {
+  list-style-image: url("resource://markdown_here_common/images/icon16.png");
+}
+
+@media (min-resolution: 2dppx) {
+  toolbar[iconsize="small"] #toolbarButton-markdown_here {
+    list-style-image: url("resource://markdown_here_common/images/icon16@2x.png");
+  }
+}
+
+toolbar[iconsize="small"] #toolbarButton-markdown_here[disabled="true"] {
   list-style-image: url("resource://markdown_here_common/images/icon16-bw.png");
+}
+
+@media (min-resolution: 2dppx) {
+  toolbar[iconsize="small"] #toolbarButton-markdown_here[disabled="true"] {
+    list-style-image: url("resource://markdown_here_common/images/icon16-bw@2x.png");
+  }
+}
+
+
+/*
+ * Thunderbird and Postbox compose window toolbar.
+ * Note that Postbox doesn't seem to support pixel density media queries.
+ */
+
+/* The "normal" size, which is small. */
+
+#composeToolbarButton-markdown_here {
+  list-style-image: url("resource://markdown_here_common/images/icon16.png");
+}
+
+#composeToolbarButton-markdown_here > .toolbarbutton-icon {
+  width: 16px;
+  height: 16px;
+}
+
+@media (min-resolution: 2dppx) {
+  #composeToolbarButton-markdown_here {
+    list-style-image: url("resource://markdown_here_common/images/icon16@2x.png");
+  }
+}
+
+/* The "large" size. This is available in Thunderbird+Xubuntu and Postbox. */
+
+toolbar[iconsize="large"] #composeToolbarButton-markdown_here {
+  list-style-image: url("resource://markdown_here_common/images/icon24.png");
+}
+
+toolbar[iconsize="large"] #composeToolbarButton-markdown_here > .toolbarbutton-icon {
+  width: 24px;
+  height: 24px;
+}
+
+@media (min-resolution: 2dppx) {
+  toolbar[iconsize="large"] #composeToolbarButton-markdown_here {
+    list-style-image: url("resource://markdown_here_common/images/icon24@2x.png");
+  }
+}
+
+
+/*
+ * Thunderbird formatting toolbar.
+ */
+
+#formatToolbarButton-markdown_here {
+  list-style-image: url("resource://markdown_here_common/images/icon16.png");
+}
+
+#formatToolbarButton-markdown_here > .toolbarbutton-icon {
+  width: 16px;
+  height: 16px;
+}
+
+@media (min-resolution: 2dppx) {
+  #formatToolbarButton-markdown_here {
+    list-style-image: url("resource://markdown_here_common/images/icon16@2x.png");
+  }
 }

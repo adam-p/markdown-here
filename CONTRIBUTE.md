@@ -37,7 +37,7 @@ If you do make any translation changes, or if you have any questions or problems
 
 * [leftaroundabout](https://crowdin.com/profile/leftaroundabout)
 
-* [Pierre Quillery](dandelionmood)
+* [Pierre Quillery](https://crowdin.com/profile/dandelionmood)
 
 * [Ko-Chih Wu](https://crowdin.com/profile/mecca831)
 
@@ -52,3 +52,13 @@ If you do make any translation changes, or if you have any questions or problems
 * [Alexis Morelle](https://crowdin.com/profile/almorelle)
 
 * [Eugene Fryntov](https://crowdin.com/profile/efryntov)
+
+* [Oscar del Pozo](https://crowdin.com/profile/oskar7) 
+
+* [Rafa Couto](https://crowdin.com/profile/rafacouto)
+
+* [yoroy](https://crowdin.com/profile/yoroy)
+
+* [nullepart](https://crowdin.com/profile/nullepart)
+
+* [sherkiv](https://crowdin.com/profile/sherkiv)

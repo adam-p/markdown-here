@@ -7,31 +7,14 @@
  * Application logic that is common to all (or some) platforms.
  * (And isn't generic enough for utils.js or render-y enough for markdown-render.js,
  * etc.)
- * If this module is being instantiated without a global `window` object being
- * available (providing XMLHttpRequest, for example), then `CommonLogic.global` must
- * be set to an equivalent object by the caller.
+ *
+ * This module assumes that a global `window` is available.
  */
 
 ;(function() {
 
 "use strict";
 /*global module:false, chrome:false, Utils:false*/
-
-var CommonLogic = {};
-
-
-if (typeof(Utils) === 'undefined' && typeof(Components) !== 'undefined') {
-  Components.utils.import('resource://markdown_here_common/utils.js');
-
-  // C.u.import creates only one cached instance of a module, so Utils.global
-  // might already be set elsewhere.
-  if (!Utils.global) {
-    // We're using a closure because CommonLogic.global might not get set until later.
-    Utils.global = function() {
-      return CommonLogic.global;
-    };
-  }
-}
 
 
 var DEBUG = false;
@@ -59,7 +42,7 @@ function getUpgradeNotification(optionsURL, responseCallback) {
     function(html) {
       // Get the logo image data
       Utils.getLocalFileAsBase64(
-        Utils.getLocalURL('/common/images/icon16.png'),
+        Utils.getLocalURL('/common/images/icon32.png'),
         function(logoBase64) {
           // Do some rough template replacement
           html = html.replace('{{optionsURL}}', optionsURL)
@@ -100,7 +83,7 @@ function getForgotToRenderPromptContent(responseCallback) {
 
       // Get the logo image data
       Utils.getLocalFileAsBase64(
-        Utils.getLocalURL('/common/images/icon24.png'),
+        Utils.getLocalURL('/common/images/icon48.png'),
         function(logoBase64) {
           // Do some rough template replacement
           html = html.replace('{{logoBase64}}', logoBase64);
@@ -571,20 +554,11 @@ function showHTMLForgotToRenderPrompt(html, composeElem, composeSendButton, call
 
 
 // Expose these functions
+var CommonLogic = {};
 CommonLogic.getUpgradeNotification = getUpgradeNotification;
 CommonLogic.getForgotToRenderPromptContent = getForgotToRenderPromptContent;
 CommonLogic.forgotToRenderIntervalCheck = forgotToRenderIntervalCheck;
 CommonLogic.probablyWritingMarkdown = probablyWritingMarkdown;
-
-
-CommonLogic.__defineSetter__('global', function(val) { CommonLogic._global = val; });
-CommonLogic.__defineGetter__('global', function() {
-  if (typeof(CommonLogic._global) === 'function') {
-    return CommonLogic._global.call();
-  }
-  return CommonLogic._global;
-});
-CommonLogic.global = this;
 
 
 var EXPORTED_SYMBOLS = ['CommonLogic'];

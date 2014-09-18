@@ -1,6 +1,29 @@
 Change Log
 ==========
 
+2014-09-18: v2.11.2
+-------------------
+
+* [Fixed bug #141](https://github.com/adam-p/markdown-here/issues/141): Markdown Here in **Firefox would mysteriously stop working after a while** (aka the "ReferenceError: document is not defined" problem). It turns out that opening and closing a new browser window would trigger the bug.
+  - This also manifested as ["Problem related with Zotero"](https://github.com/adam-p/markdown-here/issues/189) and ["Thunderbird: does not toggle when only the Write window is open"](https://github.com/adam-p/markdown-here/issues/175).
+  - Thanks to everyone who reported this and helped diagnose it: [Ryan Heaton](https://github.com/stoicflame) (who [originally reported the bug](https://groups.google.com/forum/#!topic/markdown-here/ikXFqkP77Ws)), [darickard](https://github.com/darickard), [JacobEvelyn](https://github.com/JacobEvelyn), [Lennaick](https://github.com/lennaick), [Sherwood Botsford](https://plus.google.com/u/0/+SherwoodBotsford), [Cyrus David](https://github.com/vohof), and [iagobozza](https://github.com/iagobozza), who [shared a screencast](https://github.com/adam-p/markdown-here/issues/189) that finally provided a reproduction scenario and allowed us to figure out the bug.
+
+* **Added support for "retina"** (high PPI) displays. The Markdown Here icons should now be nice and crisp. Closes [issue #205](https://github.com/adam-p/markdown-here/issues/205).
+  - Caveats: 
+    - There doesn't seem to be a way to specify a high-res icon for Chrome's context menu item.
+    - Postbox just doesn't seem to work. I don't think there's a regression, though.
+    - I don't actually own any fancy retina-display computers, so... please create an issue if something is broken. 
+    - Thanks to [Alexandru Nedelcu](https://github.com/alexandru) for requesting this.
+
+* [Fixed bug #202](https://github.com/adam-p/markdown-here/issues/202): In Options page, Markdown preview wasn't initially rendering.
+
+* Updated translations.
+  - Spanish: [Oscar del Pozo](https://crowdin.com/profile/oskar7) and [Rafa Couto](https://crowdin.com/profile/rafacouto).
+  - Dutch: [yoroy](https://crowdin.com/profile/yoroy).
+  - French: [nullepart](https://crowdin.com/profile/nullepart).
+  - Chinese: [sherkiv](https://crowdin.com/profile/sherkiv).
+
+
 2014-08-31: v2.11.1
 -------------------
 
@@ -8,7 +31,7 @@ Change Log
   - Thanks to: [Paulo Diovani Gonçalves](https://github.com/paulodiovani), [Edmundo Junior](https://github.com/edmundojr), [Mike Lindegarde](https://github.com/mlindegarde), [Jordi Gerona](https://github.com/jordi9), [Dilek](https://github.com/averagewizard), [Hrusikesh Panda](https://github.com/mrchief), [Clay McKell](https://github.com/kcmckell), [Trey Harris](https://groups.google.com/forum/#!topic/markdown-here/SnQ4fVtQvQQ).
 
 * With the help of our hard-working translators, **six new translations** were added. They are: Chinese, French, German, Russian, Spanish, and Turkish.
-  - Thanks to: [Antoine Proulx](https://crowdin.com/profile/magicienap), [ebouchut](https://crowdin.com/profile/ebouchut), [Lennaick](https://crowdin.com/profile/lennaick), [leftaroundabout](https://crowdin.com/profile/leftaroundabout), [Pierre Quillery](dandelionmood), [Ko-Chih Wu](https://crowdin.com/profile/mecca831), [Masahiro Umegaki](https://crowdin.com/profile/ume), [dlkgenc](https://crowdin.com/profile/dlkgenc), [turkish123](https://crowdin.com/profile/turkish123), [sergiolunagarcia](https://crowdin.com/profile/sergiolunagarcia), [Alexis Morelle](https://crowdin.com/profile/almorelle), and my friend and co-worker [Eugene Fryntov](https://crowdin.com/profile/efryntov). (You're all also in the [contributors list](https://github.com/adam-p/markdown-here/blob/development/CONTRIBUTE.md).)
+  - Thanks to: [Antoine Proulx](https://crowdin.com/profile/magicienap), [ebouchut](https://crowdin.com/profile/ebouchut), [Lennaick](https://crowdin.com/profile/lennaick), [leftaroundabout](https://crowdin.com/profile/leftaroundabout), [Pierre Quillery](https://crowdin.com/profile/dandelionmood), [Ko-Chih Wu](https://crowdin.com/profile/mecca831), [Masahiro Umegaki](https://crowdin.com/profile/ume), [dlkgenc](https://crowdin.com/profile/dlkgenc), [turkish123](https://crowdin.com/profile/turkish123), [sergiolunagarcia](https://crowdin.com/profile/sergiolunagarcia), [Alexis Morelle](https://crowdin.com/profile/almorelle), and my friend and co-worker [Eugene Fryntov](https://crowdin.com/profile/efryntov). (You're all also in the [contributors list](https://github.com/adam-p/markdown-here/blob/development/CONTRIBUTE.md).)
   - If you'd like to start a new language, add to a not-quite-complete translation, or fix up something, please visit the [Markdown Here translation project on Crowdin](https://crowdin.com/project/markdown-here).
 
 * **Updated [Highglight.js](http://highlightjs.org/)**, which is the syntax highlighting library used by Markdown Here.

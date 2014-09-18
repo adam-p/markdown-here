@@ -8,12 +8,9 @@
   <script src="chrome://markdown_here/content/ff-overlay.js"/>
 
   <popup id="msgComposeContext">
-    <menuseparator id="context-markdown_here-separator" insertafter="context-selectall"/>
     <menuitem id="context-markdown_here" label="&context_menu_item;"
               accesskey="&context_menu_item_shortcut;"
-              insertafter="context-markdown_here-separator"
               class="menuitem-iconic"
-              image="resource://markdown_here_common/images/icon16.png"
               oncommand="markdown_here.onMenuItemCommand(event)" />
   </popup>
 
@@ -31,7 +28,6 @@
                    insertbefore="smileButtonMenu"
                    label="&toggle_button_text;"
                    tooltiptext="&toggle_button_tooltip;"
-                   image="resource://markdown_here_common/images/icon19.png"
                    oncommand="markdown_here.onToolbarButtonCommand(event)" />
   </toolbar>
 

@@ -4,9 +4,10 @@
  */
 
 "use strict";
-/*global OptionsStore:false, chrome:false, markdownRender:false, $:false,
+/*jshint browser:true, jquery:true, sub:true */
+/*global OptionsStore:false, chrome:false, markdownRender:false,
   htmlToText:false, marked:false, hljs:false, markdownHere:false, Utils:false,
-  MdhHtmlToText:false*/
+  MdhHtmlToText:false */
 
 /*
  * Main script file for the options page.
@@ -116,19 +117,13 @@ function onLoad() {
   // of extension packages.
 
   // Check if our test file exists.
-  // Note: Using $.ajax won't work because for local requests Firefox sets
-  // status to 0 even on success. jQuery interprets this as an error.
-  xhr = new XMLHttpRequest();
-  xhr.open('HEAD', './test/index.html');
-  // If we don't set the mimetype, Firefox will complain.
-  xhr.overrideMimeType('text/plain');
-  xhr.onreadystatechange = function() {
-    if (this.readyState === this.DONE && !this.responseText) {
+  Utils.getLocalFile('./test/index.html', 'text/html', function(_, err) {
+    // The test files aren't present, so hide the button.
+    if (err) {
       // The test files aren't present, so hide the button.
       $('#tests-link').hide();
     }
-  };
-  xhr.send();
+  });
 
   loaded = true;
 }
@@ -161,6 +156,14 @@ function localize() {
         Utils.saferSetInnerHTML(this, Utils.getMessage(messageID));
       }
     });
+
+    // Take this opportunity to show appropriate size images for the pixel
+    // density. This saves us from having to make the `img` tags in the
+    // translated content more complex.
+    if (window.devicePixelRatio === 2) {
+      $('img[src="images/icon16.png"]').css('width', '16px')
+                                       .attr('src', 'images/icon16@2x.png');
+    }
   });
 }
 

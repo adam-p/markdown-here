@@ -9,12 +9,12 @@
     "description":"shown as subtitle for Markdown Here in the browser extensions list"
   },
   "toggle_button_text":{
-    "message":"Basculer MD",
+    "message":"Basculer vers MD",
     "description":"Text shown underneath the render toggle button. Make it as short as possible.",
     "inMozDTD":true
   },
   "toggle_button_tooltip":{
-    "message":"Cliquez pour basculer le rendu Markdown",
+    "message":"Cliquez pour basculer vers le rendu Markdown",
     "description":"text shown when user hovers mouse over Markdown Toggle button",
     "inMozDTD":true
   },
@@ -24,12 +24,12 @@
     "inMozDTD":true
   },
   "context_menu_item":{
-    "message":"Basculer Markdown",
+    "message":"Basculer vers Markdown",
     "description":"Text shown on the context menu.",
     "inMozDTD":true
   },
   "context_menu_item_with_shortcut":{
-    "message":"Basculer Mar&kdown",
+    "message":"Basculer vers Mar&kdown",
     "description":"Text shown on the context menu. The '&' comes before the shortcut character. If a shortcut key doesn't make sense for your language\/locale\/keyboard, you can just leave out the '&'."
   },
   "context_menu_item_shortcut":{
@@ -42,7 +42,7 @@
     "description":"Shown in an alert dialog if the user tries to render a field that cannot be rendered"
   },
   "plain_text_compose":{
-    "message":"Vous utilisez un éditeur de texte simple. Changez pour un éditeur riche dit WYSIWYG pour utiliser Markdown Here.",
+    "message":"Vous utilisez un éditeur de texte simple. Changez pour un éditeur de texte enrichi pour utiliser Markdown Here.",
     "description":"Shown in an alert dialog if the user has their email compose app set to plain text"
   },
   "cursor_into_compose":{

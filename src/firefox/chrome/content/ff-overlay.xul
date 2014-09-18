@@ -9,18 +9,14 @@
   <script src="chrome://markdown_here/content/ff-overlay.js"/>
 
   <popup id="contentAreaContextMenu">
-    <menuseparator id="context-markdown_here-separator" insertafter="context-selectall"/>
     <menuitem id="context-markdown_here" label="&context_menu_item;"
               accesskey="&context_menu_item_shortcut;"
-              insertafter="context-markdown_here-separator"
               class="menuitem-iconic"
-              image="resource://markdown_here_common/images/icon16.png"
               oncommand="markdown_here.onMenuItemCommand(event)"/>
   </popup>
 
   <hbox id="urlbar-icons">
     <image id="pageAction-markdown_here" insertafter="star-button"
-           src="resource://markdown_here_common/images/icon16.png"
            onclick="markdown_here.onToolbarButtonCommand(event)"
            tooltiptext="&toggle_button_tooltip;" />
   </hbox>

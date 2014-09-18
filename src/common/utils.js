@@ -5,28 +5,14 @@
 
 /*
  * Utilities and helpers that are needed in multiple places.
- * If this module is being instantiated without a global `window` object being
- * available (providing XMLHttpRequest, for example), then `Utils.global` must
- * be set to an equivalent object by the caller.
+ *
+ * This module assumes that a global `window` is available.
  */
 
 ;(function() {
 
 "use strict";
 /*global module:false, chrome:false, safari:false*/
-
-
-var Utils = {};
-
-// For some reason the other two ways of creating properties don't work.
-Utils.__defineSetter__('global', function(val) { Utils._global = val; });
-Utils.__defineGetter__('global', function() {
-  if (typeof(Utils._global) === 'function') {
-    return Utils._global.call();
-  }
-  return Utils._global;
-});
-Utils.global = this;
 
 
 function consoleLog(logString) {
@@ -156,8 +142,8 @@ function rangeIntersectsNode(range, node) {
 
     // Workaround for this old Mozilla bug, which is still present in Postbox:
     // https://bugzilla.mozilla.org/show_bug.cgi?id=665279
-    var END_TO_START = node.ownerDocument.defaultView.Range.END_TO_START || Utils.global.Range.END_TO_START;
-    var START_TO_END = node.ownerDocument.defaultView.Range.START_TO_END || Utils.global.Range.START_TO_END;
+    var END_TO_START = node.ownerDocument.defaultView.Range.END_TO_START || window.Range.END_TO_START;
+    var START_TO_END = node.ownerDocument.defaultView.Range.START_TO_END || window.Range.START_TO_END;
 
     return range.compareBoundaryPoints(
               END_TO_START,
@@ -345,7 +331,7 @@ function getLocalFile(url, mimetype, callback) {
     mimetype = null;
   }
 
-  var xhr = new Utils.global.XMLHttpRequest();
+  var xhr = new window.XMLHttpRequest();
   if (mimetype) {
     xhr.overrideMimeType(mimetype);
   }
@@ -386,7 +372,7 @@ function getLocalFile(url, mimetype, callback) {
 // data-url image element.
 // If error occurs, `callback`'s second parameter will be an error.
 function getLocalFileAsBase64(url, callback) {
-  var xhr = new Utils.global.XMLHttpRequest();
+  var xhr = new window.XMLHttpRequest();
   xhr.open('GET', url);
   xhr.responseType = 'arraybuffer';
 
@@ -483,7 +469,7 @@ function makeRequestToPrivilegedScript(doc, requestObj, callback) {
         // it'll get triggered once for each frame in the page. So we need to
         // make very sure that we should be acting on the message.
         if (event.name === 'request-response') {
-          var responseObj = Utils.global.JSON.parse(event.message);
+          var responseObj = window.JSON.parse(event.message);
 
           if (responseObj.requestID &&
               makeRequestToPrivilegedScript.requestCallbacks[responseObj.requestID]) {
@@ -504,7 +490,7 @@ function makeRequestToPrivilegedScript(doc, requestObj, callback) {
       requestObj.requestID = reqID;
     }
 
-    safari.self.tab.dispatchMessage('request', Utils.global.JSON.stringify(requestObj));
+    safari.self.tab.dispatchMessage('request', window.JSON.stringify(requestObj));
   }
   else {
     // See: https://developer.mozilla.org/en-US/docs/Code_snippets/Interaction_between_privileged_and_non-privileged_pages#Chromium-like_messaging.3A_json_request_with_json_callback
@@ -593,7 +579,7 @@ function nextTick(callback, context) {
     callback.call(context);
   };
 
-  Utils.global.setTimeout(runner, 0);
+  window.setTimeout(runner, 0);
 }
 
 // `context` is optional. Will be `this` when `callback` is called.
@@ -604,7 +590,7 @@ function nextTickFn(callback, context) {
       callback.apply(context, args);
     };
 
-    Utils.global.setTimeout(runner, 0);
+    window.setTimeout(runner, 0);
   };
 }
 
@@ -681,7 +667,7 @@ function getMozStringBundle() {
 
   // First load the English fallback strings
 
-  stringBundle = Utils.global.Components.classes["@mozilla.org/intl/stringbundle;1"]
+  stringBundle = window.Components.classes["@mozilla.org/intl/stringbundle;1"]
                         .getService(Components.interfaces.nsIStringBundleService)
                         // Notice the explicit locale in this path:
                         .createBundle("resource://markdown_here_locale/en/strings.properties");
@@ -694,7 +680,7 @@ function getMozStringBundle() {
 
   // Then load the strings that are overridden for the current locale
 
-  stringBundle = Utils.global.Components.classes["@mozilla.org/intl/stringbundle;1"]
+  stringBundle = window.Components.classes["@mozilla.org/intl/stringbundle;1"]
                         .getService(Components.interfaces.nsIStringBundleService)
                         .createBundle("chrome://markdown_here/locale/strings.properties");
 
@@ -711,10 +697,9 @@ function getMozStringBundle() {
 if (typeof(chrome) === 'undefined' && typeof(safari) === 'undefined') {
   var g_mozStringBundle = getMozStringBundle();
 
-  if ((!g_mozStringBundle || Object.keys(g_mozStringBundle).length === 0) &&
-      Utils.global.setTimeout) {
-    Utils.global.setTimeout(function requestMozStringBundle() {
-      makeRequestToPrivilegedScript(Utils.global.document, {action: 'get-string-bundle'}, function(response) {
+  if (!g_mozStringBundle || Object.keys(g_mozStringBundle).length === 0) {
+    window.setTimeout(function requestMozStringBundle() {
+      makeRequestToPrivilegedScript(window.document, {action: 'get-string-bundle'}, function(response) {
         g_mozStringBundle = response;
         triggerStringBundleLoadListeners();
       });
@@ -755,7 +740,7 @@ function getSafariStringBundle(callback) {
 
     extendBundle(stringBundle, data);
 
-    var locale = Utils.global.navigator.language;
+    var locale = window.navigator.language;
     if (locale.indexOf('en') === 0) {
       // The locale is English, nothing more to do
       return callback(stringBundle, null);
@@ -827,7 +812,7 @@ if (typeof(safari) !== 'undefined') {
   }
   else {
     // Call from the privileged script
-    makeRequestToPrivilegedScript(Utils.global.document, {action: 'get-string-bundle'}, function(response) {
+    makeRequestToPrivilegedScript(window.document, {action: 'get-string-bundle'}, function(response) {
       if (response) {
         g_safariStringBundle = response;
         triggerStringBundleLoadListeners();
@@ -964,7 +949,7 @@ function base64EncArr (aBytes) {
 
 /* UTF-8 array to DOMString and vice versa */
 
-function UTF8ArrToStr (aBytes) {
+function utf8ArrToStr (aBytes) {
 
   var sView = "";
 
@@ -1052,11 +1037,13 @@ function utf8StringToBase64(str) {
   return base64EncArr(strToUTF8Arr(str));
 }
 function base64ToUTF8String(str) {
-  return UTF8ArrToStr(base64DecToArr(str));
+  return utf8ArrToStr(base64DecToArr(str));
 }
 
 
 // Expose these functions
+
+var Utils = {};
 
 Utils.saferSetInnerHTML = saferSetInnerHTML;
 Utils.saferSetOuterHTML = saferSetOuterHTML;
