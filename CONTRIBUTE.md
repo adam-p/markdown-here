@@ -56,3 +56,9 @@ If you do make any translation changes, or if you have any questions or problems
 * [Oscar del Pozo](https://crowdin.com/profile/oskar7) 
 
 * [Rafa Couto](https://crowdin.com/profile/rafacouto)
+
+* [yoroy](https://crowdin.com/profile/yoroy)
+
+* [nullepart](https://crowdin.com/profile/nullepart)
+
+* [sherkiv](https://crowdin.com/profile/sherkiv)
