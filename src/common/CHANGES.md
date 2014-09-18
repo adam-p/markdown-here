@@ -1,7 +1,7 @@
 Change Log
 ==========
 
-2014-09-xx: v2.11.2
+2014-09-18: v2.11.2
 -------------------
 
 * [Fixed bug #141](https://github.com/adam-p/markdown-here/issues/141): Markdown Here in **Firefox would mysteriously stop working after a while** (aka the "ReferenceError: document is not defined" problem). It turns out that opening and closing a new browser window would trigger the bug.
