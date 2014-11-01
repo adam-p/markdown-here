@@ -332,7 +332,7 @@
   },
   "new_changelist_items": {
     "message": "NEW",
-    "description": "Used to highlight the part of the changelist that is new"
+    "description": "Used to highlight the part of the changelist that is new. There will typically be multiple items in the list, so this should be considered plural."
   },
   "options_page__header_anchors_enabled_label": {
     "message": "<b>Enable automatic header anchors.</b>",
