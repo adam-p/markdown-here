@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+2014-11-xx: v2.11.3
+-------------------
+
+* **Improved compatibilty with screen readers**. Much thanks to [Sofian Babai](https://groups.google.com/forum/#!topic/markdown-here/miNEosqmn2w) for reporting the problem and helping to solve it. The primary fix target was Windows+Thunderbird+NVDA, but if anyone finds any cases where the fix is incomplete, please describe the scenario in the [Github issue](https://github.com/adam-p/markdown-here/issues/222) for it. 
+
+
 2014-09-18: v2.11.2
 -------------------
 

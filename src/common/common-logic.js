@@ -31,7 +31,7 @@ function debugLog() {
 
 
 /*
- * Gets the forgot-to-render prompt. This must be called from a privileged script.
+ * Gets the upgrade notification. This must be called from a privileged script.
  */
 function getUpgradeNotification(optionsURL, responseCallback) {
   debugLog('getUpgradeNotification', 'getting');
