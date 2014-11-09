@@ -6,6 +6,15 @@ Change Log
 
 * **Improved compatibilty with screen readers**. Much thanks to [Sofian Babai](https://groups.google.com/forum/#!topic/markdown-here/miNEosqmn2w) for reporting the problem and helping to solve it. The primary fix target was Windows+Thunderbird+NVDA, but if anyone finds any cases where the fix is incomplete, please describe the scenario in the [Github issue](https://github.com/adam-p/markdown-here/issues/222) for it. 
 
+* Added and updated translations:
+  - **Polish**: [LeahCim](https://crowdin.com/profile/LeahCim).
+  - **Portuguese (Brazilian)**: [Erik Neves](https://crowdin.com/profile/7kire).
+  - **Chinese Traditional**: [Shen-Ta Hsiea](https://github.com/ibmibmibm).
+  - Spanish: [sergiolunagarcia](https://crowdin.com/profile/sergiolunagarcia) and [J. Ignacio Reta Sabarrós](https://crowdin.com/profile/jirsis).
+  - Japanese: [danpansa](https://crowdin.com/profile/danpansa).
+  - Turkish: [trblnc](https://crowdin.com/profile/trblnc).
+  - Chinese Simplified: [Liu Cheng](https://crowdin.com/profile/willowcheng).
+
 
 2014-09-18: v2.11.2
 -------------------

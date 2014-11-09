@@ -1,0 +1,36 @@
+## Słodki zrzut ekranu Markdown
+
+*Markdown Here* jest rozszerzeniem dla programów Google Chrome, Firefox i Thunderbird, pozwalającym pisać e-maile w języku Markdown i przekładać je na sformatowany tekst przed wysłaniem.
+
+* Markdown jest **cool**. Tutaj `kod wewnątrz linii tekstu`.
+* Umieść link np. do [tego projektu](https://github.com/adam-p/markdown-here).
+* Uporządkowane, mówisz? **I** jako lista podrzędna?
+  1. Zrobione.
+  2. I zrobione.
+
+Cytat z autentycznej recenzji:
+
+> Robi dokładnie to co powinien. Wsparcie dla języka Markdown w e-mailach bez wchodzenia w paradę.
+
+### Kolorowanie składni: miodzio
+
+Trochę kodu JavaScript:
+
+```javascript
+alert('Witaj Markdown');
+```
+
+A co powiesz na nietypowy przykład -- diff:
+
+```diff
+diff --git a/src/common/markdown-here.js b/src/common/markdown-here.js
+index 24dcb97..20c36a1 100644
+--- a/src/common/markdown-here.js
++++ b/src/common/markdown-here.js
+@@ -201,12 +179,14 @@ function makeStylesExplicit(wrapperElem, css) {
+-        applyStyleToElement(rule.style, selectorMatches[j]);
++        styleAttr = selectorMatches[j].getAttribute('style') || '';
++        styleAttr += rule.style.cssText;
++        selectorMatches[j].setAttribute('style', styleAttr);
+```
+

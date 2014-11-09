@@ -1,0 +1,23 @@
+Markdown Here pozwala na pisanie e-maili w języku Markdown i przekładanie ich na tekst wyjściowy (upiększony!) przed wysłaniem.
+
+To świetna wiadomość dla każdego kto nie lubi klikać na przyciski formatowania tekstu podczas pisania e-maili. To szczególnie przydatne dla programistów, którzy piszą e-maile zawierające fragmenty kodu źródłowego -- Markdown Here umożliwia nawet kolorowanie składni. A dla matematyków wśród nas: Markdawn Here wygeneruje również wzory zapisane w języku TeX.
+
+Banalnie proste w użyciu:
+1. Napisz e-mail w swoim kliencie poczty elektronicznej używając języka Markdown w wersji GitHub.
+2. Kliknij pole edycji tekstu prawym przyciskiem myszy i wybierz "Przełącz Markdown".
+3. Twój e-mail został upiększony! (To jest, przełożony na język HTML.)
+4. Jeśli rezultat jest zadowalający, po prostu wyślij wiadomość. Jeśli chcesz coś zmienić lub dodać, znów wybierz "Przełącz Markdown", żeby wrócić do wersji wyjściowej w języku Markdown.
+5. Powtarzaj w miarę potrzeb.
+
+Markdown Here został stworzony głownie z myślą o serwisie Gmail i o programie Thunderbird, ale działa też całkiem nieźle z serwisami Yahoo i Hotmail. Dodatkowo, świetnie działa z Google Groups oraz Sites, z wersją internetową serwisu Evernote, z serwisami Blogger, Wordpress i nie tylko!
+
+Uwaga na temat kolorowania składni: Używaj ogrodzonych bloków kodu źródłowego (ang. fenced code blocks) precyzując użyty język programowania. Zobacz przykład na stronie internetowej projektu.
+
+Prywatność: Markdown Here ma dostęp do i modyfikuje zawartość stron internetowych kiedy jest włączony. Teoretycznie, ma dostęp do zawartości innych stron internetowych, ale z tego dostępu nie korzysta. Nie wykonuje też żadnych zapytań internetowych. Twoje dane są modyfikowane tylko wtedy i tylko tam gdzie zdecydujesz i nie opuszczają twojej przeglądarki.
+
+Dostępne jako rozszerzenie dla programów Chrome, Firefox, Safari, Opera oraz Thunderbird.
+
+Ten projekt tworzy otwarte oprogramowanie. Odwiedź stronę GitHub projektu Markdown Here aby znaleźć pełne instrukcje, więcej informacji, żeby zgłaszać błędy, albo pomóc w rozwoju projektu.
+
+http://markdown-here.com
+https://github.com/adam-p/markdown-here

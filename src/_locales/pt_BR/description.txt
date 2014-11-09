@@ -1,0 +1,23 @@
+Markdown Here permite que você escreva e-mail em Markdown e o renderiza (torna-o elegante!) antes de enviar.
+
+É perfeito para quem não gosta de ficar mexendo com botões de formatação enquanto escreve um e-mail. É especialmente adequado para programadores que escrevem e-mail que incluem código-fonte — Markdown Here suporta destaque de sintaxe. E para os matemáticos entre nós: Markdown Here também converte fórmulas em TeX.
+
+Totalmente fácil de usar:
+1. Escreva sua mensagem no campo de edição formatada do seu cliente de e-mail usando Markdown versão Github.
+2. Clique com o botão direito no campo de edição e, em seguida, selecione “Markdown Toggle”.
+3. Seu e-mail agora ficou elegante! (Ou seja, foi convertido em HTML.)
+4. Se você gostar do resultado, é só enviá-lo. Se você quiser alterá-lo ou acrescentar algo, clique novamente em “Markdown Toggle” para voltar ao Markdown original.
+5. Repita se necessário.
+
+Markdown Here é voltado principalmente para trabalhar com Gmail e Thunderbird, mas também funciona muito bem com Yahoo e Hotmail. Além disso, ele funciona muito bem com Google Groups e Sites, a interface web do Evernote, Blogger, Wordpress e muito mais!
+
+Nota sobre destaque de sintaxe: Use código de blocos delimitados e especifique o nome da linguagem. Veja um exemplo na página do projeto.
+
+Privacidade: Markdown Here acessa e modifica o conteúdo da web quando é ativado. Ele pode, em teoria, acessar outros conteúdos da web, mas não o faz. Tampouco acessa a Internet de algum modo. Seus dados são modificados quando e onde você decide e não deixam o seu navegador.
+
+Disponível como extensões para Chrome, Firefox, Safari, Opera e Thunderbird.
+
+Este é um projeto de código fonte aberto. Visite a página Github do Markdown Here para as instruções completas, mais informações, relatórios de bugs, ou para contribuir.
+
+http://markdown-here.com
+https://github.com/adam-p/markdown-here

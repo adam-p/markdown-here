@@ -1,5 +1,5 @@
-Write your email in Markdown...
+用Markdown写下您的电子邮件
 
-...and then make it pretty!
+......然后让它看起来更美观
 
-Want to use Markdown for only part of your email? Just select it and convert it!
+只想在你的电子邮件中部分使用Markdown？ 只需选中它然后转换即可！

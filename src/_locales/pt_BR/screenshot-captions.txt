@@ -1,0 +1,5 @@
+Escreva seu e-mail em Markdown…
+
+…e o torne elegante!
+
+Quer usar Markdown apenas em parte do seu e-mail? Simplesmente selecione-a e converta-a!

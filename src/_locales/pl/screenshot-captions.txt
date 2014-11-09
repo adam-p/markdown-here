@@ -1,0 +1,5 @@
+Napisz e-mail w języku Markdown...
+
+...a następnie upiększ go!
+
+Chcesz użyć języka Markdown tylko w części swojego e-mailu? Po prostu zaznacz ją i przekonwertuj!
