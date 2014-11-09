@@ -1,0 +1,23 @@
+Markdown Here讓你使用Markdown撰寫電子郵件，並在傳送前算繪它(讓它變漂亮！)。
+
+這對那些不喜歡在撰寫電子郵件時浪費時間在排版按鈕的人是好事。它特別適合那些要在電子郵件中插入代碼的程式設計師們 -- 沒錯，它甚至支援語法高亮顯示。對於我們之中的數學家們而言，Markdown Here也支援算繪TeX公式。
+
+使用起來十分簡易：
+1. 在你的電子郵件程式中用Github口味Markdown寫電子郵件。
+2. 對輸入框右鍵點擊，並點選"Markdown 切換"。
+3. 你的電子郵件現在看起來很漂亮！(它已被算繪成HTML。)
+4. 如果你喜歡它的樣子，就傳送。如果你想要更改或是新增東西，再次點選Markdown切換來拿到原本的Markdown。
+5. 需要時重複以上步驟。
+
+Markdown Here主要針對Gmail與Thunderbird，但是也能在Yahoo與Hotmail運作正常。除此之外，也可在Google Groups與Google Sites，Evernote的網頁界面，Blogger，Wordpress，與其他服務運作！
+
+關於Syntax highlighting：使用程式碼區塊，並指定語言名稱。瀏覽專案頁面來觀看範例。
+
+隱私權：當你啟用時，Markdown Here會存取並更改網頁內容。它理論上有能力存取其他網頁內容，但是不會做這件事情。它也不會任何發送網際網路請求。你的資料只會在你更改時更改，並且不會離開你的瀏覽器。
+
+可以從Chrome、Firefox、Safari、Opera與Thunderbird的擴充套件取得。
+
+這是開源專案。瀏覽Markdown Here的Github網頁來獲得使用手冊、更多資訊、回報問題，或是貢獻。
+
+http://markdown-here.com
+https://github.com/adam-p/markdown-here
