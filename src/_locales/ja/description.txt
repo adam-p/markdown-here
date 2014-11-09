@@ -7,17 +7,17 @@ Markdown Here を使えば、メールを Markdown で書けるようになり�
 2. 右クリックメニューで「Markdown 切り替え」をクリックします。
 3. あなたの電子メールはキレイに整形されています! (つまり、HTMLとしてレンダリングされます)
 4. 見た目がよければ、送信するだけ。 もし変更、追加したかったら、もう一度「Markdown 切り替え」をクリックすると、元のMarkdownに戻すことができます。
-5. Repeat as necessary.
+5. 以上の操作を必要に応じて繰り返します。
 
 Markdown Hereは主にGmailとThunderbirdをターゲットにしていますが、YahooやHotmailでもうまく動作します。 また、Google グループやGoogle のサイト、Evernote、Blogger、Wordpress などのサービスでも動作します！
 
-Syntax highlighting note: Use fenced code blocks and specify the language name. プロジェクトのページにある例もご覧ください。
+コードのハイライト表示について:  「fenced block」 (```) で囲み、プログラム言語名を指定してください。 プロジェクトのページにある例もご覧ください。
 
-Privacy: Markdown Here accesses and modifies web content when you activate it. 理論的には、その他のwebコンテンツにもアクセスできますが、そんなことはやりません。 It also makes no Internet requests whatsoever. Your data is modified when and where you choose, and does not leave your browser.
+プライバシー: Markdown Here は、あなたが許可を与えた場合、web コンテンツにアクセスし変更します。 理論的にはその他のwebコンテンツにもアクセスできますが、行いません。 また、いかなるものであれインターネットへのリクエストも行いません。 あなたのデータはあなたが望んだ時に望んだサイトで更新されますが、あなたのブラウザにデータを残しません。
 
-Chrome、Firefox、Safari、Opera、Thunderbirdの拡張機能もあります。
+Chrome、Firefox、Safari、Opera、Thunderbirdの拡張機能として使用することができます。
 
-Markdown Hereはオープンソースです。 使用方法、さらに詳しい情報、、バグの報告、貢献したいときは、Githubのプロジェクトのページをへどうぞ。
+Markdown Hereはオープンソースです。 Markdown Hereの使用方法、さらに詳しい情報、、バグの報告、開発に貢献したいときは、Githubにあるプロジェクトのページをへどうぞ。
 
 http://markdown-here.com
 https://github.com/adam-p/markdown-here

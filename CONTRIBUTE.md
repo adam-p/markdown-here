@@ -62,3 +62,17 @@ If you do make any translation changes, or if you have any questions or problems
 * [nullepart](https://crowdin.com/profile/nullepart)
 
 * [sherkiv](https://crowdin.com/profile/sherkiv)
+
+* [LeahCim](https://crowdin.com/profile/LeahCim)
+
+* [Shen-Ta Hsiea](https://github.com/ibmibmibm)
+
+* [Erik Neves](https://crowdin.com/profile/7kire)
+
+* [J. Ignacio Reta Sabarrós](https://crowdin.com/profile/jirsis)
+
+* [danpansa](https://crowdin.com/profile/danpansa)
+
+* [trblnc](https://crowdin.com/profile/trblnc)
+
+* [Liu Cheng](https://crowdin.com/profile/willowcheng)

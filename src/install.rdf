@@ -89,6 +89,22 @@
 
         <em:localized>
           <Description>
+            <em:locale>pl</em:locale>
+            <em:name>Markdown Here</em:name>
+            <em:description>Napisz e-mail w języku Markdown a następnie go upiększ.</em:description>
+          </Description>
+        </em:localized>
+
+        <em:localized>
+          <Description>
+            <em:locale>pt-BR</em:locale>
+            <em:name>Markdown Here</em:name>
+            <em:description>Escreva seu email em Markdown e o torne elegante.</em:description>
+          </Description>
+        </em:localized>
+
+        <em:localized>
+          <Description>
             <em:locale>ru</em:locale>
             <em:name>Markdown Here</em:name>
             <em:description>Напишите ваш емейл в Markdown и сделайте его стильным.</em:description>
@@ -108,6 +124,14 @@
             <em:locale>zh-CN</em:locale>
             <em:name>Markdown Here</em:name>
             <em:description>用Markdown写一封漂亮的电子邮件。</em:description>
+          </Description>
+        </em:localized>
+
+        <em:localized>
+          <Description>
+            <em:locale>zh-TW</em:locale>
+            <em:name>Markdown Here</em:name>
+            <em:description>用Markdown寫一封漂亮的電子郵件。</em:description>
           </Description>
         </em:localized>
 

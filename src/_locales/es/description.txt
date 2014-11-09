@@ -13,9 +13,9 @@ Markdown Here está enfocado principalmente para trabajar con Gmail y Thunderbir
 
 Nota de resaltado de sintaxis: Usa secciones de código delimitadas y especifica el lenguaje. Consulta la página del proyecto para ver un ejemplo.
 
-Privacidad: Markdown Here accede y modifica el contenido web cuando lo activas. Puede, en teoría, acceder a otros contenidos web, pero no lo hace. Tampoco hace ninguna petición web. Tu información es modificada cuando y donde tu eliges, y no sale de tu navegador.
+Privacidad: Markdown Here accede y modifica el contenido web cuando lo activas. Puede, en teoría, acceder a otros contenidos web, pero no lo hace. Tampoco hace ninguna petición web. Tu información es modificada cuando y donde tu elijas, y no sale de tu navegador.
 
-Extensiones disponibles para para Chrome, Firefox, Safari, Opera y Thunderbird.
+Disponible como extensión para Chrome, Firefox, Safari, Opera y Thunderbird.
 
 Éste es un proyecto de código fuente abierto. Visita la página Github de Markdown Here para encontrar las instrucciones completas, más información, informes de errores o para contribuir.
 

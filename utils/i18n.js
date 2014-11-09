@@ -88,10 +88,10 @@ function processLocale(locale) {
   var stringBundle = JSON.parse(fs.readFileSync(LOCALES_DIR + locale + '/messages.json'));
 
   var mozPropertiesFilename = '../src/firefox/chrome/locale/' + locale + '/strings.properties';
-  fs.truncateSync(mozPropertiesFilename, 0);
+  var mozPropertiesFd = fs.openSync(mozPropertiesFilename, 'w');
 
   var mozDtdFilename = '../src/firefox/chrome/locale/' + locale + '/strings.dtd';
-  fs.truncateSync(mozDtdFilename, 0);
+  var mozDtdFd = fs.openSync(mozDtdFilename, 'w');
 
   // We'll iterate through the keys in sorted order, to help keep the diffs stable.
   var keys, i, key, message;
@@ -107,12 +107,15 @@ function processLocale(locale) {
 
     message = message.replace(/\\/g, '\\\\').replace(/\n/g, '\\n').replace(/"/g, '\\"');
 
-    fs.appendFileSync(mozPropertiesFilename, key + '=' + message + '\n');
+    fs.writeSync(mozPropertiesFd, key + '=' + message + '\n');
 
     if (stringBundle[key]['inMozDTD']) {
-      fs.appendFileSync(mozDtdFilename, '<!ENTITY ' + key + ' "' + message + '">\n' );
+      fs.writeSync(mozDtdFd, '<!ENTITY ' + key + ' "' + message + '">\n' );
     }
   }
+
+  fs.closeSync(mozPropertiesFd);
+  fs.closeSync(mozDtdFd);
 
   var rdfEntry = INSTALL_RDF_I18N_TEMPLATE
                   .replace('{{locale}}', mozLocale)

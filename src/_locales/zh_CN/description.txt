@@ -3,7 +3,7 @@ Markdown Here允许你在发送电子邮件之前用Markdown语法编辑并转�
 这对于那些不喜欢在撰写电邮时反复摆弄排版按钮的人无疑是好消息。 它特别适合那些要在电子邮件中插入代码的程序员们 —— 没错，它甚至支持语法高亮显示。 对于我们之中的数学家们而言，Markdown Here也支持转换TeX公式。
 
 使用起来十分简易：
-1. Write your email in your email client's rich editor using Github-flavoured Markdown.
+1. 在你的电子邮箱客户端的富文本编辑栏(rich editor)中使用Github支持的Markdown。
 2. Right-click in the compose area and then click "Markdown Toggle".
 3. Your email is now pretty! (That is, it's been rendered to HTML.)
 4. If you like the way it looks, just send it. If you want to change or add something, click "Markdown Toggle" again to get back to your original Markdown.

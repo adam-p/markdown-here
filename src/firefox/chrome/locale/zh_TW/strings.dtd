@@ -1,0 +1,8 @@
+<!ENTITY app_name "Markdown Here">
+<!ENTITY context_menu_item "Markdown切換">
+<!ENTITY context_menu_item_shortcut "k">
+<!ENTITY forgot_to_render_back_button "返回">
+<!ENTITY forgot_to_render_send_button "傳送">
+<!ENTITY toggle_button_text "切換">
+<!ENTITY toggle_button_tooltip "點擊來切換Markdown算繪模式">
+<!ENTITY toggle_button_tooltip_disabled "選擇的區域不支援Markdown算繪模式">

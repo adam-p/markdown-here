@@ -1,18 +1,18 @@
-On Wed, May 16, 2012 at 9:51 PM, Buddy <buddy@example.com> wrote:
+2012年5月16日周三，下午9点51，小伙伴<buddy@example.com>写道：
 
-> Hey pal!
+> 嗨，pal！
 
-Hi Buddy.
+嗨，朋友。
 
-> Can you send me some sweet code?
+> 可以发给我一些有趣的代码吗？
 
-**This** is pretty great:
+**这个**相当不错：
 
 ```clojure
-(defn hello [x] (str "Hello", x))
+(defn hello [x] (str "你好", x))
 (hello "Clojure")
 ```
 
-> Thanks in advance!
+> 多谢！
 
-No problem.
+没事儿。

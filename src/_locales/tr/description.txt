@@ -7,17 +7,17 @@ Kullanımı çok basittir:
 2. Yazı alanında sağ tuşlayarak "Markdown Toggle" seçiniz.
 3. E-mailiniz şimdi çok zarif olmuşdur! (Yani, HTML'e kılınmışdır.)
 4. Göründüğü şekli beğendiyseniz, gönderebilirsiniz. Bir şey eklemek veya değiştirmek isterseniz, orijinal Markdownunuza geri dönmek için "Markdown Toggle"'a geri basınız.
-5. Repeat as necessary.
+5. Sonucu begenmez iseniz, tekrar edin.
 
 Markdown Here öncelikle Gmail ve Thunderbird ile çalışması hedeflenmişdir, ama Yahoo ve Hotmail ile de oldukça iyi çalışır. Ayrıca, Google Groups ve Sites, Evernote'un web arayüzü, Blogger, Wordpress ve başkaları ile de çalışır!
 
-Syntax highlighting note: Use fenced code blocks and specify the language name. Örnek için proje sayfasına bakın.
+Sözdizimi vurgu notu: Tirnak isareti (`) ile çevirilmiş kod blokları kullanın ve dil ismini belirtin. Örnek için proje sayfasına bakın.
 
-Privacy: Markdown Here accesses and modifies web content when you activate it. Teorik olarak başka web içeriğini de erişebilir, ama yapmaz. It also makes no Internet requests whatsoever. Your data is modified when and where you choose, and does not leave your browser.
+Gizlilik: "Markdown Here" aktif edildiginde; web icerigine erişebilir ve degistirilebilir. Teorik olarak, diger web içeriğinize de erişebilir, ama bunu yapmaz. O ayrica herhangi bir internet servisi istedigi yapmaz, ne olursa olsun. Sizin veriniz istediginiz zaman ve istediginiz alanda modifiye edilir, ve internet gezgininizi terk etmez.
 
-Chrome, Firefox, Safari, Opera, ve Thunderbird eki olarak vardır.
+Chrome, Firefox, Safari, Opera, ve Thunderbird eklentisi olarak kullanilabilir.
 
-Bu açık kaynak projesidir. Daha çok bilgi, tam talimatlar, hata raporları veya katkıda bulunmak için Markdown Here'in Github sayfasını ziyret edebilirsiniz.
+Bu açık kaynak kodlu bir projedir. Tum kullanim talimatlari, daha fazla bilgi, hata raporları veya katkıda bulunmak için Markdown Here'in Github sayfasını ziyret edebilirsiniz.
 
 http://markdown-here.com
 https://github.com/adam-p/markdown-here

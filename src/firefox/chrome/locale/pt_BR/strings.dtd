@@ -1,0 +1,8 @@
+<!ENTITY app_name "Markdown Here">
+<!ENTITY context_menu_item "Alternar Markdown">
+<!ENTITY context_menu_item_shortcut "k">
+<!ENTITY forgot_to_render_back_button "Voltar">
+<!ENTITY forgot_to_render_send_button "Enviar">
+<!ENTITY toggle_button_text "Alternar MD">
+<!ENTITY toggle_button_tooltip "Clique para alternar a renderização do Markdown">
+<!ENTITY toggle_button_tooltip_disabled "O campo selecionado não é válido para renderização em Markdown">

@@ -1,0 +1,36 @@
+## Doces Capturas de Tela em Markdown
+
+*Markdown Here* é uma extensão para Google Chrome, Firefox e Thunderbird que permite que você escreva e-mail em Markdown e converte-o antes de enviá-lo.
+
+* Markdown é **legal**. Ponha `código inline`.
+* Crie links para coisas, como [este projeto](https://github.com/adam-p/markdown-here).
+* Você disse ordenado? **E** uma sub-lista?
+  1. Pronto.
+  2. E pronto.
+
+Citação de uma revisão real:
+
+> Faz exatamente o que preciso que faça. Suporte de Markdown no email sem atrapalhar.
+
+### Destaque de sintaxe: super radical
+
+Um pouco de JavaScript:
+
+```javascript
+alert('Hello Markdown');
+```
+
+Que tal um exemplo incomum -- um diff:
+
+```diff
+diff --git a/src/common/markdown-here.js b/src/common/markdown-here.js
+index 24dcb97..20c36a1 100644
+--- a/src/common/markdown-here.js
++++ b/src/common/markdown-here.js
+@@ -201,12 +179,14 @@ function makeStylesExplicit(wrapperElem, css) {
+-        applyStyleToElement(rule.style, selectorMatches[j]);
++        styleAttr = selectorMatches[j].getAttribute('style') || '';
++        styleAttr += rule.style.cssText;
++        selectorMatches[j].setAttribute('style', styleAttr);
+```
+
