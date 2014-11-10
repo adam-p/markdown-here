@@ -142,7 +142,9 @@ function forgotToRenderIntervalCheck(focusedElem, MarkdownHere, MdhHtmlToText, m
   */
 
   // There is only logic for GMail (so far)
-  if (focusedElem.ownerDocument.location.host.indexOf('mail.google.') < 0) {
+  var isGmail = focusedElem.ownerDocument.location.host.indexOf('mail.google.') < 0;
+  var isInboxByGoogle = focusedElem.ownerDocument.location.host.indexOf('inbox.google.') < 0;
+  if (isGmail || isInboxByGoogle) {
     debugLog('forgotToRenderIntervalCheck', 'not Gmail');
     return;
   }
