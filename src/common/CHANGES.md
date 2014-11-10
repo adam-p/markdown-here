@@ -4,7 +4,9 @@ Change Log
 2014-11-xx: v2.11.3
 -------------------
 
-* **Improved compatibilty with screen readers**. Much thanks to [Sofian Babai](https://groups.google.com/forum/#!topic/markdown-here/miNEosqmn2w) for reporting the problem and helping to solve it. The primary fix target was Windows+Thunderbird+NVDA, but if anyone finds any cases where the fix is incomplete, please describe the scenario in the [Github issue](https://github.com/adam-p/markdown-here/issues/222) for it. 
+* **Improved compatibilty with screen readers**. Much thanks to [Sofian Babai](https://groups.google.com/forum/#!topic/markdown-here/miNEosqmn2w) for reporting the problem and helping to solve it. The primary fix target was Windows+Thunderbird+NVDA, but if anyone finds any cases where the fix is incomplete, please describe the scenario in the [Github issue](https://github.com/adam-p/markdown-here/issues/222) for it.
+
+* [Fixed bug #223](https://github.com/adam-p/markdown-here/issues/223): Keyboard shortcut was not working in Gmail on Firefox.
 
 * Added and updated translations:
   - **Polish**: [LeahCim](https://crowdin.com/profile/LeahCim).
@@ -15,7 +17,7 @@ Change Log
   - Turkish: [trblnc](https://crowdin.com/profile/trblnc).
   - Chinese Simplified: [Liu Cheng](https://crowdin.com/profile/willowcheng).
 
-* TeX math support is now enabled by default (for new users). Too many people were confused as to why it wasn't working out of the box. I had disabled it for privacy concern reasons (you're sending your math to Google for rendering), but that only happens if you actually use the math markup, so it's not a very big concern.
+* TeX math support is now enabled by default (for new users). ([Issue #213](https://github.com/adam-p/markdown-here/issues/213).)
 
 
 2014-09-18: v2.11.2
