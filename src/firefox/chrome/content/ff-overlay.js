@@ -138,7 +138,7 @@ var markdown_here = {
 
       // Only add a listener if a key is set
       if (prefs.hotkey.key.length === 1) {
-        window.addEventListener('keydown', hotkeyHandler, false);
+        window.addEventListener('keydown', hotkeyHandler, true);
       }
 
       /*
@@ -235,7 +235,6 @@ var markdown_here = {
     }
 
     document.getElementById('context-markdown_here').hidden = !showItem;
-    document.getElementById('context-markdown_here-separator').hidden = !showItem;
   },
 
   log: function(msg) {
