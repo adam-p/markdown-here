@@ -15,6 +15,8 @@ Change Log
   - Turkish: [trblnc](https://crowdin.com/profile/trblnc).
   - Chinese Simplified: [Liu Cheng](https://crowdin.com/profile/willowcheng).
 
+* TeX math support is now enabled by default (for new users). Too many people were confused as to why it wasn't working out of the box. I had disabled it for privacy concern reasons (you're sending your math to Google for rendering), but that only happens if you actually use the math markup, so it's not a very big concern.
+
 
 2014-09-18: v2.11.2
 -------------------

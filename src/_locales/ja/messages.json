@@ -204,7 +204,7 @@
     "description":"heading for warnings about TeX math privacy concerns"
   },
   "options_page__tex_math_privacy_issue_1":{
-    "message":"数式の画像を生成するためにGoogleにリクエストを送信します。 これはGoogleにあなたの数式が共有されることを意味します。 また、レンダリングされた画像を取得するためにGoogleにリクエストを送信することも意味します。これがこのオプションがデフォルトで無効になっている理由です。",
+    "message":"数式の画像を生成するためにGoogleにリクエストを送信します。 これはGoogleにあなたの数式が共有されることを意味します。 また、レンダリングされた画像を取得するためにGoogleにリクエストを送信することも意味します。",
     "description":"one of the TeX math privacy concerns"
   },
   "options_page__tex_math_privacy_issue_2":{

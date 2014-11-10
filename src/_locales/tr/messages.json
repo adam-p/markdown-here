@@ -204,7 +204,7 @@
     "description":"heading for warnings about TeX math privacy concerns"
   },
   "options_page__tex_math_privacy_issue_1":{
-    "message":"Bir formülün imajını üretmek için, Google'a istek gönderilir. Bu da formülanının Google'la paylaştığın anlamına gelir. Ayrıca, mesajın alıcıları da imajı görmek için Google'a istek gönderirler. Bu yüzden varsayılan seçenek bunun kapalı olmasıdır.",
+    "message":"Bir formülün imajını üretmek için, Google'a istek gönderilir. Bu da formülanının Google'la paylaştığın anlamına gelir. Ayrıca, mesajın alıcıları da imajı görmek için Google'a istek gönderirler.",
     "description":"one of the TeX math privacy concerns"
   },
   "options_page__tex_math_privacy_issue_2":{

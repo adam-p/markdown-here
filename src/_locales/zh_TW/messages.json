@@ -204,7 +204,7 @@
     "description":"heading for warnings about TeX math privacy concerns"
   },
   "options_page__tex_math_privacy_issue_1":{
-    "message":"為了產生公式的圖片, 瀏覽器會向Google發送請求。這等同於你在和Google分享公式，而且收件人也會向Google發送請求來顯示圖片，所以這個選項預設是關閉的。",
+    "message":"為了產生公式的圖片, 瀏覽器會向Google發送請求。這等同於你在和Google分享公式，而且收件人也會向Google發送請求來顯示圖片。",
     "description":"one of the TeX math privacy concerns"
   },
   "options_page__tex_math_privacy_issue_2":{

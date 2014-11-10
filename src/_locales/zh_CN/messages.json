@@ -204,7 +204,7 @@
     "description":"heading for warnings about TeX math privacy concerns"
   },
   "options_page__tex_math_privacy_issue_1":{
-    "message":"为了生成公式的图片, 浏览器会向谷歌发送请求. 这事实上意味着你在和谷歌分享公式。 就是说你编辑的信息会被发给谷歌以转换成图片，所以这个选项默认是关闭的。",
+    "message":"为了生成公式的图片, 浏览器会向谷歌发送请求. 这事实上意味着你在和谷歌分享公式。 就是说你编辑的信息会被发给谷歌以转换成图片。",
     "description":"one of the TeX math privacy concerns"
   },
   "options_page__tex_math_privacy_issue_2":{

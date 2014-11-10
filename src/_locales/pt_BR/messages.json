@@ -204,7 +204,7 @@
     "description":"heading for warnings about TeX math privacy concerns"
   },
   "options_page__tex_math_privacy_issue_1":{
-    "message":"Para gerar a imagem da fórmula, um pedido é enviado ao Google. Isso efetivamente significa que você está compartilhando sua fórmula com o Google. Também significa que os destinatários da sua mensagem farão um pedido ao Google para ter a imagem renderizada. Por isso esta opção é desativada como padrão.",
+    "message":"Para gerar a imagem da fórmula, um pedido é enviado ao Google. Isso efetivamente significa que você está compartilhando sua fórmula com o Google. Também significa que os destinatários da sua mensagem farão um pedido ao Google para ter a imagem renderizada.",
     "description":"one of the TeX math privacy concerns"
   },
   "options_page__tex_math_privacy_issue_2":{

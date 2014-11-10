@@ -204,7 +204,7 @@
     "description":"heading for warnings about TeX math privacy concerns"
   },
   "options_page__tex_math_privacy_issue_1":{
-    "message":"Afin de générer une image pour la formule, une requête est effectuée chez Google. Cela signifie concrètement que vous partagez cette formule avec Google. Cela signifie également que les récipiendaires de votre message feront également une requête chez Google pour calculer cette image. C'est pour cette raison que cette option est désactivée par défaut.",
+    "message":"Afin de générer une image pour la formule, une requête est effectuée chez Google. Cela signifie concrètement que vous partagez cette formule avec Google. Cela signifie également que les récipiendaires de votre message feront également une requête chez Google pour calculer cette image.",
     "description":"one of the TeX math privacy concerns"
   },
   "options_page__tex_math_privacy_issue_2":{

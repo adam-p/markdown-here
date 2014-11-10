@@ -204,7 +204,7 @@
     "description":"heading for warnings about TeX math privacy concerns"
   },
   "options_page__tex_math_privacy_issue_1":{
-    "message":"Aby wygenerować obraz wzoru, wysłane zostaje zapytanie do serwisu Google. W praktyce znaczy to, że dzielisz się swoim wzorem z serwisem Google. Znaczy to również, że odbiorcy twojej wiadomości wyślą zapytanie do serwisu Google w celu wyświetlenia obrazu. Z tego powodu ta opcja jest domyślnie wyłączona.",
+    "message":"Aby wygenerować obraz wzoru, wysłane zostaje zapytanie do serwisu Google. W praktyce znaczy to, że dzielisz się swoim wzorem z serwisem Google. Znaczy to również, że odbiorcy twojej wiadomości wyślą zapytanie do serwisu Google w celu wyświetlenia obrazu.",
     "description":"one of the TeX math privacy concerns"
   },
   "options_page__tex_math_privacy_issue_2":{
