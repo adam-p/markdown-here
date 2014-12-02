@@ -4,7 +4,8 @@ Change Log
 2014-11-10: v2.11.3
 -------------------
 
-* **Improved compatibilty with screen readers**. Much thanks to [Sofian Babai](https://groups.google.com/forum/#!topic/markdown-here/miNEosqmn2w) for reporting the problem and helping to solve it. The primary fix target was Windows+Thunderbird+NVDA, but if anyone finds any cases where the fix is incomplete, please describe the scenario in the [Github issue](https://github.com/adam-p/markdown-here/issues/222) for it.
+* **Improved compatibilty with screen readers**. Much thanks to [Sofian Babai](https://groups.google.com/forum/#!topic/markdown-here/miNEosqmn2w) for reporting the problem and helping to solve it. The primary fix target was Windows+Thunderbird+NVDA, but if anyone finds any cases where the fix is incomplete, please describe the scenario in the [Github issue](https://github.com/adam-p/markdown-here/issues/222) for it. 
+  - Thanks also to [Sukil Echenique](https://github.com/sukiletxe) for reporting the [original issue](https://github.com/adam-p/markdown-here/issues/185).
 
 * [Fixed bug #223](https://github.com/adam-p/markdown-here/issues/223): Keyboard shortcut was not working in Gmail on Firefox.
 
