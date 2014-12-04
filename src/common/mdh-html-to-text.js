@@ -314,7 +314,7 @@ function convertHTMLtoMarkdown(tag, html) {
     groups to create the desired MD link.
     */
     html = html.replace(
-      /((?:\]\([^\)]*)|(?:\[[^\]]*))?<a\s[^>]*href="([^"]*)"[^>]*>(.*?)<\/a>/ig,
+      /((?:\]\([^\)]*)|(?:\[[^\]]*)|(?:\[.*\]:.*))?<a\s[^>]*href="([^"]*)"[^>]*>(.*?)<\/a>/ig,
       function($0, $1, $2, $3) {
         return $1 ? $0 : '['+$3+']('+$2+')';
       });
