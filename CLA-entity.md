@@ -1,5 +1,5 @@
-Markdown Here Entity Contributor Assignment Agreement
-=====================================================
+Markdown Here Entity Contributor License Agreement
+==================================================
 
 Thank you for your interest in contributing to Markdown Here ("We" or "Us").
 
@@ -11,7 +11,7 @@ This is a legally binding document, so please read it carefully before agreeing 
 
 "You" means any Legal Entity on behalf of whom a Contribution has been received by Us. "Legal Entity" means an entity which is not a natural person. "Affiliates" means other Legal Entities that control, are controlled by, or under common control with that Legal Entity. For the purposes of this definition, "control" means (i) the power, direct or indirect, to cause the direction or management of such Legal Entity, whether by contract or otherwise, (ii) ownership of fifty percent (50%) or more of the outstanding shares or securities which vote to elect the management or other persons who direct such Legal Entity or (iii) beneficial ownership of such entity.
 
-"Contribution" means any work of authorship that is Submitted by You to Us in which You own or assert ownership of the Copyright. If You do not own the Copyright in the entire work of authorship, please follow the instructions in https://goo.gl/forms/q0TXJmcjWv.
+"Contribution" means any work of authorship that is Submitted by You to Us in which You own or assert ownership of the Copyright. If You do not own the Copyright in the entire work of authorship, please follow the instructions in .
 
 "Copyright" means all rights protecting works of authorship owned or controlled by You or Your Affiliates, including copyright, moral and neighboring rights, as appropriate, for the full term of their existence including any extensions by You.
 
@@ -25,15 +25,11 @@ This is a legally binding document, so please read it carefully before agreeing 
 
 ## 2. Grant of Rights
 
-2.1 Copyright Assignment
+2.1 Copyright License
 
-(a) At the time the Contribution is Submitted, You assign to Us all right, title, and interest worldwide in all Copyright covering the Contribution; provided that this transfer is conditioned upon compliance with Section 2.3.
+(a) You retain ownership of the Copyright in Your Contribution and have the same rights to use or license the Contribution which You would have had without entering into the Agreement.
 
-(b) To the extent that any of the rights in Section 2.1(a) cannot be assigned by You to Us, You grant to Us a perpetual, worldwide, exclusive, royalty-free, transferable, irrevocable license under such non-assigned rights, with rights to sublicense through multiple tiers of sublicensees, to practice such non-assigned rights, including, but not limited to, the right to reproduce, modify, display, perform and distribute the Contribution; provided that this license is conditioned upon compliance with Section 2.3.
-
-(c) To the extent that any of the rights in Section 2.1(a) can neither be assigned nor licensed by You to Us, You irrevocably waive and agree never to assert such rights against Us, any of our successors in interest, or any of our licensees, either direct or indirect; provided that this agreement not to assert is conditioned upon compliance with Section 2.3.
-
-(d) Upon such transfer of rights to Us, to the maximum extent possible, We immediately grant to You a perpetual, worldwide, non-exclusive, royalty-free, transferable, irrevocable license under such rights covering the Contribution, with rights to sublicense through multiple tiers of sublicensees, to reproduce, modify, display, perform, and distribute the Contribution. The intention of the parties is that this license will be as broad as possible and to provide You with rights as similar as possible to the owner of the rights that You transferred. This license back is limited to the Contribution and does not provide any rights to the Material.
+(b) To the maximum extent permitted by the relevant law, You grant to Us a perpetual, worldwide, non-exclusive, transferable, royalty-free, irrevocable license under the Copyright covering the Contribution, with the right to sublicense such rights through multiple tiers of sublicensees, to reproduce, modify, display, perform and distribute the Contribution as part of the Material; provided that this license is conditioned upon compliance with Section 2.3.
 
 2.2 Patent License
 
@@ -47,7 +43,7 @@ Based on the grant of rights in Sections 2.1 and 2.2, if We include Your Contrib
 
 2.5 Our Rights. You acknowledge that We are not obligated to use Your Contribution as part of the Material and may decide to include any Contribution We consider appropriate.
 
-2.6 Reservation of Rights. Any rights not expressly assigned or licensed under this section are expressly reserved by You.
+2.6 Reservation of Rights. Any rights not expressly licensed under this section are expressly reserved by You.
 
 ## 3. Agreement
 
@@ -59,19 +55,19 @@ You confirm that:
 
 (c) The grant of rights under Section 2 does not violate any grant of rights which You or Your Affiliates have made to third parties.
 
-(d) You have followed the instructions in https://goo.gl/forms/q0TXJmcjWv, if You do not own the Copyright in the entire work of authorship Submitted.
+(d) You have followed the instructions in , if You do not own the Copyright in the entire work of authorship Submitted.
 
 ## 4. Disclaimer
 
-EXCEPT FOR THE EXPRESS WARRANTIES IN SECTION 3, THE CONTRIBUTION IS PROVIDED "AS IS". MORE PARTICULARLY, ALL EXPRESS OR IMPLIED WARRANTIES INCLUDING, WITHOUT LIMITATION, ANY IMPLIED WARRANTY OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT ARE EXPRESSLY DISCLAIMED BY YOU TO US AND BY US TO YOU. TO THE EXTENT THAT ANY SUCH WARRANTIES CANNOT BE DISCLAIMED, SUCH WARRANTY IS LIMITED IN DURATION TO THE MINIMUM PERIOD PERMITTED BY LAW.
+EXCEPT FOR THE EXPRESS WARRANTIES IN SECTION 3, THE CONTRIBUTION IS PROVIDED "AS IS". MORE PARTICULARLY, ALL EXPRESS OR IMPLIED WARRANTIES INCLUDING, WITHOUT LIMITATION, ANY IMPLIED WARRANTY OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT ARE EXPRESSLY DISCLAIMED BY YOU TO US. TO THE EXTENT THAT ANY SUCH WARRANTIES CANNOT BE DISCLAIMED, SUCH WARRANTY IS LIMITED IN DURATION TO THE MINIMUM PERIOD PERMITTED BY LAW.
 
 ## 5. Consequential Damage Waiver
 
-TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT WILL YOU OR US BE LIABLE FOR ANY LOSS OF PROFITS, LOSS OF ANTICIPATED SAVINGS, LOSS OF DATA, INDIRECT, SPECIAL, INCIDENTAL, CONSEQUENTIAL AND EXEMPLARY DAMAGES ARISING OUT OF THIS AGREEMENT REGARDLESS OF THE LEGAL OR EQUITABLE THEORY (CONTRACT, TORT OR OTHERWISE) UPON WHICH THE CLAIM IS BASED.
+TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT WILL YOU BE LIABLE FOR ANY LOSS OF PROFITS, LOSS OF ANTICIPATED SAVINGS, LOSS OF DATA, INDIRECT, SPECIAL, INCIDENTAL, CONSEQUENTIAL AND EXEMPLARY DAMAGES ARISING OUT OF THIS AGREEMENT REGARDLESS OF THE LEGAL OR EQUITABLE THEORY (CONTRACT, TORT OR OTHERWISE) UPON WHICH THE CLAIM IS BASED.
 
 ## 6. Miscellaneous
 
-6.1 This Agreement will be governed by and construed in accordance with the laws of Canada excluding its conflicts of law provisions. Under certain circumstances, the governing law in this section might be superseded by the United Nations Convention on Contracts for the International Sale of Goods ("UN Convention") and the parties intend to avoid the application of the UN Convention to this Agreement and, thus, exclude the application of the UN Convention in its entirety to this Agreement.
+6.1 This Agreement will be governed by and construed in accordance with the laws of excluding its conflicts of law provisions. Under certain circumstances, the governing law in this section might be superseded by the United Nations Convention on Contracts for the International Sale of Goods ("UN Convention") and the parties intend to avoid the application of the UN Convention to this Agreement and, thus, exclude the application of the UN Convention in its entirety to this Agreement.
 
 6.2 This Agreement sets out the entire agreement between You and Us for Your Contributions to Us and overrides all other agreements or understandings.
 
@@ -83,4 +79,4 @@ TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT WILL YOU OR US BE
 
 This agreement is derived from the Project Harmony CLA generator: 
 http://www.harmonyagreements.org/
-Harmony (HA-CAA-E-ANY) Version 1.0
+Harmony (HA-CLA-E-ANY) Version 1.0
