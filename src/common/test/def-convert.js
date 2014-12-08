@@ -5,9 +5,6 @@
  * [text](<a href="http://example.com" target="_blank">http://example.com</a>)
  * Expect results:
  * All of them should be unchanged
- *
- * (c) 2014 Meng Wang <wm8120@gmail.com> 
- * MIT License
  */
 
 function convert() {
