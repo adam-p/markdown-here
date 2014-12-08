@@ -304,6 +304,7 @@ function convertHTMLtoMarkdown(tag, html) {
       (                 // begin optional prefix capture group
         (?:\]\([^\)]*)  // match an unclosed URL portion of a MD link -- like "...](..."
         |(?:\[[^\]]*)   // match an unclosed name portion of a MD link -- like "...[..."
+        |(?:\[.*\]:.*)  // match the patterns of reflink and nolink -- link "[...]:..."
       )?                // capture group is optional so that we do the "negative" lookbehind -- that is, we can match links that are *not* preceded by the stuff we *don't* want
       <a\s[^>]*href="([^"]*)"[^>]*>(.*?)<\/a>  // an HTML link
     Then the replace callback looks like this:
@@ -314,7 +315,7 @@ function convertHTMLtoMarkdown(tag, html) {
     groups to create the desired MD link.
     */
     html = html.replace(
-      /((?:\]\([^\)]*)|(?:\[[^\]]*))?<a\s[^>]*href="([^"]*)"[^>]*>(.*?)<\/a>/ig,
+      /((?:\]\([^\)]*)|(?:\[[^\]]*)|(?:\[.*\]:.*))?<a\s[^>]*href="([^"]*)"[^>]*>(.*?)<\/a>/ig,
       function($0, $1, $2, $3) {
         return $1 ? $0 : '['+$3+']('+$2+')';
       });

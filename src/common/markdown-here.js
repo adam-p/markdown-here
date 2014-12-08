@@ -458,7 +458,7 @@ function renderMarkdown(focusedElem, selectedRange, markdownRenderer, renderComp
     // Monitor for changes to the content of the rendered MD. This will help us
     // prevent the user from silently losing changes later.
     // We're going to set this up after a short timeout, to help prevent false
-    // detections based on automatic chagnes by the host site.
+    // detections based on automatic changes by the host site.
     wrapper.ownerDocument.defaultView.setTimeout(function addMutationObserver() {
       var SupportedMutationObserver =
             wrapper.ownerDocument.defaultView.MutationObserver ||
