@@ -1,6 +1,6 @@
-# Contribute.md
+# Contributing.md
 
-The most up-to-date version of this file will be in the `development` branch: https://github.com/adam-p/markdown-here/blob/development/CONTRIBUTE.md
+The most up-to-date version of this file will be in the `development` branch: https://github.com/adam-p/markdown-here/blob/development/CONTRIBUTING.md
 
 * Project page: https://github.com/adam-p/markdown-here
 * Google Group: https://groups.google.com/forum/#!forum/markdown-here
