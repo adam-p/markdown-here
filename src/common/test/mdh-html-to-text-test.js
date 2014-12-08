@@ -63,6 +63,56 @@ describe('MdhHtmlToText', function() {
       expect(get(html)).to.equal(target);
     });
 
+    // Test fix for bug https://github.com/adam-p/markdown-here/pull/233
+    // reflinks and nolinks weren't working with pre-rendered links.
+    it('should work correctly with pre-rendered links in reflinks and nolinks', function() {
+      //
+      // reflinks
+      //
+
+      var html = '[link text][1]<br>[1]: <a href="http://example.com">http://example.com</a><br>';
+      var target = '[link text][1]\n[1]: http://example.com';
+      expect(get(html)).to.equal(target);
+
+      // HTTPS and a target attribute
+      html = '[link text][1]<br>[1]: <a href="https://example.com" target="_blank">https://example.com</a><br>';
+      target = '[link text][1]\n[1]: https://example.com';
+      expect(get(html)).to.equal(target);
+
+      // Different URL for HREF and text of link (should use text of link)
+      html = '[link text][1]<br>[1]: <a href="http://hreflink.com">https://textlink.com</a><br>';
+      target = '[link text][1]\n[1]: https://textlink.com';
+      expect(get(html)).to.equal(target);
+
+      // Only the hostname part of the URL is a link
+      html = '[link text][1]<br>[1]: http://<a href="http://example.com">example.com</a><br>';
+      target = '[link text][1]\n[1]: http://example.com';
+      expect(get(html)).to.equal(target);
+
+      //
+      // nolinks
+      //
+
+      html = '[link text]<br>[link text]: <a href="http://example.com">http://example.com</a><br>';
+      target = '[link text]\n[link text]: http://example.com';
+      expect(get(html)).to.equal(target);
+
+      // HTTPS and a target attribute
+      html = '[link text]<br>[link text]: <a href="https://example.com" target="_blank">https://example.com</a><br>';
+      target = '[link text]\n[link text]: https://example.com';
+      expect(get(html)).to.equal(target);
+
+      // Different URL for HREF and text of link (should use text of link)
+      html = '[link text]<br>[link text]: <a href="http://hreflink.com">https://textlink.com</a><br>';
+      target = '[link text]\n[link text]: https://textlink.com';
+      expect(get(html)).to.equal(target);
+
+      // Only the hostname part of the URL is a link
+      html = '[link text]<br>[link text]: http://<a href="http://example.com">example.com</a><br>';
+      target = '[link text]\n[link text]: http://example.com';
+      expect(get(html)).to.equal(target);
+    });
+
   });
 
   describe('MdhHtmlToText (check-for-MD mode)', function() {
