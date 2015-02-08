@@ -1,26 +1,26 @@
-## Sweet Screenshot Markdown
+## Markdown美妙截圖
 
-*Markdown Here* is a Google Chrome, Firefox, and Thunderbird extension that lets you write email in Markdown and render it before sending.
+*Markdown Here*是Google Chrome、Firefox與Thunderbird的擴充套件，允許你用Markdown撰寫電子郵件，並在發送前算繪。
 
-* Markdown is **cool**. Put `code inline`.
-* Link to stuff, like [this project](https://github.com/adam-p/markdown-here).
-* Ordered, you say? **And** a sub-list?
-  1. Done.
-  2. And done.
+* Markdown很**酷**。 寫點`inline code`。
+* 建立鍊結，像是[這個專案](https://github.com/adam-p/markdown-here).
+* 想要有序清單嗎？ **還有**子清單嗎？
+  1. 完成。
+  2. 再次完成。
 
-Actual review quote:
+引用真實使用心得：
 
-> Does exactly what I need it to do. Markdown support in email without getting in the way.
+> 精準做出我需要的排版。 在電子郵件中使用Markdown而不礙手礙腳。
 
-### Syntax highlighting: super rad
+### 語法高亮顯示：超炫
 
-Some JavaScript:
+一些JavaScript：
 
 ```javascript
 alert('Hello Markdown');
 ```
 
-How about an unusual example -- a diff:
+來一些特殊範例 -- 一份diff：
 
 ```diff
 diff --git a/src/common/markdown-here.js b/src/common/markdown-here.js

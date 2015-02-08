@@ -12,7 +12,7 @@
 
 > 做我需要做的。 Markdown支持在不妨碍您的情况下在电子邮件内使用。
 
-### Syntax highlighting: super rad
+### 语法高亮: super rad
 
 JavaScript代码：
 

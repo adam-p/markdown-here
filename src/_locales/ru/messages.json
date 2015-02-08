@@ -79,7 +79,7 @@
     "description":"Text on the notification shown when Markdown Here has been updated"
   },
   "upgrade_notification_changes_tooltip":{
-    "message":"Click to see the changes in this release",
+    "message":"Просмотреть изменения в текущей версии",
     "description":"Tooltip text on the link that opens the changes list"
   },
   "upgrade_notification_dismiss_tooltip":{
@@ -208,7 +208,7 @@
     "description":"one of the TeX math privacy concerns"
   },
   "options_page__tex_math_privacy_issue_2":{
-    "message":"If you customize the formula rendering tag, you should use a secure (https:\/\/) path. Not all rendering services provide a secure option.",
+    "message":"Если вы настраиваете тег рендеринга формул, следует использовать безопасный (https:\/\/) путь. Имейте в виду, что не все сервисы рендеринга обеспечивают безопасное подключение.",
     "description":"one of the TeX math privacy concerns"
   },
   "options_page__tex_math_customization_heading":{
@@ -216,7 +216,7 @@
     "description":"heading for customization and use info"
   },
   "options_page__tex_math_customization_1":{
-    "message":"If this feature is enabled, text between dollar signs — <code>$$<\/code> — will be interpreted as mathematical formulae. For example, <code>$$\\Delta$$<\/code> would be rendered as a delta symbol.",
+    "message":"Если эта функция включена, текст между знаками доллара — <code>$$<\/code> — будет интерпретироваться как математическая формула. Например, запись вида  <code>$$\\Delta$$<\/code> после рендеринга отобразит символ Дельта.",
     "description":"Note: Double dollar signs ($$) are necessary to get a single dollar sign."
   },
   "options_page__tex_math_customization_2":{
@@ -226,18 +226,18 @@
     "message":"Хороший ресурс для создания формул TeX — <a href=\"https:\/\/www.codecogs.com\/latex\/about.php\" target=\"_blank\"> Редактор формул CodeCogs<\/a>."
   },
   "options_page__tex_math_customization_4":{
-    "message":"Formulae are rendered to images, so email recipients will have to enable images to be shown to see the rendering."
+    "message":"Формулы после рендеринга отображаются как изображения. Чтобы увидеть их, получателям электронной почты нужно будет включить показ изображений."
   },
   "options_page__tex_math_customization_5":{
-    "message":"If you customize the rendering tag, you can (and should) use either or both of <code>{mathcode}<\/code> and <code>{urlmathcode}<\/code> as placeholders.",
+    "message":"При настройке тега рендеринга, следует использовать <code>{mathcode}<\/code> и\\или <code>{urlmathcode}<\/code> в качестве плейсхолдеров.",
     "description":"Please do not translate {mathcode} and {urlmathcode}"
   },
   "options_page__tex_math_customization_5_1":{
-    "message":"<code>{mathcode}<\/code>: The text between the <code>$$<\/code> symbols — i.e., the raw TeX formula; like <code>\\Delta<\/code>.",
+    "message":"<code>{mathcode}<\/code>: Текст между символами <code>$$<\/code>, то есть, например, исходный текст формулы в формате TeX. Пример: <code>\\Delta<\/code>.",
     "description":"Please do not translate {mathcode} and {urlmathcode}. Note: Double dollar signs ($$) are necessary to get a single dollar sign."
   },
   "options_page__tex_math_customization_5_2":{
-    "message":"<code>{urlmathcode}<\/code>: The URL-encoded form of the TeX formula; like <code>%5CDelta<\/code>.",
+    "message":"<code>{urlmathcode}<\/code>:  TeX формула в URL-кодировке; например <code>%5CDelta<\/code>.",
     "description":"Please do not translate {mathcode} and {urlmathcode}"
   },
   "options_page__tex_math_customization_6":{
@@ -284,11 +284,11 @@
     "message":"Чтобы отключить использование этой \"горячей\" клавиши, оставьте поле \"ключ\" пустым."
   },
   "options_page__advanced_title":{
-    "message":"Advanced and Miscellaneous",
+    "message":"Дополнительные настройки",
     "description":"A section title"
   },
   "options_page__forgot_to_render_label":{
-    "message":"<b>Enable \"forgot-to-render\" check.<\/b>",
+    "message":"<b>Включить проверку рендеринга.<\/b>",
     "description":"Label for the checkbox that enables the forgot-to-render feature"
   },
   "options_page__forgot_to_render_1":{
@@ -301,14 +301,14 @@
     "message":"If you find yourself disabling this, <em>please<\/em> let me know why and how it could be better. Create <a href=\"https:\/\/groups.google.com\/forum\/#!forum\/markdown-here\" target=\"_blank\">a post on the \"markdown-here\" Google Group<\/a> or <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/issues\" target=\"_blank\">an issue in the Github project<\/a>. Thanks."
   },
   "options_page__contributing_title":{
-    "message":"Contributing",
+    "message":"Помощь проекту",
     "description":"A section title"
   },
   "options_page__contributing_1":{
-    "message":"<strong>If you have ever put a code block into an email, then you can help make Markdown Here better.<\/strong> <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/blob\/master\/CONTRIBUTING.md\" target=\"_blank\">CONTRIBUTING.md<\/a>"
+    "message":"<strong>Если вам когда-либо доводилось отправлять часть кода по электронной почте, вы можете помочь сделать Markdown Here лучше.<\/strong> <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/blob\/development\/CONTRIBUTING.md\" target=\"_blank\">CONTRIBUTING.md<\/a>"
   },
   "options_page__contributing_2":{
-    "message":"Помощь в переводе Markdown Here на ваш язык. <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/blob\/master\/CONTRIBUTING.md#translation\" target=\"_blank\">горячо приветствуется.<\/a>"
+    "message":"Помощь в переводе Markdown Here на ваш язык. <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/blob\/development\/CONTRIBUTING.md#translation\" target=\"_blank\">горячо приветствуется.<\/a>"
   },
   "options_page__footer_1":{
     "message":"<em>Markdown Here<\/em> - проект с открытым исходным кодом. Задать вопрос, сообщить об ошибках, запросить функциональность  или иным образом посодействовать можно на <a target=\"_blank\" href=\"https:\/\/github.com\/adam-p\/markdown-here\">странице проекта на Github<\/a> или в <a target=\"_blank\" href=\"https:\/\/groups.google.com\/forum\/?fromgroups=#!forum\/markdown-here\">группе Google \"markdown here\"<\/a>.",
@@ -332,20 +332,20 @@
   },
   "new_changelist_items":{
     "message":"НОВОЕ",
-    "description":"Used to highlight the part of the changelist that is new"
+    "description":"Used to highlight the part of the changelist that is new. There will typically be multiple items in the list, so this should be considered plural."
   },
   "options_page__header_anchors_enabled_label":{
-    "message":"<b>Enable automatic header anchors.<\/b>",
+    "message":"<b>Автоматически создавать ссылки для заголовков<\/b>",
     "description":"Label for the checkbox that enables the automatic header anchors feature. This means that an 'anchor' is created at every heading (H1, H2, etc.) in the user's Markdown. The user can then create links that will jump to these anchors, like in the table of contents of a document."
   },
   "options_page__header_anchors_enabled_1":{
     "message":"Это очень удобно, если вы хотите поместить оглавление или другие внутренние ссылки в текст документа. <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/wiki\/Tips-and-Tricks#wiki-header-anchors\" target=\"_blank\"> узнать о том, как этим пользоваться в вики MDH.<\/a>"
   },
   "options_page__header_anchors_enabled_2":{
-    "message":"It's disabled by default because it <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/issues\/155\" target=\"_blank\">creates visual noise in Thunderbird<\/a>. (And most people probably won't use the feature.)"
+    "message":"Она отключена по умолчанию, потому что <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/issues\/155\" target=\"_blank\"> создает визуальный шум в Thunderbird<\/a>. Большинство пользователей, скорее всего, не будут использовать эту функцию."
   },
   "options_page__gfm_line_breaks_enabled_label":{
-    "message":"<b>Enable GFM line breaks.<\/b>",
+    "message":"<b>Перенос строк как в Github (GFM).<\/b>",
     "description":"Label for the checkbox that enables the support of 'Github-flavored Markdown' line breaks."
   }
 }

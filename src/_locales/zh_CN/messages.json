@@ -140,7 +140,7 @@
     "message":"如果你对Markdown Here的未来发展感兴趣, 查看 <a href=\"https:\/\/github.com\/adam-p\/markdown-here#next-steps\" target=\"_blank\">README的Next Steps部分<\/a>。"
   },
   "options_page__donate_plea_1":{
-    "message":"Once you decide Markdown Here is pretty sweet, please help me to buy some flowers for my wife so she's not too upset about how much time I spend working on it. <strong>Thank you!<\/strong>"
+    "message":"一旦你发现Markdown Here相当不错，请帮助我给我妻子买一些鲜花，这样她也不会为我在此花的大量工作而感到沮丧。 <strong>谢谢！<\/strong>"
   },
   "options_page__donate_plea_2":{
     "message":"<strong>帮助Markdown Here变的更好!<\/strong>"
@@ -149,7 +149,7 @@
     "message":"<strong>帮助支持Markdown Here的发展!<\/strong>"
   },
   "options_page__donate_plea_4":{
-    "message":"You know what makes it easier to keep Markdown Here working on Chrome, Firefox, Thunderbird, Postbox, Safari, Opera, Gmail, Yahoo, Hotmail, Blogger, Evernote, etc.? <strong>Coffee!<\/strong>"
+    "message":"你知道怎么让Markdown Here能够在Chrome，Firefox，Thunderbird，Postbox，Safari，Opera，Gmail，Yahoo，Hotmail，Blogger，Evernote等平台中工作吗？\n<strong>Coffee!<\/strong>"
   },
   "options_page__other_donation_options":{
     "message":"其它捐赠选项",
@@ -233,11 +233,11 @@
     "description":"Please do not translate {mathcode} and {urlmathcode}"
   },
   "options_page__tex_math_customization_5_1":{
-    "message":"<code>{mathcode}<\/code>: The text between the <code>$$<\/code> symbols — i.e., the raw TeX formula; like <code>\\Delta<\/code>.",
+    "message":"<code>{mathcode}<\/code>：位于 <code>$$<\/code> 之间的符号 — 即，原生的TeX公式；比如 <code>\\Delta<\/code>。",
     "description":"Please do not translate {mathcode} and {urlmathcode}. Note: Double dollar signs ($$) are necessary to get a single dollar sign."
   },
   "options_page__tex_math_customization_5_2":{
-    "message":"<code>{urlmathcode}<\/code>: The URL-encoded form of the TeX formula; like <code>%5CDelta<\/code>.",
+    "message":"<code>{urlmathcode}<\/code>：TeX共识的URL编码格式；比如 <code>%5CDelta<\/code>。",
     "description":"Please do not translate {mathcode} and {urlmathcode}"
   },
   "options_page__tex_math_customization_6":{
@@ -315,7 +315,7 @@
     "description":"part of the page footer text"
   },
   "options_page__footer_2":{
-    "message":"Created by <a target=\"_blank\" href=\"http:\/\/adam-p.github.com\/\">Adam Pritchard<\/a>.",
+    "message":"由<a target=\"_blank\" href=\"http:\/\/adam-p.github.com\/\">Adam Pritchard<\/a>创建。",
     "description":"part of the page footer text"
   },
   "options_page__changes_saved":{
@@ -332,7 +332,7 @@
   },
   "new_changelist_items":{
     "message":"NEW",
-    "description":"Used to highlight the part of the changelist that is new"
+    "description":"Used to highlight the part of the changelist that is new. There will typically be multiple items in the list, so this should be considered plural."
   },
   "options_page__header_anchors_enabled_label":{
     "message":"<b>自动设置标题锚点.<\/b>",

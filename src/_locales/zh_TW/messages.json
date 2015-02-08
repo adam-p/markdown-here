@@ -331,8 +331,8 @@
     "description":"Indicates the syntax highlighting theme that the user is currently using"
   },
   "new_changelist_items":{
-    "message":"NEW",
-    "description":"Used to highlight the part of the changelist that is new"
+    "message":"新",
+    "description":"Used to highlight the part of the changelist that is new. There will typically be multiple items in the list, so this should be considered plural."
   },
   "options_page__header_anchors_enabled_label":{
     "message":"<b>自動產生標題錨點。<\/b>",

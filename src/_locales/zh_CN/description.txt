@@ -3,21 +3,21 @@ Markdown Here允许你在发送电子邮件之前用Markdown语法编辑并转�
 这对于那些不喜欢在撰写电邮时反复摆弄排版按钮的人无疑是好消息。 它特别适合那些要在电子邮件中插入代码的程序员们 —— 没错，它甚至支持语法高亮显示。 对于我们之中的数学家们而言，Markdown Here也支持转换TeX公式。
 
 使用起来十分简易：
-1. 在你的电子邮箱客户端的富文本编辑栏(rich editor)中使用Github支持的Markdown。
-2. Right-click in the compose area and then click "Markdown Toggle".
-3. Your email is now pretty! (That is, it's been rendered to HTML.)
-4. If you like the way it looks, just send it. If you want to change or add something, click "Markdown Toggle" again to get back to your original Markdown.
-5. Repeat as necessary.
+1. 在你的电子邮箱客户端的富文本编辑器中使用Github风格的Markdown。
+2. 在编辑区右击然后选择 "Markdown Toggle"。
+3. 你的电子邮件现在看起来非常漂亮! (它已经被检测并转换为HTML格式)
+4. 如果你很满意这样的外观就直接发送吧。 如果你想更改或者添加些什么，再次点击 "Markdown Toggle" 可以返回到你原始的Markdown文本。
+5. 如有必要，重复以上步骤
 
-Markdown Here is primarily targeted to work with Gmail and Thunderbird, but it also works pretty well with Yahoo and Hotmail. Additionally, it works great with Google Groups and Sites, Evernote's web interface, Blogger, Wordpress, and more!
+Markdown Here 主要目标是为 Gmail 和 Thunderbird 服务， 但它也可以在 Yahoo 和 Hotmail 正常使用。 另外， 它在 Google Group 和一些网站中也可以出色使用，比如Evernote/印象笔记的网页版，Blogger，Wordpress等！
 
-Syntax highlighting note: Use fenced code blocks and specify the language name. See the project page for an example.
+语法高亮提示：使用fenced code blocks并指定代码语言。 可以参考项目页作为例子。
 
-Privacy: Markdown Here accesses and modifies web content when you activate it. It can, in theory, access other web content, but does not. It also makes no Internet requests whatsoever. Your data is modified when and where you choose, and does not leave your browser.
+隐私：当你激活Markdown Here时，它会获取和修改网页内容。 理论上它可以获取其他网页内容，但它不会这么做。 它也无论如何不会发起因特网请求。 只有你主动选择的指定范围的数据才会被修改，你的数据不会离开你的浏览器。
 
-Available as a Chrome, Firefox, Safari, Opera, and Thunderbird extension.
+可作为Chrome，Firefox，Safari，Opera和Thunderbird的扩展程序/附加组件。
 
-This is an open source project. Visit Markdown Here's Github page for full instructions, more information, bug reports, or to contribute.
+这是一个开源项目。 详细指导，更多信息，bug报告以及贡献，可以访问Markdown Here的Github页面。
 
 http://markdown-here.com
 https://github.com/adam-p/markdown-here
