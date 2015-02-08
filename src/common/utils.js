@@ -416,7 +416,7 @@ function fireMouseClick(elem) {
   var clickEvent = elem.ownerDocument.createEvent('MouseEvent');
   clickEvent.initMouseEvent(
     'click',
-    false,                          // bubbles: We want to target this element and do not want the event to bubble.
+    true,                           // bubbles: We want the event to bubble.
     true,                           // cancelable
     elem.ownerDocument.defaultView, // view,
     1,                              // detail,

@@ -122,6 +122,19 @@ var ESCAPE_KEYCODE = 27;
 
 var WATCHED_PROPERTY = 'markdownHereForgotToRenderWatched';
 
+// Returns the correct selector to use when looking for the Send button. 
+// Returns null if forgot-to-render should not be used here.
+function getForgotToRenderButtonSelector(elem) {
+  if (elem.ownerDocument.location.host.indexOf('mail.google.') >= 0) {
+    return '[role="button"][tabindex="1"]';
+  }
+  else if (elem.ownerDocument.location.host.indexOf('inbox.google.') >= 0) {
+    return '[role="button"][tabindex="0"]';
+  }
+
+  return null;
+}
+
 
 // This function encapsulates the logic required to prevent accidental sending
 // of email that the user wrote in Markdown but forgot to render.
@@ -141,10 +154,10 @@ function forgotToRenderIntervalCheck(focusedElem, MarkdownHere, MdhHtmlToText, m
       * For now we're going to ignore the "or subject field" part.
   */
 
-  // There is only logic for GMail (so far)
-  if (focusedElem.ownerDocument.location.host.indexOf('mail.google.') < 0) {
-    debugLog('forgotToRenderIntervalCheck', 'not Gmail');
-    return;
+  var forgotToRenderButtonSelector = getForgotToRenderButtonSelector(focusedElem);
+  if (!forgotToRenderButtonSelector) {
+    debugLog('forgotToRenderIntervalCheck', 'not supported');
+    return;    
   }
 
   // If focus isn't in the compose body, there's nothing to do
@@ -175,9 +188,15 @@ function findClosestSendButton(elem) {
   // div in the latter. That means that sometimes we'll be crossing iframe
   // boundaries and sometimes we won't.
 
+  var forgotToRenderButtonSelector = getForgotToRenderButtonSelector(elem);
+  // If we're in this function, this should not non-null, but...
+  if (!forgotToRenderButtonSelector) {
+    return null;
+  }
+
   var sendButton = null;
   while (elem.parentNode && elem.parentNode.nodeType === elem.ELEMENT_NODE) {
-    sendButton = elem.parentNode.querySelector('[role="button"][tabindex="1"]');
+    sendButton = elem.parentNode.querySelector(forgotToRenderButtonSelector);
     if (sendButton) {
       debugLog('findClosestSendButton', 'found');
       return sendButton;

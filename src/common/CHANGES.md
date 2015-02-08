@@ -7,6 +7,7 @@ Change Log
 * [Fixed bug #233](https://github.com/adam-p/markdown-here/issues/233): Reference links were broken if the URL part was pre-formatted.
   - Big thanks to [Meng Wang](https://github.com/wm8120) for finding this bug, fixing it, adding tests, and submitting a [pull request](https://github.com/adam-p/markdown-here/pull/232).
 
+* Added forgot-to-render check support for "Inbox by Google".
 
 2014-11-10: v2.11.3
 -------------------
