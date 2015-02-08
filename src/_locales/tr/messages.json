@@ -305,10 +305,10 @@
     "description":"A section title"
   },
   "options_page__contributing_1":{
-    "message":"<strong>If you have ever put a code block into an email, then you can help make Markdown Here better.<\/strong> <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/blob\/development\/CONTRIBUTING.md\" target=\"_blank\">CONTRIBUTING.md<\/a>"
+    "message":"<strong>If you have ever put a code block into an email, then you can help make Markdown Here better.<\/strong> <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/blob\/master\/CONTRIBUTING.md\" target=\"_blank\">CONTRIBUTING.md<\/a>"
   },
   "options_page__contributing_2":{
-    "message":"Markdown Here 'yi kendi dilinde kullanılabilir olması için yardımcı ol. <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/blob\/development\/CONTRIBUTING.md#translation\" target=\"_blank\">Çevirilerinizi Bekleriz..<\/a>"
+    "message":"Markdown Here 'yi kendi dilinde kullanılabilir olması için yardımcı ol. <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/blob\/master\/CONTRIBUTING.md#translation\" target=\"_blank\">Çevirilerinizi Bekleriz..<\/a>"
   },
   "options_page__footer_1":{
     "message":"<em>Markdown Here<\/em> açık kaynaktır.Soru sormak, hata raporu yollamak, yeni özellik istekleri ya da katkıda bulunmak için,   <a target=\"_blank\" href=\"https:\/\/github.com\/adam-p\/markdown-here\">Github proje sayfamızı<\/a> yada <a target=\"_blank\" href=\"https:\/\/groups.google.com\/forum\/?fromgroups=#!forum\/markdown-here\">\"markdown-here\" Google Grubumuzu<\/a> ziyaret edin. ",

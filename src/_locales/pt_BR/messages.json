@@ -305,10 +305,10 @@
     "description":"A section title"
   },
   "options_page__contributing_1":{
-    "message":"<strong>Se alguma vez você escreveu um bloco de código em um e-mail, então você já pode ajudar a melhorar o Markdown Here.<\/strong> <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/blob\/development\/CONTRIBUTING.md\" target=\"_blank\">CONTRIBUTING.md<\/a>"
+    "message":"<strong>Se alguma vez você escreveu um bloco de código em um e-mail, então você já pode ajudar a melhorar o Markdown Here.<\/strong> <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/blob\/master\/CONTRIBUTING.md\" target=\"_blank\">CONTRIBUTING.md<\/a>"
   },
   "options_page__contributing_2":{
-    "message":"Ajude a tornar o Markdown Here disponível no seu idioma. <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/blob\/development\/CONTRIBUTING.md#translation\" target=\"_blank\">Traduções são bem vindas<\/a>."
+    "message":"Ajude a tornar o Markdown Here disponível no seu idioma. <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/blob\/master\/CONTRIBUTING.md#translation\" target=\"_blank\">Traduções são bem vindas<\/a>."
   },
   "options_page__footer_1":{
     "message":"<em>Markdown Here<\/em> é código livre. Para perguntar, informar bugs, solicitar recursos, ou contribuir, visite a <a target=\"_blank\" href=\"https:\/\/github.com\/adam-p\/markdown-here\">página do projeto Github<\/a> ou o <a target=\"_blank\" href=\"https:\/\/groups.google.com\/forum\/?fromgroups=#!forum\/markdown-here\">Google Group \"markdown-here\"<\/a>.",

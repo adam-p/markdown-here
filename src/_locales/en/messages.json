@@ -305,10 +305,10 @@
     "description": "A section title"
   },
   "options_page__contributing_1": {
-    "message": "<strong>If you have ever put a code block into an email, then you can help make Markdown Here better.</strong> <a href=\"https://github.com/adam-p/markdown-here/blob/development/CONTRIBUTING.md\" target=\"_blank\">CONTRIBUTING.md</a>"
+    "message": "<strong>If you have ever put a code block into an email, then you can help make Markdown Here better.</strong> <a href=\"https://github.com/adam-p/markdown-here/blob/master/CONTRIBUTING.md\" target=\"_blank\">CONTRIBUTING.md</a>"
   },
   "options_page__contributing_2": {
-    "message": "Help make Markdown Here available in your language. <a href=\"https://github.com/adam-p/markdown-here/blob/development/CONTRIBUTING.md#translation\" target=\"_blank\">Translations are welcome.</a>"
+    "message": "Help make Markdown Here available in your language. <a href=\"https://github.com/adam-p/markdown-here/blob/master/CONTRIBUTING.md#translation\" target=\"_blank\">Translations are welcome.</a>"
   },
   "options_page__footer_1": {
     "message": "<em>Markdown Here</em> is open source. To ask questions, report bugs, request features, or contribute, visit the <a target=\"_blank\" href=\"https://github.com/adam-p/markdown-here\">Github project page</a> or the <a target=\"_blank\" href=\"https://groups.google.com/forum/?fromgroups=#!forum/markdown-here\">\"markdown-here\" Google Group</a>.",

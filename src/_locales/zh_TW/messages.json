@@ -305,10 +305,10 @@
     "description":"A section title"
   },
   "options_page__contributing_1":{
-    "message":"<strong>如果你曾經在電子郵件上使用程式碼區塊，你就可以幫助Markdown Here做的更好.<\/strong> <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/blob\/development\/CONTRIBUTING.md\" target=\"_blank\">CONTRIBUTING.md<\/a>"
+    "message":"<strong>如果你曾經在電子郵件上使用程式碼區塊，你就可以幫助Markdown Here做的更好.<\/strong> <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/blob\/master\/CONTRIBUTING.md\" target=\"_blank\">CONTRIBUTING.md<\/a>"
   },
   "options_page__contributing_2":{
-    "message":"幫助翻譯Markdown Here。<a href=\"https:\/\/github.com\/adam-p\/markdown-here\/blob\/development\/CONTRIBUTING.md#translation\" target=\"_blank\">歡迎翻譯。<\/a>"
+    "message":"幫助翻譯Markdown Here。<a href=\"https:\/\/github.com\/adam-p\/markdown-here\/blob\/master\/CONTRIBUTING.md#translation\" target=\"_blank\">歡迎翻譯。<\/a>"
   },
   "options_page__footer_1":{
     "message":"<em>Markdown Here<\/em> 是開源的。要詢問，回報錯誤，請求新功能，或參與開發，請見<a target=\"_blank\" href=\"https:\/\/github.com\/adam-p\/markdown-here\">Github專案首頁<\/a>或<a target=\"_blank\" href=\"https:\/\/groups.google.com\/forum\/?fromgroups=#!forum\/markdown-here\">\"markdown-here\" Google Group<\/a>.",
