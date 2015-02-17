@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "__MSG_app_name__",
-  "version": "2.11.3",
+  "version": "2.11.4",
   "description": "__MSG_app_slogan__",
   "homepage_url": "http://markdown-here.com",
   "minimum_chrome_version": "6",

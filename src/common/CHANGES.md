@@ -1,7 +1,10 @@
 Change Log
 ==========
 
-2015-02-xx: v2.11.4
+**Hey you guys!** [Please vote in a poll](https://goo.gl/forms/kBSUY1jvDZ) about whether or not Markdown Here should get a new logo. **Thanks!**
+
+
+2015-02-16: v2.11.4
 -------------------
 
 * [Fixed bug #233](https://github.com/adam-p/markdown-here/issues/233): Reference links were broken if the URL part was pre-formatted.
