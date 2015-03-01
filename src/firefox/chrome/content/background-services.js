@@ -128,19 +128,33 @@ true); // wantsUntrusted -- needed for communication with content scripts
 
 // Access the actual Firefox/Thunderbird stored prefs.
 function prefsAccessRequestHandler(request) {
-  var prefs, prefKeys, prefsObj, i;
+  var extPrefsBranch, supportString, prefKeys, prefsObj, i;
 
-  prefs = Components.classes['@mozilla.org/preferences-service;1']
-                    .getService(Components.interfaces.nsIPrefService)
-                    .getBranch('extensions.markdown-here.');
+  extPrefsBranch = Components.classes['@mozilla.org/preferences-service;1']
+                             .getService(Components.interfaces.nsIPrefService)
+                             .getBranch('extensions.markdown-here.');
+  supportString = Components.classes["@mozilla.org/supports-string;1"]
+                            .createInstance(Components.interfaces.nsISupportsString);
 
   if (request.verb === 'get') {
-    prefKeys = prefs.getChildList('');
+    prefKeys = extPrefsBranch.getChildList('');
     prefsObj = {};
 
     for (i = 0; i < prefKeys.length; i++) {
+      // All of our legitimate prefs should be strings, but issue #237 suggests
+      // that things may sometimes get into a bad state. We will check and delete
+      // and prefs that aren't strings.
+      // https://github.com/adam-p/markdown-here/issues/237
+      if (extPrefsBranch.getPrefType(prefKeys[i]) !== extPrefsBranch.PREF_STRING) {
+        extPrefsBranch.clearUserPref(prefKeys[i]);
+        continue;
+      }
+
       try {
-        prefsObj[prefKeys[i]] = JSON.parse(prefs.getCharPref(prefKeys[i]));
+        prefsObj[prefKeys[i]] = JSON.parse(
+                                  extPrefsBranch.getComplexValue(
+                                    prefKeys[i],
+                                    Components.interfaces.nsISupportsString).data);
       }
       catch(e) {
         // Null values and empty strings will result in JSON exceptions
@@ -152,7 +166,11 @@ function prefsAccessRequestHandler(request) {
   }
   else if (request.verb === 'set') {
     for (var key in request.obj) {
-      prefs.setCharPref(key, JSON.stringify(request.obj[key]));
+      supportString.data = JSON.stringify(request.obj[key]);
+      extPrefsBranch.setComplexValue(
+        key,
+        Components.interfaces.nsISupportsString,
+        supportString);
     }
 
     return;
@@ -163,7 +181,7 @@ function prefsAccessRequestHandler(request) {
     }
 
     for (i = 0; i < request.obj.length; i++) {
-      prefs.clearUserPref(request.obj[i]);
+      extPrefsBranch.clearUserPref(request.obj[i]);
     }
 
     return;
@@ -200,49 +218,51 @@ catch (ex) {
 }
 
 function updateHandler(currVer) {
-
-  // I don't know why, but getting the extension prefs -- like last-version
-  // -- doesn't seem to work when using prefsServ and providing the full pref
-  // name. So we need to use prefsServ to set the sync options and prefsBranch
-  // to get and set the extension options.
-  var prefsServ = Components.classes['@mozilla.org/preferences-service;1']
-                            .getService(Components.interfaces.nsIPrefBranch);
-  var prefsBranch = prefsServ.getBranch('extensions.markdown-here.');
-
+  var prefService = Components.classes['@mozilla.org/preferences-service;1']
+                              .getService(Components.interfaces.nsIPrefService);
+  var extPrefsBranch = prefService.getBranch('extensions.markdown-here.');
+  var extSyncBranch = prefService.getBranch('services.sync.prefs.sync.extensions.markdown-here.');
+  var supportString = Components.classes["@mozilla.org/supports-string;1"]
+                                .createInstance(Components.interfaces.nsISupportsString);
 
   var lastVersion = '';
   try {
-    lastVersion = JSON.parse(prefsBranch.getCharPref('last-version'));
+    lastVersion = JSON.parse(
+                    extPrefsBranch.getComplexValue(
+                      'last-version',
+                      Components.interfaces.nsISupportsString).data);
   }
   catch (ex) {
   }
 
-  var localFirstRun = false;
-  try {
-    // No need to assign this to anything. It shouldn't exist on first run.
-    JSON.parse(prefsBranch.getCharPref('local-first-run'));
-  }
-  catch (ex) {
-    // It's only the first run if the above throws.
-    localFirstRun = true;
-  }
+  // The presence of this pref indicates that it's not the first run.
+  var localFirstRun = !extPrefsBranch.prefHasUserValue('local-first-run');
 
-  prefsBranch.setCharPref('local-first-run', JSON.stringify(localFirstRun));
+  supportString.data = JSON.stringify(false);
+  extPrefsBranch.setComplexValue(
+    'local-first-run',
+    Components.interfaces.nsISupportsString,
+    supportString);
 
   if (currVer !== lastVersion) {
-    prefsBranch.setCharPref('last-version', JSON.stringify(currVer));
+    supportString.data = JSON.stringify(currVer);
+    extPrefsBranch.setComplexValue(
+      'last-version',
+      Components.interfaces.nsISupportsString,
+      supportString);
 
-    // Set the sync flags while we're at it.
-    prefsServ.setBoolPref('services.sync.prefs.sync.extensions.markdown-here.main-css', true);
-    prefsServ.setBoolPref('services.sync.prefs.sync.extensions.markdown-here.syntax-css', true);
-    prefsServ.setBoolPref('services.sync.prefs.sync.extensions.markdown-here.last-version', true);
-    prefsServ.setBoolPref('services.sync.prefs.sync.extensions.markdown-here.math-enabled', true);
-    prefsServ.setBoolPref('services.sync.prefs.sync.extensions.markdown-here.math-value', true);
-    prefsServ.setBoolPref('services.sync.prefs.sync.extensions.markdown-here.hotkey', true);
-    prefsServ.setBoolPref('services.sync.prefs.sync.extensions.markdown-here.forgot-to-render-check-enabled', true);
+    // Set the preference sync flags while we're at it.
 
-    // Don't sync this one -- local only.
-    prefsServ.setBoolPref('services.sync.prefs.sync.extensions.markdown-here.local-first-run', false);
+    // First our user-level prefs
+    for (var key in imports.OptionsStore.defaults) {
+      extSyncBranch.setBoolPref(key, true);
+    }
+
+    // last-version isn't a user pref but should also be synched.
+    extSyncBranch.setBoolPref('last-version', true);
+
+    // local-first-run should not be synched, as it only applies locally.
+    extSyncBranch.setBoolPref('local-first-run', false);
 
     // This is a bit dirty. If we open the new tab immediately, it will get
     // overwritten when session restore starts creating tabs. So we'll wait a

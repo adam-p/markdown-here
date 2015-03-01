@@ -293,19 +293,39 @@ var MozillaOptionsStore = {
   // directly. Unfortunately, this means duplicating some code from the background
   // service.
   _sendRequest: function(data, callback) { // analogue of chrome.extension.sendMessage
-    var prefs, prefKeys, prefsObj, request, sender, i;
+    var extPrefsBranch, supportString, prefKeys, prefsObj, request, sender, i;
 
     try {
-      prefs = window.Components.classes['@mozilla.org/preferences-service;1']
-                          .getService(Components.interfaces.nsIPrefService)
-                          .getBranch('extensions.markdown-here.');
+      extPrefsBranch = window.Components.classes['@mozilla.org/preferences-service;1']
+                             .getService(Components.interfaces.nsIPrefService)
+                             .getBranch('extensions.markdown-here.');
+      supportString = Components.classes["@mozilla.org/supports-string;1"]
+                                .createInstance(Components.interfaces.nsISupportsString);
 
       if (data.verb === 'get') {
-        prefKeys = prefs.getChildList('');
+        prefKeys = extPrefsBranch.getChildList('');
         prefsObj = {};
 
         for (i = 0; i < prefKeys.length; i++) {
-          prefsObj[prefKeys[i]] = window.JSON.parse(prefs.getCharPref(prefKeys[i]));
+          // All of our legitimate prefs should be strings, but issue #237 suggests
+          // that things may sometimes get into a bad state. We will check and delete
+          // and prefs that aren't strings.
+          // https://github.com/adam-p/markdown-here/issues/237
+          if (extPrefsBranch.getPrefType(prefKeys[i]) !== extPrefsBranch.PREF_STRING) {
+            extPrefsBranch.clearUserPref(prefKeys[i]);
+            continue;
+          }
+
+          try {
+            prefsObj[prefKeys[i]] = window.JSON.parse(
+                                      extPrefsBranch.getComplexValue(
+                                        prefKeys[i],
+                                        Components.interfaces.nsISupportsString).data);
+          }
+          catch(e) {
+            // Null values and empty strings will result in JSON exceptions
+            prefsObj[prefKeys[i]] = null;
+          }
         }
 
         callback(prefsObj);
@@ -313,7 +333,11 @@ var MozillaOptionsStore = {
       }
       else if (data.verb === 'set') {
         for (i in data.obj) {
-          prefs.setCharPref(i, window.JSON.stringify(data.obj[i]));
+          supportString.data = window.JSON.stringify(data.obj[i]);
+          extPrefsBranch.setComplexValue(
+            i,
+            Components.interfaces.nsISupportsString,
+            supportString);
         }
 
         if (callback) callback();
@@ -325,7 +349,7 @@ var MozillaOptionsStore = {
         }
 
         for (i = 0; i < data.obj.length; i++) {
-          prefs.clearUserPref(data.obj[i]);
+          extPrefsBranch.clearUserPref(data.obj[i]);
         }
 
         if (callback) return callback();
