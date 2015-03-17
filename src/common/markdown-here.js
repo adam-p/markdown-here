@@ -155,16 +155,21 @@ function getOperationalRange(focusedElem) {
 // exclusion code. But I'm not sure how to find the sig as well without being
 // able to traverse the DOM. (Surely with regexes and parsing... someday.)
 function findSignatureStart(startElem) {
-  var i, child, recurseReturn, sig;
+  var i, child, recurseReturn, sig, gmailSig;
 
   sig = null;
+  
+  // All Gmail sigs are given "gmail_signature" class - check for this first
+  gmailSig = startElem.getElementsByClassName('gmail_signature');
+  if(gmailSig.length === 1)
+    return gmailSig[0];
 
   for (i = 0; i < startElem.childNodes.length; i++) {
     child = startElem.childNodes[i];
     if (child.nodeType === child.TEXT_NODE) {
       // Thunderbird wraps the sig in a `<pre>`, so there's a newline.
       // Hand-written sigs (including Hotmail and Yahoo) are `'--&nbsp;'` (aka \u00a0).
-      // Gmail auto-inserted sigs are `'-- '` (plain space).
+      // Gmail auto-inserted sigs are `'-- '` (plain space)
       if (child.nodeValue.search(/^--[\s\u00a0]+(\n|$)/) === 0) {
 
         // Assume that the entire parent element belongs to the sig only if the
