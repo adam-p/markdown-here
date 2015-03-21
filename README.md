@@ -146,102 +146,16 @@ For Chrome and Firefox, any changes made in the *Markdown Here* Options are auto
 
 ![screenshot of options](https://raw.githubusercontent.com/adam-p/markdown-here/master/store-assets/markdown-here-chrome-options-1.gimp.png)
 
+
 ## Troubleshooting
 
-Here are some common problems that people run into.
+See the [Troubleshooting wiki page](https://github.com/adam-p/markdown-here/wiki/Troubleshooting).
 
-<dl>
-  <dt>Chrome/Firefox/Safari/Opera/Thunderbird: I just installed <em>Markdown Here</em> and the context menu item isn't showing up.</dt>
-  <dd>Make sure you restarted Firefox or Thunderbird, and either restarted Chrome/Safari/Opera or reloaded your webmail page.</dd>
-</dl>
 
 ## Compatibility
 
-Short answer: Gmail and Thunderbird are great. More info about some clients can be found [in the wiki](https://github.com/adam-p/markdown-here/wiki/Compatibility).
+See the [Compatibility wiki page](https://github.com/adam-p/markdown-here/wiki/Compatibility).
 
-<table>
-  <tr>
-    <th></th>
-    <th>Compose</th>
-    <th>Send</th>
-    <th>Receive</th>
-    <th>Notes</th>
-  </tr>
-  <tr>
-    <th>Gmail</th>
-    <td>&#x2713;</td>
-    <td>&#x2713;</td>
-    <td>&#x2713;</td>
-    <td></td>
-  </tr>
-  <tr>
-    <th>Thunderbird</th>
-    <td>&#x2713;</td>
-    <td>&#x2713;</td>
-    <td>&#x2713;</td>
-    <td></td>
-  </tr>
-  <tr>
-    <th>Hotmail</th>
-    <td>&#x2713;</td>
-    <td>&#x2713;</td>
-    <td>
-      Email received from Yahoo does not display with properly separated paragraphs. (Hotmail strips styling off <code>&lt;p&gt;</code> and <code>&lt;div&gt;</code> tags, and Yahoo uses the latter for paragraphs.)
-    </td>
-    <td>No reply exclusion. No forgot-to-render detection.</td>
-  </tr>
-  <tr>
-    <th>Yahoo</th>
-    <td>&#x2713;</td>
-    <td>&#x2713;</td>
-    <td>&#x2713;</td>
-    <td>No reply exclusion. No forgot-to-render detection.</td>
-  </tr>
-  <tr>
-    <th>Google Groups</th>
-    <td>&#x2713;</td>
-    <td>&#x2713;</td>
-    <td>&#x2713;</td>
-    <td>Rendered version doesn't show in digest email, but that's probably true of manually-rich-edited posts as well. No forgot-to-render detection.</td>
-  </tr>
-  <tr>
-    <th>Evernote (web interface)</th>
-    <td>&#x2713;</td>
-    <td>&#x2713;</td>
-    <td>&#x2713;</td>
-    <td></td>
-  </tr>
-  <tr>
-    <th>Blogger</th>
-    <td>&#x2713;</td>
-    <td>&#x2713;</td>
-    <td>&#x2713;</td>
-    <td></td>
-  </tr>
-  <tr>
-    <th>Wordpress</th>
-    <td>Inline code displays in non-monospace font, but is correct in preview and final post.</td>
-    <td>&#x2713;</td>
-    <td>&#x2713;</td>
-    <td>See the <a href="https://github.com/adam-p/markdown-here/wiki/Compatibility#wordpress">Compatibility wiki page</a> for full details and tips</td>
-  </tr>
-  <tr>
-    <th>Postbox</th>
-    <td>&#x2713;</td>
-    <td>Inserts newlines in raw email, which can mess up code blocks.</td>
-    <td>&#x2713;</td>
-    <td>No options page. No reply exclusion.</td>
-  </tr>
-</table>
-
-*Compose*
-> How *Markdown Here* behaves when composing an email. E.g., if rendering and reverting looks correct, styling is good, etc.
-
-*Send*
-> Negative effect that may occur when sending a rendered email from this email client. E.g., stripped tags and styles.
-
-*Receive*
-> How well this email client displays rendered email that it receives (assuming the sender is perfect).
 
 ## Notes and Miscellaneous
 
