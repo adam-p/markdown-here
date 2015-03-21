@@ -11,6 +11,10 @@ Change Log
   - **Note**: In order to get this styling change, you will need to [reset your Primary Styling CSS](https://github.com/adam-p/markdown-here/wiki/Troubleshooting#getting-the-latest-primary-styling-css).
   - Thanks to [James F McMahon](https://github.com/JamesMcMahon) for reporting the issue.
 
+* Changed styling of sub-ordered-lists to match Github's: Top level is still numbers, first sub level is Roman letters, second sub level is Roman numerals. Will make your email lists look totally pro. 
+  - **Note**: In order to get this styling change, you will need to [reset your Primary Styling CSS](https://github.com/adam-p/markdown-here/wiki/Troubleshooting#getting-the-latest-primary-styling-css).
+  - Thanks to [Andrew Greenberg](https://github.com/wizardwerdna) for [pointing out](https://github.com/adam-p/markdown-here/issues/255) Github's styling, and an unnamed user in a [Google Groups post](https://groups.google.com/forum/#!topic/markdown-here/E-5tSHCAlpg) who also asked about list styling.
+
 * [Fixed bug #237](https://github.com/adam-p/markdown-here/issues/237): Made Mozilla preferences handling more robust. Helps to deal with non-ANSI characters, synchronization, and corruption. 
   - Thanks to [flying-sheep](https://github.com/flying-sheep) for reporting the corruption problem and helping to diagnose it.
 
