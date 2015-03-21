@@ -20,7 +20,7 @@ var DEFAULTS = {
   'math-enabled': true,
   'math-value': '<img src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}" alt="{mathcode}">',
   'hotkey': { shiftKey: false, ctrlKey: true, altKey: true, key: 'M' },
-  'forgot-to-render-check-enabled': true,
+  'forgot-to-render-check-enabled': false,
   'header-anchors-enabled': false,
   'gfm-line-breaks-enabled': true
 };
