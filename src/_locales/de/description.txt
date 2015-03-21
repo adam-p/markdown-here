@@ -7,13 +7,13 @@ Ganz einfach zu benutzen:
 2. Rechtsklick im Schreibbereich, dann auf "Markdown rendern".
 3. Die E-Mail erscheint jetzt in schönem Typsatz. (Bedeutet, sie ist als HTML gerendert.)
 4. Wenn alles gut aussieht – versenden! Wenn noch etwas geändert oder hinzugefügt werden muss, nochmal auf den "Markdown"–Knopf klicken um zurück zum Markdown-Code zu kommen.
-5. Repeat as necessary.
+5. Bei Bedarf wiederholen.
 
 Markdown Here ist vor allem für Gmail oder Thunderbird konzipiert, aber es funktioniert auch ganz gut mit Yahoo und Hotmail. Außerdem funktioniert es großartig mit Google Groups und Sites, dem Evernote–Web-Interface, Blogger, Wordpress, und mehr!
 
-Syntax highlighting note: Use fenced code blocks and specify the language name. Siehe Projektseite für ein Beispiel.
+Hinweis zum Syntax-Highlighting: Nutzen Sie "fenced code blocks" und definieren Sie die Sprache. Siehe Projektseite für ein Beispiel.
 
-Privacy: Markdown Here accesses and modifies web content when you activate it. Theoretisch könnte es auf andere Web-Inhalte zugreifen, tut dies aber nicht. It also makes no Internet requests whatsoever. Your data is modified when and where you choose, and does not leave your browser.
+Datenschutz: Markdown Here greift auf Webinhalte zurück und verändert diese, wenn Sie es aktivieren. Theoretisch könnte es auf andere Web-Inhalte zugreifen, tut dies aber nicht. Es macht auch keine Internet-Abfragen jeglicher Art. Die Nutzerinhalte werden nur auf Nutzerkommando bearbeitet und verlassen nicht der Browser.
 
 Verfügbar als Erweiterung für Chrome, Firefox, Safari, Opera, und Thunderbird.
 

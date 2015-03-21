@@ -1,0 +1,8 @@
+<!ENTITY app_name "Markdown Here">
+<!ENTITY context_menu_item "Commuta Markdown">
+<!ENTITY context_menu_item_shortcut "k">
+<!ENTITY forgot_to_render_back_button "Indietro">
+<!ENTITY forgot_to_render_send_button "Invia">
+<!ENTITY toggle_button_text "Commuta MD">
+<!ENTITY toggle_button_tooltip "Clicca per commutare la trasformazione Markdown">
+<!ENTITY toggle_button_tooltip_disabled "Il campo selezionato non è valido per la trasformazione Markdown">

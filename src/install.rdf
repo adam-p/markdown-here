@@ -73,6 +73,14 @@
 
         <em:localized>
           <Description>
+            <em:locale>it</em:locale>
+            <em:name>Markdown Here</em:name>
+            <em:description>Scrivi la tua email in Markdown, quindi rendila bella.</em:description>
+          </Description>
+        </em:localized>
+
+        <em:localized>
+          <Description>
             <em:locale>ja</em:locale>
             <em:name>Markdown Here</em:name>
             <em:description>Markdownで電子メールを美しく</em:description>

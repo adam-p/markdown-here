@@ -78,3 +78,11 @@ If you do make any translation changes, or if you have any questions or problems
 * [trblnc](https://crowdin.com/profile/trblnc)
 
 * [Liu Cheng](https://crowdin.com/profile/willowcheng)
+
+* [Andrea Lazzarotto](https://crowdin.com/profile/Lazza)
+
+* [H. Salah Eddine](https://crowdin.com/profile/jamesconception)
+
+* [Yahya Erturan](https://crowdin.com/profile/yahyaerturan)
+
+* [Boris Lewandowski](https://crowdin.com/profile/bl)

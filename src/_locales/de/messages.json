@@ -79,7 +79,7 @@
     "description":"Text on the notification shown when Markdown Here has been updated"
   },
   "upgrade_notification_changes_tooltip":{
-    "message":"Click to see the changes in this release",
+    "message":"Anklicken um Änderungen in dieser Version zu sehen",
     "description":"Tooltip text on the link that opens the changes list"
   },
   "upgrade_notification_dismiss_tooltip":{
@@ -332,7 +332,7 @@
   },
   "new_changelist_items":{
     "message":"NEU",
-    "description":"Used to highlight the part of the changelist that is new"
+    "description":"Used to highlight the part of the changelist that is new. There will typically be multiple items in the list, so this should be considered plural."
   },
   "options_page__header_anchors_enabled_label":{
     "message":"<b>Aktiviere automatische Header-Anker.<\/b>",
@@ -345,7 +345,7 @@
     "message":"Dies ist standardmäßig deaktiviert weil es <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/issues\/155\" target=\"_blank\">in Thunderbird visuell ablenkt<\/a>. (Und die meisten Leute benutzen dieses Feature wahrscheinlich nicht.)"
   },
   "options_page__gfm_line_breaks_enabled_label":{
-    "message":"<b>Enable GFM line breaks.<\/b>",
+    "message":"<b>Aktivieren der GFM Zeilenumbrüche.<\/b>",
     "description":"Label for the checkbox that enables the support of 'Github-flavored Markdown' line breaks."
   }
 }
