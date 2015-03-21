@@ -39,6 +39,16 @@ if (typeof(Utils) === 'undefined' && typeof(Components) !== 'undefined') {
   scriptLoader.loadSubScript('resource://markdown_here_common/utils.js');
 }
 
+// Common defaults
+var DEFAULTS = {
+  'math-enabled': true,
+  'math-value': '<img class="mdh-math" src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}" alt="{mathcode}">',
+  'hotkey': { shiftKey: false, ctrlKey: true, altKey: true, key: 'M' },
+  'forgot-to-render-check-enabled': true,
+  'header-anchors-enabled': false,
+  'gfm-line-breaks-enabled': true
+};
+
 
 var ChromeOptionsStore = {
 
@@ -116,12 +126,12 @@ var ChromeOptionsStore = {
   defaults: {
     'main-css': {'__defaultFromFile__': '/common/default.css', '__mimeType__': 'text/css'},
     'syntax-css': {'__defaultFromFile__': '/common/highlightjs/styles/github.css', '__mimeType__': 'text/css'},
-    'math-enabled': true,
-    'math-value': '<img src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}" alt="{mathcode}">',
-    'hotkey': { shiftKey: false, ctrlKey: true, altKey: true, key: 'M' },
-    'forgot-to-render-check-enabled': true,
-    'header-anchors-enabled': false,
-    'gfm-line-breaks-enabled': true
+    'math-enabled': DEFAULTS['math-enabled'],
+    'math-value': DEFAULTS['math-value'],
+    'hotkey': DEFAULTS['hotkey'],
+    'forgot-to-render-check-enabled': DEFAULTS['forgot-to-render-check-enabled'],
+    'header-anchors-enabled': DEFAULTS['header-anchors-enabled'],
+    'gfm-line-breaks-enabled': DEFAULTS['gfm-line-breaks-enabled']
   },
 
   // Stored string pieces look like: {'key##0': 'the quick ', 'key##1': 'brown fox'}
@@ -275,15 +285,15 @@ var MozillaOptionsStore = {
 
   // The default values or URLs for our various options.
   defaults: {
+    'local-first-run': true,
     'main-css': {'__defaultFromFile__': 'resource://markdown_here_common/default.css', '__mimeType__': 'text/css'},
     'syntax-css': {'__defaultFromFile__': 'resource://markdown_here_common/highlightjs/styles/github.css', '__mimeType__': 'text/css'},
-    'math-enabled': true,
-    'math-value': '<img src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}" alt="{mathcode}">',
-    'hotkey': { shiftKey: false, ctrlKey: true, altKey: true, key: 'M' },
-    'local-first-run': true,
-    'forgot-to-render-check-enabled': true,
-    'header-anchors-enabled': false,
-    'gfm-line-breaks-enabled': true
+    'math-enabled': DEFAULTS['math-enabled'],
+    'math-value': DEFAULTS['math-value'],
+    'hotkey': DEFAULTS['hotkey'],
+    'forgot-to-render-check-enabled': DEFAULTS['forgot-to-render-check-enabled'],
+    'header-anchors-enabled': DEFAULTS['header-anchors-enabled'],
+    'gfm-line-breaks-enabled': DEFAULTS['gfm-line-breaks-enabled']
   },
 
   // This is called both from content and background scripts, and we need vastly
@@ -468,12 +478,12 @@ var SafariOptionsStore = {
   defaults: {
     'main-css': {'__defaultFromFile__': (typeof(safari) !== 'undefined' ? safari.extension.baseURI : '')+'markdown-here/src/common/default.css', '__mimeType__': 'text/css'},
     'syntax-css': {'__defaultFromFile__': (typeof(safari) !== 'undefined' ? safari.extension.baseURI : '')+'markdown-here/src/common/highlightjs/styles/github.css', '__mimeType__': 'text/css'},
-    'math-enabled': true,
-    'math-value': '<img src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}" alt="{mathcode}">',
-    'hotkey': { shiftKey: false, ctrlKey: true, altKey: true, key: 'M' },
-    'forgot-to-render-check-enabled': true,
-    'header-anchors-enabled': false,
-    'gfm-line-breaks-enabled': true
+    'math-enabled': DEFAULTS['math-enabled'],
+    'math-value': DEFAULTS['math-value'],
+    'hotkey': DEFAULTS['hotkey'],
+    'forgot-to-render-check-enabled': DEFAULTS['forgot-to-render-check-enabled'],
+    'header-anchors-enabled': DEFAULTS['header-anchors-enabled'],
+    'gfm-line-breaks-enabled': DEFAULTS['gfm-line-breaks-enabled']
   }
 };
 
