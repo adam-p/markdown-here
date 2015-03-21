@@ -9,6 +9,22 @@
 "use strict";
 /*global module:false, chrome:false, Components:false*/
 
+if (typeof(Utils) === 'undefined' && typeof(Components) !== 'undefined') {
+  var scriptLoader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"]
+                               .getService(Components.interfaces.mozIJSSubScriptLoader);
+  scriptLoader.loadSubScript('resource://markdown_here_common/utils.js');
+}
+
+// Common defaults
+var DEFAULTS = {
+  'math-enabled': true,
+  'math-value': '<img src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}" alt="{mathcode}">',
+  'hotkey': { shiftKey: false, ctrlKey: true, altKey: true, key: 'M' },
+  'forgot-to-render-check-enabled': true,
+  'header-anchors-enabled': false,
+  'gfm-line-breaks-enabled': true
+};
+
 /*
  * Chrome storage helper. Gets around the synchronized value size limit.
  * Overall quota limits still apply (or less, but we should stay well within).
@@ -29,26 +45,7 @@
  * a cross-domain restriction error. Instead use the service provided by the
  * background script.
  */
-
 // TODO: Check for errors. See: https://code.google.com/chrome/extensions/dev/storage.html
-
-
-if (typeof(Utils) === 'undefined' && typeof(Components) !== 'undefined') {
-  var scriptLoader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"]
-                               .getService(Components.interfaces.mozIJSSubScriptLoader);
-  scriptLoader.loadSubScript('resource://markdown_here_common/utils.js');
-}
-
-// Common defaults
-var DEFAULTS = {
-  'math-enabled': true,
-  'math-value': '<img class="mdh-math" src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}" alt="{mathcode}">',
-  'hotkey': { shiftKey: false, ctrlKey: true, altKey: true, key: 'M' },
-  'forgot-to-render-check-enabled': true,
-  'header-anchors-enabled': false,
-  'gfm-line-breaks-enabled': true
-};
-
 
 var ChromeOptionsStore = {
 
