@@ -4,6 +4,23 @@ Change Log
 **Hey you guys!** [Please vote in a poll](https://goo.gl/forms/kBSUY1jvDZ) about whether or not Markdown Here should get a new logo. **Thanks!**
 
 
+2015-03-xx: v2.11.5
+-------------------
+
+* [Fixed bug #243](https://github.com/adam-p/markdown-here/issues/243): Due to the way paragraphs were styled, there appeared to be a "blank line" inserted at the top when your Markdown-Here-rendered your content. The styling was changed to correct this.
+  - **Note**: In order to get this styling change, you will need to [reset your Primary Styling CSS](https://github.com/adam-p/markdown-here/wiki/Troubleshooting#getting-the-latest-primary-styling-css).
+  - Thanks to [James F McMahon](https://github.com/JamesMcMahon) for reporting the issue.
+
+* [Fixed bug #237](https://github.com/adam-p/markdown-here/issues/237): Made Mozilla preferences handling more robust. Helps to deal with non-ANSI characters, synchronization, and corruption. 
+  - Thanks to [flying-sheep](https://github.com/flying-sheep) for reporting the corruption problem and helping to diagnose it.
+
+* Added and updated translations:
+  - **Italian**: [Andrea Lazzarotto](https://crowdin.com/profile/Lazza)
+  - German: [Boris Lewandowski](https://crowdin.com/profile/bl)
+  - French: [H. Salah Eddine](https://crowdin.com/profile/jamesconception)
+  - Turkish: [Yahya Erturan](https://crowdin.com/profile/yahyaerturan)
+
+
 2015-02-16: v2.11.4
 -------------------
 
