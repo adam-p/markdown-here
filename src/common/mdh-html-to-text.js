@@ -147,13 +147,31 @@ MdhHtmlToText.prototype._preprocess = function() {
   // Experimentation has shown some tags that need to be tweaked a little.
   this.preprocessInfo.html =
     this.preprocessInfo.html
-      .replace(/(<\/div>)((?!<div).+?)(<div[^>]*>)/ig, '$1<div>$2</div>$3') // a raw text node without an enclosing <div> won't be handled properly, so add one
-      .replace(/(<\/div>)<div[^>]*><\/div>(<div[^>]*>)/ig, '$1$2') // empty <div> between other <div> elems gets removed
-      .replace(/<div[^>]*><br><\/div>/ig, '<br>') // <div><br></div> --> <br>
-      .replace(/(<div[^>]*>)+/ig, '<br>') // opening <div> --> <br> (but nested <div><div> just gets one <br>)
-      .replace(/<\/div>/ig, '')        // closing </div> --> nothing
-      .replace(/<(img[^>]*)>/ig, '&lt;$1&gt;') // <img> tags --> textual <img> tags
-      .replace(/&nbsp;/ig, ' ');       // &nbsp; --> space
+      // a raw text node without an enclosing <div> won't be handled properly, so add one
+      .replace(/(<\/div>)((?!<div\b).+?)(?:(<div\b[^>]*>)|$)/ig, '$1<div>$2</div>$3')
+
+      // empty <div> between other <div> elems gets removed
+      .replace(/(<\/div>)<div\b[^>]*><\/div>(<div[^>]*>)/ig, '$1$2')
+
+      // <div><br></div> --> <br>
+      .replace(/<div\b[^>]*><br\b[^>]*><\/div>/ig, '<br>')
+
+      // A <br> as the last child of a <div> adds no whitespace, so: <br></div> --> </div>
+      // Note: I can't find a reference for this, but testing shows it.
+      // The reason we're testing for this is because we see it in the wild. E.g., issue #251.
+      .replace(/<br\b[^>]*><\/div>/ig, '</div>')
+
+      // closing </div> --> <br> (but nested </div></div> just gets one <br>)
+      .replace(/(<\/div>)+/ig, '<br>')
+
+      // open <div> --> nothing (since we've replaced all the closing tags)
+      .replace(/<div\b[^>]*>/ig, '')
+
+      // <img> tags --> textual <img> tags
+      .replace(/<(img[^>]*)>/ig, '&lt;$1&gt;')
+
+      // &nbsp; --> space
+      .replace(/&nbsp;/ig, ' ');
 };
 
 

@@ -113,6 +113,15 @@ describe('MdhHtmlToText', function() {
       expect(get(html)).to.equal(target);
     });
 
+    // Test fix for bug https://github.com/adam-p/markdown-here/issues/251
+    // <br> at the end of <div> should not add a newline
+    it('should not add an extra newline for br at end of div', function() {
+      // HTML from issue
+      var html = '<div><div>mardown | test<br>-- |---<br></div>1 |\ntest<br></div>2 | test2<br clear="all">';
+      var target = 'mardown | test\n-- |---\n1 | test\n2 | test2';
+      expect(get(html)).to.equal(target);
+    });
+
   });
 
   describe('MdhHtmlToText (check-for-MD mode)', function() {
