@@ -122,6 +122,41 @@ describe('MdhHtmlToText', function() {
       expect(get(html)).to.equal(target);
     });
 
+    // Test some cases with bare text nodes
+    it('should properly handle bare text nodes', function() {
+      var html = '';
+      var target = '';
+      expect(get(html)).to.equal(target);
+
+      html = 'asdf';
+      target = 'asdf';
+      expect(get(html)).to.equal(target);
+
+      html = 'asdf<div class="x">qwer</div>';
+      target = 'asdf\nqwer';
+      expect(get(html)).to.equal(target);
+
+      html = 'asdf<br class="x">qwer';
+      target = 'asdf\nqwer';
+      expect(get(html)).to.equal(target);
+
+      html = 'asdf<br class="x">qwer<div>zxcv</div>asdf';
+      target = 'asdf\nqwer\nzxcv\nasdf';
+      expect(get(html)).to.equal(target);
+
+      html = 'asdf<br class="x">qwer<div>zxcv</div>ghjk<div>yuio</div>asdf';
+      target = 'asdf\nqwer\nzxcv\nghjk\nyuio\nasdf';
+      expect(get(html)).to.equal(target);
+
+      html = 'asdf<br class="x">qwer<div><div>zxcv</div>ghjk<div>yuio</div></div>asdf';
+      target = 'asdf\nqwer\nzxcv\nghjk\nyuio\nasdf';
+      expect(get(html)).to.equal(target);
+
+      html = 'asdf\n<br class="x">qwer<div><div>zxcv</div>ghjk<div>yuio</div></div>asdf';
+      target = 'asdf \nqwer\nzxcv\nghjk\nyuio\nasdf';
+      expect(get(html)).to.equal(target);
+    });
+
   });
 
   describe('MdhHtmlToText (check-for-MD mode)', function() {

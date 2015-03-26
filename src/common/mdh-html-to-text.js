@@ -144,11 +144,22 @@ MdhHtmlToText.prototype._preprocess = function() {
     this.preprocessInfo.html = convertHTMLtoMarkdown('a', this.preprocessInfo.html);
   }
 
+  // NOTE: Don't use '.' in these regexes and hope to match across newlines. Instead use [\s\S].
+
   // Experimentation has shown some tags that need to be tweaked a little.
   this.preprocessInfo.html =
     this.preprocessInfo.html
-      // a raw text node without an enclosing <div> won't be handled properly, so add one
-      .replace(/(<\/div>)((?!<div\b).+?)(?:(<div\b[^>]*>)|$)/ig, '$1<div>$2</div>$3')
+      // A raw text node without an enclosing <div> won't be handled properly, so enclose them.
+      // At the beginning:
+      .replace(/^((?:(?!<div\b)[\s\S])+)/i, '<div>$1</div>')
+      // In the middle:
+      .replace(/(<\/div>)((?!<div\b)[\s\S]+?)(<div\b[^>]*>)/ig, '$1<div>$2</div>$3')
+      // At the end:
+      .replace(/(<\/div>)?((?:(?!<\/div\b)[\s\S])+)?$/i, function(match, p1, p2) {
+        p1 = p1 || '';
+        p2 = p2 ? '<div>' + p2 + '</div>' : '';
+        return p1 + p2;
+      })
 
       // empty <div> between other <div> elems gets removed
       .replace(/(<\/div>)<div\b[^>]*><\/div>(<div[^>]*>)/ig, '$1$2')
