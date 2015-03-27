@@ -1,7 +1,7 @@
 Change Log
 ==========
 
-**Hey you guys!** [Please vote in a poll](https://goo.gl/forms/kBSUY1jvDZ) about whether or not Markdown Here should get a new logo. **Thanks!**
+**The new logo is happening! Graphically-inclined people needed!** Submit your design, and the MDH users will vote on the next logo. Exciting! [Details are on the website.](http://markdown-here.com/logo.html)
 
 
 2015-03-xx: v2.11.5
