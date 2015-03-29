@@ -4,7 +4,7 @@ Change Log
 **The new logo is happening! Graphically-inclined people needed!** Submit your design, and the MDH users will vote on the next logo. Exciting! [Details are on the website.](http://markdown-here.com/logo.html)
 
 
-2015-03-xx: v2.11.5
+2015-03-29: v2.11.5
 -------------------
 
 * [Fixed bug #243](https://github.com/adam-p/markdown-here/issues/243): Due to the way paragraphs were styled, there appeared to be a "blank line" inserted at the top when your Markdown-Here-rendered your content. The styling was changed to correct this.
@@ -23,6 +23,8 @@ Change Log
   - German: [Boris Lewandowski](https://crowdin.com/profile/bl)
   - French: [H. Salah Eddine](https://crowdin.com/profile/jamesconception)
   - Turkish: [Yahya Erturan](https://crowdin.com/profile/yahyaerturan)
+
+* And thanks to Erin for looking after Wulfie long enough for me to put this release together.
 
 
 2015-02-16: v2.11.4
