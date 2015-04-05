@@ -364,9 +364,6 @@ var MozillaOptionsStore = {
       }
     }
     catch (ex) {
-      Utils.consoleLog('Markdown Here: failing back to content script preferences code');
-      Utils.consoleLog(ex);
-
       // This exception was thrown by the Components.classes stuff above, and
       // means that this code is being called from a content script.
       // We need to send a request from this non-privileged context to the
