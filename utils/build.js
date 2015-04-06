@@ -7,6 +7,7 @@
 "use strict";
 
 var fs = require('fs');
+var path = require('path');
 var file = require('file');
 var archiver = require('archiver');
 var MetaScript = require('MetaScript');
@@ -17,11 +18,13 @@ var SRC_DIR = file.path.join(BASE_DIR, 'src');
 var DIST_DIR = file.path.join(BASE_DIR, 'dist');
 var CHROME_EXTENSION = file.path.join(DIST_DIR, 'chrome.zip');
 var FIREFOX_EXTENSION = file.path.join(DIST_DIR, 'firefox.xpi');
-var CHROME_INPUT = ['manifest.json', 'common/', 'chrome/', '_locales/'];
-var FIREFOX_INPUT = ['chrome.manifest', 'install.rdf', 'common/', 'firefox/'];
+var CHROME_INPUT = [/^manifest\.json$/, /^common(\\|\/)/, /^chrome(\\|\/)/, /^_locales(\\|\/)/];
+var FIREFOX_INPUT = [/^chrome.manifest$/, /^install.rdf$/, /^common(\\|\/)/, /^firefox(\\|\/)/];
 var FIREFOX_PLATFORM = 'mozilla';
 
-var skipFileRegexes = [/\.DS_Store$/, /.+\.bts$/];
+var skipFileRegexes = [/^common(\\|\/)test(\\|\/)/,
+                       // OS files and temp files
+                       /\.DS_Store$/, /.+\.bts$/, /desktop\.ini$/];
 var javascriptFileRegex = /.+\.js$/;
 
 
@@ -38,7 +41,7 @@ function fnameMatch(fpath, inputArray) {
   }
 
   for (i = 0; i < inputArray.length; i++) {
-    if (fname === inputArray[i] || fname.indexOf(inputArray[i]) === 0) {
+    if (inputArray[i].test(fname)) {
       return fname;
     }
   }
