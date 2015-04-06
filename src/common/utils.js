@@ -1,5 +1,5 @@
 /*
- * Copyright Adam Pritchard 2014
+ * Copyright Adam Pritchard 2015
  * MIT License : http://adampritchard.mit-license.org/
  */
 
@@ -293,15 +293,16 @@ function getLocalURL(url) {
     return url;
   }
 
+  /*? if(platform!=='mozilla'){ */
   if (typeof(chrome) !== 'undefined') {
     return chrome.extension.getURL(url);
   }
   else if (typeof(safari) !== 'undefined') {
     return safari.extension.baseURI + 'markdown-here/src' + url;
   }
-  else {
+  else /*? } */ {
     // Mozilla platform.
-    // HACK The proper URL depends on values in `chrome.manifest`. But we "know"
+    // HACK: The proper URL depends on values in `chrome.manifest`. But we "know"
     // that there are only a couple of locations we request from, so we're going
     // to branch depending on the presence of "common".
 
@@ -440,6 +441,7 @@ function fireMouseClick(elem) {
 var PRIVILEGED_REQUEST_EVENT_NAME = 'markdown-here-request-event';
 
 function makeRequestToPrivilegedScript(doc, requestObj, callback) {
+  /*? if(platform!=='mozilla'){ */
   if (typeof(chrome) !== 'undefined') {
     // If `callback` is undefined and we pass it anyway, Chrome complains with this:
     // Uncaught Error: Invocation of form extension.sendMessage(object, undefined, null) doesn't match definition extension.sendMessage(optional string extensionId, any message, optional function responseCallback)
@@ -492,7 +494,7 @@ function makeRequestToPrivilegedScript(doc, requestObj, callback) {
 
     safari.self.tab.dispatchMessage('request', window.JSON.stringify(requestObj));
   }
-  else {
+  else /*? } */ {
     // See: https://developer.mozilla.org/en-US/docs/Code_snippets/Interaction_between_privileged_and_non-privileged_pages#Chromium-like_messaging.3A_json_request_with_json_callback
 
     // Make a unique event name to use. (Bad style to modify the input like this...)
@@ -628,9 +630,11 @@ calls wait until the loading is complete.
 var g_stringBundleLoadListeners = [];
 
 function registerStringBundleLoadListener(callback) {
-  if (typeof(chrome) !== 'undefined' ||
-      (typeof(g_mozStringBundle) === 'object' && Object.keys(g_mozStringBundle).length > 0) ||
-      (typeof(g_safariStringBundle) === 'object' && Object.keys(g_safariStringBundle).length > 0)) {
+  if (/*? if(platform!=='mozilla'){ */
+      typeof(chrome) !== 'undefined' ||
+      (typeof(g_safariStringBundle) === 'object' && Object.keys(g_safariStringBundle).length > 0) ||
+      /*? } */
+      (typeof(g_mozStringBundle) === 'object' && Object.keys(g_mozStringBundle).length > 0)) {
     // Already loaded
     Utils.nextTick(callback);
     return;
@@ -718,6 +722,8 @@ if (typeof(chrome) === 'undefined' && typeof(safari) === 'undefined') {
 // (content) script.
 // Otherwise `data` will contain the string bundle object.
 function getSafariStringBundle(callback) {
+  /*? if(platform!=='mozilla'){ */
+
   // Can't use Utils.functionname in this function, since the exports haven't
   // been set up at the time it's called.
 
@@ -791,8 +797,10 @@ function getSafariStringBundle(callback) {
       intoBundle[key] = fromObj[key].message;
     }
   }
+  /*? } */
 }
 
+/*? if(platform!=='mozilla'){ */
 // Load the Safari string bundle
 if (typeof(safari) !== 'undefined') {
   var g_safariStringBundle = {};
@@ -823,6 +831,7 @@ if (typeof(safari) !== 'undefined') {
     });
   }
 }
+/*? } */
 
 
 // Get the translated string indicated by `messageID`.
@@ -831,6 +840,7 @@ if (typeof(safari) !== 'undefined') {
 // internationalization (yet).
 function getMessage(messageID) {
   var message = '';
+  /*? if(platform!=='mozilla'){ */
   if (typeof(chrome) !== 'undefined') {
     message = chrome.i18n.getMessage(messageID);
   }
@@ -843,7 +853,7 @@ function getMessage(messageID) {
       return '';
     }
   }
-  else { // Mozilla
+  else /*? } */ { // Mozilla
     if (g_mozStringBundle) {
       message = g_mozStringBundle[messageID];
     }
