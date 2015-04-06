@@ -1,5 +1,5 @@
 /*
- * Copyright Adam Pritchard 2013
+ * Copyright Adam Pritchard 2015
  * MIT License : http://adampritchard.mit-license.org/
  */
 
@@ -171,11 +171,12 @@ function localize() {
 // Shows/hide page elements depending on the current platform.
 // E.g., not all usage instructions apply to all clients.
 function showPlatformElements() {
+  /*? if(platform!=='mozilla'){ */
   if (typeof(chrome) !== 'undefined' && typeof(chrome.extension) !== 'undefined') {
     // Webkit-derived platforms
     $('#need-page-reload').css('display', 'none');
   }
-  else {
+  else /*? } */ {
     // Mozilla-derived platforms
     $('#need-page-reload').css('display', '');
   }

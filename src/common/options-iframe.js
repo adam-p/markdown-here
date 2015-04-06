@@ -1,9 +1,10 @@
 /*
- * Copyright Adam Pritchard 2013
+ * Copyright Adam Pritchard 2015
  * MIT License : http://adampritchard.mit-license.org/
  */
 
 function onLoad() {
+  /*? if(platform!=='mozilla'){ */
   // Chrome and Safari require us to manually load our content script in order
   // to use the button and context menu in the iframe.
   if (typeof(safari) !== 'undefined' || typeof(chrome) !== 'undefined') {
@@ -17,6 +18,7 @@ function onLoad() {
     }
     document.body.appendChild(contentscript);
   }
+  /*? } */
 
   // The body of the iframe needs to have a (collapsed) selection range for
   // Markdown Here to work (simulating focus/cursor).

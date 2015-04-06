@@ -4,10 +4,10 @@ Change Log
 **The new logo is happening! Graphically-inclined people needed!** Submit your design, and the MDH users will vote on the next logo. Exciting! [Details are on the website.](http://markdown-here.com/logo.html)
 
 
-2015-04-04: v2.11.6
+2015-04-06: v2.11.7
 -------------------
 
-* No change. Version bump. Trying to get past Mozilla review...
+* No user-facing code changes. Modifications to pass Mozilla review. (Added a preprocessor to strip out cross-browser code.)
 
 
 2015-03-29: v2.11.5

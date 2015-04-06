@@ -1,5 +1,5 @@
 /*
- * Copyright Adam Pritchard 2014
+ * Copyright Adam Pritchard 2015
  * MIT License : http://adampritchard.mit-license.org/
  */
 
@@ -25,6 +25,7 @@ var DEFAULTS = {
   'gfm-line-breaks-enabled': true
 };
 
+/*? if(platform!=='mozilla'){ */
 /*
  * Chrome storage helper. Gets around the synchronized value size limit.
  * Overall quota limits still apply (or less, but we should stay well within).
@@ -258,6 +259,8 @@ var ChromeOptionsStore = {
     });
   }
 };
+/*? } */
+
 
 /*
  * Mozilla preferences storage helper
@@ -378,6 +381,7 @@ var MozillaOptionsStore = {
 };
 
 
+/*? if(platform!=='mozilla'){ */
 /*
  * When called from the options page, this is effectively a content script, so
  * we'll have to make calls to the background script in that case.
@@ -480,15 +484,17 @@ var SafariOptionsStore = {
     'gfm-line-breaks-enabled': DEFAULTS['gfm-line-breaks-enabled']
   }
 };
+/*? } */
 
 
+/*? if(platform!=='mozilla'){ */
 if (typeof(navigator) !== 'undefined' && navigator.userAgent.indexOf('Chrome') >= 0) {
   this.OptionsStore = ChromeOptionsStore;
 }
 else if (typeof(navigator) !== 'undefined' && navigator.userAgent.match(/AppleWebKit.*Version.*Safari/)) {
   this.OptionsStore = SafariOptionsStore;
 }
-else {
+else /*? } */ {
   this.OptionsStore = MozillaOptionsStore;
 }
 
