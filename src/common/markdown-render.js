@@ -1,5 +1,5 @@
 /*
- * Copyright Adam Pritchard 2013
+ * Copyright Adam Pritchard 2015
  * MIT License : http://adampritchard.mit-license.org/
  */
 
@@ -7,7 +7,7 @@
  * The function that does the basic raw-Markdown-in-HTML to rendered-HTML
  * conversion.
  * The reason we keep this function -- specifically, the function that uses our
- * external markdown renderer (marked.js), text-from-HTML module (jsHtmlToText.js),
+ * external markdown renderer (markdown-it.js), text-from-HTML module (jsHtmlToText.js),
  * and CSS -- separate is that it allows us to keep the bulk of the rendering
  * code (and the bulk of the code in our extension) out of the content script.
  * That way, we minimize the amount of code that needs to be loaded in every page.
@@ -25,20 +25,25 @@ var MarkdownRender = {};
  Using the functionality provided by the functions htmlToText and markdownToHtml,
  render html into pretty text.
  */
-function markdownRender(mdText, userprefs, marked, hljs) {
+function markdownRender(mdText, userprefs, Markdownit, hljs) {
   function mathify(mathcode) {
     return userprefs['math-value']
             .replace(/\{mathcode\}/ig, mathcode)
             .replace(/\{urlmathcode\}/ig, encodeURIComponent(mathcode));
   }
 
+  /* TODO:MD
   // Hook into some of Marked's renderer customizations
   var markedRenderer = new marked.Renderer();
+  */
 
+  /* TODO:MD
   var sanitizeLinkForAnchor = function(text) {
     return text.toLowerCase().replace(/[^\w]+/g, '-');
   };
+  */
 
+  /* TODO:MD
   var defaultHeadingRenderer = markedRenderer.heading;
   markedRenderer.heading = function (text, level, raw) {
     if (userprefs['header-anchors-enabled']) {
@@ -54,7 +59,9 @@ function markdownRender(mdText, userprefs, marked, hljs) {
       return defaultHeadingRenderer.call(this, text, level, raw);
     }
   };
+  */
 
+  /* TODO:MD
   var defaultLinkRenderer = markedRenderer.link;
   markedRenderer.link = function(href, title, text) {
     // Added to fix MDH issue #57: MD links should automatically add scheme.
@@ -71,9 +78,10 @@ function markdownRender(mdText, userprefs, marked, hljs) {
 
     return defaultLinkRenderer.call(this, href, title, text);
   };
+  */
 
-  var markedOptions = {
-    renderer: markedRenderer,
+  /* OLD
+  var markdownitOptions = {
     gfm: true,
     pedantic: false,
     sanitize: false,
@@ -94,8 +102,36 @@ function markdownRender(mdText, userprefs, marked, hljs) {
         return codeText;
       }
     };
+  */
 
-  var renderedMarkdown = marked(mdText, markedOptions);
+  var markdownitOptions = {
+    html: true,       // Enable HTML tags in source
+    breaks: userprefs['gfm-line-breaks-enabled'], // Convert '\n' in paragraphs into <br>
+    langPrefix: 'hljs language-', // CSS language prefix for fenced blocks.
+    linkify: true,                // Autoconvert URL-like text to links
+
+    // Enable some language-neutral replacement + quotes beautification
+    typographer:  true,
+
+    // Double + single quotes replacement pairs, when typographer enabled,
+    // and smartquotes on. Set doubles to '«»' for Russian, '„“' for German.
+    quotes: '\u201c\u201d\u2018\u2019' /* “”‘’ */, // TODO: Make configurable, or localize.
+
+    // Highlighter function. Should return escaped HTML,
+    // or '' if the source string is not changed and should be escaped externaly.
+    highlight: function(codeText, codeLanguage) {
+      if (codeLanguage &&
+          hljs.getLanguage(codeLanguage.toLowerCase())) {
+        return hljs.highlight(codeLanguage.toLowerCase(), codeText).value;
+      }
+
+      return '';
+    }
+  };
+
+
+  var mdRender = new Markdownit('default', markdownitOptions);
+  var renderedMarkdown = mdRender.render(mdText);
 
   return renderedMarkdown;
 }

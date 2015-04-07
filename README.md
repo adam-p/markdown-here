@@ -228,9 +228,9 @@ It also takes a fair bit of work to stay up-to-date with the latest changes in a
 
 *Markdown Here* was coded on the shoulders of giants.
 
-* Markdown-to-HTML: [chjj / marked](https://github.com/chjj/marked)
-* Syntax highlighting: [isagalaev / highlight.js](https://github.com/isagalaev/highlight.js)
-* HTML-to-text: [mtrimpe / jsHtmlToText](https://github.com/mtrimpe/jsHtmlToText)
+* Markdown-to-HTML: [markdown-it/markdown-it](https://github.com/markdown-it/markdown-it)
+* Syntax highlighting: [isagalaev/highlight.js](https://github.com/isagalaev/highlight.js)
+* HTML-to-text: [mtrimpe/jsHtmlToText](https://github.com/mtrimpe/jsHtmlToText)
 
 ## Feedback
 

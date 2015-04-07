@@ -1,11 +1,11 @@
 /*
- * Copyright Adam Pritchard 2013
+ * Copyright Adam Pritchard 2015
  * MIT License : http://adampritchard.mit-license.org/
  */
 
 "use strict";
 /*global chrome:false, markdownHere:false, CommonLogic:false, htmlToText:false,
-    Utils:false, MdhHtmlToText:false, marked:false*/
+         Utils:false, MdhHtmlToText:false, markdownit:false*/
 /*jshint devel:true, browser:true*/
 
 
@@ -258,7 +258,7 @@ function intervalCheck(elem) {
       focusedElem,
       markdownHere,
       MdhHtmlToText,
-      marked,
+      markdownit,
       forgotToRenderIntervalCheckPrefs);
   }
 }

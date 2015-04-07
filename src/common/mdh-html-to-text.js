@@ -181,8 +181,8 @@ MdhHtmlToText.prototype._preprocess = function() {
       // <img> tags --> textual <img> tags
       .replace(/<(img[^>]*)>/ig, '&lt;$1&gt;')
 
-      // &nbsp; --> space
-      .replace(/&nbsp;/ig, ' ');
+      // &nbsp; or non-breaking-space character --> space
+      .replace(/(&nbsp;|\xA0)/ig, ' ');
 };
 
 

@@ -1,11 +1,11 @@
 /*
- * Copyright Adam Pritchard 2013
+ * Copyright Adam Pritchard 2015
  * MIT License : http://adampritchard.mit-license.org/
  */
 
 "use strict";
 /*global chrome:false, OptionsStore:false, MarkdownRender:false,
-  marked:false, hljs:false, Utils:false, CommonLogic:false */
+  markdownit:false, hljs:false, Utils:false, CommonLogic:false */
 /*jshint devel:true*/
 
 /*
@@ -76,7 +76,7 @@ chrome.extension.onMessage.addListener(function(request, sender, responseCallbac
         html: MarkdownRender.markdownRender(
           request.mdText,
           prefs,
-          marked,
+          markdownit,
           hljs),
         css: (prefs['main-css'] + prefs['syntax-css'])
       });
