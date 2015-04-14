@@ -22,7 +22,7 @@
         "common/utils.js",
         "common/common-logic.js",
         "common/jsHtmlToText.js",
-        "common/markdown-it/markdown-it.js",
+        "common/markdown-it/mdh-markdown-it.out.js",
         "common/mdh-html-to-text.js",
         "common/markdown-here.js",
         "chrome/contentscript.js"

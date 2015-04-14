@@ -5,7 +5,7 @@
 
 "use strict";
 /*global chrome:false, OptionsStore:false, MarkdownRender:false,
-  markdownit:false, hljs:false, Utils:false, CommonLogic:false */
+  MdhMarkdownIt:false, hljs:false, Utils:false, CommonLogic:false */
 /*jshint devel:true*/
 
 /*
@@ -76,7 +76,7 @@ chrome.extension.onMessage.addListener(function(request, sender, responseCallbac
         html: MarkdownRender.markdownRender(
           request.mdText,
           prefs,
-          markdownit,
+          MdhMarkdownIt,
           hljs),
         css: (prefs['main-css'] + prefs['syntax-css'])
       });

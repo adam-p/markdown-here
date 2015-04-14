@@ -5,7 +5,7 @@
 
 "use strict";
 /*global chrome:false, markdownHere:false, CommonLogic:false, htmlToText:false,
-         Utils:false, MdhHtmlToText:false, markdownit:false*/
+         Utils:false, MdhHtmlToText:false, MdhMarkdownIt:false*/
 /*jshint devel:true, browser:true*/
 
 
@@ -258,7 +258,7 @@ function intervalCheck(elem) {
       focusedElem,
       markdownHere,
       MdhHtmlToText,
-      markdownit,
+      MdhMarkdownIt,
       forgotToRenderIntervalCheckPrefs);
   }
 }

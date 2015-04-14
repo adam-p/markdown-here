@@ -1,0 +1,10 @@
+{
+  "name": "markdown-here-markdownit",
+  "version": "0.0.0",
+  "dependencies": {
+    "browserify": "9.0.8",
+    "markdown-it": "4.1.0",
+    "markdown-it-footnote": "1.0.0"
+  },
+  "private": true
+}

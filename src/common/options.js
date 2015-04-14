@@ -6,7 +6,7 @@
 "use strict";
 /*jshint browser:true, jquery:true, sub:true */
 /*global OptionsStore:false, chrome:false, markdownRender:false,
-  htmlToText:false, markdownit:false, hljs:false, markdownHere:false, Utils:false,
+  htmlToText:false, MdhMarkdownIt:false, hljs:false, markdownHere:false, Utils:false,
   MdhHtmlToText:false */
 
 /*
@@ -370,12 +370,7 @@ function loadChangelist() {
       // Assume 200 OK -- it's just a local call
       var changes = this.responseText;
 
-      var markdownitOptions = {
-            gfm: true,
-            pedantic: false,
-            sanitize: false };
-
-      changes = new markdownit('default').render(changes);
+      changes = MdhMarkdownIt.get().render(changes);
 
       Utils.saferSetInnerHTML($('#changelist').get(0), changes);
 

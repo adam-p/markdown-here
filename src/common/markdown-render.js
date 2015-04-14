@@ -25,7 +25,7 @@ var MarkdownRender = {};
  Using the functionality provided by the functions htmlToText and markdownToHtml,
  render html into pretty text.
  */
-function markdownRender(mdText, userprefs, Markdownit, hljs) {
+function markdownRender(mdText, userprefs, MdhMarkdownIt, hljs) {
   function mathify(mathcode) {
     return userprefs['math-value']
             .replace(/\{mathcode\}/ig, mathcode)
@@ -129,8 +129,8 @@ function markdownRender(mdText, userprefs, Markdownit, hljs) {
     }
   };
 
-
-  var mdRender = new Markdownit('default', markdownitOptions);
+  // TODO: Enable/disable plugins
+  var mdRender = MdhMarkdownIt.get(null, markdownitOptions);
   var renderedMarkdown = mdRender.render(mdText);
 
   return renderedMarkdown;
