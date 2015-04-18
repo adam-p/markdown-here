@@ -8,21 +8,29 @@
 
 var MarkdownIt = require('markdown-it');
 
-var markdownItPlugins = {
-  footnote: require('markdown-it-footnote')
+var requiredMarkdownItPlugins = {
+  linkscheme: require('markdown-it-linkscheme')
+};
+
+var optionalMarkdownItPlugins = {
+  footnote: require('markdown-it-footnote'),
+  smartarrows: require('markdown-it-smartarrows')
 };
 
 
 // If `enabledPlugins` is null, all plugins will be enabled.
 // `options` can be null and then set later using [`.set()`](https://markdown-it.github.io/markdown-it/#MarkdownIt.set)
 function get(enabledPlugins, options) {
-  enabledPlugins = enabledPlugins || [];
-
   var md = new MarkdownIt('default', options);
 
-  for (var plugin in markdownItPlugins) {
+  var plugin;
+  for (plugin in requiredMarkdownItPlugins) {
+    md.use(requiredMarkdownItPlugins[plugin]);
+  }
+
+  for (plugin in optionalMarkdownItPlugins) {
     if (!enabledPlugins || plugin in enabledPlugins) {
-      md.use(markdownItPlugins[plugin]);
+      md.use(optionalMarkdownItPlugins[plugin]);
     }
   }
 

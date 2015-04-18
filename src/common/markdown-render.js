@@ -80,7 +80,7 @@ function markdownRender(mdText, userprefs, MdhMarkdownIt, hljs) {
   };
   */
 
-  /* OLD
+  /* TEMP: OLD
   var markdownitOptions = {
     gfm: true,
     pedantic: false,

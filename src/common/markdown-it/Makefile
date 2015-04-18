@@ -19,6 +19,6 @@ clean:
 install:
 	npm install
 
-build: install
+build:
 	./node_modules/.bin/browserify $(INPUT_FILE) --standalone $(EXPORT_NAME) -o $(OUTPUT_FILE)
 
