@@ -104,18 +104,8 @@ function markdownRender(mdText, userprefs, MdhMarkdownIt, hljs) {
     };
   */
 
-  var markdownitOptions = {
-    html: true,       // Enable HTML tags in source
-    breaks: userprefs['gfm-line-breaks-enabled'], // Convert '\n' in paragraphs into <br>
-    langPrefix: 'hljs language-', // CSS language prefix for fenced blocks.
-    linkify: true,                // Autoconvert URL-like text to links
-
-    // Enable some language-neutral replacement + quotes beautification
-    typographer:  true,
-
-    // Double + single quotes replacement pairs, when typographer enabled,
-    // and smartquotes on. Set doubles to '«»' for Russian, '„“' for German.
-    quotes: '\u201c\u201d\u2018\u2019' /* “”‘’ */, // TODO: Make configurable, or localize.
+  var rendererOptions = {
+    gfmLineBreaks: userprefs['gfm-line-breaks-enabled'], // Convert '\n' in paragraphs into <br>
 
     // Highlighter function. Should return escaped HTML,
     // or '' if the source string is not changed and should be escaped externaly.
@@ -126,11 +116,16 @@ function markdownRender(mdText, userprefs, MdhMarkdownIt, hljs) {
       }
 
       return '';
-    }
+    },
+    langPrefix: 'hljs language-', // CSS language prefix for fenced blocks.
+
+    // MDH custom options
+    headingAnchors: userprefs['header-anchors-enabled'],
+    mathRenderer: userprefs['math-enabled'] ? mathify : null
   };
 
   // TODO: Enable/disable plugins
-  var mdRender = MdhMarkdownIt.get(null, markdownitOptions);
+  var mdRender = MdhMarkdownIt.get(rendererOptions);
   var renderedMarkdown = mdRender.render(mdText);
 
   return renderedMarkdown;

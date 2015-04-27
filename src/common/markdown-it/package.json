@@ -2,11 +2,14 @@
   "name": "markdown-here-markdownit",
   "version": "0.0.0",
   "dependencies": {
+    "babelify": "^6.0.2",
     "browserify": "9.0.8",
     "markdown-it": "4.1.0",
-    "markdown-it-footnote": "^1.0.0",
-    "markdown-it-linkscheme": "*",
-    "markdown-it-smartarrows": "*"
+    "markdown-it-footnote": "1.0.*",
+    "markdown-it-headinganchor": "1.2.*",
+    "markdown-it-linkscheme": "1.0.*",
+    "markdown-it-math": "2.0.*",
+    "markdown-it-smartarrows": "1.0.*"
   },
   "private": true
 }
