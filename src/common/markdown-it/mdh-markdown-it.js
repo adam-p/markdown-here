@@ -20,7 +20,7 @@ var optionalMarkdownItPlugins = {
   footnotes: require('markdown-it-footnote'),
   smartarrows: require('markdown-it-smartarrows'),
   headingAnchors: require('markdown-it-headinganchor'),
-  math: require('markdown-it-math')
+  math: require('markdown-it-simplemath')
 };
 
 
@@ -89,12 +89,8 @@ function get(options) {
 
   if (options.mathRenderer) {
     renderer.use(
-      require('markdown-it-math'),
-      {
-        inlineOpen: '$',
-        inlineClose: '$',
-        inlineRenderer: options.mathRenderer
-      });
+      optionalMarkdownItPlugins.math,
+      { inlineRenderer: options.mathRenderer });
   }
 
   g_cachedRenderer.renderer = renderer;

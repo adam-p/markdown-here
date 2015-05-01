@@ -8,7 +8,7 @@
     "markdown-it-footnote": "1.0.*",
     "markdown-it-headinganchor": "1.2.*",
     "markdown-it-linkscheme": "1.0.*",
-    "markdown-it-math": "2.0.*",
+    "markdown-it-simplemath": "1.0.*",
     "markdown-it-smartarrows": "1.0.*"
   },
   "private": true
