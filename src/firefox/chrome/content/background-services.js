@@ -34,8 +34,8 @@ scriptLoader.loadSubScript('resource://markdown_here_common/utils.js');
 imports.Utils = window.Utils;
 scriptLoader.loadSubScript('resource://markdown_here_common/common-logic.js');
 imports.CommonLogic = window.CommonLogic;
-scriptLoader.loadSubScript('resource://markdown_here_common/marked.js');
-imports.marked = window.marked;
+scriptLoader.loadSubScript('resource://markdown_here_common/markdown-it/mdh-markdown-it.out.js');
+imports.MdhMarkdownIt = window.MdhMarkdownIt;
 scriptLoader.loadSubScript('resource://markdown_here_common/markdown-render.js');
 imports.MarkdownRender = window.MarkdownRender;
 scriptLoader.loadSubScript('resource://markdown_here_common/options-store.js');
@@ -81,7 +81,7 @@ document.addEventListener(imports.Utils.PRIVILEGED_REQUEST_EVENT_NAME, function(
         html: imports.MarkdownRender.markdownRender(
           request.mdText,
           prefs,
-          imports.marked,
+          imports.MdhMarkdownIt,
           imports.hljs),
         css: (prefs['main-css'] + prefs['syntax-css'])
       });

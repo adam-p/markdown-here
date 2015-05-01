@@ -96,8 +96,8 @@ var markdown_here = {
     markdown_here.imports.CommonLogic = window.CommonLogic;
     markdown_here.scriptLoader.loadSubScript('resource://markdown_here_common/jsHtmlToText.js');
     markdown_here.imports.htmlToText = window.htmlToText;
-    markdown_here.scriptLoader.loadSubScript('resource://markdown_here_common/marked.js');
-    markdown_here.imports.marked = window.marked;
+    markdown_here.scriptLoader.loadSubScript('resource://markdown_here_common/markdown-it/mdh-markdown-it.out.js');
+    markdown_here.imports.MdhMarkdownIt = window.MdhMarkdownIt;
     markdown_here.scriptLoader.loadSubScript('resource://markdown_here_common/markdown-here.js');
     markdown_here.imports.markdownHere = window.markdownHere;
     markdown_here.scriptLoader.loadSubScript('resource://markdown_here_common/mdh-html-to-text.js');
@@ -175,7 +175,7 @@ var markdown_here = {
           if (!markdown_here.imports.CommonLogic.probablyWritingMarkdown(
                 plaintext,
                 markdown_here.imports.htmlToText,
-                markdown_here.imports.marked)) {
+                markdown_here.imports.MdhMarkdownIt)) {
             return;
           }
 
@@ -255,7 +255,7 @@ var markdown_here = {
       var renderedMarkdown = markdown_here.imports.MarkdownRender.markdownRender(
         mdhHtmlToText.get(),
         prefs,
-        markdown_here.imports.marked,
+        markdown_here.imports.MdhMarkdownIt,
         markdown_here.imports.hljs);
       renderedMarkdown = mdhHtmlToText.postprocess(renderedMarkdown);
 
@@ -357,7 +357,7 @@ var markdown_here = {
           focusedElem,
           markdown_here.imports.markdownHere,
           markdown_here.imports.MdhHtmlToText,
-          markdown_here.imports.marked,
+          markdown_here.imports.MdhMarkdownIt,
           forgotToRenderIntervalCheckPrefs);
       }
     };
