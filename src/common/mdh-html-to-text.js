@@ -325,6 +325,12 @@ resulting HTML.
 */
 function convertHTMLtoMarkdown(tag, html) {
   if (tag === 'a') {
+    var htmlToRestore = [];
+    html = html.replace(/(`+)[\s\S]+?\1/ig, function($0) {
+      var replacement = Math.random();
+      htmlToRestore.push([replacement, $0]);
+      return replacement;
+    });
     /*
     Make sure we do *not* convert HTML links that are inside of MD links.
     Otherwise we'll have problems like issue #69.
@@ -348,6 +354,10 @@ function convertHTMLtoMarkdown(tag, html) {
       function($0, $1, $2, $3) {
         return $1 ? $0 : '['+$3+']('+$2+')';
       });
+
+    for (var i = 0; i < htmlToRestore.length; i++) {
+      html = html.replace(htmlToRestore[i][0], htmlToRestore[i][1]);
+    }
   }
   else {
     throw new Error('convertHTMLtoMarkdown: ' + tag + ' is not a supported tag');

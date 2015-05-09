@@ -43,23 +43,31 @@ describe('MdhHtmlToText', function() {
       expect(get('')).to.equal('');
     });
 
-    // Busted due to https://github.com/adam-p/markdown-here/issues/104
-    it('should NOT correctly handle pre-rendered links in inline code (busted due to issue #104)', function() {
+    // Fix for https://github.com/adam-p/markdown-here/issues/104
+    it('should correctly handle pre-rendered links in inline code (fix for issue #104)', function() {
       var html = 'aaa `<a href="bbb">ccc</a>`';
 
       // Real target
-      // var target = 'aaa `bbb`';
-      var target = 'aaa `[ccc](bbb)`';
+      var target = 'aaa `ccc`';
+      expect(get(html)).to.equal(target);
+    });
+
+    // Fix for https://github.com/adam-p/markdown-here/issues/104
+    it('should correctly handle pre-rendered links in code blocks (fix for issue #104)', function() {
+      var html = '```<br><a href="aaa">bbb</a><br>```';
+
+      // Real target
+      var target = '```\nbbb\n```';
       expect(get(html)).to.equal(target);
     });
 
     // Busted due to https://github.com/adam-p/markdown-here/issues/104
     it('should NOT correctly handle pre-rendered links in code blocks (busted due to issue #104)', function() {
-      var html = '```<br><a href="aaa">bbb</a><br>```';
+      var html = '&nbsp;&nbsp;&nbsp;&nbsp;<a href="aaa">bbb</a><br>';
 
       // Real target
-      // var target = '```\nbbb\n```';
-      var target = '```\n[bbb](aaa)\n```';
+      // var target = '    bbb';
+      var target = '    [bbb](aaa)';
       expect(get(html)).to.equal(target);
     });
 
