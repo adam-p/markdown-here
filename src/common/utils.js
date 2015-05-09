@@ -577,11 +577,7 @@ function getTopURL(win, justHostname) {
 
 // Sets a short timeout and then calls callback
 function nextTick(callback, context) {
-  var runner = function nextTickInner() {
-    callback.call(context);
-  };
-
-  window.setTimeout(runner, 0);
+  nextTickFn(callback, context)();
 }
 
 // `context` is optional. Will be `this` when `callback` is called.
@@ -592,7 +588,15 @@ function nextTickFn(callback, context) {
       callback.apply(context, args);
     };
 
+    // For ordinary browser use, setTimeout() is throttled to 1000ms for inactive
+    // tabs. This doesn't seem to affect extensions, except... Chrome Canary is
+    // currently doing this for the extension background scripts. This causes
+    // horribly slow rendering. For info see:
+    // https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/setTimeout#Inactive_tabs
     window.setTimeout(runner, 0);
+    // If we ever need a new way to do next-tick-async-ify, this will work, but
+    // it's kind of ugly and produces console errors for the failed XHR attempt.
+    //getLocalFile('BAD-URL', runner);
   };
 }
 
