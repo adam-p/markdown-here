@@ -574,6 +574,37 @@ function getTopURL(win, justHostname) {
   return url;
 }
 
+// Regarding methods for `nextTick` and related:
+// For ordinary browser use, setTimeout() is throttled to 1000ms for inactive
+// tabs. This doesn't seem to affect extensions, except... Chrome Canary is
+// currently doing this for the extension background scripts. This causes
+// horribly slow rendering. For info see:
+// https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/setTimeout#Inactive_tabs
+// As an alternative, we can use a local XHR request/response.
+
+function asyncCallbackXHR(callback) {
+  var xhr = new window.XMLHttpRequest();
+  xhr.open('HEAD', '/common/CHANGES.md');
+
+  xhr.onload = callback;
+  xhr.onerror = callback;
+
+  try {
+    // On some platforms, xhr.send throws an error if the url is not found.
+    // On some platforms, it will call onerror and on some it won't.
+    xhr.send();
+  }
+  catch(e) {
+    asyncCallbackTimeout(callback);
+  }
+}
+
+function asyncCallbackTimeout(callback) {
+  setTimeout(callback, 0);
+}
+
+// We prefer to use the setTimeout approach.
+var asyncCallback = asyncCallbackTimeout;
 
 // Sets a short timeout and then calls callback
 function nextTick(callback, context) {
@@ -582,21 +613,22 @@ function nextTick(callback, context) {
 
 // `context` is optional. Will be `this` when `callback` is called.
 function nextTickFn(callback, context) {
+  var start = new Date();
+
   return function nextTickFnInner() {
     var args = arguments;
     var runner = function() {
+      // Detect a whether the async callback was super slow
+      var end = new Date() - start;
+      if (end > 200) {
+        // setTimeout is too slow -- switch to the XHR approach.
+        asyncCallback = asyncCallbackXHR;
+      }
+
       callback.apply(context, args);
     };
 
-    // For ordinary browser use, setTimeout() is throttled to 1000ms for inactive
-    // tabs. This doesn't seem to affect extensions, except... Chrome Canary is
-    // currently doing this for the extension background scripts. This causes
-    // horribly slow rendering. For info see:
-    // https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/setTimeout#Inactive_tabs
-    window.setTimeout(runner, 0);
-    // If we ever need a new way to do next-tick-async-ify, this will work, but
-    // it's kind of ugly and produces console errors for the failed XHR attempt.
-    //getLocalFile('BAD-URL', runner);
+    asyncCallback(runner);
   };
 }
 
