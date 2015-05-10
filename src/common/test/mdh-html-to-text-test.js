@@ -163,6 +163,10 @@ describe('MdhHtmlToText', function() {
       html = 'asdf\n<br class="x">qwer<div><div>zxcv</div>ghjk<div>yuio</div></div>asdf';
       target = 'asdf \nqwer\nzxcv\nghjk\nyuio\nasdf';
       expect(get(html)).to.equal(target);
+
+      html = '<div class="x">asdf</div>qwer';
+      target = 'asdf\nqwer';
+      expect(get(html)).to.equal(target);
     });
 
   });

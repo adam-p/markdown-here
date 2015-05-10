@@ -155,11 +155,7 @@ MdhHtmlToText.prototype._preprocess = function() {
       // In the middle:
       .replace(/(<\/div>)((?!<div\b)[\s\S]+?)(<div\b[^>]*>)/ig, '$1<div>$2</div>$3')
       // At the end:
-      .replace(/(<\/div>)?((?:(?!<\/div\b)[\s\S])+)?$/i, function(match, p1, p2) {
-        p1 = p1 || '';
-        p2 = p2 ? '<div>' + p2 + '</div>' : '';
-        return p1 + p2;
-      })
+      .replace(/([^>]+)$/i, '<div>$1</div>')
 
       // empty <div> between other <div> elems gets removed
       .replace(/(<\/div>)<div\b[^>]*><\/div>(<div[^>]*>)/ig, '$1$2')
