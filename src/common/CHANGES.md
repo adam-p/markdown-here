@@ -4,6 +4,13 @@ Change Log
 **The new logo is happening! Graphically-inclined people needed!** Submit your design, and the MDH users will vote on the next logo. Exciting! [Details are on the website.](http://markdown-here.com/logo.html)
 
 
+2015-xx-yy: v2.11.8
+-------------------
+
+* [Fixed bug #241](https://github.com/adam-p/markdown-here/issues/241): Rendering was very slow on Chrome Beta and Canary. Thanks to [Alex Vaystikh](https://github.com/bornio).
+
+
+
 2015-04-06: v2.11.7
 -------------------
 
