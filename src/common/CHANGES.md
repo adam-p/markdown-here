@@ -9,6 +9,8 @@ Change Log
 
 * [Fixed bug #241](https://github.com/adam-p/markdown-here/issues/241): Rendering was very slow on Chrome Beta and Canary. Thanks to [Alex Vaystikh](https://github.com/bornio).
 
+* Fixed [Pale Moon](http://www.palemoon.org/) compatibility.
+
 
 
 2015-04-06: v2.11.7
