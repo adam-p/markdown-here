@@ -124,6 +124,15 @@ describe('Markdown-Render', function() {
       expect(headingName).to.equal(linkHREF);
     });
 
+    // Test issue #93: Add support for anchor links: https://github.com/adam-p/markdown-here/issues/93
+    it('should handle non-anglo characters in headers', function() {
+      userprefs['header-anchors-enabled'] = true;
+      var md = '[H1](#РоссийскаяФедерация)\n# Российская Федерация';
+      var render = MarkdownRender.markdownRender(md, userprefs, MdhMarkdownIt, hljs);
+      var target = '<p><a href="#%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D0%B9%D1%81%D0%BA%D0%B0%D1%8F%D0%A4%D0%B5%D0%B4%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D1%8F">H1</a></p>\n<h1 id="%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D0%B9%D1%81%D0%BA%D0%B0%D1%8F%D0%A4%D0%B5%D0%B4%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D1%8F"><a name="%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D0%B9%D1%81%D0%BA%D0%B0%D1%8F%D0%A4%D0%B5%D0%B4%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D1%8F" class="mdh-heading-anchor" href="#"></a>Российская Федерация</h1>\n';
+      expect(MarkdownRender.markdownRender(md, userprefs, MdhMarkdownIt, hljs)).to.equal(target);
+    });
+
     // Test issue #112: Syntax Highlighting crashing rendering on bad language name: https://github.com/adam-p/markdown-here/issues/112
     it('should properly render code with good language names', function() {
       var md = '```sql\nSELECT * FROM table WHERE id = 1\n```';
