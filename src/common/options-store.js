@@ -512,14 +512,20 @@ this.OptionsStore._fillDefaults = function(prefsObj, callback) {
 
   function doNextKey() {
     if (allKeys.length === 0) {
-      // All done
-      return callback(prefsObj);
+      // All done.
+      // Ensure this function is actually asynchronous.
+      Utils.nextTick(function() {
+        callback(prefsObj);
+      });
+      return;
     }
 
     // Keep processing keys (and recurse)
-    return doDefaultForKey(allKeys.pop(), doNextKey);
+    doDefaultForKey(allKeys.pop(), doNextKey);
   }
 
+  // This function may be asynchronous (if XHR occurs) or it may be a straight
+  // recursion.
   function doDefaultForKey(key, callback) {
     // Only take action if the key doesn't already have a value set.
     if (typeof(prefsObj[key]) === 'undefined') {
@@ -538,25 +544,25 @@ this.OptionsStore._fillDefaults = function(prefsObj, callback) {
             // Assume 200 OK -- it's just a local call
             prefsObj[key] = this.responseText;
 
-            return callback();
+            callback();
+            return;
           }
         };
 
         xhr.send();
       }
       else {
-        // Make it actually asynchronous
-        Utils.nextTick(function() {
-          prefsObj[key] = that.defaults[key];
-          return callback();
-        });
+        // Set the default.
+        prefsObj[key] = that.defaults[key];
+        // Recurse
+        callback();
+        return;
       }
     }
     else {
-      // Just skip it, but make it asynchronous
-      Utils.nextTick(function() {
-        return callback();
-      });
+      // Key already has a value -- skip it.
+      callback();
+      return;
     }
   }
 };

@@ -4,6 +4,16 @@ Change Log
 **The new logo is happening! Graphically-inclined people needed!** Submit your design, and the MDH users will vote on the next logo. Exciting! [Details are on the website.](http://markdown-here.com/logo.html)
 
 
+2015-xx-yy: v2.11.8
+-------------------
+
+* [Fixed bug #251](https://github.com/adam-p/markdown-here/issues/251): Improved HTML-to-plaintext processing, in order to make newline handling better. Fixes some cases where tables get messed up. Thanks to [hchaase](https://github.com/hchaase).
+
+* [Fixed bug #241](https://github.com/adam-p/markdown-here/issues/241): Rendering was very slow on Chrome Beta and Canary. Thanks to [Alex Vaystikh](https://github.com/bornio).
+
+* Fixed [Pale Moon](http://www.palemoon.org/) compatibility. Thanks to Ismani Nieuweboer.
+
+
 2015-04-06: v2.11.7
 -------------------
 

@@ -155,11 +155,7 @@ MdhHtmlToText.prototype._preprocess = function() {
       // In the middle:
       .replace(/(<\/div>)((?!<div\b)[\s\S]+?)(<div\b[^>]*>)/ig, '$1<div>$2</div>$3')
       // At the end:
-      .replace(/(<\/div>)?((?:(?!<\/div\b)[\s\S])+)?$/i, function(match, p1, p2) {
-        p1 = p1 || '';
-        p2 = p2 ? '<div>' + p2 + '</div>' : '';
-        return p1 + p2;
-      })
+      .replace(/([^>]+)$/i, '<div>$1</div>')
 
       // empty <div> between other <div> elems gets removed
       .replace(/(<\/div>)<div\b[^>]*><\/div>(<div[^>]*>)/ig, '$1$2')
@@ -325,6 +321,12 @@ resulting HTML.
 */
 function convertHTMLtoMarkdown(tag, html) {
   if (tag === 'a') {
+    var htmlToRestore = [];
+    html = html.replace(/(`+)[\s\S]+?\1/ig, function($0) {
+      var replacement = Math.random();
+      htmlToRestore.push([replacement, $0]);
+      return replacement;
+    });
     /*
     Make sure we do *not* convert HTML links that are inside of MD links.
     Otherwise we'll have problems like issue #69.
@@ -348,6 +350,10 @@ function convertHTMLtoMarkdown(tag, html) {
       function($0, $1, $2, $3) {
         return $1 ? $0 : '['+$3+']('+$2+')';
       });
+
+    for (var i = 0; i < htmlToRestore.length; i++) {
+      html = html.replace(htmlToRestore[i][0], htmlToRestore[i][1]);
+    }
   }
   else {
     throw new Error('convertHTMLtoMarkdown: ' + tag + ' is not a supported tag');
