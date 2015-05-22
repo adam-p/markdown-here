@@ -1,6 +1,7 @@
 {
   "name": "markdown-here-utils",
   "version": "0.0.0",
+  "private": true,
   "dependencies": {
     "markdown-it": "~3.0.5",
     "metascript": "~1.0.0",

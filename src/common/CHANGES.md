@@ -1,10 +1,10 @@
 Change Log
 ==========
 
-**The new logo is happening! Graphically-inclined people needed!** Submit your design, and the MDH users will vote on the next logo. Exciting! [Details are on the website.](http://markdown-here.com/logo.html)
+### **Time to pick the new logo! [Cast your vote!](https://goo.gl/forms/XTrT6FwnFo)**
 
 
-2015-xx-yy: v2.11.8
+2015-05-21: v2.11.8
 -------------------
 
 * [Fixed bug #251](https://github.com/adam-p/markdown-here/issues/251): Improved HTML-to-plaintext processing, in order to make newline handling better. Fixes some cases where tables get messed up. Thanks to [hchaase](https://github.com/hchaase).
@@ -12,6 +12,8 @@ Change Log
 * [Fixed bug #241](https://github.com/adam-p/markdown-here/issues/241): Rendering was very slow on Chrome Beta and Canary. Thanks to [Alex Vaystikh](https://github.com/bornio).
 
 * Fixed [Pale Moon](http://www.palemoon.org/) compatibility. Thanks to Ismani Nieuweboer.
+
+* Partially [fixed bug #104](https://github.com/adam-p/markdown-here/issues/104): Pre-rendered links (especially auto-links) in code were getting converted to Markdown when rendering (so you end up with raw Markdown in your code). This is now fixed for backtick-style code (inline and block), but not for indented code blocks.
 
 
 2015-04-06: v2.11.7
