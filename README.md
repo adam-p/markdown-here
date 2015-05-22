@@ -218,7 +218,7 @@ Use the Safari Extension Builder.
 
 ## Next Steps
 
-See the [issues list](https://github.com/adam-p/markdown-here/issues) and the [Notes file](https://github.com/adam-p/markdown-here/blob/master/NOTES.md). All ideas, bugs, plans, complaints, and dreams will end up in one of those two places.
+See the [issues list](https://github.com/adam-p/markdown-here/issues) and the [Notes Wiki](https://github.com/adam-p/markdown-here/wiki/Development-Notes). All ideas, bugs, plans, complaints, and dreams will end up in one of those two places.
 
 Feel free to create a feature request issue if what you want isn't already there. If you'd prefer a less formal approach to floating an idea, post to the ["markdown-here" Google Group](https://groups.google.com/forum/?fromgroups=#!forum/markdown-here).
 

@@ -1,5 +1,5 @@
-Write your email in Markdown...
+Scrivi le tue email in Markdown...
 
-...and then make it pretty!
+...e poi rendile belle!
 
-Want to use Markdown for only part of your email? Just select it and convert it!
+Vuoi usare Markdown solo per una parte della tua email? Basta selezionarla e convertirla!
