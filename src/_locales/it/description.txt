@@ -1,9 +1,9 @@
-Markdown Here ti permette di scrivere email in Markdown e trasformarle (renderle belle!) prima di inviare.
+Markdown Here ti permette di scrivere email in Markdown e trasformarle (renderle belle!) prima di inviarle.
 
 Questo è ottimo per chi non ama trafficare con i pulsanti di formattazione mentre scrive una email. È particolarmente valido per i programmatori che scrivono email con codice all'interno -- supporta anche l'evidenziazione della sintassi. E per i matematici tra noi: Markdown Here interpreta anche le formule TeX.
 
-Totalmente semplice da utilizzare:
-1. Scrivi la tua email nell'editor di testo ricco del tuo client di posta usando Github-flavoured Markdown.
+Molto semplice da utilizzare:
+1. Scrivi la tua email nel ricco editor di testo del tuo client di posta usando Github-flavoured Markdown.
 2. Clicca col destro nell'area di composizione e poi clicca "Commuta Markdown".
 3. La tua email ora è bella! (Vale a dire, è stata trasformata in HTML)
 4. Se ti piace l'aspetto che ha, spediscila. Se vuoi cambiare o aggiungere qualcosa, clicca "Commuta Markdown" di nuovo per tornare al tuo originale Markdown.
@@ -11,13 +11,13 @@ Totalmente semplice da utilizzare:
 
 Markdown Here è pensato principalmente per funzionare con Gmail e Thunderbird, ma funziona molto bene anche con Yahoo e Hotmail. Inoltre, funziona ottimamente con Google Groups e Sites, l'interfaccia web di Evernote, Blogger, Wordpress, e altro ancora!
 
-Syntax highlighting note: Use fenced code blocks and specify the language name. See the project page for an example.
+Nota per la syntax highlighting: usare i Fenced Code Blocks specificando il nome del linguaggio utilizzato. Si veda la pagina del progetto per un esempio.
 
-Privacy: Markdown Here accesses and modifies web content when you activate it. It can, in theory, access other web content, but does not. It also makes no Internet requests whatsoever. Your data is modified when and where you choose, and does not leave your browser.
+Privacy: Markdown Here ha accesso e modifica il contenuto web una volta che è stato attivato. In teoria, può accedere anche ad altri contenuti, ma non lo fa. Addirittura non esegue nessuna richiesta Internet. Il testo viene modificato solo dove e quando tu scegli di farlo, e non lascia mai il tuo browser.
 
-Available as a Chrome, Firefox, Safari, Opera, and Thunderbird extension.
+Disponibile come estensione per Chrome, Firefox, Safari, Opera e Thunderbird.
 
-This is an open source project. Visit Markdown Here's Github page for full instructions, more information, bug reports, or to contribute.
+Questo è un progetto open source. Visita la pagina GitHub di Markdown Here per le istruzioni complete, ulteriori informazioni, segnalazioni di bug o per contribuire.
 
 http://markdown-here.com
 https://github.com/adam-p/markdown-here

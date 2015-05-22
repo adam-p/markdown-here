@@ -1,18 +1,18 @@
-On Wed, May 16, 2012 at 9:51 PM, Buddy <buddy@example.com> wrote:
+Mercoledì 16 Maggio, 2012 alle 9:51 PM, Buddy <buddy@example.com> ha scritto:
 
-> Hey pal!
+> Hey amico!
 
-Hi Buddy.
+Ciao bello.
 
-> Can you send me some sweet code?
+> Puoi mandarmi del buon codice?
 
-**This** is pretty great:
+**Questo** è abbastanza bello:
 
 ```clojure
 (defn hello [x] (str "Hello", x))
 (hello "Clojure")
 ```
 
-> Thanks in advance!
+> Grazie in anticipo!
 
-No problem.
+Nessun problema.

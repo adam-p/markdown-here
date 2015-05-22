@@ -15,6 +15,11 @@ Change Log
 
 * Partially [fixed bug #104](https://github.com/adam-p/markdown-here/issues/104): Pre-rendered links (especially auto-links) in code were getting converted to Markdown when rendering (so you end up with raw Markdown in your code). This is now fixed for backtick-style code (inline and block), but not for indented code blocks.
 
+* Updated translations:
+  - German: [Boris Lewandowski](https://crowdin.com/profile/bl)
+  - Spanish: [J. Ignacio Reta Sabarrós](https://crowdin.com/profile/jirsis)
+  - Italian: [Alessandro Tondo](https://crowdin.com/profile/alextoind)
+
 
 2015-04-06: v2.11.7
 -------------------

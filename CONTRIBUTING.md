@@ -86,3 +86,5 @@ If you do make any translation changes, or if you have any questions or problems
 * [Yahya Erturan](https://crowdin.com/profile/yahyaerturan)
 
 * [Boris Lewandowski](https://crowdin.com/profile/bl)
+
+* [Alessandro Tondo](https://crowdin.com/profile/alextoind)
