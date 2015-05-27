@@ -32,54 +32,6 @@ function markdownRender(mdText, userprefs, MdhMarkdownIt, hljs) {
             .replace(/\{urlmathcode\}/ig, encodeURIComponent(mathcode));
   }
 
-  /* TODO:MD
-  // Hook into some of Marked's renderer customizations
-  var markedRenderer = new marked.Renderer();
-  */
-
-  /* TODO:MD
-  var sanitizeLinkForAnchor = function(text) {
-    return text.toLowerCase().replace(/[^\w]+/g, '-');
-  };
-  */
-
-  /* TODO:MD
-  var defaultHeadingRenderer = markedRenderer.heading;
-  markedRenderer.heading = function (text, level, raw) {
-    if (userprefs['header-anchors-enabled']) {
-      // Add an anchor right above the heading. See MDH issue #93.
-      var sanitizedText = sanitizeLinkForAnchor(text);
-      var anchorLink = '<a href="#" name="' + sanitizedText + '"></a>';
-      return '<h' + level + '>' +
-             anchorLink +
-             text +
-             '</h' + level + '>\n';
-    }
-    else {
-      return defaultHeadingRenderer.call(this, text, level, raw);
-    }
-  };
-  */
-
-  /* TODO:MD
-  var defaultLinkRenderer = markedRenderer.link;
-  markedRenderer.link = function(href, title, text) {
-    // Added to fix MDH issue #57: MD links should automatically add scheme.
-    // Note that the presence of a ':' is used to indicate a scheme, so port
-    // numbers will defeat this.
-    href = href.replace(/^(?!#)([^:]+)$/, 'http://$1');
-
-    if (userprefs['header-anchors-enabled']) {
-      // Add an anchor right above the heading. See MDH issue #93.
-      if (href.indexOf('#') === 0) {
-        href = '#' + sanitizeLinkForAnchor(href.slice(1).toLowerCase());
-      }
-    }
-
-    return defaultLinkRenderer.call(this, href, title, text);
-  };
-  */
-
   /* TEMP: OLD
   var markdownitOptions = {
     gfm: true,
