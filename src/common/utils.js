@@ -584,7 +584,7 @@ function getTopURL(win, justHostname) {
 
 function asyncCallbackXHR(callback) {
   var xhr = new window.XMLHttpRequest();
-  xhr.open('HEAD', '/common/CHANGES.md');
+  xhr.open('HEAD', getLocalURL('/common/CHANGES.md'));
 
   xhr.onload = callback;
   xhr.onerror = callback;

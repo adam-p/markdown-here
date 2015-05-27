@@ -1,7 +1,14 @@
 Change Log
 ==========
 
-### **Time to pick the new logo! [Cast your vote!](https://goo.gl/forms/XTrT6FwnFo)**
+### Voting is complete and the [**new Markdown Here logo**](http://markdown-here.com/logo.html) has been chosen by the users!
+
+
+2015-05-26: v2.11.9
+-------------------
+
+* [Fixed bug #278](https://github.com/adam-p/markdown-here/issues/278): In the previous release, the `setTimeout` workaround to fix slow Chrome Beta caused Firefox to stop working. For some people. Sometimes. (But not in the unit tests. Ha.)
+  - Thanks to [georgejean](https://github.com/georgejean), [Nathan Wittstock](https://github.com/fardog), [fugo](https://github.com/fugo), [Dheeraj Bhaskar](https://github.com/dheerajbhaskar), and [robred](https://github.com/robred).
 
 
 2015-05-21: v2.11.8
