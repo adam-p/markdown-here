@@ -45,12 +45,8 @@ MIT License : http://adampritchard.mit-license.org/
   .control-group {
     float: left;
     width: 45%;
-    width: -webkit-calc(50% - 40px);
-    width: -moz-calc(50% - 40px);
     width: calc(50% - 40px);
     height: 360px;
-    height: -webkit-calc(100% - 40px);
-    height: -moz-calc(100% - 40px);
     height: calc(100% - 40px);
     margin: 10px;
     padding: 10px;
@@ -66,8 +62,6 @@ MIT License : http://adampritchard.mit-license.org/
 
   .control-group > .stretch {
     height: 280px;
-    height: -webkit-calc(100% - 80px);
-    height: -moz-calc(100% - 80px);
     height: calc(100% - 80px);
   }
 
@@ -111,12 +105,8 @@ MIT License : http://adampritchard.mit-license.org/
     right: 0;
     font-size: 1.5em;
     padding: 1em;
-    background: -webkit-linear-gradient(right top, rgb(207,182,227) 0%, rgb(255,255,255) 100%);
-    background: -moz-linear-gradient(225deg, rgb(207,182,227), rgb(255,255,255));
     background: linear-gradient(225deg, rgb(207,182,227), rgb(255,255,255));
     color: #482168;
-    -webkit-transition: opacity 1000ms;
-    -moz-transition: opacity 1000ms;
     transition: opacity 1000ms;
     opacity: 0;
     border-bottom-left-radius: 30px;
@@ -124,8 +114,6 @@ MIT License : http://adampritchard.mit-license.org/
   }
 
   #saved-msg.showing {
-    -webkit-transition: opacity 100ms;
-    -moz-transition: opacity 100ms;
     transition: opacity 100ms;
     opacity: 0.95;
   }
@@ -153,19 +141,13 @@ MIT License : http://adampritchard.mit-license.org/
   .purple {
     color: #FAF5FC;
     border: solid 1px #2d0f5a;
-    background: -webkit-gradient(linear, left top, left bottom, from(#A022A0), to(#662D91));
-    background: -moz-linear-gradient(270deg, #A022A0, #662D91);
     background: linear-gradient(270deg, #A022A0, #662D91);
   }
   .purple:hover {
-    background: -webkit-gradient(linear, left top, left bottom, from(#BC699F), to(#F98AD1));
-    background: -moz-linear-gradient(270deg, #BC699F, #F98AD1);
     background: linear-gradient(270deg, #BC699F, #F98AD1);
   }
   .purple:active {
     color: #fcd3a5;
-    background: -webkit-gradient(linear, left top, left bottom, from(#662D91), to(#A022A0));
-    background: -moz-linear-gradient(270deg, #662D91, #A022A0);
     background: linear-gradient(270deg, #662D91, #A022A0);
   }
 
@@ -243,8 +225,6 @@ MIT License : http://adampritchard.mit-license.org/
 
   .changelist-new {
     border-radius: 5px;
-    background: -webkit-gradient(linear, left center, right center, from(rgb(227, 214, 238)), to(rgb(255,255,255)));
-    background: -moz-linear-gradient(90deg, rgb(227, 214, 238), rgb(255,255,255));
     background: linear-gradient(90deg, rgb(227, 214, 238), rgb(255,255,255));
     padding-left: 0.5em;
     padding-right: 0.5em;
@@ -295,15 +275,9 @@ MIT License : http://adampritchard.mit-license.org/
 
     /* BACKGROUND GRADIENTS */
     background: #FEE1A5;
-    background: -moz-linear-gradient(top, #FFF, #FEE1A5 50%, #FFB829 51%,
-      #FEE1A5 95%, #FEE1A5);
-    background: -webkit-gradient(linear, left top, left bottom,
-      color-stop(0, #FFF), color-stop(.5, #FEE1A5), color-stop(.51, #FFB829),
-      color-stop(.95, #FEE1A5), color-stop(.96, #FEE1A5), to(#FEE1A5));
+    background: linear-gradient(to bottom, #FFF, #FEE1A5 50%, #FFB829 51%, #FEE1A5 95%, #FEE1A5);
 
     /* BORDER RADIUS */
-    -moz-border-radius: 18px;
-    -webkit-border-radius: 18px;
     border-radius: 18px;
 
     border-bottom: 1px solid #FFF;
@@ -316,27 +290,19 @@ MIT License : http://adampritchard.mit-license.org/
     text-shadow: 0px 1px 1px white;
 
     /* BOX SHADOW */
-    -moz-box-shadow: 0 1px 3px #777;
-    -webkit-box-shadow: 0 1px 3px #777;
     box-shadow: 0 1px 3px #777;
     font: italic bold 20px/28px helvetica, arial;
   }
   /* WHILE HOVERED */
   .paypal-button:hover {
     background: #FEE1A5;
-    background: -moz-linear-gradient(top, #FFF, #FEE1A5 50%,
-      #FFB829 51%, #FEE1A5 95%, #FEE1A5);
-    background: -webkit-gradient(linear, left top, left bottom,
-      color-stop(0, #FFF), color-stop(.5, #FEE1A5), color-stop(.51, #FFB829),
-      color-stop(.95, #FEE1A5), color-stop(.96, #FEE1A5), to(#FEE1A5));
-    -moz-box-shadow: 0 1px 2px black;
-    -webkit-box-shadow: 0 1px 2px black;
+    background: linear-gradient(to bottom, #FFF, #FEE1A5 50%, #FFB829 51%, #FEE1A5 95%, #FEE1A5);
+    box-shadow: 0 1px 2px black;
     cursor: pointer;
   }
   /* WHILE BEING CLICKED */
   .paypal-button:active {
-    -moz-box-shadow: 0 2px 6px black;
-    -webkit-box-shadow: 0 2px 6px black;
+    box-shadow: 0 2px 6px black;
   }
   </style>
 </head>

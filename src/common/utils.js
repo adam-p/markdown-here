@@ -128,30 +128,33 @@ function rangeIntersectsNode(range, node) {
   // adam-p: I have found that Range.intersectsNode gives incorrect results in
   // Chrome (but not Firefox). So we're going to use the fail-back code always,
   // regardless of whether the current platform implements Range.intersectsNode.
-  if (false && range.intersectsNode) {
+  /*
+  if (range.intersectsNode) {
     return range.intersectsNode(node);
   }
   else {
-    nodeRange = node.ownerDocument.createRange();
-    try {
-      nodeRange.selectNode(node);
-    }
-    catch (e) {
-      nodeRange.selectNodeContents(node);
-    }
+    ...
+  */
 
-    // Workaround for this old Mozilla bug, which is still present in Postbox:
-    // https://bugzilla.mozilla.org/show_bug.cgi?id=665279
-    var END_TO_START = node.ownerDocument.defaultView.Range.END_TO_START || window.Range.END_TO_START;
-    var START_TO_END = node.ownerDocument.defaultView.Range.START_TO_END || window.Range.START_TO_END;
-
-    return range.compareBoundaryPoints(
-              END_TO_START,
-              nodeRange) === -1 &&
-           range.compareBoundaryPoints(
-              START_TO_END,
-              nodeRange) === 1;
+  nodeRange = node.ownerDocument.createRange();
+  try {
+    nodeRange.selectNode(node);
   }
+  catch (e) {
+    nodeRange.selectNodeContents(node);
+  }
+
+  // Workaround for this old Mozilla bug, which is still present in Postbox:
+  // https://bugzilla.mozilla.org/show_bug.cgi?id=665279
+  var END_TO_START = node.ownerDocument.defaultView.Range.END_TO_START || window.Range.END_TO_START;
+  var START_TO_END = node.ownerDocument.defaultView.Range.START_TO_END || window.Range.START_TO_END;
+
+  return range.compareBoundaryPoints(
+            END_TO_START,
+            nodeRange) === -1 &&
+         range.compareBoundaryPoints(
+            START_TO_END,
+            nodeRange) === 1;
 }
 
 
@@ -734,7 +737,9 @@ function getMozStringBundle() {
 }
 
 // Load the Mozilla string bundle
+/*? if(platform!=='mozilla'){ */
 if (typeof(chrome) === 'undefined' && typeof(safari) === 'undefined') {
+/*? } */
   var g_mozStringBundle = getMozStringBundle();
 
   if (!g_mozStringBundle || Object.keys(g_mozStringBundle).length === 0) {
@@ -749,16 +754,18 @@ if (typeof(chrome) === 'undefined' && typeof(safari) === 'undefined') {
     // g_mozStringBundle is filled in
     triggerStringBundleLoadListeners();
   }
+/*? if(platform!=='mozilla'){ */
 }
+/*? } */
 
 
+/*? if(platform!=='mozilla'){ */
 // Will only succeed when called from a privileged Safari script.
 // `callback(data, err)` is passed a non-null value for err in case of total
 // failure, which should be interpreted as being called from a non-privileged
 // (content) script.
 // Otherwise `data` will contain the string bundle object.
 function getSafariStringBundle(callback) {
-  /*? if(platform!=='mozilla'){ */
 
   // Can't use Utils.functionname in this function, since the exports haven't
   // been set up at the time it's called.
@@ -833,8 +840,8 @@ function getSafariStringBundle(callback) {
       intoBundle[key] = fromObj[key].message;
     }
   }
-  /*? } */
 }
+/*? } */
 
 /*? if(platform!=='mozilla'){ */
 // Load the Safari string bundle
@@ -1111,7 +1118,9 @@ Utils.getTopURL = getTopURL;
 Utils.nextTick = nextTick;
 Utils.nextTickFn = nextTickFn;
 Utils.getMozStringBundle = getMozStringBundle;
+/*? if(platform!=='mozilla'){ */
 Utils.getSafariStringBundle = getSafariStringBundle;
+/*? } */
 Utils.registerStringBundleLoadListener = registerStringBundleLoadListener;
 Utils.getMessage = getMessage;
 Utils.utf8StringToBase64 = utf8StringToBase64;
