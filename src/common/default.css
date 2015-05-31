@@ -93,12 +93,12 @@ ul ul, ul ol, ol ul, ol ol {
   padding-left: 1em;
 }
 
-/* Use letters for sub-ordered-lists. (Like Github.) */
+/* Use Roman numerals for sub-ordered-lists. (Like Github.) */
 ol ol, ul ol {
   list-style-type: lower-roman;
 }
 
-/* Use Roman numerals for sub-sub-ordered lists. (Like Github.) */
+/* Use letters for sub-sub-ordered lists. (Like Github.) */
 ul ul ol, ul ol ol, ol ul ol, ol ol ol {
   list-style-type: lower-alpha;
 }
