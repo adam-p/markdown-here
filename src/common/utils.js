@@ -194,6 +194,7 @@ function getSelectedElementsInRange(range) {
           }
       });
 
+    /*? if(platform!=='mozilla'){ */
     /*
     // This code is probably superior, but TreeWalker is not supported by Postbox.
     // If this ends up getting used, it should probably be moved into walkDOM
@@ -211,6 +212,7 @@ function getSelectedElementsInRange(range) {
       elems.push(treeWalker.currentNode);
     }
     */
+    /*? } */
   }
 
   return elems;

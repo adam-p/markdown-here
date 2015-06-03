@@ -122,14 +122,14 @@ var ESCAPE_KEYCODE = 27;
 
 var WATCHED_PROPERTY = 'markdownHereForgotToRenderWatched';
 
-// Returns the correct selector to use when looking for the Send button. 
+// Returns the correct selector to use when looking for the Send button.
 // Returns null if forgot-to-render should not be used here.
 function getForgotToRenderButtonSelector(elem) {
   if (elem.ownerDocument.location.host.indexOf('mail.google.') >= 0) {
     return '[role="button"][tabindex="1"]';
   }
   else if (elem.ownerDocument.location.host.indexOf('inbox.google.') >= 0) {
-    return '[role="button"][tabindex="0"]';
+    return '[role="button"][tabindex="0"][jsaction$=".send"]';
   }
 
   return null;
@@ -157,7 +157,7 @@ function forgotToRenderIntervalCheck(focusedElem, MarkdownHere, MdhHtmlToText, m
   var forgotToRenderButtonSelector = getForgotToRenderButtonSelector(focusedElem);
   if (!forgotToRenderButtonSelector) {
     debugLog('forgotToRenderIntervalCheck', 'not supported');
-    return;    
+    return;
   }
 
   // If focus isn't in the compose body, there's nothing to do
@@ -189,7 +189,7 @@ function findClosestSendButton(elem) {
   // boundaries and sometimes we won't.
 
   var forgotToRenderButtonSelector = getForgotToRenderButtonSelector(elem);
-  // If we're in this function, this should not non-null, but...
+  // If we're in this function, this should be non-null, but...
   if (!forgotToRenderButtonSelector) {
     return null;
   }
@@ -243,13 +243,28 @@ function setupForgotToRenderInterceptors(composeElem, MdhHtmlToText, marked, pre
     return probablyWritingMarkdown(mdMaybe, marked, prefs);
   };
 
+  // Helper function to look for element within parents up to a certain point.
+  // We use this because sometimes a click even happens on a child element of
+  // the send button, but we still want it to count as a click on the button.
+  var isSendButtonOrChild = function(eventTarget) {
+    var elem = eventTarget;
+    while (elem && elem.nodeType === elem.ELEMENT_NODE &&
+           elem !== composeSendButton.parentNode) {
+      if (elem === composeSendButton) {
+        return true;
+      }
+      elem = elem.parentNode;
+    }
+    return false;
+  };
+
   // NOTE: We are setting the event listeners on the *parent* element of the
   // send button and compose area. This is so that we can capture and prevent
   // propagation to the actual element, thereby preventing Gmail's event
   // listeners from firing.
 
   var composeSendButtonKeyListener = function(event) {
-    if (event.target === composeSendButton &&
+    if (isSendButtonOrChild(event.target) &&
         (event.keyCode === ENTER_KEYCODE || event.keyCode === SPACE_KEYCODE) &&
         shouldIntercept()) {
       // Gmail uses keydown to trigger its send action. Firefox fires keyup even if
@@ -267,7 +282,7 @@ function setupForgotToRenderInterceptors(composeElem, MdhHtmlToText, marked, pre
   };
 
   var composeSendButtonClickListener = function(event) {
-    if (event.target === composeSendButton &&
+    if (isSendButtonOrChild(event.target) &&
         !event[Utils.MARKDOWN_HERE_EVENT] &&
         shouldIntercept()) {
       eatEvent(event);
