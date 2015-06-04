@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <!--
-Copyright Adam Pritchard 2013
+Copyright Adam Pritchard 2015
 MIT License : http://adampritchard.mit-license.org/
 -->
 
@@ -88,15 +88,12 @@ MIT License : http://adampritchard.mit-license.org/
     background-color: #FFF;
   }
 
-  #notes {
-  }
-
-  #notes ul {
+  .control-group ul, .control-group ol {
     padding-left: 30px;
   }
 
-  #notes li {
-    padding-bottom: 5px;
+  .control-group li {
+    margin-bottom: 0.3em;
   }
 
   #saved-msg {
@@ -198,14 +195,6 @@ MIT License : http://adampritchard.mit-license.org/
 
   #changelist li p {
     margin: 0;
-  }
-
-  ol > li {
-    margin-bottom: 0.3em;
-  }
-
-  #resources li {
-    margin-bottom: 0.3em;
   }
 
   #tests-link {
@@ -317,14 +306,14 @@ MIT License : http://adampritchard.mit-license.org/
   </header>
 
   <div class="horiz-groupset">
-    <div id="usage" class="control-group">
+    <div class="control-group">
       <div class="section-title" data-i18n="basic_usage">
         Basic Usage
       </div>
       <div>
         <ol>
-          <li id="need-page-reload" data-i18n="reload_restart">
-            Reload your email web page or restart your web browser.
+          <li class="mozilla-hide" data-i18n="reload_restart">
+            After installing or upgrading, reload your email web page or restart your web browser.
           </li>
           <li data-i18n="start_new_message">
             Start a new email message.
@@ -342,7 +331,7 @@ MIT License : http://adampritchard.mit-license.org/
       </div>
     </div>
 
-    <div id="resources" class="control-group">
+    <div class="control-group">
       <div class="section-title" data-i18n="resources_title">
         Resources and Links
       </div>
@@ -384,7 +373,7 @@ MIT License : http://adampritchard.mit-license.org/
             <input type="hidden" name="bn" value="PP-DonationsBF:btn_donate_LG.gif:NonHosted"/>
             <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1"/>
 
-            <input id="paypal-submit-css" class="paypal-button" type="submit" value="Donate with PayPal" alt="PayPal - The safer, easier way to pay online!"/>
+            <input class="paypal-button" type="submit" value="Donate with PayPal" alt="PayPal - The safer, easier way to pay online!"/>
             </form>
 
             <a href="http://markdown-here.com/about.html" target="_blank" data-i18n="other_donation_options">
@@ -397,7 +386,7 @@ MIT License : http://adampritchard.mit-license.org/
     </div>
   </div>
 
-  <div id="options-container">
+  <div>
 
     <div class="horiz-groupset">
 
@@ -452,7 +441,7 @@ MIT License : http://adampritchard.mit-license.org/
         <div class="section-title" data-i18n="notes_title">
           Notes
         </div>
-        <div id="notes">
+        <div>
           <ul>
             <li data-i18n="note_options_sync">Changes are automatically saved and synchronized (if sync is enabled in your browser).</li>
             <li data-i18n="note_syntax_styles_after_primary">The syntax highlighting styles are applied after the primary styling, and so take precedence.</li>
@@ -481,7 +470,7 @@ MIT License : http://adampritchard.mit-license.org/
           </button>
         </div>
 
-        <div id="notes">
+        <div>
           <p>
             <span data-i18n="tex_math_privacy_heading"><strong>Privacy Issues:</strong></span>
             <ul>
@@ -541,7 +530,7 @@ MIT License : http://adampritchard.mit-license.org/
         <div id="hotkey-key-warning" class="warning hidden" data-i18n="hotkey_warning">
           Is the key an alphanumeric value?
         </div>
-        <div id="notes">
+        <div>
           <ul>
             <li data-i18n="hotkey_note_1">
               Chrome: You must reload your email web page for the new hotkey setting to take effect.
@@ -564,14 +553,14 @@ MIT License : http://adampritchard.mit-license.org/
 
     </div><!-- /.horiz-groupset -->
 
-  </div><!-- /#options-container -->
+  </div><!-- /options container -->
 
   <div id="changelist-container">
     <div id="changelist">
     </div>
   </div>
 
-  <div id="extra-options-container">
+  <div>
     <div class="horiz-groupset">
 
       <div class="control-group">
@@ -635,7 +624,7 @@ MIT License : http://adampritchard.mit-license.org/
       </div>
 
     </div><!-- /.horiz-groupset -->
-  </div><!-- /#extra-options-container -->
+  </div><!-- /extra options container -->
 
   <footer>
     <p data-i18n="footer_1">

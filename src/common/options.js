@@ -174,11 +174,10 @@ function showPlatformElements() {
   /*? if(platform!=='mozilla'){ */
   if (typeof(chrome) !== 'undefined' && typeof(chrome.extension) !== 'undefined') {
     // Webkit-derived platforms
-    $('#need-page-reload').css('display', 'none');
   }
   else /*? } */ {
     // Mozilla-derived platforms
-    $('#need-page-reload').css('display', '');
+    $('.mozilla-hide').css('display', 'none');
   }
 }
 
@@ -405,15 +404,6 @@ function showDonatePlea() {
   var $plea = $pleas.eq(choice);
   var pleaId = $plea.attr('id');
   var submitType = $plea.data('submit-type');
-
-  if (submitType === 'paypal-submit-image') {
-    $('#paypal-submit-image').show();
-    $('#paypal-submit-css').hide();
-  }
-  else {
-    $('#paypal-submit-image').hide();
-    $('#paypal-submit-css').show();
-  }
 
   $plea.removeClass('donate-plea-hidden');
   $('#donate-button input[name="item_number"]').prop('value', 'options-page-'+pleaId);
