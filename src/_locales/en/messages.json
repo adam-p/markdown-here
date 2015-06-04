@@ -101,7 +101,7 @@
     "message": "Basic Usage"
   },
   "options_page__reload_restart": {
-    "message": "Reload your email web page or restart your web browser.",
+    "message": "After installing or upgrading, reload your email web page or restart your web browser.",
     "description": "A step in the basic usage instructions"
   },
   "options_page__start_new_message": {
