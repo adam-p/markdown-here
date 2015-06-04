@@ -276,7 +276,7 @@ function updateHandler(currVer) {
       var postTabRestoredOptionsOpen = function() {
         document.removeEventListener('SSTabRestored', tabRestored);
 
-        var optionsURL = 'resource://markdown_here_common/options.html';
+        var optionsURL = 'resource://markdown_here_common/options-page/options.html';
         if (lastVersion) {
           // If this is an upgrade, show the changelist
           optionsURL += '?prevVer=' + lastVersion;

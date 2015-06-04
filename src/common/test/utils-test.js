@@ -253,7 +253,7 @@ describe('Utils', function() {
         done();
       };
 
-      Utils.getLocalFile('../options.html', 'text/html', callback);
+      Utils.getLocalFile('../options-page/options.html', 'text/html', callback);
     });
 
     it('should correctly handle absence of optional argument', function(done) {
@@ -264,7 +264,7 @@ describe('Utils', function() {
         done();
       };
 
-      Utils.getLocalFile('../options.html', callback);
+      Utils.getLocalFile('../options-page/options.html', callback);
     });
 
     it('should supply an error arg to callback if file not found', function(done) {
@@ -308,7 +308,7 @@ describe('Utils', function() {
         done();
       };
 
-      var url = Utils.getLocalURL('/common/options.html');
+      var url = Utils.getLocalURL('/common/options-page/options.html');
       Utils.getLocalFile(url, 'text/html', callback);
     });
   });

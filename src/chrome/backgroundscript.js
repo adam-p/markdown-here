@@ -27,7 +27,7 @@ function upgradeCheck() {
   OptionsStore.get(function(options) {
     var appDetails = chrome.app.getDetails();
 
-    var optionsURL = '/common/options.html';
+    var optionsURL = '/common/options-page/options.html';
 
     if (typeof(options['last-version']) === 'undefined') {
       // Update our last version. Only when the update is complete will we take

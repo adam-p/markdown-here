@@ -49,7 +49,7 @@ function onLoad() {
   // Get the available highlight.js styles.
   xhr = new XMLHttpRequest();
   xhr.overrideMimeType('application/json');
-  xhr.open('GET', 'highlightjs/styles/styles.json');
+  xhr.open('GET', '../highlightjs/styles/styles.json');
   xhr.onreadystatechange = function() {
     if (this.readyState === this.DONE) {
       // Assume 200 OK -- it's just a local call
@@ -117,7 +117,7 @@ function onLoad() {
   // of extension packages.
 
   // Check if our test file exists.
-  Utils.getLocalFile('./test/index.html', 'text/html', function(_, err) {
+  Utils.getLocalFile('../test/index.html', 'text/html', function(_, err) {
     // The test files aren't present, so hide the button.
     if (err) {
       // The test files aren't present, so hide the button.
@@ -161,8 +161,8 @@ function localize() {
     // density. This saves us from having to make the `img` tags in the
     // translated content more complex.
     if (window.devicePixelRatio === 2) {
-      $('img[src="images/icon16.png"]').css('width', '16px')
-                                       .attr('src', 'images/icon16@2x.png');
+      $('img[src="../images/icon16.png"]').css('width', '16px')
+                                          .attr('src', '../images/icon16@2x.png');
     }
   });
 }
@@ -348,7 +348,7 @@ function cssSyntaxSelectChange() {
   // Get the CSS for the selected theme.
   var xhr = new XMLHttpRequest();
   xhr.overrideMimeType('text/css');
-  xhr.open('GET', 'highlightjs/styles/'+selected);
+  xhr.open('GET', '../highlightjs/styles/'+selected);
   xhr.onreadystatechange = function() {
     if (this.readyState === this.DONE) {
       // Assume 200 OK -- it's just a local call
@@ -363,7 +363,7 @@ function loadChangelist() {
   xhr.overrideMimeType('text/plain');
 
   // Get the changelist from a local file.
-  xhr.open('GET', 'CHANGES.md');
+  xhr.open('GET', '../CHANGES.md');
   xhr.onreadystatechange = function() {
     if (this.readyState === this.DONE) {
       // Assume 200 OK -- it's just a local call

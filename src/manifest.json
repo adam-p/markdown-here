@@ -36,5 +36,5 @@
     },
     "default_title": "__MSG_toggle_button_tooltip__"
   },
-  "options_page": "common/options.html"
+  "options_page": "common/options-page/options.html"
 }
