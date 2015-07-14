@@ -4,11 +4,13 @@ Change Log
 ### Voting is complete and the [**new Markdown Here logo**](http://markdown-here.com/logo.html) has been chosen by the users!
 
 
-2015-06-xx: v2.11.10
+2015-xx-yy: v2.11.10
 --------------------
 
 * [Fixed bug #283](https://github.com/adam-p/markdown-here/issues/283): Forgot-to-render detection was broken for Google Inbox. Thanks to [Marvin R.](https://github.com/therealmarv).
   - If you find that the forgot-to-render detection gets broken for the Gmail or Google Inbox web interfaces, please post to the ["markdown-here" Google Group](https://groups.google.com/group/markdown-here) or create [an issue in the Github project](https://github.com/adam-p/markdown-here/issues). The MDH code that hooks into the web UI is brittle and might break when Google changes stuff.
+
+* [Fixed bug #288](https://github.com/adam-p/markdown-here/issues/288): Some character combinations involving a dollar sign in inline code would render incorrectly. Thanks to [rfulkerson](https://github.com/rfulkerson).
 
 
 2015-05-26: v2.11.9

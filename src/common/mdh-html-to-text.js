@@ -352,7 +352,12 @@ function convertHTMLtoMarkdown(tag, html) {
       });
 
     for (var i = 0; i < htmlToRestore.length; i++) {
-      html = html.replace(htmlToRestore[i][0], htmlToRestore[i][1]);
+      html = html.replace(htmlToRestore[i][0], function() {
+          // The replacement argument to `String.replace()` has some magic values: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/String/replace#Specifying_a_string_as_a_parameter
+          // Because we don't control the content of that argument, we either
+          // need to escape dollar signs in it, or use the function version.
+          return htmlToRestore[i][1];
+        });
     }
   }
   else {

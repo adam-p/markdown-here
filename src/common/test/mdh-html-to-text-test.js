@@ -169,6 +169,14 @@ describe('MdhHtmlToText', function() {
       expect(get(html)).to.equal(target);
     });
 
+    // Test the fix for bug https://github.com/adam-p/markdown-here/issues/288
+    // Use of dollar sign in inline code producing odd results
+    it('should properly handle a dollar sign in inline code', function() {
+      var html = '`$`';
+      var target = '`$`';
+      expect(get(html)).to.equal(target);
+    });
+
   });
 
   describe('MdhHtmlToText (check-for-MD mode)', function() {
