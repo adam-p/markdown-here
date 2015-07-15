@@ -1,10 +1,10 @@
 Markdown Here te permite escribir correo electrónico en Markdown y renderizarlo (¡hacerlo bonito!) antes de enviar.
 
-Esto es estupendo para cualquiera al que no le guste juguetear con los botones de formato mientras escribe un correo electrónico. Es especialmente bueno para programadores que escriben correos electrónicos con código fuente en ellos - incluso soporte resaltado sintáctico. Y para los matemáticos entre nosotros: Markdown Here también renderizará las fórmulas TeX.
+Esto es estupendo para cualquiera al que no le gusta juguetear con los botones de formato mientras escribe un correo electrónico. Es especialmente bueno para programadores que escriben correos electrónicos con código fuente en ellos - incluso soporta el resaltado sintáctico. Y para los matemáticos: Markdown Here también renderizará las fórmulas TeX.
 
 Totalmente fácil de usar:
-1. Escribe tu correo electrónico en el editor de texto enriquecido de tu cliente de correo electrónico usando Markdown con sabor a Github.
-2. Haz clic con el botón derecho en el área de escritura y entonces clic en "Markdown Toggle".
+1. Escribe tu correo electrónico en el editor de texto enriquecido de tu cliente de correo usando Markdown con sabor a Github.
+2. Haz clic con el botón derecho en el área de escritura y después en "Markdown Toggle".
 3. ¡Ahora tu correo electrónico es bonito! (Esto es, ha sido renderizado a HTML).
 4. Si te gusta cómo ha quedado, simplemente envíalo. Si quieres cambiarlo o añadir algo, haz clic en "Markdown Toggle" de nuevo para volver a tu Markdown original.
 5. Repetir tantas veces como sea necesario.
@@ -13,7 +13,7 @@ Markdown Here está enfocado principalmente para trabajar con Gmail y Thunderbir
 
 Nota de resaltado de sintaxis: Usa secciones de código delimitadas y especifica el lenguaje. Consulta la página del proyecto para ver un ejemplo.
 
-Privacidad: Markdown Here accede y modifica el contenido web cuando lo activas. Puede, en teoría, acceder a otros contenidos web, pero no lo hace. Tampoco hace ninguna petición web. Tu información es modificada cuando y donde tu elijas, y no sale de tu navegador.
+Privacidad: Markdown Here accede y modifica el contenido de internet cuando lo activas. Puede, en teoría, acceder a otros contenidos de internet, pero no lo hace. Tampoco hace ninguna petición a la internet. Tu información es modificada cuando y donde tu elijas, y no sale de tu navegador.
 
 Disponible como extensión para Chrome, Firefox, Safari, Opera y Thunderbird.
 
