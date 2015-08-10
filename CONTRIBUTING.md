@@ -88,3 +88,6 @@ If you do make any translation changes, or if you have any questions or problems
 * [Boris Lewandowski](https://crowdin.com/profile/bl)
 
 * [Alessandro Tondo](https://crowdin.com/profile/alextoind)
+
+* [Darío Hereñú](https://github.com/kant)
+
