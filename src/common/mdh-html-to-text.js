@@ -1,5 +1,5 @@
 /*
- * Copyright Adam Pritchard 2013
+ * Copyright Adam Pritchard 2015
  * MIT License : http://adampritchard.mit-license.org/
  */
 
@@ -155,7 +155,11 @@ MdhHtmlToText.prototype._preprocess = function() {
       // In the middle:
       .replace(/(<\/div>)((?!<div\b)[\s\S]+?)(<div\b[^>]*>)/ig, '$1<div>$2</div>$3')
       // At the end:
-      .replace(/([^>]+)$/i, '<div>$1</div>')
+      // Note: The original, simpler form of this regex -- `([^>]+)$/` was
+      // horribly slow. The new form is fast for both positive and negative
+      // matches. I can't pretend to entirely understand why.
+      // More info: https://stackoverflow.com/questions/31952381/end-of-string-regex-match-too-slow
+      .replace(/^(?=([\s\S]*>))\1([^>]+)$/, '$1<div>$2</div>')
 
       // empty <div> between other <div> elems gets removed
       .replace(/(<\/div>)<div\b[^>]*><\/div>(<div[^>]*>)/ig, '$1$2')

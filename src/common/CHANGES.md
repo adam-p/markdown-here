@@ -7,6 +7,9 @@ Change Log
 2015-xx-yy: v2.11.10
 --------------------
 
+* [Fixed bug #289](https://github.com/adam-p/markdown-here/issues/289): With forgot-to-render detection enabled, sending a large email could result in MDH causing the mail client to hang. (The HTML-to-text processing code had a bad regex.)
+  - Thanks to [r2evans](https://github.com/r2evans), [Dave Tapley](https://github.com/dukedave), and [Eugene Fryntov](https://github.com/efryntov) for reporting and helping to diagnose the problem. Also thanks to [georg](https://stackoverflow.com/users/989121/georg) on StackOverflow for helping me to [understand and improve](https://stackoverflow.com/questions/31952381/end-of-string-regex-match-too-slow) the offending regex.
+
 * [Fixed bug #283](https://github.com/adam-p/markdown-here/issues/283): Forgot-to-render detection was broken for Google Inbox. Thanks to [Marvin R.](https://github.com/therealmarv).
   - If you find that the forgot-to-render detection gets broken for the Gmail or Google Inbox web interfaces, please post to the ["markdown-here" Google Group](https://groups.google.com/group/markdown-here) or create [an issue in the Github project](https://github.com/adam-p/markdown-here/issues). The MDH code that hooks into the web UI is brittle and might break when Google changes stuff.
 
