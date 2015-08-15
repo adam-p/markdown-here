@@ -329,24 +329,55 @@ function hasParentElementOfTagName(element, tagName) {
 }
 
 
-function isWrapperElem(elem) {
-  // Make sure the candidate is an element node
-  if (elem.nodeType === elem.ELEMENT_NODE) {
-    // A MDH wrapper has a child element with a specially prefixed title.
-    var rawHolder = elem.querySelector('[title^="' + WRAPPER_TITLE_PREFIX + '"]');
+// Look for valid raw-MD-holder element under `elem`. Only MDH wrappers will
+// have such an element.
+// Returns null if no raw-MD-holder element is found; otherwise returns that element.
+function findElemRawHolder(elem) {
+  // A raw-MD-holder element has a specially prefixed title and must be an
+  // immediate child of `elem`.
+  //
+  // To restrict our selector to only immediate children of elem, we would
+  // use `:scope > whatever`, but scope is not supported widely enough yet.
+  // See: https://developer.mozilla.org/en-US/docs/Web/CSS/:scope#Browser_compatibility
+  //
+  // If we just take the first `querySelector` result, we may get the wrong
+  // raw-MD-holder element -- a grandchild -- and incorrectly assume that
+  // `elem` is not a wrapper element. So we'll check all query results and
+  // only return false if none of them are immediate children.
+  // Here's an example of a failure case email if we didn't do that:
+  //     New rendered MD in a reply here.
+  //     On Thu, Aug 13, 2015 at 9:08 PM, Billy Bob wrote:
+  //     | Rendered MD in original email here.
+  //     | [invisible raw MD holder elem for original email]
+  //     [invisible raw MD holder elem for reply]
+  // `querySelector` would return the holder inside the original email.
+  // This scenario is issue #297 https://github.com/adam-p/markdown-here/issues/297
 
-    if (rawHolder &&
-        // The above `querySelector` will also look at grandchildren of
+  var rawHolders = elem.querySelectorAll('[title^="' + WRAPPER_TITLE_PREFIX + '"]');
+
+  for (var i = 0; i < rawHolders.length; i++) {
+    if (// The above `querySelector` will also look at grandchildren of
         // `elem`, which we don't want.
-        rawHolder.parentNode === elem &&
+        rawHolders[i].parentNode === elem &&
         // Skip all wrappers that are in a `blockquote`. We don't want to revert
         // Markdown that was sent to us.
         !hasParentElementOfTagName(elem, 'BLOCKQUOTE')) {
-      return true;
+      return rawHolders[i];
     }
   }
 
-  return false;
+  return null;
+}
+
+// Determine if the given element is a MDH wrapper element.
+function isWrapperElem(elem) {
+  return true &&
+    // Make sure the candidate is an element node
+    elem.nodeType === elem.ELEMENT_NODE &&
+    // And is not a blockquote, so we ignore replies
+    elem.tagName.toUpperCase() !== 'BLOCKQUOTE' &&
+    // And has a raw-MD-holder element
+    findElemRawHolder(elem) !== null;
 }
 
 
@@ -480,7 +511,7 @@ function renderMarkdown(focusedElem, selectedRange, markdownRenderer, renderComp
 
 // Revert the rendered Markdown wrapperElem back to its original form.
 function unrenderMarkdown(wrapperElem) {
-  var rawHolder = wrapperElem.querySelector('[title^="' + WRAPPER_TITLE_PREFIX + '"]');
+  var rawHolder = findElemRawHolder(wrapperElem);
   // Not checking for success of that call, since we shouldn't be here if there
   // isn't a wrapper.
 

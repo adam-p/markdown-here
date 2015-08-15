@@ -1,19 +1,22 @@
 Change Log
 ==========
 
-### Voting is complete and the [**new Markdown Here logo**](http://markdown-here.com/logo.html) has been chosen by the users!
-
 
 2015-xx-yy: v2.11.10
 --------------------
 
-* [Fixed bug #289](https://github.com/adam-p/markdown-here/issues/289): With forgot-to-render detection enabled, sending a large email could result in MDH causing the mail client to hang. (The HTML-to-text processing code had a bad regex.)
+* [Fixed bug #297](https://github.com/adam-p/markdown-here/issues/297): Unrendering an email that is a reply to an email that was itself rendered with MDH would fail (if the original email were visible, like with Thunderbird or when it's expanded in Gmail).
+  - Thanks to [Dave Tapley](https://github.com/dukedave) for creating a great video that illustrated the problem and how to reproduce it.
+  - Repeatedly trigger this bug could also lead to the next bug...
+
+* [Fixed bug #289](https://github.com/adam-p/markdown-here/issues/289): With forgot-to-render detection enabled, sending a large email could result in MDH causing the mail client to hang. 
   - Thanks to [r2evans](https://github.com/r2evans), [Dave Tapley](https://github.com/dukedave), and [Eugene Fryntov](https://github.com/efryntov) for reporting and helping to diagnose the problem. Also thanks to [georg](https://stackoverflow.com/users/989121/georg) on StackOverflow for helping me to [understand and improve](https://stackoverflow.com/questions/31952381/end-of-string-regex-match-too-slow) the offending regex.
 
 * [Fixed bug #283](https://github.com/adam-p/markdown-here/issues/283): Forgot-to-render detection was broken for Google Inbox. Thanks to [Marvin R.](https://github.com/therealmarv).
   - If you find that the forgot-to-render detection gets broken for the Gmail or Google Inbox web interfaces, please post to the ["markdown-here" Google Group](https://groups.google.com/group/markdown-here) or create [an issue in the Github project](https://github.com/adam-p/markdown-here/issues). The MDH code that hooks into the web UI is brittle and might break when Google changes stuff.
 
-* [Fixed bug #288](https://github.com/adam-p/markdown-here/issues/288): Some character combinations involving a dollar sign in inline code would render incorrectly. Thanks to [rfulkerson](https://github.com/rfulkerson).
+* [Fixed bug #288](https://github.com/adam-p/markdown-here/issues/288): Some character combinations involving a dollar sign in inline code would render incorrectly. 
+  - Thanks to [rfulkerson](https://github.com/rfulkerson) for reporting the problem.
 
 
 2015-05-26: v2.11.9
