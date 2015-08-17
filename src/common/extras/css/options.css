@@ -1,0 +1,51 @@
+#brand-logo {
+    position: relative;
+    top: -5px;
+    display: inline-block;
+}
+
+.navbar {
+    margin-bottom: 5px;
+}
+
+.css-textarea {
+    font-family: monospace;
+    font-size: 0.9em;
+
+    resize: vertical;
+}
+
+#rendered-markdown {
+    height: 400px;
+    width: 100%;
+
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+         -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+
+    resize: vertical;
+}
+
+#markdown-toggle-button, #highlight-dropdown, #primary-reset-button {
+    float: right;
+}
+
+#form-enable-math-text {
+    font-family: monospace;
+    font-size: 0.9em;
+}
+
+section dd {
+    margin-left: 30px;
+    margin-bottom: 5px;
+}
+
+.checkbox .help-block {
+    padding-left: 20px;
+}
+

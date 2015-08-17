@@ -1,0 +1,174 @@
+<h2>Settings</h2>
+<div class="row">
+    <div class="col-xs-12">
+
+        <h4>
+            Markdown Options
+        </h4>
+
+        <div class="form-group checkbox">
+            <label>
+                <span class="inline-checkbox">
+                    <input type="checkbox">
+                </span>
+                Forgot-To-Render checking
+            </label>
+            <small class="help-block">
+                <p>
+                    When you send an email, this checks the content to see if it looks like you wrote it in Markdown, but forgot to render it (i.e., click "Markdown Toggle") before sending. This may need to be disabled if it interferes with your ability to send email.
+                </p>
+                <p>
+                    Currently only supported in the Gmail web interface and Thunderbird (and Postbox and Icedove).
+                </p>
+                <p>
+                    If this feature stops working for you, please let us know by posting to the <a href="https://groups.google.com/group/markdown-here" target="_blank">"markdown-here" Google Group</a> or creating <a href="https://github.com/adam-p/markdown-here/issues" target="_blank">an issue in the Github project</a>. (Hooking into the email sending web UI is brittle and will sometimes break.)
+                </p>
+            </small>
+        </div>
+
+        <div class="form-group checkbox">
+            <label>
+                <span class="inline-checkbox">
+                    <input type="checkbox">
+                </span>
+                Automatic header anchors
+            </label>
+            <small class="help-block">
+                <p>
+                    This is great if you want to put a table of contents or other internal links into your content. <a href="https://github.com/adam-p/markdown-here/wiki/Tips-and-Tricks#wiki-header-anchors" target="_blank">Learn about how to use it in the MDH wiki.</a><br>
+                    It's disabled by default because it <a href="https://github.com/adam-p/markdown-here/issues/155" target="_blank">creates visual noise in Thunderbird</a>. (And most people probably won't use the feature.)
+                </p>
+            </small>
+        </div>
+
+        <div class="form-group checkbox">
+            <label>
+                <span class="inline-checkbox">
+                    <input type="checkbox">
+                </span>
+                GFM line breaks
+            </label>
+            <small class="help-block">
+                Enable Github Flavoured Markdown like line-breaking behaviour.
+            </small>
+        </div>
+
+        <hr/>
+
+        <h4>
+            Tex/Math Options
+        </h4>
+
+        <div class="form-group">
+            <label for="form-enable-math-text">
+                TeX Mathematical Formulae Replacement
+            </label>
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon2">
+                    <input id="form-enable-math-checkbox" type="checkbox" aria-label="...">
+                </span>
+                <input type="text" id="form-enable-math-text" class="form-control" aria-describedby="basic-addon2">
+            </div>
+            <small class="help-block">
+            <p>
+                <strong>Privacy Issues:</strong>
+                <ul>
+                    <li>
+                        To generate the image for the formula, a request is sent to Google. That effectively means that you are sharing your formula with Google. It also means that recipients of your message will be making a request to Google to have the image rendered.
+                    </li>
+                    <li>
+                        If you customize the formula rendering tag, you should use a secure (https://) path. Not all rendering services provide a secure option.
+                    </li>
+                </ul>
+            </p>
+            <p>
+                <strong>Customization and Use:</strong>
+                <ul>
+                    <li>
+                        If this feature is enabled, text between dollar signs <code>$</code> will be interpreted as mathematical formulae. For example, <code>$\Delta$</code> would be rendered as a delta symbol.
+                    </li>
+                    <li>
+                        For render customization options, see the <a href="https://developers.google.com/chart/infographics/docs/formulas" target="_blank">Google Charts documentation</a> for this service.
+                    </li>
+                    <li>
+                        A good resource for creating TeX formulae is the <a href="https://www.codecogs.com/latex/about.php" target="_blank">CodeCogs Equation Editor</a>.
+                    </li>
+                    <li>
+                        Formulae are rendered to images, so email recipients will have to enable images to be shown to see the rendering.
+                    </li>
+                    <li>
+                        If you customize the rendering tag, you can (and should) use either or both of <code>{mathcode}</code> and <code>{urlmathcode}</code> as placeholders.
+                        <ul>
+                            <li>
+                                <code>{mathcode}</code>: The text between the <code>$</code> symbols — i.e., the raw TeX formula; like <code>\Delta</code>.
+                            </li>
+                            <li>
+                                <code>{urlmathcode}</code>: The URL-encoded form of the TeX formula; like <code>%5CDelta</code>.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        If you customize the <code>&lt;img&gt;</code> tag, you should include an <code>alt</code> attribute that has as human-readable a value as possible, like <code>{mathcode}</code>. This value of this attribute will be used for the plaintext version of the email (when sent from Gmail and Thunderbird), and used by screen readers for sight-impaired recipients.
+                    </li>
+                </ul>
+            </p>
+            </small>
+        </div>
+
+    </div>
+</div>
+<hr/>
+<div class="row">
+    <div class="col-xs-12 col-md-6">
+        <h3>
+            Primary CSS
+            <button id="primary-reset-button" class="btn btn-default" type="button">
+                Reset to Default
+            </button>
+        </h3>
+        <div class="input-group">
+            <!-- cols is such a large value as it is resized into the viewport size automatically -->
+            <textarea
+                id="primary-css-edit" class="css-textarea form-control"
+                rows="10" cols="1000"
+            ></textarea>
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-6">
+        <h3>
+            Highlighting CSS
+            <div id="highlight-dropdown" class="dropdown">
+                <button type="button"
+                    id="highlight-dropdown-button" class="btn btn-default dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                    Dropdown
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="highlight-dropdown-button">
+                </ul>
+            </div>
+        </h3>
+        <div class="input-group">
+            <!-- cols is such a large value as it is resized into the viewport size automatically -->
+            <textarea
+                id="highlight-css-edit" class="css-textarea form-control"
+                rows="10" cols="1000"
+            ></textarea>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <h3>
+            Preview
+            <button id="markdown-toggle-button" class="btn btn-default" type="button">
+                Reload Preview
+            </button>
+        </h3>
+        <iframe id="rendered-markdown" src="options-iframe.html">
+            <!-- rendered Markdown preview will appear here -->
+      </iframe>
+    </div>
+</div>
+<hr/>
