@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <!--
-Copyright Adam Pritchard 2013
+Copyright Adam Pritchard 2015
 MIT License : http://adampritchard.mit-license.org/
 -->
 
@@ -15,9 +15,14 @@ MIT License : http://adampritchard.mit-license.org/
   <title data-i18n="page_title">Markdown Here Options</title>
 
   <style type="text/css">
+  /*
+  The palette can be seen here: http://paletton.com/#uid=64G0u0ks8sIhj-JmfuftVmIzshO
+  */
+
   body {
     font-family: Tahoma, Helvetica, arial, freesans, clean, sans-serif;
     font-size: 14px;
+    color: #14021F;
   }
 
   .pagehead {
@@ -25,8 +30,8 @@ MIT License : http://adampritchard.mit-license.org/
   }
 
   h1 {
-    color: #482168;
-    text-shadow: 1px 1px 1px rgba(72, 33, 104, 0.23);
+    color: #3E055F;
+    text-shadow: 1px 1px 1px #945AB7;
     vertical-align: top;
     /* Needs to match the height of the image */
     line-height: 48px;
@@ -80,8 +85,8 @@ MIT License : http://adampritchard.mit-license.org/
   .section-title {
     font-size: 1.2em;
     font-weight: bold;
-    color: #482168;
-    text-shadow: 1px 1px 1px rgba(72, 33, 104, 0.23);
+    color: #3E055F;
+    text-shadow: 1px 1px 1px #945AB7;
   }
 
   .iframe-container {
@@ -105,8 +110,8 @@ MIT License : http://adampritchard.mit-license.org/
     right: 0;
     font-size: 1.5em;
     padding: 1em;
-    background: linear-gradient(225deg, rgb(207,182,227), rgb(255,255,255));
-    color: #482168;
+    background: linear-gradient(225deg, #D4AFEA, rgb(255,255,255));
+    color: #510E79;
     transition: opacity 1000ms;
     opacity: 0;
     border-bottom-left-radius: 30px;
@@ -139,23 +144,22 @@ MIT License : http://adampritchard.mit-license.org/
     top: 1px;
   }
   .purple {
-    color: #FAF5FC;
-    border: solid 1px #2d0f5a;
-    background: linear-gradient(270deg, #A022A0, #662D91);
+    color: #EEE;
+    border: solid 1px #3E055F;
+    background: linear-gradient(270deg, #6A1A99, #510E79);
   }
   .purple:hover {
-    background: linear-gradient(270deg, #BC699F, #F98AD1);
+    background: linear-gradient(270deg, #7A37A1, #6A1A99);
   }
   .purple:active {
-    color: #fcd3a5;
-    background: linear-gradient(270deg, #662D91, #A022A0);
+    background: linear-gradient(270deg, #510E79, #6A1A99);
   }
 
   #css-syntax-select {
     font-size: 1em;
     border-radius: .5em;
     text-shadow: 0 1px 1px rgba(0, 0, 0, .3);
-    background: #A022A0;
+    background: #510E79;
     padding: 0.2em;
     outline: none;
   }
@@ -178,7 +182,7 @@ MIT License : http://adampritchard.mit-license.org/
   input[type="text"] {
     width: 90%;
     font-size: 1em;
-    background-color: rgba(249, 138, 209, 0.35);
+    background-color: #F6E6FF;
   }
 
   .warning {
@@ -225,7 +229,7 @@ MIT License : http://adampritchard.mit-license.org/
 
   .changelist-new {
     border-radius: 5px;
-    background: linear-gradient(90deg, rgb(227, 214, 238), rgb(255,255,255));
+    background: linear-gradient(90deg, #E7D7F1, rgb(255,255,255));
     padding-left: 0.5em;
     padding-right: 0.5em;
     padding-bottom: 0.1em;
@@ -233,7 +237,7 @@ MIT License : http://adampritchard.mit-license.org/
 
   .changelist-new h2:first-child {
     color: #FFF;
-    text-shadow: 1px 1px 2px black, 0 0 1em rgb(132, 41, 209), 0 0 0.2em rgb(132, 41, 209);
+    text-shadow: 1px 1px 2px black, 0 0 1em #510E79, 0 0 0.2em #510E79;
     margin-bottom: 0;
   }
 
@@ -244,7 +248,7 @@ MIT License : http://adampritchard.mit-license.org/
 
   hr {
     border: 0;
-    border-top: 1px dashed #482168;
+    border-top: 1px dashed #945AB7;
     width: 90%;
   }
 
