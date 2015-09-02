@@ -37,6 +37,18 @@ MIT License : http://adampritchard.mit-license.org/
     line-height: 48px;
   }
 
+  img.text-align {
+    vertical-align: middle;
+  }
+
+  img[src^="images/icon32"] {
+    width: 16px;
+  }
+
+  img[src^="images/icon96"] {
+    width: 48px;
+  }
+
   textarea {
     font-size: 0.8em;
   }
@@ -315,7 +327,7 @@ MIT License : http://adampritchard.mit-license.org/
 
   <header id="pagehead" class="pagehead">
     <h1>
-      <img style="width:48px" src="images/icon128.png"/>
+      <img class="text-align" src="images/icon96.png"/>
       <span data-i18n="page_title">Markdown Here Options</span>
     </h1>
   </header>
@@ -337,7 +349,7 @@ MIT License : http://adampritchard.mit-license.org/
             Type some Markdown into the email.<br/>Try this: <code>_Hello_ `Markdown` **Here**!</code>
           </li>
           <li data-i18n="click_toggle">
-            Right-click in the email and then click "Markdown Toggle". (Or click the <img style="width:16px" src="images/icon32-button-monochrome.png"/> button on the toolbar.<span class="hotkey-display-wrapper"> Or press <span class="hotkey-display"><kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>M</kbd></span></span>)
+            Right-click in the email and then click "Markdown Toggle". (Or click the <img class="text-align" src="images/icon32-button-monochrome.png"/> button on the toolbar.<span class="hotkey-display-wrapper"> Or press <span class="hotkey-display"><kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>M</kbd></span></span>)
           </li>
           <li data-i18n="pretty_cool">
             The message should now look pretty cool. Send it to your friends!

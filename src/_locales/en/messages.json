@@ -113,7 +113,7 @@
     "description": "A step in the basic usage instructions"
   },
   "options_page__click_toggle": {
-    "message": "Right-click in the email and then click \"Markdown Toggle\". (Or click the <img src=\"images/icon16.png\"/> button on the toolbar.<span class=\"hotkey-display-wrapper\"> Or press <span class=\"hotkey-display\"><kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>M</kbd></span></span>)",
+    "message": "Right-click in the email and then click \"Markdown Toggle\". (Or click the <img class=\"text-align\" src=\"images/icon32-button-monochrome.png\"/> button on the toolbar.<span class=\"hotkey-display-wrapper\"> Or press <span class=\"hotkey-display\"><kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>M</kbd></span></span>)",
     "description": "A step in the basic usage instructions"
   },
   "options_page__pretty_cool": {
