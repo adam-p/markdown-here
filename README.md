@@ -244,7 +244,7 @@ MIT License: http://adampritchard.mit-license.org/ or see [the `LICENSE` file](h
 
 ### Logo
 
-Copyright 2015, [Austin Anderson](http://protractor.ninja/). Licensed Markdown Here under the [MDH contributor license agreement](https://github.com/adam-p/markdown-here/blob/master/CLA-individual.md).
+Copyright 2015, [Austin Anderson](http://protractor.ninja/). Licensed to Markdown Here under the [MDH contributor license agreement](https://github.com/adam-p/markdown-here/blob/master/CLA-individual.md).
 
 ### Other images
 
