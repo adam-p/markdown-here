@@ -101,7 +101,7 @@
     "message":"Uso básico"
   },
   "options_page__reload_restart":{
-    "message":"Recarga la página web de tu correo electrónico o reinicia tu navegador web.",
+    "message":"After installing or upgrading, reload your email web page or restart your web browser.",
     "description":"A step in the basic usage instructions"
   },
   "options_page__start_new_message":{
@@ -292,13 +292,13 @@
     "description":"Label for the checkbox that enables the forgot-to-render feature"
   },
   "options_page__forgot_to_render_1":{
-    "message":"Actualmente sólo soportado por la interfaz web de Gmail y Thunderbird (y Postbox y Icedove)."
+    "message":"Currently only supported in the Gmail and Google Inbox web interfaces, and Thunderbird (and Postbox and Icedove)."
   },
   "options_page__forgot_to_render_2":{
     "message":"Cuando envías un correo electrónico, esto comprueba el contenido para ver si parece que escribió en Markdown, pero se te olvidó renderizarlo (es decir, hacer clic en \"Markdown Toggle\") antes de enviar. Esto puede necesitar ser desactivado si interfiere con su capacidad de enviar correo electrónico."
   },
-  "options_page__forgot_to_render_3":{
-    "message":"Si te encuentras deshabilitando esto, <em>por favor<\/em> dejame saber por qué y cómo podría ser mejor. Crea <a href=\"https:\/\/groups.google.com\/forum\/#!forum\/markdown-here\" target=\"_blank\"> un post en el grupo de Google \"Markdown Here\"<\/a> o <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/issues\" target=\"_blank\"> un error en el proyecto de Github<\/a>. Gracias."
+  "options_page__forgot_to_render_4":{
+    "message":"If this feature stops working for you, please let us know by posting to the <a href=\"https:\/\/groups.google.com\/group\/markdown-here\" target=\"_blank\">\"markdown-here\" Google Group<\/a> or creating <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/issues\" target=\"_blank\">an issue in the Github project<\/a>. (Hooking into the email sending web UI is brittle and will sometimes break.)"
   },
   "options_page__contributing_title":{
     "message":"Contribuyendo",

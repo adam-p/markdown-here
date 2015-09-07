@@ -11,13 +11,13 @@ Tout à fait simple à utiliser :
 
 Markdown Here est principalement destiné à être utilisé avec Gmail et Thunderbird, mais il fonctionne également très bien avec Yahoo et Hotmail. De plus, il fonctionne bien avec Google Groupes et Sites, avec l'interface Web d'Evernote, Blogger, Wordpress et plus encore!
 
-Remarque concernant la coloration syntaxique : utilisez des blocs de code balisés et spécifiez le nom du langage. Voyez la page du projet pour un exemple.
+Remarque concernant la coloration syntaxique : utilisez des blocs de code balisés et spécifiez le nom du langage. Regardez la page du projet pour avoir un exemple.
 
-Vie privée : Markdown Here accède au contenu web et le modifie quand vous l'activez. Il peut aussi, en théorie accéder à d'autre contenu Web, mais il ne le fait pas. Il ne fait également aucune requête Internet que ce soit. Vos données sont modifiées quand et où vous le choisissez et elles ne quittent pas votre navigateur.
+Vie privée : Markdown Here accède au contenu web et le modifie quand vous l'activez. Il peut aussi, en théorie, accéder à d'autre contenu Web, mais il ne le fait pas. Il ne fait également aucune requête Internet que ce soit. Vos données sont modifiées quand et où vous le choisissez et elles ne quittent pas votre navigateur.
 
 Disponible en tant qu'extension Chrome, Firefox, Safari, Opera et Thunderbird.
 
-Il s'agit d'un projet libre. Visitez la page Github de Markdown Here pour les instructions complètes, pour plus d'information, pour les rapports de bogue ou pour contribuer à ce projet.
+C'est un projet open source. Visitez la page Github de Markdown Here pour les instructions complètes, pour plus d'information, pour les rapports de bogue ou pour contribuer à ce projet.
 
 http://markdown-here.com (en anglais)
 https://github.com/adam-p/markdown-here (en anglais)

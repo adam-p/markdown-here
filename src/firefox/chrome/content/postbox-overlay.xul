@@ -15,7 +15,7 @@
                    class=""
                    label="&toggle_button_text;"
                    tooltiptext="&toggle_button_tooltip;"
-                   image="resource://markdown_here_common/images/icon16.png"
+                   image="resource://markdown_here_common/images/icon16-button-monochrome.png"
                    oncommand="markdown_here.onToolbarButtonCommand(event)" />
   </toolbar>
 

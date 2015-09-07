@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "__MSG_app_name__",
-  "version": "2.11.10",
+  "version": "2.12.0",
   "description": "__MSG_app_slogan__",
   "homepage_url": "http://markdown-here.com",
   "minimum_chrome_version": "6",
@@ -31,8 +31,8 @@
   ],
   "browser_action": {
     "default_icon": {
-      "19": "common/images/icon19.png",
-      "38": "common/images/icon38.png"
+      "19": "common/images/icon19-button-monochrome.png",
+      "38": "common/images/icon38-button-monochrome.png"
     },
     "default_title": "__MSG_toggle_button_tooltip__"
   },

@@ -160,9 +160,23 @@ function localize() {
     // Take this opportunity to show appropriate size images for the pixel
     // density. This saves us from having to make the `img` tags in the
     // translated content more complex.
+    // TODO: Change to media queries (and so use background-image style).
     if (window.devicePixelRatio === 2) {
-      $('img[src="images/icon16.png"]').css('width', '16px')
-                                       .attr('src', 'images/icon16@2x.png');
+      $('img[src="images/icon16.png"]')
+        .css('width', '16px')
+        .attr('src', 'images/icon32.png');
+      $('img[src="images/icon16-button.png"]')
+        .css('width', '16px')
+        .attr('src', 'images/icon32-button.png');
+      $('img[src="images/icon16-monochrome.png"]')
+        .css('width', '16px')
+        .attr('src', 'images/icon32-monochrome.png');
+      $('img[src="images/icon16-button-monochrome.png"]')
+        .css('width', '16px')
+        .attr('src', 'images/icon32-button-monochrome.png');
+      $('img[src="images/icon16-button-disabled.png"]')
+        .css('width', '16px')
+        .attr('src', 'images/icon32-button-disabled.png');
     }
   });
 }

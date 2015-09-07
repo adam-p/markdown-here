@@ -91,3 +91,6 @@ If you do make any translation changes, or if you have any questions or problems
 
 * [Darío Hereñú](https://github.com/kant)
 
+* [BenWayne182](https://crowdin.com/profile/benwayne182)
+
+* [Erich Gubler](https://crowdin.com/profile/erichdongubler)

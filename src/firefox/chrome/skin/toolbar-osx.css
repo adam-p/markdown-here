@@ -16,7 +16,7 @@ toolbar[iconsize="small"] #toolbarButton-markdown_here[disabled="true"] > .toolb
  */
 
 #formatToolbarButton-markdown_here {
-  list-style-image: url("resource://markdown_here_common/images/icon12.png");
+  list-style-image: url("resource://markdown_here_common/images/icon12-button-monochrome.png");
 }
 
 #formatToolbarButton-markdown_here > .toolbarbutton-icon {
@@ -26,6 +26,6 @@ toolbar[iconsize="small"] #toolbarButton-markdown_here[disabled="true"] > .toolb
 
 @media (min-resolution: 2dppx) {
   #formatToolbarButton-markdown_here {
-    list-style-image: url("resource://markdown_here_common/images/icon12@2x.png");
+    list-style-image: url("resource://markdown_here_common/images/icon24-button-monochrome.png");
   }
 }

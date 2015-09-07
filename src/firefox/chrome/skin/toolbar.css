@@ -5,14 +5,14 @@
 /* Note that `#pageAction-markdown_here` is an `<image>`, so the `width` can be
    set directly. */
 #pageAction-markdown_here {
-  list-style-image: url("resource://markdown_here_common/images/icon14.png");
+  list-style-image: url("resource://markdown_here_common/images/icon14-button-monochrome.png");
   width: 14px;
   height: 14px;
 }
 
 @media (min-resolution: 2dppx) {
   #pageAction-markdown_here {
-    list-style-image: url("resource://markdown_here_common/images/icon14@2x.png");
+    list-style-image: url("resource://markdown_here_common/images/icon28-button-monochrome.png");
   }
 }
 
@@ -22,12 +22,12 @@
  */
 
 #context-markdown_here {
-  list-style-image: url("resource://markdown_here_common/images/icon16.png");
+  list-style-image: url("resource://markdown_here_common/images/icon16-monochrome.png");
 }
 
 @media (min-resolution: 2dppx) {
   #context-markdown_here {
-    list-style-image: url("resource://markdown_here_common/images/icon16@2x.png");
+    list-style-image: url("resource://markdown_here_common/images/icon32-monochrome.png");
   }
 }
 
@@ -50,44 +50,44 @@
 /* This also controls how the icon will look in the toolbar customize palette. */
 
 #toolbarButton-markdown_here {
-  list-style-image: url("resource://markdown_here_common/images/icon24.png");
+  list-style-image: url("resource://markdown_here_common/images/icon24-button-monochrome.png");
 }
 
 @media (min-resolution: 2dppx) {
   #toolbarButton-markdown_here {
-    list-style-image: url("resource://markdown_here_common/images/icon24@2x.png");
+    list-style-image: url("resource://markdown_here_common/images/icon48-button-monochrome.png");
   }
 }
 
 #toolbarButton-markdown_here[disabled="true"] {
-  list-style-image: url("resource://markdown_here_common/images/icon24-bw.png");
+  list-style-image: url("resource://markdown_here_common/images/icon24-button-disabled.png");
 }
 
 @media (min-resolution: 2dppx) {
   #toolbarButton-markdown_here[disabled="true"] {
-    list-style-image: url("resource://markdown_here_common/images/icon24-bw@2x.png");
+    list-style-image: url("resource://markdown_here_common/images/icon48-button-disabled.png");
   }
 }
 
 /* The "small" icon toolbar, which is the standard. */
 
 toolbar[iconsize="small"] #toolbarButton-markdown_here {
-  list-style-image: url("resource://markdown_here_common/images/icon16.png");
+  list-style-image: url("resource://markdown_here_common/images/icon16-button-monochrome.png");
 }
 
 @media (min-resolution: 2dppx) {
   toolbar[iconsize="small"] #toolbarButton-markdown_here {
-    list-style-image: url("resource://markdown_here_common/images/icon16@2x.png");
+    list-style-image: url("resource://markdown_here_common/images/icon32-button-monochrome.png");
   }
 }
 
 toolbar[iconsize="small"] #toolbarButton-markdown_here[disabled="true"] {
-  list-style-image: url("resource://markdown_here_common/images/icon16-bw.png");
+  list-style-image: url("resource://markdown_here_common/images/icon16-button-disabled.png");
 }
 
 @media (min-resolution: 2dppx) {
   toolbar[iconsize="small"] #toolbarButton-markdown_here[disabled="true"] {
-    list-style-image: url("resource://markdown_here_common/images/icon16-bw@2x.png");
+    list-style-image: url("resource://markdown_here_common/images/icon32-button-disabled.png");
   }
 }
 
@@ -100,7 +100,7 @@ toolbar[iconsize="small"] #toolbarButton-markdown_here[disabled="true"] {
 /* The "normal" size, which is small. */
 
 #composeToolbarButton-markdown_here {
-  list-style-image: url("resource://markdown_here_common/images/icon16.png");
+  list-style-image: url("resource://markdown_here_common/images/icon16-button-monochrome.png");
 }
 
 #composeToolbarButton-markdown_here > .toolbarbutton-icon {
@@ -110,14 +110,14 @@ toolbar[iconsize="small"] #toolbarButton-markdown_here[disabled="true"] {
 
 @media (min-resolution: 2dppx) {
   #composeToolbarButton-markdown_here {
-    list-style-image: url("resource://markdown_here_common/images/icon16@2x.png");
+    list-style-image: url("resource://markdown_here_common/images/icon32-button-monochrome.png");
   }
 }
 
 /* The "large" size. This is available in Thunderbird+Xubuntu and Postbox. */
 
 toolbar[iconsize="large"] #composeToolbarButton-markdown_here {
-  list-style-image: url("resource://markdown_here_common/images/icon24.png");
+  list-style-image: url("resource://markdown_here_common/images/icon24-button-monochrome.png");
 }
 
 toolbar[iconsize="large"] #composeToolbarButton-markdown_here > .toolbarbutton-icon {
@@ -127,7 +127,7 @@ toolbar[iconsize="large"] #composeToolbarButton-markdown_here > .toolbarbutton-i
 
 @media (min-resolution: 2dppx) {
   toolbar[iconsize="large"] #composeToolbarButton-markdown_here {
-    list-style-image: url("resource://markdown_here_common/images/icon24@2x.png");
+    list-style-image: url("resource://markdown_here_common/images/icon48-button-monochrome.png");
   }
 }
 
@@ -137,7 +137,7 @@ toolbar[iconsize="large"] #composeToolbarButton-markdown_here > .toolbarbutton-i
  */
 
 #formatToolbarButton-markdown_here {
-  list-style-image: url("resource://markdown_here_common/images/icon16.png");
+  list-style-image: url("resource://markdown_here_common/images/icon16-button-monochrome.png");
 }
 
 #formatToolbarButton-markdown_here > .toolbarbutton-icon {
@@ -147,6 +147,6 @@ toolbar[iconsize="large"] #composeToolbarButton-markdown_here > .toolbarbutton-i
 
 @media (min-resolution: 2dppx) {
   #formatToolbarButton-markdown_here {
-    list-style-image: url("resource://markdown_here_common/images/icon16@2x.png");
+    list-style-image: url("resource://markdown_here_common/images/icon32-button-monochrome.png");
   }
 }

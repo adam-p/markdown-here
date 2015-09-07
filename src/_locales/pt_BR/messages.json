@@ -101,7 +101,7 @@
     "message":"Uso Básico"
   },
   "options_page__reload_restart":{
-    "message":"Atualize a página web do seu e-mail ou reinicie seu navegador.",
+    "message":"Após instalar ou atualizar, recarregue a página web do seu email ou reinicie seu navegador.",
     "description":"A step in the basic usage instructions"
   },
   "options_page__start_new_message":{
@@ -292,13 +292,13 @@
     "description":"Label for the checkbox that enables the forgot-to-render feature"
   },
   "options_page__forgot_to_render_1":{
-    "message":"Atualmente apenas suportado na interface web do Gmail e Thunderbird (e Postbox e Icedove)."
+    "message":"Atualmente só apoiada com os interfaces de Gmail e Google Inbox, e o de Thunderbird (e Postbox e Icedove)."
   },
   "options_page__forgot_to_render_2":{
     "message":"Quando você envia um e-mail, isto analisa o conteúdo para verificar se você escreveu em Markdown, mas esqueceu de renderizar (ou seja, clicar em \"Alternar Markdown\") antes de enviar. Pode sen necessáio desativar esta opção se ela interferir com sua abilidade de enviar e-mail."
   },
-  "options_page__forgot_to_render_3":{
-    "message":"Se você for desativar esta extensão, <em>por favor<\/em> diga-me por que e como eu posso melhorá-la. Crie <a href=\"https:\/\/groups.google.com\/forum\/#!forum\/markdown-here\" target=\"_blank\">uma postagem no Google Group do \"markdown-here\"<\/a> ou <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/issues\" target=\"_blank\">um problema no projeto Github<\/a>. Obrigado."
+  "options_page__forgot_to_render_4":{
+    "message":"Se esta funcionalidade parar de funcionar por você, favor nos deixar sabendo por meio de postar no <a href=\"https:\/\/groups.google.com\/group\/markdown-here\" target=\"_blank\">grupo \"markdown-here\" do Google<\/a> ou por reportar <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/issues\" target=\"_blank\">um bug no projeto de Github<\/a>. (Integrar com UI web de email quebra fácil e de vez em quando quebra mesmo.)"
   },
   "options_page__contributing_title":{
     "message":"Contribuindo",
