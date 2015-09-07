@@ -2,18 +2,25 @@ Change Log
 ==========
 
 
-2015-xx-yy: v2.12.0
+2015-09-07: v2.12.0
 --------------------
+
+* **New logo!** Created by [Austin Anderson](http://protractor.ninja/) and chosen by the Markdown Here users, our great new logo is finally ready for action.
+  - Much thanks to Austin for his work polishing and tweaking the 60 variants of the logo. He did a lot of work getting things just right.
+  - Thanks to everyone else who submitted a design: [Rafe Goldberg](http://rgd2.co/), [Jack Reis](http://www.ux-jack.com/), [Enrique Esquinas](https://twitter.com/esquinas), [Leon Wilmanns](http://leon-wilmanns.de/). All of their designs were great and I would have been happy for any of them to win.
+  - Seriously, if you haven't seen the other designs, [go check them out](http://markdown-here.com/logo.html). And then check out their portfolios, bookmark them, and contact them the next time you need design work done.
+  - Thanks to all of you who took the time to vote for the new logo.
+  - If you are unhappy with the change to a monochrome browser toolbar and context menu button, [\+1 this issue](https://github.com/adam-p/markdown-here/issues/302).
 
 * [Fixed bug #297](https://github.com/adam-p/markdown-here/issues/297): Unrendering an email that is a reply to an email that was itself rendered with MDH would fail (if the original email were visible, like with Thunderbird or when it's expanded in Gmail).
   - Thanks to [Dave Tapley](https://github.com/dukedave) for creating a great video that illustrated the problem and how to reproduce it.
-  - Repeatedly trigger this bug could also lead to the next bug...
+  - Repeatedly triggering this bug could also lead to the next bug...
 
 * [Fixed bug #289](https://github.com/adam-p/markdown-here/issues/289): With forgot-to-render detection enabled, sending a large email could result in MDH causing the mail client to hang. 
   - Thanks to [r2evans](https://github.com/r2evans), [Dave Tapley](https://github.com/dukedave), and [Eugene Fryntov](https://github.com/efryntov) for reporting and helping to diagnose the problem. Also thanks to [georg](https://stackoverflow.com/users/989121/georg) on StackOverflow for helping me to [understand and improve](https://stackoverflow.com/questions/31952381/end-of-string-regex-match-too-slow) the offending regex.
 
 * [Fixed bug #283](https://github.com/adam-p/markdown-here/issues/283): Forgot-to-render detection was broken for Google Inbox. Thanks to [Marvin R.](https://github.com/therealmarv).
-  - If you find that the forgot-to-render detection gets broken for the Gmail or Google Inbox web interfaces, please post to the ["markdown-here" Google Group](https://groups.google.com/group/markdown-here) or create [an issue in the Github project](https://github.com/adam-p/markdown-here/issues). The MDH code that hooks into the web UI is brittle and might break when Google changes stuff.
+  - If you find that the forgot-to-render detection gets broken for the Gmail or Google Inbox web interfaces, please post to the ["markdown-here" Google Group](https://groups.google.com/group/markdown-here) or create [an issue in the Github project](https://github.com/adam-p/markdown-here/issues). The MDH code that hooks into the webmail UI is brittle and might break when Google changes stuff.
 
 * [Fixed bug #288](https://github.com/adam-p/markdown-here/issues/288): Some character combinations involving a dollar sign in inline code would render incorrectly. 
   - Thanks to [rfulkerson](https://github.com/rfulkerson) for reporting the problem.
