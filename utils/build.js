@@ -82,7 +82,7 @@ function setUpZips() {
     fs.unlinkSync(FIREFOX_EXTENSION);
   }
 
-  var chromeZip = new archiver('zip', {store: true});
+  var chromeZip = new archiver('zip'); // Chrome will reject the zip if there's no compression
   var firefoxZip = new archiver('zip', {store: true});
 
   chromeZip.on('error', function(err) {

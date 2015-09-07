@@ -5,7 +5,7 @@
   "dependencies": {
     "markdown-it": "~3.0.5",
     "metascript": "~1.0.0",
-    "file": "~0.2.2",
-    "archiver": "~0.14.3"
+    "file": "*",
+    "archiver": "*"
   }
 }
