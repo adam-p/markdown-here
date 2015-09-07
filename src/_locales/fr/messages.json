@@ -79,7 +79,7 @@
     "description":"Text on the notification shown when Markdown Here has been updated"
   },
   "upgrade_notification_changes_tooltip":{
-    "message":"Cliquez pour voir les changements apportés par cette version",
+    "message":"Cliquez pour voir les modifications apportées à cette version",
     "description":"Tooltip text on the link that opens the changes list"
   },
   "upgrade_notification_dismiss_tooltip":{
@@ -101,19 +101,19 @@
     "message":"Utilisation de base"
   },
   "options_page__reload_restart":{
-    "message":"Actualiser la page Web de vos courriels ou redémarrer votre navigateur Web.",
+    "message":"Après l'installation ou une mise à jour, actualisez la page web de votre email ou redémarrez votre navigateur.",
     "description":"A step in the basic usage instructions"
   },
   "options_page__start_new_message":{
-    "message":"Commencer un nouveau courriel.",
+    "message":"Commencez un nouveau courriel.",
     "description":"A step in the basic usage instructions"
   },
   "options_page__type_some_markdown":{
-    "message":"Écrire un peu de Markdown dans le courriel.<br\/>Essayer ceci:<code>_Bonjour_ `Markdown` **Here**!<\/code>",
+    "message":"Écrivez un peu de Markdown dans le courriel.<br\/>Essayez ceci:<code>_Bonjour_ `Markdown` **Here**!<\/code>",
     "description":"A step in the basic usage instructions"
   },
   "options_page__click_toggle":{
-    "message":"Fait un clique droit dans le courriel puis \"Bascule Markdown\". (Ou cliquez l'icon <img src=\"images\/icon16.png\"\/> dans la bar d'outils.<span class=\"hotkey-display-wrapper\"> Ou appuyez <span class=\"hotkey-display\"><kbd>CTRL<\/kbd>+<kbd>ALT<\/kbd>+<kbd>M<\/kbd><\/span><\/span>)",
+    "message":"Faites un clic droit dans le courriel puis sélectionnez \"Basculez vers Markdown\". (Ou cliquez sur le bouton <img src=\"images\/icon16.png\"\/> dans la barre d'outils.<span class=\"hotkey-display-wrapper\"> Ou appuyez sur <span class=\"hotkey-display\"><kbd>CTRL<\/kbd>+<kbd>ALT<\/kbd>+<kbd>M<\/kbd><\/span><\/span>)",
     "description":"A step in the basic usage instructions"
   },
   "options_page__pretty_cool":{
@@ -121,11 +121,11 @@
     "description":"A step in the basic usage instructions"
   },
   "options_page__resources_title":{
-    "message":"Ressources et liens",
+    "message":"Ressources et Liens",
     "description":"A section title"
   },
   "options_page__resources_cheatsheet_link":{
-    "message":"Si vous débutez avec Markdown, la <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/wiki\/Markdown-Here-Cheatsheet\" target=\"_blank\">Feuille de triche Markdown Here<\/a> fera de vous un pro."
+    "message":"Si vous débutez en Markdown, <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/wiki\/Markdown-Here-Cheatsheet\" target=\"_blank\">l'aide mémoire Markdown Here<\/a> fera de vous un expert."
   },
   "options_page__advanced_usage":{
     "message":"Pour davantage d'information et pour l'utilisation avancée, visitez la <a href=\"https:\/\/github.com\/adam-p\/markdown-here\" target=\"_blank\">page du projet Mardown Here<\/a> (en anglais). Vous devriez aussi explorer les options ci-dessous."
@@ -134,7 +134,7 @@
     "message":"Posez une question, commencez une discussion ou dites simplement bonjour dans le <a href=\"https:\/\/groups.google.com\/forum\/?fromgroups=#!forum\/markdown-here\" target=\"_blank\">groupe Google mardown-here<\/a>."
   },
   "options_page__mdh_wiki":{
-    "message":"Visitez le <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/wiki\" target=\"_blank\">Wiki Markdown Here<\/a> pour savoir <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/wiki\/Compatibility\" target=\"_blank\">où MDH fonctionne t-il<\/a> et d'autres <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/wiki\/Tips-and-Tricks\" target=\"_blank\">trucs et astuces<\/a>."
+    "message":"Visitez le <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/wiki\" target=\"_blank\">Wiki Markdown Here<\/a> pour savoir <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/wiki\/Compatibility\" target=\"_blank\">où MDH est supporté<\/a> et d'autres <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/wiki\/Tips-and-Tricks\" target=\"_blank\">trucs et astuces<\/a>."
   },
   "options_page__next_steps":{
     "message":"Si vous êtes intéressé par l'avenir du projet Markdown Here, rendez-vous sur la <a href=\"https:\/\/github.com\/adam-p\/markdown-here#next-steps\" target=\"_blank\">section Prochaines Étapes<\/a> du README."
@@ -176,7 +176,7 @@
     "description":"section title for the Markdown preview section"
   },
   "options_page__markdown_toggle_button_text":{
-    "message":"Basculer Markdown",
+    "message":"Basculer vers Markdown",
     "description":"button text for Markdown Toggle button"
   },
   "options_page__notes_title":{
@@ -187,7 +187,7 @@
     "message":"Les modifications sont automatiquement enregistrées et synchronisées (si la synchronisation est activée dans votre navigateur)."
   },
   "options_page__note_syntax_styles_after_primary":{
-    "message":"Les styles pour la coloration syntaxique sont appliqués après les styles de base. Ils ont donc priorité."
+    "message":"Les styles pour la coloration syntaxique sont appliqués après les styles de base et sont donc prioritaires."
   },
   "options_page__note_default_client_styles":{
     "message":"Certains éditeurs de courrier électronique et navigateurs imposent leurs propres styles. Ceux-ci peuvent ne pas être visibles ici."
@@ -204,11 +204,11 @@
     "description":"heading for warnings about TeX math privacy concerns"
   },
   "options_page__tex_math_privacy_issue_1":{
-    "message":"Afin de générer une image pour la formule, une requête est effectuée chez Google. Cela signifie concrètement que vous partagez cette formule avec Google. Cela signifie également que les récipiendaires de votre message feront également une requête chez Google pour calculer cette image.",
+    "message":"Afin de générer une image pour la formule, une requête est effectuée chez Google. Cela signifie concrètement que vous partagez cette formule avec Google. Cela signifie également que les destinataires de votre message feront également une requête chez Google pour afficher cette image.",
     "description":"one of the TeX math privacy concerns"
   },
   "options_page__tex_math_privacy_issue_2":{
-    "message":"Si vous choisissez de customiser le *tag* de la formule de rendu, vous devriez utiliser un chemin sécurisé (https:\/\/). Tous les services de rendu ne fournissent pas une option sécurisée.",
+    "message":"Si vous choisissez de modifier la balise de rendu de formule, vous devriez utiliser un chemin sécurisé (https:\/\/). Tous les services de rendu ne fournissent pas une option sécurisée.",
     "description":"one of the TeX math privacy concerns"
   },
   "options_page__tex_math_customization_heading":{
@@ -226,10 +226,10 @@
     "message":"Une bonne ressource pour créer des formules Tex est <a href=\"https:\/\/www.codecogs.com\/latex\/about.php\" target=\"_blank\">« CodeCogs Equation Editor »<\/a> (en anglais)."
   },
   "options_page__tex_math_customization_4":{
-    "message":"Les formules sont converties en images, ce qui fait en sorte que les destinataires du courriel devront activer l'affichage des images afin de les voir."
+    "message":"Les formules sont converties en images, ce qui fait que les destinataires du courriel devront activer l'affichage des images afin de les voir."
   },
   "options_page__tex_math_customization_5":{
-    "message":"Si vous personnalisez le tag de rendu, vous pouvez (et devriez) utiliser <code>{mathcode}<\/code> et\/ou <code>{urlmathcode}<\/code> en tant qu'espaces de nom.",
+    "message":"Si vous personnalisez la balise de rendu, vous pouvez (et devriez) utiliser <code>{mathcode}<\/code> et\/ou <code>{urlmathcode}<\/code> à la place.",
     "description":"Please do not translate {mathcode} and {urlmathcode}"
   },
   "options_page__tex_math_customization_5_1":{
@@ -237,11 +237,11 @@
     "description":"Please do not translate {mathcode} and {urlmathcode}. Note: Double dollar signs ($$) are necessary to get a single dollar sign."
   },
   "options_page__tex_math_customization_5_2":{
-    "message":"<code>{urlmathcode}<\/code>: forme d'URL encodée de la formule de TeX ; comme <code>%5CDelta<\/code>.",
+    "message":"<code>{urlmathcode}<\/code>: forme encodée en URL de la formule TeX ; comme <code>%5CDelta<\/code>.",
     "description":"Please do not translate {mathcode} and {urlmathcode}"
   },
   "options_page__tex_math_customization_6":{
-    "message":"Si vous personnalisez la balise <code>&lt;img&gt;<\/code>, vous devez inclure un attribut <code>alt<\/code> qui a comme une valeur aussi lisible que possible, comme <code>{mathcode}<\/code>. La valeur de cet attribut sera utilisée pour la version en texte brut du message (quand il est envoyé depuis Gmail et Thunderbird) et utilisée par les lecteurs d'écran de vos destinataires malvoyants.",
+    "message":"Si vous personnalisez la balise <code>&lt;img&gt;<\/code>, vous devez inclure un attribut <code>alt<\/code> qui a une valeur aussi lisible que possible, comme <code>{mathcode}<\/code>. La valeur de cet attribut sera utilisée pour la version en texte brut du message (quand il est envoyé depuis Gmail et Thunderbird) et utilisée par les lecteurs d'écran de vos destinataires malvoyants.",
     "description":"Please do not translate {mathcode} and {urlmathcode}"
   },
   "options_page__hotkey_title":{
@@ -292,13 +292,13 @@
     "description":"Label for the checkbox that enables the forgot-to-render feature"
   },
   "options_page__forgot_to_render_1":{
-    "message":"Actuellement seulement supporté dans l'interface web de Gmail et dans Thunderbird (et Postbox et Icedove)."
+    "message":"Actuellement uniquement supporté dans les interfaces web de Gmail et Google Inbox, et dans Thunderbird (et Postbox et Icedove)."
   },
   "options_page__forgot_to_render_2":{
-    "message":"Lorsque vous envoyez un courriel, l'extension vérifie le contenu pour voir si vous l'avez écrit en Markdown, mais que vous avez oublié de faire le rendu (en cliquant sur « Basculer le Markdown ») avant de l'envoyer. Cette option peut être désactivé si elle interfère avec votre capacité à envoyer des courriels."
+    "message":"Lorsque vous envoyez un courriel, l'extension vérifie le contenu pour voir si vous l'avez écrit en Markdown, mais que vous avez oublié de faire le rendu (en cliquant sur « Basculer vers Markdown ») avant de l'envoyer. Cette option peut être désactivée si elle interfère avec votre capacité à envoyer des courriels."
   },
-  "options_page__forgot_to_render_3":{
-    "message":"Si jamais vous devez désactiver cette extension, <em>s'il vous plaît<\/em> laissez moi savoir pourquoi et comment il pourrait être amélioré. Créez <a href=\"https:\/\/groups.google.com\/forum\/#!forum\/markdown-here\" target=\"_blank\"> un post sur le groupe Google \"markdown-here\"<\/a> ou <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/issues\" target=\"_blank\"> une issue dans le projet Github<\/a>. Merci."
+  "options_page__forgot_to_render_4":{
+    "message":"Si cette fonctionnalité ne fonctionne plus pour vous, s'il vous plait faites le nous savoir en créant un post sur le <a href=\"https:\/\/groups.google.com\/group\/markdown-here\" target=\"_blank\">groupe Google \"markdown-here\"<\/a> ou en créant <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/issues\" target=\"_blank\">une issue dans le projet Github<\/a>. (Le lien avec l'interface web des messageries est fragile et peut parfois se briser.)"
   },
   "options_page__contributing_title":{
     "message":"Contribuer",
@@ -311,7 +311,7 @@
     "message":"Aidez à rendre Markdown Here disponible dans votre langue. <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/blob\/master\/CONTRIBUTING.md#translation\" target=\"_blank\">Les traducations sont les bienvenues.<\/a>"
   },
   "options_page__footer_1":{
-    "message":"<em>Markdown Here<\/em> est libre. Pour poser des questions, rapporter des bogues, proposer des fonctionnalités ou pour contribuer, visitez la <a target=\"_blank\" href=\"https:\/\/github.com\/adam-p\/markdown-here\">page Gihub du projet (en anglais)<\/a> ou le <a target=\"_blank\" href=\"https:\/\/groups.google.com\/forum\/?fromgroups=#!forum\/markdown-here\">Groupe Google « markdown-here » (en anglais)<\/a>.",
+    "message":"<em>Markdown Here<\/em> est open source. Pour poser des questions, signaler un problème, proposer des fonctionnalités ou pour contribuer, visitez la <a target=\"_blank\" href=\"https:\/\/github.com\/adam-p\/markdown-here\">page Github du projet (en anglais)<\/a> ou le <a target=\"_blank\" href=\"https:\/\/groups.google.com\/forum\/?fromgroups=#!forum\/markdown-here\">Groupe Google « markdown-here » (en anglais)<\/a>.",
     "description":"part of the page footer text"
   },
   "options_page__footer_2":{
@@ -323,7 +323,7 @@
     "description":"message that shows when user changes have been saved"
   },
   "options_page__preview_markdown":{
-    "message":"```javascript<br>\nfunction colorationSyntaxique() {<br>\n&nbsp; var n = 33;<br>\n&nbsp; var t = \"bonjour\";<br>\n&nbsp; console.log(t);<br>\n}<br>\n```<br>\n<br>\n* plein<br>\n* *accentuation*<br>\n&nbsp; * **forte accentuation**<br>\n&nbsp; &nbsp; * ~~barré~~<br>\n* `code sur une ligne`<br>\n<br>\n1. Liste numérotée<br>\n&nbsp;&nbsp;&nbsp;1. Numbered sub-list<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. Numbered sub-sub-list<br>\n2. [Lien](https:\/\/www.google.com)<br>\n<br>\n<br>\nUne image : ![logo de Markdown Here](https:\/\/raw.githubusercontent.com\/adam-p\/markdown-here\/master\/src\/common\/images\/icon24.png)\n<br>\n<br>\n> Bloc de citation.&nbsp; <br>\n> *Avec* **un peu de** `markdown`.<br>\n<br>\nSi le support des **formules mathématiques TeX** est activé, l'équation du second degré est la suivante :&nbsp;<br>\n$$-b \\pm \\sqrt{b^2 - 4ac} \\over 2a$$<br>\n<br>\n# Titre 1<br>\n## Titre 2<br>\n### Titre 3<br>\n#### Titre 4<br>\n##### Titre 5<br>\n###### Titre 6<br>\n&nbsp; <br>\n| Les tableaux | sont | intéressants |<br>\n| ------------- |:-------------:| -----:|<br>\n| la colonne 3 | est alignée à droite | 1600 $$ |<br>\n| la colonne 2 | est centrée | 12 $$ |<br>\n| les rayures | sont élégantes | 1 $$ |<br>\n<br>\nVoici une ligne horizontale :<br>\n<br>\n---<br>\n<br>\n```<br>\nbloc de code<br>\nsans coloration syntaxique<br>\n```<br>\n<br>",
+    "message":"```javascript<br>\nfunction colorationSyntaxique() {<br>\n&nbsp; var n = 33;<br>\n&nbsp; var t = \"bonjour\";<br>\n&nbsp; console.log(t);<br>\n}<br>\n```<br>\n<br>\n* plein<br>\n* *accentuation*<br>\n&nbsp; * **forte accentuation**<br>\n&nbsp; &nbsp; * ~~barré~~<br>\n* `code à l’intérieur d'une ligne de texte`<br>\n<br>\n1. Liste numérotée<br>\n&nbsp;&nbsp;&nbsp;1. Numbered sub-list<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. Numbered sub-sub-list<br>\n2. [Link](https:\/\/www.google.com)<br>\n<br>\n<br>\nUne image : ![logo de Markdown Here](http:\/\/adam-p.github.io\/markdown-here\/img\/icon24.png)\n<br>\n<br>\n> Bloc de citation.&nbsp; <br>\n> *Avec* **un peu de** `markdown`.<br>\n<br>\nSi le support des **formules mathématiques TeX** est activé, l'équation du second degré est la suivante :&nbsp;<br>\n$$-b \\pm \\sqrt{b^2 - 4ac} \\over 2a$$<br>\n<br>\n# Titre 1<br>\n## Titre 2<br>\n### Titre 3<br>\n#### Titre 4<br>\n##### Titre 5<br>\n###### Titre 6<br>\n&nbsp; <br>\n| Les tableaux | sont | intéressants |<br>\n| ------------- |:-------------:| -----:|<br>\n| la colonne 3 | est alignée à droite | 1600 $$ |<br>\n| la colonne 2 | est centrée | 12 $$ |<br>\n| les rayures | sont élégantes | 1 $$ |<br>\n<br>\nVoici une ligne horizontale :<br>\n<br>\n---<br>\n<br>\n```<br>\nbloc de code<br>\nsans coloration syntaxique<br>\n```<br>\n<br>\n",
     "description":"This doesn't need to be translated, unless you want to make it more relevant to your language. The raw Markdown used for previewing user styling changes. Also shows users what can be done with Markdown. Please note that the double dollar signs ($$) are needed to make a single dollar sign in the application."
   },
   "currently_in_use":{
@@ -342,7 +342,7 @@
     "message":"C'est très pratique si vous voulez mettre une table des matières ou d'autres liens internes dans votre contenu. <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/wiki\/Tips-and-Tricks#wiki-header-anchors\" target=\"_blank\"> En savoir plus sur comment l'utiliser dans le wiki MDH.<\/a>"
   },
   "options_page__header_anchors_enabled_2":{
-    "message":"Elle est désactivée par défaut car cela <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/issues\/155\" target=\"_blank\"> créer un bruit visuel dans Thunderbird<\/a>. (Et la plupart des gens n'utiliserons probablement pas la fonctionnalité.)"
+    "message":"Désactivé par défaut car cela <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/issues\/155\" target=\"_blank\"> crée un bruit visuel dans Thunderbird<\/a>. (Et la plupart des gens n'utilisera probablement pas la fonctionnalité.)"
   },
   "options_page__gfm_line_breaks_enabled_label":{
     "message":"<b>Activer les sauts de ligne GFM.<\/b>",

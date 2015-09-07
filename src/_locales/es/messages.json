@@ -101,7 +101,7 @@
     "message":"Uso básico"
   },
   "options_page__reload_restart":{
-    "message":"Recarga la página web de tu correo electrónico o reinicia tu navegador web.",
+    "message":"After installing or upgrading, reload your email web page or restart your web browser.",
     "description":"A step in the basic usage instructions"
   },
   "options_page__start_new_message":{
@@ -292,13 +292,13 @@
     "description":"Label for the checkbox that enables the forgot-to-render feature"
   },
   "options_page__forgot_to_render_1":{
-    "message":"Actualmente sólo soportado por la interfaz web de Gmail y Thunderbird (y Postbox y Icedove)."
+    "message":"Currently only supported in the Gmail and Google Inbox web interfaces, and Thunderbird (and Postbox and Icedove)."
   },
   "options_page__forgot_to_render_2":{
     "message":"Cuando envías un correo electrónico, esto comprueba el contenido para ver si parece que escribió en Markdown, pero se te olvidó renderizarlo (es decir, hacer clic en \"Markdown Toggle\") antes de enviar. Esto puede necesitar ser desactivado si interfiere con su capacidad de enviar correo electrónico."
   },
-  "options_page__forgot_to_render_3":{
-    "message":"Si te encuentras deshabilitando esto, <em>por favor<\/em> dejame saber por qué y cómo podría ser mejor. Crea <a href=\"https:\/\/groups.google.com\/forum\/#!forum\/markdown-here\" target=\"_blank\"> un post en el grupo de Google \"Markdown Here\"<\/a> o <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/issues\" target=\"_blank\"> un error en el proyecto de Github<\/a>. Gracias."
+  "options_page__forgot_to_render_4":{
+    "message":"If this feature stops working for you, please let us know by posting to the <a href=\"https:\/\/groups.google.com\/group\/markdown-here\" target=\"_blank\">\"markdown-here\" Google Group<\/a> or creating <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/issues\" target=\"_blank\">an issue in the Github project<\/a>. (Hooking into the email sending web UI is brittle and will sometimes break.)"
   },
   "options_page__contributing_title":{
     "message":"Contribuyendo",
@@ -323,7 +323,7 @@
     "description":"message that shows when user changes have been saved"
   },
   "options_page__preview_markdown":{
-    "message":"```javascript<br>\nfunction syntaxHighlighting() {<br>\n&nbsp; var n = 33;<br>\n&nbsp; var s = \"hola, こんにちは\";<br>\n&nbsp; console.log(s);<br>\n}<br>\n```<br>\n<br>\n* sin formato <br>\n* *con &eacute;nfasis*<br>\n&nbsp; * **con mucho &eacute;nfasis**<br>\n&nbsp; &nbsp; * ~~tachado~~<br>\n* `c&oacute;digo en l&iacute;nea`<br>\n<br>\n1. Lista numerada<br>\n&nbsp;&nbsp;&nbsp;1. Numbered sub-list<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. Numbered sub-sub-list<br>\n2. [Enlace](https:\/\/www.google.com)<br>\n<br>\n<br>\nUna imagen: ![logo Markdown Here](https:\/\/raw.githubusercontent.com\/adam-p\/markdown-here\/master\/src\/common\/images\/icon24.png)\n<br>\n<br>\n> Bloque de cita.&nbsp; <br>\n> *Con* **algo de** `markdown`.<br>\n<br>\nSi el soporte **TeX Math** est&aacute; activado, esta es la ecuaci&oacute;n cuadr&aacute;tica:&nbsp;<br>\n$$-b \\pm \\sqrt{b^2 - 4ac} \\over 2a$$<br>\n<br>\n# Cabecera 1<br>\n## Cabecera 2<br>\n### Cabecera 3<br>\n#### Cabecera 4<br>\n##### Cabecera 5<br>\n###### Cabecera 6<br>\n&nbsp; <br>\n| Tablas        | Son           | Guays  |<br>\n| ------------- |:-------------:| -----:|<br>\n| columna 3   | a la derecha | $$1600 |<br>\n| columna 2   | centrada      |   $$12 |<br>\n| las rayas de cebra | son n&iacute;tidas      |    $$1 |<br>\n<br>\nAqu&iacute; hay un separador vertical:<br>\n<br>\n---<br>\n<br>\n```<br>\nbloque de c&oacute;digo<br>\nsin resaltado<br>\n```<br>\n<br>",
+    "message":"```javascript<br>\nfunction syntaxHighlighting() {<br>\n&nbsp; var n = 33;<br>\n&nbsp; var s = \"hola, こんにちは\";<br>\n&nbsp; console.log(s);<br>\n}<br>\n```<br>\n<br>\n* sin formato <br>\n* *con &eacute;nfasis*<br>\n&nbsp; * **con mucho &eacute;nfasis**<br>\n&nbsp; &nbsp; * ~~tachado~~<br>\n* `c&oacute;digo en l&iacute;nea`<br>\n<br>\n1. Lista numerada<br>\n&nbsp;&nbsp;&nbsp;1. Numbered sub-list<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. Numbered sub-sub-list<br>\n2. [Enlace](https:\/\/www.google.com)<br>\n<br>\n<br>\nUna imagen: ![logo Markdown Here](http:\/\/adam-p.github.io\/markdown-here\/img\/icon24.png)\n<br>\n<br>\n> Bloque de cita.&nbsp; <br>\n> *Con* **algo de** `markdown`.<br>\n<br>\nSi el soporte **TeX Math** est&aacute; activado, esta es la ecuaci&oacute;n cuadr&aacute;tica:&nbsp;<br>\n$$-b \\pm \\sqrt{b^2 - 4ac} \\over 2a$$<br>\n<br>\n# Cabecera 1<br>\n## Cabecera 2<br>\n### Cabecera 3<br>\n#### Cabecera 4<br>\n##### Cabecera 5<br>\n###### Cabecera 6<br>\n&nbsp; <br>\n| Tablas        | Son           | Guays  |<br>\n| ------------- |:-------------:| -----:|<br>\n| columna 3   | a la derecha | $$1600 |<br>\n| columna 2   | centrada      |   $$12 |<br>\n| las rayas de cebra | son n&iacute;tidas      |    $$1 |<br>\n<br>\nAqu&iacute; hay un separador vertical:<br>\n<br>\n---<br>\n<br>\n```<br>\nbloque de c&oacute;digo<br>\nsin resaltado<br>\n```<br>\n<br>",
     "description":"This doesn't need to be translated, unless you want to make it more relevant to your language. The raw Markdown used for previewing user styling changes. Also shows users what can be done with Markdown. Please note that the double dollar signs ($$) are needed to make a single dollar sign in the application."
   },
   "currently_in_use":{

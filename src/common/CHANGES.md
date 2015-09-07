@@ -2,7 +2,7 @@ Change Log
 ==========
 
 
-2015-xx-yy: v2.11.10
+2015-xx-yy: v2.12.0
 --------------------
 
 * [Fixed bug #297](https://github.com/adam-p/markdown-here/issues/297): Unrendering an email that is a reply to an email that was itself rendered with MDH would fail (if the original email were visible, like with Thunderbird or when it's expanded in Gmail).
@@ -17,6 +17,11 @@ Change Log
 
 * [Fixed bug #288](https://github.com/adam-p/markdown-here/issues/288): Some character combinations involving a dollar sign in inline code would render incorrectly. 
   - Thanks to [rfulkerson](https://github.com/rfulkerson) for reporting the problem.
+
+* Updated and new translations:
+  - French: [BenWayne182](https://crowdin.com/profile/benwayne182)
+  - Spanish: [Darío Hereñú](https://github.com/kant)
+  - Portuguese (Brazilian): [Erich Gubler](https://crowdin.com/profile/erichdongubler)
 
 
 2015-05-26: v2.11.9
