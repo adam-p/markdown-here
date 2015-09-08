@@ -981,9 +981,7 @@
   .nav-collapse .dropdown-menu a {
     padding: 9px 15px;
     font-weight: bold;
-    color: #f7e9f6;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
+    color: #3E055F;
     border-radius: 3px;
   }
   .nav-collapse .btn {
@@ -1000,7 +998,7 @@
   .nav-collapse .nav > li > a:focus,
   .nav-collapse .dropdown-menu a:hover,
   .nav-collapse .dropdown-menu a:focus {
-    background-color: #534654;
+    background-color: #E7BEFF;
   }
   .navbar-inverse .nav-collapse .nav > li > a,
   .navbar-inverse .nav-collapse .dropdown-menu a {
