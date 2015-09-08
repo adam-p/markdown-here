@@ -210,16 +210,16 @@ body {
   font-family: MainFont, Arial, sans-serif;
   font-size: 18px;
   line-height: 26px;
-  color: #6f5d70;
-  background-color: #f8edff;
+  color: #5E5A61;
+  background-color: #F2EDF7;
 }
 a {
-  color: #eb00ff;
+  color: #B333FF;
   text-decoration: none;
 }
 a:hover,
 a:focus {
-  color: #a500b3;
+  color: #6A1A99;
   text-decoration: underline;
 }
 .img-rounded {
@@ -3700,20 +3700,9 @@ input[type="submit"].btn.btn-mini {
   min-height: 40px;
   padding-left: 20px;
   padding-right: 20px;
-  background-color: #645465;
-  background-image: -moz-linear-gradient(top, #6f5d70, #534654);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#6f5d70), to(#534654));
-  background-image: -webkit-linear-gradient(top, #6f5d70, #534654);
-  background-image: -o-linear-gradient(top, #6f5d70, #534654);
-  background-image: linear-gradient(to bottom, #6f5d70, #534654);
-  background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff6f5d70', endColorstr='#ff534654', GradientType=0);
-  border: 1px solid #322a33;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
+  background-color: #F4E1FF;
+  border: 1px solid #EAC5FF;
   border-radius: 4px;
-  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
-  -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
   *zoom: 1;
 }
@@ -3740,8 +3729,8 @@ input[type="submit"].btn.btn-mini {
   margin-left: -20px;
   font-size: 20px;
   font-weight: 200;
-  color: #f7e9f6;
-  text-shadow: 0 1px 0 #6f5d70;
+  color: #3E055F;
+  text-shadow: 1px 1px 1px #D896FF;
 }
 .navbar .brand:hover,
 .navbar .brand:focus {
@@ -3753,7 +3742,7 @@ input[type="submit"].btn.btn-mini {
   color: #dbd5db;
 }
 .navbar-link {
-  color: #f7e9f6;
+  color: #3E055F;
 }
 .navbar-link:hover,
 .navbar-link:focus {
@@ -3903,9 +3892,9 @@ input[type="submit"].btn.btn-mini {
 .navbar .nav > li > a {
   float: none;
   padding: 7px 15px 7px;
-  color: #f7e9f6;
+  color: #3E055F;
   text-decoration: none;
-  text-shadow: 0 1px 0 #6f5d70;
+  text-shadow: 0 1px 0 #D896FF;
 }
 .navbar .nav .dropdown-toggle .caret {
   margin-top: 8px;
@@ -3913,7 +3902,7 @@ input[type="submit"].btn.btn-mini {
 .navbar .nav > li > a:focus,
 .navbar .nav > li > a:hover {
   background-color: transparent;
-  color: #eb00ff;
+  color: #B22EFF;
   text-decoration: none;
 }
 .navbar .nav > .active > a,
@@ -3921,9 +3910,7 @@ input[type="submit"].btn.btn-mini {
 .navbar .nav > .active > a:focus {
   color: #ffffff;
   text-decoration: none;
-  background-color: #463a46;
-  -webkit-box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
-  -moz-box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
+  background-color: #CB72FF;
   box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
 }
 .navbar .btn-navbar {
@@ -3935,13 +3922,7 @@ input[type="submit"].btn.btn-mini {
   color: #ffffff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
   background-color: #564857;
-  background-image: -moz-linear-gradient(top, #615162, #463a46);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#615162), to(#463a46));
-  background-image: -webkit-linear-gradient(top, #615162, #463a46);
-  background-image: -o-linear-gradient(top, #615162, #463a46);
-  background-image: linear-gradient(to bottom, #615162, #463a46);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff615162', endColorstr='#ff463a46', GradientType=0);
   border-color: #463a46 #463a46 #1c181c;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
   *background-color: #463a46;
@@ -4027,8 +4008,8 @@ input[type="submit"].btn.btn-mini {
   color: #ffffff;
 }
 .navbar .nav li.dropdown > .dropdown-toggle .caret {
-  border-top-color: #f7e9f6;
-  border-bottom-color: #f7e9f6;
+  border-top-color: #3E055F;
+  border-bottom-color: #3E055F;
 }
 .navbar .nav li.dropdown.open > .dropdown-toggle .caret,
 .navbar .nav li.dropdown.active > .dropdown-toggle .caret,
@@ -5222,9 +5203,7 @@ a.badge:focus {
   font-weight: 200;
   line-height: 39px;
   color: inherit;
-  background-color: #e2bce8;
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
+  background-color: #F0E7F5;
   border-radius: 6px;
 }
 .hero-unit h1 {

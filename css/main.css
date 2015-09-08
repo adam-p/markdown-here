@@ -86,8 +86,9 @@ body {
 }
 
 .navbar img {
-  height: 1em;
-  vertical-align: text-top;
+  height: 24px;
+  vertical-align: bottom;
+  margin-right: 5px;
 }
 
 footer {
