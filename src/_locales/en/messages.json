@@ -269,19 +269,24 @@
     "description": "warning shown if the user chooses an illegal hotkey value"
   },
   "options_page__hotkey_note_1": {
-    "message": "Chrome: You must reload your email web page for the new hotkey setting to take effect."
+    "message": "Chrome: You must reload your email web page for the new hotkey setting to take effect.",
+    "description": "Descriptive text explaining some limitations of the 'hotkey' (keyboard shortcut) feature/option."
   },
   "options_page__hotkey_note_2": {
-    "message": "Firefox and Thunderbird: You must restart the application for the new hotkey setting to take effect."
+    "message": "Firefox and Thunderbird: You must restart the application for the new hotkey setting to take effect.",
+    "description": "Descriptive text explaining some limitations of the 'hotkey' (keyboard shortcut) feature/option."
   },
   "options_page__hotkey_note_3": {
-    "message": "You must use an alphanumeric key for the shortcut (varies by language and keyboard)."
+    "message": "You must use an alphanumeric key for the shortcut (varies by language and keyboard).",
+    "description": "Descriptive text explaining some limitations of the 'hotkey' (keyboard shortcut) feature/option."
   },
   "options_page__hotkey_note_4": {
-    "message": "The Windows key and the OS X &#8984; key cannot be used in the shortcut."
+    "message": "The Windows key and the OS X &#8984; key cannot be used in the shortcut.",
+    "description": "Descriptive text explaining some limitations of the 'hotkey' (keyboard shortcut) feature/option."
   },
   "options_page__hotkey_note_5": {
-    "message": "To disable the use of this hotkey, leave the \"key\" text box empty."
+    "message": "To disable the use of this hotkey, leave the \"key\" text box empty.",
+    "description": "Descriptive text explaining how to disable the 'hotkey' (keyboard shortcut) feature/option."
   },
   "options_page__advanced_title": {
     "message": "Advanced and Miscellaneous",
@@ -292,13 +297,16 @@
     "description": "Label for the checkbox that enables the forgot-to-render feature"
   },
   "options_page__forgot_to_render_1": {
-    "message": "Currently only supported in the Gmail and Google Inbox web interfaces, and Thunderbird (and Postbox and Icedove)."
+    "message": "Currently only supported in the Gmail and Google Inbox web interfaces, and Thunderbird (and Postbox and Icedove).",
+    "description": "Descriptive text referring to the 'forgot-to-render' feature. Tells the user that it's only available for limited platforms."
   },
   "options_page__forgot_to_render_2": {
-    "message": "When you send an email, this checks the content to see if it looks like you wrote it in Markdown, but forgot to render it (i.e., click \"Markdown Toggle\") before sending. This may need to be disabled if it interferes with your ability to send email."
+    "message": "When you send an email, this checks the content to see if it looks like you wrote it in Markdown, but forgot to render it (i.e., click \"Markdown Toggle\") before sending. This may need to be disabled if it interferes with your ability to send email.",
+    "description": "Descriptive text explaining the 'forgot-to-render' feature."
   },
   "options_page__forgot_to_render_4": {
-    "message": "If this feature stops working for you, please let us know by posting to the <a href=\"https://groups.google.com/group/markdown-here\" target=\"_blank\">\"markdown-here\" Google Group</a> or creating <a href=\"https://github.com/adam-p/markdown-here/issues\" target=\"_blank\">an issue in the Github project</a>. (Hooking into the email sending web UI is brittle and will sometimes break.)"
+    "message": "If this feature stops working for you, please let us know by posting to the <a href=\"https://groups.google.com/group/markdown-here\" target=\"_blank\">\"markdown-here\" Google Group</a> or creating <a href=\"https://github.com/adam-p/markdown-here/issues\" target=\"_blank\">an issue in the Github project</a>. (Hooking into the email sending web UI is brittle and will sometimes break.)",
+    "description": "Descriptive text referring to the 'forgot-to-render' feature (which is prone to break when Google changes its webmail code)."
   },
   "options_page__contributing_title": {
     "message": "Contributing",
