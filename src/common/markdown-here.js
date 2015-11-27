@@ -577,6 +577,30 @@ function getMarkdownRenderObject(document) {
 }
 
 // Exported function.
+// Determines if the current selection will be unrendered by the markdownHere()
+// function (@see markdownHere)
+// @param `document`  The document object containing the email compose element.
+//        (Actually, it can be any document above the compose element. We'll
+//        drill down to find the correct element and document.)
+// @returns True if selection is inside a Markdown wrapper or contains wrappers
+function selectionContainsRenderedMarkdown(document) {
+
+  var renderObj, wrappers;
+
+  renderObj = getMarkdownRenderObject(document);
+  if (typeof(renderObj) !== 'object') {
+    return false;
+  }
+
+  wrappers = renderObj.wrappers;
+  if (wrappers && wrappers.length > 0) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+// Exported function.
 // The context menu handler. Does the rendering or unrendering, depending on the
 // state of the email compose element and the current selection.
 // @param `document`  The document object containing the email compose element.
@@ -670,6 +694,7 @@ function markdownHere(document, markdownRenderer, logger, renderComplete) {
 // We also export a couple of utility functions
 markdownHere.findFocusedElem = findFocusedElem;
 markdownHere.elementCanBeRendered = elementCanBeRendered;
+markdownHere.selectionContainsRenderedMarkdown = selectionContainsRenderedMarkdown;
 
 var EXPORTED_SYMBOLS = ['markdownHere'];
 
