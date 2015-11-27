@@ -112,15 +112,22 @@ function markdownRenderComplete(elem, rendered) {
 // we're basically relaying entirely on the interval checks.
 
 
-// At this time, only this function differs between Chrome and Firefox.
+// At this time, the following function differs between Chrome and Firefox.
 function showToggleButton(show) {
   Utils.makeRequestToPrivilegedScript(
     document,
     { action: 'show-toggle-button', show: show });
 }
 
+// At this time, this function does not exist in Firefox
+function showToggleButtonBadge(show) {
+  Utils.makeRequestToPrivilegedScript(
+    document,
+    { action: 'show-toggle-button-badge', show: show });
+}
 
-var lastElemChecked, lastRenderable;
+
+var lastElemChecked, lastRenderable, lastShowBadge;
 function setToggleButtonVisibility(elem) {
   var renderable = false;
 
@@ -143,6 +150,31 @@ function setToggleButtonVisibility(elem) {
   if (renderable !== lastRenderable) {
     showToggleButton(renderable);
     lastRenderable = renderable;
+
+    if (renderable === false) {
+      // Remove the badge
+      lastShowBadge = false;
+      showToggleButtonBadge(lastShowBadge);
+    }
+  }
+}
+
+function setToggleButtonBadge(elem) {
+  var showBadge = false;
+
+  // The badge indicates the to user that s/he has UNRENDERED markdown
+
+  // We don't want to show the badge if the selection is unrenderable
+  if (lastRenderable) {
+    if (elem && elem.ownerDocument) {
+      // We don't want to show the badge if the selection contains rendered text
+      showBadge = !(markdownHere.selectionContainsRenderedMarkdown(elem.ownerDocument));
+    }
+  }
+
+  if (showBadge !== lastShowBadge) {
+    showToggleButtonBadge(showBadge);
+    lastShowBadge = showBadge;
   }
 }
 
@@ -151,12 +183,14 @@ function setToggleButtonVisibility(elem) {
 // a valid Markdown Toggle target.
 function focusChange(event) {
   setToggleButtonVisibility(event.target);
+  setToggleButtonBadge(event.target);
 }
 window.document.addEventListener('focus', focusChange, true);
 
 
 function buttonIntervalCheck(focusedElem) {
   setToggleButtonVisibility(focusedElem);
+  setToggleButtonBadge(focusedElem);
 }
 
 
