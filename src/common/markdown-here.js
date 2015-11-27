@@ -527,27 +527,14 @@ function unrenderMarkdown(wrapperElem) {
   Utils.saferSetOuterHTML(wrapperElem, originalMdHtml);
 }
 
-// Exported function.
-// The context menu handler. Does the rendering or unrendering, depending on the
-// state of the email compose element and the current selection.
+// Finds Markdown wrappers in the document.
+// Prioritizes outer wrappers, then searches in the current selection
 // @param `document`  The document object containing the email compose element.
 //        (Actually, it can be any document above the compose element. We'll
 //        drill down to find the correct element and document.)
-// @param `markdownRenderer`  The function that provides raw-Markdown-in-HTML
-//                            to pretty-Markdown-in-HTML rendering service.
-// @param `logger`  A function that can be used for logging debug messages. May
-//                  be null.
-// @param `renderComplete`  Callback that will be called when a render or unrender
-//                          has completed. Passed two arguments: `elem`
-//                          (the element de/rendered) and `rendered` (boolean,
-//                          true if rendered, false if derendered).
-// @returns True if successful, otherwise an error message that should be shown
-//          to the user.
-function markdownHere(document, markdownRenderer, logger, renderComplete) {
-
-  if (logger) {
-    mylog = logger;
-  }
+// @returns {{wrappers: array, range: object, focusedElem: object}} if successful,
+//        otherwise an error message that should be shown to the user.
+function getMarkdownRenderObject(document) {
 
   // If the cursor (or current selection) is in a Markdown Here wrapper, then
   // we're reverting that wrapper back to Markdown. If there's a selection that
@@ -582,6 +569,56 @@ function markdownHere(document, markdownRenderer, logger, renderComplete) {
     wrappers = findMarkdownHereWrappersInRange(range);
   }
 
+  return {
+    wrappers: wrappers,
+    range: range,
+    focusedElem: focusedElem
+  };
+}
+
+// Exported function.
+// The context menu handler. Does the rendering or unrendering, depending on the
+// state of the email compose element and the current selection.
+// @param `document`  The document object containing the email compose element.
+//        (Actually, it can be any document above the compose element. We'll
+//        drill down to find the correct element and document.)
+// @param `markdownRenderer`  The function that provides raw-Markdown-in-HTML
+//                            to pretty-Markdown-in-HTML rendering service.
+// @param `logger`  A function that can be used for logging debug messages. May
+//                  be null.
+// @param `renderComplete`  Callback that will be called when a render or unrender
+//                          has completed. Passed two arguments: `elem`
+//                          (the element de/rendered) and `rendered` (boolean,
+//                          true if rendered, false if derendered).
+// @returns True if successful, otherwise an error message that should be shown
+//          to the user.
+function markdownHere(document, markdownRenderer, logger, renderComplete) {
+
+  if (logger) {
+    mylog = logger;
+  }
+
+  // If the cursor (or current selection) is in a Markdown Here wrapper, then
+  // we're reverting that wrapper back to Markdown. If there's a selection that
+  // contains one or more wrappers, then we're reverting those wrappers back to
+  // Markdown.
+  // Otherwise, we're rendering. If there's a selection, then we're rendering
+  // the selection. If not, then we're rendering the whole email.
+
+  var renderObj, wrappers, focusedElem, range, i;
+
+  renderObj = getMarkdownRenderObject(document);
+  if (typeof(renderObj) === 'string') {
+    // Error message was returned. Pass it on
+    return renderObj;
+  } else if (typeof(renderObj) !== 'object') {
+    return 'Error retrieving Markdown wrappers, range, and focusedElem';
+  }
+
+  wrappers = renderObj.wrappers;
+  range = renderObj.range;
+  focusedElem = renderObj.focusedElem;
+
   // If we've found wrappers, then we're reverting.
   // Otherwise, we're rendering.
   if (wrappers && wrappers.length > 0) {
@@ -607,6 +644,15 @@ function markdownHere(document, markdownRenderer, logger, renderComplete) {
     }
   }
   else {
+
+    if (!range) {
+      return Utils.getMessage('nothing_to_render');
+    }
+
+    if (!focusedElem) {
+      return 'Could not find focused element';
+    }
+
     renderMarkdown(
       focusedElem,
       range,
