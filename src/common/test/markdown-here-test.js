@@ -137,6 +137,32 @@ describe('markdownHere', function() {
         expect(markdownHere.selectionContainsRenderedMarkdown(document)).to.equal(false);
         done();
       });
+
+      it('should give error when the input format is incorrect', function(done) {
+        var fakeDocument = '**This is a fakeDocument**';
+        renderMD(function(elem) {
+          expect(markdownHere.selectionContainsRenderedMarkdown(fakeDocument)).to.equal('Error retrieving Markdown wrappers, range, and focusedElem');
+          done();
+        });
+      });
+      
+      it('should not detect rendered markdown if the rendered markdown is not selected', function(done) {
+        var md = '_some markdown_';
+        var myText = document.createElement('textarea');
+        document.body.appendChild(myText);
+        myText.value = '_some more markdown_';
+
+        // First render
+        renderMD(md, function(elem) {
+          // Then focus on another place and check if we detect the rendered markdown
+          myText.focus();
+          expect(markdownHere.selectionContainsRenderedMarkdown(document)).to.equal(false);
+          done();
+        });
+        
+        myText.remove();
+      });
+      
     });
   });
 });

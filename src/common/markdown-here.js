@@ -589,7 +589,7 @@ function selectionContainsRenderedMarkdown(document) {
 
   renderObj = getMarkdownRenderObject(document);
   if (typeof(renderObj) !== 'object') {
-    return false;
+    return 'Error retrieving Markdown wrappers, range, and focusedElem';
   }
 
   wrappers = renderObj.wrappers;
