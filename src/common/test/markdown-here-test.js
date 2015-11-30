@@ -113,4 +113,37 @@ describe('markdownHere', function() {
     });
 
   });
+
+  describe('selectionContainsRenderedMarkdown', function() {
+    var userprefs = {};
+    var $testElem = null;
+
+    beforeEach(function() {
+      userprefs = {
+        'math-value': null,
+        'math-enabled': false,
+        'main-css': '',
+        'syntax-css': ''
+      };
+
+      // Not sure how $testElem is used
+      $testElem = $('<div contentEditable="true">').appendTo('body');
+      $testElem.focus();
+    });
+
+    afterEach(function() {
+      $testElem.remove();
+    });
+
+    var setHTML = function(HTML) {
+
+    };
+
+    it('should not detect rendered markdown in empty document', function(done) {
+
+      // We need to figure out how to modify the 'document' below for testing...
+      expect(markdownHere.selectionContainsRenderedMarkdown(document)).to.equal(false);
+      done();
+    });
+  });
 });
