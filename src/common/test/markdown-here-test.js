@@ -112,38 +112,31 @@ describe('markdownHere', function() {
       });
     });
 
-  });
+    describe('selectionContainsRenderedMarkdown', function() {
 
-  describe('selectionContainsRenderedMarkdown', function() {
-    var userprefs = {};
-    var $testElem = null;
+      it('should detect rendered markdown', function(done) {
+        var md = '_some markdown_';
 
-    beforeEach(function() {
-      userprefs = {
-        'math-value': null,
-        'math-enabled': false,
-        'main-css': '',
-        'syntax-css': ''
-      };
+        // First render
+        renderMD(md, function(elem) {
+          // Then check if we detect it
+          $testElem.focus();
+          expect(markdownHere.selectionContainsRenderedMarkdown(document)).to.equal(true);
+          done();
+        });
+      });
 
-      // Not sure how $testElem is used
-      $testElem = $('<div contentEditable="true">').appendTo('body');
-      $testElem.focus();
-    });
+      it('should not detect unrendered markdown', function(done) {
+        var md = '_some markdown_';
+        $testElem.html(md);
+        expect(markdownHere.selectionContainsRenderedMarkdown(document)).to.equal(false);
+        done();
+      });
 
-    afterEach(function() {
-      $testElem.remove();
-    });
-
-    var setHTML = function(HTML) {
-
-    };
-
-    it('should not detect rendered markdown in empty document', function(done) {
-
-      // We need to figure out how to modify the 'document' below for testing...
-      expect(markdownHere.selectionContainsRenderedMarkdown(document)).to.equal(false);
-      done();
+      it('should not detect rendered markdown in empty document', function(done) {
+        expect(markdownHere.selectionContainsRenderedMarkdown(document)).to.equal(false);
+        done();
+      });
     });
   });
 });
