@@ -159,16 +159,31 @@ function setToggleButtonVisibility(elem) {
   }
 }
 
+var setToggleButtonBadgePrefs = null;
 function setToggleButtonBadge(elem) {
   var showBadge = false;
 
-  // The badge indicates the to user that s/he has UNRENDERED markdown
+  if (!setToggleButtonBadgePrefs) {
+      Utils.makeRequestToPrivilegedScript(
+        document,
+        { action: 'get-options' },
+        function(prefs) {
+          setToggleButtonBadgePrefs = prefs;
+        });
 
-  // We don't want to show the badge if the selection is unrenderable
-  if (lastRenderable) {
-    if (elem && elem.ownerDocument) {
-      // We don't want to show the badge if the selection contains rendered text
-      showBadge = !(markdownHere.selectionContainsRenderedMarkdown(elem.ownerDocument));
+  } else {
+
+    if (setToggleButtonBadgePrefs['google-chrome-badge-enabled']) {
+
+      // The badge indicates the to user that s/he has UNRENDERED markdown
+
+      // We don't want to show the badge if the selection is unrenderable
+      if (lastRenderable) {
+        if (elem && elem.ownerDocument) {
+          // We don't want to show the badge if the selection contains rendered text
+          showBadge = !(markdownHere.selectionContainsRenderedMarkdown(elem.ownerDocument));
+        }
+      }
     }
   }
 
