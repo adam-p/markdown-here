@@ -138,14 +138,14 @@ describe('markdownHere', function() {
         done();
       });
 
-      it('should give error when the input format is incorrect', function(done) {
+      it('should return an error when there is no focussed element', function(done) {
         var fakeDocument = '**This is a fakeDocument**';
         renderMD(function(elem) {
-          expect(markdownHere.selectionContainsRenderedMarkdown(fakeDocument)).to.equal('Error retrieving Markdown wrappers, range, and focusedElem');
+          expect(markdownHere.selectionContainsRenderedMarkdown(fakeDocument)).to.equal(false);
           done();
         });
       });
-      
+
       it('should not detect rendered markdown if the rendered markdown is not selected', function(done) {
         var md = '_some markdown_';
         var myText = document.createElement('textarea');
@@ -159,10 +159,10 @@ describe('markdownHere', function() {
           expect(markdownHere.selectionContainsRenderedMarkdown(document)).to.equal(false);
           done();
         });
-        
+
         myText.remove();
       });
-      
+
     });
   });
 });
