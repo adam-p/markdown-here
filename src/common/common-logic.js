@@ -131,6 +131,9 @@ function getForgotToRenderButtonSelector(elem) {
   else if (elem.ownerDocument.location.host.indexOf('inbox.google.') >= 0) {
     return '[role="button"][tabindex="0"][jsaction$=".send"]';
   }
+  else if (elem.ownerDocument.location.host.indexOf('fastmail.') >= 0) {
+    return '[class~="s-send"]';
+  }
 
   return null;
 }
