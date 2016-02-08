@@ -22,7 +22,8 @@ var DEFAULTS = {
   'hotkey': { shiftKey: false, ctrlKey: true, altKey: true, key: 'M' },
   'forgot-to-render-check-enabled': false,
   'header-anchors-enabled': false,
-  'gfm-line-breaks-enabled': true
+  'gfm-line-breaks-enabled': true,
+  'highlight-line-breaks-enabled': false 
 };
 
 /*? if(platform!=='mozilla'){ */
@@ -129,6 +130,7 @@ var ChromeOptionsStore = {
     'hotkey': DEFAULTS['hotkey'],
     'forgot-to-render-check-enabled': DEFAULTS['forgot-to-render-check-enabled'],
     'header-anchors-enabled': DEFAULTS['header-anchors-enabled'],
+    'highlight-line-breaks-enabled': DEFAULTS['highlight-line-breaks-enabled'],
     'gfm-line-breaks-enabled': DEFAULTS['gfm-line-breaks-enabled']
   },
 
@@ -293,6 +295,7 @@ var MozillaOptionsStore = {
     'hotkey': DEFAULTS['hotkey'],
     'forgot-to-render-check-enabled': DEFAULTS['forgot-to-render-check-enabled'],
     'header-anchors-enabled': DEFAULTS['header-anchors-enabled'],
+    'highlight-line-breaks-enabled': DEFAULTS['highlight-line-breaks-enabled'],
     'gfm-line-breaks-enabled': DEFAULTS['gfm-line-breaks-enabled']
   },
 
@@ -481,6 +484,7 @@ var SafariOptionsStore = {
     'hotkey': DEFAULTS['hotkey'],
     'forgot-to-render-check-enabled': DEFAULTS['forgot-to-render-check-enabled'],
     'header-anchors-enabled': DEFAULTS['header-anchors-enabled'],
+    'highlight-line-breaks-enabled': DEFAULTS['highlight-line-breaks-enabled'],
     'gfm-line-breaks-enabled': DEFAULTS['gfm-line-breaks-enabled']
   }
 };
