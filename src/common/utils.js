@@ -451,10 +451,10 @@ function makeRequestToPrivilegedScript(doc, requestObj, callback) {
     // If `callback` is undefined and we pass it anyway, Chrome complains with this:
     // Uncaught Error: Invocation of form extension.sendMessage(object, undefined, null) doesn't match definition extension.sendMessage(optional string extensionId, any message, optional function responseCallback)
     if (callback) {
-      chrome.extension.sendMessage(requestObj, callback);
+      chrome.runtime.sendMessage(requestObj, callback);
     }
     else {
-      chrome.extension.sendMessage(requestObj);
+      chrome.runtime.sendMessage(requestObj);
     }
   }
   else if (typeof(safari) !== 'undefined') {

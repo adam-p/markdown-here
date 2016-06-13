@@ -141,7 +141,7 @@ var ChromeOptionsStore = {
     // Note that chrome.storage.sync.QUOTA_BYTES_PER_ITEM is in bytes, but JavaScript
     // strings are UTF-16, so we need to divide by 2.
     // Some JS string info: http://rosettacode.org/wiki/String_length#JavaScript
-    if (chrome.storage) {
+    if (chrome.storage && chrome.storage.sync && chrome.storage.sync.QUOTA_BYTES_PER_ITEM) {
       return chrome.storage.sync.QUOTA_BYTES_PER_ITEM / 2;
     }
     else {
@@ -153,7 +153,7 @@ var ChromeOptionsStore = {
 
   _storageGet: function(callback) {
     if (chrome.storage) {
-      chrome.storage.sync.get(null, function(obj) {
+      (chrome.storage.sync || chrome.storage.local).get(null, function(obj) {
         var key;
         for (key in obj) {
           // Older settings aren't JSON-encoded, so they'll throw an exception.
@@ -194,7 +194,7 @@ var ChromeOptionsStore = {
     }
 
     if (chrome.storage) {
-      chrome.storage.sync.set(finalobj, callback);
+      (chrome.storage.sync || chrome.storage.local).set(finalobj, callback);
       return;
     }
     else {
@@ -212,7 +212,7 @@ var ChromeOptionsStore = {
 
   _storageRemove: function(keysToDelete, callback) {
     if (chrome.storage) {
-      chrome.storage.sync.remove(keysToDelete, callback);
+      (chrome.storage.sync || chrome.storage.local).remove(keysToDelete, callback);
       return;
     }
     else {
@@ -302,7 +302,7 @@ var MozillaOptionsStore = {
   // When called from a background script, we're going to access the browser prefs
   // directly. Unfortunately, this means duplicating some code from the background
   // service.
-  _sendRequest: function(data, callback) { // analogue of chrome.extension.sendMessage
+  _sendRequest: function(data, callback) { // analogue of chrome.runtime.sendMessage
     var extPrefsBranch, supportString, prefKeys, prefsObj, request, sender, i;
 
     try {
@@ -488,13 +488,14 @@ var SafariOptionsStore = {
 
 
 /*? if(platform!=='mozilla'){ */
-if (typeof(navigator) !== 'undefined' && navigator.userAgent.indexOf('Chrome') >= 0) {
+if (typeof(navigator) !== 'undefined' &&
+    (navigator.userAgent.indexOf('Chrome') >= 0 || navigator.userAgent.indexOf('Firefox') >= 0)) {
   this.OptionsStore = ChromeOptionsStore;
 }
 else if (typeof(navigator) !== 'undefined' && navigator.userAgent.match(/AppleWebKit.*Version.*Safari/)) {
   this.OptionsStore = SafariOptionsStore;
 }
-else /*? } */ {
+else /*? } */ { // Thunderbird, Postbox, Icedove
   this.OptionsStore = MozillaOptionsStore;
 }
 
