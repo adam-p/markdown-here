@@ -1,6 +1,5 @@
 <!ENTITY app_name "Markdown Here">
 <!ENTITY context_menu_item "Markdown An/Aus">
-<!ENTITY context_menu_item_shortcut "k">
 <!ENTITY forgot_to_render_back_button "Zurück">
 <!ENTITY forgot_to_render_send_button "Senden">
 <!ENTITY toggle_button_text "MD An/Aus">

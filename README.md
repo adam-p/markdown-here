@@ -1,6 +1,5 @@
 # WebExtensions notes
 
-* Ampersand in context menu item (just remove? programmatically?)
 * Toolbar logo looks crap on dark background
   - Doesn't seem to be a way to detect theme and show appropriate icon. (See [this SO question](https://stackoverflow.com/questions/37366781/how-to-detect-firefox-theme)). Maybe will need to provide an option for user to choose icon.
 * Hotkey doesn't work

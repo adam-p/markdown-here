@@ -28,15 +28,6 @@
     "description":"Text shown on the context menu.",
     "inMozDTD":true
   },
-  "context_menu_item_with_shortcut":{
-    "message":"Commuta Mar&kdown",
-    "description":"Text shown on the context menu. The '&' comes before the shortcut character. If a shortcut key doesn't make sense for your language\/locale\/keyboard, you can just leave out the '&'."
-  },
-  "context_menu_item_shortcut":{
-    "message":"k",
-    "description":"The shortcut key for the context menu. Must be one of the letters in the context menu item text. If you excluded '&' in 'context_menu_item_with_shortcut', then you can leave this blank.",
-    "inMozDTD":true
-  },
   "invalid_field":{
     "message":"The selected field is not valid for Markdown rendering. Please use a rich editor.",
     "description":"Shown in an alert dialog if the user tries to render a field that cannot be rendered"
