@@ -2,7 +2,6 @@
 
 * Toolbar logo looks crap on dark background
   - Doesn't seem to be a way to detect theme and show appropriate icon. (See [this SO question](https://stackoverflow.com/questions/37366781/how-to-detect-firefox-theme)). Maybe will need to provide an option for user to choose icon.
-* Hotkey doesn't work
 * Build stuff and MetaScript stuff will need to change. Separate Firefox from Thunderbird et al.
 * `applications` key can't be in `manifest.json` for Chrome
 * Decide on whether to keep using AMO.
