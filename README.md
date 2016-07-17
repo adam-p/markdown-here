@@ -1,10 +1,17 @@
 # WebExtensions notes
 
+## High
+* Test the WebExtension. Especially on release Firefox. Publish for prelim review/signing.
+* Show message to Firefox users about switching to new extension. Probably open options tab with huge message at top.
+* Decide on whether to keep using AMO.
+
+## Low
 * Toolbar logo looks crap on dark background
   - Doesn't seem to be a way to detect theme and show appropriate icon. (See [this SO question](https://stackoverflow.com/questions/37366781/how-to-detect-firefox-theme)). Maybe will need to provide an option for user to choose icon.
-* Build stuff and MetaScript stuff will need to change. Separate Firefox from Thunderbird et al.
-* `applications` key can't be in `manifest.json` for Chrome
-* Decide on whether to keep using AMO.
+
+## Steps (after work done)
+1. Release WebExtension. Get it signed (happens immediately?). Maybe get it preliminarily reviewed.
+2. Release XUL update. Point Firefox users at WebExtension.
 
 
 # ![Markdown Here logo](https://raw.github.com/adam-p/markdown-here/master/src/common/images/icon48.png) Markdown Here

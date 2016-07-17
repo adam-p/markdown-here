@@ -114,7 +114,7 @@ function getOperationalRange(focusedElem) {
 
   range = selection.getRangeAt(0);
 
-  /*? if(platform!=='mozilla'){ */
+  /*? if(platform==='safari' || platform==='chrome'){ */
   // We're going to work around some weird OSX+Chrome/Safari behaviour where if you
   // right-click on a word it gets selected, which then causes us to render just
   // that one word and look dumb and be wrong.

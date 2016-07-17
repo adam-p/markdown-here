@@ -25,7 +25,7 @@ var DEFAULTS = {
   'gfm-line-breaks-enabled': true
 };
 
-/*? if(platform!=='mozilla'){ */
+/*? if(platform!=='thunderbird'){ */
 /*
  * Chrome storage helper. Gets around the synchronized value size limit.
  * Overall quota limits still apply (or less, but we should stay well within).
@@ -261,7 +261,7 @@ var ChromeOptionsStore = {
 };
 /*? } */
 
-
+/*? if(platform==='thunderbird'){ */
 /*
  * Mozilla preferences storage helper
  */
@@ -379,9 +379,10 @@ var MozillaOptionsStore = {
     }
   }
 };
+/*? } */
 
 
-/*? if(platform!=='mozilla'){ */
+/*? if(platform==='safari'){ */
 /*
  * When called from the options page, this is effectively a content script, so
  * we'll have to make calls to the background script in that case.
@@ -487,17 +488,28 @@ var SafariOptionsStore = {
 /*? } */
 
 
-/*? if(platform!=='mozilla'){ */
-if (typeof(navigator) !== 'undefined' &&
-    (navigator.userAgent.indexOf('Chrome') >= 0 || navigator.userAgent.indexOf('Firefox') >= 0)) {
+// Choose which OptionsStore engine we should use.
+// (This if-structure is ugly to work around the preprocessor logic.)
+/*? if(platform==='chrome' || platform==='firefox'){ */
+if (typeof(navigator) !== 'undefined'
+    && (navigator.userAgent.indexOf('Chrome') >= 0
+        || navigator.userAgent.indexOf('Firefox') >= 0)) {
   this.OptionsStore = ChromeOptionsStore;
 }
-else if (typeof(navigator) !== 'undefined' && navigator.userAgent.match(/AppleWebKit.*Version.*Safari/)) {
+/*? } */
+/*? if(platform==='safari'){ */
+if (!this.OptionsStore
+    && typeof(navigator) !== 'undefined'
+    && navigator.userAgent.match(/AppleWebKit.*Version.*Safari/)) {
   this.OptionsStore = SafariOptionsStore;
 }
-else /*? } */ { // Thunderbird, Postbox, Icedove
+/*? } */
+/*? if(platform==='thunderbird'){ */
+// Thunderbird, Postbox, Icedove
+if (!this.OptionsStore) {
   this.OptionsStore = MozillaOptionsStore;
 }
+/*? } */
 
 this.OptionsStore._fillDefaults = function(prefsObj, callback) {
   var that = this;

@@ -38,9 +38,9 @@
   "options_ui": {
     "page": "common/options.html",
     "open_in_tab": true
-  },
+  }
 
-  "applications": {
+  ,"applications": {
     "gecko": {
       "id": "markdown-here@adam.pritchard",
       "update_url": "https://example.com/updates.json"
