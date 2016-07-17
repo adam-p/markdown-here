@@ -1,5 +1,5 @@
 /*
- * Copyright Adam Pritchard 2013
+ * Copyright Adam Pritchard 2016
  * MIT License : http://adampritchard.mit-license.org/
  */
 
@@ -25,23 +25,23 @@ window.addEventListener('load', Utils.nextTickFn(onLoad), false);
 
 function upgradeCheck() {
   OptionsStore.get(function(options) {
-    var appDetails = chrome.app.getDetails();
+    var appManifest = chrome.runtime.getManifest();
 
     var optionsURL = '/common/options.html';
 
     if (typeof(options['last-version']) === 'undefined') {
       // Update our last version. Only when the update is complete will we take
       // the next action, to make sure it doesn't happen every time we start up.
-      OptionsStore.set({ 'last-version': appDetails.version }, function() {
+      OptionsStore.set({ 'last-version': appManifest.version }, function() {
         // This is the very first time the extensions has been run, so show the
         // options page.
         chrome.tabs.create({ url: chrome.extension.getURL(optionsURL) });
       });
     }
-    else if (options['last-version'] !== appDetails.version) {
+    else if (options['last-version'] !== appManifest.version) {
       // Update our last version. Only when the update is complete will we take
       // the next action, to make sure it doesn't happen every time we start up.
-      OptionsStore.set({ 'last-version': appDetails.version }, function() {
+      OptionsStore.set({ 'last-version': appManifest.version }, function() {
         // The extension has been newly updated
         optionsURL += '?prevVer=' + options['last-version'];
 
