@@ -34,7 +34,7 @@
       "19": "common/images/icon19-button-monochrome.png",
       "32": "common/images/icon32-button-monochrome.png",
       "38": "common/images/icon38-button-monochrome.png",
-      "64": "common/images/icon64-monochrome.png"
+      "64": "common/images/icon64-button-monochrome.png"
     },
     "default_title": "__MSG_toggle_button_tooltip__"
   },
