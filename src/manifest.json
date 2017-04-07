@@ -18,6 +18,7 @@
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
+      "exclude_matches": ["https://mail.google.com/mail/mu/background*"],
       "js": [
         "common/utils.js",
         "common/common-logic.js",
