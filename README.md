@@ -1,17 +1,36 @@
 # WebExtensions notes
 
 ## High
+* DON'T FORGET THUNDERBIRD
 * Test the WebExtension. Especially on release Firefox. Publish for prelim review/signing.
 * Show message to Firefox users about switching to new extension. Probably open options tab with huge message at top.
 * Decide on whether to keep using AMO.
 
 ## Low
 * Toolbar logo looks crap on dark background
-  - Doesn't seem to be a way to detect theme and show appropriate icon. (See [this SO question](https://stackoverflow.com/questions/37366781/how-to-detect-firefox-theme)). Maybe will need to provide an option for user to choose icon.
+  - JUST CREATE AN ISSUE
+  - Maybe getting fixed someday: https://bugzilla.mozilla.org/show_bug.cgi?id=1329242
+  - Maybe will need to provide an option for user to choose icon.
 
 ## Steps (after work done)
 1. Release WebExtension. Get it signed (happens immediately?). Maybe get it preliminarily reviewed.
 2. Release XUL update. Point Firefox users at WebExtension.
+
+## Better steps
+
+This results in a cleaner migration for existing Firefox users.
+
+1. Release webext version with new ID.
+
+2. Modify old version to detect if it's running on Firefox, prompt the user to install the new extension and uninstall the old extension.
+   ```
+   AddonManager.getInstallForURL('https://addons.mozilla.org/firefox/downloads/latest/markdown-here/addon-375281-latest.xpi', function(install) {console.log(arguments); install.install()}, 'application/x-xpinstall')
+   ```
+
+3. Coordinate with AMO reviewers to allow the install/uninstall action. (Via IRC?)
+
+
+
 
 
 # ![Markdown Here logo](https://raw.github.com/adam-p/markdown-here/master/src/common/images/icon48.png) Markdown Here
