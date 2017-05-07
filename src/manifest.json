@@ -36,7 +36,8 @@
       "38": "common/images/icon38-button-monochrome.png",
       "64": "common/images/icon64-button-monochrome.png"
     },
-    "default_title": "__MSG_toggle_button_tooltip__"
+    "default_title": "__MSG_toggle_button_tooltip__",
+    "browser_style": true
   },
   "options_ui": {
     "page": "common/options.html",
@@ -45,8 +46,7 @@
 
   ,"applications": {
     "gecko": {
-      "id": "markdown-here@adam.pritchard",
-      "update_url": "https://example.com/updates.json"
+      "id": "markdown-here-webext@adam.pritchard"
     }
   }
 }
