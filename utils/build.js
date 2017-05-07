@@ -25,7 +25,7 @@ var CHROME_INPUT = [/^manifest\.json$/, /^common(\\|\/)/, /^chrome(\\|\/)/, /^_l
 var FIREFOX_INPUT = CHROME_INPUT;
 var THUNDERBIRD_INPUT = [/^chrome.manifest$/, /^install.rdf$/, /^common(\\|\/)/, /^firefox(\\|\/)/];
 
-var CHROME_PLATFORM = 'firefox';
+var CHROME_PLATFORM = 'chrome';
 var FIREFOX_PLATFORM = 'firefox';
 var THUNDERBIRD_PLATFORM = 'thunderbird';
 
