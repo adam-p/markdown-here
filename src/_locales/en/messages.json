@@ -37,6 +37,16 @@
     "description": "The shortcut key for the context menu. Must be one of the letters in the context menu item text. If you excluded '&' in 'context_menu_item_with_shortcut', then you can leave this blank.",
     "inMozDTD": true
   },
+  "moz_options_dlg_title": {
+    "message": "Markdown Here Options",
+    "description": "In Thunderbird, in order to open the options tab we first have to open a temporary dialog box. This is the title for that box.",
+    "inMozDTD": true
+  },
+  "moz_options_dlg_instruction": {
+    "message": "Click the 'OK' button to open the Markdown Here Options tab",
+    "description": "In Thunderbird, in order to open the options tab we first have to open a temporary dialog box. This is the text in that box telling the user what to do. Please use the same translation for 'OK' that the application uses.",
+    "inMozDTD": true
+  },
   "invalid_field": {
     "message": "The selected field is not valid for Markdown rendering. Please use a rich editor.",
     "description": "Shown in an alert dialog if the user tries to render a field that cannot be rendered"
