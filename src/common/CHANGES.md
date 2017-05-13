@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+2017-xx-yy: v2.13.0
+--------------------
+
+* [Fixed bug # 369](https://github.com/adam-p/markdown-here/issues/369): Clicking Markdown Here's "Options" button in Firefox and Thunderbird (version 48+) causes the client application to hang.
+  - Thanks to [Sam Estep](https://github.com/samestep), [r2evans](https://github.com/r2evans), [happyconfident](https://github.com/happyconfident), [Juan Salvador Aleixandre](https://github.com/juaalta), [haililihai](https://github.com/haililihai), [Shi Liang](https://github.com/shiliang-hust), [jjroper](https://github.com/jjroper), [Linxzh](https://github.com/l0o0).
 
 2015-09-07: v2.12.0
 --------------------
