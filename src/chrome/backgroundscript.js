@@ -115,6 +115,15 @@ chrome.extension.onMessage.addListener(function(request, sender, responseCallbac
       return false;
     }
   }
+  else if (request.action === 'show-toggle-button-badge') {
+    if (request.show) {
+      chrome.browserAction.setBadgeText({text: "R", tabId: sender.tab.id});
+      chrome.browserAction.setBadgeBackgroundColor({color: "#7a1ea1", tabId: sender.tab.id});
+    }
+    else {
+      chrome.browserAction.setBadgeText({text: "", tabId: sender.tab.id});
+    }
+  }
   else if (request.action === 'upgrade-notification-shown') {
     clearUpgradeNotification();
     return false;
