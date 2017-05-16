@@ -6,11 +6,6 @@
 * Show message to Firefox users about switching to new extension. Probably open options tab with huge message at top.
 * Decide on whether to keep using AMO.
 
-## Low
-* Toolbar logo looks crap on dark background
-  - JUST CREATE AN ISSUE
-  - Maybe getting fixed someday: https://bugzilla.mozilla.org/show_bug.cgi?id=1329242
-  - Maybe will need to provide an option for user to choose icon.
 
 ## Steps (after work done)
 1. Release WebExtension. Get it signed (happens immediately?). Maybe get it preliminarily reviewed.
