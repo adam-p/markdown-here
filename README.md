@@ -19,7 +19,9 @@ This results in a cleaner migration for existing Firefox users.
 
 2. Modify old version to detect if it's running on Firefox, prompt the user to install the new extension and uninstall the old extension.
    ```
-   AddonManager.getInstallForURL('https://addons.mozilla.org/firefox/downloads/latest/markdown-here/addon-375281-latest.xpi', function(install) {console.log(arguments); install.install()}, 'application/x-xpinstall')
+   AddonManager.getInstallForURL('https://addons.mozilla.org/firefox/downloads/latest/markdown-here/addon-375281-latest.xpi', function(install) {console.log(arguments); install.install()}, 'application/x-xpinstall');
+
+   AddonManager.getAddonByID('markdown-here@adam.pritchard', function(install) {console.log(arguments); install.uninstall()});
    ```
 
 3. Coordinate with AMO reviewers to allow the install/uninstall action. (Via IRC?)

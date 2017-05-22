@@ -95,8 +95,11 @@ chrome.runtime.onMessage.addListener(function(request, sender, responseCallback)
         tabId: sender.tab.id });
       chrome.browserAction.setIcon({
         path: {
+          "16": Utils.getLocalURL('/common/images/icon16-button-monochrome.png'),
           "19": Utils.getLocalURL('/common/images/icon19-button-monochrome.png'),
-          "38": Utils.getLocalURL('/common/images/icon38-button-monochrome.png')
+          "32": Utils.getLocalURL('/common/images/icon32-button-monochrome.png'),
+          "38": Utils.getLocalURL('/common/images/icon38-button-monochrome.png'),
+          "64": Utils.getLocalURL('/common/images/icon64-button-monochrome.png')
         },
         tabId: sender.tab.id });
       return false;
@@ -108,8 +111,11 @@ chrome.runtime.onMessage.addListener(function(request, sender, responseCallback)
         tabId: sender.tab.id });
       chrome.browserAction.setIcon({
         path: {
+          "16": Utils.getLocalURL('/common/images/icon16-button-disabled.png'),
           "19": Utils.getLocalURL('/common/images/icon19-button-disabled.png'),
-          "38": Utils.getLocalURL('/common/images/icon38-button-disabled.png')
+          "32": Utils.getLocalURL('/common/images/icon32-button-disabled.png'),
+          "38": Utils.getLocalURL('/common/images/icon38-button-disabled.png'),
+          "64": Utils.getLocalURL('/common/images/icon64-button-disabled.png')
         },
         tabId: sender.tab.id });
       return false;
