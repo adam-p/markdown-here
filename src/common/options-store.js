@@ -145,8 +145,8 @@ var ChromeOptionsStore = {
       return chrome.storage.sync.QUOTA_BYTES_PER_ITEM / 2;
     }
     else {
-      // 2048 is the default value for chrome.storage.sync.QUOTA_BYTES_PER_ITEM, so...
-      return 2048 / 2;
+      // 8192 is the default value for chrome.storage.sync.QUOTA_BYTES_PER_ITEM, so...
+      return 8192 / 2;
     }
 
   },
