@@ -21,7 +21,7 @@
           <Description>
             <em:id>postbox@postbox-inc.com</em:id>
             <em:minVersion>2.0</em:minVersion>
-            <em:maxVersion>4.*</em:maxVersion>
+            <em:maxVersion>5.*</em:maxVersion>
           </Description>
         </em:targetApplication>
 
@@ -30,7 +30,7 @@
           <Description>
             <em:id>toolkit@mozilla.org</em:id>
             <em:minVersion>6.0</em:minVersion>
-            <em:maxVersion>49.*</em:maxVersion>
+            <em:maxVersion>54.*</em:maxVersion>
           </Description>
         </em:targetApplication>
 
