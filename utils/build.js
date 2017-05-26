@@ -31,7 +31,7 @@ var THUNDERBIRD_PLATFORM = 'thunderbird';
 
 var skipFileRegexes = [/^common(\\|\/)test(\\|\/)/,
                        // OS files and temp files
-                       /\.DS_Store$/, /.+\.bts$/, /desktop\.ini$/];
+                       /\.DS_Store$/, /.+\.bts$/, /desktop\.ini$/, /Thumbs.db$/];
 var javascriptFileRegex = /.+\.js$/;
 var manifestJsonFileRegex = /manifest\.json$/
 
