@@ -1,7 +1,7 @@
 Change Log
 ==========
 
-2017-06-04: v2.13.2
+2017-06-07: v2.13.2
 --------------------
 
 * Firefox/XUL: Added mechanism for upgrading from legacy XUL extension to newfangled WebExtensions version.
