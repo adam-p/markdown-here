@@ -548,10 +548,15 @@ describe('Utils', function() {
 
       // The sibling of the selected node *is not* intersected.
       expect(Utils.rangeIntersectsNode(range, $('#test-elem-2')[0])).to.be.false;
+    });
 
-      // I have found that Range.intersectsNode is broken on Chrome. I'm adding
-      // test to see if/when it gets fixed.
-      if (typeof(window.chrome) !== 'undefined') {
+    // I have found that Range.intersectsNode is broken on Chrome. I'm adding
+    // test to see if/when it gets fixed.
+    it('Range.intersectsNode is broken on Chrome', function() {
+      var range = document.createRange();
+      range.selectNode($('#test-elem-1')[0]);
+
+      if (typeof(window.chrome) !== 'undefined' && navigator.userAgent.indexOf('Chrome') >= 0) {
         expect(range.intersectsNode($('#test-elem-2')[0])).to.be.true;
       }
     });

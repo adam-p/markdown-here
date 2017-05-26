@@ -1,5 +1,5 @@
 /*
- * Copyright Adam Pritchard 2013
+ * Copyright Adam Pritchard 2016
  * MIT License : http://adampritchard.mit-license.org/
  */
 
@@ -25,23 +25,23 @@ window.addEventListener('load', Utils.nextTickFn(onLoad), false);
 
 function upgradeCheck() {
   OptionsStore.get(function(options) {
-    var appDetails = chrome.app.getDetails();
+    var appManifest = chrome.runtime.getManifest();
 
     var optionsURL = '/common/options.html';
 
     if (typeof(options['last-version']) === 'undefined') {
       // Update our last version. Only when the update is complete will we take
       // the next action, to make sure it doesn't happen every time we start up.
-      OptionsStore.set({ 'last-version': appDetails.version }, function() {
+      OptionsStore.set({ 'last-version': appManifest.version }, function() {
         // This is the very first time the extensions has been run, so show the
         // options page.
         chrome.tabs.create({ url: chrome.extension.getURL(optionsURL) });
       });
     }
-    else if (options['last-version'] !== appDetails.version) {
+    else if (options['last-version'] !== appManifest.version) {
       // Update our last version. Only when the update is complete will we take
       // the next action, to make sure it doesn't happen every time we start up.
-      OptionsStore.set({ 'last-version': appDetails.version }, function() {
+      OptionsStore.set({ 'last-version': appManifest.version }, function() {
         // The extension has been newly updated
         optionsURL += '?prevVer=' + options['last-version'];
 
@@ -54,7 +54,7 @@ function upgradeCheck() {
 // Create the context menu that will signal our main code.
 chrome.contextMenus.create({
   contexts: ['editable'],
-  title: Utils.getMessage('context_menu_item_with_shortcut'),
+  title: Utils.getMessage('context_menu_item'),
   onclick: function(info, tab) {
     chrome.tabs.sendMessage(tab.id, {action: 'context-click'});
   }
@@ -62,7 +62,7 @@ chrome.contextMenus.create({
 
 // Handle rendering requests from the content script.
 // See the comment in markdown-render.js for why we do this.
-chrome.extension.onMessage.addListener(function(request, sender, responseCallback) {
+chrome.runtime.onMessage.addListener(function(request, sender, responseCallback) {
   // The content script can load in a not-real tab (like the search box), which
   // has an invalid `sender.tab` value. We should just ignore these pages.
   if (typeof(sender.tab) === 'undefined' ||
@@ -95,8 +95,11 @@ chrome.extension.onMessage.addListener(function(request, sender, responseCallbac
         tabId: sender.tab.id });
       chrome.browserAction.setIcon({
         path: {
-          19: Utils.getLocalURL('/common/images/icon19-button-monochrome.png'),
-          38: Utils.getLocalURL('/common/images/icon38-button-monochrome.png')
+          "16": Utils.getLocalURL('/common/images/icon16-button-monochrome.png'),
+          "19": Utils.getLocalURL('/common/images/icon19-button-monochrome.png'),
+          "32": Utils.getLocalURL('/common/images/icon32-button-monochrome.png'),
+          "38": Utils.getLocalURL('/common/images/icon38-button-monochrome.png'),
+          "64": Utils.getLocalURL('/common/images/icon64-button-monochrome.png')
         },
         tabId: sender.tab.id });
       return false;
@@ -108,8 +111,11 @@ chrome.extension.onMessage.addListener(function(request, sender, responseCallbac
         tabId: sender.tab.id });
       chrome.browserAction.setIcon({
         path: {
-          19: Utils.getLocalURL('/common/images/icon19-button-disabled.png'),
-          38: Utils.getLocalURL('/common/images/icon38-button-disabled.png')
+          "16": Utils.getLocalURL('/common/images/icon16-button-disabled.png'),
+          "19": Utils.getLocalURL('/common/images/icon19-button-disabled.png'),
+          "32": Utils.getLocalURL('/common/images/icon32-button-disabled.png'),
+          "38": Utils.getLocalURL('/common/images/icon38-button-disabled.png'),
+          "64": Utils.getLocalURL('/common/images/icon64-button-disabled.png')
         },
         tabId: sender.tab.id });
       return false;

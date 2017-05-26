@@ -1,6 +1,5 @@
 <!ENTITY app_name "Markdown Here">
 <!ENTITY context_menu_item "Basculer vers Markdown">
-<!ENTITY context_menu_item_shortcut "k">
 <!ENTITY forgot_to_render_back_button "Retour">
 <!ENTITY forgot_to_render_send_button "Envoyer">
 <!ENTITY toggle_button_text "Basculer vers MD">

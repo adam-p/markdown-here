@@ -28,15 +28,6 @@
     "description": "Text shown on the context menu.",
     "inMozDTD": true
   },
-  "context_menu_item_with_shortcut": {
-    "message": "Mar&kdown Toggle",
-    "description": "Text shown on the context menu. The '&' comes before the shortcut character. If a shortcut key doesn't make sense for your language/locale/keyboard, you can just leave out the '&'."
-  },
-  "context_menu_item_shortcut": {
-    "message": "k",
-    "description": "The shortcut key for the context menu. Must be one of the letters in the context menu item text. If you excluded '&' in 'context_menu_item_with_shortcut', then you can leave this blank.",
-    "inMozDTD": true
-  },
   "moz_options_dlg_title": {
     "message": "Markdown Here Options",
     "description": "In Thunderbird, in order to open the options tab we first have to open a temporary dialog box. This is the title for that box.",

@@ -16,16 +16,24 @@ var MetaScript = require('MetaScript');
 var BASE_DIR = '..';
 var SRC_DIR = file.path.join(BASE_DIR, 'src');
 var DIST_DIR = file.path.join(BASE_DIR, 'dist');
+
 var CHROME_EXTENSION = file.path.join(DIST_DIR, 'chrome.zip');
-var FIREFOX_EXTENSION = file.path.join(DIST_DIR, 'firefox.xpi');
+var FIREFOX_EXTENSION = file.path.join(DIST_DIR, 'firefox.zip');
+var THUNDERBIRD_EXTENSION = file.path.join(DIST_DIR, 'thunderbird.xpi');
+
 var CHROME_INPUT = [/^manifest\.json$/, /^common(\\|\/)/, /^chrome(\\|\/)/, /^_locales(\\|\/)/];
-var FIREFOX_INPUT = [/^chrome.manifest$/, /^install.rdf$/, /^common(\\|\/)/, /^firefox(\\|\/)/];
-var FIREFOX_PLATFORM = 'mozilla';
+var FIREFOX_INPUT = CHROME_INPUT;
+var THUNDERBIRD_INPUT = [/^chrome.manifest$/, /^install.rdf$/, /^common(\\|\/)/, /^firefox(\\|\/)/];
+
+var CHROME_PLATFORM = 'chrome';
+var FIREFOX_PLATFORM = 'firefox';
+var THUNDERBIRD_PLATFORM = 'thunderbird';
 
 var skipFileRegexes = [/^common(\\|\/)test(\\|\/)/,
                        // OS files and temp files
-                       /\.DS_Store$/, /.+\.bts$/, /desktop\.ini$/];
+                       /\.DS_Store$/, /.+\.bts$/, /desktop\.ini$/, /Thumbs.db$/];
 var javascriptFileRegex = /.+\.js$/;
+var manifestJsonFileRegex = /manifest\.json$/
 
 
 // Checks for a match for fpath in inputArray (which should be CHROME_INPUT or FIREFOX_INPUT).
@@ -51,17 +59,18 @@ function fnameMatch(fpath, inputArray) {
 
 
 // Add a file to the Chrome extension zip
-function addChromeFile(zip, fullPath, zipPath) {
-  zip.file(fullPath, { name: zipPath });
-}
-
-
-// Add a file to the Firefox extension zip
-function addFirefoxFile(zip, fullPath, zipPath) {
-  // For the Mozilla extension, we need to do some preprocessing on JavaScript files.
+function addBuildFile(platformName, zip, fullPath, zipPath) {
+  // For the Mozilla extensions in particular, we need to do some preprocessing on JavaScript files
+  // in order to exclude code specific to other platforms.
   if (javascriptFileRegex.test(fullPath)) {
     var fileContents = fs.readFileSync(fullPath);
-    fileContents = MetaScript.transform(fileContents, {platform: FIREFOX_PLATFORM});
+    fileContents = MetaScript.transform(fileContents, {platform: platformName});
+    zip.append(fileContents, { name: zipPath });
+  }
+  else if (platformName === CHROME_PLATFORM && manifestJsonFileRegex.test(fullPath)) {
+    // Remove the Firefox-specific stuff from manifest.json when building for Chrome.
+    var fileContents = fs.readFileSync(fullPath, {encoding: 'utf8'});
+    fileContents = fileContents.replace(/,"applications":[^{]*{[^{]*{[^}]*}[^}]*}/m, '');
     zip.append(fileContents, { name: zipPath });
   }
   else {
@@ -71,7 +80,7 @@ function addFirefoxFile(zip, fullPath, zipPath) {
 
 
 // Initialize the extension zips. Returns an object like:
-//  { chrome: chromeZip, firefox: firefoxZip }
+//  { chrome: chromeZip, firefox: firefoxZip, thunderbird: thunderbirdZip }
 function setUpZips() {
   file.mkdirsSync(DIST_DIR);
   if (fs.existsSync(CHROME_EXTENSION)) {
@@ -82,8 +91,13 @@ function setUpZips() {
     fs.unlinkSync(FIREFOX_EXTENSION);
   }
 
+  if (fs.existsSync(THUNDERBIRD_EXTENSION)) {
+    fs.unlinkSync(THUNDERBIRD_EXTENSION);
+  }
+
   var chromeZip = new archiver('zip'); // Chrome will reject the zip if there's no compression
   var firefoxZip = new archiver('zip', {store: true});
+  var thunderbirdZip = new archiver('zip', {store: true});
 
   chromeZip.on('error', function(err) {
     console.log('chromeZip error:', err);
@@ -95,12 +109,19 @@ function setUpZips() {
     throw err;
   });
 
+  thunderbirdZip.on('error', function(err) {
+    console.log('thunderbirdZip error:', err);
+    throw err;
+  });
+
   chromeZip.pipe(fs.createWriteStream(CHROME_EXTENSION));
   firefoxZip.pipe(fs.createWriteStream(FIREFOX_EXTENSION));
+  thunderbirdZip.pipe(fs.createWriteStream(THUNDERBIRD_EXTENSION));
 
   return {
     chrome: chromeZip,
-    firefox: firefoxZip
+    firefox: firefoxZip,
+    thunderbird: thunderbirdZip,
   };
 }
 
@@ -114,19 +135,25 @@ function main() {
 
       var fnameChrome = fnameMatch(fullPath, CHROME_INPUT);
       var fnameFirefox = fnameMatch(fullPath, FIREFOX_INPUT);
+      var fnameThunderbird = fnameMatch(fullPath, THUNDERBIRD_INPUT);
 
       if (fnameChrome) {
-        addChromeFile(zips.chrome, fullPath, fnameChrome);
+        addBuildFile(CHROME_PLATFORM, zips.chrome, fullPath, fnameChrome);
       }
 
       if (fnameFirefox) {
-        addFirefoxFile(zips.firefox, fullPath, fnameFirefox);
+        addBuildFile(FIREFOX_PLATFORM, zips.firefox, fullPath, fnameFirefox);
+      }
+
+      if (fnameThunderbird) {
+        addBuildFile(THUNDERBIRD_PLATFORM, zips.thunderbird, fullPath, fnameThunderbird);
       }
     }
   });
 
   zips.chrome.finalize();
   zips.firefox.finalize();
+  zips.thunderbird.finalize();
 
   console.log('Done! Built extensions written to', DIST_DIR);
 }
