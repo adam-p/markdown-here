@@ -20,7 +20,7 @@ Mostly so that I can go back and use them again later...
 
 ## Cygwin
 
-Install: libxml2 libxml2-devel libxslt libxslt-devel libiconv
+Install: ruby-devel libxml2 libxml2-devel libxslt libxslt-devel libiconv
 
 gem install racc
 
