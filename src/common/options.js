@@ -5,6 +5,7 @@
 
 "use strict";
 /*jshint browser:true, jquery:true, sub:true */
+/*eslint-env jquery */
 /*global OptionsStore:false, chrome:false, markdownRender:false,
   htmlToText:false, marked:false, hljs:false, markdownHere:false, Utils:false,
   MdhHtmlToText:false */
@@ -125,10 +126,50 @@ function onLoad() {
     }
   });
 
+  // Check if we need to upgrade from XUL to WebExtensions.
+  webextUpgradeCheck();
+
   loaded = true;
 }
 document.addEventListener('DOMContentLoaded', onLoad, false);
 
+
+/**
+ * Check if the current installation needs to be upgraded from a XUL extension
+ * to a WebExtensions extension. If so, do it.
+ */
+function webextUpgradeCheck() {
+  // Handle the "Upgrade" button in the modal dialog we're about to show.
+  $('#webextUpgrade').click(function() {
+    $('html').addClass('wait');
+    // Ask the privileged background script to do the upgrade.
+    Utils.makeRequestToPrivilegedScript(
+      document,
+      { action: 'webext-upgrade' },
+      function() {
+        $('html').removeClass('wait');
+      });
+  });
+
+  // Handle the "Cancel" button in the modal dialog we're about to show.
+  $('#webextCancel').click(function() {
+    alert('If you change your mind, you can get the upgrade prompt again\nby reloading or re-opening this page.');
+    $('#webextUpgradeModalDialog').removeClass('visible').delay(1).queue(function() {
+      $(this).css('display', 'none').dequeue();
+    });
+  });
+
+  // We want to upgrade Firefox >= v50.
+  // We want to make sure we don't try to upgrade Pale Moon, which intends to
+  // continue supporting XUL and not WebExtensions: https://www.palemoon.org/roadmap.shtml
+  // If any other clients gets upgraded which shouldn't, please create an issue.
+  if (navigator.userAgent.match(/(Firefox\/5\d)(?!.*PaleMoon)/)) {
+    // Show the modal dialog.
+    $('#webextUpgradeModalDialog').css('display', 'initial').delay(1).queue(function() {
+      $(this).addClass('visible').dequeue();
+    });
+  }
+}
 
 // The Preview <iframe> will let us know when it's loaded, so that we can
 // trigger the rendering of it.

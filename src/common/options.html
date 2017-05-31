@@ -666,6 +666,87 @@ MIT License : http://adampritchard.mit-license.org/
 
   <div id="saved-msg" data-i18n="changes_saved">Changes saved</div>
 
+  <!-- BEGIN WebExtensions upgrade modal dialog -->
+  <!-- Adapted from: http://www.greywyvern.com/?post=337 -->
+  <style>
+  .modalDialog {
+    position: fixed;
+    font-family: Arial, Helvetica, sans-serif;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 99999;
+    opacity:0;
+    display: none;
+    visibility: hidden;
+    -webkit-transition: opacity 400ms ease-in;
+    -moz-transition: opacity 400ms ease-in;
+    transition: opacity 400ms ease-in;
+  }
+
+  .modalDialog.visible {
+    opacity: 1;
+    display: initial;
+    visibility: visible;
+    -webkit-transition: opacity 400ms ease-in;
+    -moz-transition: opacity 400ms ease-in;
+    transition: opacity 400ms ease-in;
+  }
+
+  .modalDialog > div {
+    max-width: 500px;
+    position: relative;
+    margin: 10% auto;
+    padding: 5px 20px 13px 20px;
+    border-radius: 10px;
+    background: #fff;
+    background: -moz-linear-gradient(#fff, #999);
+    background: -webkit-linear-gradient(#fff, #999);
+    background: -o-linear-gradient(#fff, #999);
+  }
+
+  .modalDialog .button.cancel {
+    background: linear-gradient(270deg, #bdbdbd, #d4c4de);
+    color: #111;
+  }
+
+  html.wait, html.wait * { cursor: wait !important; }
+  </style>
+  <div id="webextUpgradeModalDialog" class="modalDialog">
+    <div>
+      <h2>IMPORTANT! Upgrade Markdown Here</h2>
+      <p>
+        <strong>You have the legacy Markdown Here extension
+        for Firefox installed.</strong> This XUL/overlay style of extension does not work with Firefox's
+        new multi-process mode, and <strong>when Firefox 57 is released this extension
+        <a target="_blank" href="https://blog.mozilla.org/addons/2017/02/16/the-road-to-firefox-57-compatibility-milestones/">
+          will not work at all</a></strong>.
+      </p>
+      <p>
+        <strong>A new multi-process-compatible version of Markdown Here is available.</strong> In order
+        to upgrade to it, you need to uninstall the existing extension and install
+        the new one. If you <strong>click the "Upgrade" button</strong> below this will be done for
+        you. (If you click "Cancel" you can do it manually later.)
+      </p>
+      <p>
+        <strong>TL;DR: You have a deprecated and soon-to-be defunct
+        version of MDH installed. Click the "Upgrade" button to get it sorted out.</strong>
+      </p>
+      <div>
+        <button id="webextUpgrade" class="button purple">
+          Upgrade
+        </button>
+        <button id="webextCancel" class="button purple cancel">
+          Cancel
+        </button>
+      </div>
+
+    </div>
+  </div>
+  <!-- END WebExtensions upgrade modal dialog -->
+
 </body>
 
 <script src="jsHtmlToText.js"></script>

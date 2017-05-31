@@ -106,6 +106,74 @@ document.addEventListener(imports.Utils.PRIVILEGED_REQUEST_EVENT_NAME, function(
     asyncResponseCallback = false;
     responseCallback(getStringBundleHandler());
   }
+  else if (request.action === 'webext-upgrade') {
+    asyncResponseCallback = true;
+
+    // The options page is requesting that we perform the XUL-to-WebExtensions
+    // upgrade. This involves installing the new extension and then uninstall
+    // the old one (which is the one in which this code is running).
+
+    // TODO: Determine the final URL, after review of the WebExt. Try to find one
+    // that points to the "latest", rather than a specific build.
+    var webExtURL = 'https://addons.mozilla.org/firefox/downloads/file/654719/markdown_here-2.13.1-an+fx-windows.xpi';
+
+    // Get the new extension installer.
+    AddonManager.getInstallForURL(
+      webExtURL,
+      function getInstallForURLCallback(install) {
+        // We have the new installer, now get the currently installed XUL extension.
+        AddonManager.getAddonByID(
+          'markdown-here@adam.pritchard',
+          function getAddonByIDCallback(addon) {
+            // Now we'll install the new WebExt extension before proceeding to
+            // uninstall the XUL extension.
+
+            // If the WebExt install fails, we're not going to uninstall.
+            function installFailed() {
+              var prompts = Components.classes['@mozilla.org/embedcomp/prompt-service;1']
+                                      .getService(Components.interfaces.nsIPromptService);
+              prompts.alert(null, 'Markdown Here', "Upgrade install failed.\n\nReload this page to try again.\n\nIf it keeps failing, you'll need to upgrade manually.");
+              responseCallback();
+            }
+
+            var installListener = {
+              onNewInstall: function() {}, onDownloadStarted: function() {},
+              onDownloadProgress: function() {}, onDownloadEnded: function() {},
+              onDownloadCancelled: function() {}, onInstallStarted: function() {},
+              onInstallCancelled: function() {}, onExternalInstall: function() {},
+
+              onDownloadFailed: installFailed, onInstallFailed: installFailed,
+
+              onInstallEnded: function() {
+                // WebExt install succeeded.
+
+                // Close the XUL-Options tab, so that it doesn't re-open when
+                // the session is restored after browser restart.
+                closeCurrentTab();
+
+                // Uninstall the XUL extension. This is a synchronous call.
+                addon.uninstall();
+
+                responseCallback();
+
+                // Restart the browser. This is needed to fully uninstall,
+                // including getting rid of the toolbar button.
+                var appStartup = Components.classes['@mozilla.org/toolkit/app-startup;1']
+                 .getService(Components.interfaces.nsIAppStartup);
+                appStartup.quit(appStartup.eForceQuit | appStartup.eRestart);
+              }
+            };
+
+            // Start listening for install completion before starting, to avoid
+            // a race condition.
+            install.addListener(installListener);
+
+            // Begin the download+install of the WebExt extension.
+            install.install();
+          });
+      },
+      'application/x-xpinstall');
+  }
   else if (request.action === 'test-request') {
     asyncResponseCallback = false;
     responseCallback('test-request-good');
@@ -374,6 +442,25 @@ function openTab(url) {
   else {
       var win = windowMediator.getMostRecentWindow('navigator:browser');
       win.gBrowser.selectedTab = win.gBrowser.addTab(url);
+  }
+}
+
+function closeCurrentTab() {
+  var windowMediator = Components.classes['@mozilla.org/appshell/window-mediator;1']
+                                 .getService(Components.interfaces.nsIWindowMediator);
+
+  if (navigator.userAgent.indexOf('Thunderbird') >= 0 ||
+      navigator.userAgent.indexOf('Icedove') >= 0) {
+      windowMediator.getMostRecentWindow('mail:3pane')
+                    .document.getElementById('tabmail')
+                    .removeCurrentTab();
+  }
+  else if (navigator.userAgent.indexOf('Postbox') >= 0) {
+      /* Haven't yet figured out how to open a tab in Postbox */
+  }
+  else {
+      var win = windowMediator.getMostRecentWindow('navigator:browser');
+      win.gBrowser.selectedTab = win.gBrowser.removeCurrentTab();
   }
 }
 })();
