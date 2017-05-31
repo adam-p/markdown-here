@@ -355,7 +355,11 @@ function updateHandler(currVer) {
         // capability check.)
         var canShowUpgradeNotification = typeof(markdown_here) !== 'undefined';
 
-        if (lastVersion && canShowUpgradeNotification) {
+        if (imports.Utils.xulToWebExtUpgradeRequired()) {
+          // The user needs to upgrade from XUL to WebExt, so show the options page.
+          openTab(optionsURL);
+        }
+        else if (lastVersion && canShowUpgradeNotification) {
           // If this is an upgrade, show the upgrade notification
           markdown_here.showUpgradeNotification(optionsURL, openTab);
         }

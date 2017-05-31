@@ -637,6 +637,21 @@ function nextTickFn(callback, context) {
   };
 }
 
+// TODO: When merging into master, wrap this in a XUL-only (Tbird) pre-processor block.
+/**
+Returns true if the current client (browser) needs to be updated from a XUL-based
+extension to a WebExtensions-based extension.
+NOTE: This must only be called from the XUL extension.
+ */
+function xulToWebExtUpgradeRequired() {
+  // We want to upgrade Firefox >= v50.
+  // We want to make sure we don't try to upgrade Pale Moon, which intends to
+  // continue supporting XUL and not WebExtensions: https://www.palemoon.org/roadmap.shtml
+  // If any other clients get upgraded which shouldn't (or don't, which should),
+  // please create an issue.
+  return !!navigator.userAgent.match(/Firefox\/[5-9][0-9]\.[0-9]+$/);
+}
+
 
 /*
  * i18n/l10n
@@ -1119,6 +1134,7 @@ Utils.setFocus = setFocus;
 Utils.getTopURL = getTopURL;
 Utils.nextTick = nextTick;
 Utils.nextTickFn = nextTickFn;
+Utils.xulToWebExtUpgradeRequired = xulToWebExtUpgradeRequired;
 Utils.getMozStringBundle = getMozStringBundle;
 /*? if(platform!=='mozilla'){ */
 Utils.getSafariStringBundle = getSafariStringBundle;

@@ -159,11 +159,9 @@ function webextUpgradeCheck() {
     });
   });
 
-  // We want to upgrade Firefox >= v50.
-  // We want to make sure we don't try to upgrade Pale Moon, which intends to
-  // continue supporting XUL and not WebExtensions: https://www.palemoon.org/roadmap.shtml
-  // If any other clients gets upgraded which shouldn't, please create an issue.
-  if (navigator.userAgent.match(/(Firefox\/5\d)(?!.*PaleMoon)/)) {
+  // TODO: When merging into master, wrap this in a XUL-only preprocessor block.
+  // Check if we should upgrade from XUL to WebExtensions.
+  if (Utils.xulToWebExtUpgradeRequired()) {
     // Show the modal dialog.
     $('#webextUpgradeModalDialog').css('display', 'initial').delay(1).queue(function() {
       $(this).addClass('visible').dequeue();
