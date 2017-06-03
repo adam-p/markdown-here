@@ -1,0 +1,351 @@
+{
+  "app_name": {
+    "message": "Markdown Here",
+    "description": "the name of the extension",
+    "inMozDTD": true
+  },
+  "app_slogan": {
+    "message": "用Markdown写一封漂亮的电子邮件。",
+    "description": "shown as subtitle for Markdown Here in the browser extensions list"
+  },
+  "toggle_button_text":{
+    "message": "转换",
+    "description": "Text shown underneath the render toggle button. Make it as short as possible.",
+    "inMozDTD": true
+  },
+  "toggle_button_tooltip": {
+    "message": "单击转换Markdown",
+    "description": "text shown when user hovers mouse over Markdown Toggle button",
+    "inMozDTD": true
+  },
+  "toggle_button_tooltip_disabled": {
+    "message": "选定的区域不支持Markdown转换",
+    "description": "text shown when user hover mouse over disabled Markdown Toggle button",
+    "inMozDTD": true
+  },
+  "context_menu_item": {
+    "message": "Markdown转换",
+    "description": "Text shown on the context menu.",
+    "inMozDTD": true
+  },
+  "context_menu_item_with_shortcut": {
+    "message": "Mar&kdown转换",
+    "description": "Text shown on the context menu. The '&' comes before the shortcut character."
+  },
+  "context_menu_item_shortcut": {
+    "message": "k",
+    "description": "The shortcut key for the context menu. Must be one of the letters in the context menu item text",
+    "inMozDTD": true
+  },
+  "invalid_field": {
+    "message": "选定的区域不支持Markdown转换，请使用富文本编辑器。",
+    "description": "Shown in an alert dialog if the user tries to render a field that cannot be rendered"
+  },
+  "plain_text_compose": {
+    "message": "你正在使用纯文本编辑器，你必须使用富文本编辑器才能使用Markdown Here。",
+    "description": "Shown in an alert dialog if the user has their email compose app set to plain text"
+  },
+  "cursor_into_compose": {
+    "message": "请把光标定位在编辑区。"
+  },
+  "forgot_to_render_prompt_title": {
+    "message": "忘了转换Markdown?",
+    "description": "Title of the prompt that's shown when it's detected that a user may have forgotten to render the Markdown in their email"
+  },
+  "forgot_to_render_prompt_info": {
+    "message": "你好像用Markdown写了这封电邮，但却忘了让它变得更漂亮。",
+    "description": "Informational part of the prompt that's shown when it's detected that a user may have forgotten to render the Markdown in their email"
+  },
+  "forgot_to_render_prompt_question": {
+    "message": "坚持发送?",
+    "description": "Question part of the prompt that's shown when it's detected that a user may have forgotten to render the Markdown in their email"
+  },
+  "forgot_to_render_back_button": {
+    "message": "返回",
+    "description": "Text on the Back (cancel) button of the prompt that's shown when it's detected that a user may have forgotten to render the Markdown in their email",
+    "inMozDTD": true
+  },
+  "forgot_to_render_send_button": {
+    "message": "发送",
+    "description": "Text on the Send (continue) button of the prompt that's shown when it's detected that a user may have forgotten to render the Markdown in their email",
+    "inMozDTD": true
+  },
+  "forgot_to_render_prompt_close_hover": {
+    "message": "忽略这条通知",
+    "description": "Text that shows when the user hovers over the 'X' that will close the prompt"
+  },
+  "upgrade_notification_text": {
+    "message": "Markdown Here已更新",
+    "description": "Text on the notification shown when Markdown Here has been updated"
+  },
+  "upgrade_notification_changes_tooltip": {
+    "message": "单击查看这个版本的更新日志",
+    "description": "Tooltip text on the link that opens the changes list"
+  },
+  "upgrade_notification_dismiss_tooltip": {
+    "message": "忽略这条通知",
+    "description": "Tooltip text on the link that dismisses the notification"
+  },
+  "nothing_to_render": {
+    "message": "没有可转换或可恢复的内容",
+    "description": "Error message shown to user if there's nothing found to revert or render."
+  },
+  "unrendering_modified_markdown_warning": {
+    "message": "已转换的Markdown内容好像有了新改动.\n如果你再次转换它，新改动的内容会丢失。\n\n你确定要转换吗?",
+    "description": "Warning shown to the user if she tries to revert some rendered Markdown that they've modified since rendering. The user will lose their modifications if they proceed."
+  },
+  "options_page__page_title": {
+    "message": "Markdown Here选项"
+  },
+  "options_page__basic_usage": {
+    "message": "基本用法"
+  },
+  "options_page__reload_restart": {
+    "message": "重载你的电子邮件页面或者重启浏览器。",
+    "description": "A step in the basic usage instructions"
+  },
+  "options_page__start_new_message": {
+    "message": "开始写一封新的电邮。",
+    "description": "A step in the basic usage instructions"
+  },
+  "options_page__type_some_markdown": {
+    "message": "在你的电邮里输入一些Markdown内容.<br/>试试这个: <code>_Hello_ `Markdown` **Here**!</code>",
+    "description": "A step in the basic usage instructions"
+  },
+  "options_page__click_toggle": {
+    "message": "在你的电子邮件上右击然后选择\"Markdown转换\". (或者单击扩展工具栏上的<img src=\"images/icon16.png\"/>按钮。<span class=\"hotkey-display-wrapper\"> 也可以试试快捷键 <span class=\"hotkey-display\"><kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>M</kbd></span></span>)",
+    "description": "A step in the basic usage instructions"
+  },
+  "options_page__pretty_cool": {
+    "message": "你的消息现在看起来应该棒极了，发给你的朋友们吧!",
+    "description": "A step in the basic usage instructions"
+  },
+  "options_page__resources_title": {
+    "message": "资源和链接",
+    "description": "A section title"
+  },
+  "options_page__resources_cheatsheet_link": {
+    "message": "如果你刚开始接触Markdown， <a href=\"https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet\" target=\"_blank\">Markdown Here Cheatsheet</a> 是本不错的入门手册."
+  },
+  "options_page__advanced_usage": {
+    "message": "如果要查看更多信息和用法，参见 <a href=\"https://github.com/adam-p/markdown-here\" target=\"_blank\">Markdown Here项目主页</a>. 你会在下方看到选项."
+  },
+  "options_page__ggroup": {
+    "message": "资询， 讨论，或者只是和同道中人打个招呼，戳 <a href=\"https://groups.google.com/forum/?fromgroups=#!forum/markdown-here\" target=\"_blank\">markdown-here Google Group</a>."
+  },
+  "options_page__mdh_wiki": {
+    "message": "访问 <a href=\"https://github.com/adam-p/markdown-here/wiki\" target=\"_blank\">Markdown Here wiki</a> 以查看 <a href=\"https://github.com/adam-p/markdown-here/wiki/Compatibility\" target=\"_blank\">MDH适用的服务</a> 以及更多 <a href=\"https://github.com/adam-p/markdown-here/wiki/Tips-and-Tricks\" target=\"_blank\">使用提示和窍门</a>."
+  },
+  "options_page__next_steps": {
+    "message": "如果你对Markdown Here的未来发展感兴趣, 查看 <a href=\"https://github.com/adam-p/markdown-here#next-steps\" target=\"_blank\">README的Next Steps部分</a>。"
+  },
+  "options_page__donate_plea_1": {
+    "message": "Once you decide Markdown Here is pretty sweet, please help me to buy some flowers for my wife so she's not too upset about how much time I spend working on it. <strong>Thank you!</strong>"
+  },
+  "options_page__donate_plea_2": {
+    "message": "<strong>帮助Markdown Here变的更好!</strong>"
+  },
+  "options_page__donate_plea_3": {
+    "message": "<strong>帮助支持Markdown Here的发展!</strong>"
+  },
+  "options_page__donate_plea_4": {
+    "message": "You know what makes it easier to keep Markdown Here working on Chrome, Firefox, Thunderbird, Postbox, Safari, Opera, Gmail, Yahoo, Hotmail, Blogger, Evernote, etc.? <strong>Coffee!</strong>"
+  },
+  "options_page__other_donation_options": {
+    "message": "其它捐赠选项",
+    "description": "Link to a page that provides other ways to donate"
+  },
+  "options_page__primary_css_title": {
+    "message": "基本渲染CSS",
+    "description": "section title"
+  },
+  "options_page__reset_primary_css": {
+    "message": "恢复默认",
+    "description": "text on button to reset Primary Styling CSS"
+  },
+  "options_page__syntax_highlighting_css_title": {
+    "message": "语法高亮CSS",
+    "description": "section title"
+  },
+  "options_page__syntax_highlighting_theme_label": {
+    "message": "主题:",
+    "description": "label for the syntax highlighting theme combox box"
+  },
+  "options_page__preview_title": {
+    "message": "预览",
+    "description": "section title for the Markdown preview section"
+  },
+  "options_page__markdown_toggle_button_text": {
+    "message": "Markdown转换",
+    "description": "button text for Markdown Toggle button"
+  },
+  "options_page__notes_title": {
+    "message": "注意",
+    "description": "section title"
+  },
+  "options_page__note_options_sync": {
+    "message": "改动会自动保存并同步 (如果你的浏览器启用了同步)."
+  },
+  "options_page__note_syntax_styles_after_primary": {
+    "message": "语法高亮样式会在基本渲染完成后生效, 所以有较高优先级。"
+  },
+  "options_page__note_default_client_styles": {
+    "message": "一些电子邮件编辑器和浏览器会加入自己的风格。这里可能显示不出来."
+  },
+  "options_page__tex_math_title": {
+    "message": "TeX数学公式支持"
+  },
+  "options_page__tex_math_reset_button": {
+    "message": "恢复默认",
+    "description": "text on button to reset TeX math option"
+  },
+  "options_page__tex_math_privacy_heading": {
+    "message": "<strong>隐私问题:</strong>",
+    "description": "heading for warnings about TeX math privacy concerns"
+  },
+  "options_page__tex_math_privacy_issue_1": {
+    "message": "为了生成公式的图片, 浏览器会向谷歌发送请求. 这事实上意味着你在和谷歌分享公式。 就是说你编辑的信息会被发给谷歌以转换成图片，所以这个选项默认是关闭的。",
+    "description": "one of the TeX math privacy concerns"
+  },
+  "options_page__tex_math_privacy_issue_2": {
+    "message": "如果你自定义了公式转换标签, 你应该使用安全 (https://) 路径.不是所有的转换服务都支持安全选项。",
+    "description": "one of the TeX math privacy concerns"
+  },
+  "options_page__tex_math_customization_heading": {
+    "message": "<strong>定制和使用:</strong>",
+    "description": "heading for customization and use info"
+  },
+  "options_page__tex_math_customization_1": {
+    "message": "如果启用此功能，美元符号之间的文本 — <code>$$</code> — 将被解释为数学公式。例如， <code>$$\\Delta$$</code> 将显示为一个delta符号。",
+    "description": "Note: Double dollar signs ($$) are necessary to get a single dollar sign."
+  },
+  "options_page__tex_math_customization_2": {
+    "message": "为了定制公式转换, 戳 <a href=\"https://developers.google.com/chart/infographics/docs/formulas\" target=\"_blank\">Google Charts documentation</a> 查看这项服务。"
+  },
+  "options_page__tex_math_customization_3": {
+    "message": "用于创建TeX公式的一个很好的资源是 <a href=\"https://www.codecogs.com/latex/about.php\" target=\"_blank\">codecogs公式编辑器</a>."
+  },
+  "options_page__tex_math_customization_4": {
+    "message": "公式会被转换为图片,所以电邮收件人必须启用图像显示才能看到公式。"
+  },
+  "options_page__tex_math_customization_5": {
+    "message": "如果你要定制转换标签, 你可以（也应该）使用 <code>{mathcode}</code> 和 <code>{urlmathcode}</code> 作为占位符.",
+    "description": "Please do not translate {mathcode} and {urlmathcode}"
+  },
+  "options_page__tex_math_customization_5_1": {
+    "message": "<code>{mathcode}</code>: The text between the <code>$$</code> symbols — i.e., the raw TeX formula; like <code>\\Delta</code>.",
+    "description": "Please do not translate {mathcode} and {urlmathcode}. Note: Double dollar signs ($$) are necessary to get a single dollar sign."
+  },
+  "options_page__tex_math_customization_5_2": {
+    "message": "<code>{urlmathcode}</code>: The URL-encoded form of the TeX formula; like <code>%5CDelta</code>.",
+    "description": "Please do not translate {mathcode} and {urlmathcode}"
+  },
+  "options_page__tex_math_customization_6": {
+    "message": "如果你要定制 <code>&lt;img&gt;</code> 标签, 你应该使 <code>alt</code> 属性包含尽可能可读的值, 如 <code>{mathcode}</code>. 此属性的值将被用于电子邮件的纯文本版（当从Gmail和Thunderbird发送时）.",
+    "description": "Please do not translate {mathcode} and {urlmathcode}"
+  },
+  "options_page__hotkey_title": {
+    "message": "快捷键",
+    "description": "A section title"
+  },
+  "options_page__hotkey_shift_key": {
+    "message": "SHIFT",
+    "description": "label for the Shift key"
+  },
+  "options_page__hotkey_ctrl_key": {
+    "message": "CTRL",
+    "description": "label for the Ctrl key"
+  },
+  "options_page__hotkey_alt_key": {
+    "message": "ALT",
+    "description": "label for the Alt key"
+  },
+  "options_page__hotkey_plus": {
+    "message": "+",
+    "description": "plus sign that connects the hotkey buttons"
+  },
+  "options_page__hotkey_warning": {
+    "message": "这是一个字母或数字吗?",
+    "description": "warning shown if the user chooses an illegal hotkey value"
+  },
+  "options_page__hotkey_note_1": {
+    "message": "Chrome: 你必须重新载入您的电子邮件页面，以使新的热键设置生效."
+  },
+  "options_page__hotkey_note_2": {
+    "message": "Firefox and Thunderbird: 你必须重启应用以使新的热键设置生效."
+  },
+  "options_page__hotkey_note_3": {
+    "message": "你必须使用字母或数字作为快捷键（因语言和键盘而异）."
+  },
+  "options_page__hotkey_note_4": {
+    "message": "Windows键和OS X &#8984; 键不能被用作快捷键."
+  },
+  "options_page__hotkey_note_5": {
+    "message": "要禁用快捷键, 留空 \"key\" ."
+  },
+  "options_page__advanced_title": {
+    "message": "高级选项及其它",
+    "description": "A section title"
+  },
+  "options_page__forgot_to_render_label": {
+    "message": "<b>启用 \"忘记转换\" 检查.</b>",
+    "description": "Label for the checkbox that enables the forgot-to-render feature"
+  },
+  "options_page__forgot_to_render_1": {
+    "message": "目前只支持Gmail网页版和Thunderbird (还有Postbox 和 Icedove)."
+  },
+  "options_page__forgot_to_render_2": {
+    "message": "当你发送电邮时, 这个选项会检查邮件内容是不是未转换的Markdown. 这可能会干扰你正常发送邮件."
+  },
+  "options_page__forgot_to_render_3": {
+    "message": "如果你禁用了此项, <em>请</em> 告知我为什么和如何做更好. Create <a href=\"https://groups.google.com/forum/#!forum/markdown-here\" target=\"_blank\">a post on the \"markdown-here\" Google Group</a> or <a href=\"https://github.com/adam-p/markdown-here/issues\" target=\"_blank\">an issue in the Github project</a>. 谢谢."
+  },
+  "options_page__contributing_title": {
+    "message": "贡献",
+    "description": "A section title"
+  },
+  "options_page__contributing_1": {
+    "message": "<strong>如果你曾经把一个代码块写进电子邮件，你就可以帮助Markdown Here做的更好.</strong> <a href=\"https://github.com/adam-p/markdown-here/blob/development/CONTRIBUTE.md\" target=\"_blank\">CONTRIBUTE.md</a>"
+  },
+  "options_page__contributing_2": {
+    "message": "帮助翻译Markdown Here. <a href=\"https://github.com/adam-p/markdown-here/blob/development/CONTRIBUTE.md#translation\" target=\"_blank\">欢迎翻译.</a>"
+  },
+  "options_page__footer_1": {
+    "message": "<em>Markdown Here</em> 是开源的. 要提问, 报告错误, 请求新特性, 或参与开发, 访问 <a target=\"_blank\" href=\"https://github.com/adam-p/markdown-here\">Github项目主页</a> 或 <a target=\"_blank\" href=\"https://groups.google.com/forum/?fromgroups=#!forum/markdown-here\">\"markdown-here\" Google Group</a>.",
+    "description": "part of the page footer text"
+  },
+  "options_page__footer_2": {
+    "message": "Created by <a target=\"_blank\" href=\"http://adam-p.github.com/\">Adam Pritchard</a>.",
+    "description": "part of the page footer text"
+  },
+  "options_page__changes_saved": {
+    "message": "已保存",
+    "description": "message that shows when user changes have been saved"
+  },
+  "options_page__preview_markdown": {
+    "message": "```javascript<br>\nfunction syntaxHighlighting() {<br>\n&nbsp; var n = 33;<br>\n&nbsp; var s = \"hello, こんにちは\";<br>\n&nbsp; console.log(s);<br>\n}<br>\n```<br>\n<br>\n* plain<br>\n* *emphasis*<br>\n&nbsp; * **strong emphasis**<br>\n&nbsp; &nbsp; * ~~strikethrough~~<br>\n* `inline code`<br>\n<br>\n1. Numbered list<br>\n2. [Link](https://www.google.com)<br>\n<br>\n<br>\nAn image: ![Markdown Here logo](http://adam-p.github.io/markdown-here/img/icon24.png)\n<br>\n<br>\n> Block quote.&nbsp; <br>\n> *With* **some** `markdown`.<br>\n<br>\nIf **TeX Math** support is enabled, this is the quadratic equation:&nbsp;<br>\n$$-b \\pm \\sqrt{b^2 - 4ac} \\over 2a$$<br>\n<br>\n# Header 1<br>\n## Header 2<br>\n### Header 3<br>\n#### Header 4<br>\n##### Header 5<br>\n###### Header 6<br>\n&nbsp; <br>\n| Tables        | Are           | Cool  |<br>\n| ------------- |:-------------:| -----:|<br>\n| column 3 is   | right-aligned | $$1600 |<br>\n| column 2 is   | centered      |   $$12 |<br>\n| zebra stripes | are neat      |    $$1 |<br>\n<br>\nHere's a horizontal rule:<br>\n<br>\n---<br>\n<br>\n```<br>\ncode block<br>\nwith no highlighting<br>\n```<br>\n<br>\n",
+    "description": "The raw Markdown used for previewing user styling changes. Also shows users what can be done with Markdown. Please note that the double dollar signs ($$) are needed to make a single dollar sign in the application."
+  },
+  "currently_in_use": {
+    "message": "目前使用",
+    "description": "Indicates the syntax highlighting theme that the user is currently using"
+  },
+  "new_changelist_items": {
+    "message": "NEW",
+    "description": "Used to highlight the part of the changelist that is new"
+  },
+  "options_page__header_anchors_enabled_label": {
+    "message": "<b>自动设置标题锚点.</b>",
+    "description": "Label for the checkbox that enables the automatic header anchors feature. This means that an 'anchor' is created at every heading (H1, H2, etc.) in the user's Markdown. The user can then create links that will jump to these anchors, like in the table of contents of a document."
+  },
+  "options_page__header_anchors_enabled_1": {
+    "message": "如果你想把一个表的内容或其他内部链接加入到你的内容中，这会很有用. <a href=\"https://github.com/adam-p/markdown-here/wiki/Tips-and-Tricks#wiki-header-anchors\" target=\"_blank\">在MDH wiki中查看如何使用.</a>"
+  },
+  "options_page__header_anchors_enabled_2": {
+    "message": "默认禁用，因为它会 <a href=\"https://github.com/adam-p/markdown-here/issues/155\" target=\"_blank\">在Thunderbird产生视觉干扰</a>. (况且大多数人用不到.)"
+  },
+  "options_page__gfm_line_breaks_enabled_label": {
+    "message": "<b>启用GFM换行。</b>",
+    "description": "Label for the checkbox that enables the support of 'Github-flavored Markdown' line breaks."
+  }
+}
