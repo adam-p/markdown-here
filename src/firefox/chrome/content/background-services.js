@@ -114,9 +114,7 @@ document.addEventListener(imports.Utils.PRIVILEGED_REQUEST_EVENT_NAME, function(
     // upgrade. This involves installing the new extension and then uninstall
     // the old one (which is the one in which this code is running).
 
-    // TODO: Determine the final URL, after review of the WebExt. Try to find one
-    // that points to the "latest", rather than a specific build.
-    var webExtURL = 'https://addons.mozilla.org/firefox/downloads/file/654719/markdown_here-2.13.1-an+fx-windows.xpi';
+    var webExtURL = 'https://addons.mozilla.org/firefox/downloads/latest/markdown-here/platform:5/addon-817444-latest.xpi';
 
     // Get the new extension installer.
     AddonManager.getInstallForURL(

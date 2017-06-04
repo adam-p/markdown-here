@@ -1,11 +1,26 @@
 Change Log
 ==========
 
-2017-xx-yy: v2.13.0
+2017-06-04: v2.13.2
 --------------------
 
-* [Fixed bug # 369](https://github.com/adam-p/markdown-here/issues/369): Clicking Markdown Here's "Options" button in Firefox and Thunderbird (version 48+) causes the client application to hang.
+* Firefox/XUL: Added mechanism for upgrading from legacy XUL extension to newfangled WebExtensions version.
+
+
+2017-05-26: v2.13.1
+--------------------
+
+* Converted the **Firefox** version of Markdown Here to use the WebExtensions API. This makes MDH compatible with Firefox's new **multiprocess** architecture (aka **Electrolysis**). If you have an older version of MDH installed in Firefox, there will soon be a new release of that version which prompts you to install the new WebExtensions version.
+  - The upgrade for existing Firefox users is a little rocky because the XUL version needs to continue to exist for Thunderbird (and Postbox) users. So the WebExtensions version has to fork.
+  - The Firefox and Chrome code bases are now almost identical, so that's good.
+
+* [Fixed bug# 369](https://github.com/adam-p/markdown-here/issues/369): Clicking Markdown Here's "Options" button in Firefox and Thunderbird (version 48+) causes the client application to hang. (Note that this only applies to the XUL version of the extension.)
   - Thanks to [Sam Estep](https://github.com/samestep), [r2evans](https://github.com/r2evans), [happyconfident](https://github.com/happyconfident), [Juan Salvador Aleixandre](https://github.com/juaalta), [haililihai](https://github.com/haililihai), [Shi Liang](https://github.com/shiliang-hust), [jjroper](https://github.com/jjroper), [Linxzh](https://github.com/l0o0).
+
+* Updated jQuery to 3.2.1. This was required to pass Mozilla review.
+
+* Wondering why there hasn't been a release in a while? My son was born a month after the last release. This is not a coincidence. You guys, having a kid is a lot of work.
+
 
 2015-09-07: v2.12.0
 --------------------
