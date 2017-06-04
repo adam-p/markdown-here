@@ -16,8 +16,8 @@
 
 var cssEdit, cssSyntaxEdit, cssSyntaxSelect, rawMarkdownIframe, savedMsg,
     mathEnable, mathEdit, hotkeyShift, hotkeyCtrl, hotkeyAlt, hotkeyKey,
-    forgotToRenderCheckEnabled, headerAnchorsEnabled, gfmLineBreaksEnabled,
-    loaded = false;
+    forgotToRenderCheckEnabled, headerAnchorsEnabled, gfmLineBreaksEnabled;
+var loaded = false;
 
 function onLoad() {
   var xhr;
@@ -145,7 +145,7 @@ function webextUpgradeCheck() {
     // Ask the privileged background script to do the upgrade.
     Utils.makeRequestToPrivilegedScript(
       document,
-      { action: 'webext-upgrade' },
+      { action: 'webext-upgrade', restart: $('#restartNow').prop('checked') },
       function() {
         $('html').removeClass('wait');
       });

@@ -22,7 +22,8 @@
 /*global Components:false, AddonManager:false, markdown_here:false*/
 /*jshint devel:true*/
 
-var scriptLoader, imports = {};
+var scriptLoader;
+var imports = {};
 
 // See comment in ff-overlay.js for info about module loading.
 scriptLoader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"]
@@ -50,7 +51,7 @@ document.addEventListener(imports.Utils.PRIVILEGED_REQUEST_EVENT_NAME, function(
   var node, doc, request, responseEventName, responseCallback, asyncResponseCallback;
 
   node = event.target;
-  if (!node || node.nodeType != node.TEXT_NODE) {
+  if (!node || node.nodeType !== node.TEXT_NODE) {
     return;
   }
 
@@ -156,11 +157,13 @@ document.addEventListener(imports.Utils.PRIVILEGED_REQUEST_EVENT_NAME, function(
 
                 responseCallback();
 
-                // Restart the browser. This is needed to fully uninstall,
-                // including getting rid of the toolbar button.
-                var appStartup = Components.classes['@mozilla.org/toolkit/app-startup;1']
-                 .getService(Components.interfaces.nsIAppStartup);
-                appStartup.quit(appStartup.eForceQuit | appStartup.eRestart);
+                if (request.restart) {
+                  // Restart the browser. This is needed to fully uninstall,
+                  // including getting rid of the toolbar button.
+                  var appStartup = Components.classes['@mozilla.org/toolkit/app-startup;1']
+                  .getService(Components.interfaces.nsIAppStartup);
+                  appStartup.quit(appStartup.eForceQuit | appStartup.eRestart);
+                }
               }
             };
 

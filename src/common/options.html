@@ -708,6 +708,10 @@ MIT License : http://adampritchard.mit-license.org/
     color: #111;
   }
 
+  #restartNowContainer {
+    margin-top: 0.5em;
+  }
+
   html.wait, html.wait * { cursor: wait !important; }
   </style>
   <div id="webextUpgradeModalDialog" class="modalDialog">
@@ -738,7 +742,10 @@ MIT License : http://adampritchard.mit-license.org/
           Cancel
         </button>
       </div>
-
+      <div id="restartNowContainer">
+        <input type="checkbox" id="restartNow" checked="true"/>
+        <label for="restartNow">Automatically restart the browser to complete the upgrade</label>
+      </div>
     </div>
   </div>
   <!-- END WebExtensions upgrade modal dialog -->
