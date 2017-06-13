@@ -1,6 +1,13 @@
 Change Log
 ==========
 
+2017-xx-yy: v2.13.3
+--------------------
+
+* [Fixed bug #435](https://github.com/adam-p/markdown-here/issues/435): On some pages, Markdown Here would spew cross-origin exceptions to the console. This was due to MDH trying to determine if a focused iframe-within-an-iframe was renderable.
+  - Thanks to [lincoln-b](https://github.com/lincoln-b) for reporting it.
+
+
 2017-05-26: v2.13.1
 --------------------
 

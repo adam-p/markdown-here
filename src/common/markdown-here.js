@@ -60,17 +60,28 @@ var mylog = function() {};
 function findFocusedElem(document) {
   var focusedElem = document.activeElement;
 
-  // Fix #173: https://github.com/adam-p/markdown-here/issues/173
-  // If the focus is in an iframe with a different origin, then attempting to
-  // access focusedElem.contentDocument will fail with a `SecurityError`:
-  // "Failed to read the 'contentDocument' property from 'HTMLIFrameElement': Blocked a frame with origin "http://jsbin.io" from accessing a cross-origin frame."
-  // Rather than spam the console with exceptions, we'll treat this as an
-  // unrenderable situation (which it is).
-  try {
-    var accessTest = focusedElem.contentDocument;
+  // Tests if it's possible to access the iframe contentDocument without throwing
+  // an exception.
+  function iframeAccessOkay(focusedElem) {
+    // Fix #173: https://github.com/adam-p/markdown-here/issues/173
+    // Fix #435: https://github.com/adam-p/markdown-here/issues/435
+    // If the focus is in an iframe with a different origin, then attempting to
+    // access focusedElem.contentDocument will fail with a `SecurityError`:
+    // "Failed to read the 'contentDocument' property from 'HTMLIFrameElement': Blocked a frame with origin "http://jsbin.io" from accessing a cross-origin frame."
+    // Rather than spam the console with exceptions, we'll treat this as an
+    // unrenderable situation (which it is).
+    try {
+      var _ = focusedElem.contentDocument;
+    }
+    catch (e) {
+      // TODO: Check that this is actually a SecurityError and re-throw if it's not?
+      return false;
+    }
+
+    return true;
   }
-  catch (e) {
-    // TODO: Check that this is actually a SecurityError and re-throw if it's not?
+
+  if (!iframeAccessOkay(focusedElem)) {
     return null;
   }
 
@@ -78,6 +89,10 @@ function findFocusedElem(document) {
   // actual element.
   while (focusedElem && focusedElem.contentDocument) {
     focusedElem = focusedElem.contentDocument.activeElement;
+
+    if (!iframeAccessOkay(focusedElem)) {
+      return null;
+    }
   }
 
   // There's a bug in Firefox/Thunderbird that we need to work around. For
