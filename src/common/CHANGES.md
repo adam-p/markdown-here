@@ -7,6 +7,9 @@ Change Log
 * [Fixed bug #435](https://github.com/adam-p/markdown-here/issues/435): On some pages, Markdown Here would spew cross-origin exceptions to the console. This was due to MDH trying to determine if a focused iframe-within-an-iframe was renderable.
   - Thanks to [lincoln-b](https://github.com/lincoln-b) for reporting it.
 
+* [Fixed bug #427](https://github.com/adam-p/markdown-here/issues/427): In Chrome and Firefox (at least for some pages), after rendering the resulting text was selected.
+  - Thanks to [nedchu](https://github.com/nedchu) for reporting it.
+
 
 2017-05-26: v2.13.1
 --------------------

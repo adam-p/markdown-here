@@ -38,7 +38,7 @@ https://github.com/adam-p/markdown-here/issues/85
 ;(function() {
 
 "use strict";
-/*global module:false*/
+/* global module:false Utils */
 
 
 var WRAPPER_TITLE_PREFIX = 'MDH:';
@@ -207,8 +207,13 @@ function findSignatureStart(startElem) {
   return sig;
 }
 
-// Replaces the contents of `range` with the HTML string in `html`.
-// Returns the element that is created from `html`.
+/**
+ * Replaces the contents of `range` with the HTML string in `html`.
+ * Returns the element that is created from `html`.
+ * @param {Range} range
+ * @param {string} html
+ * @returns {Element}
+ */
 function replaceRange(range, html) {
   var documentFragment, newElement;
 
@@ -225,10 +230,14 @@ function replaceRange(range, html) {
 
   range.insertNode(documentFragment);
 
-  // Make sure the replacement is selected. This isn't strictly necessary, but
-  // in order to make Chrome and Firefox consistent, we either need to remove
-  // the selection in Chrome, or set it in Firefox. We'll do the latter.
-  range.selectNode(newElement);
+  // In some clients (and maybe some versions of those clients), on some pages,
+  // the newly inserted rendered Markdown will be selected. It looks better and
+  // is slightly less annoying if the text is not selected, and consistency
+  // across platforms is good. So we're going to collapse the selection.
+  // Note that specifying the `toStart` argument to `true` seems to be necessary
+  // in order to actually get a cursor in the editor.
+  // Fixes #427: https://github.com/adam-p/markdown-here/issues/427
+  range.collapse(true);
 
   return newElement;
 }
@@ -344,7 +353,7 @@ function hasParentElementOfTagName(element, tagName) {
 }
 
 
-// Look for valid raw-MD-holder element under `elem`. Only MDH wrappers will
+// Looks for valid raw-MD-holder element under `elem`. Only MDH wrappers will
 // have such an element.
 // Returns null if no raw-MD-holder element is found; otherwise returns that element.
 function findElemRawHolder(elem) {
@@ -396,8 +405,8 @@ function isWrapperElem(elem) {
 }
 
 
-// Find the wrapper element that's above the current cursor position and returns
-// it. Returns falsy if there is no wrapper.
+// Finds the wrapper element that's above the current cursor position and
+// returns it. Returns falsy if there is no wrapper.
 function findMarkdownHereWrapper(focusedElem) {
   var selection, range, wrapper = null;
 
