@@ -110,7 +110,7 @@ Note that *Markdown Here* only works with Opera versions 16 and higher (i.e., th
 
 Go to the [Opera Add-ons store page for *Markdown Here*](https://addons.opera.com/en/extensions/details/markdown-here/) and install normally.
 
-After installing, make sure to reload your webmail or restart Chrome!
+After installing, make sure to reload your webmail or restart Opera!
 
 ## Usage Instructions
 
