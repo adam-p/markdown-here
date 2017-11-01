@@ -8,5 +8,8 @@
     "glob": "^7.1.2",
     "markdown-it": "~3.0.5",
     "metascript": "~1.0.0"
+  },
+  "scripts": {
+    "build": "node build.js"
   }
 }
