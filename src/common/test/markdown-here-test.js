@@ -112,5 +112,57 @@ describe('markdownHere', function() {
       });
     });
 
+    describe('selectionContainsRenderedMarkdown', function() {
+
+      it('should detect rendered markdown', function(done) {
+        var md = '_some markdown_';
+
+        // First render
+        renderMD(md, function(elem) {
+          // Then check if we detect it
+          $testElem.focus();
+          expect(markdownHere.selectionContainsRenderedMarkdown(document)).to.equal(true);
+          done();
+        });
+      });
+
+      it('should not detect unrendered markdown', function(done) {
+        var md = '_some markdown_';
+        $testElem.html(md);
+        expect(markdownHere.selectionContainsRenderedMarkdown(document)).to.equal(false);
+        done();
+      });
+
+      it('should not detect rendered markdown in empty document', function(done) {
+        expect(markdownHere.selectionContainsRenderedMarkdown(document)).to.equal(false);
+        done();
+      });
+
+      it('should return an error when there is no focussed element', function(done) {
+        var fakeDocument = '**This is a fakeDocument**';
+        renderMD(function(elem) {
+          expect(markdownHere.selectionContainsRenderedMarkdown(fakeDocument)).to.equal(false);
+          done();
+        });
+      });
+
+      it('should not detect rendered markdown if the rendered markdown is not selected', function(done) {
+        var md = '_some markdown_';
+        var myText = document.createElement('textarea');
+        document.body.appendChild(myText);
+        myText.value = '_some more markdown_';
+
+        // First render
+        renderMD(md, function(elem) {
+          // Then focus on another place and check if we detect the rendered markdown
+          myText.focus();
+          expect(markdownHere.selectionContainsRenderedMarkdown(document)).to.equal(false);
+          done();
+        });
+
+        myText.remove();
+      });
+
+    });
   });
 });
