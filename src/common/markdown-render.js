@@ -72,6 +72,25 @@ function markdownRender(mdText, userprefs, marked, hljs) {
     return defaultLinkRenderer.call(this, href, title, text);
   };
 
+  var defaultLinkRenderer = markedRenderer.listitem;
+  markedRenderer.listitem = function(text) {
+      if (userprefs['evernote-task-lists-enabled']) {
+        if (/^\s*\[[x ]\]\s*/.test(text)) {
+          var todoImg = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+          text = text
+              .replace(/^\s*\[ \]\s*/, '<img class="en-todo" src="' + todoImg + '"> ')
+              .replace(/^\s*\[x\]\s*/, '<img class="en-todo en-todo-checked" src="' + todoImg + '"> ');
+          return '<li style="list-style: none">' + text + '</li>';
+        }
+        else {
+          return '<li>' + text + '</li>';
+        }
+      }
+      else {
+        return defaultLinkRenderer.call(this, text);
+      }
+  };
+
   var markedOptions = {
     renderer: markedRenderer,
     gfm: true,
