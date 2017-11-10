@@ -74,7 +74,7 @@ function markdownRender(mdText, userprefs, marked, hljs) {
 
   var defaultLinkRenderer = markedRenderer.listitem;
   markedRenderer.listitem = function(text) {
-      if (userprefs['evernote-task-lists-enabled']) {
+      if (userprefs['evernote-task-lists-enabled'] && location.href.match('evernote.com')) {
         if (/^\s*\[[x ]\]\s*/.test(text)) {
           var todoImg = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
           text = text
