@@ -72,23 +72,28 @@ function markdownRender(mdText, userprefs, marked, hljs) {
     return defaultLinkRenderer.call(this, href, title, text);
   };
 
+  var defaultLinkRenderer = markedRenderer.list;
+  markedRenderer.list = function(body, ordered) {
+    if (userprefs['evernote-task-lists-enabled'] && location.href.match(/evernote.com/)
+        && !ordered && /<.*en-todo.*>/.test(body)) {
+      return '<div>' + body + '</div>\n';
+    }
+    return defaultLinkRenderer.call(this, body, ordered);
+  };
+
   var defaultLinkRenderer = markedRenderer.listitem;
   markedRenderer.listitem = function(text) {
-      if (userprefs['evernote-task-lists-enabled'] && location.href.match('evernote.com')) {
-        if (/^\s*\[[x ]\]\s*/.test(text)) {
-          var todoImg = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
-          text = text
-              .replace(/^\s*\[ \]\s*/, '<img class="en-todo" src="' + todoImg + '"> ')
-              .replace(/^\s*\[x\]\s*/, '<img class="en-todo en-todo-checked" src="' + todoImg + '"> ');
-          return '<li style="list-style: none">' + text + '</li>';
-        }
-        else {
-          return '<li>' + text + '</li>';
-        }
-      }
-      else {
-        return defaultLinkRenderer.call(this, text);
-      }
+    if (userprefs['evernote-task-lists-enabled'] && location.href.match(/evernote.com/)
+        && /\s*\[[x ]\]\s*/.test(text)) {
+      var todoImg = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+      text = text
+          .replace(/\s*\[ \]\s*/g, '<img class="en-todo" src="' + todoImg + '"> ')
+          .replace(/\s*\[x\]\s*/g, '<img class="en-todo en-todo-checked" src="' + todoImg + '"> ');
+      return '<div>' + text + '</div>\n';
+    }
+    else {
+      return defaultLinkRenderer.call(this, text);
+    }
   };
 
   var markedOptions = {
