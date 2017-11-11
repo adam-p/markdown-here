@@ -72,6 +72,28 @@ function markdownRender(mdText, userprefs, marked, hljs) {
     return defaultLinkRenderer.call(this, href, title, text);
   };
 
+  var defaultListRenderer = markedRenderer.list;
+  markedRenderer.list = function(body, ordered) {
+    if (userprefs['evernote-task-lists-enabled'] && /<.*en-todo.*>/.test(body)) {
+      return '<div>' + body + '</div>\n';
+    }
+    return defaultListRenderer.call(this, body, ordered);
+  };
+
+  var defaultListItemRenderer = markedRenderer.listitem;
+  markedRenderer.listitem = function(text) {
+    if (userprefs['evernote-task-lists-enabled'] && /\s*\[[x ]\]\s*/.test(text)) {
+      var todoImg = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+      text = text
+          .replace(/\s*\[ \]\s*/g, '<img class="en-todo" src="' + todoImg + '"> ')
+          .replace(/\s*\[x\]\s*/g, '<img class="en-todo en-todo-checked" src="' + todoImg + '"> ');
+      return '<div>' + text + '</div>\n';
+    }
+    else {
+      return defaultListItemRenderer.call(this, text);
+    }
+  };
+
   var markedOptions = {
     renderer: markedRenderer,
     gfm: true,

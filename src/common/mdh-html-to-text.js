@@ -111,6 +111,11 @@ MdhHtmlToText.prototype._preprocess = function() {
                           /&lt;<a (href="mailto:[^>]+)>([^<]*)<\/a>&gt;/ig,
                           '&lt;&lt;a $1&gt;$2&lt;\/a&gt;&gt;');
 
+  // Support Evernote task lists.
+  // This code must be executed before handling <img>.
+  this.preprocessInfo.html = this.preprocessInfo.html.replace(/<.*en-todo-checked.*>/ig, '- [x]')
+                                                     .replace(/<.*en-todo.*>/ig, '- [ ]');
+
   // It's a deviation from Markdown, but we'd like to leave any rendered
   // images already in the email intact. So we'll escape their tags.
   // Note that we can't use excludeTagBlocks because there's no closing tag.
