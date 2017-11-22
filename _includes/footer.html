@@ -1,9 +1,8 @@
   <footer class="text-right">
   </footer>
 
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 
   <script src="js/vendor/bootstrap.min.js"></script>
 
@@ -12,11 +11,14 @@
   <script src="js/highlight.js"></script>
   <script src="js/main.js"></script>
 
+  <!-- Google Analytics -->
   <script>
-    var _gaq=[['_setAccount','UA-34697662-2'],['_trackPageview']];
-    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-     g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-     s.parentNode.insertBefore(g,s)}(document,'script'));
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-34697662-2', 'auto');
+    ga('send', 'pageview');
   </script>
+  <script async src='https://www.google-analytics.com/analytics.js'></script>
+  <!-- End Google Analytics -->
+
 </body>
 </html>

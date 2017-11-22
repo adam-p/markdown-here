@@ -207,7 +207,7 @@ textarea {
 }
 body {
   margin: 0;
-  font-family: MainFont, Arial, sans-serif;
+  font-family: 'Barlow Semi Condensed', Arial, sans-serif;
   font-size: 18px;
   line-height: 26px;
   color: #5E5A61;
@@ -894,7 +894,7 @@ input,
 button,
 select,
 textarea {
-  font-family: MainFont, Arial, sans-serif;
+  font-family: 'Barlow Semi Condensed', Arial, sans-serif;
 }
 label {
   display: block;

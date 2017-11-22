@@ -109,7 +109,26 @@ function initLiveDemos() {
 }
 
 function initReviewQuotes() {
-  var quote_template = _.template($('#quote-carousel-item-template').text());
+  // Our CSP policy prevents eval and Function(), which prevents template function creation.
+  // So we're going to pre-compile and include the resulting function here.
+  // If the template changes, it can be re-pre-compiled with:
+  //   _.template($('#quote-carousel-item-template').text(), null, { variable: 'data' }).source
+  var quote_template = function(data){
+    var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
+    __p+='\n<div class="item">\n  <p>\n    '+
+    ((__t=( data.quote ))==null?'':__t)+
+    '\n  </p>\n  <p class="text-right">\n    <small>\n      ';
+     if (data.stars) { _.each(_.range(data.stars), function() {
+    __p+=' <i class="icon-star"></i> ';
+     }) }
+    __p+='\n      <a href="'+
+    ((__t=( data.link ))==null?'':__t)+
+    '">'+
+    ((__t=( data.context ))==null?'':__t)+
+    '</a>\n    </small>\n  </p>\n</div>\n';
+    return __p;
+  };
+
   var $quote_carousel = $('.quote-carousel');
 
   $.getJSON('reviews.json', function(quotes) {

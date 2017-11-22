@@ -21,15 +21,16 @@ layout: mainpage
   </div>
 </div>
 
+<!-- NOTE: If this is updated, the precompiled code in initReviewQuotes() will also need updating. -->
 <script type="text/template" id="quote-carousel-item-template">
 <div class="item">
   <p>
-    <%= quote %>
+    <%= data.quote %>
   </p>
   <p class="text-right">
     <small>
-      <% if (stars) { _.each(_.range(stars), function() { %> <i class="icon-star"></i> <% }) } %>
-      <a href="<%= link %>"><%= context %></a>
+      <% if (data.stars) { _.each(_.range(data.stars), function() { %> <i class="icon-star"></i> <% }) } %>
+      <a href="<%= data.link %>"><%= data.context %></a>
     </small>
   </p>
 </div>

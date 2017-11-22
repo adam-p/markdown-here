@@ -1,6 +1,6 @@
 # Required/overridden by Github
 safe: true
 lsi: false
-highlighter: pygments
+highlighter: rouge
 
 exclude: ["README.md", "node_modules"]
