@@ -134,6 +134,9 @@ function getForgotToRenderButtonSelector(elem) {
   else if (elem.ownerDocument.location.host.indexOf('fastmail.') >= 0) {
     return '[class~="s-send"]';
   }
+  else if (elem.ownerDocument.URL.indexOf('salesforce.') >= 0) {
+    return '[class~="casePublisherButton"]';
+  }
 
   return null;
 }
