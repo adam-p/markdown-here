@@ -252,3 +252,5 @@ Copyright 2015, [Austin Anderson](http://protractor.ninja/). Licensed to Markdow
 ---
 
 ![Dos Equis man says](https://raw.github.com/adam-p/markdown-here/master/store-assets/dos-equis-MDH.jpg)
+
+EDITS HERE
