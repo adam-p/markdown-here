@@ -1,95 +1,95 @@
 # ![Markdown Here logo](https://raw.github.com/adam-p/markdown-here/master/src/common/images/icon48.png) Markdown Here
 
-[**Visit the website.**](http://markdown-here.com)<br>
-[**Get it for Chrome.**](https://chrome.google.com/webstore/detail/elifhakcjgalahccnjkneoccemfahfoa)<br>
-[**Get it for Firefox.**](https://addons.mozilla.org/en-US/firefox/addon/markdown-here/)<br>
-[**Get it for Safari.**](https://s3.amazonaws.com/markdown-here/markdown-here.safariextz)<br>
-[**Get it for Thunderbird and Postbox.**](https://addons.mozilla.org/en-US/thunderbird/addon/markdown-here/)<br>
-[**Get it for Opera.**](https://addons.opera.com/en/extensions/details/markdown-here/)<br>
-[**Discuss it and ask questions in the Google Group.**](https://groups.google.com/forum/?fromgroups#!forum/markdown-here/)<br>
+[**bezoek de website.**](http://markdown-here.com)<br>
+[**Download link voor Chrome.**](https://chrome.google.com/webstore/detail/elifhakcjgalahccnjkneoccemfahfoa)<br>
+[**Download link voor Firefox.**](https://addons.mozilla.org/en-US/firefox/addon/markdown-here/)<br>
+[**Download link voor Safari.**](https://s3.amazonaws.com/markdown-here/markdown-here.safariextz)<br>
+[**Download link voor Thunderbird en Postbox.**](https://addons.mozilla.org/en-US/thunderbird/addon/markdown-here/)<br>
+[**Download link voor Opera.**](https://addons.opera.com/en/extensions/details/markdown-here/)<br>
+[**Voer discussies en stel vragen in de Google Groep.**](https://groups.google.com/forum/?fromgroups#!forum/markdown-here/)<br>
 
-*Markdown Here* is a Google Chrome, Firefox, Safari, Opera, and Thunderbird extension that lets you write email<sup>&dagger;</sup> in Markdown<sup>&Dagger;</sup> and render them before sending. It also supports syntax highlighting (just specify the language in a fenced code block).
+*Markdown Here* is een Google Chrome, Firefox, Safari, Opera, and Thunderbird extensie die jou email laat schrijven<sup>&dagger;</sup> in Markdown<sup>&Dagger;</sup> en een voorbeeld weergeeft voordat je deze verzendt. Het ondersteunt ook het accentueren van zinnen.(Hiervoor hoef je alleen je taal op te geven in een codeblok, die als zodanig herkend wordt als u een hekje plaatst aan het begin en het eind).
 
-Writing email with code in it is pretty tedious. Writing Markdown with code in it is easy. I found myself writing email in Markdown in the Github in-browser editor, then copying the preview into email. This is a pretty absurd workflow, so I decided create a tool to write and render Markdown right in the email.
+Het schrijven van email met code erin verwerkt is best wel vervelend. Markdown schrijven met code erin is vrij eenvoudig. Ik merkte dat ik zelf email schreef in Markdown in de Github in-browser bewerker, om deze vervolgens te kopieren naar mijn email. Dit is een vrij omslachtige manier, dus besloot ik een hulpmiddel te ontwikkelen om Markdown rechtstreeks in de email weer te geven.
 
-To discover what can be done with Markdown in *Markdown Here*, check out the [Markdown Here Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet) and the other [wiki pages](https://github.com/adam-p/markdown-here/wiki).
+Om te zien welke mogelijkheden er allemaal zijn met *Markdown Here*, kijk je hier [Markdown Here Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet) en op de andere wiki pagina's [wiki pages](https://github.com/adam-p/markdown-here/wiki).
 
-<sup>&dagger;: And Google Groups posts, and Blogger posts, and Evernote notes, and Wordpress posts! [See more](#compatibility).</sup><br>
-<sup>&Dagger;: And TeX mathematical formulae!</sup>
+<sup>&dagger;: En Google Groepsberichten, en Blogberichten, en Evernote notities, en Wordpress berichten! [Zie meer](#compatibility).</sup><br>
+<sup>&Dagger;: En TeX mathematica formules!</sup>
 
-![screenshot of conversion](https://raw.github.com/adam-p/markdown-here/master/store-assets/markdown-here-image1.gimp.png)
+![schermafbeelding van conversie](https://raw.github.com/adam-p/markdown-here/master/store-assets/markdown-here-image1.gimp.png)
 
-### Table of Contents
-**[Installation Instructions](#installation-instructions)**<br>
-**[Usage Instructions](#usage-instructions)**<br>
-**[Troubleshooting](#troubleshooting)**<br>
-**[Compatibility](#compatibility)**<br>
-**[Notes and Miscellaneous](#notes-and-miscellaneous)**<br>
-**[Building the Extension Bundles](#building-the-extension-bundles)**<br>
-**[Next Steps, Credits, Feedback, License](#next-steps)**<br>
+### Inhoudsopgave
+**[Installatie Handleiding](#installation-instructions)**<br>
+**[Gebruikers Handleiding](#usage-instructions)**<br>
+**[Probleemoplossing](#troubleshooting)**<br>
+**[Compatibiliteit](#compatibility)**<br>
+**[Aantekeningen en Diversen](#notes-and-miscellaneous)**<br>
+**[Uitbreidingsbundels Bouwen](#building-the-extension-bundles)**<br>
+**[Volgende stappen, Credits, Feedback, Licensies](#next-steps)**<br>
 
-## Installation Instructions
+## Installatie Handleiding
 
 ### Chrome
 
-#### Chrome Web Store
+#### Chrome Webwinkel
 
-Go to the [Chrome Web Store page for *Markdown Here*](https://chrome.google.com/webstore/detail/elifhakcjgalahccnjkneoccemfahfoa) and install normally.
+Ga naar de [Chrome Webwinkel pagina voor *Markdown Here*](https://chrome.google.com/webstore/detail/elifhakcjgalahccnjkneoccemfahfoa) en voer een normale installatie uit.
 
-After installing, make sure to reload your webmail or restart Chrome!
+Na het installeren, wees er zeker van dat je jouw webmail opnieuw laadt óf Chrome herstart!
 
-#### Manual/Development
+#### Handmatig/Ontwikkeling
 
-1. Clone this repo.
-2. In Chrome, open the Extensions settings. (Wrench button, Tools, Extensions.)
-3. On the Extensions settings page, click the "Developer Mode" checkbox.
-4. Click the now-visible "Load unpacked extension…" button. Navigate to the directory where you cloned the repo, then the `src` directory under that.
-5. The *Markdown Here* extension should now be visible in your extensions list.
-6. Reload your webmail page (and maybe application) before trying to convert an email.
+1. Kloon deze repo.
+2. In Chrome, open de Extensies in instellingen. (knop met sleutel-icoon, Gereedschappen, Extensies).
+3. In de instellingen pagina voor Extensies, klik op het vakje naast "Ontwikkelaarsmodus" zodat deze aangevinkt staat.
+4. Klik op de "Laad uitgepakte extensie…" knop. Navigeer naar de directory waar jouw gekloonde repo staat, ga naar de `src` directory die daar weer onder staat.
+5. De *Markdown Here* extensie zou nu zichtbaar moeten zijn in jouw lijst met extensies.
+6. Herlaadt nu jouw webmail pagina (en eventueel de applicatie) alvorens je gaat proberen een email om te zetten.
 
 ### Firefox and Thunderbird
 
 #### Mozilla Add-ons site
 
-Go to the [Firefox Add-ons page for *Markdown Here*](https://addons.mozilla.org/en-US/firefox/addon/markdown-here/) and install normally.
+Ga naar de [Firefox Add-ons pagina voor *Markdown Here*](https://addons.mozilla.org/en-US/firefox/addon/markdown-here/) voer een normale installatie uit.
 
-Or go to the "Tools > Add-ons" menu and then search for "Markdown Here".
+Of ga naar "Tools > Add-ons" menu en zoek dan naar "Markdown Here".
 
-After installing, make sure to restart Firefox/Thunderbird!
+Na het installeren, zorg ervoor dat je Firefox/thunderbird herstart!
 
-**Note:** It takes up to a month for Mozilla to approve changes to the Firefox/Thunderbird extension, so updates (features, fixes) will lag behind what is shown here. You can manually choose to install the newest version before it's reviewed from the list of versions: [https://addons.mozilla.org/en-US/firefox/addon/markdown-here/versions/](https://addons.mozilla.org/en-US/firefox/addon/markdown-here/versions/)
+**Aantekening:** Het duurt tot maximaal een maand voordat Mozilla wijzigingen in de Mozilla/Thunderbird extensie goedkeurt, dus updates (functies, reparaties) zullen achterlopen op wat hier wordt weergegeven. U kunt handmatig kiezen om de nieuwste versie te installeren, nog voordat deze is beoordeeld vanuit de lijst met verschillende versies: [https://addons.mozilla.org/en-US/firefox/addon/markdown-here/versions/](https://addons.mozilla.org/en-US/firefox/addon/markdown-here/versions/)
 
-#### Manual/Development
+#### Handmatig/Ontwikkeling
 
-1. Clone this repo.
-2. Follow the instructions in the MDN ["Setting up an extension development environment"](https://developer.mozilla.org/en/Setting_up_extension_development_environment) article.
+1. Kloon deze Repo.
+2. Volg de instructies in het MDN ["Setting up an extension development environment"](https://developer.mozilla.org/en/Setting_up_extension_development_environment) artikel.
 
 ### Safari
 
-[Download the extension directly.](https://s3.amazonaws.com/markdown-here/markdown-here.safariextz) When it has finished downloading, double click it to install.
+[Download de extensie rechtstreeks.](https://s3.amazonaws.com/markdown-here/markdown-here.safariextz) Als de dowload compleet is, klik tweemaal om te installeren.
 
-#### Preferences
+#### Voorkeuren
 
-To get to the Markdown Here preferences, open the Safari preferences and then go to the "Extensions" tab. Then click the "Click me to show Markdown Here options" box.
+Om jouw Markdown voorkeuren op te geven, open uw Safari voorkeuren en ga naar de "Extensies" tab. Dan klik je op het "Klik hier om de Markdown Here opties weer te geven" hokje.
 
 ### Opera
 
-Note that *Markdown Here* only works with Opera versions 16 and higher (i.e., the ones that are based on Chromium).
+Onthoud dat *Markdown Here* alleen werkt met Opera versies 16 en hoger (d.w.z. degenen die gebaseerd zijn op Chromium).
 
-Go to the [Opera Add-ons store page for *Markdown Here*](https://addons.opera.com/en/extensions/details/markdown-here/) and install normally.
+Ga naar de [Opera Add-ons winkel pagina voor *Markdown Here*](https://addons.opera.com/en/extensions/details/markdown-here/) en voer normale installatie uit.
 
-After installing, make sure to reload your webmail or restart Chrome!
+Na het installeren, zorg ervoor dat u uw webmail herlaadt of Chrome herstart!
 
-## Usage Instructions
+## Gebruikers Handleiding
 
-Install it, and then…
+Installeer het, en dan...
 
-1. In Chrome/Safari/Opera, *make sure* you reload your web mail page before trying to use Markdown Here.
-2. In Chrome/Firefox/Safari/Opera, log into your Gmail, Hotmail, or Yahoo account and start a new email. In Thunderbird, start a new message.
-3. Make sure you're using the rich editor.
-   * In Gmail, click the "Rich formatting" link, if it's visible.
-   * In Thunderbird, make sure "Compose messages in HTML format" is enabled in your "Account Settings", "Composition & Addressing" pane.
-4. Compose an email in Markdown. For example:
+1. In Chrome/Safari/Opera, *zorg ervoor* dat u uw webmail herlaadt, voordat u Markdown Here probeert te gebruiken.
+2. In Chrome/Firefox/Safari/Opera, log in op uw Gmail, Hotmail, of Yahoo account en start een nieuwe email. Als u gebruik maakt van Thunderbird, start u een nieuw bericht.
+3. Zorg ervoor dat u de rich editor gebruikt.
+   * In Gmail, klik op de "Rich formatting" (Rijk opmaken) link, als deze zichtbaar is. 
+   * In Thunderbird, Zorg ervoor dat "Berichten opmaken in HTML formaat" is geactiveerd in uw "Account Instellingen", in het deelvenster "Compositie & Adressering".
+4. Stel een email op in Markdown. Als voorbeeld:
 
    <pre>
    **Hello** `world`.
@@ -99,98 +99,98 @@ Install it, and then…
    ```
    </pre>
 
-5. Right-click in the compose box and choose the "Markdown Toggle" item from the context menu. Or click the button that appears in your address bar. Or use the hotkey (<kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>M</kbd> by default).
-6. You should see your email rendered correctly from Markdown into rich HTML.
-7. Send your awesome email to everyone you know. It will appear to them the same way it looks to you.
+5. Klik met de rechtermuisknop op de compose-box en kies het item "Markdown Toggle" in het contextmenu. Of klik op de knop die verschijnt in uw adresbar. Of gebruik de sneltoets (<kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>M</kbd> als standaard).
+6. U zou uw email in de juiste weergave moeten zien veranderen van Markdown naar rich HTML.
+7. Verzend uw email naar iedereen die u kent. Het zal er bij hun precies hetzelfde uitzien zoals het er voor u uitziet.
 
-### Revert to Markdown
+### Terugkeren naar Markdown
 
-After rendering your Markdown to pretty HTML, you can still get back to your original Markdown. Just right-click anywhere in the newly rendered Markdown and click "Markdown Toggle" -- your email compose body will change back to the Markdown you had written.
+Na het weergeven van uw Markdown naar het fraaie HTML, kunt u nog steeds terugkeren naar uw originele Markdown. Als u met uw rechtermuisknop ergens in de nieuw weergegeven Markdown klikt en dan op "Markdown Toggle" -- Uw email bewerkingsscherm keert terug naar de Markdown die u heeft geschreven.
 
-Note that any changes you make to the pretty HTML will be lost when you revert to Markdown.
+Houdt u er rekening mee dat wijzigingen die u aanbrengt aan het fraaie HTML verloren gaan wanneer u terugkeert naar Markdown.
 
-In Gmail, you can also use the browser's Undo command (<kbd>CTRL</kbd>+<kbd>Z</kbd> / <kbd>CMD</kbd>+<kbd>Z</kbd>, or from the Edit menu). Be warned that you might also lose the last few characters you entered.
+In Gmail, kunt u ook het commando ongedaan maken vanuit de browser gebruiken (<kbd>CTRL</kbd>+<kbd>Z</kbd> / <kbd>CMD</kbd>+<kbd>Z</kbd>, of vanuit het wijzigings menu). Houdt u er rekening mee dat u hierdoor ook de laatste paar karakters die u heeft ingevoerd kunt verliezen.
 
-### Replies
+### Antwoorden
 
-In Gmail, Thunderbird, and Google Groups, you can use "Markdown Toggle" normally: just write your reply (top, bottom, inline, wherever) and then convert. The original email that you're replying to will be left alone. (Technically: Existing `blockquote` blocks will be left intact.)
+In Gmail, Thunderbird, en Google Groepen, kunt u "Markdown Toggle" gewoon gebruiken: schrijf gewoon uw antwoord (bovenaan, onderin, op dezelfde plaats, waar dan ook) en daarna kunt u deze omzetten. De originele email waar u op reageert blijft ongewijzigd. (Technisch bekeken: bestaande `blockquote` blokken zullen intact worden gelaten).
 
-In Hotmail and Yahoo (which don't put the original in a `blockquote`), and optionally in Gmail, Thunderbird, and Google Groups, you can ensure that only the part of the reply that you wrote gets converted by selecting what you want to convert and then clicking "Markdown Toggle" -- see the next section.
+In Hotmail en Yahoo (die het originele bericht niet in een `blockquote` plaatsen), en optioneel in Gmail, Thunderbird, en Google Groepen, bent u er altijd zeker van dat alleen het deel van uw antwoord dat u geschreven heeft zal worden omgezet, door te selecteren wat u wilt omzetten waarna u "Markdown Toggle" aanklikt -- zie de volgende paragraaf.
 
-### Selection/Piecemeal Conversion
+### Selectie/Gedeeltelijk Omzetten
 
-Sometimes you don't want to convert the entire email; sometimes your email isn't entirely Markdown. To convert only part of the email, select the text (with your mouse or keyboard), right-click on it, and click the "Markdown Toggle" menu item. Your selection is magically rendered into pretty HTML.
+Soms wilt u niet een gehele mail omzetten; in sommige gevallen is niet uw gehele email Markdown. Om een gedeelte van een email om te zetten, selecteert u een gedeelte van de email, selecteer de tekst (met uw muis of keyboard), klik met de rechtermuisknop op uw selectie, en klik op het "Markdown Toggle" item in het menu. Uw selectie wordt op magische wijze weergegeven in het prachtige HTML.
 
-To revert back to Markdown, just put your cursor anywhere in the block of converted text, right click, and click the "Markdown Toggle" menu item again. Now it's magically back to the original Markdown.
+Om terug te keren naar Markdown, plaatst u uw cursor ergens in het blok van de omgezette tekst, klik rechts, en klik wederom op het "Markdown Toggle" item in het menu. To revert back to Markdown, just put your cursor anywhere in the block of converted text, right click, and click the "Markdown Toggle" menu item again. Nu zal de weergave op magische wijze terugkeren naar het originele Markdown.
 
-![screenshot of selection conversion](https://raw.github.com/adam-p/markdown-here/master/store-assets/markdown-here-image2.gimp.png)
+![schermafbeelding van selectie omzetten](https://raw.github.com/adam-p/markdown-here/master/store-assets/markdown-here-image2.gimp.png)
 
-#### Things to know about converting/reverting a selection
+#### Wat u moet weten over het omzetten/terugzetten van een selectie
 
-* If you select only part of a block of text, only that text will be converted. The converted block will be wrapped in a paragraph element, so the original line will be broken up. You probably don't want to ever do this.
+* Wanneer u alleen een gedeelte van een blok of tekst selecteert, zal alleen die tekst worden omgezet. Het omgezette blok zal in een alinea- element worden gewikkeld, zodat de originele regel zal worden verbroken. U zult dit waarschijnlijk nooit willen doen.
 
-* You can select and revert multiple converted blocks at the same time. One upshot of this is that you can select your entire email, click "Markdown Toggle", and all portions of it that you had converted will be reverted.
+* U kunt meerdere blokken tegelijk selecteren en terugzetten. Een voordeel hiervan is dat wanneer u de gehele email selecteert, "Markdown Toggle" aanklikt, alle delen die u had omgezet zullen worden teruggezet.
 
-* If you don't have anything selected when you click "Markdown Toggle", *Markdown Here* will check if there are converted blocks anywhere in the message and revert them. If there no converted blocks are found, it will convert the entire email.
+* Als u niets heeft geselecteerd wanneer u op "Markdown Toggle" klikt, zal *Markdown Here* controleren of ergens in het bericht omgezette blokken zijn en deze terugzetten. Als er geen omgezette blokken worden gevonden, zal de hele email worden omgezet.
 
-### Options
+### Opties
 
-The *Markdown Here* Options page can be accessed via the Chrome, Firefox, Safari, or Thunderbird extensions list. The available options include:
+De *Markdown Here* Opties pagina kan worden bereikt via de Chrome, Firefox, Safari, or Thunderbird lijst met extensies. De beschikbare opties zijn:
 
-* Styling modifications for the rendered Markdown.
-* Syntax highlighting theme selection and modification.
-* TeX math formulae processing enabling and customization.
-* What the hotkey should be.
+* Stylingswijzigingen voor de omgezette Markdown.
+* Zinnen accentueren voor selecteren van thema's en wijzigingen.
+* TeX wiskundige formules verwerken inschakelen en aanpassen.
+* Wat de sneltoets zou moeten zijn.
 
-For Chrome and Firefox, any changes made in the *Markdown Here* Options are automatically synchronized between your other installations of that browser (if you have the sync feature enabled in the browser).
+Voor Chrome en Firefox, zullen alle wijzigingen die gedaan worden in de *Markdown Here* Opties automatisch gesynchroniseerd tussen uw andere installaties van die browser (als u de sync optie van uw browser geactiveerd heeft).
 
-![screenshot of options](https://raw.githubusercontent.com/adam-p/markdown-here/master/store-assets/markdown-here-chrome-options-1.gimp.png)
-
-
-## Troubleshooting
-
-See the [Troubleshooting wiki page](https://github.com/adam-p/markdown-here/wiki/Troubleshooting).
+![schermafbeelding van opties](https://raw.githubusercontent.com/adam-p/markdown-here/master/store-assets/markdown-here-chrome-options-1.gimp.png)
 
 
-## Compatibility
+## Probleemoplossing
 
-See the [Compatibility wiki page](https://github.com/adam-p/markdown-here/wiki/Compatibility).
+Zie de [Probleemoplossing wiki pagina](https://github.com/adam-p/markdown-here/wiki/Troubleshooting).
 
 
-## Notes and Miscellaneous
+## Compatibiliteit
 
-* *Markdown Here* uses [Github Flavored Markdown](http://github.github.com/github-flavored-markdown/), with the limitation that GFM special links are not supported ([issue #11](https://github.com/adam-p/markdown-here/issues/11)); nor will they be, as MDH is not Github-specific.
+See the [Compatibiliteit wiki pagina](https://github.com/adam-p/markdown-here/wiki/Compatibility).
 
-* Available languages for syntax highlighting (and the way they should be written in the fenced code block) can be seen on the [highlight.js demo page](http://softwaremaniacs.org/media/soft/highlight/test.html).
 
-* Images embedded inline in your Markdown will be retained when you "Markdown Toggle". Gmail allows you to put images inline in your email -- this can be much easier than referencing an external image.
+## Aantekeningen en Diversen
 
-* Email signatures are automatically excluded from conversion. Specifically, anything after the semi-standard `'-- '` (note the trailing space) is left alone.
-  * Note that Hotmail and Yahoo do *not* automatically add the `'-- '` to signatures, so you have to add it yourself.
+* *Markdown Here* maakt gebruik van [Github Flavored Markdown](http://github.github.com/github-flavored-markdown/), met de beperking dat speciale GFM links niet worden ondersteund ([issue #11](https://github.com/adam-p/markdown-here/issues/11)); niet ondersteund zullen gaan worden, aangezien MDH niet Github-specifiek is.
 
-* The "Markdown Toggle" menu item shows up for more element types than it can correctly render. This is intended to help people realize that they're not using a rich editor. Otherwise they just don't see the menu item and don't know why.
+* Beschikbare talen voor het markeren van tekstdelen (en de manier waarop ze moeten worden geschreven in het omheinde codeblok) kan worden bekeken op de [markeren.js demo pagina](http://softwaremaniacs.org/media/soft/highlight/test.html).
+
+* Afbeeldingen die in jouw Markdown verwerkt zitten, zullen worden behouden wanneer je "Markdown Toggle"gebruikt. Gmail staat toe dat afbeeldingen rechtstreeks aan een email worden toegevoegd -- dit kan veel makkelijker zijn dan te refereren naar een externe afbeelding.
+
+* Email handtekeningen zijn automatisch uitgesloten van omzetting. Specifieker, alles na de semi- standaard `'-- '` (let op de achterliggende ruimte) zal alleen worden gelaten.
+  * Let goed op met Hotmail en Yahoo die *niet* automatisch `'-- '` toevoegen aan handtekeningen, dus zal je dit zelf toe moeten voegen.
+
+* Het "Markdown Toggle" menu item bevat meer soorten elementen dan het kan weergeven. Dit is bewust gedaan als hulp om mensen zich te laten realiseren dat ze geen rijke tekst editor gebruiken. Anders zien ze het menu item gewoonweg niet en zulen ze niet weten waarom.
 
 * Styling:
-  * The use of browser-specific styles (-moz-, -webkit-) should be avoided. If used, they may not render correctly for people reading the email in a different browser from the one where the email was sent.
-  * The use of state-dependent styles (like `a:hover`) don't work because they don't match at the time the styles are made explicit. (In email, styles must be explicitly applied to all elements -- stylesheets get stripped.)
+  * Het gebruik van browser- specifieke stijlen (-moz-, -webkit-) moeten worden vermeden. Bij gebruik hiervan, kunnen emails mogelijk niet juist worden weergegeven voor mensen die de email lezen in een andere browser dan degene van waaruit de email werd verzonden.
+  * Het gebruik van situatie- afhankelijke stijlen (zoals `a:hover`) werken niet, als ze niet overeenkomen met de tijd waarop de stijlen expliciet zijn ingesteld. (In emails, moeten stijlen expliciet op alle elementen worden toegepast -- styles must be explicitly applied to all elements -- stijlsheets worden gestript.)
 
-* For more tweaky features, visit the [Tips and Tricks](https://github.com/adam-p/markdown-here/wiki/Tips-and-Tricks) section.
+* Voor meer tricky functies, bezoek de [Tips en Tricks](https://github.com/adam-p/markdown-here/wiki/Tips-and-Tricks) sectie.
 
-## Building the Extension Bundles
+## Uitbreidings Bundels bouwen
 
-"Building" is really just zipping. Create all archives relative to the `src` directory.
+"Bouwen" is echt net als zippen. Maak alle archieven gerelateerd aan de 'src' directory.
 
-Before zipping, delete the `src/common/test` directory. This will prevent the autotests from ending up in the release.
+Voordat je gaat zippen, verwijdert u de `src/common/test` map. Hiermee wordt voorkomen dat de autotests in de release terechtkomen.
 
-An important preparatory step is to remove any system-generated hidden files that shouldn't be included in the release file (like Windows' `desktop.ini` and OS X's `.DS_Store`, etc.). This shell command will delete those unwanted files:
+Een belangrijke voorbereidende stap is het verwijderen van eventuele door het systeem gegenereerde verborgen bestanden die niet in het releasebestand zouden moeten worden opgenomen (zoals Windows' `desktop.ini` en OS X's `.DS_Store`, enz.). Dit shell commando zal deze ongewilde bestanden verwijderen:
 
 ```
 find . -name "desktop.ini" -or -name ".*" -and -not -name "." -and -not -name ".git*" -print0 | xargs -0 rm -rf
 ```
 
-### Chrome and Opera extension
+### Chrome and Opera extensie
 
-Create a file with a `.zip` extension containing these files and directories:
+Maak een bestand met een `.zip` extensie die de volgende bestanden en mappen bevat:
 
 ```
 manifest.json
@@ -198,9 +198,9 @@ common/
 chrome/
 ```
 
-### Firefox/Thunderbird extension
+### Firefox/Thunderbird extensie
 
-Create a file with a `.xpi` extension containing these files and directories:
+Maak een bestand met een `.xpi` extensie die de volgende bestanden en mappen bevat:
 
 ```
 chrome.manifest
@@ -209,23 +209,23 @@ common/
 firefox/
 ```
 
-### Safari extension
+### Safari extensie
 
-The browser-specific code is located in the [`markdown-here-safari`](https://github.com/adam-p/markdown-here-safari) project.
+De browser- specifieke code is gelocaliseerd in het [`markdown-here-safari`](https://github.com/adam-p/markdown-here-safari) project.
 
-Use the Safari Extension Builder.
+Gebruik de Safari Extensie Bouwer.
 
-## Next Steps
+## Volgende Stappen
 
-See the [issues list](https://github.com/adam-p/markdown-here/issues) and the [Notes Wiki](https://github.com/adam-p/markdown-here/wiki/Development-Notes). All ideas, bugs, plans, complaints, and dreams will end up in one of those two places.
+Zie de [lijst met kwesties](https://github.com/adam-p/markdown-here/issues) en de [Aantekeningen wiki](https://github.com/adam-p/markdown-here/wiki/Development-Notes). Alle ideeën, fouten, plannen, klachten en dromen zullen eindigen in een van deze twee plekken.
 
-Feel free to create a feature request issue if what you want isn't already there. If you'd prefer a less formal approach to floating an idea, post to the ["markdown-here" Google Group](https://groups.google.com/forum/?fromgroups=#!forum/markdown-here).
+Voel je vrij om een toekomstig wijzigingsverzoek in te dienen als hetgeen je wilt er nog niet is. Feel free to create a feature request issue if what you want isn't already there. Als u de voorkeur geeft aan een minder formele benadering voor het indienen van een idee, stuur je een bericht naar ["markdown-here" Google Groep](https://groups.google.com/forum/?fromgroups=#!forum/markdown-here).
 
-It also takes a fair bit of work to stay up-to-date with the latest changes in all the applications and web sites where Markdown Here works.
+Het is eerlijk gezegd ook best wat werk om up-to-date te blijven met de laatste wijzigingen in alle applicaties en web sites waar Markdown Here werkt.
 
 ## Credits
 
-*Markdown Here* was coded on the shoulders of giants.
+*Markdown Here* is gecodeerd op de schouders van reuzen.
 
 * Markdown-to-HTML: [chjj / marked](https://github.com/chjj/marked)
 * Syntax highlighting: [isagalaev / highlight.js](https://github.com/isagalaev/highlight.js)
@@ -233,7 +233,7 @@ It also takes a fair bit of work to stay up-to-date with the latest changes in a
 
 ## Feedback
 
-All bugs, feature requests, pull requests, feedback, etc., are welcome. [Create an issue](https://github.com/adam-p/markdown-here/issues). Or [post to the "markdown-here" Google Group](https://groups.google.com/forum/?fromgroups=#!forum/markdown-here).
+Alle fouten, toekomstige aanvragen, pull aanvragen, feedback, enz., zijn welkom. [Create an issue](https://github.com/adam-p/markdown-here/issues). Of [post to the "markdown-here" Google Group](https://groups.google.com/forum/?fromgroups=#!forum/markdown-here).
 
 ## License
 
