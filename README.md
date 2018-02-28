@@ -8,9 +8,9 @@
 [**Download link voor Opera.**](https://addons.opera.com/en/extensions/details/markdown-here/)<br>
 [**Voer discussies en stel vragen in de Google Groep.**](https://groups.google.com/forum/?fromgroups#!forum/markdown-here/)<br>
 
-*Markdown Here* is een Google Chrome, Firefox, Safari, Opera, and Thunderbird extensie die jou email laat schrijven<sup>&dagger;</sup> in Markdown<sup>&Dagger;</sup> en een voorbeeld weergeeft voordat je deze verzend. Het ondersteunt ook het accentueren van zinnen.(Hiervoor hoef je alleen je taal op te geven in een codeblok, die als zodanig herkend wordt als u een hekje plaatst aan het begin en het eind).
+*Markdown Here* is een Google Chrome, Firefox, Safari, Opera, and Thunderbird extensie die jou email laat schrijven<sup>&dagger;</sup> in Markdown<sup>&Dagger;</sup> en een voorbeeld weergeeft voordat je deze verzendt. Het ondersteunt ook het accentueren van zinnen.(Hiervoor hoef je alleen je taal op te geven in een codeblok, die als zodanig herkend wordt als u een hekje plaatst aan het begin en het eind).
 
-Het schrijven van email met code erin verwerkt is best wel vervelend. Markdown schrijven met code erin is vrij eenvoudig. Ik merkte dat ik zelf email schreef in Markdownin de Github in-browser bewerker, om deze vervolgens te kopieren naar mijn email. Dit is een vrij omslachtige manier, dus besloot ik een hulpmiddel te ontwikkelen om Markdown rechtstreeks in de email weer te geven.
+Het schrijven van email met code erin verwerkt is best wel vervelend. Markdown schrijven met code erin is vrij eenvoudig. Ik merkte dat ik zelf email schreef in Markdown in de Github in-browser bewerker, om deze vervolgens te kopieren naar mijn email. Dit is een vrij omslachtige manier, dus besloot ik een hulpmiddel te ontwikkelen om Markdown rechtstreeks in de email weer te geven.
 
 Om te zien welke mogelijkheden er allemaal zijn met *Markdown Here*, kijk je hier [Markdown Here Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet) en op de andere wiki pagina's [wiki pages](https://github.com/adam-p/markdown-here/wiki).
 
