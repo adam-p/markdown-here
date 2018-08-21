@@ -16,12 +16,10 @@
  * No additional processing is done, like filling in default values.
  */
 
-
 (function() {
 "use strict";
 /*global Components:false, AddonManager:false, markdown_here:false*/
 /*jshint devel:true*/
-
 var scriptLoader, imports = {};
 
 // See comment in ff-overlay.js for info about module loading.
@@ -151,10 +149,16 @@ function prefsAccessRequestHandler(request) {
       }
 
       try {
-        prefsObj[prefKeys[i]] = JSON.parse(
-                                  extPrefsBranch.getComplexValue(
-                                    prefKeys[i],
-                                    Components.interfaces.nsISupportsString).data);
+        if ( Services.vc.compare(Services.appinfo.platformVersion, '58') < 0 ) {
+          prefsObj[prefKeys[i]] = JSON.parse(
+                                    extPrefsBranch.getComplexValue(
+                                      prefKeys[i],
+                                      Components.interfaces.nsISupportsString).data);
+        } else {
+          prefsObj[prefKeys[i]] = JSON.parse(
+                                    extPrefsBranch.getStringPref(
+                                      prefKeys[i]));
+        }
       }
       catch(e) {
         // Null values and empty strings will result in JSON exceptions
@@ -167,10 +171,16 @@ function prefsAccessRequestHandler(request) {
   else if (request.verb === 'set') {
     for (var key in request.obj) {
       supportString.data = JSON.stringify(request.obj[key]);
-      extPrefsBranch.setComplexValue(
-        key,
-        Components.interfaces.nsISupportsString,
-        supportString);
+      if ( Services.vc.compare(Services.appinfo.platformVersion, '58') < 0 ) {
+        extPrefsBranch.setComplexValue(
+          key,
+          Components.interfaces.nsISupportsString,
+          supportString);
+      } else {
+        extPrefsBranch.setStringPref(
+          key,
+          supportString.data);
+      }
     }
 
     return;
@@ -227,10 +237,16 @@ function updateHandler(currVer) {
 
   var lastVersion = '';
   try {
-    lastVersion = JSON.parse(
-                    extPrefsBranch.getComplexValue(
-                      'last-version',
-                      Components.interfaces.nsISupportsString).data);
+    if ( Services.vc.compare(Services.appinfo.platformVersion, '58') < 0 ) {
+        lastVersion = JSON.parse(
+                        extPrefsBranch.getComplexValue(
+                          'last-version',
+                          Components.interfaces.nsISupportsString).data);
+    } else {
+        lastVersion = JSON.parse(
+                        extPrefsBranch.getStringPref(
+                          'last-version'));
+    }
   }
   catch (ex) {
   }
@@ -239,17 +255,29 @@ function updateHandler(currVer) {
   var localFirstRun = !extPrefsBranch.prefHasUserValue('local-first-run');
 
   supportString.data = JSON.stringify(false);
-  extPrefsBranch.setComplexValue(
-    'local-first-run',
-    Components.interfaces.nsISupportsString,
-    supportString);
+  if ( Services.vc.compare(Services.appinfo.platformVersion, '58') < 0 ) {
+    extPrefsBranch.setComplexValue(
+      'local-first-run',
+      Components.interfaces.nsISupportsString,
+      supportString);
+  } else {
+    extPrefsBranch.setStringPref(
+      'local-first-run',
+      supportString.data);
+  }
 
   if (currVer !== lastVersion) {
     supportString.data = JSON.stringify(currVer);
-    extPrefsBranch.setComplexValue(
-      'last-version',
-      Components.interfaces.nsISupportsString,
-      supportString);
+    if ( Services.vc.compare(Services.appinfo.platformVersion, '58') < 0 ) {
+      extPrefsBranch.setComplexValue(
+        'last-version',
+        Components.interfaces.nsISupportsString,
+        supportString);
+    } else {
+      extPrefsBranch.setStringPref(
+        'local-first-run',
+        supportString.data);
+    }
 
     // Set the preference sync flags while we're at it.
 

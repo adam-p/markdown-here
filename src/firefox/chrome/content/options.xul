@@ -2,6 +2,7 @@
 <!DOCTYPE overlay SYSTEM "chrome://markdown_here/locale/strings.dtd">
 
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://messenger/skin/preferences/preferences.css" type="text/css"?>
 
 <prefwindow id="markdown-here-options-intermediate"
      title="&moz_options_dlg_title;"
