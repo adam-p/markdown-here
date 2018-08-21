@@ -327,10 +327,16 @@ var MozillaOptionsStore = {
           }
 
           try {
-            prefsObj[prefKeys[i]] = window.JSON.parse(
-                                      extPrefsBranch.getComplexValue(
-                                        prefKeys[i],
-                                        Components.interfaces.nsISupportsString).data);
+            if ( Services.vc.compare(Services.appinfo.platformVersion, '58') < 0 ) {
+              prefsObj[prefKeys[i]] = window.JSON.parse(
+                                        extPrefsBranch.getComplexValue(
+                                          prefKeys[i],
+                                          Components.interfaces.nsISupportsString).data);
+            } else {
+              prefsObj[prefKeys[i]] = window.JSON.parse(
+                                        extPrefsBranch.getStringPref(
+                                          prefKeys[i]));
+            }
           }
           catch(e) {
             // Null values and empty strings will result in JSON exceptions

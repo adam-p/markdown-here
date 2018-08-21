@@ -152,7 +152,6 @@
         <em:iconURL>resource://markdown_here_common/images/icon128.png</em:iconURL>
         <em:homepageURL>https://github.com/adam-p/markdown-here</em:homepageURL>
 
-        <em:optionsType>1</em:optionsType>
         <em:optionsURL>chrome://markdown_here/content/options.xul</em:optionsURL>
 
     </Description>
