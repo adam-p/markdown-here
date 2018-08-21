@@ -275,7 +275,7 @@ function updateHandler(currVer) {
         supportString);
     } else {
       extPrefsBranch.setStringPref(
-        'local-first-run',
+        'last-version',
         supportString.data);
     }
 
