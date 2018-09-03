@@ -659,6 +659,87 @@ function nextTickFn(callback, context) {
 }
 
 
+/*? if(platform==='thunderbird'){ */
+
+/**
+ * Returns the stored preference string for the given key.
+ * Must only be called from a privileged Mozilla script.
+ * @param {nsIPrefBranch} prefsBranch
+ * @param {string} key
+ * @returns {?string} The preference value. May be null if the preference is not set
+ * or is null.
+ */
+function getMozStringPref(prefsBranch, key) {
+  try {
+    if (Services.vc.compare(Services.appinfo.platformVersion, '58') < 0) {
+      return prefsBranch.getComplexValue(
+                          key,
+                          Components.interfaces.nsISupportsString).data;
+    }
+
+    return prefsBranch.getStringPref(key, null);
+  }
+  catch(e) {
+    // getComplexValue could have thrown an exception because it didn't find the key. As
+    // with getStringPref, we will default to null.
+    return null;
+  }
+}
+
+/**
+ * Get the stored preference object, JSON-parsed, for the given key.
+ * Must only be called from a privileged Mozilla script.
+ * @param {nsIPrefBranch} prefsBranch
+ * @param {string} key
+ * @returns {?(object|number|boolean|string)} The preference object (any valid JSON
+ * type). May be null if the preference is not set or is null.
+ */
+function getMozJsonPref(prefsBranch, key) {
+  try {
+    return JSON.parse(getMozStringPref(prefsBranch, key));
+  }
+  catch(e) {
+    return null;
+  }
+}
+
+/**
+ * Store the preference string for the given key.
+ * Must only be called from a privileged Mozilla script.
+ * @param {nsIPrefBranch} prefsBranch
+ * @param {string} key
+ * @param {string} value
+ */
+function setMozStringPref(prefsBranch, key, value) {
+  var supportString = Components.classes['@mozilla.org/supports-string;1']
+                        .createInstance(Components.interfaces.nsISupportsString);
+
+  if (Services.vc.compare(Services.appinfo.platformVersion, '58') < 0) {
+    supportString.data = value;
+    prefsBranch.setComplexValue(
+                  key,
+                  Components.interfaces.nsISupportsString,
+                  supportString);
+  }
+  else {
+    prefsBranch.setStringPref(key, value);
+  }
+}
+
+/**
+ * Store the given object in preferences under the given key.
+ * Must only be called from a privileged Mozilla script.
+ * @param {nsIPrefBranch} prefsBranch
+ * @param {string} key
+ * @param {?(object|number|boolean|string)} value
+ */
+function setMozJsonPref(prefsBranch, key, value) {
+  setMozStringPref(prefsBranch, key, JSON.stringify(value));
+}
+
+/*? } */
+
+
 /*
  * i18n/l10n
  */
@@ -736,7 +817,7 @@ function triggerStringBundleLoadListeners() {
 }
 
 
-// Must only be called from a priviledged Mozilla script
+// Must only be called from a privileged Mozilla script
 function getMozStringBundle() {
   if (typeof(Components) === 'undefined' || typeof(Components.classes) === 'undefined') {
     return false;
@@ -755,7 +836,7 @@ function getMozStringBundle() {
 
   // First load the English fallback strings
 
-  stringBundle = window.Components.classes["@mozilla.org/intl/stringbundle;1"]
+  stringBundle = Components.classes["@mozilla.org/intl/stringbundle;1"]
                         .getService(Components.interfaces.nsIStringBundleService)
                         // Notice the explicit locale in this path:
                         .createBundle("resource://markdown_here_locale/en/strings.properties");
@@ -768,7 +849,7 @@ function getMozStringBundle() {
 
   // Then load the strings that are overridden for the current locale
 
-  stringBundle = window.Components.classes["@mozilla.org/intl/stringbundle;1"]
+  stringBundle = Components.classes["@mozilla.org/intl/stringbundle;1"]
                         .getService(Components.interfaces.nsIStringBundleService)
                         .createBundle("chrome://markdown_here/locale/strings.properties");
 
@@ -1172,6 +1253,10 @@ Utils.getTopURL = getTopURL;
 Utils.nextTick = nextTick;
 Utils.nextTickFn = nextTickFn;
 /*? if(platform==='thunderbird'){ */
+Utils.getMozStringPref = getMozStringPref;
+Utils.getMozJsonPref = getMozJsonPref;
+Utils.setMozStringPref = setMozStringPref;
+Utils.setMozJsonPref = setMozJsonPref;
 Utils.getMozStringBundle = getMozStringBundle;
 /*? } */
 /*? if(platform==='safari'){ */

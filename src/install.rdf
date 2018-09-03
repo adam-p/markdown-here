@@ -30,7 +30,7 @@
           <Description>
             <em:id>toolkit@mozilla.org</em:id>
             <em:minVersion>6.0</em:minVersion>
-            <em:maxVersion>54.*</em:maxVersion>
+            <em:maxVersion>60.*</em:maxVersion>
           </Description>
         </em:targetApplication>
 
@@ -152,7 +152,8 @@
         <em:iconURL>resource://markdown_here_common/images/icon128.png</em:iconURL>
         <em:homepageURL>https://github.com/adam-p/markdown-here</em:homepageURL>
 
-        <em:optionsURL>chrome://markdown_here/content/options.xul</em:optionsURL>
+        <em:optionsType>3</em:optionsType>
+        <em:optionsURL>resource://markdown_here_common/options.html</em:optionsURL>
 
     </Description>
 </RDF>
