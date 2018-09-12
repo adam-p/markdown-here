@@ -1,8 +1,11 @@
 Change Log
 ==========
 
-2017-xx-yy: v2.13.3
+2018-09-11: v2.13.3
 --------------------
+
+* [Fixed bug #495](https://github.com/adam-p/markdown-here/issues/495): Markdown Here stopped working in Thunderbird version 60 (due to changes in Thunderbird).
+  - Thanks to [dugite-code](https://github.com/dugite-code) for the [PR](https://github.com/adam-p/markdown-here/pull/518) to fix it. Also thanks to: [Marc-Alexandre Espiaut](https://github.com/marespiaut), [Tehmul Ghyara](https://github.com/tehmul), [Pedro Silva](https://github.com/pmanu93), [PackElend](https://github.com/PackElend), [qolii](https://github.com/qolii), [Francisco Pina-Martins](https://github.com/StuntsPT), [evazquez00](https://github.com/evazquez00).
 
 * [Fixed bug #435](https://github.com/adam-p/markdown-here/issues/435): On some pages, Markdown Here would spew cross-origin exceptions to the console. This was due to MDH trying to determine if a focused iframe-within-an-iframe was renderable.
   - Thanks to [lincoln-b](https://github.com/lincoln-b) for reporting it.
@@ -40,13 +43,13 @@ Change Log
   - Thanks to [Dave Tapley](https://github.com/dukedave) for creating a great video that illustrated the problem and how to reproduce it.
   - Repeatedly triggering this bug could also lead to the next bug...
 
-* [Fixed bug #289](https://github.com/adam-p/markdown-here/issues/289): With forgot-to-render detection enabled, sending a large email could result in MDH causing the mail client to hang. 
+* [Fixed bug #289](https://github.com/adam-p/markdown-here/issues/289): With forgot-to-render detection enabled, sending a large email could result in MDH causing the mail client to hang.
   - Thanks to [r2evans](https://github.com/r2evans), [Dave Tapley](https://github.com/dukedave), and [Eugene Fryntov](https://github.com/efryntov) for reporting and helping to diagnose the problem. Also thanks to [georg](https://stackoverflow.com/users/989121/georg) on StackOverflow for helping me to [understand and improve](https://stackoverflow.com/questions/31952381/end-of-string-regex-match-too-slow) the offending regex.
 
 * [Fixed bug #283](https://github.com/adam-p/markdown-here/issues/283): Forgot-to-render detection was broken for Google Inbox. Thanks to [Marvin R.](https://github.com/therealmarv).
   - If you find that the forgot-to-render detection gets broken for the Gmail or Google Inbox web interfaces, please post to the ["markdown-here" Google Group](https://groups.google.com/group/markdown-here) or create [an issue in the Github project](https://github.com/adam-p/markdown-here/issues). The MDH code that hooks into the webmail UI is brittle and might break when Google changes stuff.
 
-* [Fixed bug #288](https://github.com/adam-p/markdown-here/issues/288): Some character combinations involving a dollar sign in inline code would render incorrectly. 
+* [Fixed bug #288](https://github.com/adam-p/markdown-here/issues/288): Some character combinations involving a dollar sign in inline code would render incorrectly.
   - Thanks to [rfulkerson](https://github.com/rfulkerson) for reporting the problem.
 
 * Updated and new translations:
@@ -92,11 +95,11 @@ Change Log
   - **Note**: In order to get this styling change, you will need to [reset your Primary Styling CSS](https://github.com/adam-p/markdown-here/wiki/Troubleshooting#getting-the-latest-primary-styling-css).
   - Thanks to [James F McMahon](https://github.com/JamesMcMahon) for reporting the issue.
 
-* Changed styling of sub-ordered-lists to match Github's: Top level is still numbers, first sub level is Roman letters, second sub level is Roman numerals. Will make your email lists look totally pro. 
+* Changed styling of sub-ordered-lists to match Github's: Top level is still numbers, first sub level is Roman letters, second sub level is Roman numerals. Will make your email lists look totally pro.
   - **Note**: In order to get this styling change, you will need to [reset your Primary Styling CSS](https://github.com/adam-p/markdown-here/wiki/Troubleshooting#getting-the-latest-primary-styling-css).
   - Thanks to [Andrew Greenberg](https://github.com/wizardwerdna) for [pointing out](https://github.com/adam-p/markdown-here/issues/255) Github's styling, and an unnamed user in a [Google Groups post](https://groups.google.com/forum/#!topic/markdown-here/E-5tSHCAlpg) who also asked about list styling.
 
-* [Fixed bug #237](https://github.com/adam-p/markdown-here/issues/237): Made Mozilla preferences handling more robust. Helps to deal with non-ANSI characters, synchronization, and corruption. 
+* [Fixed bug #237](https://github.com/adam-p/markdown-here/issues/237): Made Mozilla preferences handling more robust. Helps to deal with non-ANSI characters, synchronization, and corruption.
   - Thanks to [flying-sheep](https://github.com/flying-sheep) for reporting the corruption problem and helping to diagnose it.
 
 * Added and updated translations:
@@ -125,7 +128,7 @@ Change Log
 2014-11-10: v2.11.3
 -------------------
 
-* **Improved compatibilty with screen readers**. Much thanks to [Sofian Babai](https://twitter.com/sofquipeut) for reporting the problem and helping to solve it. The primary fix target was Windows+Thunderbird+NVDA, but if anyone finds any cases where the fix is incomplete, please describe the scenario in the [Github issue](https://github.com/adam-p/markdown-here/issues/222) for it. 
+* **Improved compatibilty with screen readers**. Much thanks to [Sofian Babai](https://twitter.com/sofquipeut) for reporting the problem and helping to solve it. The primary fix target was Windows+Thunderbird+NVDA, but if anyone finds any cases where the fix is incomplete, please describe the scenario in the [Github issue](https://github.com/adam-p/markdown-here/issues/222) for it.
   - Thanks also to [Sukil Echenique](https://github.com/sukiletxe) for reporting the [original issue](https://github.com/adam-p/markdown-here/issues/185).
 
 * [Fixed bug #223](https://github.com/adam-p/markdown-here/issues/223): Keyboard shortcut was not working in Gmail on Firefox.
@@ -150,10 +153,10 @@ Change Log
   - Thanks to everyone who reported this and helped diagnose it: [Ryan Heaton](https://github.com/stoicflame) (who [originally reported the bug](https://groups.google.com/forum/#!topic/markdown-here/ikXFqkP77Ws)), [darickard](https://github.com/darickard), [JacobEvelyn](https://github.com/JacobEvelyn), [Lennaick](https://github.com/lennaick), [Sherwood Botsford](https://plus.google.com/u/0/+SherwoodBotsford), [Cyrus David](https://github.com/vohof), and [iagobozza](https://github.com/iagobozza), who [shared a screencast](https://github.com/adam-p/markdown-here/issues/189) that finally provided a reproduction scenario and allowed us to figure out the bug.
 
 * **Added support for "retina"** (high PPI) displays. The Markdown Here icons should now be nice and crisp. Closes [issue #205](https://github.com/adam-p/markdown-here/issues/205).
-  - Caveats: 
+  - Caveats:
     - There doesn't seem to be a way to specify a high-res icon for Chrome's context menu item.
     - Postbox just doesn't seem to work. I don't think there's a regression, though.
-    - I don't actually own any fancy retina-display computers, so... please create an issue if something is broken. 
+    - I don't actually own any fancy retina-display computers, so... please create an issue if something is broken.
     - Thanks to [Alexandru Nedelcu](https://github.com/alexandru) for requesting this.
 
 * [Fixed bug #202](https://github.com/adam-p/markdown-here/issues/202): In Options page, Markdown preview wasn't initially rendering.
@@ -188,11 +191,11 @@ Change Log
 2014-05-17: v2.11.0
 -------------------
 
-* Added ability to **de-render after saving**. After you render and save an **email draft** or an **Evernote** Note or a **Google Group post** or a **Blogger post** (or etc.), you can go back, edit it, and de-render it back to Markdown. 
+* Added ability to **de-render after saving**. After you render and save an **email draft** or an **Evernote** Note or a **Google Group post** or a **Blogger post** (or etc.), you can go back, edit it, and de-render it back to Markdown.
   * Fixes [#85](https://github.com/adam-p/markdown-here/issues/85) and [#86](https://github.com/adam-p/markdown-here/issues/86). Thanks to [Alfredo Canziani](https://github.com/Atcold), [HU, Pili](https://github.com/hupili), [Dima Tisnek](https://github.com/dimaqq), [dayer4b](https://github.com/dayer4b), [Bryan Cribbs](https://github.com/bdcribbs), [jmerlevede](https://github.com/jmerlevede), [portmantoad](https://github.com/portmantoad), and [Kurtis Rainbolt-Greene](https://github.com/krainboltgreene) for reporting the issue, suggesting solutions, and helping to test.
   * Deets for geeks: Below the rendered MD, in the same wrapper `div`, there is now a `div` with its `title` attribute set to the original MD (base64), containing a zero-width space, and styled to be zero-height. This delightful hack was the best combination of factors that ensured the raw MD would survive.
 
-* Added a partial Korean translation, thanks to [dotvezz](https://crowdin.net/profile/dotvezz). 
+* Added a partial Korean translation, thanks to [dotvezz](https://crowdin.net/profile/dotvezz).
   * **Do you speak something in addition to English?** [At least half](https://addons.mozilla.org/en-US/firefox/addon/markdown-here/statistics/usage/languages/?last=30) of all Markdown Here users are not English, but Japanese is the only complete translation we have. **It's easy to help with translations** -- just try out the [Crowdin project for Markdown Here](https://crowdin.net/project/markdown-here). Thanks!
 
 * Added ability to disable GFM line breaks.
@@ -239,7 +242,7 @@ Change Log
 2013-10-27: v2.9.3
 ------------------
 
-* New feature: Added support for **smart arrows**. Here's how to use them: 
+* New feature: Added support for **smart arrows**. Here's how to use them:
   * `<--` ←
   * `-->` →
   * `<-->` ↔
@@ -273,7 +276,7 @@ Change Log
 ------------------
 
 * [Fixed bug](https://github.com/adam-p/markdown-here/issues/112): If a bad language name was used for a code block (where "bad" might even just be "SQL" vs. "sql"), rendering would break. Language name case is now ignored.
-  * Thanks to [Chris/jhwarehouse](https://github.com/jhwarehouse) for reporting the bug and helping to investigate. 
+  * Thanks to [Chris/jhwarehouse](https://github.com/jhwarehouse) for reporting the bug and helping to investigate.
 
 * [Fixed bug](https://github.com/adam-p/markdown-here/issues/116): Markdown Here wasn't working on Postbox. Thanks to Branden C. for letting me know.
 
@@ -367,7 +370,7 @@ Added support for [**Opera**](http://www.opera.com)! Get it [here](https://addon
 2013-03-05: v2.7.3
 ------------------
 
-* Fixed Firefox+Linux bug ([#56](https://github.com/adam-p/markdown-here/issues/56)): Toolbar button icon was not displaying correctly. 
+* Fixed Firefox+Linux bug ([#56](https://github.com/adam-p/markdown-here/issues/56)): Toolbar button icon was not displaying correctly.
   * Thanks to users [ynoxia](https://github.com/ynoxia) and [jljouannic](https://github.com/jljouannic) for reporting the bug.
 * Fixed Firefox bug: Toolbar button would not stay removed when browser was restarted.
 * Added support for Icedove (Debian version of Thunderbird).
@@ -395,8 +398,8 @@ Added support for [**Opera**](http://www.opera.com)! Get it [here](https://addon
   * Smarter lists: Have you ever had a numbered list mysteriously/annoyingly become a bullet list because it comes after one? Not anymore.
   * GFM line breaks: If you put a line break in your Markdown, it will be a line break after you toggle, instead of joining to form a single line. This closes [issue #12](https://github.com/adam-p/markdown-here/issues/12).
 
-* Added a **Markdown Toggle button** to complement the context menu item and hotkey. 
-  * In Chrome and Firefox, this button will appear on the browser toolbar. It will be enabled when you're typing in a compose box that Markdown Here can work with. 
+* Added a **Markdown Toggle button** to complement the context menu item and hotkey.
+  * In Chrome and Firefox, this button will appear on the browser toolbar. It will be enabled when you're typing in a compose box that Markdown Here can work with.
     * You might notice the button enabled when you're typing in places other than your email page -- try it out! You might discover that Markdown Here works somewhere new. If you do, please [add it to the compatibility wiki](https://github.com/adam-p/markdown-here/wiki/Compatibility).
   * In Thunderbird and Postbox the appears on the formatting toolbar.
   * In Firefox, Thunderbird, and Postbox you can add/remove/move the button by right-clicking on the toolbar, clicking "Customize", and then dragging the button around. In Chrome you can remove it by right-click on it.
@@ -427,7 +430,7 @@ Added support for [**Opera**](http://www.opera.com)! Get it [here](https://addon
 2012-10-06: v2.6.2
 ------------------
 
-* Firefox/Thunderbird: [Fixed bug](https://github.com/adam-p/markdown-here/issues/31): Tabbing into the email body and then Markdown-Toggling via keyboard (i.e., never clicking the mouse in the message body) would result in the email body being lost when sent. 
+* Firefox/Thunderbird: [Fixed bug](https://github.com/adam-p/markdown-here/issues/31): Tabbing into the email body and then Markdown-Toggling via keyboard (i.e., never clicking the mouse in the message body) would result in the email body being lost when sent.
   * This is due to [a bug in Firefox/Thunderbird](https://bugzilla.mozilla.org/show_bug.cgi?id=740813).
 
 * Discovered Wordpress post compatibility, thanks to user [Sina Iravanian](https://plus.google.com/116422808039109985732/posts). ([See details](https://github.com/adam-p/markdown-here/wiki/Compatibility).)
@@ -435,11 +438,11 @@ Added support for [**Opera**](http://www.opera.com)! Get it [here](https://addon
 2012-09-09: v2.6.1
 ------------------
 
-* Added hot-key (keyboard shortcut) support. The default key combination is <kbd>ctrl</kbd>+<kbd>alt</kbd>+<kbd>m</kbd>, but it is configurable from the Markdown Here options. Using the hot-key is identical to using the "Markdown Toggle" context menu item. 
+* Added hot-key (keyboard shortcut) support. The default key combination is <kbd>ctrl</kbd>+<kbd>alt</kbd>+<kbd>m</kbd>, but it is configurable from the Markdown Here options. Using the hot-key is identical to using the "Markdown Toggle" context menu item.
 
 * Added basic support for the [Postbox](http://www.postbox-inc.com/) desktop email client, at the [request of a user](https://github.com/adam-p/markdown-here/issues/30). There are [some significant caveats](https://github.com/adam-p/markdown-here/wiki/Compatibility), like the lack of an options page.
 
-* Fixed [bug](https://github.com/adam-p/markdown-here/issues/27): Gmail and Thunderbird reply exclusion wasn't working well, resulting in quoted replies getting messed up when doing a full (non-selection) rendering. 
+* Fixed [bug](https://github.com/adam-p/markdown-here/issues/27): Gmail and Thunderbird reply exclusion wasn't working well, resulting in quoted replies getting messed up when doing a full (non-selection) rendering.
 
 * Fixed: In Chrome on OS X, right-clicking on a word causes it to be selected. If "Markdown Toggle" were then clicked, it would render just that one word, which is lame. This behaviour is now avoided by not rendering single word selections -- if a single word is selected, the entire content will be rendered instead.
 
@@ -448,11 +451,11 @@ Added support for [**Opera**](http://www.opera.com)! Get it [here](https://addon
 2012-08-29: v2.6.0
 ------------------
 
-* Added support for TeX math formulae. For info check out the Options page. 
+* Added support for TeX math formulae. For info check out the Options page.
   * Note that this feature is disabled by default, due to privacy concerns. Again, the see the Options page for info.
   * Thanks to [bordaigorl](https://github.com/bordaigorl) for [suggesting this feature](https://github.com/adam-p/markdown-here/issues/26) and helping to implement it.
 
-* Firefox/Thunderbird: Added Options page. (Chrome already had it.) Take a look around and play with the styles. 
+* Firefox/Thunderbird: Added Options page. (Chrome already had it.) Take a look around and play with the styles.
 
 * Added a few new syntax highlighting themes. (Thanks to Highlight.js.)
 
@@ -499,25 +502,25 @@ Added support for [**Opera**](http://www.opera.com)! Get it [here](https://addon
       1. Format *after* Markdown-Toggling. Note that any changes -- including formatting -- made to rendered text will be lost if you toggle back to Markdown. So only do your additional formatting after you're happy with the rest.
       2. Add inline HTML with the desired formatting.
          * In your Markdown, you can use `<span>` or `<b>`, etc., to explicitly style your text. For example:
-           
+
              ```
              Here is some <span style="background-color:red; font-size:2em;">*big red*</span> highlighting.
              ```
          * If you find you use inline tags with complex styles a lot, edit the CSS in the options to add a class that you can reuse for your inline tags. For example, in the CSS add:
-   
+
              ```
              .bigred {
                background-color: red;
                font-size: 2em;
              }
              ```
-   
+
              And then in your Markdown:
 
              ```
              Here is some <span class="red">*big red*</span> highlighting.
              ```
-           
+
   - It saddens me to remove out this feature, but I think it's essentially creeping featurism that has a higher bug-danger-cost than it has an actually-useful-benefit. If this feature is/was important to you, please create an issue to let me know.
 
 2012-06-20: v2.3.1
@@ -528,13 +531,13 @@ Added support for [**Opera**](http://www.opera.com)! Get it [here](https://addon
 2012-06-20: v2.3.0
 ------------------
 
-* Works with Google Groups posts! You can use it either in the GG rich compose box, or when sending posts via email. 
+* Works with Google Groups posts! You can use it either in the GG rich compose box, or when sending posts via email.
 
 * Added support for inline, pre-rendered images. Some email editors allow the user to drag-and-drop an image into an email body, and some allow users to select one from their computer or the web (or an emoticon in the email compose controls!). Previously, the image would be lost when a "Markdown Toggle" was done. Now the image will be retained.
 
 * Pre-formatted text (colours, italics, bold, etc.), links, and lists (made using the email client rich edit controls, for example) are now left intact when rendering the Markdown.
 
-* Added ability to convert a reply email in its entirety, rather than using the select-and-convert piecemeal approach. 
+* Added ability to convert a reply email in its entirety, rather than using the select-and-convert piecemeal approach.
   - This doesn't work with Yahoo and Hotmail, because they don't seem to quote the original email.
   - Resolves issue #14.
 
