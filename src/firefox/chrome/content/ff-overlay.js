@@ -78,6 +78,19 @@ var markdown_here = {
     markdown_here.onMenuItemCommand(e);
   },
 
+  // Called by the "open options" menuitem that's used by older versions of Thunderbird.
+  // Look for "#495" below to see when it's enabled.
+  openOptionsTab: function(e) {
+    var url = 'resource://markdown_here_common/options.html';
+    var windowMediator = Components.classes['@mozilla.org/appshell/window-mediator;1']
+                          .getService(Components.interfaces.nsIWindowMediator);
+
+    windowMediator.getMostRecentWindow('mail:3pane')
+      .document.getElementById('tabmail')
+      .openTab('contentTab', {contentPage: url});
+    windowMediator.getMostRecentWindow('mail:3pane').focus();
+  },
+
   // NOTE: Thunderbird seems to reuse compose windows, so this will only get
   // called for every addtion new open message. Like, if a message is opened
   // and send and another message is opened, this will only get called once.
@@ -111,6 +124,15 @@ var markdown_here = {
 
     // initialization code
     this.initialized = true;
+
+    // Only show the open-options menu item if we're on a version of Thunderbird where
+    // the options page won't open via the usual means (see #495).
+    var tbirdWithOptionsProblems =
+      (navigator.userAgent.indexOf('Thunderbird') >= 0 || navigator.userAgent.indexOf('Icedove') >= 0) &&
+      (Services.vc.compare(Services.appinfo.platformVersion, '59') < 0);
+    if (tbirdWithOptionsProblems) {
+      document.getElementById('tools-menu-markdown_here-open-options').hidden = false;
+    }
 
     contextMenu = document.getElementById('contentAreaContextMenu');
     if (!contextMenu) contextMenu = document.getElementById('msgComposeContext');

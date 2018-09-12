@@ -30,4 +30,13 @@
                    oncommand="markdown_here.onToolbarButtonCommand(event)" />
   </toolbar>
 
+  <menu id="tasksMenu">
+    <menupopup id="taskPopup">
+      <!-- Initially hidden. Will be shown on platforms that need it. -->
+      <menuitem id="tools-menu-markdown_here-open-options" label="&moz_options_dlg_title;"
+                oncommand="markdown_here.openOptionsTab(event)"
+                hidden="true" />
+    </menupopup>
+  </menu>
+
 </overlay>
