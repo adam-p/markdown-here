@@ -4,19 +4,19 @@
  */
 
 "use strict";
-/*jshint browser:true, jquery:true, sub:true */
-/*global OptionsStore:false, chrome:false, markdownRender:false,
-  htmlToText:false, marked:false, hljs:false, markdownHere:false, Utils:false,
-  MdhHtmlToText:false */
+/* jshint browser:true, jquery:true, sub:true */
+/* eslint-env jquery */
+/* global OptionsStore:false, chrome:false, marked:false, markdownHere:false, Utils:false,
+   MdhHtmlToText:false */
 
 /*
  * Main script file for the options page.
  */
 
 var cssEdit, cssSyntaxEdit, cssSyntaxSelect, rawMarkdownIframe, savedMsg,
-    mathEnable, mathEdit, hotkeyShift, hotkeyCtrl, hotkeyAlt, hotkeyKey,
-    forgotToRenderCheckEnabled, headerAnchorsEnabled, gfmLineBreaksEnabled,
-    loaded = false;
+  mathEnable, mathEdit, hotkeyShift, hotkeyCtrl, hotkeyAlt, hotkeyKey,
+  forgotToRenderCheckEnabled, headerAnchorsEnabled, gfmLineBreaksEnabled;
+var loaded = false;
 
 function onLoad() {
   var xhr;

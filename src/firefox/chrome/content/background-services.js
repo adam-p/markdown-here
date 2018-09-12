@@ -48,7 +48,7 @@ document.addEventListener(imports.Utils.PRIVILEGED_REQUEST_EVENT_NAME, function(
   var node, doc, request, responseEventName, responseCallback, asyncResponseCallback;
 
   node = event.target;
-  if (!node || node.nodeType != node.TEXT_NODE) {
+  if (!node || node.nodeType !== node.TEXT_NODE) {
     return;
   }
 
