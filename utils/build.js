@@ -7,7 +7,6 @@
 "use strict";
 
 var fs = require('fs');
-var path = require('path');
 var file = require('file');
 var archiver = require('archiver');
 var MetaScript = require('MetaScript');
@@ -60,16 +59,18 @@ function fnameMatch(fpath, inputArray) {
 
 // Add a file to the Chrome extension zip
 function addBuildFile(platformName, zip, fullPath, zipPath) {
+  var fileContents;
+
   // For the Mozilla extensions in particular, we need to do some preprocessing on JavaScript files
   // in order to exclude code specific to other platforms.
   if (javascriptFileRegex.test(fullPath)) {
-    var fileContents = fs.readFileSync(fullPath);
+    fileContents = fs.readFileSync(fullPath);
     fileContents = MetaScript.transform(fileContents, {platform: platformName});
     zip.append(fileContents, { name: zipPath });
   }
   else if (platformName === CHROME_PLATFORM && manifestJsonFileRegex.test(fullPath)) {
     // Remove the Firefox-specific stuff from manifest.json when building for Chrome.
-    var fileContents = fs.readFileSync(fullPath, {encoding: 'utf8'});
+    fileContents = fs.readFileSync(fullPath, {encoding: 'utf8'});
     fileContents = fileContents.replace(/,"applications":[^{]*{[^{]*{[^}]*}[^}]*}/m, '');
     zip.append(fileContents, { name: zipPath });
   }
@@ -96,8 +97,8 @@ function setUpZips() {
   }
 
   var chromeZip = new archiver('zip'); // Chrome will reject the zip if there's no compression
-  var firefoxZip = new archiver('zip', {store: true});
-  var thunderbirdZip = new archiver('zip', {store: true});
+  var firefoxZip = new archiver('zip');
+  var thunderbirdZip = new archiver('zip'); // addons.thunderbird.net rejects the xpi if there's no compression
 
   chromeZip.on('error', function(err) {
     console.log('chromeZip error:', err);
@@ -121,7 +122,7 @@ function setUpZips() {
   return {
     chrome: chromeZip,
     firefox: firefoxZip,
-    thunderbird: thunderbirdZip,
+    thunderbird: thunderbirdZip
   };
 }
 

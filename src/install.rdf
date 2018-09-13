@@ -7,21 +7,21 @@
         <em:id>markdown-here@adam.pritchard</em:id>
         <em:version>2.13.3</em:version>
 
+        <!-- Firefox -->
         <em:targetApplication>
             <Description>
-                <!-- Firefox -->
                 <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
                 <em:minVersion>11.0</em:minVersion>
                 <em:maxVersion>49.*</em:maxVersion>
             </Description>
         </em:targetApplication>
 
-        <!-- Postbox -->
+        <!-- Thunderbird -->
         <em:targetApplication>
           <Description>
-            <em:id>postbox@postbox-inc.com</em:id>
-            <em:minVersion>2.0</em:minVersion>
-            <em:maxVersion>5.*</em:maxVersion>
+            <em:id>{3550f703-e582-4d05-9a08-453d09bdfdc6}</em:id>
+            <em:minVersion>6.0</em:minVersion>
+            <em:maxVersion>60.*</em:maxVersion>
           </Description>
         </em:targetApplication>
 
