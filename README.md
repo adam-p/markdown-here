@@ -178,15 +178,11 @@ See the [Compatibility wiki page](https://github.com/adam-p/markdown-here/wiki/C
 
 ## Building the Extension Bundles
 
-"Building" is really just zipping. Create all archives relative to the `src` directory.
-
-Before zipping, delete the `src/common/test` directory. This will prevent the autotests from ending up in the release.
-
-An important preparatory step is to remove any system-generated hidden files that shouldn't be included in the release file (like Windows' `desktop.ini` and OS X's `.DS_Store`, etc.). This shell command will delete those unwanted files:
-
 ```
-find . -name "desktop.ini" -or -name ".*" -and -not -name "." -and -not -name ".git*" -print0 | xargs -0 rm -rf
+cd utils
+node build.js
 ```
+
 
 ### Chrome and Opera extension
 

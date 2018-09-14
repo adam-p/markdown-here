@@ -303,72 +303,11 @@ var MozillaOptionsStore = {
   // directly. Unfortunately, this means duplicating some code from the background
   // service.
   _sendRequest: function(data, callback) { // analogue of chrome.runtime.sendMessage
-    var extPrefsBranch, supportString, prefKeys, prefsObj, request, sender, i;
+    var privileged, prefsBranch, prefKeys, prefsObj, i;
 
-    try {
-      extPrefsBranch = window.Components.classes['@mozilla.org/preferences-service;1']
-                             .getService(Components.interfaces.nsIPrefService)
-                             .getBranch('extensions.markdown-here.');
-      supportString = Components.classes["@mozilla.org/supports-string;1"]
-                                .createInstance(Components.interfaces.nsISupportsString);
-
-      if (data.verb === 'get') {
-        prefKeys = extPrefsBranch.getChildList('');
-        prefsObj = {};
-
-        for (i = 0; i < prefKeys.length; i++) {
-          // All of our legitimate prefs should be strings, but issue #237 suggests
-          // that things may sometimes get into a bad state. We will check and delete
-          // and prefs that aren't strings.
-          // https://github.com/adam-p/markdown-here/issues/237
-          if (extPrefsBranch.getPrefType(prefKeys[i]) !== extPrefsBranch.PREF_STRING) {
-            extPrefsBranch.clearUserPref(prefKeys[i]);
-            continue;
-          }
-
-          try {
-            prefsObj[prefKeys[i]] = window.JSON.parse(
-                                      extPrefsBranch.getComplexValue(
-                                        prefKeys[i],
-                                        Components.interfaces.nsISupportsString).data);
-          }
-          catch(e) {
-            // Null values and empty strings will result in JSON exceptions
-            prefsObj[prefKeys[i]] = null;
-          }
-        }
-
-        callback(prefsObj);
-        return;
-      }
-      else if (data.verb === 'set') {
-        for (i in data.obj) {
-          supportString.data = window.JSON.stringify(data.obj[i]);
-          extPrefsBranch.setComplexValue(
-            i,
-            Components.interfaces.nsISupportsString,
-            supportString);
-        }
-
-        if (callback) callback();
-        return;
-      }
-      else if (data.verb === 'clear') {
-        if (typeof(data.obj) === 'string') {
-          data.obj = [data.obj];
-        }
-
-        for (i = 0; i < data.obj.length; i++) {
-          extPrefsBranch.clearUserPref(data.obj[i]);
-        }
-
-        if (callback) return callback();
-        return;
-      }
-    }
-    catch (ex) {
-      // This exception was thrown by the Components.classes stuff above, and
-      // means that this code is being called from a content script.
+    privileged = (typeof(Components) !== 'undefined' && typeof(Components.classes) !== 'undefined');
+    if (!privileged) {
+      // This means that this code is being called from a content script.
       // We need to send a request from this non-privileged context to the
       // privileged background script.
       data.action = 'prefs-access';
@@ -376,6 +315,53 @@ var MozillaOptionsStore = {
         document,
         data,
         callback);
+
+      return;
+    }
+
+    prefsBranch = Components.classes['@mozilla.org/preferences-service;1']
+                            .getService(Components.interfaces.nsIPrefService)
+                            .getBranch('extensions.markdown-here.');
+
+    if (data.verb === 'get') {
+      prefKeys = prefsBranch.getChildList('');
+      prefsObj = {};
+
+      for (i = 0; i < prefKeys.length; i++) {
+        // All of our legitimate prefs should be strings, but issue #237 suggests
+        // that things may sometimes get into a bad state. We will check and delete
+        // and prefs that aren't strings.
+        // https://github.com/adam-p/markdown-here/issues/237
+        if (prefsBranch.getPrefType(prefKeys[i]) !== prefsBranch.PREF_STRING) {
+          prefsBranch.clearUserPref(prefKeys[i]);
+          continue;
+        }
+
+        prefsObj[prefKeys[i]] = Utils.getMozJsonPref(prefsBranch, prefKeys[i]);
+      }
+
+      callback(prefsObj);
+      return;
+    }
+    else if (data.verb === 'set') {
+      for (i in data.obj) {
+        Utils.setMozJsonPref(prefsBranch, i, data.obj[i]);
+      }
+
+      if (callback) callback();
+      return;
+    }
+    else if (data.verb === 'clear') {
+      if (typeof(data.obj) === 'string') {
+        data.obj = [data.obj];
+      }
+
+      for (i = 0; i < data.obj.length; i++) {
+        prefsBranch.clearUserPref(data.obj[i]);
+      }
+
+      if (callback) return callback();
+      return;
     }
   }
 };
