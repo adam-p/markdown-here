@@ -7,3 +7,6 @@ Thumbs.db
 
 # Build directory
 dist
+
+# Extension stub file
+markdown-here@adam.pritchard
