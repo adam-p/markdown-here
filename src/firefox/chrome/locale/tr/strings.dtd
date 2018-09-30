@@ -2,6 +2,8 @@
 <!ENTITY context_menu_item "Markdown Toggle">
 <!ENTITY forgot_to_render_back_button "Geri">
 <!ENTITY forgot_to_render_send_button "Gönder">
+<!ENTITY moz_options_dlg_instruction "Click the 'OK' button to open the Markdown Here Options tab">
+<!ENTITY moz_options_dlg_title "Markdown Here Options">
 <!ENTITY toggle_button_text "MD Toggle">
 <!ENTITY toggle_button_tooltip "Markdown haline dönüştürmek için bas">
 <!ENTITY toggle_button_tooltip_disabled "Seçilen alan Markdown dönüşümü için geçerli değildir">

@@ -2,6 +2,8 @@
 <!ENTITY context_menu_item "Przełącz Markdown">
 <!ENTITY forgot_to_render_back_button "Wróć">
 <!ENTITY forgot_to_render_send_button "Wyślij">
+<!ENTITY moz_options_dlg_instruction "Click the 'OK' button to open the Markdown Here Options tab">
+<!ENTITY moz_options_dlg_title "Markdown Here Options">
 <!ENTITY toggle_button_text "Przełącz MD">
 <!ENTITY toggle_button_tooltip "Kliknij aby przełączyć formatowanie Markdown">
 <!ENTITY toggle_button_tooltip_disabled "Wybrane pole nie pozwala na interpretację języka Markdown">

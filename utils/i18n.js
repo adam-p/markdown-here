@@ -29,6 +29,8 @@ var LOCALES_DIR = '../src/_locales/';
 var locales = fs.readdirSync(LOCALES_DIR);
 var mozLocaleMappings = getMozillaLocaleMappings();
 
+var englishStringBundle = JSON.parse(fs.readFileSync(LOCALES_DIR + 'en/messages.json'));
+
 locales.forEach(function(locale) {
   // Skip .DS_Store. No locale dirs should start with '.'
   if (locale[0] === '.') {
@@ -87,6 +89,10 @@ function processLocale(locale) {
   // message.json is authoritative. The Firefox files are derived from it.
   var stringBundle = JSON.parse(fs.readFileSync(LOCALES_DIR + locale + '/messages.json'));
 
+  // If new strings have been added, they may be present in English but not in the other
+  // strings bundles. We'll make sure each language has the complete set.
+  stringBundle = Object.assign(englishStringBundle, stringBundle);
+
   var mozPropertiesFilename = '../src/firefox/chrome/locale/' + locale + '/strings.properties';
   var mozPropertiesFd = fs.openSync(mozPropertiesFilename, 'w');
 
@@ -110,7 +116,7 @@ function processLocale(locale) {
     fs.writeSync(mozPropertiesFd, key + '=' + message + '\n');
 
     if (stringBundle[key]['inMozDTD']) {
-      fs.writeSync(mozDtdFd, '<!ENTITY ' + key + ' "' + message + '">\n' );
+      fs.writeSync(mozDtdFd, '<!ENTITY ' + key + ' "' + message + '">\n');
     }
   }
 
@@ -127,11 +133,11 @@ function processLocale(locale) {
 
 
 function getMozillaLocaleMappings() {
-  var lines = mozManifest.split('\n'),
-      mappings = {},
-      i, match;
-  for (var i = 0; i < lines.length; i++) {
-    match = lines[i].match(/^locale\s+markdown_here\s+([a-zA-Z_-]+)\s+firefox\/chrome\/locale\/([a-zA-Z_-]+)\/$/);
+  var lines = mozManifest.split('\n');
+  var mappings = {};
+
+  for (let i = 0; i < lines.length; i++) {
+    let match = lines[i].match(/^locale\s+markdown_here\s+([a-zA-Z_-]+)\s+firefox\/chrome\/locale\/([a-zA-Z_-]+)\/$/);
     if (match) {
       mappings[match[2]] = match[1];
     }
