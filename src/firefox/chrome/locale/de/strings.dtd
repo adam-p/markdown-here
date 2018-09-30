@@ -2,6 +2,8 @@
 <!ENTITY context_menu_item "Markdown An/Aus">
 <!ENTITY forgot_to_render_back_button "Zurück">
 <!ENTITY forgot_to_render_send_button "Senden">
+<!ENTITY moz_options_dlg_instruction "Click the 'OK' button to open the Markdown Here Options tab">
+<!ENTITY moz_options_dlg_title "Markdown Here Options">
 <!ENTITY toggle_button_text "MD An/Aus">
 <!ENTITY toggle_button_tooltip "Zwischen Markdown und gerendert wechseln">
 <!ENTITY toggle_button_tooltip_disabled "Das ausgewählte Feld kann nicht als Markdown gerendert werden">

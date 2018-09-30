@@ -2,6 +2,8 @@
 <!ENTITY context_menu_item "Basculer vers Markdown">
 <!ENTITY forgot_to_render_back_button "Retour">
 <!ENTITY forgot_to_render_send_button "Envoyer">
+<!ENTITY moz_options_dlg_instruction "Click the 'OK' button to open the Markdown Here Options tab">
+<!ENTITY moz_options_dlg_title "Markdown Here Options">
 <!ENTITY toggle_button_text "Basculer vers MD">
 <!ENTITY toggle_button_tooltip "Cliquez pour basculer vers le rendu Markdown">
 <!ENTITY toggle_button_tooltip_disabled "Le champ sélectionné n'est pas valide pour un rendu avec Markdown">

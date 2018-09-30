@@ -2,6 +2,8 @@
 <!ENTITY context_menu_item "Commuta Markdown">
 <!ENTITY forgot_to_render_back_button "Indietro">
 <!ENTITY forgot_to_render_send_button "Invia">
+<!ENTITY moz_options_dlg_instruction "Click the 'OK' button to open the Markdown Here Options tab">
+<!ENTITY moz_options_dlg_title "Markdown Here Options">
 <!ENTITY toggle_button_text "Commuta MD">
 <!ENTITY toggle_button_tooltip "Clicca per commutare la trasformazione Markdown">
 <!ENTITY toggle_button_tooltip_disabled "Il campo selezionato non è valido per la trasformazione Markdown">

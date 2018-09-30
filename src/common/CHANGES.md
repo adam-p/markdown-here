@@ -1,6 +1,13 @@
 Change Log
 ==========
 
+2018-09-30: v2.13.4
+--------------------
+
+* Fixed [bug #524] and [bug #526]: Due to v2.13.3 fix, Markdown Here didn't work in Thunderbird with a non-English UI.
+  - Thanks to [KSR-Yasuda](https://github.com/KSR-Yasuda), [ensleep](https://github.com/ensleep), [Pedro Silva](https://github.com/pmanu93), [Christophe Meyer](https://github.com/stombi), [littdky](https://github.com/littdky), [Michael Lashkevich](https://github.com/lashkevi), [morsedl](https://github.com/morsedl).
+
+
 2018-09-11: v2.13.3
 --------------------
 

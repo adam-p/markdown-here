@@ -2,6 +2,8 @@
 <!ENTITY context_menu_item "Markdown转换">
 <!ENTITY forgot_to_render_back_button "返回">
 <!ENTITY forgot_to_render_send_button "发送">
+<!ENTITY moz_options_dlg_instruction "Click the 'OK' button to open the Markdown Here Options tab">
+<!ENTITY moz_options_dlg_title "Markdown Here Options">
 <!ENTITY toggle_button_text "转换">
 <!ENTITY toggle_button_tooltip "单击转换Markdown">
 <!ENTITY toggle_button_tooltip_disabled "选定的区域不支持Markdown转换">
