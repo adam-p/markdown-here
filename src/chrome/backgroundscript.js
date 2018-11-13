@@ -51,12 +51,42 @@ function upgradeCheck() {
   });
 }
 
+// Load content script dependencies.
+function loadContentScripts(done) {
+  chrome.tabs.executeScript(
+      {code: 'document.markdown_here_loaded'}, function(results) {
+    if (results[0]) {
+      done();
+      return;
+    }
+
+    let srcs = [
+      "common/utils.js",
+      "common/common-logic.js",
+      "common/jsHtmlToText.js",
+      "common/marked.js",
+      "common/mdh-html-to-text.js",
+      "common/markdown-here.js",
+      "chrome/contentscript.js"
+    ];
+
+    for (let i=0; i<srcs.length; i++) {
+      chrome.tabs.executeScript({file: srcs[i]});
+    }
+
+    chrome.tabs.executeScript(
+        {code: 'document.markdown_here_loaded = true'}, done);
+  });
+}
+
 // Create the context menu that will signal our main code.
 chrome.contextMenus.create({
   contexts: ['editable'],
   title: Utils.getMessage('context_menu_item'),
   onclick: function(info, tab) {
-    chrome.tabs.sendMessage(tab.id, {action: 'context-click'});
+    loadContentScripts(function() {
+      chrome.tabs.sendMessage(tab.id, {action: 'context-click'});
+    });
   }
 });
 
@@ -149,7 +179,9 @@ chrome.runtime.onMessage.addListener(function(request, sender, responseCallback)
 
 // Add the browserAction (the button in the browser toolbar) listener.
 chrome.browserAction.onClicked.addListener(function(tab) {
-  chrome.tabs.sendMessage(tab.id, {action: 'button-click', });
+  loadContentScripts(function() {
+    chrome.tabs.sendMessage(tab.id, {action: 'button-click', });
+  });
 });
 
 
