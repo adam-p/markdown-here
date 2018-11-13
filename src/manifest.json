@@ -12,22 +12,8 @@
     "128": "common/images/icon128.png",
     "512": "common/images/icon512.png"
   },
-  "permissions": ["contextMenus", "storage"],
+  "permissions": ["contextMenus", "storage", "activeTab"],
   "background": {"page": "chrome/background.html"},
-  "content_scripts": [
-    {
-      "matches": ["http://*/*", "https://*/*"],
-      "js": [
-        "common/utils.js",
-        "common/common-logic.js",
-        "common/jsHtmlToText.js",
-        "common/marked.js",
-        "common/mdh-html-to-text.js",
-        "common/markdown-here.js",
-        "chrome/contentscript.js"
-        ]
-    }
-  ],
   "browser_action": {
     "default_icon": {
       "16": "common/images/icon16-button-monochrome.png",
