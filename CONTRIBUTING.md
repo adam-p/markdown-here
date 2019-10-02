@@ -28,7 +28,7 @@ If you do make any translation changes, or if you have any questions or problems
 
 ### Translators
 
-* [lambdalice](https://github.com/lambdalice)
+* [lambdalice](https://github.com/lambdalice) 
   - Provided an entire Japanese translation and forced the MDH i18n work to get done.
 
 * [Antoine Proulx](https://crowdin.com/profile/magicienap)
