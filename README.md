@@ -193,6 +193,7 @@ manifest.json
 common/
 chrome/
 ```
+sometimes opera extension not find the link.
 
 ### Firefox/Thunderbird extension
 
