@@ -152,7 +152,7 @@ chrome.runtime.onMessageExternal.addListener(function(request) {
   if (request && request.action === 'toggle-markdown') {
     chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
       var tab = tabs[0];
-      chrome.tabs.sendMessage(tab.id, {action: 'button-click', });
+      chrome.tabs.sendMessage(tab.id, {action: 'message-external', });
     });
   }
 });

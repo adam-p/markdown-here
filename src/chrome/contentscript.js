@@ -21,7 +21,8 @@ function requestHandler(request, sender, sendResponse) {
 
   if (request && (request.action === 'context-click' ||
                   request.action === 'hotkey' ||
-                  request.action === 'button-click')) {
+                  request.action === 'button-click' ||
+                  request.action === 'message-external')) {
 
     // Check if the focused element is a valid render target
     focusedElem = markdownHere.findFocusedElem(window.document);
