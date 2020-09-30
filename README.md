@@ -227,7 +227,7 @@ It also takes a fair bit of work to stay up-to-date with the latest changes in a
 * Syntax highlighting: [isagalaev / highlight.js](https://github.com/isagalaev/highlight.js)
 * HTML-to-text: [mtrimpe / jsHtmlToText](https://github.com/mtrimpe/jsHtmlToText)
 
-## Feedback
+## Feedback for improvement
 
 All bugs, feature requests, pull requests, feedback, etc., are welcome. [Create an issue](https://github.com/adam-p/markdown-here/issues). Or [post to the "markdown-here" Google Group](https://groups.google.com/forum/?fromgroups=#!forum/markdown-here).
 
