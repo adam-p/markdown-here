@@ -180,7 +180,7 @@ function getSelectedElementsInRange(range) {
 
   if (range) {
     containerElement = range.commonAncestorContainer;
-    if (containerElement.nodeType != 1) {
+    if (containerElement.nodeType !== 1) {
       containerElement = containerElement.parentNode;
     }
 
@@ -300,7 +300,7 @@ function getLocalURL(url) {
 
   // (This if-structure is ugly to work around the preprocessor logic.)
   var matched = false;
-  /*? if (platform==='chrome' || platform==='firefox') { */
+  /*? if (platform==='chrome' || platform==='firefox' || platform==='thunderbird') { */
   if (typeof(chrome) !== 'undefined') {
     matched = true;
     return chrome.extension.getURL(url);
@@ -458,7 +458,7 @@ var PRIVILEGED_REQUEST_EVENT_NAME = 'markdown-here-request-event';
 function makeRequestToPrivilegedScript(doc, requestObj, callback) {
   // (This if-structure is ugly to work around the preprocessor logic.)
   var matched = false;
-  /*? if(platform==='chrome' || platform==='firefox'){ */
+  /*? if(platform==='chrome' || platform==='firefox' || platform==='thunderbird'){ */
   if (typeof(chrome) !== 'undefined') {
     matched = true;
     // If `callback` is undefined and we pass it anyway, Chrome complains with this:
@@ -514,41 +514,6 @@ function makeRequestToPrivilegedScript(doc, requestObj, callback) {
     }
 
     safari.self.tab.dispatchMessage('request', window.JSON.stringify(requestObj));
-  }
-  /*? } */
-  /*? if(platform==='thunderbird'){ */
-  if (!matched) { // Mozilla/XUL
-    matched = true;
-
-    // See: https://developer.mozilla.org/en-US/docs/Code_snippets/Interaction_between_privileged_and_non-privileged_pages#Chromium-like_messaging.3A_json_request_with_json_callback
-
-    // Make a unique event name to use. (Bad style to modify the input like this...)
-    requestObj.responseEventName = 'markdown-here-response-event-' + Math.floor(Math.random()*1000000);
-
-    var request = doc.createTextNode(JSON.stringify(requestObj));
-
-    var responseHandler = function(event) {
-      var response = null;
-
-      // There may be no response data.
-      if (request.nodeValue) {
-        response = JSON.parse(request.nodeValue);
-      }
-
-      request.parentNode.removeChild(request);
-
-      if (callback) {
-        callback(response);
-      }
-    };
-
-    request.addEventListener(requestObj.responseEventName, responseHandler, false);
-
-    (doc.head || doc.body).appendChild(request);
-
-    var event = doc.createEvent('HTMLEvents');
-    event.initEvent(PRIVILEGED_REQUEST_EVENT_NAME, true, false);
-    request.dispatchEvent(event);
   }
   /*? } */
 }
@@ -659,87 +624,6 @@ function nextTickFn(callback, context) {
 }
 
 
-/*? if(platform==='thunderbird'){ */
-
-/**
- * Returns the stored preference string for the given key.
- * Must only be called from a privileged Mozilla script.
- * @param {nsIPrefBranch} prefsBranch
- * @param {string} key
- * @returns {?string} The preference value. May be null if the preference is not set
- * or is null.
- */
-function getMozStringPref(prefsBranch, key) {
-  try {
-    if (Services.vc.compare(Services.appinfo.platformVersion, '58') < 0) {
-      return prefsBranch.getComplexValue(
-                          key,
-                          Components.interfaces.nsISupportsString).data;
-    }
-
-    return prefsBranch.getStringPref(key, null);
-  }
-  catch(e) {
-    // getComplexValue could have thrown an exception because it didn't find the key. As
-    // with getStringPref, we will default to null.
-    return null;
-  }
-}
-
-/**
- * Get the stored preference object, JSON-parsed, for the given key.
- * Must only be called from a privileged Mozilla script.
- * @param {nsIPrefBranch} prefsBranch
- * @param {string} key
- * @returns {?(object|number|boolean|string)} The preference object (any valid JSON
- * type). May be null if the preference is not set or is null.
- */
-function getMozJsonPref(prefsBranch, key) {
-  try {
-    return JSON.parse(getMozStringPref(prefsBranch, key));
-  }
-  catch(e) {
-    return null;
-  }
-}
-
-/**
- * Store the preference string for the given key.
- * Must only be called from a privileged Mozilla script.
- * @param {nsIPrefBranch} prefsBranch
- * @param {string} key
- * @param {string} value
- */
-function setMozStringPref(prefsBranch, key, value) {
-  var supportString = Components.classes['@mozilla.org/supports-string;1']
-                        .createInstance(Components.interfaces.nsISupportsString);
-
-  if (Services.vc.compare(Services.appinfo.platformVersion, '58') < 0) {
-    supportString.data = value;
-    prefsBranch.setComplexValue(
-                  key,
-                  Components.interfaces.nsISupportsString,
-                  supportString);
-  }
-  else {
-    prefsBranch.setStringPref(key, value);
-  }
-}
-
-/**
- * Store the given object in preferences under the given key.
- * Must only be called from a privileged Mozilla script.
- * @param {nsIPrefBranch} prefsBranch
- * @param {string} key
- * @param {?(object|number|boolean|string)} value
- */
-function setMozJsonPref(prefsBranch, key, value) {
-  setMozStringPref(prefsBranch, key, JSON.stringify(value));
-}
-
-/*? } */
-
-
 /*
  * i18n/l10n
  */
@@ -776,7 +660,7 @@ var g_stringBundleLoadListeners = [];
 function registerStringBundleLoadListener(callback) {
   // (This if-structure is ugly to work around the preprocessor logic.)
   var matched = false;
-  /*? if(platform==='chrome' || platform==='firefox'){ */
+  /*? if(platform==='chrome' || platform==='firefox' || platform==='thunderbird'){ */
   if (typeof(chrome) !== 'undefined') {
     matched = true;
     // Already loaded
@@ -788,16 +672,6 @@ function registerStringBundleLoadListener(callback) {
   if (!matched
       && typeof(g_safariStringBundle) === 'object'
       && Object.keys(g_safariStringBundle).length > 0) {
-    matched = true;
-    // Already loaded
-    Utils.nextTick(callback);
-    return;
-  }
-  /*? } */
-  /*? if(platform==='thunderbird'){ */
-  if (!matched
-      && typeof(g_mozStringBundle) === 'object'
-      && Object.keys(g_mozStringBundle).length > 0) {
     matched = true;
     // Already loaded
     Utils.nextTick(callback);
@@ -861,26 +735,6 @@ function getMozStringBundle() {
 
   return stringBundleObj;
 }
-
-/*? if(platform==='thunderbird'){ */
-// Load the Mozilla string bundle
-if (typeof(chrome) === 'undefined' && typeof(safari) === 'undefined') {
-  var g_mozStringBundle = getMozStringBundle();
-
-  if (!g_mozStringBundle || Object.keys(g_mozStringBundle).length === 0) {
-    window.setTimeout(function requestMozStringBundle() {
-      makeRequestToPrivilegedScript(window.document, {action: 'get-string-bundle'}, function(response) {
-        g_mozStringBundle = response;
-        triggerStringBundleLoadListeners();
-      });
-    }, 0);
-  }
-  else {
-    // g_mozStringBundle is filled in
-    triggerStringBundleLoadListeners();
-  }
-}
-/*? } */
 
 
 /*? if(platform==='safari'){ */
@@ -1010,7 +864,7 @@ function getMessage(messageID) {
 
   // (This if-structure is ugly to work around the preprocessor logic.)
   var matched = false;
-  /*? if (platform==='chrome' || platform==='firefox') { */
+  /*? if (platform==='chrome' || platform==='firefox' || platform==='thunderbird') { */
   if (typeof(chrome) !== 'undefined') {
     matched = true;
     message = chrome.i18n.getMessage(messageID);
@@ -1021,18 +875,6 @@ function getMessage(messageID) {
     matched = true;
     if (g_safariStringBundle) {
       message = g_safariStringBundle[messageID];
-    }
-    else {
-      // We don't yet have the string bundle available
-      return '';
-    }
-  }
-  /*? } */
-  /*? if (platform==='thunderbird') { */
-  if (!matched) { // Mozilla
-    matched = true;
-    if (g_mozStringBundle) {
-      message = g_mozStringBundle[messageID];
     }
     else {
       // We don't yet have the string bundle available
@@ -1252,13 +1094,6 @@ Utils.setFocus = setFocus;
 Utils.getTopURL = getTopURL;
 Utils.nextTick = nextTick;
 Utils.nextTickFn = nextTickFn;
-/*? if(platform==='thunderbird'){ */
-Utils.getMozStringPref = getMozStringPref;
-Utils.getMozJsonPref = getMozJsonPref;
-Utils.setMozStringPref = setMozStringPref;
-Utils.setMozJsonPref = setMozJsonPref;
-Utils.getMozStringBundle = getMozStringBundle;
-/*? } */
 /*? if(platform==='safari'){ */
 Utils.getSafariStringBundle = getSafariStringBundle;
 /*? } */
