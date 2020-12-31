@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+2020-12-31: 
+
+* Port Thunderbird support to mail extensions to support Thunderbird 78.5+
+
+
 2018-09-30: v2.13.4
 --------------------
 

@@ -432,7 +432,7 @@ function findMarkdownHereWrapper(focusedElem) {
 function findMarkdownHereWrappersInRange(range) {
   // Adapted from: http://stackoverflow.com/a/1483487/729729
   var containerElement = range.commonAncestorContainer;
-  if (containerElement.nodeType != containerElement.ELEMENT_NODE) {
+  if (containerElement.nodeType !== containerElement.ELEMENT_NODE) {
     containerElement = containerElement.parentNode;
   }
 

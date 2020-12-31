@@ -9,7 +9,7 @@
 var fs = require('fs');
 var file = require('file');
 var archiver = require('archiver');
-var MetaScript = require('MetaScript');
+var MetaScript = require('metascript');
 
 
 var BASE_DIR = '..';
@@ -20,9 +20,9 @@ var CHROME_EXTENSION = file.path.join(DIST_DIR, 'chrome.zip');
 var FIREFOX_EXTENSION = file.path.join(DIST_DIR, 'firefox.zip');
 var THUNDERBIRD_EXTENSION = file.path.join(DIST_DIR, 'thunderbird.xpi');
 
-var CHROME_INPUT = [/^manifest\.json$/, /^common(\\|\/)/, /^chrome(\\|\/)/, /^_locales(\\|\/)/];
+var CHROME_INPUT = [/^manifest-browser\.json$/, /^common(\\|\/)/, /^chrome(\\|\/)/, /^_locales(\\|\/)/];
 var FIREFOX_INPUT = CHROME_INPUT;
-var THUNDERBIRD_INPUT = [/^chrome.manifest$/, /^install.rdf$/, /^common(\\|\/)/, /^firefox(\\|\/)/];
+var THUNDERBIRD_INPUT = [/^manifest-thunderbird\.json$/, /^common(\\|\/)/, /^chrome(\\|\/)/, /^_locales(\\|\/)/];
 
 var CHROME_PLATFORM = 'chrome';
 var FIREFOX_PLATFORM = 'firefox';
@@ -32,7 +32,7 @@ var skipFileRegexes = [/^common(\\|\/)test(\\|\/)/,
                        // OS files and temp files
                        /\.DS_Store$/, /.+\.bts$/, /desktop\.ini$/, /Thumbs.db$/];
 var javascriptFileRegex = /.+\.js$/;
-var manifestJsonFileRegex = /manifest\.json$/
+var manifestJsonFileRegex = /manifest\-(browser|thunderbird)\.json$/
 
 
 // Checks for a match for fpath in inputArray (which should be CHROME_INPUT or FIREFOX_INPUT).
@@ -61,17 +61,21 @@ function fnameMatch(fpath, inputArray) {
 function addBuildFile(platformName, zip, fullPath, zipPath) {
   var fileContents;
 
+  if (manifestJsonFileRegex.test(fullPath)) {
+    if (platformName === CHROME_PLATFORM) {
+      fileContents = fs.readFileSync(fullPath, {encoding: 'utf8'});
+      fileContents = fileContents.replace(/,"applications":[^{]*{[^{]*{[^}]*}[^}]*}/m, '');
+    } else {
+      fileContents = fs.readFileSync(fullPath);
+    }
+    zip.append(fileContents, { name: "manifest.json" });
+  }
+
   // For the Mozilla extensions in particular, we need to do some preprocessing on JavaScript files
   // in order to exclude code specific to other platforms.
-  if (javascriptFileRegex.test(fullPath)) {
+  else if (javascriptFileRegex.test(fullPath)) {
     fileContents = fs.readFileSync(fullPath);
     fileContents = MetaScript.transform(fileContents, {platform: platformName});
-    zip.append(fileContents, { name: zipPath });
-  }
-  else if (platformName === CHROME_PLATFORM && manifestJsonFileRegex.test(fullPath)) {
-    // Remove the Firefox-specific stuff from manifest.json when building for Chrome.
-    fileContents = fs.readFileSync(fullPath, {encoding: 'utf8'});
-    fileContents = fileContents.replace(/,"applications":[^{]*{[^{]*{[^}]*}[^}]*}/m, '');
     zip.append(fileContents, { name: zipPath });
   }
   else {

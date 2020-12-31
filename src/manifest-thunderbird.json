@@ -1,0 +1,39 @@
+{
+  "manifest_version": 2,
+  "name": "__MSG_app_name__",
+  "version": "2.13.4",
+  "description": "__MSG_app_slogan__",
+  "homepage_url": "http://markdown-here.com",
+  "default_locale": "en",
+  "icons": {
+    "16": "common/images/icon16.png",
+    "32": "common/images/icon32.png",
+    "48": "common/images/icon48.png",
+    "128": "common/images/icon128.png",
+    "512": "common/images/icon512.png"
+  },
+  "permissions": ["compose", "storage"],
+  "background": {"page": "chrome/background.html"},
+  "compose_action": {
+    "browser_style": true,
+    "default_area": "formattoolbar",
+    "default_icon": {
+      "16": "common/images/icon16-button-monochrome.png",
+      "19": "common/images/icon19-button-monochrome.png",
+      "32": "common/images/icon32-button-monochrome.png",
+      "38": "common/images/icon38-button-monochrome.png",
+      "64": "common/images/icon64-button-monochrome.png"
+    },
+    "default_title": "__MSG_toggle_button_tooltip__"
+  },
+  "options_ui": {
+    "page": "common/options.html",
+    "open_in_tab": true
+  },
+  "applications": {
+    "gecko": {
+      "id": "markdown-here-mailext@xul.calypsoblue.org",
+      "strict_min_version": "78.5"
+    }
+  }
+}
