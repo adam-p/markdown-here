@@ -16,7 +16,7 @@
   "background": {"page": "chrome/background.html"},
   "content_scripts": [
     {
-      "matches": ["http://*/*", "https://*/*"],
+      "matches": ["http://*/*", "https://*/*", "file:///*"],
       "js": [
         "common/utils.js",
         "common/common-logic.js",
