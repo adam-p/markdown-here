@@ -110,7 +110,7 @@ This has two annoying effects for us:
 away, our message box's focused button might get immediately `click`ed.
 
 2. If the user hits `space` to dismiss our message box, any button underneath
-(such as on Gmail's "Please specificy at least one recipient" box) might get
+(such as on Gmail's "Please specificity at least one recipient" box) might get
 clicked.
 */
 
