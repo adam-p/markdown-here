@@ -1,0 +1,8 @@
+on Saturday ,may 22 20121 at 1:51 , buddy GoldiMaurya <goldimauryar@gmail.com> 
+hi Buddy 
+Can you send me sweet code? 
+**THis is pretty great'''' javascript
+ var a = "Hello World"
+alert(a)
+Thanku!
+NO problem.
