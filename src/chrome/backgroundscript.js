@@ -51,6 +51,10 @@ function upgradeCheck() {
   });
 }
 
+let actionButton
+
+if (messenger === undefined) {
+  // Running in a browser such as Firefox, Chrome, Safari
 // Create the context menu that will signal our main code.
 chrome.contextMenus.create({
   contexts: ['editable'],
@@ -59,6 +63,11 @@ chrome.contextMenus.create({
     chrome.tabs.sendMessage(tab.id, {action: 'context-click'});
   }
 });
+  actionButton = chrome.browserAction
+} else {
+  // Running in a Thunderbird compose window
+  actionButton = messenger.composeAction
+}
 
 // Handle rendering requests from the content script.
 // See the comment in markdown-render.js for why we do this.
@@ -89,11 +98,11 @@ chrome.runtime.onMessage.addListener(function(request, sender, responseCallback)
   }
   else if (request.action === 'show-toggle-button') {
     if (request.show) {
-      chrome.browserAction.enable(sender.tab.id);
-      chrome.browserAction.setTitle({
+      actionButton.enable(sender.tab.id);
+      actionButton.setTitle({
         title: Utils.getMessage('toggle_button_tooltip'),
         tabId: sender.tab.id });
-      chrome.browserAction.setIcon({
+      actionButton.setIcon({
         path: {
           "16": Utils.getLocalURL('/common/images/icon16-button-monochrome.png'),
           "19": Utils.getLocalURL('/common/images/icon19-button-monochrome.png'),
@@ -105,11 +114,11 @@ chrome.runtime.onMessage.addListener(function(request, sender, responseCallback)
       return false;
     }
     else {
-      chrome.browserAction.disable(sender.tab.id);
-      chrome.browserAction.setTitle({
+      actionButton.disable(sender.tab.id);
+      actionButton.setTitle({
         title: Utils.getMessage('toggle_button_tooltip_disabled'),
         tabId: sender.tab.id });
-      chrome.browserAction.setIcon({
+      actionButton.setIcon({
         path: {
           "16": Utils.getLocalURL('/common/images/icon16-button-disabled.png'),
           "19": Utils.getLocalURL('/common/images/icon19-button-disabled.png'),
@@ -148,10 +157,25 @@ chrome.runtime.onMessage.addListener(function(request, sender, responseCallback)
 });
 
 // Add the browserAction (the button in the browser toolbar) listener.
-chrome.browserAction.onClicked.addListener(function(tab) {
+actionButton.onClicked.addListener(function(tab) {
   chrome.tabs.sendMessage(tab.id, {action: 'button-click', });
 });
 
+if (messenger !== undefined) {
+  // Mail Extensions are not able to add composeScripts via manifest.json,
+  // they must be added via the API.
+  messenger.composeScripts.register({
+    "js": [
+      {file: "../common/utils.js"},
+      {file: "../common/common-logic.js"},
+      {file: "../common/jsHtmlToText.js"},
+      {file: "../common/marked.js"},
+      {file: "../common/mdh-html-to-text.js"},
+      {file: "../common/markdown-here.js"},
+      {file: "contentscript.js"}
+    ]
+  });
+}
 
 /*
 Showing an notification after upgrade is complicated by the fact that the

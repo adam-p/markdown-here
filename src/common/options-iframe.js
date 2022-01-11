@@ -4,7 +4,6 @@
  */
 
 function onLoad() {
-  /*? if(platform==='safari' || platform==='chrome' || platform==='firefox'){ */
   // Chrome/Safari/WebExtensions require us to manually load our content script in order
   // to use the button and context menu in the iframe.
   if (typeof(safari) !== 'undefined' || typeof(chrome) !== 'undefined') {
@@ -18,7 +17,6 @@ function onLoad() {
     }
     document.body.appendChild(contentscript);
   }
-  /*? } */
 
   // The body of the iframe needs to have a (collapsed) selection range for
   // Markdown Here to work (simulating focus/cursor).
