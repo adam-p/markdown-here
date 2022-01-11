@@ -1,3 +1,9 @@
+# This repository is not maintained.
+
+* Addon for current Thunderbird versions: [Markdown Here Revival](https://addons.thunderbird.net/en-US/thunderbird/addon/markdown-here-revival/)
+* Current development: [Gitlab](https://gitlab.com/jfx2006/markdown-here-revival)
+
+
 # ![Markdown Here logo](https://raw.github.com/adam-p/markdown-here/master/src/common/images/icon48.png) Markdown Here
 
 [**Visit the website.**](http://markdown-here.com)<br>
