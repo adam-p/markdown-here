@@ -2,9 +2,9 @@
 
 [**Visit the website.**](http://markdown-here.com)<br>
 [**Get it for Chrome.**](https://chrome.google.com/webstore/detail/elifhakcjgalahccnjkneoccemfahfoa)<br>
-[**Get it for Firefox.**](https://addons.mozilla.org/en-US/firefox/addon/markdown-here/)<br>
+[**Get it for Firefox.**](https://addons.mozilla.org/firefox/addon/markdown-here/)<br>
 [**Get it for Safari.**](https://s3.amazonaws.com/markdown-here/markdown-here.safariextz)<br>
-[**Get it for Thunderbird and Postbox.**](https://addons.mozilla.org/en-US/thunderbird/addon/markdown-here/)<br>
+[**Get it for Thunderbird and Postbox.**](https://addons.mozilla.org/thunderbird/addon/markdown-here/)<br>
 [**Get it for Opera.**](https://addons.opera.com/en/extensions/details/markdown-here/)<br>
 [**Discuss it and ask questions in the Google Group.**](https://groups.google.com/forum/?fromgroups#!forum/markdown-here/)<br>
 
@@ -51,13 +51,13 @@ After installing, make sure to reload your webmail or restart Chrome!
 
 #### Mozilla Add-ons site
 
-Go to the [Firefox Add-ons page for *Markdown Here*](https://addons.mozilla.org/en-US/firefox/addon/markdown-here/) and install normally.
+Go to the [Firefox Add-ons page for *Markdown Here*](https://addons.mozilla.org/firefox/addon/markdown-here/) and install normally.
 
 Or go to the "Tools > Add-ons" menu and then search for "Markdown Here".
 
 After installing, make sure to restart Firefox/Thunderbird!
 
-**Note:** It takes up to a month for Mozilla to approve changes to the Firefox/Thunderbird extension, so updates (features, fixes) will lag behind what is shown here. You can manually choose to install the newest version before it's reviewed from the list of versions: [https://addons.mozilla.org/en-US/firefox/addon/markdown-here/versions/](https://addons.mozilla.org/en-US/firefox/addon/markdown-here/versions/)
+**Note:** It takes up to a month for Mozilla to approve changes to the Firefox/Thunderbird extension, so updates (features, fixes) will lag behind what is shown here. You can manually choose to install the newest version before it's reviewed from the list of versions: [https://addons.mozilla.org/en-US/firefox/addon/markdown-here/versions/](https://addons.mozilla.org/firefox/addon/markdown-here/versions/)
 
 #### Manual/Development
 
@@ -243,7 +243,7 @@ Copyright 2015, [Austin Anderson](http://protractor.ninja/). Licensed to Markdow
 
 ### Other images
 
-[Creative Commons Attribution 3.0 Unported (CC BY 3.0) License](http://creativecommons.org/licenses/by/3.0/)
+[Creative Commons Attribution 3.0 Unported (CC BY 3.0) License](https://creativecommons.org/licenses/by/3.0/)
 
 ---
 
