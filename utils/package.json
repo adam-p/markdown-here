@@ -6,7 +6,7 @@
     "archiver": "^3.0.0",
     "file": "*",
     "glob": "^7.1.3",
-    "markdown-it": "~3.0.5",
+    "markdown-it": "~3.1.0",
     "metascript": "~1.0.0"
   }
 }
