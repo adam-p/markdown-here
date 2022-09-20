@@ -16,12 +16,10 @@
  * No additional processing is done, like filling in default values.
  */
 
-
 (function() {
 "use strict";
 /*global Components:false, AddonManager:false, markdown_here:false*/
 /*jshint devel:true*/
-
 var scriptLoader, imports = {};
 
 // See comment in ff-overlay.js for info about module loading.
@@ -50,7 +48,7 @@ document.addEventListener(imports.Utils.PRIVILEGED_REQUEST_EVENT_NAME, function(
   var node, doc, request, responseEventName, responseCallback, asyncResponseCallback;
 
   node = event.target;
-  if (!node || node.nodeType != node.TEXT_NODE) {
+  if (!node || node.nodeType !== node.TEXT_NODE) {
     return;
   }
 
@@ -128,16 +126,14 @@ true); // wantsUntrusted -- needed for communication with content scripts
 
 // Access the actual Firefox/Thunderbird stored prefs.
 function prefsAccessRequestHandler(request) {
-  var extPrefsBranch, supportString, prefKeys, prefsObj, i;
+  var prefsBranch, prefKeys, prefsObj, i;
 
-  extPrefsBranch = Components.classes['@mozilla.org/preferences-service;1']
+  prefsBranch = Components.classes['@mozilla.org/preferences-service;1']
                              .getService(Components.interfaces.nsIPrefService)
                              .getBranch('extensions.markdown-here.');
-  supportString = Components.classes["@mozilla.org/supports-string;1"]
-                            .createInstance(Components.interfaces.nsISupportsString);
 
   if (request.verb === 'get') {
-    prefKeys = extPrefsBranch.getChildList('');
+    prefKeys = prefsBranch.getChildList('');
     prefsObj = {};
 
     for (i = 0; i < prefKeys.length; i++) {
@@ -145,32 +141,19 @@ function prefsAccessRequestHandler(request) {
       // that things may sometimes get into a bad state. We will check and delete
       // and prefs that aren't strings.
       // https://github.com/adam-p/markdown-here/issues/237
-      if (extPrefsBranch.getPrefType(prefKeys[i]) !== extPrefsBranch.PREF_STRING) {
-        extPrefsBranch.clearUserPref(prefKeys[i]);
+      if (prefsBranch.getPrefType(prefKeys[i]) !== prefsBranch.PREF_STRING) {
+        prefsBranch.clearUserPref(prefKeys[i]);
         continue;
       }
 
-      try {
-        prefsObj[prefKeys[i]] = JSON.parse(
-                                  extPrefsBranch.getComplexValue(
-                                    prefKeys[i],
-                                    Components.interfaces.nsISupportsString).data);
-      }
-      catch(e) {
-        // Null values and empty strings will result in JSON exceptions
-        prefsObj[prefKeys[i]] = null;
-      }
+      prefsObj[prefKeys[i]] = imports.Utils.getMozJsonPref(prefsBranch, prefKeys[i]);
     }
 
     return prefsObj;
   }
   else if (request.verb === 'set') {
     for (var key in request.obj) {
-      supportString.data = JSON.stringify(request.obj[key]);
-      extPrefsBranch.setComplexValue(
-        key,
-        Components.interfaces.nsISupportsString,
-        supportString);
+      imports.Utils.setMozJsonPref(prefsBranch, key, request.obj[key]);
     }
 
     return;
@@ -181,7 +164,7 @@ function prefsAccessRequestHandler(request) {
     }
 
     for (i = 0; i < request.obj.length; i++) {
-      extPrefsBranch.clearUserPref(request.obj[i]);
+      prefsBranch.clearUserPref(request.obj[i]);
     }
 
     return;
@@ -220,36 +203,18 @@ catch (ex) {
 function updateHandler(currVer) {
   var prefService = Components.classes['@mozilla.org/preferences-service;1']
                               .getService(Components.interfaces.nsIPrefService);
-  var extPrefsBranch = prefService.getBranch('extensions.markdown-here.');
+  var prefsBranch = prefService.getBranch('extensions.markdown-here.');
   var extSyncBranch = prefService.getBranch('services.sync.prefs.sync.extensions.markdown-here.');
-  var supportString = Components.classes["@mozilla.org/supports-string;1"]
-                                .createInstance(Components.interfaces.nsISupportsString);
 
-  var lastVersion = '';
-  try {
-    lastVersion = JSON.parse(
-                    extPrefsBranch.getComplexValue(
-                      'last-version',
-                      Components.interfaces.nsISupportsString).data);
-  }
-  catch (ex) {
-  }
+  var lastVersion = imports.Utils.getMozJsonPref(prefsBranch, 'last-version');
 
   // The presence of this pref indicates that it's not the first run.
-  var localFirstRun = !extPrefsBranch.prefHasUserValue('local-first-run');
+  var localFirstRun = !prefsBranch.prefHasUserValue('local-first-run');
 
-  supportString.data = JSON.stringify(false);
-  extPrefsBranch.setComplexValue(
-    'local-first-run',
-    Components.interfaces.nsISupportsString,
-    supportString);
+  imports.Utils.setMozJsonPref(prefsBranch, 'local-first-run', false);
 
   if (currVer !== lastVersion) {
-    supportString.data = JSON.stringify(currVer);
-    extPrefsBranch.setComplexValue(
-      'last-version',
-      Components.interfaces.nsISupportsString,
-      supportString);
+    imports.Utils.setMozJsonPref(prefsBranch, 'last-version', currVer);
 
     // Set the preference sync flags while we're at it.
 

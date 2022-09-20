@@ -4,3 +4,9 @@ Thumbs.db
 
 *.sublime-project
 *.sublime-workspace
+
+# Build directory
+dist
+
+# Extension stub file
+markdown-here@adam.pritchard

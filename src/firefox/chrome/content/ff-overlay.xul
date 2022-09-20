@@ -10,7 +10,6 @@
 
   <popup id="contentAreaContextMenu">
     <menuitem id="context-markdown_here" label="&context_menu_item;"
-              accesskey="&context_menu_item_shortcut;"
               class="menuitem-iconic"
               oncommand="markdown_here.onMenuItemCommand(event)"/>
   </popup>

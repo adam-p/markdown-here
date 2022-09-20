@@ -25,7 +25,7 @@ var DEFAULTS = {
   'gfm-line-breaks-enabled': true
 };
 
-/*? if(platform!=='mozilla'){ */
+/*? if(platform!=='thunderbird'){ */
 /*
  * Chrome storage helper. Gets around the synchronized value size limit.
  * Overall quota limits still apply (or less, but we should stay well within).
@@ -141,19 +141,19 @@ var ChromeOptionsStore = {
     // Note that chrome.storage.sync.QUOTA_BYTES_PER_ITEM is in bytes, but JavaScript
     // strings are UTF-16, so we need to divide by 2.
     // Some JS string info: http://rosettacode.org/wiki/String_length#JavaScript
-    if (chrome.storage) {
+    if (chrome.storage && chrome.storage.sync && chrome.storage.sync.QUOTA_BYTES_PER_ITEM) {
       return chrome.storage.sync.QUOTA_BYTES_PER_ITEM / 2;
     }
     else {
-      // 2048 is the default value for chrome.storage.sync.QUOTA_BYTES_PER_ITEM, so...
-      return 2048 / 2;
+      // 8192 is the default value for chrome.storage.sync.QUOTA_BYTES_PER_ITEM, so...
+      return 8192 / 2;
     }
 
   },
 
   _storageGet: function(callback) {
     if (chrome.storage) {
-      chrome.storage.sync.get(null, function(obj) {
+      (chrome.storage.sync || chrome.storage.local).get(null, function(obj) {
         var key;
         for (key in obj) {
           // Older settings aren't JSON-encoded, so they'll throw an exception.
@@ -194,7 +194,7 @@ var ChromeOptionsStore = {
     }
 
     if (chrome.storage) {
-      chrome.storage.sync.set(finalobj, callback);
+      (chrome.storage.sync || chrome.storage.local).set(finalobj, callback);
       return;
     }
     else {
@@ -212,7 +212,7 @@ var ChromeOptionsStore = {
 
   _storageRemove: function(keysToDelete, callback) {
     if (chrome.storage) {
-      chrome.storage.sync.remove(keysToDelete, callback);
+      (chrome.storage.sync || chrome.storage.local).remove(keysToDelete, callback);
       return;
     }
     else {
@@ -261,7 +261,7 @@ var ChromeOptionsStore = {
 };
 /*? } */
 
-
+/*? if(platform==='thunderbird'){ */
 /*
  * Mozilla preferences storage helper
  */
@@ -302,73 +302,12 @@ var MozillaOptionsStore = {
   // When called from a background script, we're going to access the browser prefs
   // directly. Unfortunately, this means duplicating some code from the background
   // service.
-  _sendRequest: function(data, callback) { // analogue of chrome.extension.sendMessage
-    var extPrefsBranch, supportString, prefKeys, prefsObj, request, sender, i;
+  _sendRequest: function(data, callback) { // analogue of chrome.runtime.sendMessage
+    var privileged, prefsBranch, prefKeys, prefsObj, i;
 
-    try {
-      extPrefsBranch = window.Components.classes['@mozilla.org/preferences-service;1']
-                             .getService(Components.interfaces.nsIPrefService)
-                             .getBranch('extensions.markdown-here.');
-      supportString = Components.classes["@mozilla.org/supports-string;1"]
-                                .createInstance(Components.interfaces.nsISupportsString);
-
-      if (data.verb === 'get') {
-        prefKeys = extPrefsBranch.getChildList('');
-        prefsObj = {};
-
-        for (i = 0; i < prefKeys.length; i++) {
-          // All of our legitimate prefs should be strings, but issue #237 suggests
-          // that things may sometimes get into a bad state. We will check and delete
-          // and prefs that aren't strings.
-          // https://github.com/adam-p/markdown-here/issues/237
-          if (extPrefsBranch.getPrefType(prefKeys[i]) !== extPrefsBranch.PREF_STRING) {
-            extPrefsBranch.clearUserPref(prefKeys[i]);
-            continue;
-          }
-
-          try {
-            prefsObj[prefKeys[i]] = window.JSON.parse(
-                                      extPrefsBranch.getComplexValue(
-                                        prefKeys[i],
-                                        Components.interfaces.nsISupportsString).data);
-          }
-          catch(e) {
-            // Null values and empty strings will result in JSON exceptions
-            prefsObj[prefKeys[i]] = null;
-          }
-        }
-
-        callback(prefsObj);
-        return;
-      }
-      else if (data.verb === 'set') {
-        for (i in data.obj) {
-          supportString.data = window.JSON.stringify(data.obj[i]);
-          extPrefsBranch.setComplexValue(
-            i,
-            Components.interfaces.nsISupportsString,
-            supportString);
-        }
-
-        if (callback) callback();
-        return;
-      }
-      else if (data.verb === 'clear') {
-        if (typeof(data.obj) === 'string') {
-          data.obj = [data.obj];
-        }
-
-        for (i = 0; i < data.obj.length; i++) {
-          extPrefsBranch.clearUserPref(data.obj[i]);
-        }
-
-        if (callback) return callback();
-        return;
-      }
-    }
-    catch (ex) {
-      // This exception was thrown by the Components.classes stuff above, and
-      // means that this code is being called from a content script.
+    privileged = (typeof(Components) !== 'undefined' && typeof(Components.classes) !== 'undefined');
+    if (!privileged) {
+      // This means that this code is being called from a content script.
       // We need to send a request from this non-privileged context to the
       // privileged background script.
       data.action = 'prefs-access';
@@ -376,12 +315,60 @@ var MozillaOptionsStore = {
         document,
         data,
         callback);
+
+      return;
+    }
+
+    prefsBranch = Components.classes['@mozilla.org/preferences-service;1']
+                            .getService(Components.interfaces.nsIPrefService)
+                            .getBranch('extensions.markdown-here.');
+
+    if (data.verb === 'get') {
+      prefKeys = prefsBranch.getChildList('');
+      prefsObj = {};
+
+      for (i = 0; i < prefKeys.length; i++) {
+        // All of our legitimate prefs should be strings, but issue #237 suggests
+        // that things may sometimes get into a bad state. We will check and delete
+        // and prefs that aren't strings.
+        // https://github.com/adam-p/markdown-here/issues/237
+        if (prefsBranch.getPrefType(prefKeys[i]) !== prefsBranch.PREF_STRING) {
+          prefsBranch.clearUserPref(prefKeys[i]);
+          continue;
+        }
+
+        prefsObj[prefKeys[i]] = Utils.getMozJsonPref(prefsBranch, prefKeys[i]);
+      }
+
+      callback(prefsObj);
+      return;
+    }
+    else if (data.verb === 'set') {
+      for (i in data.obj) {
+        Utils.setMozJsonPref(prefsBranch, i, data.obj[i]);
+      }
+
+      if (callback) callback();
+      return;
+    }
+    else if (data.verb === 'clear') {
+      if (typeof(data.obj) === 'string') {
+        data.obj = [data.obj];
+      }
+
+      for (i = 0; i < data.obj.length; i++) {
+        prefsBranch.clearUserPref(data.obj[i]);
+      }
+
+      if (callback) return callback();
+      return;
     }
   }
 };
+/*? } */
 
 
-/*? if(platform!=='mozilla'){ */
+/*? if(platform==='safari'){ */
 /*
  * When called from the options page, this is effectively a content script, so
  * we'll have to make calls to the background script in that case.
@@ -487,16 +474,28 @@ var SafariOptionsStore = {
 /*? } */
 
 
-/*? if(platform!=='mozilla'){ */
-if (typeof(navigator) !== 'undefined' && navigator.userAgent.indexOf('Chrome') >= 0) {
+// Choose which OptionsStore engine we should use.
+// (This if-structure is ugly to work around the preprocessor logic.)
+/*? if(platform==='chrome' || platform==='firefox'){ */
+if (typeof(navigator) !== 'undefined'
+    && (navigator.userAgent.indexOf('Chrome') >= 0
+        || navigator.userAgent.indexOf('Firefox') >= 0)) {
   this.OptionsStore = ChromeOptionsStore;
 }
-else if (typeof(navigator) !== 'undefined' && navigator.userAgent.match(/AppleWebKit.*Version.*Safari/)) {
+/*? } */
+/*? if(platform==='safari'){ */
+if (!this.OptionsStore
+    && typeof(navigator) !== 'undefined'
+    && navigator.userAgent.match(/AppleWebKit.*Version.*Safari/)) {
   this.OptionsStore = SafariOptionsStore;
 }
-else /*? } */ {
+/*? } */
+/*? if(platform==='thunderbird'){ */
+// Thunderbird, Postbox, Icedove
+if (!this.OptionsStore) {
   this.OptionsStore = MozillaOptionsStore;
 }
+/*? } */
 
 this.OptionsStore._fillDefaults = function(prefsObj, callback) {
   var that = this;

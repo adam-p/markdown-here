@@ -194,7 +194,7 @@ function getSelectedElementsInRange(range) {
           }
       });
 
-    /*? if(platform!=='mozilla'){ */
+    /*? if(platform!=='firefox' && platform!=='thunderbird'){ */
     /*
     // This code is probably superior, but TreeWalker is not supported by Postbox.
     // If this ends up getting used, it should probably be moved into walkDOM
@@ -298,14 +298,23 @@ function getLocalURL(url) {
     return url;
   }
 
-  /*? if(platform!=='mozilla'){ */
+  // (This if-structure is ugly to work around the preprocessor logic.)
+  var matched = false;
+  /*? if (platform==='chrome' || platform==='firefox') { */
   if (typeof(chrome) !== 'undefined') {
+    matched = true;
     return chrome.extension.getURL(url);
   }
-  else if (typeof(safari) !== 'undefined') {
+  /*? } */
+  /*? if (platform==='safari') { */
+  if (!matched && typeof(safari) !== 'undefined') {
+    matched = true;
     return safari.extension.baseURI + 'markdown-here/src' + url;
   }
-  else /*? } */ {
+  /*? } */
+  /*? if(platform==='thunderbird'){ */
+  if (!matched) {
+    matched = true;
     // Mozilla platform.
     // HACK: The proper URL depends on values in `chrome.manifest`. But we "know"
     // that there are only a couple of locations we request from, so we're going
@@ -321,6 +330,7 @@ function getLocalURL(url) {
       return 'chrome://markdown_here/' + url.slice(CONTENT.length);
     }
   }
+  /*? } */
 
   throw 'unknown url type: ' + url;
 }
@@ -446,18 +456,24 @@ function fireMouseClick(elem) {
 var PRIVILEGED_REQUEST_EVENT_NAME = 'markdown-here-request-event';
 
 function makeRequestToPrivilegedScript(doc, requestObj, callback) {
-  /*? if(platform!=='mozilla'){ */
+  // (This if-structure is ugly to work around the preprocessor logic.)
+  var matched = false;
+  /*? if(platform==='chrome' || platform==='firefox'){ */
   if (typeof(chrome) !== 'undefined') {
+    matched = true;
     // If `callback` is undefined and we pass it anyway, Chrome complains with this:
     // Uncaught Error: Invocation of form extension.sendMessage(object, undefined, null) doesn't match definition extension.sendMessage(optional string extensionId, any message, optional function responseCallback)
     if (callback) {
-      chrome.extension.sendMessage(requestObj, callback);
+      chrome.runtime.sendMessage(requestObj, callback);
     }
     else {
-      chrome.extension.sendMessage(requestObj);
+      chrome.runtime.sendMessage(requestObj);
     }
   }
-  else if (typeof(safari) !== 'undefined') {
+  /*? } */
+  /*? if(platform==='safari'){ */
+  if (!matched && typeof(safari) !== 'undefined') {
+    matched = true;
     /*
     Unlike Chrome, Safari doesn't provide a way to pass a callback to a background-
     script request. Instead the background script sends a separate message to
@@ -499,7 +515,11 @@ function makeRequestToPrivilegedScript(doc, requestObj, callback) {
 
     safari.self.tab.dispatchMessage('request', window.JSON.stringify(requestObj));
   }
-  else /*? } */ {
+  /*? } */
+  /*? if(platform==='thunderbird'){ */
+  if (!matched) { // Mozilla/XUL
+    matched = true;
+
     // See: https://developer.mozilla.org/en-US/docs/Code_snippets/Interaction_between_privileged_and_non-privileged_pages#Chromium-like_messaging.3A_json_request_with_json_callback
 
     // Make a unique event name to use. (Bad style to modify the input like this...)
@@ -530,6 +550,7 @@ function makeRequestToPrivilegedScript(doc, requestObj, callback) {
     event.initEvent(PRIVILEGED_REQUEST_EVENT_NAME, true, false);
     request.dispatchEvent(event);
   }
+  /*? } */
 }
 
 
@@ -638,18 +659,100 @@ function nextTickFn(callback, context) {
 }
 
 
+/*? if(platform==='thunderbird'){ */
+
+/**
+ * Returns the stored preference string for the given key.
+ * Must only be called from a privileged Mozilla script.
+ * @param {nsIPrefBranch} prefsBranch
+ * @param {string} key
+ * @returns {?string} The preference value. May be null if the preference is not set
+ * or is null.
+ */
+function getMozStringPref(prefsBranch, key) {
+  try {
+    if (Services.vc.compare(Services.appinfo.platformVersion, '58') < 0) {
+      return prefsBranch.getComplexValue(
+                          key,
+                          Components.interfaces.nsISupportsString).data;
+    }
+
+    return prefsBranch.getStringPref(key, null);
+  }
+  catch(e) {
+    // getComplexValue could have thrown an exception because it didn't find the key. As
+    // with getStringPref, we will default to null.
+    return null;
+  }
+}
+
+/**
+ * Get the stored preference object, JSON-parsed, for the given key.
+ * Must only be called from a privileged Mozilla script.
+ * @param {nsIPrefBranch} prefsBranch
+ * @param {string} key
+ * @returns {?(object|number|boolean|string)} The preference object (any valid JSON
+ * type). May be null if the preference is not set or is null.
+ */
+function getMozJsonPref(prefsBranch, key) {
+  try {
+    return JSON.parse(getMozStringPref(prefsBranch, key));
+  }
+  catch(e) {
+    return null;
+  }
+}
+
+/**
+ * Store the preference string for the given key.
+ * Must only be called from a privileged Mozilla script.
+ * @param {nsIPrefBranch} prefsBranch
+ * @param {string} key
+ * @param {string} value
+ */
+function setMozStringPref(prefsBranch, key, value) {
+  var supportString = Components.classes['@mozilla.org/supports-string;1']
+                        .createInstance(Components.interfaces.nsISupportsString);
+
+  if (Services.vc.compare(Services.appinfo.platformVersion, '58') < 0) {
+    supportString.data = value;
+    prefsBranch.setComplexValue(
+                  key,
+                  Components.interfaces.nsISupportsString,
+                  supportString);
+  }
+  else {
+    prefsBranch.setStringPref(key, value);
+  }
+}
+
+/**
+ * Store the given object in preferences under the given key.
+ * Must only be called from a privileged Mozilla script.
+ * @param {nsIPrefBranch} prefsBranch
+ * @param {string} key
+ * @param {?(object|number|boolean|string)} value
+ */
+function setMozJsonPref(prefsBranch, key, value) {
+  setMozStringPref(prefsBranch, key, JSON.stringify(value));
+}
+
+/*? } */
+
+
 /*
  * i18n/l10n
  */
 /*
-This is a much bigger hassle than it should be. i18n support is great on Chrome,
-a bit of a hassle on Firefox/Thunderbird, and basically nonexistent on Safari.
+This is a much bigger hassle than it should be. i18n support is great on Chrome
+(and Opera, and Firefox+WebExtensions), a bit of a hassle on Thunderbird/XUL,
+and basically nonexistent on Safari.
 
 In Chrome, we can use `chrome.i18n.getMessage` to just get the string we want,
 in either content or background scripts, synchronously and with no extra prep
 work.
 
-In Firefox, we need to load the `strings.properties` string bundle for both the
+In Thunderbird, we need to load the `strings.properties` string bundle for both the
 current locale and English (our fallback language) and combine them. This can
 only be done from a privileged script. Then we can use the strings. The loading
 is synchronous for the privileged script, but asynchronous for the unprivileged
@@ -671,15 +774,36 @@ calls wait until the loading is complete.
 var g_stringBundleLoadListeners = [];
 
 function registerStringBundleLoadListener(callback) {
-  if (/*? if(platform!=='mozilla'){ */
-      typeof(chrome) !== 'undefined' ||
-      (typeof(g_safariStringBundle) === 'object' && Object.keys(g_safariStringBundle).length > 0) ||
-      /*? } */
-      (typeof(g_mozStringBundle) === 'object' && Object.keys(g_mozStringBundle).length > 0)) {
+  // (This if-structure is ugly to work around the preprocessor logic.)
+  var matched = false;
+  /*? if(platform==='chrome' || platform==='firefox'){ */
+  if (typeof(chrome) !== 'undefined') {
+    matched = true;
     // Already loaded
     Utils.nextTick(callback);
     return;
   }
+  /*? } */
+  /*? if(platform==='safari'){ */
+  if (!matched
+      && typeof(g_safariStringBundle) === 'object'
+      && Object.keys(g_safariStringBundle).length > 0) {
+    matched = true;
+    // Already loaded
+    Utils.nextTick(callback);
+    return;
+  }
+  /*? } */
+  /*? if(platform==='thunderbird'){ */
+  if (!matched
+      && typeof(g_mozStringBundle) === 'object'
+      && Object.keys(g_mozStringBundle).length > 0) {
+    matched = true;
+    // Already loaded
+    Utils.nextTick(callback);
+    return;
+  }
+  /*? } */
 
   g_stringBundleLoadListeners.push(callback);
 }
@@ -693,7 +817,7 @@ function triggerStringBundleLoadListeners() {
 }
 
 
-// Must only be called from a priviledged Mozilla script
+// Must only be called from a privileged Mozilla script
 function getMozStringBundle() {
   if (typeof(Components) === 'undefined' || typeof(Components.classes) === 'undefined') {
     return false;
@@ -712,7 +836,7 @@ function getMozStringBundle() {
 
   // First load the English fallback strings
 
-  stringBundle = window.Components.classes["@mozilla.org/intl/stringbundle;1"]
+  stringBundle = Components.classes["@mozilla.org/intl/stringbundle;1"]
                         .getService(Components.interfaces.nsIStringBundleService)
                         // Notice the explicit locale in this path:
                         .createBundle("resource://markdown_here_locale/en/strings.properties");
@@ -725,7 +849,7 @@ function getMozStringBundle() {
 
   // Then load the strings that are overridden for the current locale
 
-  stringBundle = window.Components.classes["@mozilla.org/intl/stringbundle;1"]
+  stringBundle = Components.classes["@mozilla.org/intl/stringbundle;1"]
                         .getService(Components.interfaces.nsIStringBundleService)
                         .createBundle("chrome://markdown_here/locale/strings.properties");
 
@@ -738,10 +862,9 @@ function getMozStringBundle() {
   return stringBundleObj;
 }
 
+/*? if(platform==='thunderbird'){ */
 // Load the Mozilla string bundle
-/*? if(platform!=='mozilla'){ */
 if (typeof(chrome) === 'undefined' && typeof(safari) === 'undefined') {
-/*? } */
   var g_mozStringBundle = getMozStringBundle();
 
   if (!g_mozStringBundle || Object.keys(g_mozStringBundle).length === 0) {
@@ -756,12 +879,11 @@ if (typeof(chrome) === 'undefined' && typeof(safari) === 'undefined') {
     // g_mozStringBundle is filled in
     triggerStringBundleLoadListeners();
   }
-/*? if(platform!=='mozilla'){ */
 }
 /*? } */
 
 
-/*? if(platform!=='mozilla'){ */
+/*? if(platform==='safari'){ */
 // Will only succeed when called from a privileged Safari script.
 // `callback(data, err)` is passed a non-null value for err in case of total
 // failure, which should be interpreted as being called from a non-privileged
@@ -845,7 +967,7 @@ function getSafariStringBundle(callback) {
 }
 /*? } */
 
-/*? if(platform!=='mozilla'){ */
+/*? if(platform==='safari'){ */
 // Load the Safari string bundle
 if (typeof(safari) !== 'undefined') {
   var g_safariStringBundle = {};
@@ -885,11 +1007,18 @@ if (typeof(safari) !== 'undefined') {
 // internationalization (yet).
 function getMessage(messageID) {
   var message = '';
-  /*? if(platform!=='mozilla'){ */
+
+  // (This if-structure is ugly to work around the preprocessor logic.)
+  var matched = false;
+  /*? if (platform==='chrome' || platform==='firefox') { */
   if (typeof(chrome) !== 'undefined') {
+    matched = true;
     message = chrome.i18n.getMessage(messageID);
   }
-  else if (typeof(safari) !== 'undefined') {
+  /*? } */
+  /*? if (platform==='safari') { */
+  if (!matched && typeof(safari) !== 'undefined') {
+    matched = true;
     if (g_safariStringBundle) {
       message = g_safariStringBundle[messageID];
     }
@@ -898,7 +1027,10 @@ function getMessage(messageID) {
       return '';
     }
   }
-  else /*? } */ { // Mozilla
+  /*? } */
+  /*? if (platform==='thunderbird') { */
+  if (!matched) { // Mozilla
+    matched = true;
     if (g_mozStringBundle) {
       message = g_mozStringBundle[messageID];
     }
@@ -907,6 +1039,7 @@ function getMessage(messageID) {
       return '';
     }
   }
+  /*? } */
 
   if (!message) {
     throw new Error('Could not find message ID: ' + messageID);
@@ -1119,8 +1252,14 @@ Utils.setFocus = setFocus;
 Utils.getTopURL = getTopURL;
 Utils.nextTick = nextTick;
 Utils.nextTickFn = nextTickFn;
+/*? if(platform==='thunderbird'){ */
+Utils.getMozStringPref = getMozStringPref;
+Utils.getMozJsonPref = getMozJsonPref;
+Utils.setMozStringPref = setMozStringPref;
+Utils.setMozJsonPref = setMozJsonPref;
 Utils.getMozStringBundle = getMozStringBundle;
-/*? if(platform!=='mozilla'){ */
+/*? } */
+/*? if(platform==='safari'){ */
 Utils.getSafariStringBundle = getSafariStringBundle;
 /*? } */
 Utils.registerStringBundleLoadListener = registerStringBundleLoadListener;

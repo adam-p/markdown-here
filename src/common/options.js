@@ -4,19 +4,19 @@
  */
 
 "use strict";
-/*jshint browser:true, jquery:true, sub:true */
-/*global OptionsStore:false, chrome:false, markdownRender:false,
-  htmlToText:false, marked:false, hljs:false, markdownHere:false, Utils:false,
-  MdhHtmlToText:false */
+/* jshint browser:true, jquery:true, sub:true */
+/* eslint-env jquery */
+/* global OptionsStore:false, chrome:false, marked:false, markdownHere:false, Utils:false,
+   MdhHtmlToText:false */
 
 /*
  * Main script file for the options page.
  */
 
 var cssEdit, cssSyntaxEdit, cssSyntaxSelect, rawMarkdownIframe, savedMsg,
-    mathEnable, mathEdit, hotkeyShift, hotkeyCtrl, hotkeyAlt, hotkeyKey,
-    forgotToRenderCheckEnabled, headerAnchorsEnabled, gfmLineBreaksEnabled,
-    loaded = false;
+  mathEnable, mathEdit, hotkeyShift, hotkeyCtrl, hotkeyAlt, hotkeyKey,
+  forgotToRenderCheckEnabled, headerAnchorsEnabled, gfmLineBreaksEnabled;
+var loaded = false;
 
 function onLoad() {
   var xhr;
@@ -71,6 +71,7 @@ function onLoad() {
   // Restore previously set options (asynchronously)
   //
 
+  var optionsGetSuccessful = false;
   OptionsStore.get(function(prefs) {
     cssEdit.value = prefs['main-css'];
     cssSyntaxEdit.value = prefs['syntax-css'];
@@ -93,6 +94,8 @@ function onLoad() {
 
     // Start watching for changes to the styles.
     setInterval(checkChange, 100);
+
+    optionsGetSuccessful = true;
   });
 
   // Load the changelist section
@@ -124,6 +127,17 @@ function onLoad() {
       $('#tests-link').hide();
     }
   });
+
+  // Older Thunderbird may try to open this options page in a new ChromeWindow, and it
+  // won't work. So in that case we need to tell the user how they can actually open the
+  // options page. This is pretty ungraceful, but few users will encouter it, and fewer as
+  // time goes on.
+  setTimeout(function() {
+    if (!optionsGetSuccessful) {
+      alert('It looks like you are running an older version of Thunderird.\nOpen the Markdown Here Options via the message window Tools menu.');
+      window.close();
+    }
+  }, 500);
 
   loaded = true;
 }
@@ -185,15 +199,21 @@ function localize() {
 // Shows/hide page elements depending on the current platform.
 // E.g., not all usage instructions apply to all clients.
 function showPlatformElements() {
-  /*? if(platform!=='mozilla'){ */
+  // (This if-structure is ugly to work around the preprocessor logic.)
+  var matched = false;
+  /*? if (platform!=='firefox' && platform!=='thunderbird') { */
   if (typeof(chrome) !== 'undefined' && typeof(chrome.extension) !== 'undefined') {
+    matched = true;
     // Webkit-derived platforms
     $('#need-page-reload').css('display', 'none');
   }
-  else /*? } */ {
+  /*? } else { */
+  if (!matched) {
+    matched = true;
     // Mozilla-derived platforms
     $('#need-page-reload').css('display', '');
   }
+  /*? } */
 }
 
 
