@@ -303,7 +303,7 @@ function getLocalURL(url) {
   /*? if (platform==='chrome' || platform==='firefox') { */
   if (typeof(chrome) !== 'undefined') {
     matched = true;
-    return chrome.extension.getURL(url);
+    return chrome.runtime.getURL(url);
   }
   /*? } */
   /*? if (platform==='safari') { */
@@ -337,90 +337,45 @@ function getLocalURL(url) {
 
 
 // Makes an asynchrous XHR request for a local file (basically a thin wrapper).
-// `mimetype` is optional. `callback` will be called with the responseText as
+// `dataType` must be one of 'text', 'json', or 'base64'.
+// `callback` will be called with the responseText as
 // argument.
 // If error occurs, `callback`'s second parameter will be an error.
-function getLocalFile(url, mimetype, callback) {
-  if (!callback) {
-    // optional mimetype not provided
-    callback = mimetype;
-    mimetype = null;
-  }
+function getLocalFile(url, dataType, callback) {
+  fetch(url)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error status: ${response.status}`);
+      }
 
-  var xhr = new window.XMLHttpRequest();
-  if (mimetype) {
-    xhr.overrideMimeType(mimetype);
-  }
-  xhr.open('GET', url);
-
-  xhr.onload = function() {
-    if (callback) {
-     callback(this.responseText);
-     callback = null;
-    }
-  };
-
-  xhr.onerror = function(e) {
-    if (callback) {
-      callback(null, e);
-      callback = null;
-    }
-  };
-
-  try {
-    // On some platforms, xhr.send throws an error if the url is not found.
-    // On some platforms, it will call onerror and on some it won't.
-    xhr.send();
-  }
-  catch(e) {
-    if (callback) {
-      callback(null, e);
-      callback = null;
-      return;
-    }
-  }
-}
-
-
-// Does async XHR request to get data at `url`, then passes it to `callback`
-// Base64-encoded.
-// Intended to be used get the logo image file in a form that can be put in a
-// data-url image element.
-// If error occurs, `callback`'s second parameter will be an error.
-function getLocalFileAsBase64(url, callback) {
-  var xhr = new window.XMLHttpRequest();
-  xhr.open('GET', url);
-  xhr.responseType = 'arraybuffer';
-
-  xhr.onload = function() {
-    var uInt8Array = new Uint8Array(this.response);
-    var base64Data = base64EncArr(uInt8Array);
-
-    if (callback) {
-      callback(base64Data);
-      callback = null;
-    }
-  };
-
-  xhr.onerror = function(e) {
-    if (callback) {
-      callback(null, e);
-      callback = null;
-    }
-  };
-
-  try {
-    // On some platforms, xhr.send throws an error if the url is not found.
-    // On some platforms, it will call onerror and on some it won't.
-    xhr.send();
-  }
-  catch(e) {
-    if (callback) {
-      callback(null, e);
-      callback = null;
-      return;
-    }
-  }
+      switch (dataType) {
+        case 'text':
+          return response.text();
+        case 'json':
+          return response.json();
+        case 'base64':
+          return response.blob();
+        default:
+          throw new Error(`Unknown dataType: ${dataType}`);
+      }
+    })
+    .then(data => {
+      switch (dataType) {
+        case 'text':
+        case 'json':
+          callback(data);
+          break;
+        case 'base64':
+          data.arrayBuffer().then(function(buffer) {
+            var uInt8Array = new Uint8Array(buffer);
+            var base64Data = base64EncArr(uInt8Array);
+            callback(base64Data);
+          });
+      }
+    })
+    .catch(err => {
+        callback(null, err);
+    });
 }
 
 
@@ -945,7 +900,7 @@ function getSafariStringBundle(callback) {
 
   function getStringBundle(locale, callback) {
     var url = getLocalURL('/_locales/' + locale + '/messages.json');
-    getLocalFile(url, 'application/json', function(data, err) {
+    getLocalFile(url, 'json', function(data, err) {
       if (err) {
         return callback(null, err);
       }
@@ -1242,7 +1197,6 @@ Utils.getDocumentFragmentHTML = getDocumentFragmentHTML;
 Utils.isElementDescendant = isElementDescendant;
 Utils.getLocalURL = getLocalURL;
 Utils.getLocalFile = getLocalFile;
-Utils.getLocalFileAsBase64 = getLocalFileAsBase64;
 Utils.fireMouseClick = fireMouseClick;
 Utils.MARKDOWN_HERE_EVENT = MARKDOWN_HERE_EVENT;
 Utils.makeRequestToPrivilegedScript = makeRequestToPrivilegedScript;

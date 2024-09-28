@@ -1,9 +1,9 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "__MSG_app_name__",
   "version": "2.13.4",
   "description": "__MSG_app_slogan__",
-  "homepage_url": "http://markdown-here.com",
+  "homepage_url": "https://markdown-here.com",
   "default_locale": "en",
   "icons": {
     "16": "common/images/icon16.png",
@@ -13,7 +13,10 @@
     "512": "common/images/icon512.png"
   },
   "permissions": ["contextMenus", "storage"],
-  "background": {"page": "chrome/background.html"},
+  "background": {
+    "page": "chrome/background.html#background-page",
+    "service_worker": "chrome/backgroundscript.js"
+  },
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
@@ -28,7 +31,7 @@
         ]
     }
   ],
-  "browser_action": {
+  "action": {
     "default_icon": {
       "16": "common/images/icon16-button-monochrome.png",
       "19": "common/images/icon19-button-monochrome.png",
@@ -44,7 +47,7 @@
     "open_in_tab": true
   }
 
-  ,"applications": {
+  ,"browser_specific_settings": {
     "gecko": {
       "id": "markdown-here-webext@adam.pritchard"
     }
