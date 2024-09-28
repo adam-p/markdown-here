@@ -303,7 +303,7 @@ function getLocalURL(url) {
   /*? if (platform==='chrome' || platform==='firefox') { */
   if (typeof(chrome) !== 'undefined') {
     matched = true;
-    return chrome.extension.getURL(url);
+    return chrome.runtime.getURL(url);
   }
   /*? } */
   /*? if (platform==='safari') { */
