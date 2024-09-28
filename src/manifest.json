@@ -47,7 +47,7 @@
     "open_in_tab": true
   }
 
-  ,"applications": {
+  ,"browser_specific_settings": {
     "gecko": {
       "id": "markdown-here-webext@adam.pritchard"
     }

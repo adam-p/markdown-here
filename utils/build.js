@@ -71,7 +71,7 @@ function addBuildFile(platformName, zip, fullPath, zipPath) {
   else if (platformName === CHROME_PLATFORM && manifestJsonFileRegex.test(fullPath)) {
     // Remove the Firefox-specific stuff from manifest.json when building for Chrome.
     fileContents = fs.readFileSync(fullPath, {encoding: 'utf8'});
-    fileContents = fileContents.replace(/,"applications":[^{]*{[^{]*{[^}]*}[^}]*}/m, '');
+    fileContents = fileContents.replace(/,"browser_specific_settings":[^{]*{[^{]*{[^}]*}[^}]*}/m, '');
     zip.append(fileContents, { name: zipPath });
   }
   else {
