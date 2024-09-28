@@ -120,7 +120,7 @@ function onLoad() {
   // of extension packages.
 
   // Check if our test file exists.
-  Utils.getLocalFile('./test/index.html', 'text/html', function(_, err) {
+  Utils.getLocalFile('./test/index.html', 'text', function(_, err) {
     // The test files aren't present, so hide the button.
     if (err) {
       // The test files aren't present, so hide the button.
