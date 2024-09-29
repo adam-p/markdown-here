@@ -227,6 +227,10 @@ function showUpgradeNotification(optionsURL) {
       });
     };
 
+    // TODO: This interval won't keep the service worker alive, so if a content script
+    // doesn't reload in about 30 seconds, we'll lose the interval and the notification
+    // won't show.
+    // Maybe use the Alarms API? Maybe restructure this so that it's less hacky?
     showUpgradeNotificationInterval = setInterval(askTabsToShowNotification, 5000);
   });
 }
