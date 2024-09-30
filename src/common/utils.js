@@ -338,9 +338,8 @@ function getLocalURL(url) {
 
 // Makes an asynchrous XHR request for a local file (basically a thin wrapper).
 // `dataType` must be one of 'text', 'json', or 'base64'.
-// `callback` will be called with the responseText as
-// argument.
-// If error occurs, `callback`'s second parameter will be an error.
+// `callback` will be called with the response value, of a type depending on `dataType`.
+// Errors are no expected for local files, and will result in an exception being thrown asynchrously.
 function getLocalFile(url, dataType, callback) {
   fetch(url)
     .then(response => {
@@ -374,7 +373,7 @@ function getLocalFile(url, dataType, callback) {
       }
     })
     .catch(err => {
-        callback(null, err);
+        throw new Error(`Error fetching local file: ${url}: ${err}`);
     });
 }
 
@@ -562,22 +561,11 @@ function getTopURL(win, justHostname) {
 // horribly slow rendering. For info see:
 // https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/setTimeout#Inactive_tabs
 // As an alternative, we can use a local XHR request/response.
-
+// This function just does a simple, local async request and then calls the callback.
 function asyncCallbackXHR(callback) {
-  var xhr = new window.XMLHttpRequest();
-  xhr.open('HEAD', getLocalURL('/common/CHANGES.md'));
-
-  xhr.onload = callback;
-  xhr.onerror = callback;
-
-  try {
-    // On some platforms, xhr.send throws an error if the url is not found.
-    // On some platforms, it will call onerror and on some it won't.
-    xhr.send();
-  }
-  catch(e) {
-    asyncCallbackTimeout(callback);
-  }
+  fetch(getLocalURL('/common/CHANGES.md'), {method: 'HEAD'})
+    .then(callback)
+    .catch(callback);
 }
 
 function asyncCallbackTimeout(callback) {

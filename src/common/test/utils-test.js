@@ -276,12 +276,25 @@ describe('Utils', function() {
       Utils.getLocalFile('../images/icon16.png', 'base64', callback);
     });
 
-    it('should supply an error arg to callback if file not found', function(done) {
-      Utils.getLocalFile('badfilename', 'text', function(val, err) {
-        expect(err).to.be.ok;
-        expect(val).to.not.be.ok;
+    it('should work with getLocalURL', function(done) {
+      var KNOWN_PREFIX = '<!DOCTYPE html>';
+      var callback = function(data) {
+        expect(data.slice(0, KNOWN_PREFIX.length)).to.equal(KNOWN_PREFIX);
         done();
-      });
+      };
+
+      Utils.getLocalFile(Utils.getLocalURL('/common/options.html'), 'text', callback);
+    });
+
+    /* If we switch to promises rather than asynchronous callbacks, we can use these tests again.
+    it('should supply an error arg to callback if file not found', function(done) {
+      try {
+        Utils.getLocalFile('badfilename', 'text', function(val, err) {
+        });
+      }
+      catch (e) {
+        done();
+      }
     });
 
     it('should supply an error arg to callback if dataType is bad', function(done) {
@@ -291,6 +304,7 @@ describe('Utils', function() {
         done();
       });
     });
+    */
   });
 
   describe('getLocalURL', function() {
