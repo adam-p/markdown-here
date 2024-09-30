@@ -47,14 +47,10 @@ function onLoad() {
   //
 
   // Get the available highlight.js styles.
-  xhr = new XMLHttpRequest();
-  xhr.overrideMimeType('application/json');
-  xhr.open('GET', 'highlightjs/styles/styles.json');
-  xhr.onreadystatechange = function() {
-    if (this.readyState === this.DONE) {
-      // Assume 200 OK -- it's just a local call
-      var syntaxStyles = JSON.parse(this.responseText);
-
+  Utils.getLocalFile(
+    Utils.getLocalURL('/common/highlightjs/styles/styles.json'),
+    'json',
+    function(syntaxStyles) {
       for (var name in syntaxStyles) {
         cssSyntaxSelect.options.add(new Option(name, syntaxStyles[name]));
       }
@@ -63,9 +59,7 @@ function onLoad() {
       cssSyntaxSelect.selectedIndex = cssSyntaxSelect.options.length - 1;
 
       cssSyntaxSelect.addEventListener('change', cssSyntaxSelectChange);
-    }
-  };
-  xhr.send();
+    });
 
   //
   // Restore previously set options (asynchronously)
@@ -353,16 +347,12 @@ document.querySelector('#markdown-toggle-button').addEventListener('click', mark
 // Reset the main CSS to default.
 function resetCssEdit() {
   // Get the default value.
-  var xhr = new XMLHttpRequest();
-  xhr.overrideMimeType(OptionsStore.defaults['main-css']['__mimeType__']);
-  xhr.open('GET', OptionsStore.defaults['main-css']['__defaultFromFile__']);
-  xhr.onreadystatechange = function() {
-    if (this.readyState === this.DONE) {
-      // Assume 200 OK -- it's just a local call
-      cssEdit.value = this.responseText;
-    }
-  };
-  xhr.send();
+  Utils.getLocalFile(
+    OptionsStore.defaults['main-css']['__defaultFromFile__'],
+    OptionsStore.defaults['main-css']['__dataType__'],
+    function(defaultValue) {
+      cssEdit.value = defaultValue;
+    });
 }
 document.getElementById('reset-button').addEventListener('click', resetCssEdit, false);
 
@@ -381,29 +371,19 @@ function cssSyntaxSelectChange() {
   }
 
   // Get the CSS for the selected theme.
-  var xhr = new XMLHttpRequest();
-  xhr.overrideMimeType('text/css');
-  xhr.open('GET', 'highlightjs/styles/'+selected);
-  xhr.onreadystatechange = function() {
-    if (this.readyState === this.DONE) {
-      // Assume 200 OK -- it's just a local call
-      cssSyntaxEdit.value = this.responseText;
-    }
-  };
-  xhr.send();
+  Utils.getLocalFile(
+    Utils.getLocalURL('/common/highlightjs/styles/'+selected),
+    'text',
+    css => {
+      cssSyntaxEdit.value = css;
+    });
 }
 
 function loadChangelist() {
-  var xhr = new XMLHttpRequest();
-  xhr.overrideMimeType('text/plain');
-
-  // Get the changelist from a local file.
-  xhr.open('GET', 'CHANGES.md');
-  xhr.onreadystatechange = function() {
-    if (this.readyState === this.DONE) {
-      // Assume 200 OK -- it's just a local call
-      var changes = this.responseText;
-
+  Utils.getLocalFile(
+    Utils.getLocalURL('/common/CHANGES.md'),
+    'text',
+    function(changes) {
       var markedOptions = {
             gfm: true,
             pedantic: false,
@@ -426,9 +406,7 @@ function loadChangelist() {
         // Move the changelist section up in the page
         $('#changelist-container').insertAfter('#pagehead');
       }
-    }
-  };
-  xhr.send();
+    });
 }
 
 // Choose one of the donate pleas to use, and update the donate info so we can
