@@ -564,6 +564,7 @@ describe('Utils', function() {
 
     // I have found that Range.intersectsNode is broken on Chrome. I'm adding
     // test to see if/when it gets fixed.
+    // TODO: This test seems flawed. Why would test-elem-2 intersect the range that just contains test-elem-1? Hand-testing suggests that this is working as expected in Chrome and Firefox. Code that works around this probably-nonexistent bug should be reconsidered (especially since Postbox support is dropped).
     it('Range.intersectsNode is broken on Chrome', function() {
       var range = document.createRange();
       range.selectNode($('#test-elem-1')[0]);
