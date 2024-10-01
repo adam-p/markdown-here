@@ -10,7 +10,7 @@
 
 *Markdown Here* is a Google Chrome, Firefox, Safari, Opera, and Thunderbird extension that lets you write email<sup>&dagger;</sup> in Markdown<sup>&Dagger;</sup> and render them before sending. It also supports syntax highlighting (just specify the language in a fenced code block).
 
-Writing email with code in it is pretty tedious. Writing Markdown with code in it is easy. I found myself writing email in Markdown in the Github in-browser editor, then copying the preview into email. This is a pretty absurd workflow, so I decided create a tool to write and render Markdown right in the email.
+Writing email with code in it is pretty tedious. Writing Markdown with code in it is easy. I found myself writing email in Markdown in the GitHub in-browser editor, then copying the preview into email. This is a pretty absurd workflow, so I decided create a tool to write and render Markdown right in the email.
 
 To discover what can be done with Markdown in *Markdown Here*, check out the [Markdown Here Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet) and the other [wiki pages](https://github.com/adam-p/markdown-here/wiki).
 
@@ -62,7 +62,7 @@ After installing, make sure to restart Firefox/Thunderbird!
 #### Manual/Development
 
 1. Clone this repo.
-2. Follow the instructions in the MDN ["Setting up an extension development environment"](https://developer.mozilla.org/en/Setting_up_extension_development_environment) article.
+2. Follow the instructions in the MDN ["Your first WebExtension"](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Your_first_WebExtension#installing) article.
 
 ### Safari
 
@@ -184,7 +184,7 @@ node build.js
 ```
 
 
-### Chrome and Opera extension
+### Chrome, Opera, and Firefox (WebExtension) extension
 
 Create a file with a `.zip` extension containing these files and directories:
 
@@ -192,9 +192,10 @@ Create a file with a `.zip` extension containing these files and directories:
 manifest.json
 common/
 chrome/
+_locales
 ```
 
-### Firefox/Thunderbird extension
+### Thunderbird (XUL) extension
 
 Create a file with a `.xpi` extension containing these files and directories:
 
