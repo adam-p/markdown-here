@@ -63,6 +63,9 @@ chrome.runtime.onInstalled.addListener((details) => {
 });
 
 function upgradeCheck() {
+  // DISABLED FOR THIS RELEASE
+  return;
+
   OptionsStore.get(function(options) {
     var appManifest = chrome.runtime.getManifest();
 
