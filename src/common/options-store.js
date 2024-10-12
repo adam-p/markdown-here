@@ -122,8 +122,8 @@ var ChromeOptionsStore = {
 
   // The default values or URLs for our various options.
   defaults: {
-    'main-css': {'__defaultFromFile__': '/common/default.css', '__mimeType__': 'text/css'},
-    'syntax-css': {'__defaultFromFile__': '/common/highlightjs/styles/github.css', '__mimeType__': 'text/css'},
+    'main-css': {'__defaultFromFile__': '/common/default.css', '__dataType__': 'text'},
+    'syntax-css': {'__defaultFromFile__': '/common/highlightjs/styles/github.css', '__dataType__': 'text'},
     'math-enabled': DEFAULTS['math-enabled'],
     'math-value': DEFAULTS['math-value'],
     'hotkey': DEFAULTS['hotkey'],
@@ -286,8 +286,8 @@ var MozillaOptionsStore = {
   // The default values or URLs for our various options.
   defaults: {
     'local-first-run': true,
-    'main-css': {'__defaultFromFile__': 'resource://markdown_here_common/default.css', '__mimeType__': 'text/css'},
-    'syntax-css': {'__defaultFromFile__': 'resource://markdown_here_common/highlightjs/styles/github.css', '__mimeType__': 'text/css'},
+    'main-css': {'__defaultFromFile__': 'resource://markdown_here_common/default.css', '__dataType__': 'text/css'},
+    'syntax-css': {'__defaultFromFile__': 'resource://markdown_here_common/highlightjs/styles/github.css', '__dataType__': 'text/css'},
     'math-enabled': DEFAULTS['math-enabled'],
     'math-value': DEFAULTS['math-value'],
     'hotkey': DEFAULTS['hotkey'],
@@ -461,8 +461,8 @@ var SafariOptionsStore = {
 
   // The default values or URLs for our various options.
   defaults: {
-    'main-css': {'__defaultFromFile__': (typeof(safari) !== 'undefined' ? safari.extension.baseURI : '')+'markdown-here/src/common/default.css', '__mimeType__': 'text/css'},
-    'syntax-css': {'__defaultFromFile__': (typeof(safari) !== 'undefined' ? safari.extension.baseURI : '')+'markdown-here/src/common/highlightjs/styles/github.css', '__mimeType__': 'text/css'},
+    'main-css': {'__defaultFromFile__': (typeof(safari) !== 'undefined' ? safari.extension.baseURI : '')+'markdown-here/src/common/default.css', '__dataType__': 'text/css'},
+    'syntax-css': {'__defaultFromFile__': (typeof(safari) !== 'undefined' ? safari.extension.baseURI : '')+'markdown-here/src/common/highlightjs/styles/github.css', '__dataType__': 'text/css'},
     'math-enabled': DEFAULTS['math-enabled'],
     'math-value': DEFAULTS['math-value'],
     'hotkey': DEFAULTS['hotkey'],
@@ -524,31 +524,19 @@ this.OptionsStore._fillDefaults = function(prefsObj, callback) {
   }
 
   // This function may be asynchronous (if XHR occurs) or it may be a straight
-  // recursion.
+  // synchronous callback invocation.
   function doDefaultForKey(key, callback) {
     // Only take action if the key doesn't already have a value set.
     if (typeof(prefsObj[key]) === 'undefined') {
       if (that.defaults[key].hasOwnProperty('__defaultFromFile__')) {
-        var xhr = new window.XMLHttpRequest();
-
-        if (that.defaults[key]['__mimeType__']) {
-          xhr.overrideMimeType(that.defaults[key]['__mimeType__']);
-        }
-
-        // Get the default value from the indicated file.
-        xhr.open('GET', that.defaults[key]['__defaultFromFile__']);
-
-        xhr.onreadystatechange = function() {
-          if (this.readyState === this.DONE) {
-            // Assume 200 OK -- it's just a local call
-            prefsObj[key] = this.responseText;
-
+        Utils.getLocalFile(
+          that.defaults[key]['__defaultFromFile__'],
+          that.defaults[key]['__dataType__'] || 'text',
+          function(data) {
+            prefsObj[key] = data;
             callback();
-            return;
-          }
-        };
-
-        xhr.send();
+        });
+        return;
       }
       else {
         // Set the default.

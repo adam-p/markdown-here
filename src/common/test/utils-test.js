@@ -245,38 +245,27 @@ describe('Utils', function() {
 
 
   describe('getLocalFile', function() {
-    it('should return correct data', function(done) {
-      // We "know" our logo file starts with this string when base64'd
+    it('should return correct text data', function(done) {
       var KNOWN_PREFIX = '<!DOCTYPE html>';
       var callback = function(data) {
         expect(data.slice(0, KNOWN_PREFIX.length)).to.equal(KNOWN_PREFIX);
         done();
       };
 
-      Utils.getLocalFile('../options.html', 'text/html', callback);
+      Utils.getLocalFile('../options.html', 'text', callback);
     });
 
-    it('should correctly handle absence of optional argument', function(done) {
-      // We "know" our options.html file starts with this string
-      var KNOWN_PREFIX = '<!DOCTYPE html>';
+    it('should return correct json data', function(done) {
       var callback = function(data) {
-        expect(data.slice(0, KNOWN_PREFIX.length)).to.equal(KNOWN_PREFIX);
+        expect(data).to.be.an('object');
+        expect(data).to.have.property('app_name');
         done();
       };
 
-      Utils.getLocalFile('../options.html', callback);
+      Utils.getLocalFile('/_locales/en/messages.json', 'json', callback);
     });
 
-    it('should supply an error arg to callback if file not found', function(done) {
-      Utils.getLocalFile('badfilename', function(val, err) {
-        expect(err).to.be.ok;
-        done();
-      });
-    });
-  });
-
-  describe('getLocalFileAsBase64', function() {
-    it('should return data as Base64', function(done) {
+    it('should return correct base64 data', function(done) {
       // We "know" our logo file starts with this string when base64'd
       var KNOWN_PREFIX = 'iVBORw0KGgo';
       var callback = function(data) {
@@ -284,15 +273,38 @@ describe('Utils', function() {
         done();
       };
 
-      Utils.getLocalFileAsBase64('../images/icon16.png', callback);
+      Utils.getLocalFile('../images/icon16.png', 'base64', callback);
     });
 
+    it('should work with getLocalURL', function(done) {
+      var KNOWN_PREFIX = '<!DOCTYPE html>';
+      var callback = function(data) {
+        expect(data.slice(0, KNOWN_PREFIX.length)).to.equal(KNOWN_PREFIX);
+        done();
+      };
+
+      Utils.getLocalFile(Utils.getLocalURL('/common/options.html'), 'text', callback);
+    });
+
+    /* If we switch to promises rather than asynchronous callbacks, we can use these tests again.
     it('should supply an error arg to callback if file not found', function(done) {
-      Utils.getLocalFile('badfilename', function(val, err) {
+      try {
+        Utils.getLocalFile('badfilename', 'text', function(val, err) {
+        });
+      }
+      catch (e) {
+        done();
+      }
+    });
+
+    it('should supply an error arg to callback if dataType is bad', function(done) {
+      Utils.getLocalFile('../options.html', 'nope', function(val, err) {
         expect(err).to.be.ok;
+        expect(val).to.not.be.ok;
         done();
       });
     });
+    */
   });
 
   describe('getLocalURL', function() {
@@ -309,7 +321,7 @@ describe('Utils', function() {
       };
 
       var url = Utils.getLocalURL('/common/options.html');
-      Utils.getLocalFile(url, 'text/html', callback);
+      Utils.getLocalFile(url, 'text', callback);
     });
   });
 
@@ -552,6 +564,7 @@ describe('Utils', function() {
 
     // I have found that Range.intersectsNode is broken on Chrome. I'm adding
     // test to see if/when it gets fixed.
+    // TODO: This test seems flawed. Why would test-elem-2 intersect the range that just contains test-elem-1? Hand-testing suggests that this is working as expected in Chrome and Firefox. Code that works around this probably-nonexistent bug should be reconsidered (especially since Postbox support is dropped).
     it('Range.intersectsNode is broken on Chrome', function() {
       var range = document.createRange();
       range.selectNode($('#test-elem-1')[0]);

@@ -38,11 +38,12 @@ function getUpgradeNotification(optionsURL, responseCallback) {
 
   Utils.getLocalFile(
     Utils.getLocalURL('/common/upgrade-notification.html'),
-    'text/html',
+    'text',
     function(html) {
       // Get the logo image data
-      Utils.getLocalFileAsBase64(
+      Utils.getLocalFile(
         Utils.getLocalURL('/common/images/icon32.png'),
+        'base64',
         function(logoBase64) {
           // Do some rough template replacement
           html = html.replace('{{optionsURL}}', optionsURL)
@@ -72,7 +73,7 @@ function getForgotToRenderPromptContent(responseCallback) {
 
   Utils.getLocalFile(
     Utils.getLocalURL('/common/forgot-to-render-prompt.html'),
-    'text/html',
+    'text',
     function(html) {
       html = html.replace('{{forgot_to_render_prompt_title}}', Utils.getMessage('forgot_to_render_prompt_title'))
                  .replace('{{forgot_to_render_prompt_info}}', Utils.getMessage('forgot_to_render_prompt_info'))
@@ -82,8 +83,9 @@ function getForgotToRenderPromptContent(responseCallback) {
                  .replace('{{forgot_to_render_send_button}}', Utils.getMessage('forgot_to_render_send_button'));
 
       // Get the logo image data
-      Utils.getLocalFileAsBase64(
+      Utils.getLocalFile(
         Utils.getLocalURL('/common/images/icon48.png'),
+        'base64',
         function(logoBase64) {
           // Do some rough template replacement
           html = html.replace('{{logoBase64}}', logoBase64);

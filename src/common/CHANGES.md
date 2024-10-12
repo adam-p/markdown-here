@@ -1,10 +1,17 @@
 Change Log
 ==========
 
+2024-10-03: v2.14.0
+-------------------
+
+* Fixed [bug #722](https://github.com/adam-p/markdown-here/issues/722): Added support for WebExtensions manifest V3. (If you've seen warnings about the extension lately, this was why.)
+  - Thanks to [Andrew M. MacFie](https://github.com/amacfie) and [Alexander Popov](https://github.com/AlexWayfer).
+* Fixed [bug #865](https://github.com/adam-p/markdown-here/issues/865): Add Chrome Store privacy information.
+
 2018-09-30: v2.13.4
 --------------------
 
-* Fixed [bug #524] and [bug #526]: Due to v2.13.3 fix, Markdown Here didn't work in Thunderbird with a non-English UI.
+* Fixed [bug #524](https://github.com/adam-p/markdown-here/issues/524) and [bug #526](https://github.com/adam-p/markdown-here/issues/526): Due to v2.13.3 fix, Markdown Here didn't work in Thunderbird with a non-English UI.
   - Thanks to [KSR-Yasuda](https://github.com/KSR-Yasuda), [ensleep](https://github.com/ensleep), [Pedro Silva](https://github.com/pmanu93), [Christophe Meyer](https://github.com/stombi), [littdky](https://github.com/littdky), [Michael Lashkevich](https://github.com/lashkevi), [morsedl](https://github.com/morsedl).
 
 
