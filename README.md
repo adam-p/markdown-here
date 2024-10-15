@@ -194,6 +194,7 @@ common/
 chrome/
 _locales
 ```
+sometimes opera extension not find the link.
 
 ### Thunderbird (XUL) extension
 
