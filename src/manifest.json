@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "__MSG_app_name__",
-  "version": "2.14.0",
+  "version": "2.14.1",
   "description": "__MSG_app_slogan__",
   "homepage_url": "https://markdown-here.com",
   "default_locale": "en",

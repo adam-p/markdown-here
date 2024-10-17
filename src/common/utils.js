@@ -339,7 +339,10 @@ function getLocalURL(url) {
 // Makes an asynchrous XHR request for a local file (basically a thin wrapper).
 // `dataType` must be one of 'text', 'json', or 'base64'.
 // `callback` will be called with the response value, of a type depending on `dataType`.
-// Errors are no expected for local files, and will result in an exception being thrown asynchrously.
+// Errors are not expected for local files, and will result in an exception being thrown asynchrously.
+// TODO: Return a promise instead of using a callback. This will allow returning an error
+// properly, and then this can be used in options.js when checking for the existence of
+// the test file.
 function getLocalFile(url, dataType, callback) {
   fetch(url)
     .then(response => {

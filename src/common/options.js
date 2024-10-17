@@ -113,14 +113,25 @@ function onLoad() {
   // Hide the tests link if the page isn't available. It may be stripped out
   // of extension packages.
 
-  // Check if our test file exists.
-  Utils.getLocalFile('./test/index.html', 'text', function(_, err) {
-    // The test files aren't present, so hide the button.
-    if (err) {
+  // Check if our test file exists. Note that we can't use Utils.getLocalFile as it throws
+  // an asynchronous error if the file isn't found.
+  // TODO: When Utils.getLocalFile is changed to return a promise, use it here.
+  fetch('./test/index.html')
+    .then(response => {
+      if (!response.ok) {
+        // The test files aren't present, so hide the button.
+        $('#tests-link').hide();
+      }
+      else {
+        // When the file is absent, Firefox still gives a 200 status, but will throw an
+        // error when the response is read.
+        return response.text();
+      }
+    })
+    .catch(err => {
       // The test files aren't present, so hide the button.
       $('#tests-link').hide();
-    }
-  });
+    });
 
   // Older Thunderbird may try to open this options page in a new ChromeWindow, and it
   // won't work. So in that case we need to tell the user how they can actually open the
