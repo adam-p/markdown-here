@@ -19,5 +19,5 @@ Disponível como extensões para Chrome, Firefox, Safari, Opera e Thunderbird.
 
 Este é um projeto de código fonte aberto. Visite a página Github do Markdown Here para as instruções completas, mais informações, relatórios de bugs, ou para contribuir.
 
-http://markdown-here.com
+https://markdown-here.com
 https://github.com/adam-p/markdown-here

@@ -49,7 +49,7 @@ Change Log
 * **New logo!** Created by [Austin Anderson](http://protractor.ninja/) and chosen by the Markdown Here users, our great new logo is finally ready for action.
   - Much thanks to Austin for his work polishing and tweaking the 60 variants of the logo. He did a lot of work getting things just right.
   - Thanks to everyone else who submitted a design: [Rafe Goldberg](http://rgd2.co/), [Jack Reis](http://www.ux-jack.com/), [Enrique Esquinas](https://twitter.com/esquinas), [Leon Wilmanns](http://leon-wilmanns.de/). All of their designs were great and I would have been happy for any of them to win.
-  - Seriously, if you haven't seen the other designs, [go check them out](http://markdown-here.com/logo.html). And then check out their portfolios, bookmark them, and contact them the next time you need design work done.
+  - Seriously, if you haven't seen the other designs, [go check them out](https://markdown-here.com/logo.html). And then check out their portfolios, bookmark them, and contact them the next time you need design work done.
   - Thanks to all of you who took the time to vote for the new logo.
   - If you are unhappy with the change to a monochrome browser toolbar and context menu button, [\+1 this issue](https://github.com/adam-p/markdown-here/issues/302).
 
@@ -376,7 +376,7 @@ Added support for [**Opera**](http://www.opera.com)! Get it [here](https://addon
 2013-05-19: v2.8.0
 ------------------
 
-* **Markdown Here now supports Safari!** [Get it here.](http://markdown-here.com/get.html)
+* **Markdown Here now supports Safari!** [Get it here.](https://markdown-here.com/get.html)
   * Thanks to users [unscriptable](https://github.com/unscriptable) and [martinsvalin](https://github.com/martinsvalin) for [requesting it](https://github.com/adam-p/markdown-here/issues/38).
 
 * Fixed bug in Firefox v23 (current Aurora): Options page wasn't working. ([See details.](https://github.com/adam-p/markdown-here/commit/c20b7e4841f325bed3201ea9a98b3f6c986cf8cc))

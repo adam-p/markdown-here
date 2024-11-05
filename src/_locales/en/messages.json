@@ -324,7 +324,7 @@
     "description": "part of the page footer text"
   },
   "options_page__footer_2": {
-    "message": "Created by <a target=\"_blank\" href=\"http://adam-p.github.com/\">Adam Pritchard</a>.",
+    "message": "Created by <a target=\"_blank\" href=\"https://adam-p.github.io/\">Adam Pritchard</a>.",
     "description": "part of the page footer text"
   },
   "options_page__changes_saved": {

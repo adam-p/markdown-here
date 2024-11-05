@@ -1,6 +1,6 @@
 /*
  * Copyright Adam Pritchard 2015
- * MIT License : http://adampritchard.mit-license.org/
+ * MIT License : https://adampritchard.mit-license.org/
  */
 
 /*
@@ -119,7 +119,7 @@ function walkDOM(node, func) {
 }
 
 
-// Next three functions from: http://stackoverflow.com/a/1483487/729729
+// Next three functions from: https://stackoverflow.com/a/1483487/729729
 // Returns true if `node` is in `range`.
 // NOTE: This function is broken in Postbox: https://github.com/adam-p/markdown-here/issues/179
 function rangeIntersectsNode(range, node) {
@@ -230,7 +230,7 @@ function isElementinDocument(element) {
 }
 
 
-// From: http://stackoverflow.com/a/3819589/729729
+// From: https://stackoverflow.com/a/3819589/729729
 // Postbox doesn't support `node.outerHTML`.
 function outerHTML(node, doc) {
   // if IE, Chrome take the internal method otherwise build one
@@ -245,7 +245,7 @@ function outerHTML(node, doc) {
 }
 
 
-// From: http://stackoverflow.com/a/5499821/729729
+// From: https://stackoverflow.com/a/5499821/729729
 var charsToReplace = {
   '&': '&amp;',
   '<': '&lt;',

@@ -1,6 +1,6 @@
 /*
  * Copyright Adam Pritchard 2015
- * MIT License : http://adampritchard.mit-license.org/
+ * MIT License : https://adampritchard.mit-license.org/
  */
 
 
@@ -140,7 +140,7 @@ var ChromeOptionsStore = {
   _maxlen: function() {
     // Note that chrome.storage.sync.QUOTA_BYTES_PER_ITEM is in bytes, but JavaScript
     // strings are UTF-16, so we need to divide by 2.
-    // Some JS string info: http://rosettacode.org/wiki/String_length#JavaScript
+    // Some JS string info: https://rosettacode.org/wiki/String_length#JavaScript
     if (chrome.storage && chrome.storage.sync && chrome.storage.sync.QUOTA_BYTES_PER_ITEM) {
       return chrome.storage.sync.QUOTA_BYTES_PER_ITEM / 2;
     }

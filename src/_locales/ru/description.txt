@@ -19,5 +19,5 @@ Privacy: Markdown Here accesses and modifies web content when you activate it. �
 
 Это проект с открытым кодом. Посетите страницу Markdown Here на Github для получения более полных инструкций, чтобы узнать больше информации, для сообщения об ошибках, или чтобы внести свой вклад.
 
-http://markdown-here.com
+https://markdown-here.com
 https://github.com/adam-p/markdown-here
