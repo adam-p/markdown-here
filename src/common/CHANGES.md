@@ -46,7 +46,7 @@ Change Log
 2015-09-07: v2.12.0
 --------------------
 
-* **New logo!** Created by [Austin Anderson](http://protractor.ninja/) and chosen by the Markdown Here users, our great new logo is finally ready for action.
+* **New logo!** Created by [Austin Anderson](https://www.angerson.org/) and chosen by the Markdown Here users, our great new logo is finally ready for action.
   - Much thanks to Austin for his work polishing and tweaking the 60 variants of the logo. He did a lot of work getting things just right.
   - Thanks to everyone else who submitted a design: [Rafe Goldberg](http://rgd2.co/), [Jack Reis](http://www.ux-jack.com/), [Enrique Esquinas](https://twitter.com/esquinas), [Leon Wilmanns](http://leon-wilmanns.de/). All of their designs were great and I would have been happy for any of them to win.
   - Seriously, if you haven't seen the other designs, [go check them out](https://markdown-here.com/logo.html). And then check out their portfolios, bookmark them, and contact them the next time you need design work done.
