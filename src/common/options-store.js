@@ -18,7 +18,7 @@ if (typeof(Utils) === 'undefined' && typeof(Components) !== 'undefined') {
 // Common defaults
 var DEFAULTS = {
   'math-enabled': true,
-  'math-value': '<img src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}" alt="{mathcode}">',
+  'math-value': '<img src="https://latex.codecogs.com/png.image?\\dpi{120}\\inline&space;{urlmathcode}" alt="{mathcode}">',
   'hotkey': { shiftKey: false, ctrlKey: true, altKey: true, key: 'M' },
   'forgot-to-render-check-enabled': false,
   'header-anchors-enabled': false,
@@ -49,6 +49,7 @@ var DEFAULTS = {
 // TODO: Check for errors. See: https://code.google.com/chrome/extensions/dev/storage.html
 
 var ChromeOptionsStore = {
+
 
   // The options object will be passed to `callback`
   get: function(callback) {
@@ -499,6 +500,14 @@ if (!this.OptionsStore) {
 
 this.OptionsStore._fillDefaults = function(prefsObj, callback) {
   var that = this;
+
+  // Upgrade the object, if necessary.
+  // Motivation: Our default for the LaTeX renderer used to be Google Charts API. Google
+  // discontinued the service and we switched the default to CodeCogs, but because it was
+  // the default, it will be set in many users' OptionsStore. We need to forcibly replace it.
+  if (typeof prefsObj['math-value'] === 'string' && prefsObj['math-value'].indexOf('chart.googleapis.com') >= 0) {
+    prefsObj['math-value'] = that.defaults['math-value'];
+  }
 
   var key, allKeys = [];
   for (key in that.defaults) {

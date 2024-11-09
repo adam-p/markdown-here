@@ -204,8 +204,8 @@
     "message": "<strong>Privacy Issues:</strong>",
     "description": "heading for warnings about TeX math privacy concerns"
   },
-  "options_page__tex_math_privacy_issue_1": {
-    "message": "To generate the image for the formula, a request is sent to Google. That effectively means that you are sharing your formula with Google. It also means that recipients of your message will be making a request to Google to have the image rendered.",
+  "options_page__tex_math_codecogs_privacy_issue_1": {
+    "message": "To generate the image for the formula, a request is sent to CodeCogs. That effectively means that you are sharing your formula with CodeCogs. It also means that recipients of your message will be making a request to CodeCogs to have the image rendered.",
     "description": "one of the TeX math privacy concerns"
   },
   "options_page__tex_math_privacy_issue_2": {
@@ -220,11 +220,11 @@
     "message": "If this feature is enabled, text between dollar signs — <code>$$</code> — will be interpreted as mathematical formulae. For example, <code>$$\\Delta$$</code> would be rendered as a delta symbol.",
     "description": "Note: Double dollar signs ($$) are necessary to get a single dollar sign."
   },
-  "options_page__tex_math_customization_2": {
-    "message": "For render customization options, see the <a href=\"https://developers.google.com/chart/infographics/docs/formulas\" target=\"_blank\">Google Charts documentation</a> for this service."
+  "options_page__tex_math_codecogs_customization_2": {
+    "message": "For render customization options, see the <a href=\"https://editor.codecogs.com/docs/4-LaTeX_rendering.php\" target=\"_blank\">CodeCogs documentation</a> for this service."
   },
   "options_page__tex_math_customization_3": {
-    "message": "A good resource for creating TeX formulae is the <a href=\"https://www.codecogs.com/latex/about.php\" target=\"_blank\">CodeCogs Equation Editor</a>."
+    "message": "A good resource for creating TeX formulae is the <a href=\"https://editor.codecogs.com/\" target=\"_blank\">CodeCogs Equation Editor</a>."
   },
   "options_page__tex_math_customization_4": {
     "message": "Formulae are rendered to images, so email recipients will have to enable images to be shown to see the rendering."

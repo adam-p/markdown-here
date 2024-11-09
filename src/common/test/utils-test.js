@@ -460,6 +460,29 @@ describe('Utils', function() {
     });
   });
 
+  describe('semverGreaterThan', function() {
+    it('should correctly order version strings', function() {
+      // Since the exact string retuned depends on the current browser locale,
+      // we'll just check that some string is returned.
+      expect(Utils.semverGreaterThan('1.11.1', '1.2.2')).to.be.true;
+      expect(Utils.semverGreaterThan('11.1.1', '2.2.2')).to.be.true;
+      expect(Utils.semverGreaterThan('11.1.1', '11.1.0')).to.be.true;
+      expect(Utils.semverGreaterThan('9.0.0', '10.0.0')).to.be.false;
+      expect(Utils.semverGreaterThan('9.0.2', '9.0.100')).to.be.false;
+      expect(Utils.semverGreaterThan('0.99', '1.0')).to.be.false;
+    });
+
+    it('should cope with non-semver input', function() {
+      expect(Utils.semverGreaterThan('nope', '1.0')).to.be.true.and.to.not.throw;
+      expect(Utils.semverGreaterThan('1.0', 'nope')).to.be.false.and.to.not.throw;
+    });
+
+    it('should return false on falsy input', function() {
+      expect(Utils.semverGreaterThan(null, '1.0')).to.be.false;
+      expect(Utils.semverGreaterThan('1.0', null)).to.be.false;
+    });
+  });
+
   describe('registerStringBundleLoadListener', function() {
     it('should get called eventually', function(done) {
       Utils.registerStringBundleLoadListener(done);

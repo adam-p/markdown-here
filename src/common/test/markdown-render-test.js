@@ -85,17 +85,17 @@ describe('Markdown-Render', function() {
     // https://github.com/adam-p/markdown-here/issues/84
     it('should render single-character math formulae', function() {
       userprefs = {
-        'math-value': '<img class="mdh-math" src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}" alt="{mathcode}">',
+        'math-value': '<img class="mdh-math" src="https://latex.codecogs.com/png.image?\\dpi{120}\\inline&space;{urlmathcode}" alt="{mathcode}">',
         'math-enabled': true
       };
 
       var md = '$x$';
-      var target = '<p><img class="mdh-math" src="https://chart.googleapis.com/chart?cht=tx&chl=x" alt="x"></p>\n';
+      var target = '<p><img class="mdh-math" src="https://latex.codecogs.com/png.image?\\dpi{120}\\inline&space;x" alt="x"></p>\n';
       expect(MarkdownRender.markdownRender(md, userprefs, marked, hljs)).to.equal(target);
 
       // Make sure we haven't broken multi-character forumlae
       md = '$xx$';
-      target = '<p><img class="mdh-math" src="https://chart.googleapis.com/chart?cht=tx&chl=xx" alt="xx"></p>\n';
+      target = '<p><img class="mdh-math" src="https://latex.codecogs.com/png.image?\\dpi{120}\\inline&space;xx" alt="xx"></p>\n';
       expect(MarkdownRender.markdownRender(md, userprefs, marked, hljs)).to.equal(target);
     });
 
@@ -320,17 +320,17 @@ describe('Markdown-Render', function() {
     // https://github.com/adam-p/markdown-here/issues/84
     it('should render single-character math formulae', function() {
       userprefs = {
-        'math-value': '<img class="mdh-math" src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}" alt="{mathcode}">',
+        'math-value': '<img class="mdh-math" src="https://latex.codecogs.com/png.image?\\dpi{120}\\inline&space;{urlmathcode}" alt="{mathcode}">',
         'math-enabled': true
       };
 
       var md = '$x$';
-      var target = '<p><img class="mdh-math" src="https://chart.googleapis.com/chart?cht=tx&chl=x" alt="x"></p>\n';
+      var target = '<p><img class="mdh-math" src="https://latex.codecogs.com/png.image?\\dpi{120}\\inline&space;x" alt="x"></p>\n';
       expect(fullRender(md)).to.equal(target);
 
       // Make sure we haven't broken multi-character forumlae
       md = '$xx$';
-      target = '<p><img class="mdh-math" src="https://chart.googleapis.com/chart?cht=tx&chl=xx" alt="xx"></p>\n';
+      target = '<p><img class="mdh-math" src="https://latex.codecogs.com/png.image?\\dpi{120}\\inline&space;xx" alt="xx"></p>\n';
       expect(fullRender(md)).to.equal(target);
     });
 
