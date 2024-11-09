@@ -53,7 +53,7 @@ describe('Markdown-Render', function() {
     // Test issue #57: https://github.com/adam-p/markdown-here/issues/57
     it('should add the schema to links missing it', function() {
       var md = 'asdf [aaa](bbb) asdf [ccc](ftp://ddd) asdf';
-      var target = '<p>asdf <a href="http://bbb">aaa</a> asdf <a href="ftp://ddd">ccc</a> asdf</p>\n';
+      var target = '<p>asdf <a href="https://bbb">aaa</a> asdf <a href="ftp://ddd">ccc</a> asdf</p>\n';
       expect(MarkdownRender.markdownRender(md, userprefs, marked, hljs)).to.equal(target);
     });
 
@@ -85,17 +85,17 @@ describe('Markdown-Render', function() {
     // https://github.com/adam-p/markdown-here/issues/84
     it('should render single-character math formulae', function() {
       userprefs = {
-        'math-value': '<img class="mdh-math" src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}" alt="{mathcode}">',
+        'math-value': '<img class="mdh-math" src="https://latex.codecogs.com/png.image?\\dpi{120}\\inline&space;{urlmathcode}" alt="{mathcode}">',
         'math-enabled': true
       };
 
       var md = '$x$';
-      var target = '<p><img class="mdh-math" src="https://chart.googleapis.com/chart?cht=tx&chl=x" alt="x"></p>\n';
+      var target = '<p><img class="mdh-math" src="https://latex.codecogs.com/png.image?\\dpi{120}\\inline&space;x" alt="x"></p>\n';
       expect(MarkdownRender.markdownRender(md, userprefs, marked, hljs)).to.equal(target);
 
       // Make sure we haven't broken multi-character forumlae
       md = '$xx$';
-      target = '<p><img class="mdh-math" src="https://chart.googleapis.com/chart?cht=tx&chl=xx" alt="xx"></p>\n';
+      target = '<p><img class="mdh-math" src="https://latex.codecogs.com/png.image?\\dpi{120}\\inline&space;xx" alt="xx"></p>\n';
       expect(MarkdownRender.markdownRender(md, userprefs, marked, hljs)).to.equal(target);
     });
 
@@ -241,36 +241,36 @@ describe('Markdown-Render', function() {
                   '<p>asdf <a href="http://www.aaa.com">bbb</a> asdf</p>\n']);
 
       tests.push(['<a href="aaa">bbb</a>',
-                  '<p><a href="http://aaa">bbb</a></p>\n']);
+                  '<p><a href="https://aaa">bbb</a></p>\n']);
 
       tests.push(['[xxx](yyy) <a href="aaa">bbb</a>',
-                  '<p><a href="http://yyy">xxx</a> <a href="http://aaa">bbb</a></p>\n']);
+                  '<p><a href="https://yyy">xxx</a> <a href="https://aaa">bbb</a></p>\n']);
 
       tests.push(['asdf (<a href="aaa">bbb</a>)',
-                  '<p>asdf (<a href="http://aaa">bbb</a>)</p>\n']);
+                  '<p>asdf (<a href="https://aaa">bbb</a>)</p>\n']);
 
       // Begin tests where the link should *not* be converted.
       // Note that some tests are affected by issue #57: MD links should automatically add scheme
 
       tests.push(['asdf [yyy](<a href="http://www.aaa.com">bbb</a>) asdf',
-                  '<p>asdf <a href="http://bbb">yyy</a> asdf</p>\n']);
+                  '<p>asdf <a href="https://bbb">yyy</a> asdf</p>\n']);
 
       tests.push(['asdf [<a href="http://www.aaa.com">bbb</a>](ccc) asdf',
-                  '<p>asdf <a href="http://ccc">bbb</a> asdf</p>\n']);
+                  '<p>asdf <a href="https://ccc">bbb</a> asdf</p>\n']);
 
       tests.push(['[yyy](<a href="http://www.aaa.com">bbb</a>)',
-                  '<p><a href="http://bbb">yyy</a></p>\n']);
+                  '<p><a href="https://bbb">yyy</a></p>\n']);
 
       tests.push(['[yyy]( <a href="http://www.aaa.com">bbb</a>)',
-                  '<p><a href="http://bbb">yyy</a></p>\n']);
+                  '<p><a href="https://bbb">yyy</a></p>\n']);
 
       tests.push(['asdf [qwer <a href="http://www.aaa.com">bbb</a>](ccc) asdf',
-                  '<p>asdf <a href="http://ccc">qwer bbb</a> asdf</p>\n']);
+                  '<p>asdf <a href="https://ccc">qwer bbb</a> asdf</p>\n']);
 
       // Begin mixed tests
 
       tests.push(['asdf [aaa](bbb) asdf <a href="http://www.aaa.com">bbb</a> asdf [yyy](<a href="http://www.aaa.com">bbb</a>) asdf',
-                  '<p>asdf <a href="http://bbb">aaa</a> asdf <a href="http://www.aaa.com">bbb</a> asdf <a href="http://bbb">yyy</a> asdf</p>\n']);
+                  '<p>asdf <a href="https://bbb">aaa</a> asdf <a href="http://www.aaa.com">bbb</a> asdf <a href="https://bbb">yyy</a> asdf</p>\n']);
 
       // Begin tests that don't work quite right
 
@@ -288,7 +288,7 @@ describe('Markdown-Render', function() {
     // Test issue #57: https://github.com/adam-p/markdown-here/issues/57
     it('should add the schema to links missing it', function() {
       var md = 'asdf [aaa](bbb) asdf [ccc](ftp://ddd) asdf';
-      var target = '<p>asdf <a href="http://bbb">aaa</a> asdf <a href="ftp://ddd">ccc</a> asdf</p>\n';
+      var target = '<p>asdf <a href="https://bbb">aaa</a> asdf <a href="ftp://ddd">ccc</a> asdf</p>\n';
       expect(fullRender(md)).to.equal(target);
     });
 
@@ -320,17 +320,17 @@ describe('Markdown-Render', function() {
     // https://github.com/adam-p/markdown-here/issues/84
     it('should render single-character math formulae', function() {
       userprefs = {
-        'math-value': '<img class="mdh-math" src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}" alt="{mathcode}">',
+        'math-value': '<img class="mdh-math" src="https://latex.codecogs.com/png.image?\\dpi{120}\\inline&space;{urlmathcode}" alt="{mathcode}">',
         'math-enabled': true
       };
 
       var md = '$x$';
-      var target = '<p><img class="mdh-math" src="https://chart.googleapis.com/chart?cht=tx&chl=x" alt="x"></p>\n';
+      var target = '<p><img class="mdh-math" src="https://latex.codecogs.com/png.image?\\dpi{120}\\inline&space;x" alt="x"></p>\n';
       expect(fullRender(md)).to.equal(target);
 
       // Make sure we haven't broken multi-character forumlae
       md = '$xx$';
-      target = '<p><img class="mdh-math" src="https://chart.googleapis.com/chart?cht=tx&chl=xx" alt="xx"></p>\n';
+      target = '<p><img class="mdh-math" src="https://latex.codecogs.com/png.image?\\dpi{120}\\inline&space;xx" alt="xx"></p>\n';
       expect(fullRender(md)).to.equal(target);
     });
 
