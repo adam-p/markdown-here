@@ -1,6 +1,18 @@
 Change Log
 ==========
 
+2024-11-09: v2.14.2
+-------------------
+
+* Fixed [issue #261](https://github.com/adam-p/markdown-here/issues/261): Switched from using the Google Chart API to CodeCogs for the the TeX renderer. Google shut down the API we were using, so it just didn't work anymore.
+  - Take a look at [the wiki](https://github.com/adam-p/markdown-here/wiki/Tips-and-Tricks#tex) for information on using other rendering services.
+  - Some day maybe we'll figure out how to [render locally](https://github.com/adam-p/markdown-here/issues/874).
+
+2024-10-17: v2.14.1
+-------------------
+
+* Fixed error on the options page.
+
 2024-10-03: v2.14.0
 -------------------
 
