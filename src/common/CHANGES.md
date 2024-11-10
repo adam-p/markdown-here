@@ -1,6 +1,18 @@
 Change Log
 ==========
 
+2024-11-09: v2.14.2
+-------------------
+
+* Fixed [issue #261](https://github.com/adam-p/markdown-here/issues/261): Switched from using the Google Chart API to CodeCogs for the the TeX renderer. Google shut down the API we were using, so it just didn't work anymore.
+  - Take a look at [the wiki](https://github.com/adam-p/markdown-here/wiki/Tips-and-Tricks#tex) for information on using other rendering services.
+  - Some day maybe we'll figure out how to [render locally](https://github.com/adam-p/markdown-here/issues/874).
+
+2024-10-17: v2.14.1
+-------------------
+
+* Fixed error on the options page.
+
 2024-10-03: v2.14.0
 -------------------
 
@@ -46,7 +58,7 @@ Change Log
 2015-09-07: v2.12.0
 --------------------
 
-* **New logo!** Created by [Austin Anderson](http://protractor.ninja/) and chosen by the Markdown Here users, our great new logo is finally ready for action.
+* **New logo!** Created by [Austin Anderson](https://www.angerson.org/) and chosen by the Markdown Here users, our great new logo is finally ready for action.
   - Much thanks to Austin for his work polishing and tweaking the 60 variants of the logo. He did a lot of work getting things just right.
   - Thanks to everyone else who submitted a design: [Rafe Goldberg](http://rgd2.co/), [Jack Reis](http://www.ux-jack.com/), [Enrique Esquinas](https://twitter.com/esquinas), [Leon Wilmanns](http://leon-wilmanns.de/). All of their designs were great and I would have been happy for any of them to win.
   - Seriously, if you haven't seen the other designs, [go check them out](https://markdown-here.com/logo.html). And then check out their portfolios, bookmark them, and contact them the next time you need design work done.

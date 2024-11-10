@@ -994,6 +994,17 @@ function getMessage(messageID) {
   return message;
 }
 
+// Returns true if the semver version string in a is greater than the one in b.
+// If a or b isn't a version string, a simple string comparison is returned.
+// If a or b is falsy, false is returned.
+// From https://stackoverflow.com/a/55466325
+function semverGreaterThan(a, b) {
+  if (!a || !b) {
+    return false;
+  }
+  return a.localeCompare(b, undefined, { numeric: true }) === 1;
+}
+
 
 /*****************************************************************************/
 /*\
@@ -1209,6 +1220,7 @@ Utils.getSafariStringBundle = getSafariStringBundle;
 /*? } */
 Utils.registerStringBundleLoadListener = registerStringBundleLoadListener;
 Utils.getMessage = getMessage;
+Utils.semverGreaterThan = semverGreaterThan;
 Utils.utf8StringToBase64 = utf8StringToBase64;
 Utils.base64ToUTF8String = base64ToUTF8String;
 

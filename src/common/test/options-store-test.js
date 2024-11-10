@@ -239,6 +239,19 @@ describe('OptionsStore', function() {
       });
     });
 
+    it('should upgrade defunct values to new default', function(done) {
+      // Set our old math-value default, which we're replacing
+      let obj = {'math-value': '<img src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}" alt="{mathcode}">'};
+      OptionsStore.set(obj, function() {
+        // Make sure we get the new default value instead of the defunct old one
+        OptionsStore.get(function(options) {
+          expect(options).to.have.property('math-value');
+          expect(options['math-value']).to.contain('codecogs');
+          done();
+        });
+      });
+    });
+
   });
 
 });
