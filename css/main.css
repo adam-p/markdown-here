@@ -50,6 +50,10 @@ a.anchor {
   text-decoration: none;
 }
 
+.donation-widgets {
+  margin-bottom: 1em;
+}
+
 .donation-widgets > * {
   vertical-align: middle;
   margin: 1em 1em 1em 1em;
