@@ -6,6 +6,6 @@ This means that:
 - It collects no user or usage data.
 - It does not read or modify any part of any site besides the contents of the focused edit control, and only when the user tells it to do so.
 
-## What data is shared?
+## What data does Markdown Here share?
 
 - Markdown Here uses the third-party [CodeCogs](https://codecogs.com/) to render math equations. When you render markdown that contains mathematical equations, Markdown Here sends the mathematical portion of your markdown to CodeCogs for rendering.
