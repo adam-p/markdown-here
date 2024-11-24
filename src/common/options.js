@@ -100,7 +100,6 @@ function onLoad() {
   // Special effort is required to open the test page in these clients.
   if (navigator.userAgent.indexOf('Thunderbird') >= 0 ||
       navigator.userAgent.indexOf('Icedove') >= 0 ||
-      navigator.userAgent.indexOf('Postbox') >= 0 ||
       navigator.userAgent.indexOf('Zotero') >= 0) {
     $('#tests-link').click(function(event) {
       event.preventDefault();

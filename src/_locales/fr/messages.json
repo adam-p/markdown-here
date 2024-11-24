@@ -106,7 +106,7 @@
     "message": "<strong>Soutenez le développement de Markdown Here!</strong>"
   },
   "options_page__donate_plea_4": {
-    "message": "Vous savez ce qui permet plus facilement de garder Markdown Here fonctionnel sur Chrome, Firefox, Thunderbird, Postbox, Safari, Opera, Gmail, Yahoo, Hotmail, Blogger, Evernote, etc.? <strong>Le café!</strong>"
+    "message": "Vous savez ce qui permet plus facilement de garder Markdown Here fonctionnel sur Chrome, Firefox, Thunderbird, Safari, Opera, Gmail, Yahoo, Hotmail, Blogger, Evernote, etc.? <strong>Le café!</strong>"
   },
   "options_page__footer_1": {
     "message": "<em>Markdown Here</em> est open source. Pour poser des questions, signaler un problème, proposer des fonctionnalités ou pour contribuer, visitez la <a target=\"_blank\" href=\"https://github.com/adam-p/markdown-here\">page Github du projet (en anglais)</a> ou le <a target=\"_blank\" href=\"https://groups.google.com/forum/?fromgroups=#!forum/markdown-here\">Groupe Google « markdown-here » (en anglais)</a>.",
@@ -117,7 +117,7 @@
     "description": "part of the page footer text"
   },
   "options_page__forgot_to_render_1": {
-    "message": "Actuellement uniquement supporté dans les interfaces web de Gmail et Google Inbox, et dans Thunderbird (et Postbox et Icedove)."
+    "message": "Actuellement uniquement supporté dans les interfaces web de Gmail et Google Inbox, et dans Thunderbird (et Icedove)."
   },
   "options_page__forgot_to_render_2": {
     "message": "Lorsque vous envoyez un courriel, l'extension vérifie le contenu pour voir si vous l'avez écrit en Markdown, mais que vous avez oublié de faire le rendu (en cliquant sur « Basculer vers Markdown ») avant de l'envoyer. Cette option peut être désactivée si elle interfère avec votre capacité à envoyer des courriels."
@@ -136,8 +136,8 @@
     "message": "<b>Activer les sauts de ligne GFM.</b>",
     "description": "Label for the checkbox that enables the support of 'Github-flavored Markdown' line breaks."
   },
-  "options_page__ggroup": {
-    "message": "Posez une question, commencez une discussion ou dites simplement bonjour dans le <a href=\"https://groups.google.com/forum/?fromgroups=#!forum/markdown-here\" target=\"_blank\">groupe Google mardown-here</a>."
+  "options_page__ghdiscussions": {
+    "message": "Ask a question or start a conversation in <a href=\"https://github.com/adam-p/markdown-here/discussions\" target=\"_blank\">Markdown Here's GitHub Discussions</a>."
   },
   "options_page__header_anchors_enabled_1": {
     "message": "C'est très pratique si vous voulez mettre une table des matières ou d'autres liens internes dans votre contenu. <a href=\"https://github.com/adam-p/markdown-here/wiki/Tips-and-Tricks#wiki-header-anchors\" target=\"_blank\"> En savoir plus sur comment l'utiliser dans le wiki MDH.</a>"

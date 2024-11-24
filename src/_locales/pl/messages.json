@@ -106,7 +106,7 @@
     "message": "<strong>Wesprzyj rozwój Markdown Here!</strong>"
   },
   "options_page__donate_plea_4": {
-    "message": "Wiesz co ułatwia poprawne działanie Markdown Here w programach Chrome, Firefox, Thunderbird, Postbox, Safari, Opera, jak i w serwisach Gmail, Yahoo, Hotmail, Blogger, Evernote, itd.? <strong>Kawa!</strong>"
+    "message": "Wiesz co ułatwia poprawne działanie Markdown Here w programach Chrome, Firefox, Thunderbird, Safari, Opera, jak i w serwisach Gmail, Yahoo, Hotmail, Blogger, Evernote, itd.? <strong>Kawa!</strong>"
   },
   "options_page__footer_1": {
     "message": "<em>Markdown Here</em> jest oprogramowaniem otwartym. Odwiedź <a target=\"_blank\" href=\"https://github.com/adam-p/markdown-here\">stronę Github projektu</a> albo <a target=\"_blank\" href=\"https://groups.google.com/forum/?fromgroups=#!forum/markdown-here\">forum \"markdown-here\" w serwisie Google Groups</a> aby zadawać pytania, zgłaszać błędy, prosić o nowe funkcje, lub pomagać w rozwoju projektu.",
@@ -136,8 +136,8 @@
     "message": "<b>Stosuj podziały wiersza w stylu GFM.</b>",
     "description": "Label for the checkbox that enables the support of 'Github-flavored Markdown' line breaks."
   },
-  "options_page__ggroup": {
-    "message": "Zadaj pytanie, rozpocznij dyskusję lub po prostu powiedz cześć na <a href=\"https://groups.google.com/forum/?fromgroups=#!forum/markdown-here\" target=\"_blank\">forum markdown-here w serwisie Google Groups</a>."
+  "options_page__ghdiscussions": {
+    "message": "Ask a question or start a conversation in <a href=\"https://github.com/adam-p/markdown-here/discussions\" target=\"_blank\">Markdown Here's GitHub Discussions</a>."
   },
   "options_page__header_anchors_enabled_1": {
     "message": "Ta funkcja świetnie się nadaje do tworzenia spisu treści lub innych linków wewnętrznych do twojej treści. <a href=\"https://github.com/adam-p/markdown-here/wiki/Tips-and-Tricks#wiki-header-anchors\" target=\"_blank\">Dowiedz się jak tego używać na wiki MDH.</a>"

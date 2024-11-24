@@ -106,7 +106,7 @@
     "message": "<strong>Help support the development of Markdown Here!</strong>"
   },
   "options_page__donate_plea_4": {
-    "message": "You know what makes it easier to keep Markdown Here working on Chrome, Firefox, Thunderbird, Postbox, Safari, Opera, Gmail, Yahoo, Hotmail, Blogger, Evernote, etc.? <strong>Coffee!</strong>"
+    "message": "You know what makes it easier to keep Markdown Here working on Chrome, Firefox, Thunderbird, Safari, Opera, Gmail, Yahoo, Hotmail, Blogger, Evernote, etc.? <strong>Coffee!</strong>"
   },
   "options_page__footer_1": {
     "message": "<em>Markdown Here</em> is open source. To ask questions, report bugs, request features, or contribute, visit the <a target=\"_blank\" href=\"https://github.com/adam-p/markdown-here\">Github project page</a> or the <a target=\"_blank\" href=\"https://groups.google.com/forum/?fromgroups=#!forum/markdown-here\">\"markdown-here\" Google Group</a>.",
@@ -117,7 +117,7 @@
     "description": "part of the page footer text"
   },
   "options_page__forgot_to_render_1": {
-    "message": "이 기능은 현재 Gmail, Thunderbird, Postbox, 혹은 Icedove에서만 사용 가능합니다."
+    "message": "이 기능은 현재 Gmail, Thunderbird, 혹은 Icedove에서만 사용 가능합니다."
   },
   "options_page__forgot_to_render_2": {
     "message": "When you send an email, this checks the content to see if it looks like you wrote it in Markdown, but forgot to render it (i.e., click \"Markdown Toggle\") before sending. This may need to be disabled if it interferes with your ability to send email."
@@ -136,8 +136,8 @@
     "message": "<b>Enable GFM line breaks.</b>",
     "description": "Label for the checkbox that enables the support of 'Github-flavored Markdown' line breaks."
   },
-  "options_page__ggroup": {
-    "message": "Ask a question, start a discussion, or just say hi in the <a href=\"https://groups.google.com/forum/?fromgroups=#!forum/markdown-here\" target=\"_blank\">markdown-here Google Group</a>."
+  "options_page__ghdiscussions": {
+    "message": "Ask a question or start a conversation in <a href=\"https://github.com/adam-p/markdown-here/discussions\" target=\"_blank\">Markdown Here's GitHub Discussions</a>."
   },
   "options_page__header_anchors_enabled_1": {
     "message": "This is great if you want to put a table of contents or other internal links into your content. <a href=\"https://github.com/adam-p/markdown-here/wiki/Tips-and-Tricks#wiki-header-anchors\" target=\"_blank\">Learn about how to use it in the MDH wiki.</a>"

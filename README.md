@@ -4,9 +4,9 @@
 [**Get it for Chrome.**](https://chrome.google.com/webstore/detail/elifhakcjgalahccnjkneoccemfahfoa)<br>
 [**Get it for Firefox.**](https://addons.mozilla.org/en-US/firefox/addon/markdown-here/)<br>
 [**Get it for Safari.**](https://s3.amazonaws.com/markdown-here/markdown-here.safariextz)<br>
-[**Get it for Thunderbird and Postbox.**](https://addons.mozilla.org/en-US/thunderbird/addon/markdown-here/)<br>
+[**Get it for Thunderbird.**](https://addons.mozilla.org/en-US/thunderbird/addon/markdown-here/)<br>
 [**Get it for Opera.**](https://addons.opera.com/en/extensions/details/markdown-here/)<br>
-[**Discuss it and ask questions in the Google Group.**](https://groups.google.com/forum/?fromgroups#!forum/markdown-here/)<br>
+[**Discuss it and ask questions in GitHub Discussions.**](https://github.com/adam-p/markdown-here/discussions)<br>
 
 *Markdown Here* is a Google Chrome, Firefox, Safari, Opera, and Thunderbird extension that lets you write email<sup>&dagger;</sup> in Markdown<sup>&Dagger;</sup> and render them before sending. It also supports syntax highlighting (just specify the language in a fenced code block).
 
@@ -216,7 +216,7 @@ Use the Safari Extension Builder.
 
 See the [issues list](https://github.com/adam-p/markdown-here/issues) and the [Notes Wiki](https://github.com/adam-p/markdown-here/wiki/Development-Notes). All ideas, bugs, plans, complaints, and dreams will end up in one of those two places.
 
-Feel free to create a feature request issue if what you want isn't already there. If you'd prefer a less formal approach to floating an idea, post to the ["markdown-here" Google Group](https://groups.google.com/forum/?fromgroups=#!forum/markdown-here).
+Feel free to create a feature request issue if what you want isn't already there. If you'd prefer a less formal approach to floating an idea, post to our [GitHub Discussions](https://github.com/adam-p/markdown-here/discussions).
 
 It also takes a fair bit of work to stay up-to-date with the latest changes in all the applications and web sites where Markdown Here works.
 
@@ -224,13 +224,13 @@ It also takes a fair bit of work to stay up-to-date with the latest changes in a
 
 *Markdown Here* was coded on the shoulders of giants.
 
-* Markdown-to-HTML: [chjj / marked](https://github.com/chjj/marked)
-* Syntax highlighting: [isagalaev / highlight.js](https://github.com/isagalaev/highlight.js)
-* HTML-to-text: [mtrimpe / jsHtmlToText](https://github.com/mtrimpe/jsHtmlToText)
+* Markdown-to-HTML: [chjj/marked](https://github.com/chjj/marked)
+* Syntax highlighting: [isagalaev/highlight.js](https://github.com/isagalaev/highlight.js)
+* HTML-to-text: [mtrimpe/jsHtmlToText](https://github.com/mtrimpe/jsHtmlToText)
 
 ## Feedback
 
-All bugs, feature requests, pull requests, feedback, etc., are welcome. [Create an issue](https://github.com/adam-p/markdown-here/issues). Or [post to the "markdown-here" Google Group](https://groups.google.com/forum/?fromgroups=#!forum/markdown-here).
+All bugs, feature requests, pull requests, feedback, etc., are welcome. [Create an issue](https://github.com/adam-p/markdown-here/issues). Or [post to out GitHub Discussions](https://github.com/adam-p/markdown-here/discussions).
 
 ## License
 

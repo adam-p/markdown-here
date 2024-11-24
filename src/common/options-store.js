@@ -492,7 +492,7 @@ if (!this.OptionsStore
 }
 /*? } */
 /*? if(platform==='thunderbird'){ */
-// Thunderbird, Postbox, Icedove
+// Thunderbird, Icedove
 if (!this.OptionsStore) {
   this.OptionsStore = MozillaOptionsStore;
 }

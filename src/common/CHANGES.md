@@ -1,6 +1,13 @@
 Change Log
 ==========
 
+2024-xx-yy: v?
+-------------------
+
+* Replaced links to our Google Group with links to our [GitHub Discussions](https://github.com/adam-p/markdown-here/discussions).
+
+* Removed support for Postbox, which stopped allowing third-party extensions a while ago. Also removed support for "Inbox by Google", which stopped existing, like, a long time ago.
+
 2024-11-09: v2.14.2
 -------------------
 

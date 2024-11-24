@@ -106,7 +106,7 @@
     "message": "<strong>帮助支持Markdown Here的发展!</strong>"
   },
   "options_page__donate_plea_4": {
-    "message": "你知道怎么让Markdown Here能够在Chrome，Firefox，Thunderbird，Postbox，Safari，Opera，Gmail，Yahoo，Hotmail，Blogger，Evernote等平台中工作吗？\n<strong>Coffee!</strong>"
+    "message": "你知道怎么让Markdown Here能够在Chrome，Firefox，Thunderbird，Safari，Opera，Gmail，Yahoo，Hotmail，Blogger，Evernote等平台中工作吗？\n<strong>Coffee!</strong>"
   },
   "options_page__footer_1": {
     "message": "<em>Markdown Here</em> 是开源的. 要提问, 报告错误, 请求新特性, 或参与开发, 访问 <a target=\"_blank\" href=\"https://github.com/adam-p/markdown-here\">Github项目主页</a> 或 <a target=\"_blank\" href=\"https://groups.google.com/forum/?fromgroups=#!forum/markdown-here\">\"markdown-here\" Google Group</a>.",
@@ -136,8 +136,8 @@
     "message": "<b>启用GFM换行。</b>",
     "description": "Label for the checkbox that enables the support of 'Github-flavored Markdown' line breaks."
   },
-  "options_page__ggroup": {
-    "message": "资询， 讨论，或者只是和同道中人打个招呼，戳 <a href=\"https://groups.google.com/forum/?fromgroups=#!forum/markdown-here\" target=\"_blank\">markdown-here Google Group</a>."
+  "options_page__ghdiscussions": {
+    "message": "Ask a question or start a conversation in <a href=\"https://github.com/adam-p/markdown-here/discussions\" target=\"_blank\">Markdown Here's GitHub Discussions</a>."
   },
   "options_page__header_anchors_enabled_1": {
     "message": "如果你想把一个表的内容或其他内部链接加入到你的内容中，这会很有用. <a href=\"https://github.com/adam-p/markdown-here/wiki/Tips-and-Tricks#wiki-header-anchors\" target=\"_blank\">在MDH wiki中查看如何使用.</a>"

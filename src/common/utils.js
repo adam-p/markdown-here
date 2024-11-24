@@ -121,7 +121,6 @@ function walkDOM(node, func) {
 
 // Next three functions from: https://stackoverflow.com/a/1483487/729729
 // Returns true if `node` is in `range`.
-// NOTE: This function is broken in Postbox: https://github.com/adam-p/markdown-here/issues/179
 function rangeIntersectsNode(range, node) {
   var nodeRange;
 
@@ -542,7 +541,7 @@ function getTopURL(win, justHostname) {
   var url;
   // We still want a useful value if we're in Thunderbird, etc.
   if (!win.location.href || win.location.href === 'about:blank') {
-    url = win.navigator.userAgent.match(/Thunderbird|Postbox'/);
+    url = win.navigator.userAgent.match(/Thunderbird'/);
     if (url) {
       url = url[0];
     }

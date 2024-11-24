@@ -106,7 +106,7 @@
     "message": "<strong>開発の手助けをしてください!</strong>"
   },
   "options_page__donate_plea_4": {
-    "message": "Markdown HereがChrome、 Firefox、 Thunderbird、 Postbox、 Safari、 Opera、 Gmail、 Yahoo、 Hotmail、 Blogger、 Evernote、などなどでの動作を保つのに役立ってるものを知りたいかい？ <strong>コーヒーだ!</strong>"
+    "message": "Markdown HereがChrome、 Firefox、 Thunderbird、 Safari、 Opera、 Gmail、 Yahoo、 Hotmail、 Blogger、 Evernote、などなどでの動作を保つのに役立ってるものを知りたいかい？ <strong>コーヒーだ!</strong>"
   },
   "options_page__footer_1": {
     "message": "<em>Markdown Here</em> はオープンソースです。 質問をしたり、バグを報告したり、機能追加の要望をしたり、開発に協力するには、 <a target=\"_blank\" href=\"https://github.com/adam-p/markdown-here\">Github のプロジェクトページ</a> か <a target=\"_blank\" href=\"https://groups.google.com/forum/?fromgroups=#!forum/markdown-here\">Google Group</a> を訪れてください。",
@@ -117,7 +117,7 @@
     "description": "part of the page footer text"
   },
   "options_page__forgot_to_render_1": {
-    "message": "現在Web版GmailとThunderbird (とPostboxとIcedove) でのみ使えます。"
+    "message": "現在Web版GmailとThunderbird (とIcedove) でのみ使えます。"
   },
   "options_page__forgot_to_render_2": {
     "message": "メールを送るとき、レンダリングせずに生のMarkdownテキストのまま (つまり、\"Markdown 切り替え\"を押し忘れている) かどうか送信前にチェックします。うっとうしい場合は無効にすることを推奨します。"
@@ -136,8 +136,8 @@
     "message": "<b>Enable GFM line breaks.</b>",
     "description": "Label for the checkbox that enables the support of 'Github-flavored Markdown' line breaks."
   },
-  "options_page__ggroup": {
-    "message": "質問や議論、ちょっとしたあいさつは、ぜひ <a href=\"https://groups.google.com/forum/?fromgroups=#!forum/markdown-here\" target=\"_blank\">markdown-here Google Group</a> で行いましょう。"
+  "options_page__ghdiscussions": {
+    "message": "Ask a question or start a conversation in <a href=\"https://github.com/adam-p/markdown-here/discussions\" target=\"_blank\">Markdown Here's GitHub Discussions</a>."
   },
   "options_page__header_anchors_enabled_1": {
     "message": "文書に目次やその他の内部リンクを設置したい場合に便利です。<a href=\"https://github.com/adam-p/markdown-here/wiki/Tips-and-Tricks#wiki-header-anchors\" target=\"_blank\">Wikiにて使い方を確認してください。</a>"

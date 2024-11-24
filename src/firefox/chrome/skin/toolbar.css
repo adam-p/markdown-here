@@ -93,8 +93,7 @@ toolbar[iconsize="small"] #toolbarButton-markdown_here[disabled="true"] {
 
 
 /*
- * Thunderbird and Postbox compose window toolbar.
- * Note that Postbox doesn't seem to support pixel density media queries.
+ * Thunderbird compose window toolbar.
  */
 
 /* The "normal" size, which is small. */
@@ -114,7 +113,7 @@ toolbar[iconsize="small"] #toolbarButton-markdown_here[disabled="true"] {
   }
 }
 
-/* The "large" size. This is available in Thunderbird+Xubuntu and Postbox. */
+/* The "large" size. This is available in Thunderbird+Xubuntu. */
 
 toolbar[iconsize="large"] #composeToolbarButton-markdown_here {
   list-style-image: url("resource://markdown_here_common/images/icon24-button-monochrome.png");

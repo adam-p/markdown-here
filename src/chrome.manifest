@@ -29,11 +29,6 @@ overlay chrome://browser/content/browser.xul  chrome://markdown_here/content/bac
 overlay chrome://messenger/content/messengercompose/messengercompose.xul chrome://markdown_here/content/tb-overlay.xul application={3550f703-e582-4d05-9a08-453d09bdfdc6}
 overlay chrome://messenger/content/specialTabs.xul chrome://markdown_here/content/background-services-overlay.xul application={3550f703-e582-4d05-9a08-453d09bdfdc6}
 
-# Postbox
-overlay chrome://messenger/content/messengercompose/messengercompose.xul chrome://markdown_here/content/tb-overlay.xul application=postbox@postbox-inc.com
-overlay chrome://messenger/content/messengercompose/messengercompose.xul chrome://markdown_here/content/postbox-overlay.xul application=postbox@postbox-inc.com
-overlay chrome://messenger/content/specialTabs.xul chrome://markdown_here/content/background-services-overlay.xul application=postbox@postbox-inc.com
-
 # Zotero
 overlay chrome://zotero/content/standalone/standalone.xul  chrome://markdown_here/content/zotero-overlay.xul application=zotero@chnm.gmu.edu
 overlay chrome://zotero/content/standalone/standalone.xul  chrome://markdown_here/content/background-services-overlay.xul application=zotero@chnm.gmu.edu

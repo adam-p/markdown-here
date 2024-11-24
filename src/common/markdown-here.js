@@ -542,7 +542,7 @@ function unrenderMarkdown(wrapperElem) {
   var originalMdHtml = rawHolder.getAttribute('title');
   originalMdHtml = originalMdHtml.slice(WRAPPER_TITLE_PREFIX.length).replace(/\n/g, '');
 
-  // Thunderbird and Postbox break the long title up into multiple lines, which
+  // Thunderbird breaks the long title up into multiple lines, which
   // wrecks our ability to un-base64 it. So strip whitespace.
   originalMdHtml = originalMdHtml.replace(/\s/g, '');
 

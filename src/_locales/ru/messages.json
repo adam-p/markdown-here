@@ -106,7 +106,7 @@
     "message": "<strong>Помочь поддержать развитие Markdown Here!</strong>"
   },
   "options_page__donate_plea_4": {
-    "message": "Вы знаете, что действительно помогает поддерживать работу Markdown Here в Chrome, Firefox, Thunderbird, Postbox, Safari, Opera, Gmail, Yahoo, Hotmail, Blogger, Evernote и т.д.? <strong>Кофе!</strong>"
+    "message": "Вы знаете, что действительно помогает поддерживать работу Markdown Here в Chrome, Firefox, Thunderbird, Safari, Opera, Gmail, Yahoo, Hotmail, Blogger, Evernote и т.д.? <strong>Кофе!</strong>"
   },
   "options_page__footer_1": {
     "message": "<em>Markdown Here</em> - проект с открытым исходным кодом. Задать вопрос, сообщить об ошибках, запросить функциональность  или иным образом посодействовать можно на <a target=\"_blank\" href=\"https://github.com/adam-p/markdown-here\">странице проекта на Github</a> или в <a target=\"_blank\" href=\"https://groups.google.com/forum/?fromgroups=#!forum/markdown-here\">группе Google \"markdown here\"</a>.",
@@ -117,7 +117,7 @@
     "description": "part of the page footer text"
   },
   "options_page__forgot_to_render_1": {
-    "message": "В данный момент поддерживается только в Gmail веб-интерфейсе и Thunderbird (и Postbox и Icedove)."
+    "message": "В данный момент поддерживается только в Gmail веб-интерфейсе и Thunderbird (и Icedove)."
   },
   "options_page__forgot_to_render_2": {
     "message": "When you send an email, this checks the content to see if it looks like you wrote it in Markdown, but forgot to render it (i.e., click \"Markdown Toggle\") before sending. This may need to be disabled if it interferes with your ability to send email."
@@ -136,8 +136,8 @@
     "message": "<b>Перенос строк как в Github (GFM).</b>",
     "description": "Label for the checkbox that enables the support of 'Github-flavored Markdown' line breaks."
   },
-  "options_page__ggroup": {
-    "message": "Задать вопрос, начать обсуждение или просто сказать 'привет' можно тут <a href=\"https://groups.google.com/forum/?fromgroups=#!forum/markdown-here\" target=\"_blank\">markdown-here Google Group</a>."
+  "options_page__ghdiscussions": {
+    "message": "Ask a question or start a conversation in <a href=\"https://github.com/adam-p/markdown-here/discussions\" target=\"_blank\">Markdown Here's GitHub Discussions</a>."
   },
   "options_page__header_anchors_enabled_1": {
     "message": "Это очень удобно, если вы хотите поместить оглавление или другие внутренние ссылки в текст документа. <a href=\"https://github.com/adam-p/markdown-here/wiki/Tips-and-Tricks#wiki-header-anchors\" target=\"_blank\"> узнать о том, как этим пользоваться в вики MDH.</a>"

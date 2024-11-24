@@ -1,7 +1,7 @@
 # Contributing.md
 
 * Project page: https://github.com/adam-p/markdown-here
-* Google Group: https://groups.google.com/forum/#!forum/markdown-here
+* GitHub Discussions: https://github.com/adam-p/markdown-here/discussions
 * Website: https://markdown-here.com
 * Email me: pritchard.adam@gmail.com
 
