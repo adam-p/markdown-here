@@ -1,6 +1,6 @@
 /*
  * Copyright Adam Pritchard 2013
- * MIT License : http://adampritchard.mit-license.org/
+ * MIT License : https://adampritchard.mit-license.org/
  */
 
 "use strict";
@@ -61,7 +61,7 @@ function requestHandler(request, sender, sendResponse) {
     return false;
   }
 }
-chrome.extension.onMessage.addListener(requestHandler);
+chrome.runtime.onMessage.addListener(requestHandler);
 
 
 // The rendering service provided to the content script.

@@ -9,7 +9,6 @@
 
   <popup id="msgComposeContext">
     <menuitem id="context-markdown_here" label="&context_menu_item;"
-              accesskey="&context_menu_item_shortcut;"
               class="menuitem-iconic"
               oncommand="markdown_here.onMenuItemCommand(event)" />
   </popup>
@@ -30,5 +29,14 @@
                    tooltiptext="&toggle_button_tooltip;"
                    oncommand="markdown_here.onToolbarButtonCommand(event)" />
   </toolbar>
+
+  <menu id="tasksMenu">
+    <menupopup id="taskPopup">
+      <!-- Initially hidden. Will be shown on platforms that need it. -->
+      <menuitem id="tools-menu-markdown_here-open-options" label="&moz_options_dlg_title;"
+                oncommand="markdown_here.openOptionsTab(event)"
+                hidden="true" />
+    </menupopup>
+  </menu>
 
 </overlay>

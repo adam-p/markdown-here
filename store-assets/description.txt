@@ -19,5 +19,5 @@ Available as a Chrome, Firefox, Safari, Opera, and Thunderbird extension.
 
 This is an open source project. Visit Markdown Here's Github page for full instructions, more information, bug reports, or to contribute.
 
-http://markdown-here.com
+https://markdown-here.com
 https://github.com/adam-p/markdown-here

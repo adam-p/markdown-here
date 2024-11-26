@@ -1,6 +1,6 @@
 /*
  * Copyright Adam Pritchard 2013
- * MIT License : http://adampritchard.mit-license.org/
+ * MIT License : https://adampritchard.mit-license.org/
  */
 
 "use strict";
@@ -227,22 +227,28 @@ describe('OptionsStore', function() {
         // Set a default value that requires a XHR
         OptionsStore.defaults[testKeys[0]] = {'__defaultFromFile__': window.location.href};
 
-        // Note: Using $.ajax won't work because for local requests Firefox sets
-        // status to 0 even on success. jQuery interprets this as an error.
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', window.location.href);
-        // If we don't set the mimetype, Firefox will complain.
-        xhr.overrideMimeType('text/plain');
-        xhr.onreadystatechange = function() {
-          if (this.readyState === this.DONE) {
+        fetch(window.location.href)
+          .then(response => response.text())
+          .then(responseText => {
             OptionsStore.get(function(options) {
               expect(options).to.have.property(testKeys[0]);
-              expect(options[testKeys[0]]).to.eql(xhr.responseText);
+              expect(options[testKeys[0]]).to.eql(responseText);
               done();
             });
-          }
-        };
-        xhr.send();
+          });
+      });
+    });
+
+    it('should upgrade defunct values to new default', function(done) {
+      // Set our old math-value default, which we're replacing
+      let obj = {'math-value': '<img src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}" alt="{mathcode}">'};
+      OptionsStore.set(obj, function() {
+        // Make sure we get the new default value instead of the defunct old one
+        OptionsStore.get(function(options) {
+          expect(options).to.have.property('math-value');
+          expect(options['math-value']).to.contain('codecogs');
+          done();
+        });
       });
     });
 

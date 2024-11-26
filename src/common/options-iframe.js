@@ -1,11 +1,11 @@
 /*
  * Copyright Adam Pritchard 2015
- * MIT License : http://adampritchard.mit-license.org/
+ * MIT License : https://adampritchard.mit-license.org/
  */
 
 function onLoad() {
-  /*? if(platform!=='mozilla'){ */
-  // Chrome and Safari require us to manually load our content script in order
+  /*? if(platform==='safari' || platform==='chrome' || platform==='firefox'){ */
+  // Chrome/Safari/WebExtensions require us to manually load our content script in order
   // to use the button and context menu in the iframe.
   if (typeof(safari) !== 'undefined' || typeof(chrome) !== 'undefined') {
     window.LOAD_MARKDOWN_HERE_CONTENT_SCRIPT = true;

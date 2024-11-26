@@ -1,6 +1,6 @@
 /*
  * Copyright Adam Pritchard 2013
- * MIT License : http://adampritchard.mit-license.org/
+ * MIT License : https://adampritchard.mit-license.org/
  */
 
 /*
@@ -60,7 +60,7 @@ function markdownRender(mdText, userprefs, marked, hljs) {
     // Added to fix MDH issue #57: MD links should automatically add scheme.
     // Note that the presence of a ':' is used to indicate a scheme, so port
     // numbers will defeat this.
-    href = href.replace(/^(?!#)([^:]+)$/, 'http://$1');
+    href = href.replace(/^(?!#)([^:]+)$/, 'https://$1');
 
     if (userprefs['header-anchors-enabled']) {
       // Add an anchor right above the heading. See MDH issue #93.

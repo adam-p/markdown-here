@@ -1,351 +1,355 @@
 {
-  "app_name":{
-    "message":"Markdown Here",
-    "description":"the name of the extension",
-    "inMozDTD":true
-  },
-  "app_slogan":{
-    "message":"Markdown ile email yaz, sonra da güzelleştir.",
-    "description":"shown as subtitle for Markdown Here in the browser extensions list"
-  },
-  "toggle_button_text":{
-    "message":"MD Toggle",
-    "description":"Text shown underneath the render toggle button. Make it as short as possible.",
-    "inMozDTD":true
-  },
-  "toggle_button_tooltip":{
-    "message":"Markdown haline dönüştürmek için bas",
-    "description":"text shown when user hovers mouse over Markdown Toggle button",
-    "inMozDTD":true
-  },
-  "toggle_button_tooltip_disabled":{
-    "message":"Seçilen alan Markdown dönüşümü için geçerli değildir",
-    "description":"text shown when user hover mouse over disabled Markdown Toggle button",
-    "inMozDTD":true
-  },
-  "context_menu_item":{
-    "message":"Markdown Toggle",
-    "description":"Text shown on the context menu.",
-    "inMozDTD":true
-  },
-  "context_menu_item_with_shortcut":{
-    "message":"Mar&kdown Toggle",
-    "description":"Text shown on the context menu. The '&' comes before the shortcut character. If a shortcut key doesn't make sense for your language\/locale\/keyboard, you can just leave out the '&'."
-  },
-  "context_menu_item_shortcut":{
-    "message":"k",
-    "description":"The shortcut key for the context menu. Must be one of the letters in the context menu item text. If you excluded '&' in 'context_menu_item_with_shortcut', then you can leave this blank.",
-    "inMozDTD":true
-  },
-  "invalid_field":{
-    "message":"Seçilen alan Markdown dönüşümü için geçerli değildir. Lütfen bir zengin metin editörü kullanın.",
-    "description":"Shown in an alert dialog if the user tries to render a field that cannot be rendered"
-  },
-  "plain_text_compose":{
-    "message":"Düz metin editörü kullanıyorsunuz. Markdown Here kullanmak için zengin metin editörüne geçin.",
-    "description":"Shown in an alert dialog if the user has their email compose app set to plain text"
-  },
-  "cursor_into_compose":{
-    "message":"Lütfen kürsörünüzü metin alanına getirin."
+  "app_name": {
+    "message": "Markdown Here",
+    "description": "the name of the extension",
+    "inMozDTD": true
   },
-  "forgot_to_render_prompt_title":{
-    "message":"Markdown'u derlemeyi unuttun mu?",
-    "description":"Title of the prompt that's shown when it's detected that a user may have forgotten to render the Markdown in their email"
+  "app_slogan": {
+    "message": "Markdown ile email yaz, sonra da güzelleştir.",
+    "description": "shown as subtitle for Markdown Here in the browser extensions list"
   },
-  "forgot_to_render_prompt_info":{
-    "message":"Bu emaili Markdown ile yazmışsın ama derlemeyi unutmuşsun.",
-    "description":"Informational part of the prompt that's shown when it's detected that a user may have forgotten to render the Markdown in their email"
+  "context_menu_item": {
+    "message": "Markdown Toggle",
+    "description": "Text shown on the context menu.",
+    "inMozDTD": true
   },
-  "forgot_to_render_prompt_question":{
-    "message":"Yine de gönder?",
-    "description":"Question part of the prompt that's shown when it's detected that a user may have forgotten to render the Markdown in their email"
+  "currently_in_use": {
+    "message": "Şuanda kullanımda",
+    "description": "Indicates the syntax highlighting theme that the user is currently using"
   },
-  "forgot_to_render_back_button":{
-    "message":"Geri",
-    "description":"Text on the Back (cancel) button of the prompt that's shown when it's detected that a user may have forgotten to render the Markdown in their email",
-    "inMozDTD":true
+  "cursor_into_compose": {
+    "message": "Lütfen kürsörünüzü metin alanına getirin."
   },
-  "forgot_to_render_send_button":{
-    "message":"Gönder",
-    "description":"Text on the Send (continue) button of the prompt that's shown when it's detected that a user may have forgotten to render the Markdown in their email",
-    "inMozDTD":true
+  "forgot_to_render_back_button": {
+    "message": "Geri",
+    "description": "Text on the Back (cancel) button of the prompt that's shown when it's detected that a user may have forgotten to render the Markdown in their email",
+    "inMozDTD": true
   },
-  "forgot_to_render_prompt_close_hover":{
-    "message":"Bildirimi sakla",
-    "description":"Text that shows when the user hovers over the 'X' that will close the prompt"
+  "forgot_to_render_prompt_close_hover": {
+    "message": "Bildirimi sakla",
+    "description": "Text that shows when the user hovers over the 'X' that will close the prompt"
   },
-  "upgrade_notification_text":{
-    "message":"Markdown Here güncellendi",
-    "description":"Text on the notification shown when Markdown Here has been updated"
+  "forgot_to_render_prompt_info": {
+    "message": "Bu emaili Markdown ile yazmışsın ama derlemeyi unutmuşsun.",
+    "description": "Informational part of the prompt that's shown when it's detected that a user may have forgotten to render the Markdown in their email"
   },
-  "upgrade_notification_changes_tooltip":{
-    "message":"Bu sürümdeki değişiklikleri görmek için tıklayın",
-    "description":"Tooltip text on the link that opens the changes list"
+  "forgot_to_render_prompt_question": {
+    "message": "Yine de gönder?",
+    "description": "Question part of the prompt that's shown when it's detected that a user may have forgotten to render the Markdown in their email"
   },
-  "upgrade_notification_dismiss_tooltip":{
-    "message":"Bildirimi sakla",
-    "description":"Tooltip text on the link that dismisses the notification"
+  "forgot_to_render_prompt_title": {
+    "message": "Markdown'u derlemeyi unuttun mu?",
+    "description": "Title of the prompt that's shown when it's detected that a user may have forgotten to render the Markdown in their email"
   },
-  "nothing_to_render":{
-    "message":"Derleyecek veya geri alınacak birşey bulunamadı",
-    "description":"Error message shown to user if there's nothing found to revert or render."
+  "forgot_to_render_send_button": {
+    "message": "Gönder",
+    "description": "Text on the Send (continue) button of the prompt that's shown when it's detected that a user may have forgotten to render the Markdown in their email",
+    "inMozDTD": true
   },
-  "unrendering_modified_markdown_warning":{
-    "message":"Derlenilen Markdown değişmiş gibi gözüküyor.\nDerlemeyi geri alırsan, yaptığın değişiklikler kaybolacaktır.\n\nDerlemeyi geri almak istediğinden emin misin?",
-    "description":"Warning shown to the user if she tries to revert some rendered Markdown that they've modified since rendering. The user will lose their modifications if they proceed."
+  "invalid_field": {
+    "message": "Seçilen alan Markdown dönüşümü için geçerli değildir. Lütfen bir zengin metin editörü kullanın.",
+    "description": "Shown in an alert dialog if the user tries to render a field that cannot be rendered"
   },
-  "options_page__page_title":{
-    "message":"Markdown Here Seçenekleri"
+  "moz_options_dlg_instruction": {
+    "message": "Click the 'OK' button to open the Markdown Here Options tab",
+    "description": "In Thunderbird, in order to open the options tab we first have to open a temporary dialog box. This is the text in that box telling the user what to do. Please use the same translation for 'OK' that the application uses.",
+    "inMozDTD": true
   },
-  "options_page__basic_usage":{
-    "message":"Temel Kullanım"
+  "moz_options_dlg_title": {
+    "message": "Markdown Here Options",
+    "description": "In Thunderbird, in order to open the options tab we first have to open a temporary dialog box. This is the title for that box.",
+    "inMozDTD": true
   },
-  "options_page__reload_restart":{
-    "message":"E-posta sayfanı geri yükle ya da tarayacını tekrar başlat.",
-    "description":"A step in the basic usage instructions"
+  "new_changelist_items": {
+    "message": "YENİ",
+    "description": "Used to highlight the part of the changelist that is new. There will typically be multiple items in the list, so this should be considered plural."
   },
-  "options_page__start_new_message":{
-    "message":"Yeni bir email yaz.",
-    "description":"A step in the basic usage instructions"
+  "nothing_to_render": {
+    "message": "Derleyecek veya geri alınacak birşey bulunamadı",
+    "description": "Error message shown to user if there's nothing found to revert or render."
   },
-  "options_page__type_some_markdown":{
-    "message":"Emaile biraz Markdown ekle. <br\/>Bunu dene:<code>_Merhaba_`Markdown` **Here**!<\/code>",
-    "description":"A step in the basic usage instructions"
+  "options_page__advanced_title": {
+    "message": "İleri düzey ve Karışık",
+    "description": "A section title"
   },
-  "options_page__click_toggle":{
-    "message":"E-postanızda sağ tıklayın ve sonra \"Etiketleme Değiştir\" e tıklayın",
-    "description":"A step in the basic usage instructions"
+  "options_page__advanced_usage": {
+    "message": "Daha fazla bilgi ve ileri seviye kullanım için, <a href=\"https://github.com/adam-p/markdown-here\" target=\"_blank\">Etiketleme proje sayfasına </a> göz at. Burda seçenekleri keşfedebilirsin."
   },
-  "options_page__pretty_cool":{
-    "message":"Mesaj şimdi daha güzel gözüküyor olmalı.Onu arkadaşlarına gönder!",
-    "description":"A step in the basic usage instructions"
+  "options_page__basic_usage": {
+    "message": "Temel Kullanım"
   },
-  "options_page__resources_title":{
-    "message":"Kaynaklar ve Linkler",
-    "description":"A section title"
+  "options_page__changes_saved": {
+    "message": "Değişiklikler kaydedildi",
+    "description": "message that shows when user changes have been saved"
   },
-  "options_page__resources_cheatsheet_link":{
-    "message":"Eğer etiketleme de yeniysen  <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/wiki\/Markdown-Here-Cheatsheet\" target=\"_blank\"> Etiketleme Kodları <\/a> seni bir yıldız yapacak."
+  "options_page__click_toggle": {
+    "message": "E-postanızda sağ tıklayın ve sonra \"Etiketleme Değiştir\" e tıklayın",
+    "description": "A step in the basic usage instructions"
   },
-  "options_page__advanced_usage":{
-    "message":"Daha fazla bilgi ve ileri seviye kullanım için, <a href=\"https:\/\/github.com\/adam-p\/markdown-here\" target=\"_blank\">Etiketleme proje sayfasına <\/a> göz at. Burda seçenekleri keşfedebilirsin."
+  "options_page__contributing_1": {
+    "message": "<strong>Eğer e-posta içerisinde kod bloğu kullandıysanız, o zaman Markdown Here projesini daha iyiye taşımaya yardımcı olabilirsiniz.</strong> <a href=\"https://github.com/adam-p/markdown-here/blob/master/CONTRIBUTING.md\" target=\"_blank\">CONTRIBUTING.md</a>"
   },
-  "options_page__ggroup":{
-    "message":"Bir soru sor , bir tartışma başlat, ya da sadece merhaba de <a href=\"https:\/\/groups.google.com\/forum\/?fromgroups=#!forum\/markdown-here\" target=\"_blank\">markdown-here Google Group<\/a>."
+  "options_page__contributing_2": {
+    "message": "Markdown Here 'yi kendi dilinde kullanılabilir olması için yardımcı ol. <a href=\"https://github.com/adam-p/markdown-here/blob/master/CONTRIBUTING.md#translation\" target=\"_blank\">Çevirilerinizi Bekleriz..</a>"
   },
-  "options_page__mdh_wiki":{
-    "message":"Bilgi için <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/wiki\" target=\"_blank\">Markdown Here wiki<\/a> , MDH 'ın başka nerde çalıştığını öğrenmek için <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/wiki\/Compatibility\" target=\"_blank\"> ve daha fazla <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/wiki\/Tips-and-Tricks\" target=\"_blank\">ipuçları için<\/a> ziyaret edin."
+  "options_page__contributing_title": {
+    "message": "Katılım",
+    "description": "A section title"
   },
-  "options_page__next_steps":{
-    "message":"Eğer Markdown Here uygulamasının bir sonraki aşamasıyla ilgileniyorsan <a href=\"https:\/\/github.com\/adam-p\/markdown-here#next-steps\" target=\"_blank\">Gelecek adım bölümünü<\/a> oku."
+  "options_page__donate_plea_1": {
+    "message": "Eğer Markdown Here uygulamasının çok güzel olduğuna inanıyorsan lütfen karıma çiçek alabilmem için yardımcı ol ki bunun üzerine ne kadar zaman harcadığım için çok üzülmesin.\n<strong>Teşekkürler!</strong>"
   },
-  "options_page__donate_plea_1":{
-    "message":"Eğer Markdown Here uygulamasının çok güzel olduğuna inanıyorsan lütfen karıma çiçek alabilmem için yardımcı ol ki bunun üzerine ne kadar zaman harcadığım için çok üzülmesin.\n<strong>Teşekkürler!<\/strong>"
+  "options_page__donate_plea_2": {
+    "message": "<strong>Markdown Here uygulamasını geliştirmek için yardım et!</strong>"
   },
-  "options_page__donate_plea_2":{
-    "message":"<strong>Markdown Here uygulamasını geliştirmek için yardım et!<\/strong>"
+  "options_page__donate_plea_3": {
+    "message": "<strong>Markdown Here uygulamasını gelişimi için destek ol!</strong>"
   },
-  "options_page__donate_plea_3":{
-    "message":"<strong>Markdown Here uygulamasını gelişimi için destek ol!<\/strong>"
+  "options_page__donate_plea_4": {
+    "message": "Markdown Here uygulamasının Chrome, Firefox, Thunderbird, Safari, Opera, Gmail, Yahoo, Hotmail, Blogger, Evernote, vs. de çalışır kalmasının kolay yolu nedir biliyor musun?\n<strong>Kahve!</strong>"
   },
-  "options_page__donate_plea_4":{
-    "message":"Markdown Here uygulamasının Chrome, Firefox, Thunderbird, Postbox, Safari, Opera, Gmail, Yahoo, Hotmail, Blogger, Evernote, vs. de çalışır kalmasının kolay yolu nedir biliyor musun?\n<strong>Kahve!<\/strong>"
+  "options_page__footer_1": {
+    "message": "<em>Markdown Here</em> açık kaynaktır.Soru sormak, hata raporu yollamak, yeni özellik istekleri ya da katkıda bulunmak için,   <a target=\"_blank\" href=\"https://github.com/adam-p/markdown-here\">Github proje sayfamızı</a> yada <a target=\"_blank\" href=\"https://groups.google.com/forum/?fromgroups=#!forum/markdown-here\">\"markdown-here\" Google Grubumuzu</a> ziyaret edin. ",
+    "description": "part of the page footer text"
   },
-  "options_page__other_donation_options":{
-    "message":"Diğer bağış seçenekleri",
-    "description":"Link to a page that provides other ways to donate"
+  "options_page__footer_2": {
+    "message": "<a target=\"_blank\" href=\"http://adam-p.github.com/\">Adam Pritchard</a> tarafından oluşturuldu.",
+    "description": "part of the page footer text"
   },
-  "options_page__primary_css_title":{
-    "message":"Birincil Tasarım CSS",
-    "description":"section title"
+  "options_page__forgot_to_render_1": {
+    "message": "Şimdilik sadece Gmail web arayüzü ve Thunderbird destekleniyor.(ve Icedove)."
   },
-  "options_page__reset_primary_css":{
-    "message":"Varsayılan Ayarlara Geri Dön",
-    "description":"text on button to reset Primary Styling CSS"
+  "options_page__forgot_to_render_2": {
+    "message": "When you send an email, this checks the content to see if it looks like you wrote it in Markdown, but forgot to render it (i.e., click \"Markdown Toggle\") before sending. This may need to be disabled if it interferes with your ability to send email."
   },
-  "options_page__syntax_highlighting_css_title":{
-    "message":"Sintaks Belirginleştirme CSS",
-    "description":"section title"
+  "options_page__forgot_to_render_3": {
+    "message": "If you find yourself disabling this, <em>please</em> let me know why and how it could be better. Create <a href=\"https://groups.google.com/forum/#!forum/markdown-here\" target=\"_blank\">a post on the \"markdown-here\" Google Group</a> or <a href=\"https://github.com/adam-p/markdown-here/issues\" target=\"_blank\">an issue in the Github project</a>. Thanks."
   },
-  "options_page__syntax_highlighting_theme_label":{
-    "message":"Tema:",
-    "description":"label for the syntax highlighting theme combox box"
+  "options_page__forgot_to_render_4": {
+    "message": "Se esta funcionalidade parar de funcionar por você, favor nos deixar sabendo por meio de postar no <a href=\"https://groups.google.com/group/markdown-here\" target=\"_blank\">grupo \"markdown-here\" do Google</a> ou por reportar <a href=\"https://github.com/adam-p/markdown-here/issues\" target=\"_blank\">um bug no projeto de Github</a>. (Integrar com UI web de email quebra fácil e de vez em quando quebra mesmo.)"
   },
-  "options_page__preview_title":{
-    "message":"Önizleme",
-    "description":"section title for the Markdown preview section"
+  "options_page__forgot_to_render_label": {
+    "message": "<b> \"derlemeyi-unuttum\" kontrolünü etkinleştir.</b>",
+    "description": "Label for the checkbox that enables the forgot-to-render feature"
   },
-  "options_page__markdown_toggle_button_text":{
-    "message":"Markdown Aç\/Kapa",
-    "description":"button text for Markdown Toggle button"
+  "options_page__gfm_line_breaks_enabled_label": {
+    "message": "<b>Enable GFM line breaks.</b>",
+    "description": "Label for the checkbox that enables the support of 'Github-flavored Markdown' line breaks."
   },
-  "options_page__notes_title":{
-    "message":"Notlar",
-    "description":"section title"
+  "options_page__ghdiscussions": {
+    "message": "Ask a question or start a conversation in <a href=\"https://github.com/adam-p/markdown-here/discussions\" target=\"_blank\">Markdown Here's GitHub Discussions</a>."
   },
-  "options_page__note_options_sync":{
-    "message":"Değişiklikler otomatik olarak kaydedildi ve senkronize edildi (eğer senkronizeyi aktif etmişseniz tarayıcınızda)."
+  "options_page__header_anchors_enabled_1": {
+    "message": "Eğer içeriğinize bir içindekiler tablosu yahut başka dahili linkler eklemek isterseniz ki bu harika bi şey. <a href=\"https://github.com/adam-p/markdown-here/wiki/Tips-and-Tricks#wiki-header-anchors\" target=\"_blank\">Nasıl kullanacağınızı MDH wiki de öğrenin.</a>"
   },
-  "options_page__note_syntax_styles_after_primary":{
-    "message":"Sintaks beliginleştirme stilleri temel tasarımdan sonra uygulanır, buyüzden önceliği ona ver."
+  "options_page__header_anchors_enabled_2": {
+    "message": "Varsayılanlarda kapalı olarak geliyor çünkü <a href=\"https://github.com/adam-p/markdown-here/issues/155\" target=\"_blank\">Thunderbird'de görüntü kirliliği oluşturuyor</a>.(Ve muhtemelen bir çok insan bu özelliği kullanmayacak.)"
   },
-  "options_page__note_default_client_styles":{
-    "message":"Bazı e-posta düzenleyicileri ve tarayıcılar kendi stillerini dayatıyorlar.Belki onlar burada gözükmeyebilir."
+  "options_page__header_anchors_enabled_label": {
+    "message": "<b>Otomatik başlık sabitleyicileri etkinleştir.</b>",
+    "description": "Label for the checkbox that enables the automatic header anchors feature. This means that an 'anchor' is created at every heading (H1, H2, etc.) in the user's Markdown. The user can then create links that will jump to these anchors, like in the table of contents of a document."
   },
-  "options_page__tex_math_title":{
-    "message":"TeX Matematiksel Formüller Desteği"
+  "options_page__hotkey_alt_key": {
+    "message": "ALT",
+    "description": "label for the Alt key"
   },
-  "options_page__tex_math_reset_button":{
-    "message":"Varsayılana Geri Dön",
-    "description":"text on button to reset TeX math option"
+  "options_page__hotkey_ctrl_key": {
+    "message": "CTRL",
+    "description": "label for the Ctrl key"
   },
-  "options_page__tex_math_privacy_heading":{
-    "message":"<strong>Gizli Konular:<\/strong>",
-    "description":"heading for warnings about TeX math privacy concerns"
+  "options_page__hotkey_note_1": {
+    "message": "Chrome: Yeni kısayol ayarının çalışması için e-posta sayfasını yenilemelisin."
   },
-  "options_page__tex_math_privacy_issue_1":{
-    "message":"Bir formülün imajını üretmek için, Google'a istek gönderilir. Bu da formülanının Google'la paylaştığın anlamına gelir. Ayrıca, mesajın alıcıları da imajı görmek için Google'a istek gönderirler.",
-    "description":"one of the TeX math privacy concerns"
+  "options_page__hotkey_note_2": {
+    "message": "Firefox ve Thunderbird: Yeni kısayol ayarının çalışması için programı yeniden başlatmalısın."
   },
-  "options_page__tex_math_privacy_issue_2":{
-    "message":"Formül derleme etiketini özelleştirirseniz, güvenli (https:\/\/)  bağlantıyı kullanmanız gerekir. Her derleme hizmeti güvenli bağlantı sunmayabilir.",
-    "description":"one of the TeX math privacy concerns"
+  "options_page__hotkey_note_3": {
+    "message": "Kısayol için alfanümerik bi anahtar kullanmalısın. (dile ve klavyeye göre değişir)."
   },
-  "options_page__tex_math_customization_heading":{
-    "message":"<strong>Kişiselleştirme ve Kullanım:<\/strong>",
-    "description":"heading for customization and use info"
+  "options_page__hotkey_note_4": {
+    "message": "Windows tuşu ve OS X &#8984; tuşu kısayol olarak kullanılamaz."
   },
-  "options_page__tex_math_customization_1":{
-    "message":"Eğer bu özellik etkinleştirilirse, dolar işaretleri — <code>$$<\/code> — arasındaki metin matematik formülü olarak yorumlanacak.Örneğin,  <code>$$\\Delta$$<\/code> delta sembolü olarak derlenecek.",
-    "description":"Note: Double dollar signs ($$) are necessary to get a single dollar sign."
+  "options_page__hotkey_note_5": {
+    "message": "Bu kısayolu geçersiz kılmak için , \"anahtar\" metin kutusunu boş bırak."
   },
-  "options_page__tex_math_customization_2":{
-    "message":"Derleyici özelleştirme seçenekleri için  <a href=\"https:\/\/developers.google.com\/chart\/infographics\/docs\/formulas\" target=\"_blank\">Google Charts dökümasyonuna<\/a> bakabilirsiniz."
+  "options_page__hotkey_plus": {
+    "message": "+",
+    "description": "plus sign that connects the hotkey buttons"
   },
-  "options_page__tex_math_customization_3":{
-    "message":"<a href=\"https:\/\/www.codecogs.com\/latex\/about.php\" target=\"_blank\">CodeCogs Equation Editor<\/a> TeX formülleri oluşturmak için iyi bir kaynak."
+  "options_page__hotkey_shift_key": {
+    "message": "SHIFT",
+    "description": "label for the Shift key"
   },
-  "options_page__tex_math_customization_4":{
-    "message":"Formüller resim olarak derlenecek, email alıcısı derlenmiş formülleri görmek için resimleri kabul etmek zorunda olacak."
+  "options_page__hotkey_title": {
+    "message": "Kısayol (namı değer kısayol)",
+    "description": "A section title"
   },
-  "options_page__tex_math_customization_5":{
-    "message":"Eğer derleme etiketini özelleştirirseniz, <code>{mathcode}<\/code> ve <code>{urlmathcode}<\/code> yahut her ikisinide yer tutucu olarak kullanabilirsiniz.",
-    "description":"Please do not translate {mathcode} and {urlmathcode}"
+  "options_page__hotkey_warning": {
+    "message": "Şifre alfanümerik bir değer mi ?",
+    "description": "warning shown if the user chooses an illegal hotkey value"
   },
-  "options_page__tex_math_customization_5_1":{
-    "message":"<code>{mathcode}<\/code>: <code>$$<\/code> sembolleri arasındaki metin — örneğin <code>\\Delta<\/code> gibi bir TeX formülü.",
-    "description":"Please do not translate {mathcode} and {urlmathcode}. Note: Double dollar signs ($$) are necessary to get a single dollar sign."
+  "options_page__markdown_toggle_button_text": {
+    "message": "Markdown Aç/Kapa",
+    "description": "button text for Markdown Toggle button"
   },
-  "options_page__tex_math_customization_5_2":{
-    "message":"<code>{urlmathcode}<\/code>:  TeX formülünün URL olarak kodlanmış hali; <code>%5CDelta<\/code> gibi.",
-    "description":"Please do not translate {mathcode} and {urlmathcode}"
+  "options_page__mdh_wiki": {
+    "message": "Bilgi için <a href=\"https://github.com/adam-p/markdown-here/wiki\" target=\"_blank\">Markdown Here wiki</a> , MDH 'ın başka nerde çalıştığını öğrenmek için <a href=\"https://github.com/adam-p/markdown-here/wiki/Compatibility\" target=\"_blank\"> ve daha fazla <a href=\"https://github.com/adam-p/markdown-here/wiki/Tips-and-Tricks\" target=\"_blank\">ipuçları için</a> ziyaret edin."
   },
-  "options_page__tex_math_customization_6":{
-    "message":"If you customize the <code>&lt;img&gt;<\/code> tag, you should include an <code>alt<\/code> attribute that has as human-readable a value as possible, like <code>{mathcode}<\/code>. This value of this attribute will be used for the plaintext version of the email (when sent from Gmail and Thunderbird), and used by screen readers for sight-impaired recipients.",
-    "description":"Please do not translate {mathcode} and {urlmathcode}"
+  "options_page__next_steps": {
+    "message": "Eğer Markdown Here uygulamasının bir sonraki aşamasıyla ilgileniyorsan <a href=\"https://github.com/adam-p/markdown-here#next-steps\" target=\"_blank\">Gelecek adım bölümünü</a> oku."
   },
-  "options_page__hotkey_title":{
-    "message":"Kısayol (namı değer kısayol)",
-    "description":"A section title"
+  "options_page__note_default_client_styles": {
+    "message": "Bazı e-posta düzenleyicileri ve tarayıcılar kendi stillerini dayatıyorlar.Belki onlar burada gözükmeyebilir."
   },
-  "options_page__hotkey_shift_key":{
-    "message":"SHIFT",
-    "description":"label for the Shift key"
+  "options_page__note_options_sync": {
+    "message": "Değişiklikler otomatik olarak kaydedildi ve senkronize edildi (eğer senkronizeyi aktif etmişseniz tarayıcınızda)."
   },
-  "options_page__hotkey_ctrl_key":{
-    "message":"CTRL",
-    "description":"label for the Ctrl key"
+  "options_page__note_syntax_styles_after_primary": {
+    "message": "Sintaks beliginleştirme stilleri temel tasarımdan sonra uygulanır, buyüzden önceliği ona ver."
   },
-  "options_page__hotkey_alt_key":{
-    "message":"ALT",
-    "description":"label for the Alt key"
+  "options_page__notes_title": {
+    "message": "Notlar",
+    "description": "section title"
   },
-  "options_page__hotkey_plus":{
-    "message":"+",
-    "description":"plus sign that connects the hotkey buttons"
+  "options_page__other_donation_options": {
+    "message": "Diğer bağış seçenekleri",
+    "description": "Link to a page that provides other ways to donate"
   },
-  "options_page__hotkey_warning":{
-    "message":"Şifre alfanümerik bir değer mi ?",
-    "description":"warning shown if the user chooses an illegal hotkey value"
+  "options_page__page_title": {
+    "message": "Markdown Here Seçenekleri"
   },
-  "options_page__hotkey_note_1":{
-    "message":"Chrome: Yeni kısayol ayarının çalışması için e-posta sayfasını yenilemelisin."
+  "options_page__pretty_cool": {
+    "message": "Mesaj şimdi daha güzel gözüküyor olmalı.Onu arkadaşlarına gönder!",
+    "description": "A step in the basic usage instructions"
   },
-  "options_page__hotkey_note_2":{
-    "message":"Firefox ve Thunderbird: Yeni kısayol ayarının çalışması için programı yeniden başlatmalısın."
+  "options_page__preview_markdown": {
+    "message": "```javascript<br>\nfunction syntaxHighlighting() {<br>\n&nbsp; var n = 33;<br>\n&nbsp; var s = \"hello, こんにちは\";<br>\n&nbsp; console.log(s);<br>\n}<br>\n```<br>\n<br>\n* plain<br>\n* *emphasis*<br>\n&nbsp; * **strong emphasis**<br>\n&nbsp; &nbsp; * ~~strikethrough~~<br>\n* `inline code`<br>\n<br>\n1. Numbered list<br>\n2. [Link](https://www.google.com)<br>\n<br>\n<br>\nAn image: ![Markdown Here logo](https://raw.githubusercontent.com/adam-p/markdown-here/master/src/common/images/icon24.png)\n<br>\n<br>\n> Block quote.&nbsp; <br>\n> *With* **some** `markdown`.<br>\n<br>\nIf **TeX Math** support is enabled, this is the quadratic equation:&nbsp;<br>\n$$-b \\pm \\sqrt{b^2 - 4ac} \\over 2a$$<br>\n<br>\n# Header 1<br>\n## Header 2<br>\n### Header 3<br>\n#### Header 4<br>\n##### Header 5<br>\n###### Header 6<br>\n&nbsp; <br>\n| Tables        | Are           | Cool  |<br>\n| ------------- |:-------------:| -----:|<br>\n| column 3 is   | right-aligned | $$1600 |<br>\n| column 2 is   | centered      |   $$12 |<br>\n| zebra stripes | are neat      |    $$1 |<br>\n<br>\nHere's a horizontal rule:<br>\n<br>\n---<br>\n<br>\n```<br>\ncode block<br>\nwith no highlighting<br>\n```<br>\n<br>\n",
+    "description": "The raw Markdown used for previewing user styling changes. Also shows users what can be done with Markdown. Please note that the double dollar signs ($$) are needed to make a single dollar sign in the application."
   },
-  "options_page__hotkey_note_3":{
-    "message":"Kısayol için alfanümerik bi anahtar kullanmalısın. (dile ve klavyeye göre değişir)."
+  "options_page__preview_title": {
+    "message": "Önizleme",
+    "description": "section title for the Markdown preview section"
   },
-  "options_page__hotkey_note_4":{
-    "message":"Windows tuşu ve OS X &#8984; tuşu kısayol olarak kullanılamaz."
+  "options_page__primary_css_title": {
+    "message": "Birincil Tasarım CSS",
+    "description": "section title"
   },
-  "options_page__hotkey_note_5":{
-    "message":"Bu kısayolu geçersiz kılmak için , \"anahtar\" metin kutusunu boş bırak."
+  "options_page__reload_restart": {
+    "message": "E-posta sayfanı geri yükle ya da tarayacını tekrar başlat.",
+    "description": "A step in the basic usage instructions"
   },
-  "options_page__advanced_title":{
-    "message":"İleri düzey ve Karışık",
-    "description":"A section title"
+  "options_page__reset_primary_css": {
+    "message": "Varsayılan Ayarlara Geri Dön",
+    "description": "text on button to reset Primary Styling CSS"
   },
-  "options_page__forgot_to_render_label":{
-    "message":"<b> \"derlemeyi-unuttum\" kontrolünü etkinleştir.<\/b>",
-    "description":"Label for the checkbox that enables the forgot-to-render feature"
+  "options_page__resources_cheatsheet_link": {
+    "message": "Eğer etiketleme de yeniysen  <a href=\"https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet\" target=\"_blank\"> Etiketleme Kodları </a> seni bir yıldız yapacak."
   },
-  "options_page__forgot_to_render_1":{
-    "message":"Şimdilik sadece Gmail web arayüzü ve Thunderbird destekleniyor.(ve Postbox ve Icedove)."
+  "options_page__resources_title": {
+    "message": "Kaynaklar ve Linkler",
+    "description": "A section title"
   },
-  "options_page__forgot_to_render_2":{
-    "message":"When you send an email, this checks the content to see if it looks like you wrote it in Markdown, but forgot to render it (i.e., click \"Markdown Toggle\") before sending. This may need to be disabled if it interferes with your ability to send email."
+  "options_page__start_new_message": {
+    "message": "Yeni bir email yaz.",
+    "description": "A step in the basic usage instructions"
   },
-  "options_page__forgot_to_render_3":{
-    "message":"If you find yourself disabling this, <em>please<\/em> let me know why and how it could be better. Create <a href=\"https:\/\/groups.google.com\/forum\/#!forum\/markdown-here\" target=\"_blank\">a post on the \"markdown-here\" Google Group<\/a> or <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/issues\" target=\"_blank\">an issue in the Github project<\/a>. Thanks."
+  "options_page__syntax_highlighting_css_title": {
+    "message": "Sintaks Belirginleştirme CSS",
+    "description": "section title"
   },
-  "options_page__contributing_title":{
-    "message":"Katılım",
-    "description":"A section title"
+  "options_page__syntax_highlighting_theme_label": {
+    "message": "Tema:",
+    "description": "label for the syntax highlighting theme combox box"
   },
-  "options_page__contributing_1":{
-    "message":"<strong>Eğer e-posta içerisinde kod bloğu kullandıysanız, o zaman Markdown Here projesini daha iyiye taşımaya yardımcı olabilirsiniz.<\/strong> <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/blob\/master\/CONTRIBUTING.md\" target=\"_blank\">CONTRIBUTING.md<\/a>"
+  "options_page__tex_math_codecogs_customization_2": {
+    "message": "For render customization options, see the <a href=\"https://editor.codecogs.com/docs/4-LaTeX_rendering.php\" target=\"_blank\">CodeCogs documentation</a> for this service."
   },
-  "options_page__contributing_2":{
-    "message":"Markdown Here 'yi kendi dilinde kullanılabilir olması için yardımcı ol. <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/blob\/master\/CONTRIBUTING.md#translation\" target=\"_blank\">Çevirilerinizi Bekleriz..<\/a>"
+  "options_page__tex_math_codecogs_privacy_issue_1": {
+    "message": "To generate the image for the formula, a request is sent to CodeCogs. That effectively means that you are sharing your formula with CodeCogs. It also means that recipients of your message will be making a request to CodeCogs to have the image rendered.",
+    "description": "one of the TeX math privacy concerns"
   },
-  "options_page__footer_1":{
-    "message":"<em>Markdown Here<\/em> açık kaynaktır.Soru sormak, hata raporu yollamak, yeni özellik istekleri ya da katkıda bulunmak için,   <a target=\"_blank\" href=\"https:\/\/github.com\/adam-p\/markdown-here\">Github proje sayfamızı<\/a> yada <a target=\"_blank\" href=\"https:\/\/groups.google.com\/forum\/?fromgroups=#!forum\/markdown-here\">\"markdown-here\" Google Grubumuzu<\/a> ziyaret edin. ",
-    "description":"part of the page footer text"
+  "options_page__tex_math_customization_1": {
+    "message": "Eğer bu özellik etkinleştirilirse, dolar işaretleri — <code>$$</code> — arasındaki metin matematik formülü olarak yorumlanacak.Örneğin,  <code>$$\\Delta$$</code> delta sembolü olarak derlenecek.",
+    "description": "Note: Double dollar signs ($$) are necessary to get a single dollar sign."
   },
-  "options_page__footer_2":{
-    "message":"<a target=\"_blank\" href=\"http:\/\/adam-p.github.com\/\">Adam Pritchard<\/a> tarafından oluşturuldu.",
-    "description":"part of the page footer text"
+  "options_page__tex_math_customization_3": {
+    "message": "<a href=\"https://www.codecogs.com/latex/about.php\" target=\"_blank\">CodeCogs Equation Editor</a> TeX formülleri oluşturmak için iyi bir kaynak."
   },
-  "options_page__changes_saved":{
-    "message":"Değişiklikler kaydedildi",
-    "description":"message that shows when user changes have been saved"
+  "options_page__tex_math_customization_4": {
+    "message": "Formüller resim olarak derlenecek, email alıcısı derlenmiş formülleri görmek için resimleri kabul etmek zorunda olacak."
   },
-  "options_page__preview_markdown":{
-    "message":"```javascript<br>\nfunction syntaxHighlighting() {<br>\n&nbsp; var n = 33;<br>\n&nbsp; var s = \"hello, こんにちは\";<br>\n&nbsp; console.log(s);<br>\n}<br>\n```<br>\n<br>\n* plain<br>\n* *emphasis*<br>\n&nbsp; * **strong emphasis**<br>\n&nbsp; &nbsp; * ~~strikethrough~~<br>\n* `inline code`<br>\n<br>\n1. Numbered list<br>\n2. [Link](https:\/\/www.google.com)<br>\n<br>\n<br>\nAn image: ![Markdown Here logo](https:\/\/raw.githubusercontent.com\/adam-p\/markdown-here\/master\/src\/common\/images\/icon24.png)\n<br>\n<br>\n> Block quote.&nbsp; <br>\n> *With* **some** `markdown`.<br>\n<br>\nIf **TeX Math** support is enabled, this is the quadratic equation:&nbsp;<br>\n$$-b \\pm \\sqrt{b^2 - 4ac} \\over 2a$$<br>\n<br>\n# Header 1<br>\n## Header 2<br>\n### Header 3<br>\n#### Header 4<br>\n##### Header 5<br>\n###### Header 6<br>\n&nbsp; <br>\n| Tables        | Are           | Cool  |<br>\n| ------------- |:-------------:| -----:|<br>\n| column 3 is   | right-aligned | $$1600 |<br>\n| column 2 is   | centered      |   $$12 |<br>\n| zebra stripes | are neat      |    $$1 |<br>\n<br>\nHere's a horizontal rule:<br>\n<br>\n---<br>\n<br>\n```<br>\ncode block<br>\nwith no highlighting<br>\n```<br>\n<br>\n",
-    "description":"The raw Markdown used for previewing user styling changes. Also shows users what can be done with Markdown. Please note that the double dollar signs ($$) are needed to make a single dollar sign in the application."
+  "options_page__tex_math_customization_5": {
+    "message": "Eğer derleme etiketini özelleştirirseniz, <code>{mathcode}</code> ve <code>{urlmathcode}</code> yahut her ikisinide yer tutucu olarak kullanabilirsiniz.",
+    "description": "Please do not translate {mathcode} and {urlmathcode}"
   },
-  "currently_in_use":{
-    "message":"Şuanda kullanımda",
-    "description":"Indicates the syntax highlighting theme that the user is currently using"
+  "options_page__tex_math_customization_5_1": {
+    "message": "<code>{mathcode}</code>: <code>$$</code> sembolleri arasındaki metin — örneğin <code>\\Delta</code> gibi bir TeX formülü.",
+    "description": "Please do not translate {mathcode} and {urlmathcode}. Note: Double dollar signs ($$) are necessary to get a single dollar sign."
   },
-  "new_changelist_items":{
-    "message":"YENİ",
-    "description":"Used to highlight the part of the changelist that is new. There will typically be multiple items in the list, so this should be considered plural."
+  "options_page__tex_math_customization_5_2": {
+    "message": "<code>{urlmathcode}</code>:  TeX formülünün URL olarak kodlanmış hali; <code>%5CDelta</code> gibi.",
+    "description": "Please do not translate {mathcode} and {urlmathcode}"
   },
-  "options_page__header_anchors_enabled_label":{
-    "message":"<b>Otomatik başlık sabitleyicileri etkinleştir.<\/b>",
-    "description":"Label for the checkbox that enables the automatic header anchors feature. This means that an 'anchor' is created at every heading (H1, H2, etc.) in the user's Markdown. The user can then create links that will jump to these anchors, like in the table of contents of a document."
+  "options_page__tex_math_customization_6": {
+    "message": "If you customize the <code>&lt;img&gt;</code> tag, you should include an <code>alt</code> attribute that has as human-readable a value as possible, like <code>{mathcode}</code>. This value of this attribute will be used for the plaintext version of the email (when sent from Gmail and Thunderbird), and used by screen readers for sight-impaired recipients.",
+    "description": "Please do not translate {mathcode} and {urlmathcode}"
   },
-  "options_page__header_anchors_enabled_1":{
-    "message":"Eğer içeriğinize bir içindekiler tablosu yahut başka dahili linkler eklemek isterseniz ki bu harika bi şey. <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/wiki\/Tips-and-Tricks#wiki-header-anchors\" target=\"_blank\">Nasıl kullanacağınızı MDH wiki de öğrenin.<\/a>"
+  "options_page__tex_math_customization_heading": {
+    "message": "<strong>Kişiselleştirme ve Kullanım:</strong>",
+    "description": "heading for customization and use info"
   },
-  "options_page__header_anchors_enabled_2":{
-    "message":"Varsayılanlarda kapalı olarak geliyor çünkü <a href=\"https:\/\/github.com\/adam-p\/markdown-here\/issues\/155\" target=\"_blank\">Thunderbird'de görüntü kirliliği oluşturuyor<\/a>.(Ve muhtemelen bir çok insan bu özelliği kullanmayacak.)"
+  "options_page__tex_math_privacy_heading": {
+    "message": "<strong>Gizli Konular:</strong>",
+    "description": "heading for warnings about TeX math privacy concerns"
   },
-  "options_page__gfm_line_breaks_enabled_label":{
-    "message":"<b>Enable GFM line breaks.<\/b>",
-    "description":"Label for the checkbox that enables the support of 'Github-flavored Markdown' line breaks."
+  "options_page__tex_math_privacy_issue_2": {
+    "message": "Formül derleme etiketini özelleştirirseniz, güvenli (https://)  bağlantıyı kullanmanız gerekir. Her derleme hizmeti güvenli bağlantı sunmayabilir.",
+    "description": "one of the TeX math privacy concerns"
+  },
+  "options_page__tex_math_reset_button": {
+    "message": "Varsayılana Geri Dön",
+    "description": "text on button to reset TeX math option"
+  },
+  "options_page__tex_math_title": {
+    "message": "TeX Matematiksel Formüller Desteği"
+  },
+  "options_page__type_some_markdown": {
+    "message": "Emaile biraz Markdown ekle. <br/>Bunu dene:<code>_Merhaba_`Markdown` **Here**!</code>",
+    "description": "A step in the basic usage instructions"
+  },
+  "plain_text_compose": {
+    "message": "Düz metin editörü kullanıyorsunuz. Markdown Here kullanmak için zengin metin editörüne geçin.",
+    "description": "Shown in an alert dialog if the user has their email compose app set to plain text"
+  },
+  "toggle_button_text": {
+    "message": "MD Toggle",
+    "description": "Text shown underneath the render toggle button. Make it as short as possible.",
+    "inMozDTD": true
+  },
+  "toggle_button_tooltip": {
+    "message": "Markdown haline dönüştürmek için bas",
+    "description": "text shown when user hovers mouse over Markdown Toggle button",
+    "inMozDTD": true
+  },
+  "toggle_button_tooltip_disabled": {
+    "message": "Seçilen alan Markdown dönüşümü için geçerli değildir",
+    "description": "text shown when user hover mouse over disabled Markdown Toggle button",
+    "inMozDTD": true
+  },
+  "unrendering_modified_markdown_warning": {
+    "message": "Derlenilen Markdown değişmiş gibi gözüküyor.\nDerlemeyi geri alırsan, yaptığın değişiklikler kaybolacaktır.\n\nDerlemeyi geri almak istediğinden emin misin?",
+    "description": "Warning shown to the user if she tries to revert some rendered Markdown that they've modified since rendering. The user will lose their modifications if they proceed."
+  },
+  "upgrade_notification_changes_tooltip": {
+    "message": "Bu sürümdeki değişiklikleri görmek için tıklayın",
+    "description": "Tooltip text on the link that opens the changes list"
+  },
+  "upgrade_notification_dismiss_tooltip": {
+    "message": "Bildirimi sakla",
+    "description": "Tooltip text on the link that dismisses the notification"
+  },
+  "upgrade_notification_text": {
+    "message": "Markdown Here güncellendi",
+    "description": "Text on the notification shown when Markdown Here has been updated"
   }
 }

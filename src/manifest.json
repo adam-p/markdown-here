@@ -1,10 +1,9 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "__MSG_app_name__",
-  "version": "2.12.0",
+  "version": "2.14.2",
   "description": "__MSG_app_slogan__",
-  "homepage_url": "http://markdown-here.com",
-  "minimum_chrome_version": "6",
+  "homepage_url": "https://markdown-here.com",
   "default_locale": "en",
   "icons": {
     "16": "common/images/icon16.png",
@@ -14,7 +13,10 @@
     "512": "common/images/icon512.png"
   },
   "permissions": ["contextMenus", "storage"],
-  "background": {"page": "chrome/background.html"},
+  "background": {
+    "page": "chrome/background.html#background-page",
+    "service_worker": "chrome/backgroundscript.js"
+  },
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
@@ -29,12 +31,25 @@
         ]
     }
   ],
-  "browser_action": {
+  "action": {
     "default_icon": {
+      "16": "common/images/icon16-button-monochrome.png",
       "19": "common/images/icon19-button-monochrome.png",
-      "38": "common/images/icon38-button-monochrome.png"
+      "32": "common/images/icon32-button-monochrome.png",
+      "38": "common/images/icon38-button-monochrome.png",
+      "64": "common/images/icon64-button-monochrome.png"
     },
-    "default_title": "__MSG_toggle_button_tooltip__"
+    "default_title": "__MSG_toggle_button_tooltip__",
+    "browser_style": true
   },
-  "options_page": "common/options.html"
+  "options_ui": {
+    "page": "common/options.html",
+    "open_in_tab": true
+  }
+
+  ,"browser_specific_settings": {
+    "gecko": {
+      "id": "markdown-here-webext@adam.pritchard"
+    }
+  }
 }

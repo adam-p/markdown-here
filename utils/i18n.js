@@ -1,6 +1,6 @@
 /*
  * Copyright Adam Pritchard 2014
- * MIT License : http://adampritchard.mit-license.org/
+ * MIT License : https://adampritchard.mit-license.org/
  */
 
 /* jslint node: true */
@@ -8,7 +8,9 @@
 
 var fs = require('fs');
 
-var MOZ_RDF_FILENAME = '../src/install.rdf';
+const DIR_BASE = __dirname + '/../';
+
+var MOZ_RDF_FILENAME = DIR_BASE + 'src/install.rdf';
 var MOZ_RDF_I18N_SECTION_START = '<!-- i18n -->';
 var MOZ_RDF_I18N_SECTION_END = '<!-- /i18n -->';
 var INSTALL_RDF_I18N_TEMPLATE =
@@ -19,15 +21,17 @@ var INSTALL_RDF_I18N_TEMPLATE =
 '            <em:description>{{app_slogan}}</em:description>\n' +
 '          </Description>\n' +
 '        </em:localized>\n';
-var MOZ_MANIFEST_FILENAME = '../src/chrome.manifest';
+var MOZ_MANIFEST_FILENAME = DIR_BASE + 'src/chrome.manifest';
 var mozManifest = fs.readFileSync(MOZ_MANIFEST_FILENAME, 'utf8');
 
 resetInstallRdf();
 
-var LOCALES_DIR = '../src/_locales/';
+var LOCALES_DIR = DIR_BASE + 'src/_locales/';
 
 var locales = fs.readdirSync(LOCALES_DIR);
 var mozLocaleMappings = getMozillaLocaleMappings();
+
+var englishStringBundle = JSON.parse(fs.readFileSync(LOCALES_DIR + 'en/messages.json'));
 
 locales.forEach(function(locale) {
   // Skip .DS_Store. No locale dirs should start with '.'
@@ -41,7 +45,7 @@ locales.forEach(function(locale) {
 
 // Make sure that the necessary directories and entries are present.
 function checkLocaleSanity(locale) {
-  var mozLocaleDirectory = '../src/firefox/chrome/locale/' + locale;
+  var mozLocaleDirectory = DIR_BASE + 'src/firefox/chrome/locale/' + locale;
   if (!fs.existsSync(mozLocaleDirectory)) {
     throw new Error('Mozilla locale directory missing: ' + locale);
   }
@@ -87,10 +91,22 @@ function processLocale(locale) {
   // message.json is authoritative. The Firefox files are derived from it.
   var stringBundle = JSON.parse(fs.readFileSync(LOCALES_DIR + locale + '/messages.json'));
 
-  var mozPropertiesFilename = '../src/firefox/chrome/locale/' + locale + '/strings.properties';
+  // If new strings have been added, they may be present in English but not in the other
+  // strings bundles. We'll make sure each language has the complete set.
+  stringBundle = Object.assign(englishStringBundle, stringBundle);
+
+  if (locale !== 'en') {
+    // Rewrite the locale's messages.json, as it may have had English fallbacks added to it.
+    // Ensure the keys are sorted to minimize diff churn.
+    fs.writeFileSync(
+      LOCALES_DIR + locale + '/messages.json',
+      JSON.stringify(stringBundle, Object.keys(englishStringBundle).sort().concat(['message', 'description', 'inMozDTD']), 2));
+    }
+
+  var mozPropertiesFilename = DIR_BASE + 'src/firefox/chrome/locale/' + locale + '/strings.properties';
   var mozPropertiesFd = fs.openSync(mozPropertiesFilename, 'w');
 
-  var mozDtdFilename = '../src/firefox/chrome/locale/' + locale + '/strings.dtd';
+  var mozDtdFilename = DIR_BASE + 'src/firefox/chrome/locale/' + locale + '/strings.dtd';
   var mozDtdFd = fs.openSync(mozDtdFilename, 'w');
 
   // We'll iterate through the keys in sorted order, to help keep the diffs stable.
@@ -110,7 +126,7 @@ function processLocale(locale) {
     fs.writeSync(mozPropertiesFd, key + '=' + message + '\n');
 
     if (stringBundle[key]['inMozDTD']) {
-      fs.writeSync(mozDtdFd, '<!ENTITY ' + key + ' "' + message + '">\n' );
+      fs.writeSync(mozDtdFd, '<!ENTITY ' + key + ' "' + message + '">\n');
     }
   }
 
@@ -127,11 +143,11 @@ function processLocale(locale) {
 
 
 function getMozillaLocaleMappings() {
-  var lines = mozManifest.split('\n'),
-      mappings = {},
-      i, match;
-  for (var i = 0; i < lines.length; i++) {
-    match = lines[i].match(/^locale\s+markdown_here\s+([a-zA-Z_-]+)\s+firefox\/chrome\/locale\/([a-zA-Z_-]+)\/$/);
+  var lines = mozManifest.split('\n');
+  var mappings = {};
+
+  for (let i = 0; i < lines.length; i++) {
+    let match = lines[i].match(/^locale\s+markdown_here\s+([a-zA-Z_-]+)\s+firefox\/chrome\/locale\/([a-zA-Z_-]+)\/$/);
     if (match) {
       mappings[match[2]] = match[1];
     }

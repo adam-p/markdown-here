@@ -19,5 +19,5 @@ Markdown Here 主要目标是为 Gmail 和 Thunderbird 服务， 但它也可以
 
 这是一个开源项目。 详细指导，更多信息，bug报告以及贡献，可以访问Markdown Here的Github页面。
 
-http://markdown-here.com
+https://markdown-here.com
 https://github.com/adam-p/markdown-here

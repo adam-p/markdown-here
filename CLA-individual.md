@@ -3,7 +3,7 @@ Markdown Here Individual Contributor License Agreement
 
 Thank you for your interest in contributing to Markdown Here ("We" or "Us").
 
-This contributor agreement ("Agreement") documents the rights granted by contributors to Us. To make this document effective, please submit a pull request with a file under the `/contributors` directory indicating your acceptance of this agreement.
+This contributor agreement ("Agreement") documents the rights granted by contributors to Us. To make this document effective, please submit a pull request with a file under the `/contributors` directory indicating your acceptance of this agreement, following the instructions at https://github.com/adam-p/markdown-here/blob/master/CONTRIBUTING.md.
 
 This is a legally binding document, so please read it carefully before agreeing to it. The Agreement may cover more than one software project managed by Us.
 
@@ -11,7 +11,7 @@ This is a legally binding document, so please read it carefully before agreeing 
 
 "You" means the individual who Submits a Contribution to Us.
 
-"Contribution" means any work of authorship that is Submitted by You to Us in which You own or assert ownership of the Copyright. If You do not own the Copyright in the entire work of authorship, please follow the instructions in .
+"Contribution" means any work of authorship that is Submitted by You to Us in which You own or assert ownership of the Copyright. If You do not own the Copyright in the entire work of authorship, please follow the instructions in https://github.com/adam-p/markdown-here/blob/master/CONTRIBUTING.md.
 
 "Copyright" means all rights protecting works of authorship owned or controlled by You, including copyright, moral and neighboring rights, as appropriate, for the full term of their existence including any extensions by You.
 
@@ -55,7 +55,7 @@ You confirm that:
 
 (c) The grant of rights under Section 2 does not violate any grant of rights which You have made to third parties, including Your employer. If You are an employee, You have had Your employer approve this Agreement or sign the Entity version of this document. If You are less than eighteen years old, please have Your parents or guardian sign the Agreement.
 
-(d) You have followed the instructions in , if You do not own the Copyright in the entire work of authorship Submitted.
+(d) You have followed the instructions in https://github.com/adam-p/markdown-here/blob/master/CONTRIBUTING.md, if You do not own the Copyright in the entire work of authorship Submitted.
 
 ## 4. Disclaimer
 
@@ -67,7 +67,7 @@ TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT WILL YOU BE LIABL
 
 ## 6. Miscellaneous
 
-6.1 This Agreement will be governed by and construed in accordance with the laws of excluding its conflicts of law provisions. Under certain circumstances, the governing law in this section might be superseded by the United Nations Convention on Contracts for the International Sale of Goods ("UN Convention") and the parties intend to avoid the application of the UN Convention to this Agreement and, thus, exclude the application of the UN Convention in its entirety to this Agreement.
+6.1 This Agreement will be governed by and construed in accordance with the laws of Canada excluding its conflicts of law provisions. Under certain circumstances, the governing law in this section might be superseded by the United Nations Convention on Contracts for the International Sale of Goods ("UN Convention") and the parties intend to avoid the application of the UN Convention to this Agreement and, thus, exclude the application of the UN Convention in its entirety to this Agreement.
 
 6.2 This Agreement sets out the entire agreement between You and Us for Your Contributions to Us and overrides all other agreements or understandings.
 
@@ -77,7 +77,7 @@ TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT WILL YOU BE LIABL
 
 6.5 If any provision of this Agreement is found void and unenforceable, such provision will be replaced to the extent possible with a provision that comes closest to the meaning of the original provision and which is enforceable. The terms and conditions set forth in this Agreement shall apply notwithstanding any failure of essential purpose of this Agreement or any limited remedy to the maximum extent possible under law.
 
-This agreement is derived from the Project Harmony CLA generator: 
-http://www.harmonyagreements.org/
-Harmony (HA-CLA-I-ANY) Version 1.0
+This agreement is derived from the Project Harmony CLA generator:
+https://www.harmonyagreements.org/
 
+Harmony (HA-CLA-I-ANY) Version 1.0

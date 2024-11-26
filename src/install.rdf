@@ -5,23 +5,23 @@
     <Description about="urn:mozilla:install-manifest">
         <em:type>2</em:type> <!-- 2 : Extension -->
         <em:id>markdown-here@adam.pritchard</em:id>
-        <em:version>2.12.0</em:version>
+        <em:version>2.13.4</em:version>
 
+        <!-- Firefox -->
         <em:targetApplication>
             <Description>
-                <!-- Firefox -->
                 <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
                 <em:minVersion>11.0</em:minVersion>
-                <em:maxVersion>42.*</em:maxVersion>
+                <em:maxVersion>49.*</em:maxVersion>
             </Description>
         </em:targetApplication>
 
-        <!-- Postbox -->
+        <!-- Thunderbird -->
         <em:targetApplication>
           <Description>
-            <em:id>postbox@postbox-inc.com</em:id>
-            <em:minVersion>2.0</em:minVersion>
-            <em:maxVersion>4.*</em:maxVersion>
+            <em:id>{3550f703-e582-4d05-9a08-453d09bdfdc6}</em:id>
+            <em:minVersion>6.0</em:minVersion>
+            <em:maxVersion>60.*</em:maxVersion>
           </Description>
         </em:targetApplication>
 
@@ -30,7 +30,7 @@
           <Description>
             <em:id>toolkit@mozilla.org</em:id>
             <em:minVersion>6.0</em:minVersion>
-            <em:maxVersion>42.*</em:maxVersion>
+            <em:maxVersion>60.*</em:maxVersion>
           </Description>
         </em:targetApplication>
 
@@ -152,46 +152,8 @@
         <em:iconURL>resource://markdown_here_common/images/icon128.png</em:iconURL>
         <em:homepageURL>https://github.com/adam-p/markdown-here</em:homepageURL>
 
-        <em:optionsURL>
-            javascript:
-                /* This is a pretty convoluted way of getting a tab to open with
-                   our options page. */
-                var windowMediator = Components.classes['@mozilla.org/appshell/window-mediator;1']
-                                               .getService(Components.interfaces.nsIWindowMediator);
-                var optionsUrl = 'resource://markdown_here_common/options.html';
-                if (navigator.userAgent.indexOf('Thunderbird') >= 0 ||
-                    navigator.userAgent.indexOf('Icedove') >= 0) {
-                    windowMediator.getMostRecentWindow('mail:3pane')
-                                  .document.getElementById('tabmail')
-                                  .openTab('contentTab', {contentPage: optionsUrl});
-                }
-                else if (navigator.userAgent.indexOf('Postbox') >= 0) {
-                    /* Haven't yet figured out how to open a tab in Postbox */
-                    var prompts = Components.classes["@mozilla.org/embedcomp/prompt-service;1"]
-                                            .getService(Components.interfaces.nsIPromptService);
-                    prompts.alert(null, 'Markdown Here', 'Sorry, the options page is not supported for Postbox.');
-                }
-                else if (navigator.userAgent.indexOf('Zotero') >= 0) {
-                    var prompts = Components.classes["@mozilla.org/embedcomp/prompt-service;1"]
-                                            .getService(Components.interfaces.nsIPromptService);
-                    prompts.alert(null, 'Markdown Here', 'Sorry, the options page is not supported for Zotero.');
-
-                    /* This code does open the options page in a separate window,
-                       but the page can't communicate with the background services
-                       to get and set the options, so it's effectively unsupported. */
-                    /*
-                    var win = windowMediator.getMostRecentWindow('navigator:browser');
-                    win.open(optionsUrl, "Markdown-Here-Options");
-                    */
-                }
-                else {
-                    var win = windowMediator.getMostRecentWindow('navigator:browser');
-                    win.gBrowser.selectedTab = win.gBrowser.addTab(optionsUrl);
-                }
-                /* Close the stub prefs dialog that will have opened. */
-                window.close();
-        </em:optionsURL>
-
+        <em:optionsType>3</em:optionsType>
+        <em:optionsURL>resource://markdown_here_common/options.html</em:optionsURL>
 
     </Description>
 </RDF>
