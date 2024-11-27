@@ -85,6 +85,7 @@ function markdownRender(mdText, userprefs, marked, hljs) {
     // so we'll add it by sneaking it into this config field.
     langPrefix: 'hljs language-',
     math: userprefs['math-enabled'] ? mathify : null,
+    highlightForceBreaks: userprefs['highlight-line-breaks-enabled'],
     highlight: function(codeText, codeLanguage) {
         if (codeLanguage &&
             hljs.getLanguage(codeLanguage.toLowerCase())) {

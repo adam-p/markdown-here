@@ -778,6 +778,9 @@ Renderer.prototype.code = function(code, lang, escaped) {
     var out = this.options.highlight(code, lang);
     if (out != null && out !== code) {
       escaped = true;
+      if (this.options.highlightForceBreaks) {
+         out = out.replace(/\n/g, '<br>');
+      }
       code = out;
     }
   }
@@ -1248,6 +1251,7 @@ marked.defaults = {
   smartLists: false,
   silent: false,
   highlight: null,
+  highlightForceBreaks: false,
   langPrefix: 'lang-',
   smartypants: false,
   headerPrefix: '',
