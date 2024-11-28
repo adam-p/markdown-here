@@ -1,0 +1,360 @@
+{
+  "app_name": {
+    "message": "تخفيض السعر هنا",
+    "description": "the name of the extension",
+    "inMozDTD": true
+  },
+  "app_slogan": {
+    "message": "كتابة البريد الإلكتروني الخاص بك في تخفيض السعر ، ثم جعلها جميلة.",
+    "description": "shown as subtitle for Markdown Here in the browser extensions list"
+  },
+  "toggle_button_text":{
+    "message": "MD تبديل",
+    "description": "Text shown underneath the render toggle button. Make it as short as possible.",
+    "inMozDTD": true
+  },
+  "toggle_button_tooltip": {
+    "message": "انقر فوق تبديل تخفيض السعر التقديم",
+    "description": "text shown when user hovers mouse over Markdown Toggle button",
+    "inMozDTD": true
+  },
+  "toggle_button_tooltip_disabled": {
+    "message": "الحقل المحدد غير صالح من أجل تخفيض السعر التقديم",
+    "description": "text shown when user hover mouse over disabled Markdown Toggle button",
+    "inMozDTD": true
+  },
+  "context_menu_item": {
+    "message": "تخفيض السعر تبديل",
+    "description": "Text shown on the context menu.",
+    "inMozDTD": true
+  },
+  "moz_options_dlg_title": {
+    "message": "تخفيض السعر هنا الخيارات",
+    "description": "In Thunderbird, in order to open the options tab we first have to open a temporary dialog box. This is the title for that box.",
+    "inMozDTD": true
+  },
+  "moz_options_dlg_instruction": {
+    "message": "انقر فوق 'موافق' زر لفتح تخفيض السعر هنا علامة التبويب خيارات",
+    "description": "In Thunderbird, in order to open the options tab we first have to open a temporary dialog box. This is the text in that box telling the user what to do. Please use the same translation for 'OK' that the application uses.",
+    "inMozDTD": true
+  },
+  "invalid_field": {
+    "message": "الحقل المحدد غير صالح من أجل تخفيض السعر التقديم. الرجاء استخدام محرر غني.",
+    "description": "Shown in an alert dialog if the user tries to render a field that cannot be rendered"
+  },
+  "plain_text_compose": {
+    "message": "استخدام النص العادي يؤلف محرر. يجب تغيير إلى محرر غني استخدام تخفيض السعر هنا.",
+    "description": "Shown in an alert dialog if the user has their email compose app set to plain text"
+  },
+  "cursor_into_compose": {
+    "message": "من فضلك ضع المؤشر في مربع الإنشاء."
+  },
+  "forgot_to_render_prompt_title": {
+    "message": "تنسى تبديل تخفيض السعر?",
+    "description": "Title of the prompt that's shown when it's detected that a user may have forgotten to render the Markdown in their email"
+  },
+  "forgot_to_render_prompt_info": {
+    "message": "يبدو أنك كتبت هذا البريد الإلكتروني في تخفيض السعر ولكن نسيت لجعلها جميلة.",
+    "description": "Informational part of the prompt that's shown when it's detected that a user may have forgotten to render the Markdown in their email"
+  },
+  "forgot_to_render_prompt_question": {
+    "message": "إرسال ذلك على أي حال ؟ ",
+    "description": "Question part of the prompt that's shown when it's detected that a user may have forgotten to render the Markdown in their email"
+  },
+  "forgot_to_render_back_button": {
+    "message": "مرة أخرى",
+    "description": "Text on the Back (cancel) button of the prompt that's shown when it's detected that a user may have forgotten to render the Markdown in their email",
+    "inMozDTD": true
+  },
+  "forgot_to_render_send_button": {
+    "message": "إرسال",
+    "description": "Text on the Send (continue) button of the prompt that's shown when it's detected that a user may have forgotten to render the Markdown in their email",
+    "inMozDTD": true
+  },
+  "forgot_to_render_prompt_close_hover": {
+    "message": "رفض هذا الإعلام",
+    "description": "Text that shows when the user hovers over the 'X' that will close the prompt"
+  },
+  "upgrade_notification_text": {
+    "message": "تخفيض السعر هنا تحديث",
+    "description": "Text on the notification shown when Markdown Here has been updated"
+  },
+  "upgrade_notification_changes_tooltip": {
+    "message": "انقر لرؤية التغييرات في هذا الإصدار",
+    "description": "Tooltip text on the link that opens the changes list"
+  },
+  "upgrade_notification_dismiss_tooltip": {
+    "message": "رفض هذا الإعلام",
+    "description": "Tooltip text on the link that dismisses the notification"
+  },
+  "nothing_to_render": {
+    "message": "العثور على أي شيء لتقديم أو العودة",
+    "description": "Error message shown to user if there's nothing found to revert or render."
+  },
+  "unrendering_modified_markdown_warning": {
+    "message": "ويبدو أن القشرة المقدمة قد عدلت.إذا لم تجهليه ، فإن تغييراتك ستضيع.هل أنت متأكد أنك تريد أن لا تغضب؟",
+    "description": "Warning shown to the user if she tries to revert some rendered Markdown that they've modified since rendering. The user will lose their modifications if they proceed."
+  },
+  "options_page__page_title": {
+    "message": "تخفيض السعر هنا الخيارات"
+  },
+  "options_page__basic_usage": {
+    "message": "الاستخدام الأساسي"
+  },
+  "options_page__reload_restart": {
+    "message": "بعد تثبيت أو ترقية, تحميل البريد الإلكتروني الخاص بك أو صفحة ويب إعادة تشغيل متصفح الويب الخاص بك.",
+    "description": "A step in the basic usage instructions"
+  },
+  "options_page__start_new_message": {
+    "message": "تبدأ رسالة بريد إلكتروني جديدة.",
+    "description": "A step in the basic usage instructions"
+  },
+  "options_page__type_some_markdown": {
+    "message": "اكتب بعض تخفيض السعر إلى البريد الإلكتروني.<br/>جرب هذا: <code>_Hello_ `تخفيض السعر` **هنا**!</رمز>",
+    "description": "A step in the basic usage instructions"
+  },
+  "options_page__click_toggle": {
+    "message": "انقر على اليمين في البريد الإلكتروني ثم انقر \"Markdown Toggle\". (أو اضغط على <img class=\"text-align\" src=\"images/icon32-button-monochrome.png\"/> زر على شريط الأدوات.<span class=\"hotkey-display-wrapper\"> أو اضغط <span class=\"hotkey-display\"><kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>M</kbd></span></span>)",
+    "description": "A step in the basic usage instructions"
+  },
+  "options_page__pretty_cool": {
+    "message": "الرسالة الآن يجب أن تبدو باردة جدا. وإرساله إلى أصدقائك!",
+    "description": "A step in the basic usage instructions"
+  },
+  "options_page__resources_title": {
+    "message": "الموارد الروابط",
+    "description": "A section title"
+  },
+  "options_page__resources_cheatsheet_link": {
+    "message": "إذا كنت جديدا على (ماركداون) <a href=\"https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet\" target=\"_blank\">Markdown Here Cheatsheet</a> سوف تجعلك بروستار."
+  },
+  "options_page__advanced_usage": {
+    "message": "لمزيد من المعلومات والاستعمال المتقدم ، انظر <a href=\"https://github.com/adam-p/markdown-here\" target=\"_blank\">Markdown Here project page</a>. يجب عليك أيضا استكشاف الخيارات أدناه."
+  },
+  "options_page__ggroup": {
+    "message": "طرح سؤال ، بدء مناقشة ، أو مجرد قول مرحبا في <a href=\"https://groups.google.com/forum/?fromgroups=#!forum/markdown-here\" target=\"_blank\">markdown-here Google Group</a>."
+  },
+  "options_page__mdh_wiki": {
+    "message": "زيارة <a href=\"https://github.com/adam-p/markdown-here/wiki\" target=\"_blank\">Markdown Here wiki</a> للحصول على معلومات حول <a href=\"https://github.com/adam-p/markdown-here/wiki/Compatibility\" target=\"_blank\">حيث تعمل mdh</a> وأكثر <a href=\"https://github.com/adam-p/markdown-here/wiki/Tips-and-Tricks\" target=\"_blank\">النصائح والحيل</a>."
+  },
+  "options_page__next_steps": {
+    "message": "إذا كنت مهتما بما يحمله المستقبل Markdown Here, تحقق من <a href=\"https://github.com/adam-p/markdown-here#next-steps\" target=\"_blank\">قسم الخطوات المقبلة</a> من README."
+  },
+  "options_page__donate_plea_1": {
+    "message": "بمجرد أن تقرر تخفيض السعر هنا هو حلوة جدا, الرجاء مساعدتي في شراء بعض الزهور لزوجتي حتى انها ليس مستاء جدا عن كم من الوقت تقضيه في العمل على ذلك. <strong>شكرا لك</strong>"
+  },
+  "options_page__donate_plea_2": {
+    "message": "<قوية>تساعد على جعل تخفيض السعر هنا أفضل!</strong>"
+  },
+  "options_page__donate_plea_3": {
+    "message": "<قوية>مساعدة في دعم التنمية من تخفيض السعر هنا!</strong>"
+  },
+  "options_page__donate_plea_4": {
+    "message": "هل تعرف ما الذي يجعل من الأسهل للحفاظ على تخفيض السعر هنا تعمل على كروم, فايرفوكس, ثندربيرد, صندوق البريد, سفاري, اوبرا, Gmail, Yahoo, Hotmail, مدون, Evernote, وما إلى ذلك ؟ <قوية>القهوة!</strong>"
+  },
+  "options_page__other_donation_options": {
+    "message": "التبرع أخرى خيارات",
+    "description": "Link to a page that provides other ways to donate"
+  },
+  "options_page__primary_css_title": {
+    "message": "الابتدائية التصميم CSS",
+    "description": "section title"
+  },
+  "options_page__reset_primary_css": {
+    "message": "إعادة تعيين إلى الافتراضي",
+    "description": "text on button to reset Primary Styling CSS"
+  },
+  "options_page__syntax_highlighting_css_title": {
+    "message": "تسليط الضوء على تركيب CSS",
+    "description": "section title"
+  },
+  "options_page__syntax_highlighting_theme_label": {
+    "message": "موضوع:",
+    "description": "label for the syntax highlighting theme combox box"
+  },
+  "options_page__preview_title": {
+    "message": "المعاينة",
+    "description": "section title for the Markdown preview section"
+  },
+  "options_page__markdown_toggle_button_text": {
+    "message": "تخفيض السعر تبديل",
+    "description": "button text for Markdown Toggle button"
+  },
+  "options_page__notes_title": {
+    "message": "ملاحظات",
+    "description": "section title"
+  },
+  "options_page__note_options_sync": {
+    "message": "يتم حفظ التغييرات تلقائيا و متزامنة (إذا المزامنة تم تمكين في المتصفح الخاص بك)."
+  },
+  "options_page__note_syntax_styles_after_primary": {
+    "message": "بناء الجملة تسليط الضوء على الأساليب التي يتم تطبيقها بعد الابتدائية التصميم ، حتى تأخذ الأسبقية."
+  },
+  "options_page__note_default_client_styles": {
+    "message": "بعض البريد الإلكتروني المحررين المتصفحات فرض الأنماط الخاصة بهم. هؤلاء قد لا يكون واضحا هنا."
+  },
+  "options_page__tex_math_title": {
+    "message": "تكس الصيغ الرياضية الدعم"
+  },
+  "options_page__tex_math_reset_button": {
+    "message": "إعادة تعيين إلى الافتراضي",
+    "description": "text on button to reset TeX math option"
+  },
+  "options_page__tex_math_privacy_heading": {
+    "message": "<قوية>قضايا الخصوصية:</strong>",
+    "description": "heading for warnings about TeX math privacy concerns"
+  },
+  "options_page__tex_math_privacy_issue_1": {
+    "message": "لتوليد صورة صيغة طلب يتم إرساله إلى Google. هذا يعني عمليا أن يتم تقاسم الصيغة الخاصة بك مع جوجل. وهذا يعني أيضا أن متلقي رسالتك سيتم تقديم طلب إلى جوجل أن الصورة المقدمة.",
+    "description": "one of the TeX math privacy concerns"
+  },
+  "options_page__tex_math_privacy_issue_2": {
+    "message": "إذا كنت تخصيص صيغة التقديم الوسم, يجب عليك استخدام آمن (https://) المسار. ليس كل تقديم خدمات آمنة الخيار.",
+    "description": "one of the TeX math privacy concerns"
+  },
+  "options_page__tex_math_customization_heading": {
+    "message": "<قوية>التخصيص والاستخدام:</strong>",
+    "description": "heading for customization and use info"
+  },
+  "options_page__tex_math_customization_1": {
+    "message": "إذا ميزة هو ممكن نص بين دولار علامات — <code>$$</code> — سيتم تفسيرها على أنها صيغ رياضية على سبيل المثال, <code>$$\\Delta$$</code> ستكون كرمز لـ \"دلتا\".",
+    "description": "Note: Double dollar signs ($$) are necessary to get a single dollar sign."
+  },
+  "options_page__tex_math_customization_2": {
+    "message": "خيارات التكييف,  انظر <a href=\"https://developers.google.com/chart/infographics/docs/formulas\" target=\"_blank\">Google Charts documentation</a> من أجل هذه الخدمة"
+  },
+  "options_page__tex_math_customization_3": {
+    "message": "a جيد مورد لـ إنشاء tex formulae هو <a href=\"https://www.codecogs.com/latex/about.php\" target=\"_blank\">CodeCogs Equation Editor</a>."
+  },
+  "options_page__tex_math_customization_4": {
+    "message": "هي الصيغ المقدمة إلى الصور ، حتى مستلمي البريد الإلكتروني سوف تضطر إلى تمكين الصور أظهرت أن نرى التقديم."
+  },
+  "options_page__tex_math_customization_5": {
+    "message": "إذا كنت تخصيص التقديم الوسم, يمكنك (ويجب) استخدام أو كليهما <code>{mathcode}</code> و <code>{urlmathcode}</code> كما النائبة.",
+    "description": "Please do not translate {mathcode} and {urlmathcode}"
+  },
+  "options_page__tex_math_customization_5_1": {
+    "message": "<code>{mathcode}</code>: النص بين <code>$$</code> الرموز-أي صيغة تيكس الخام ؛ مثل<code>\\Delta</code>.",
+    "description": "Please do not translate {mathcode} and {urlmathcode}. Note: Double dollar signs ($$) are necessary to get a single dollar sign."
+  },
+  "options_page__tex_math_customization_5_2": {
+    "message": "<code>{urlmathcode}</code>: URL ترميز شكل تكس الصيغة ؛ <code>%5CDelta</code>.",
+    "description": "Please do not translate {mathcode} and {urlmathcode}"
+  },
+  "options_page__tex_math_customization_6": {
+    "message": "إذا كنت تخصيص <code>&lt;img&gt;</code> الوسم ، يجب أن تشمل <code>alt</code> السمة التي لديها الإنسان للقراءة قيمة ممكن ، مثل <code>{mathcode}</code>. هذه قيمة هذه السمة سيتم استخدام نص عادي نسخة من البريد الإلكتروني (عندما أرسلت من Gmail و ثندربيرد) ، وتستخدم من قبل قارئات الشاشة من أجل البصر-ضعف المستفيدين.",
+    "description": "Please do not translate {mathcode} and {urlmathcode}"
+  },
+  "options_page__hotkey_title": {
+    "message": "هوتكي (الملقب اختصار لوحة المفاتيح)",
+    "description": "A section title"
+  },
+  "options_page__hotkey_shift_key": {
+    "message": "التحول",
+    "description": "label for the Shift key"
+  },
+  "options_page__hotkey_ctrl_key": {
+    "message": "CTRL",
+    "description": "label for the Ctrl key"
+  },
+  "options_page__hotkey_alt_key": {
+    "message": "ALT",
+    "description": "label for the Alt key"
+  },
+  "options_page__hotkey_plus": {
+    "message": "+",
+    "description": "plus sign that connects the hotkey buttons"
+  },
+  "options_page__hotkey_warning": {
+    "message": "هو مفتاح أبجدية قيمة ؟ ",
+    "description": "warning shown if the user chooses an illegal hotkey value"
+  },
+  "options_page__hotkey_note_1": {
+    "message": "كروم: يجب تحميل البريد الإلكتروني الخاص بك صفحة ويب جديدة هوتكي الإعداد ساري المفعول.",
+    "description": "Descriptive text explaining some limitations of the 'hotkey' (keyboard shortcut) feature/option."
+  },
+  "options_page__hotkey_note_2": {
+    "message": "فايرفوكس وطائر الرعد: يجب إعادة تشغيل التطبيق الجديد هوتكي الإعداد ساري المفعول.",
+    "description": "Descriptive text explaining some limitations of the 'hotkey' (keyboard shortcut) feature/option."
+  },
+  "options_page__hotkey_note_3": {
+    "message": "يجب استخدام أبجدية مفتاح الاختصار (يختلف حسب اللغة و لوحة المفاتيح).",
+    "description": "Descriptive text explaining some limitations of the 'hotkey' (keyboard shortcut) feature/option."
+  },
+  "options_page__hotkey_note_4": {
+    "message": "على مفتاح ويندوز و OS X &#8984; لا يمكن استخدام المفتاح في الاختصار.",
+    "description": "Descriptive text explaining some limitations of the 'hotkey' (keyboard shortcut) feature/option."
+  },
+  "options_page__hotkey_note_5": {
+    "message": "To disable the use of this hotkey, leave the \"key\" text box empty.",
+    "description": "Descriptive text explaining how to disable the 'hotkey' (keyboard shortcut) feature/option."
+  },
+  "options_page__advanced_title": {
+    "message": "متقدمة و متنوعة",
+    "description": "A section title"
+  },
+  "options_page__forgot_to_render_label": {
+    "message": "<b>مكن \"forgot-to-render\" كش.</b>",
+    "description": "Label for the checkbox that enables the forgot-to-render feature"
+  },
+  "options_page__forgot_to_render_1": {
+    "message": "حاليا معتمد فقط في Gmail و Google Inbox واجهات ويب ، ثندربيرد (و صندوق البريد و Icedove).",
+    "description": "Descriptive text referring to the 'forgot-to-render' feature. Tells the user that it's only available for limited platforms."
+  },
+  "options_page__forgot_to_render_2": {
+    "message": "عندما ترسل بريدا إلكترونيا ، هذا يتحقق من المحتوى لمعرفة ما إذا كان يبدو أنك كتبته في markdown ، ولكن نسيت تقديمه (i.e., click \"Markdown Toggle\") قبل الإرسال. قد يحتاج هذا إلى تعطيل إذا كان يتعارض مع قدرتك على إرسال البريد الإلكتروني.",
+    "description": "Descriptive text explaining the 'forgot-to-render' feature."
+  },
+  "options_page__forgot_to_render_4": {
+    "message": "إذا توقفت هذه الميزة عن العمل بالنسبة لك ، من فضلك أعلمنا من خلال نشر إلى <a href=\"https://groups.google.com/group/markdown-here\" target=\"_blank\">\"markdown-here\" Google Group</a> أو إنشاء <a href=\"https://github.com/adam-p/markdown-here/issues\" target=\"_blank\">قضية في مشروع جيثوب</a>. (الدخول إلى البريد الإلكتروني الذي يرسل ويب ui هش و أحيانا ينكسر.)",
+    "description": "Descriptive text referring to the 'forgot-to-render' feature (which is prone to break when Google changes its webmail code)."
+  },
+  "options_page__contributing_title": {
+    "message": "المساهمة",
+    "description": "A section title"
+  },
+  "options_page__contributing_1": {
+    "message": "<strong>إذا كنت قد وضعت من أي وقت مضى رمز كتلة في البريد الإلكتروني ، ثم يمكنك المساعدة في جعل markdown هنا أفضل.</strong> <a href=\"https://github.com/adam-p/markdown-here/blob/master/CONTRIBUTING.md\" target=\"_blank\">CONTRIBUTING.md</a>"
+  },
+  "options_page__contributing_2": {
+    "message": "ساعد في جعل (ماركدون) هنا متاحا بلغتك <a href=\"https://github.com/adam-p/markdown-here/blob/master/CONTRIBUTING.md#translation\" target=\"_blank\">الترجمات مرحب بها</a>"
+  },
+  "options_page__footer_1": {
+    "message": "<em>Markdown Here</em> هو مصدر مفتوح 2 - توجيه الأسئلة ، أو الإبلاغ عن الأخطاء ، أو طلب الملامح ، أو المساهمة ، أو زيارة <a target=\"_blank\" href=\"https://github.com/adam-p/markdown-here\">Github مشروع الصفحة</a> أو <a target=\"_blank\" href=\"https://groups.google.com/forum/?fromgroups=#!forum/markdown-here\">\"markdown-here\" Google Group</a>.",
+    "description": "part of the page footer text"
+  },
+  "options_page__footer_2": {
+    "message": "خلق من قبل <a target=\"_blank\" href=\"http://adam-p.github.com/\">Adam Pritchard</a>.",
+    "description": "part of the page footer text"
+  },
+  "options_page__changes_saved": {
+    "message": "حفظ التغييرات",
+    "description": "message that shows when user changes have been saved"
+  },
+  "options_page__preview_markdown": {
+    "message": "```javascript<br>\nfunction syntaxHighlighting() {<br>\n&nbsp; var n = 33;<br>\n&nbsp; var s = \"hello, こんにちは\";<br>\n&nbsp; console.log(s);<br>\n}<br>\n```<br>\n<br>\n* plain<br>\n* *emphasis*<br>\n&nbsp; * **strong emphasis**<br>\n&nbsp; &nbsp; * ~~strikethrough~~<br>\n* `inline code`<br>\n<br>\n1. Numbered list<br>\n&nbsp;&nbsp;&nbsp;1. Numbered sub-list<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. Numbered sub-sub-list<br>\n2. [Link](https://www.google.com)<br>\n<br>\n<br>\nAn image: ![Markdown Here logo](https:\/\/raw.githubusercontent.com\/adam-p\/markdown-here\/master\/src\/common\/images\/icon24.png)\n<br>\n<br>\n> Block quote.&nbsp; <br>\n> *With* **some** `markdown`.<br>\n<br>\nIf **TeX Math** support is enabled, this is the quadratic equation:&nbsp;<br>\n$$-b \\pm \\sqrt{b^2 - 4ac} \\over 2a$$<br>\n<br>\n# Header 1<br>\n## Header 2<br>\n### Header 3<br>\n#### Header 4<br>\n##### Header 5<br>\n###### Header 6<br>\n&nbsp; <br>\n| Tables        | Are           | Cool  |<br>\n| ------------- |:-------------:| -----:|<br>\n| column 3 is   | right-aligned | $$1600 |<br>\n| column 2 is   | centered      |   $$12 |<br>\n| zebra stripes | are neat      |    $$1 |<br>\n<br>\nHere's a horizontal rule:<br>\n<br>\n---<br>\n<br>\n```<br>\ncode block<br>\nwith no highlighting<br>\n```<br>\n<br>\n",
+    "description": "This doesn't need to be translated, unless you want to make it more relevant to your language. The raw Markdown used for previewing user styling changes. Also shows users what can be done with Markdown. Please note that the double dollar signs ($$) are needed to make a single dollar sign in the application."
+  },
+  "currently_in_use": {
+    "message": "حاليا",
+    "description": "Indicates the syntax highlighting theme that the user is currently using"
+  },
+  "new_changelist_items": {
+    "message": "جديد",
+    "description": "Used to highlight the part of the changelist that is new. There will typically be multiple items in the list, so this should be considered plural."
+  },
+  "options_page__header_anchors_enabled_label": {
+    "message": "<ب>التلقائي لتمكين رأس المراسي.</b>",
+    "description": "Label for the checkbox that enables the automatic header anchors feature. This means that an 'anchor' is created at every heading (H1, H2, etc.) in the user's Markdown. The user can then create links that will jump to these anchors, like in the table of contents of a document."
+  },
+  "options_page__header_anchors_enabled_1": {
+    "message": "هذا أمر عظيم إذا كنت تريد وضع جدول المحتويات أو الروابط الداخلية الأخرى في المحتوى الخاص بك. <a href=\"https://github.com/adam-p/markdown-here/wiki/Tips-and-Tricks#wiki-header-anchors\" target=\"_blank\">تعلم كيف تستخدمه في الـ \"إم دي إتش ويكي\".</a>"
+  },
+  "options_page__header_anchors_enabled_2": {
+    "message": "إنه معطل افتراضيا لأنه <a href=\"https://github.com/adam-p/markdown-here/issues/155\" target=\"_blank\">يخلق ضوضاء مرئية بوصة Thunderbird</a>. (ومعظم الناس ربما لن تستخدم ميزة.)"
+  },
+  "options_page__gfm_line_breaks_enabled_label": {
+    "message": "<ب>تمكين GFM فواصل الأسطر.</b>",
+    "description": "Label for the checkbox that enables the support of 'Github-flavored Markdown' line breaks."
+  }
+}
