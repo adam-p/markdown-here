@@ -133,14 +133,14 @@ describe('Markdown-Render', function() {
     // Test issue #112: Syntax Highlighting crashing rendering on bad language name: https://github.com/adam-p/markdown-here/issues/112
     it('should properly render code with good language names', function() {
       var md = '```sql\nSELECT * FROM table WHERE id = 1\n```';
-      var target = '<pre><code class="hljs language-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> <span class="hljs-keyword">table</span> <span class="hljs-keyword">WHERE</span> id = <span class="hljs-number">1</span></span>\n</code></pre>\n';
+      var target = '<pre><code class="hljs language-sql"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> <span class="hljs-keyword">table</span> <span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">id</span> = <span class="hljs-number">1</span>\n</code></pre>\n';
       expect(MarkdownRender.markdownRender(md, userprefs, marked, hljs)).to.equal(target);
     });
 
     // Test issue #112: Syntax Highlighting crashing rendering on bad language name: https://github.com/adam-p/markdown-here/issues/112
     it('should properly render code with good language names that are in the wrong (upper)case', function() {
       var md = '```SQL\nSELECT * FROM table WHERE id = 1\n```';
-      var target = '<pre><code class="hljs language-SQL"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> <span class="hljs-keyword">table</span> <span class="hljs-keyword">WHERE</span> id = <span class="hljs-number">1</span></span>\n</code></pre>\n';
+      var target = '<pre><code class="hljs language-SQL"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> <span class="hljs-keyword">table</span> <span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">id</span> = <span class="hljs-number">1</span>\n</code></pre>\n';
       expect(MarkdownRender.markdownRender(md, userprefs, marked, hljs)).to.equal(target);
     });
 
