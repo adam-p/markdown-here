@@ -183,6 +183,15 @@ chrome.runtime.onMessage.addListener(function(request, sender, responseCallback)
   }
 });
 
+// Add listener for cross-extension messaging. (See https://developer.chrome.com/extensions/messaging#external)
+chrome.runtime.onMessageExternal.addListener(function(request) {
+  if (request && request.action === 'toggle-markdown') {
+    chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+      var tab = tabs[0];
+      chrome.tabs.sendMessage(tab.id, {action: 'message-external', });
+    });
+  }
+});
 // Add the browserAction (the button in the browser toolbar) listener.
 chrome.action.onClicked.addListener(function(tab) {
   chrome.tabs.sendMessage(tab.id, {action: 'button-click', });
