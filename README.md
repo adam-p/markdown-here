@@ -2,10 +2,10 @@
 
 [**Visit the website.**](https://markdown-here.com)<br>
 [**Get it for Chrome.**](https://chrome.google.com/webstore/detail/elifhakcjgalahccnjkneoccemfahfoa)<br>
-[**Get it for Firefox.**](https://addons.mozilla.org/en-US/firefox/addon/markdown-here/)<br>
+[**Get it for Firefox.**](https://addons.mozilla.org/firefox/addon/markdown-here/)<br>
 [**Get it for Safari.**](https://s3.amazonaws.com/markdown-here/markdown-here.safariextz)<br>
-[**Get it for Thunderbird.**](https://addons.mozilla.org/en-US/thunderbird/addon/markdown-here/)<br>
-[**Get it for Opera.**](https://addons.opera.com/en/extensions/details/markdown-here/)<br>
+[**Get it for Thunderbird.**](https://addons.mozilla.org/thunderbird/addon/markdown-here/)<br>
+[**Get it for Opera.**](https://addons.opera.com/extensions/details/markdown-here/)<br>
 [**Discuss it and ask questions in GitHub Discussions.**](https://github.com/adam-p/markdown-here/discussions)<br>
 
 *Markdown Here* is a Google Chrome, Firefox, Safari, Opera, and Thunderbird extension that lets you write email<sup>&dagger;</sup> in Markdown<sup>&Dagger;</sup> and render them before sending. It also supports syntax highlighting (just specify the language in a fenced code block).
