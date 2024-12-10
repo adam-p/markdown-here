@@ -90,7 +90,7 @@
     "message": "<strong>Si vous avez déjà mis un bloc de code dans un courriel, vous pouvez aider à améliorer Markdown Here.</strong> <a href=\"https://github.com/adam-p/markdown-here/blob/master/CONTRIBUTING.md\" target=\"_blank\"> CONTRIBUTING.md</a>"
   },
   "options_page__contributing_2": {
-    "message": "Aidez à rendre Markdown Here disponible dans votre langue. <a href=\"https://github.com/adam-p/markdown-here/blob/master/CONTRIBUTING.md#translation\" target=\"_blank\">Les traducations sont les bienvenues.</a>"
+    "message": "Aidez à rendre Markdown Here disponible dans votre langue. <a href=\"https://github.com/adam-p/markdown-here/blob/master/CONTRIBUTING.md#translation\" target=\"_blank\">Les traductions sont les bienvenues.</a>"
   },
   "options_page__contributing_title": {
     "message": "Contribuer",
