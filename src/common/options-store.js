@@ -1,6 +1,6 @@
 /*
  * Copyright Adam Pritchard 2015
- * MIT License : http://adampritchard.mit-license.org/
+ * MIT License : https://adampritchard.mit-license.org/
  */
 
 
@@ -18,7 +18,7 @@ if (typeof(Utils) === 'undefined' && typeof(Components) !== 'undefined') {
 // Common defaults
 var DEFAULTS = {
   'math-enabled': true,
-  'math-value': '<img src="https://chart.googleapis.com/chart?cht=tx&chl={urlmathcode}" alt="{mathcode}">',
+  'math-value': '<img src="https://latex.codecogs.com/png.image?\\dpi{120}\\inline&space;{urlmathcode}" alt="{mathcode}">',
   'hotkey': { shiftKey: false, ctrlKey: true, altKey: true, key: 'M' },
   'forgot-to-render-check-enabled': false,
   'header-anchors-enabled': false,
@@ -49,6 +49,7 @@ var DEFAULTS = {
 // TODO: Check for errors. See: https://code.google.com/chrome/extensions/dev/storage.html
 
 var ChromeOptionsStore = {
+
 
   // The options object will be passed to `callback`
   get: function(callback) {
@@ -122,8 +123,8 @@ var ChromeOptionsStore = {
 
   // The default values or URLs for our various options.
   defaults: {
-    'main-css': {'__defaultFromFile__': '/common/default.css', '__mimeType__': 'text/css'},
-    'syntax-css': {'__defaultFromFile__': '/common/highlightjs/styles/github.css', '__mimeType__': 'text/css'},
+    'main-css': {'__defaultFromFile__': '/common/default.css', '__dataType__': 'text'},
+    'syntax-css': {'__defaultFromFile__': '/common/highlightjs/styles/github.css', '__dataType__': 'text'},
     'math-enabled': DEFAULTS['math-enabled'],
     'math-value': DEFAULTS['math-value'],
     'hotkey': DEFAULTS['hotkey'],
@@ -140,7 +141,7 @@ var ChromeOptionsStore = {
   _maxlen: function() {
     // Note that chrome.storage.sync.QUOTA_BYTES_PER_ITEM is in bytes, but JavaScript
     // strings are UTF-16, so we need to divide by 2.
-    // Some JS string info: http://rosettacode.org/wiki/String_length#JavaScript
+    // Some JS string info: https://rosettacode.org/wiki/String_length#JavaScript
     if (chrome.storage && chrome.storage.sync && chrome.storage.sync.QUOTA_BYTES_PER_ITEM) {
       return chrome.storage.sync.QUOTA_BYTES_PER_ITEM / 2;
     }
@@ -286,8 +287,8 @@ var MozillaOptionsStore = {
   // The default values or URLs for our various options.
   defaults: {
     'local-first-run': true,
-    'main-css': {'__defaultFromFile__': 'resource://markdown_here_common/default.css', '__mimeType__': 'text/css'},
-    'syntax-css': {'__defaultFromFile__': 'resource://markdown_here_common/highlightjs/styles/github.css', '__mimeType__': 'text/css'},
+    'main-css': {'__defaultFromFile__': 'resource://markdown_here_common/default.css', '__dataType__': 'text/css'},
+    'syntax-css': {'__defaultFromFile__': 'resource://markdown_here_common/highlightjs/styles/github.css', '__dataType__': 'text/css'},
     'math-enabled': DEFAULTS['math-enabled'],
     'math-value': DEFAULTS['math-value'],
     'hotkey': DEFAULTS['hotkey'],
@@ -461,8 +462,8 @@ var SafariOptionsStore = {
 
   // The default values or URLs for our various options.
   defaults: {
-    'main-css': {'__defaultFromFile__': (typeof(safari) !== 'undefined' ? safari.extension.baseURI : '')+'markdown-here/src/common/default.css', '__mimeType__': 'text/css'},
-    'syntax-css': {'__defaultFromFile__': (typeof(safari) !== 'undefined' ? safari.extension.baseURI : '')+'markdown-here/src/common/highlightjs/styles/github.css', '__mimeType__': 'text/css'},
+    'main-css': {'__defaultFromFile__': (typeof(safari) !== 'undefined' ? safari.extension.baseURI : '')+'markdown-here/src/common/default.css', '__dataType__': 'text/css'},
+    'syntax-css': {'__defaultFromFile__': (typeof(safari) !== 'undefined' ? safari.extension.baseURI : '')+'markdown-here/src/common/highlightjs/styles/github.css', '__dataType__': 'text/css'},
     'math-enabled': DEFAULTS['math-enabled'],
     'math-value': DEFAULTS['math-value'],
     'hotkey': DEFAULTS['hotkey'],
@@ -491,7 +492,7 @@ if (!this.OptionsStore
 }
 /*? } */
 /*? if(platform==='thunderbird'){ */
-// Thunderbird, Postbox, Icedove
+// Thunderbird, Icedove
 if (!this.OptionsStore) {
   this.OptionsStore = MozillaOptionsStore;
 }
@@ -499,6 +500,14 @@ if (!this.OptionsStore) {
 
 this.OptionsStore._fillDefaults = function(prefsObj, callback) {
   var that = this;
+
+  // Upgrade the object, if necessary.
+  // Motivation: Our default for the LaTeX renderer used to be Google Charts API. Google
+  // discontinued the service and we switched the default to CodeCogs, but because it was
+  // the default, it will be set in many users' OptionsStore. We need to forcibly replace it.
+  if (typeof prefsObj['math-value'] === 'string' && prefsObj['math-value'].indexOf('chart.googleapis.com') >= 0) {
+    prefsObj['math-value'] = that.defaults['math-value'];
+  }
 
   var key, allKeys = [];
   for (key in that.defaults) {
@@ -524,31 +533,19 @@ this.OptionsStore._fillDefaults = function(prefsObj, callback) {
   }
 
   // This function may be asynchronous (if XHR occurs) or it may be a straight
-  // recursion.
+  // synchronous callback invocation.
   function doDefaultForKey(key, callback) {
     // Only take action if the key doesn't already have a value set.
     if (typeof(prefsObj[key]) === 'undefined') {
       if (that.defaults[key].hasOwnProperty('__defaultFromFile__')) {
-        var xhr = new window.XMLHttpRequest();
-
-        if (that.defaults[key]['__mimeType__']) {
-          xhr.overrideMimeType(that.defaults[key]['__mimeType__']);
-        }
-
-        // Get the default value from the indicated file.
-        xhr.open('GET', that.defaults[key]['__defaultFromFile__']);
-
-        xhr.onreadystatechange = function() {
-          if (this.readyState === this.DONE) {
-            // Assume 200 OK -- it's just a local call
-            prefsObj[key] = this.responseText;
-
+        Utils.getLocalFile(
+          that.defaults[key]['__defaultFromFile__'],
+          that.defaults[key]['__dataType__'] || 'text',
+          function(data) {
+            prefsObj[key] = data;
             callback();
-            return;
-          }
-        };
-
-        xhr.send();
+        });
+        return;
       }
       else {
         // Set the default.

@@ -19,5 +19,5 @@ Markdown Here主要針對Gmail與Thunderbird，但是也能在Yahoo與Hotmail運
 
 這是開源專案。 瀏覽Markdown Here的Github網頁來獲得使用手冊、更多資訊、回報問題，或是貢獻。
 
-http://markdown-here.com
+https://markdown-here.com
 https://github.com/adam-p/markdown-here

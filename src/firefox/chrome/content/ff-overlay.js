@@ -1,6 +1,6 @@
 /*
  * Copyright Adam Pritchard 2013
- * MIT License : http://adampritchard.mit-license.org/
+ * MIT License : https://adampritchard.mit-license.org/
  */
 
 "use strict";
@@ -180,7 +180,7 @@ var markdown_here = {
           var msgcomposeWindow = document.getElementById('msgcomposeWindow');
 
           // This handler will also get hit when drafts get saved, and other times.
-          // For all values, see: http://hg.mozilla.org/comm-central/file/c588ff89c281/mailnews/compose/public/nsIMsgCompose.idl#l36
+          // For all values, see: https://hg.mozilla.org/comm-central/file/c588ff89c281/mailnews/compose/public/nsIMsgCompose.idl#l36
           // Allow type coercion in the comparison
           var deliverMode = Number(msgcomposeWindow.getAttribute('msgtype'));
           if (deliverMode !== Components.interfaces.nsIMsgCompDeliverMode.Now &&

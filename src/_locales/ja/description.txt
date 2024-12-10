@@ -19,5 +19,5 @@ Chrome、Firefox、Safari、Opera、Thunderbirdの拡張機能として使用す
 
 Markdown Hereはオープンソースです。 Markdown Hereの使用方法、さらに詳しい情報、、バグの報告、開発に貢献したいときは、Githubにあるプロジェクトのページをへどうぞ。
 
-http://markdown-here.com
+https://markdown-here.com
 https://github.com/adam-p/markdown-here

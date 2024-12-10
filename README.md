@@ -1,16 +1,16 @@
 # ![Markdown Here logo](https://raw.github.com/adam-p/markdown-here/master/src/common/images/icon48.png) Markdown Here
 
-[**Visit the website.**](http://markdown-here.com)<br>
+[**Visit the website.**](https://markdown-here.com)<br>
 [**Get it for Chrome.**](https://chrome.google.com/webstore/detail/elifhakcjgalahccnjkneoccemfahfoa)<br>
 [**Get it for Firefox.**](https://addons.mozilla.org/firefox/addon/markdown-here/)<br>
 [**Get it for Safari.**](https://s3.amazonaws.com/markdown-here/markdown-here.safariextz)<br>
-[**Get it for Thunderbird and Postbox.**](https://addons.mozilla.org/thunderbird/addon/markdown-here/)<br>
+[**Get it for Thunderbird.**](https://addons.mozilla.org/thunderbird/addon/markdown-here/)<br>
 [**Get it for Opera.**](https://addons.opera.com/extensions/details/markdown-here/)<br>
-[**Discuss it and ask questions in the Google Group.**](https://groups.google.com/forum/?fromgroups#!forum/markdown-here/)<br>
+[**Discuss it and ask questions in GitHub Discussions.**](https://github.com/adam-p/markdown-here/discussions)<br>
 
 *Markdown Here* is a Google Chrome, Firefox, Safari, Opera, and Thunderbird extension that lets you write email<sup>&dagger;</sup> in Markdown<sup>&Dagger;</sup> and render them before sending. It also supports syntax highlighting (just specify the language in a fenced code block).
 
-Writing email with code in it is pretty tedious. Writing Markdown with code in it is easy. I found myself writing email in Markdown in the Github in-browser editor, then copying the preview into email. This is a pretty absurd workflow, so I decided create a tool to write and render Markdown right in the email.
+Writing email with code in it is pretty tedious. Writing Markdown with code in it is easy. I found myself writing email in Markdown in the GitHub in-browser editor, then copying the preview into email. This is a pretty absurd workflow, so I decided to create a tool to write and render Markdown right in the email.
 
 To discover what can be done with Markdown in *Markdown Here*, check out the [Markdown Here Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet) and the other [wiki pages](https://github.com/adam-p/markdown-here/wiki).
 
@@ -62,7 +62,7 @@ After installing, make sure to restart Firefox/Thunderbird!
 #### Manual/Development
 
 1. Clone this repo.
-2. Follow the instructions in the MDN ["Setting up an extension development environment"](https://developer.mozilla.org/en/Setting_up_extension_development_environment) article.
+2. Follow the instructions in the MDN ["Your first WebExtension"](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Your_first_WebExtension#installing) article.
 
 ### Safari
 
@@ -121,7 +121,7 @@ In Hotmail and Yahoo (which don't put the original in a `blockquote`), and optio
 
 Sometimes you don't want to convert the entire email; sometimes your email isn't entirely Markdown. To convert only part of the email, select the text (with your mouse or keyboard), right-click on it, and click the "Markdown Toggle" menu item. Your selection is magically rendered into pretty HTML.
 
-To revert back to Markdown, just put your cursor anywhere in the block of converted text, right click, and click the "Markdown Toggle" menu item again. Now it's magically back to the original Markdown.
+To revert back to Markdown, just put your cursor anywhere in the block of converted text, right-click, and click the "Markdown Toggle" menu item again. Now it's magically back to the original Markdown.
 
 ![screenshot of selection conversion](https://raw.github.com/adam-p/markdown-here/master/store-assets/markdown-here-image2.gimp.png)
 
@@ -159,9 +159,9 @@ See the [Compatibility wiki page](https://github.com/adam-p/markdown-here/wiki/C
 
 ## Notes and Miscellaneous
 
-* *Markdown Here* uses [Github Flavored Markdown](http://github.github.com/github-flavored-markdown/), with the limitation that GFM special links are not supported ([issue #11](https://github.com/adam-p/markdown-here/issues/11)); nor will they be, as MDH is not Github-specific.
+* *Markdown Here* uses [Github Flavored Markdown](https://github.github.com/gfm/), with the limitation that GFM special links are not supported ([issue #11](https://github.com/adam-p/markdown-here/issues/11)); nor will they be, as MDH is not Github-specific.
 
-* Available languages for syntax highlighting (and the way they should be written in the fenced code block) can be seen on the [highlight.js demo page](http://softwaremaniacs.org/media/soft/highlight/test.html).
+* Available languages for syntax highlighting (and the way they should be written in the fenced code block) can be seen on the [highlight.js demo page](https://highlightjs.org/demo).
 
 * Images embedded inline in your Markdown will be retained when you "Markdown Toggle". Gmail allows you to put images inline in your email -- this can be much easier than referencing an external image.
 
@@ -184,7 +184,7 @@ node build.js
 ```
 
 
-### Chrome and Opera extension
+### Chrome, Opera, and Firefox (WebExtension) extension
 
 Create a file with a `.zip` extension containing these files and directories:
 
@@ -192,9 +192,10 @@ Create a file with a `.zip` extension containing these files and directories:
 manifest.json
 common/
 chrome/
+_locales
 ```
 
-### Firefox/Thunderbird extension
+### Thunderbird (XUL) extension
 
 Create a file with a `.xpi` extension containing these files and directories:
 
@@ -215,7 +216,7 @@ Use the Safari Extension Builder.
 
 See the [issues list](https://github.com/adam-p/markdown-here/issues) and the [Notes Wiki](https://github.com/adam-p/markdown-here/wiki/Development-Notes). All ideas, bugs, plans, complaints, and dreams will end up in one of those two places.
 
-Feel free to create a feature request issue if what you want isn't already there. If you'd prefer a less formal approach to floating an idea, post to the ["markdown-here" Google Group](https://groups.google.com/forum/?fromgroups=#!forum/markdown-here).
+Feel free to create a feature request issue if what you want isn't already there. If you'd prefer a less formal approach to floating an idea, post to our [GitHub Discussions](https://github.com/adam-p/markdown-here/discussions).
 
 It also takes a fair bit of work to stay up-to-date with the latest changes in all the applications and web sites where Markdown Here works.
 
@@ -223,27 +224,27 @@ It also takes a fair bit of work to stay up-to-date with the latest changes in a
 
 *Markdown Here* was coded on the shoulders of giants.
 
-* Markdown-to-HTML: [chjj / marked](https://github.com/chjj/marked)
-* Syntax highlighting: [isagalaev / highlight.js](https://github.com/isagalaev/highlight.js)
-* HTML-to-text: [mtrimpe / jsHtmlToText](https://github.com/mtrimpe/jsHtmlToText)
+* Markdown-to-HTML: [chjj/marked](https://github.com/chjj/marked)
+* Syntax highlighting: [isagalaev/highlight.js](https://github.com/isagalaev/highlight.js)
+* HTML-to-text: [mtrimpe/jsHtmlToText](https://github.com/mtrimpe/jsHtmlToText)
 
 ## Feedback
 
-All bugs, feature requests, pull requests, feedback, etc., are welcome. [Create an issue](https://github.com/adam-p/markdown-here/issues). Or [post to the "markdown-here" Google Group](https://groups.google.com/forum/?fromgroups=#!forum/markdown-here).
+All bugs, feature requests, pull requests, feedback, etc., are welcome. [Create an issue](https://github.com/adam-p/markdown-here/issues). Or [post to out GitHub Discussions](https://github.com/adam-p/markdown-here/discussions).
 
 ## License
 
 ### Code
 
-MIT License: http://adampritchard.mit-license.org/ or see [the `LICENSE` file](https://github.com/adam-p/markdown-here/blob/master/LICENSE).
+MIT License: https://adampritchard.mit-license.org/ or see [the `LICENSE` file](https://github.com/adam-p/markdown-here/blob/master/LICENSE).
 
 ### Logo
 
-Copyright 2015, [Austin Anderson](http://protractor.ninja/). Licensed to Markdown Here under the [MDH contributor license agreement](https://github.com/adam-p/markdown-here/blob/master/CLA-individual.md).
+Copyright 2015, [Austin Anderson](https://www.angerson.org/). Licensed to Markdown Here under the [MDH contributor license agreement](https://github.com/adam-p/markdown-here/blob/master/CLA-individual.md).
 
 ### Other images
 
-[Creative Commons Attribution 3.0 Unported (CC BY 3.0) License](http://creativecommons.org/licenses/by/3.0/)
+[Creative Commons Attribution 3.0 Unported (CC BY 3.0) License](https://creativecommons.org/licenses/by/3.0/)
 
 ---
 

@@ -13,7 +13,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-HTML decoding functionality provided by: http://code.google.com/p/google-trekker/
+HTML decoding functionality provided by: https://code.google.com/archive/p/google-trekker/
 */
 
 /*
@@ -41,7 +41,7 @@ function htmlToText(html, extensions) {
         // Remove !DOCTYPE
         .replace(/<!DOCTYPE.*?>/ig, "");
 
-    /* I scanned http://en.wikipedia.org/wiki/HTML_element for all html tags.
+    /* I scanned https://en.wikipedia.org/wiki/HTML_element for all html tags.
     I put those tags that should affect plain text formatting in two categories:
     those that should be replaced with two newlines and those that should be
     replaced with one newline. */

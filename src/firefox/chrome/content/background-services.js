@@ -1,6 +1,6 @@
 /*
  * Copyright Adam Pritchard 2013
- * MIT License : http://adampritchard.mit-license.org/
+ * MIT License : https://adampritchard.mit-license.org/
  */
 
 /*
@@ -332,9 +332,6 @@ function openTab(url) {
       windowMediator.getMostRecentWindow('mail:3pane')
                     .document.getElementById('tabmail')
                     .openTab('contentTab', {contentPage: url});
-  }
-  else if (navigator.userAgent.indexOf('Postbox') >= 0) {
-      /* Haven't yet figured out how to open a tab in Postbox */
   }
   else {
       var win = windowMediator.getMostRecentWindow('navigator:browser');

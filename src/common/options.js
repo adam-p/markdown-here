@@ -1,6 +1,6 @@
 /*
  * Copyright Adam Pritchard 2015
- * MIT License : http://adampritchard.mit-license.org/
+ * MIT License : https://adampritchard.mit-license.org/
  */
 
 "use strict";
@@ -47,14 +47,10 @@ function onLoad() {
   //
 
   // Get the available highlight.js styles.
-  xhr = new XMLHttpRequest();
-  xhr.overrideMimeType('application/json');
-  xhr.open('GET', 'highlightjs/styles/styles.json');
-  xhr.onreadystatechange = function() {
-    if (this.readyState === this.DONE) {
-      // Assume 200 OK -- it's just a local call
-      var syntaxStyles = JSON.parse(this.responseText);
-
+  Utils.getLocalFile(
+    Utils.getLocalURL('/common/highlightjs/styles/styles.json'),
+    'json',
+    function(syntaxStyles) {
       for (var name in syntaxStyles) {
         cssSyntaxSelect.options.add(new Option(name, syntaxStyles[name]));
       }
@@ -63,9 +59,7 @@ function onLoad() {
       cssSyntaxSelect.selectedIndex = cssSyntaxSelect.options.length - 1;
 
       cssSyntaxSelect.addEventListener('change', cssSyntaxSelectChange);
-    }
-  };
-  xhr.send();
+    });
 
   //
   // Restore previously set options (asynchronously)
@@ -106,7 +100,6 @@ function onLoad() {
   // Special effort is required to open the test page in these clients.
   if (navigator.userAgent.indexOf('Thunderbird') >= 0 ||
       navigator.userAgent.indexOf('Icedove') >= 0 ||
-      navigator.userAgent.indexOf('Postbox') >= 0 ||
       navigator.userAgent.indexOf('Zotero') >= 0) {
     $('#tests-link').click(function(event) {
       event.preventDefault();
@@ -119,14 +112,25 @@ function onLoad() {
   // Hide the tests link if the page isn't available. It may be stripped out
   // of extension packages.
 
-  // Check if our test file exists.
-  Utils.getLocalFile('./test/index.html', 'text/html', function(_, err) {
-    // The test files aren't present, so hide the button.
-    if (err) {
+  // Check if our test file exists. Note that we can't use Utils.getLocalFile as it throws
+  // an asynchronous error if the file isn't found.
+  // TODO: When Utils.getLocalFile is changed to return a promise, use it here.
+  fetch('./test/index.html')
+    .then(response => {
+      if (!response.ok) {
+        // The test files aren't present, so hide the button.
+        $('#tests-link').hide();
+      }
+      else {
+        // When the file is absent, Firefox still gives a 200 status, but will throw an
+        // error when the response is read.
+        return response.text();
+      }
+    })
+    .catch(err => {
       // The test files aren't present, so hide the button.
       $('#tests-link').hide();
-    }
-  });
+    });
 
   // Older Thunderbird may try to open this options page in a new ChromeWindow, and it
   // won't work. So in that case we need to tell the user how they can actually open the
@@ -353,16 +357,12 @@ document.querySelector('#markdown-toggle-button').addEventListener('click', mark
 // Reset the main CSS to default.
 function resetCssEdit() {
   // Get the default value.
-  var xhr = new XMLHttpRequest();
-  xhr.overrideMimeType(OptionsStore.defaults['main-css']['__mimeType__']);
-  xhr.open('GET', OptionsStore.defaults['main-css']['__defaultFromFile__']);
-  xhr.onreadystatechange = function() {
-    if (this.readyState === this.DONE) {
-      // Assume 200 OK -- it's just a local call
-      cssEdit.value = this.responseText;
-    }
-  };
-  xhr.send();
+  Utils.getLocalFile(
+    OptionsStore.defaults['main-css']['__defaultFromFile__'],
+    OptionsStore.defaults['main-css']['__dataType__'],
+    function(defaultValue) {
+      cssEdit.value = defaultValue;
+    });
 }
 document.getElementById('reset-button').addEventListener('click', resetCssEdit, false);
 
@@ -381,29 +381,19 @@ function cssSyntaxSelectChange() {
   }
 
   // Get the CSS for the selected theme.
-  var xhr = new XMLHttpRequest();
-  xhr.overrideMimeType('text/css');
-  xhr.open('GET', 'highlightjs/styles/'+selected);
-  xhr.onreadystatechange = function() {
-    if (this.readyState === this.DONE) {
-      // Assume 200 OK -- it's just a local call
-      cssSyntaxEdit.value = this.responseText;
-    }
-  };
-  xhr.send();
+  Utils.getLocalFile(
+    Utils.getLocalURL('/common/highlightjs/styles/'+selected),
+    'text',
+    css => {
+      cssSyntaxEdit.value = css;
+    });
 }
 
 function loadChangelist() {
-  var xhr = new XMLHttpRequest();
-  xhr.overrideMimeType('text/plain');
-
-  // Get the changelist from a local file.
-  xhr.open('GET', 'CHANGES.md');
-  xhr.onreadystatechange = function() {
-    if (this.readyState === this.DONE) {
-      // Assume 200 OK -- it's just a local call
-      var changes = this.responseText;
-
+  Utils.getLocalFile(
+    Utils.getLocalURL('/common/CHANGES.md'),
+    'text',
+    function(changes) {
       var markedOptions = {
             gfm: true,
             pedantic: false,
@@ -426,9 +416,7 @@ function loadChangelist() {
         // Move the changelist section up in the page
         $('#changelist-container').insertAfter('#pagehead');
       }
-    }
-  };
-  xhr.send();
+    });
 }
 
 // Choose one of the donate pleas to use, and update the donate info so we can

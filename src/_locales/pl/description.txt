@@ -19,5 +19,5 @@ Dostępne jako rozszerzenie dla programów Chrome, Firefox, Safari, Opera oraz T
 
 Ten projekt tworzy otwarte oprogramowanie. Odwiedź stronę GitHub projektu Markdown Here aby znaleźć pełne instrukcje, więcej informacji, żeby zgłaszać błędy, albo pomóc w rozwoju projektu.
 
-http://markdown-here.com
+https://markdown-here.com
 https://github.com/adam-p/markdown-here

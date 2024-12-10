@@ -1,8 +1,8 @@
 # Contributing.md
 
 * Project page: https://github.com/adam-p/markdown-here
-* Google Group: https://groups.google.com/forum/#!forum/markdown-here
-* Website: http://markdown-here.com
+* GitHub Discussions: https://github.com/adam-p/markdown-here/discussions
+* Website: https://markdown-here.com
 * Email me: pritchard.adam@gmail.com
 
 ## Code contributions
@@ -55,7 +55,7 @@ If you do make any translation changes, or if you have any questions or problems
 
 * [Eugene Fryntov](https://crowdin.com/profile/efryntov)
 
-* [Oscar del Pozo](https://crowdin.com/profile/oskar7) 
+* [Oscar del Pozo](https://crowdin.com/profile/oskar7)
 
 * [Rafa Couto](https://crowdin.com/profile/rafacouto)
 

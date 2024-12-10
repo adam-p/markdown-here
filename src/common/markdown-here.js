@@ -1,6 +1,6 @@
 /*
  * Copyright Adam Pritchard 2015
- * MIT License : http://adampritchard.mit-license.org/
+ * MIT License : https://adampritchard.mit-license.org/
  */
 
 /*
@@ -109,7 +109,7 @@ function findFocusedElem(document) {
 // a rich-edit compose element).
 function elementCanBeRendered(elem) {
   // See here for more info about what we're checking:
-  // http://stackoverflow.com/a/3333679/729729
+  // https://stackoverflow.com/a/3333679/729729
   return (elem.contentEditable === true || elem.contentEditable === 'true' ||
           elem.contenteditable === true || elem.contenteditable === 'true' ||
           (elem.ownerDocument && elem.ownerDocument.designMode === 'on'));
@@ -430,7 +430,7 @@ function findMarkdownHereWrapper(focusedElem) {
 // Finds all Markdown Here wrappers in the given range. Returns an array of the
 // wrapper elements, or null if no wrappers found.
 function findMarkdownHereWrappersInRange(range) {
-  // Adapted from: http://stackoverflow.com/a/1483487/729729
+  // Adapted from: https://stackoverflow.com/a/1483487/729729
   var containerElement = range.commonAncestorContainer;
   if (containerElement.nodeType != containerElement.ELEMENT_NODE) {
     containerElement = containerElement.parentNode;
@@ -542,7 +542,7 @@ function unrenderMarkdown(wrapperElem) {
   var originalMdHtml = rawHolder.getAttribute('title');
   originalMdHtml = originalMdHtml.slice(WRAPPER_TITLE_PREFIX.length).replace(/\n/g, '');
 
-  // Thunderbird and Postbox break the long title up into multiple lines, which
+  // Thunderbird breaks the long title up into multiple lines, which
   // wrecks our ability to un-base64 it. So strip whitespace.
   originalMdHtml = originalMdHtml.replace(/\s/g, '');
 

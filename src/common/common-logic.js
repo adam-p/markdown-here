@@ -1,6 +1,6 @@
 /*
  * Copyright Adam Pritchard 2013
- * MIT License : http://adampritchard.mit-license.org/
+ * MIT License : https://adampritchard.mit-license.org/
  */
 
 /*
@@ -38,11 +38,12 @@ function getUpgradeNotification(optionsURL, responseCallback) {
 
   Utils.getLocalFile(
     Utils.getLocalURL('/common/upgrade-notification.html'),
-    'text/html',
+    'text',
     function(html) {
       // Get the logo image data
-      Utils.getLocalFileAsBase64(
+      Utils.getLocalFile(
         Utils.getLocalURL('/common/images/icon32.png'),
+        'base64',
         function(logoBase64) {
           // Do some rough template replacement
           html = html.replace('{{optionsURL}}', optionsURL)
@@ -72,7 +73,7 @@ function getForgotToRenderPromptContent(responseCallback) {
 
   Utils.getLocalFile(
     Utils.getLocalURL('/common/forgot-to-render-prompt.html'),
-    'text/html',
+    'text',
     function(html) {
       html = html.replace('{{forgot_to_render_prompt_title}}', Utils.getMessage('forgot_to_render_prompt_title'))
                  .replace('{{forgot_to_render_prompt_info}}', Utils.getMessage('forgot_to_render_prompt_info'))
@@ -82,8 +83,9 @@ function getForgotToRenderPromptContent(responseCallback) {
                  .replace('{{forgot_to_render_send_button}}', Utils.getMessage('forgot_to_render_send_button'));
 
       // Get the logo image data
-      Utils.getLocalFileAsBase64(
+      Utils.getLocalFile(
         Utils.getLocalURL('/common/images/icon48.png'),
+        'base64',
         function(logoBase64) {
           // Do some rough template replacement
           html = html.replace('{{logoBase64}}', logoBase64);
@@ -110,7 +112,7 @@ This has two annoying effects for us:
 away, our message box's focused button might get immediately `click`ed.
 
 2. If the user hits `space` to dismiss our message box, any button underneath
-(such as on Gmail's "Please specificy at least one recipient" box) might get
+(such as on Gmail's "Please specify at least one recipient" box) might get
 clicked.
 */
 
@@ -127,9 +129,6 @@ var WATCHED_PROPERTY = 'markdownHereForgotToRenderWatched';
 function getForgotToRenderButtonSelector(elem) {
   if (elem.ownerDocument.location.host.indexOf('mail.google.') >= 0) {
     return '[role="button"][tabindex="1"]';
-  }
-  else if (elem.ownerDocument.location.host.indexOf('inbox.google.') >= 0) {
-    return '[role="button"][tabindex="0"][jsaction$=".send"]';
   }
   else if (elem.ownerDocument.location.host.indexOf('fastmail.') >= 0) {
     return '[class~="s-send"]';

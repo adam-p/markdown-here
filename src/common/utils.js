@@ -1,6 +1,6 @@
 /*
  * Copyright Adam Pritchard 2015
- * MIT License : http://adampritchard.mit-license.org/
+ * MIT License : https://adampritchard.mit-license.org/
  */
 
 /*
@@ -119,9 +119,8 @@ function walkDOM(node, func) {
 }
 
 
-// Next three functions from: http://stackoverflow.com/a/1483487/729729
+// Next three functions from: https://stackoverflow.com/a/1483487/729729
 // Returns true if `node` is in `range`.
-// NOTE: This function is broken in Postbox: https://github.com/adam-p/markdown-here/issues/179
 function rangeIntersectsNode(range, node) {
   var nodeRange;
 
@@ -230,7 +229,7 @@ function isElementinDocument(element) {
 }
 
 
-// From: http://stackoverflow.com/a/3819589/729729
+// From: https://stackoverflow.com/a/3819589/729729
 // Postbox doesn't support `node.outerHTML`.
 function outerHTML(node, doc) {
   // if IE, Chrome take the internal method otherwise build one
@@ -245,7 +244,7 @@ function outerHTML(node, doc) {
 }
 
 
-// From: http://stackoverflow.com/a/5499821/729729
+// From: https://stackoverflow.com/a/5499821/729729
 var charsToReplace = {
   '&': '&amp;',
   '<': '&lt;',
@@ -303,7 +302,7 @@ function getLocalURL(url) {
   /*? if (platform==='chrome' || platform==='firefox') { */
   if (typeof(chrome) !== 'undefined') {
     matched = true;
-    return chrome.extension.getURL(url);
+    return chrome.runtime.getURL(url);
   }
   /*? } */
   /*? if (platform==='safari') { */
@@ -337,90 +336,47 @@ function getLocalURL(url) {
 
 
 // Makes an asynchrous XHR request for a local file (basically a thin wrapper).
-// `mimetype` is optional. `callback` will be called with the responseText as
-// argument.
-// If error occurs, `callback`'s second parameter will be an error.
-function getLocalFile(url, mimetype, callback) {
-  if (!callback) {
-    // optional mimetype not provided
-    callback = mimetype;
-    mimetype = null;
-  }
+// `dataType` must be one of 'text', 'json', or 'base64'.
+// `callback` will be called with the response value, of a type depending on `dataType`.
+// Errors are not expected for local files, and will result in an exception being thrown asynchrously.
+// TODO: Return a promise instead of using a callback. This will allow returning an error
+// properly, and then this can be used in options.js when checking for the existence of
+// the test file.
+function getLocalFile(url, dataType, callback) {
+  fetch(url)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error status: ${response.status}`);
+      }
 
-  var xhr = new window.XMLHttpRequest();
-  if (mimetype) {
-    xhr.overrideMimeType(mimetype);
-  }
-  xhr.open('GET', url);
-
-  xhr.onload = function() {
-    if (callback) {
-     callback(this.responseText);
-     callback = null;
-    }
-  };
-
-  xhr.onerror = function(e) {
-    if (callback) {
-      callback(null, e);
-      callback = null;
-    }
-  };
-
-  try {
-    // On some platforms, xhr.send throws an error if the url is not found.
-    // On some platforms, it will call onerror and on some it won't.
-    xhr.send();
-  }
-  catch(e) {
-    if (callback) {
-      callback(null, e);
-      callback = null;
-      return;
-    }
-  }
-}
-
-
-// Does async XHR request to get data at `url`, then passes it to `callback`
-// Base64-encoded.
-// Intended to be used get the logo image file in a form that can be put in a
-// data-url image element.
-// If error occurs, `callback`'s second parameter will be an error.
-function getLocalFileAsBase64(url, callback) {
-  var xhr = new window.XMLHttpRequest();
-  xhr.open('GET', url);
-  xhr.responseType = 'arraybuffer';
-
-  xhr.onload = function() {
-    var uInt8Array = new Uint8Array(this.response);
-    var base64Data = base64EncArr(uInt8Array);
-
-    if (callback) {
-      callback(base64Data);
-      callback = null;
-    }
-  };
-
-  xhr.onerror = function(e) {
-    if (callback) {
-      callback(null, e);
-      callback = null;
-    }
-  };
-
-  try {
-    // On some platforms, xhr.send throws an error if the url is not found.
-    // On some platforms, it will call onerror and on some it won't.
-    xhr.send();
-  }
-  catch(e) {
-    if (callback) {
-      callback(null, e);
-      callback = null;
-      return;
-    }
-  }
+      switch (dataType) {
+        case 'text':
+          return response.text();
+        case 'json':
+          return response.json();
+        case 'base64':
+          return response.blob();
+        default:
+          throw new Error(`Unknown dataType: ${dataType}`);
+      }
+    })
+    .then(data => {
+      switch (dataType) {
+        case 'text':
+        case 'json':
+          callback(data);
+          break;
+        case 'base64':
+          data.arrayBuffer().then(function(buffer) {
+            var uInt8Array = new Uint8Array(buffer);
+            var base64Data = base64EncArr(uInt8Array);
+            callback(base64Data);
+          });
+      }
+    })
+    .catch(err => {
+        throw new Error(`Error fetching local file: ${url}: ${err}`);
+    });
 }
 
 
@@ -585,7 +541,7 @@ function getTopURL(win, justHostname) {
   var url;
   // We still want a useful value if we're in Thunderbird, etc.
   if (!win.location.href || win.location.href === 'about:blank') {
-    url = win.navigator.userAgent.match(/Thunderbird|Postbox'/);
+    url = win.navigator.userAgent.match(/Thunderbird'/);
     if (url) {
       url = url[0];
     }
@@ -607,22 +563,11 @@ function getTopURL(win, justHostname) {
 // horribly slow rendering. For info see:
 // https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/setTimeout#Inactive_tabs
 // As an alternative, we can use a local XHR request/response.
-
+// This function just does a simple, local async request and then calls the callback.
 function asyncCallbackXHR(callback) {
-  var xhr = new window.XMLHttpRequest();
-  xhr.open('HEAD', getLocalURL('/common/CHANGES.md'));
-
-  xhr.onload = callback;
-  xhr.onerror = callback;
-
-  try {
-    // On some platforms, xhr.send throws an error if the url is not found.
-    // On some platforms, it will call onerror and on some it won't.
-    xhr.send();
-  }
-  catch(e) {
-    asyncCallbackTimeout(callback);
-  }
+  fetch(getLocalURL('/common/CHANGES.md'), {method: 'HEAD'})
+    .then(callback)
+    .catch(callback);
 }
 
 function asyncCallbackTimeout(callback) {
@@ -945,7 +890,7 @@ function getSafariStringBundle(callback) {
 
   function getStringBundle(locale, callback) {
     var url = getLocalURL('/_locales/' + locale + '/messages.json');
-    getLocalFile(url, 'application/json', function(data, err) {
+    getLocalFile(url, 'json', function(data, err) {
       if (err) {
         return callback(null, err);
       }
@@ -1046,6 +991,17 @@ function getMessage(messageID) {
   }
 
   return message;
+}
+
+// Returns true if the semver version string in a is greater than the one in b.
+// If a or b isn't a version string, a simple string comparison is returned.
+// If a or b is falsy, false is returned.
+// From https://stackoverflow.com/a/55466325
+function semverGreaterThan(a, b) {
+  if (!a || !b) {
+    return false;
+  }
+  return a.localeCompare(b, undefined, { numeric: true }) === 1;
 }
 
 
@@ -1242,7 +1198,6 @@ Utils.getDocumentFragmentHTML = getDocumentFragmentHTML;
 Utils.isElementDescendant = isElementDescendant;
 Utils.getLocalURL = getLocalURL;
 Utils.getLocalFile = getLocalFile;
-Utils.getLocalFileAsBase64 = getLocalFileAsBase64;
 Utils.fireMouseClick = fireMouseClick;
 Utils.MARKDOWN_HERE_EVENT = MARKDOWN_HERE_EVENT;
 Utils.makeRequestToPrivilegedScript = makeRequestToPrivilegedScript;
@@ -1264,6 +1219,7 @@ Utils.getSafariStringBundle = getSafariStringBundle;
 /*? } */
 Utils.registerStringBundleLoadListener = registerStringBundleLoadListener;
 Utils.getMessage = getMessage;
+Utils.semverGreaterThan = semverGreaterThan;
 Utils.utf8StringToBase64 = utf8StringToBase64;
 Utils.base64ToUTF8String = base64ToUTF8String;
 
