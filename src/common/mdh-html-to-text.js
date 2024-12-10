@@ -105,6 +105,12 @@ MdhHtmlToText.prototype._preprocess = function() {
   // to remain intact.
   this.excludeTagBlocks('blockquote', true);
 
+  // Try to leave intact the links that Gmail adds when tagging someone on an email
+  this.preprocessInfo.html = this.preprocessInfo.html.replace(
+    /<a (class="gmail_plusreply"[^>]+)>([^<]*)<\/a>/ig,
+    '&lt;a $1&gt;$2&lt;\/a&gt;'
+  );
+
   // Try to leave intact the line that Gmail adds that says:
   //   On such-a-date, such-a-person <email addy> wrote:
   this.preprocessInfo.html = this.preprocessInfo.html.replace(
