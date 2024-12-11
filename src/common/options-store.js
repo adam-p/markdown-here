@@ -17,7 +17,7 @@ if (typeof(Utils) === 'undefined' && typeof(Components) !== 'undefined') {
 
 // Common defaults
 var DEFAULTS = {
-  'math-enabled': true,
+  'math-enabled': false,
   'math-value': '<img src="https://latex.codecogs.com/png.image?\\dpi{120}\\inline&space;{urlmathcode}" alt="{mathcode}">',
   'hotkey': { shiftKey: false, ctrlKey: true, altKey: true, key: 'M' },
   'forgot-to-render-check-enabled': false,
