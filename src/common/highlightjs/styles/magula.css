@@ -1,3 +1,11 @@
+pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 1em
+}
+code.hljs {
+  padding: 3px 5px
+}
 /*
 Description: Magula style for highligh.js
 Author: Ruslan Keba <rukeba@gmail.com>
@@ -6,117 +14,53 @@ Version: 1.0
 Date: 2009-01-03
 Music: Aphex Twin / Xtal
 */
-
 .hljs {
-  display: block;
-  overflow-x: auto;
-  padding: 0.5em;
   background-color: #f4f4f4;
-  -webkit-text-size-adjust: none;
+  color: black
 }
-
-.hljs,
 .hljs-subst {
-  color: black;
+  color: black
 }
-
 .hljs-string,
 .hljs-title,
-.hljs-parent,
-.hljs-tag .hljs-value,
-.hljs-rules .hljs-value,
-.hljs-preprocessor,
-.hljs-pragma,
-.ruby .hljs-symbol,
-.ruby .hljs-symbol .hljs-string,
-.hljs-template_tag,
-.django .hljs-variable,
-.smalltalk .hljs-class,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-attribute,
 .hljs-addition,
-.hljs-flow,
-.hljs-stream,
-.bash .hljs-variable,
-.apache .hljs-cbracket,
-.coffeescript .hljs-attribute {
-  color: #050;
+.hljs-variable,
+.hljs-template-tag,
+.hljs-template-variable {
+  color: #050
 }
-
 .hljs-comment,
-.hljs-annotation,
-.hljs-template_comment,
-.diff .hljs-header,
-.hljs-chunk {
-  color: #777;
+.hljs-quote {
+  color: #777
 }
-
 .hljs-number,
-.hljs-date,
 .hljs-regexp,
 .hljs-literal,
-.smalltalk .hljs-symbol,
-.smalltalk .hljs-char,
-.hljs-change,
-.tex .hljs-special {
-  color: #800;
+.hljs-type,
+.hljs-link {
+  color: #800
 }
-
-.hljs-label,
-.hljs-javadoc,
-.ruby .hljs-string,
-.hljs-decorator,
-.hljs-filter .hljs-argument,
-.hljs-localvars,
-.hljs-array,
-.hljs-attr_selector,
-.hljs-pseudo,
-.hljs-pi,
-.hljs-doctype,
 .hljs-deletion,
-.hljs-envvar,
-.hljs-shebang,
-.apache .hljs-sqbracket,
-.nginx .hljs-built_in,
-.tex .hljs-formula,
-.hljs-prompt,
-.clojure .hljs-attribute {
-  color: #00e;
+.hljs-meta {
+  color: #00e
 }
-
 .hljs-keyword,
-.hljs-id,
-.hljs-phpdoc,
-.hljs-dartdoc,
+.hljs-selector-tag,
+.hljs-doctag,
 .hljs-title,
+.hljs-section,
 .hljs-built_in,
-.smalltalk .hljs-class,
-.hljs-winutils,
-.bash .hljs-variable,
-.apache .hljs-tag,
-.xml .hljs-tag,
-.tex .hljs-command,
-.hljs-request,
-.hljs-status {
+.hljs-tag,
+.hljs-name {
   font-weight: bold;
-  color: navy;
+  color: navy
 }
-
-.nginx .hljs-built_in {
-  font-weight: normal;
+.hljs-emphasis {
+  font-style: italic
 }
-
-.coffeescript .javascript,
-.javascript .xml,
-.tex .hljs-formula,
-.xml .javascript,
-.xml .vbscript,
-.xml .css,
-.xml .hljs-cdata {
-  opacity: 0.5;
+.hljs-strong {
+  font-weight: bold
 }
-
-/* --- */
-.apache .hljs-tag {
-  font-weight: bold;
-  color: blue;
-}
-

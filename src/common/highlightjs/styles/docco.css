@@ -1,136 +1,83 @@
+pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 1em
+}
+code.hljs {
+  padding: 3px 5px
+}
 /*
 Docco style used in http://jashkenas.github.com/docco/ converted by Simon Madine (@thingsinjars)
 */
-
 .hljs {
-  display: block;
-  overflow-x: auto;
-  padding: 0.5em;
   color: #000;
-  background: #f8f8ff;
-  -webkit-text-size-adjust: none;
+  background: #f8f8ff
 }
-
 .hljs-comment,
-.hljs-template_comment,
-.diff .hljs-header,
-.hljs-javadoc {
+.hljs-quote {
   color: #408080;
-  font-style: italic;
+  font-style: italic
 }
-
 .hljs-keyword,
-.assignment,
+.hljs-selector-tag,
 .hljs-literal,
-.css .rule .hljs-keyword,
-.hljs-winutils,
-.javascript .hljs-title,
-.lisp .hljs-title,
 .hljs-subst {
-  color: #954121;
+  color: #954121
 }
-
-.hljs-number,
-.hljs-hexcolor {
-  color: #40a070;
+.hljs-number {
+  color: #40a070
 }
-
 .hljs-string,
-.hljs-tag .hljs-value,
-.hljs-phpdoc,
-.hljs-dartdoc,
-.tex .hljs-formula {
-  color: #219161;
+.hljs-doctag {
+  color: #219161
 }
-
-.hljs-title,
-.hljs-id {
-  color: #19469d;
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-section,
+.hljs-type {
+  color: #19469d
 }
 .hljs-params {
-  color: #00f;
+  color: #00f
 }
-
-.javascript .hljs-title,
-.lisp .hljs-title,
-.hljs-subst {
-  font-weight: normal;
-}
-
-.hljs-class .hljs-title,
-.haskell .hljs-label,
-.tex .hljs-command {
+.hljs-title {
   color: #458;
-  font-weight: bold;
+  font-weight: bold
 }
-
 .hljs-tag,
-.hljs-tag .hljs-title,
-.hljs-rules .hljs-property,
-.django .hljs-tag .hljs-keyword {
+.hljs-name,
+.hljs-attribute {
   color: #000080;
-  font-weight: normal;
+  font-weight: normal
 }
-
-.hljs-attribute,
 .hljs-variable,
-.instancevar,
-.lisp .hljs-body {
-  color: #008080;
+.hljs-template-variable {
+  color: #008080
 }
-
-.hljs-regexp {
-  color: #b68;
+.hljs-regexp,
+.hljs-link {
+  color: #b68
 }
-
-.hljs-class {
-  color: #458;
-  font-weight: bold;
-}
-
 .hljs-symbol,
-.ruby .hljs-symbol .hljs-string,
-.ruby .hljs-symbol .hljs-keyword,
-.ruby .hljs-symbol .keymethods,
-.lisp .hljs-keyword,
-.tex .hljs-special,
-.input_number {
-  color: #990073;
+.hljs-bullet {
+  color: #990073
 }
-
-.builtin,
-.constructor,
-.hljs-built_in,
-.lisp .hljs-title {
-  color: #0086b3;
+.hljs-built_in {
+  color: #0086b3
 }
-
-.hljs-preprocessor,
-.hljs-pragma,
-.hljs-pi,
-.hljs-doctype,
-.hljs-shebang,
-.hljs-cdata {
+.hljs-meta {
   color: #999;
-  font-weight: bold;
+  font-weight: bold
 }
-
 .hljs-deletion {
-  background: #fdd;
+  background: #fdd
 }
-
 .hljs-addition {
-  background: #dfd;
+  background: #dfd
 }
-
-.diff .hljs-change {
-  background: #0086b3;
+.hljs-emphasis {
+  font-style: italic
 }
-
-.hljs-chunk {
-  color: #aaa;
-}
-
-.tex .hljs-formula {
-  opacity: 0.5;
+.hljs-strong {
+  font-weight: bold
 }

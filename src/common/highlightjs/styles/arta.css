@@ -1,141 +1,66 @@
+pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 1em
+}
+code.hljs {
+  padding: 3px 5px
+}
 /*
 Date: 17.V.2011
 Author: pumbur <pumbur@pumbur.net>
 */
-
 .hljs {
-  display: block;
-  overflow-x: auto;
-  padding: 0.5em;
   background: #222;
-  -webkit-text-size-adjust: none;
+  color: #aaa
 }
-
-.profile .hljs-header *,
-.ini .hljs-title,
-.nginx .hljs-title {
-  color: #fff;
+.hljs-subst {
+  color: #aaa
 }
-
+.hljs-section {
+  color: #fff
+}
 .hljs-comment,
-.hljs-javadoc,
-.hljs-preprocessor,
-.hljs-preprocessor .hljs-title,
-.hljs-pragma,
-.hljs-shebang,
-.profile .hljs-summary,
-.diff,
-.hljs-pi,
-.hljs-doctype,
-.hljs-tag,
-.hljs-template_comment,
-.css .hljs-rules,
-.tex .hljs-special {
-  color: #444;
+.hljs-quote,
+.hljs-meta {
+  color: #444
 }
-
 .hljs-string,
 .hljs-symbol,
-.diff .hljs-change,
-.hljs-regexp,
-.xml .hljs-attribute,
-.smalltalk .hljs-char,
-.xml .hljs-value,
-.ini .hljs-value,
-.clojure .hljs-attribute,
-.coffeescript .hljs-attribute {
-  color: #ffcc33;
+.hljs-bullet,
+.hljs-regexp {
+  color: #ffcc33
 }
-
 .hljs-number,
 .hljs-addition {
-  color: #00cc66;
+  color: #00cc66
 }
-
 .hljs-built_in,
 .hljs-literal,
 .hljs-type,
-.hljs-typename,
-.go .hljs-constant,
-.ini .hljs-keyword,
-.lua .hljs-title,
-.perl .hljs-variable,
-.php .hljs-variable,
-.mel .hljs-variable,
-.django .hljs-variable,
-.css .funtion,
-.smalltalk .method,
-.hljs-hexcolor,
-.hljs-important,
-.hljs-flow,
-.hljs-inheritance,
-.parser3 .hljs-variable {
-  color: #32aaee;
+.hljs-template-variable,
+.hljs-attribute,
+.hljs-link {
+  color: #32aaee
 }
-
 .hljs-keyword,
-.hljs-tag .hljs-title,
-.css .hljs-tag,
-.css .hljs-class,
-.css .hljs-id,
-.css .hljs-pseudo,
-.css .hljs-attr_selector,
-.hljs-winutils,
-.tex .hljs-command,
-.hljs-request,
-.hljs-status {
-  color: #6644aa;
+.hljs-selector-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class {
+  color: #6644aa
 }
-
 .hljs-title,
-.ruby .hljs-constant,
-.vala .hljs-constant,
-.hljs-parent,
+.hljs-variable,
 .hljs-deletion,
-.hljs-template_tag,
-.css .hljs-keyword,
-.objectivec .hljs-class .hljs-id,
-.smalltalk .hljs-class,
-.lisp .hljs-keyword,
-.apache .hljs-tag,
-.nginx .hljs-variable,
-.hljs-envvar,
-.bash .hljs-variable,
-.go .hljs-built_in,
-.vbscript .hljs-built_in,
-.lua .hljs-built_in,
-.rsl .hljs-built_in,
-.tail,
-.avrasm .hljs-label,
-.tex .hljs-formula,
-.tex .hljs-formula * {
-  color: #bb1166;
+.hljs-template-tag {
+  color: #bb1166
 }
-
-.hljs-yardoctag,
-.hljs-phpdoc,
-.hljs-dartdoc,
-.profile .hljs-header,
-.ini .hljs-title,
-.apache .hljs-tag,
-.parser3 .hljs-title {
-  font-weight: bold;
+.hljs-section,
+.hljs-doctag,
+.hljs-strong {
+  font-weight: bold
 }
-
-.coffeescript .javascript,
-.javascript .xml,
-.tex .hljs-formula,
-.xml .javascript,
-.xml .vbscript,
-.xml .css,
-.xml .hljs-cdata {
-  opacity: 0.6;
-}
-
-.hljs,
-.hljs-subst,
-.diff .hljs-chunk,
-.css .hljs-value,
-.css .hljs-attribute {
-  color: #aaa;
+.hljs-emphasis {
+  font-style: italic
 }

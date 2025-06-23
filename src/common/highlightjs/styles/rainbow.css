@@ -1,109 +1,77 @@
+pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 1em
+}
+code.hljs {
+  padding: 3px 5px
+}
 /*
 
 Style with support for rainbow parens
 
 */
-
 .hljs {
-  display: block;
-  overflow-x: auto;
-  padding: 0.5em;
   background: #474949;
-  color: #d1d9e1;
-  -webkit-text-size-adjust: none;
+  color: #d1d9e1
 }
-
-
-.hljs-body,
-.hljs-collection {
-   color: #d1d9e1;
-}
-
 .hljs-comment,
-.hljs-template_comment,
-.diff .hljs-header,
-.hljs-doctype,
-.lisp .hljs-string,
-.hljs-javadoc {
+.hljs-quote {
   color: #969896;
-  font-style: italic;
+  font-style: italic
 }
-
 .hljs-keyword,
-.clojure .hljs-attribute,
-.hljs-winutils,
-.javascript .hljs-title,
-.hljs-addition,
-.css .hljs-tag {
-  color: #cc99cc;
+.hljs-selector-tag,
+.hljs-literal,
+.hljs-type,
+.hljs-addition {
+  color: #cc99cc
 }
-
-.hljs-number { color: #f99157; }
-
-.hljs-command,
+.hljs-number,
+.hljs-selector-attr,
+.hljs-selector-pseudo {
+  color: #f99157
+}
 .hljs-string,
-.hljs-tag .hljs-value,
-.hljs-phpdoc,
-.hljs-dartdoc,
-.tex .hljs-formula,
-.hljs-regexp,
-.hljs-hexcolor {
-  color: #8abeb7;
+.hljs-doctag,
+.hljs-regexp {
+  color: #8abeb7
 }
-
 .hljs-title,
-.hljs-localvars,
-.hljs-function .hljs-title,
-.hljs-chunk,
-.hljs-decorator,
-.hljs-built_in,
-.hljs-identifier {
-  color: #b5bd68;
+.hljs-name,
+.hljs-section,
+.hljs-built_in {
+  color: #b5bd68
 }
-
-.hljs-class .hljs-keyword {
-  color: #f2777a;
-}
-
 .hljs-variable,
-.smalltalk .hljs-number,
-.hljs-constant,
-.hljs-class .hljs-title,
-.hljs-parent,
-.haskell .hljs-label,
-.hljs-id {
-   color: #ffcc66;
+.hljs-template-variable,
+.hljs-selector-id,
+.hljs-title.class_,
+.hljs-class .hljs-title {
+  color: #ffcc66
 }
-
-.hljs-tag .hljs-title,
-.hljs-rules .hljs-property,
-.django .hljs-tag .hljs-keyword {
-  font-weight: bold;
+.hljs-section,
+.hljs-name,
+.hljs-strong {
+  font-weight: bold
 }
-
-.hljs-attribute {
-  color: #81a2be;
-}
-
-.hljs-preprocessor,
-.hljs-pragma,
-.hljs-pi,
-.hljs-shebang,
 .hljs-symbol,
-.hljs-symbol .hljs-string,
-.diff .hljs-change,
-.hljs-special,
-.hljs-attr_selector,
-.hljs-important,
+.hljs-bullet,
 .hljs-subst,
-.hljs-cdata {
-  color: #f99157;
+.hljs-meta,
+.hljs-link {
+  color: #f99157
 }
-
 .hljs-deletion {
-  color: #dc322f;
+  color: #dc322f
 }
-
-.tex .hljs-formula {
-  background: #eee8d5;
+.hljs-formula {
+  background: #eee8d5
+}
+.hljs-attr,
+.hljs-attribute {
+  color: #81a2be
+}
+.hljs-emphasis {
+  font-style: italic
 }

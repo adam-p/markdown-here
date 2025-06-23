@@ -1,105 +1,62 @@
+pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 1em
+}
+code.hljs {
+  padding: 3px 5px
+}
 /*
 
 Dark style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org>
 
 */
-
 .hljs {
-  display: block;
-  overflow-x: auto;
-  padding: 0.5em;
-  background: #444;
-  -webkit-text-size-adjust: none;
-}
-
-.hljs-keyword,
-.hljs-literal,
-.hljs-change,
-.hljs-winutils,
-.hljs-flow,
-.nginx .hljs-title,
-.tex .hljs-special {
-  color: white;
-}
-
-.hljs,
-.hljs-subst {
   color: #ddd;
+  background: #303030
 }
-
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-literal,
+.hljs-section,
+.hljs-link {
+  color: white
+}
+.hljs-subst {
+  /* default */
+  
+}
 .hljs-string,
 .hljs-title,
+.hljs-name,
 .hljs-type,
-.ini .hljs-title,
-.hljs-tag .hljs-value,
-.css .hljs-rules .hljs-value,
-.hljs-preprocessor,
-.hljs-pragma,
-.ruby .hljs-symbol,
-.ruby .hljs-symbol .hljs-string,
-.ruby .hljs-class .hljs-parent,
+.hljs-attribute,
+.hljs-symbol,
+.hljs-bullet,
 .hljs-built_in,
-.django .hljs-template_tag,
-.django .hljs-variable,
-.smalltalk .hljs-class,
-.hljs-javadoc,
-.ruby .hljs-string,
-.django .hljs-filter .hljs-argument,
-.smalltalk .hljs-localvars,
-.smalltalk .hljs-array,
-.hljs-attr_selector,
-.hljs-pseudo,
 .hljs-addition,
-.hljs-stream,
-.hljs-envvar,
-.apache .hljs-tag,
-.apache .hljs-cbracket,
-.tex .hljs-command,
-.hljs-prompt,
-.coffeescript .hljs-attribute {
-  color: #d88;
+.hljs-variable,
+.hljs-template-tag,
+.hljs-template-variable {
+  color: #d88
 }
-
 .hljs-comment,
-.hljs-annotation,
-.hljs-decorator,
-.hljs-template_comment,
-.hljs-pi,
-.hljs-doctype,
+.hljs-quote,
 .hljs-deletion,
-.hljs-shebang,
-.apache .hljs-sqbracket,
-.tex .hljs-formula {
-  color: #777;
+.hljs-meta {
+  color: #979797
 }
-
 .hljs-keyword,
+.hljs-selector-tag,
 .hljs-literal,
 .hljs-title,
-.css .hljs-id,
-.hljs-phpdoc,
-.hljs-dartdoc,
+.hljs-section,
+.hljs-doctag,
 .hljs-type,
-.vbscript .hljs-built_in,
-.rsl .hljs-built_in,
-.smalltalk .hljs-class,
-.diff .hljs-header,
-.hljs-chunk,
-.hljs-winutils,
-.bash .hljs-variable,
-.apache .hljs-tag,
-.tex .hljs-special,
-.hljs-request,
-.hljs-status {
-  font-weight: bold;
+.hljs-name,
+.hljs-strong {
+  font-weight: bold
 }
-
-.coffeescript .javascript,
-.javascript .xml,
-.tex .hljs-formula,
-.xml .javascript,
-.xml .vbscript,
-.xml .css,
-.xml .hljs-cdata {
-  opacity: 0.5;
+.hljs-emphasis {
+  font-style: italic
 }

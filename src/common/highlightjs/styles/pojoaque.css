@@ -1,3 +1,11 @@
+pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 1em
+}
+code.hljs {
+  padding: 3px 5px
+}
 /*
 
 Pojoaque Style by Jason Tate
@@ -5,104 +13,64 @@ http://web-cms-designs.com/ftopict-10-pojoaque-style-for-highlight-js-code-highl
 Based on Solarized Style from http://ethanschoonover.com/solarized
 
 */
-
 .hljs {
-  display: block;
-  overflow-x: auto;
-  padding: 0.5em;
   color: #dccf8f;
-  background-color: #181914; /* adam-p: removed image */
-  -webkit-text-size-adjust: none;
+  background: url(./pojoaque.jpg) repeat scroll left top #181914
 }
-
 .hljs-comment,
-.hljs-template_comment,
-.diff .hljs-header,
-.hljs-doctype,
-.lisp .hljs-string,
-.hljs-javadoc {
+.hljs-quote {
   color: #586e75;
-  font-style: italic;
+  font-style: italic
 }
-
 .hljs-keyword,
-.css .rule .hljs-keyword,
-.hljs-winutils,
-.javascript .hljs-title,
-.method,
-.hljs-addition,
-.css .hljs-tag,
-.hljs-list .hljs-keyword,
-.nginx .hljs-title {
-  color: #b64926;
+.hljs-selector-tag,
+.hljs-literal,
+.hljs-addition {
+  color: #b64926
 }
-
 .hljs-number,
-.hljs-command,
 .hljs-string,
-.hljs-tag .hljs-value,
-.hljs-phpdoc,
-.hljs-dartdoc,
-.tex .hljs-formula,
-.hljs-regexp,
-.hljs-hexcolor {
-  color: #468966;
+.hljs-doctag,
+.hljs-regexp {
+  color: #468966
 }
-
 .hljs-title,
-.hljs-localvars,
-.hljs-function .hljs-title,
-.hljs-chunk,
-.hljs-decorator,
+.hljs-section,
 .hljs-built_in,
-.hljs-identifier,
-.hljs-id {
-  color: #ffb03b;
+.hljs-name {
+  color: #ffb03b
 }
-
-.hljs-attribute,
 .hljs-variable,
-.lisp .hljs-body,
-.smalltalk .hljs-number,
-.hljs-constant,
+.hljs-template-variable,
+.hljs-title.class_,
 .hljs-class .hljs-title,
-.hljs-parent,
-.hljs-type {
-  color: #b58900;
+.hljs-type,
+.hljs-tag {
+  color: #b58900
 }
-
-.css .hljs-attribute {
-  color: #b89859;
+.hljs-attribute {
+  color: #b89859
 }
-
-.css .hljs-number,
-.css .hljs-hexcolor {
-  color: #dccf8f;
-}
-
-.css .hljs-class {
-  color: #d3a60c;
-}
-
-.hljs-preprocessor,
-.hljs-pragma,
-.hljs-pi,
-.hljs-shebang,
 .hljs-symbol,
-.hljs-symbol .hljs-string,
-.diff .hljs-change,
-.hljs-special,
-.hljs-attr_selector,
-.hljs-important,
+.hljs-bullet,
+.hljs-link,
 .hljs-subst,
-.hljs-cdata {
-  color: #cb4b16;
+.hljs-meta {
+  color: #cb4b16
 }
-
 .hljs-deletion {
-  color: #dc322f;
+  color: #dc322f
 }
-
-.tex .hljs-formula {
-  background: #073642;
+.hljs-selector-id,
+.hljs-selector-class {
+  color: #d3a60c
+}
+.hljs-formula {
+  background: #073642
+}
+.hljs-emphasis {
+  font-style: italic
+}
+.hljs-strong {
+  font-weight: bold
 }

@@ -1,53 +1,45 @@
+pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 1em
+}
+code.hljs {
+  padding: 3px 5px
+}
 /*
 
 Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org>
 
 */
-
 .hljs {
-  display: block;
-  overflow-x: auto;
-  padding: 0.5em;
   background: white;
-  color: black;
-  -webkit-text-size-adjust: none;
+  color: black
 }
-
 .hljs-string,
-.hljs-tag .hljs-value,
-.hljs-filter .hljs-argument,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-section,
 .hljs-addition,
-.hljs-change,
-.apache .hljs-tag,
-.apache .hljs-cbracket,
-.nginx .hljs-built_in,
-.tex .hljs-formula {
-  color: #888;
+.hljs-attribute,
+.hljs-link {
+  color: #888
 }
-
 .hljs-comment,
-.hljs-template_comment,
-.hljs-shebang,
-.hljs-doctype,
-.hljs-pi,
-.hljs-javadoc,
-.hljs-deletion,
-.apache .hljs-sqbracket {
-  color: #ccc;
+.hljs-quote,
+.hljs-meta,
+.hljs-deletion {
+  color: #ccc
 }
-
 .hljs-keyword,
-.hljs-tag .hljs-title,
-.ini .hljs-title,
-.lisp .hljs-title,
-.http .hljs-title,
-.nginx .hljs-title,
-.css .hljs-tag,
-.hljs-winutils,
-.hljs-flow,
-.apache .hljs-tag,
-.tex .hljs-command,
-.hljs-request,
-.hljs-status {
-  font-weight: bold;
+.hljs-selector-tag,
+.hljs-section,
+.hljs-name,
+.hljs-type,
+.hljs-strong {
+  font-weight: bold
+}
+.hljs-emphasis {
+  font-style: italic
 }
