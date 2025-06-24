@@ -1,10 +1,10 @@
 Change Log
 ==========
 
-2025-xx-yy: v?
+2025-06-23: v2.15.0
 -------------------
 
-* Updated [highlight.js](https://highlightjs.org/) to v11.11.1. This brings support for a lot more languages and more themes.
+* Updated [highlight.js](https://highlightjs.org/) to v11.11.1. This brings support for a lot more languages and themes.
 
 * Replaced links to our Google Group with links to our [GitHub Discussions](https://github.com/adam-p/markdown-here/discussions).
 
