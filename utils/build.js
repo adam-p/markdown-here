@@ -9,7 +9,7 @@
 var fs = require('fs');
 var file = require('file');
 var archiver = require('archiver');
-var MetaScript = require('MetaScript');
+var MetaScript = require('metascript');
 
 
 var BASE_DIR = '..';
