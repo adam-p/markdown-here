@@ -73,28 +73,24 @@ function saferSetOuterHTML(elem, htmlString) {
 
 
 // Removes potentially harmful elements and attributes from `docFrag`.
-// Returns a santized copy.
+// Returns a sanitized copy.
 function sanitizeDocumentFragment(docFrag) {
-  var i;
-
   // Don't modify the original
   docFrag = docFrag.cloneNode(true);
 
-  var scriptTagElems = docFrag.querySelectorAll('script');
-  for (i = 0; i < scriptTagElems.length; i++) {
+  let scriptTagElems = docFrag.querySelectorAll('script');
+  for (let i = 0; i < scriptTagElems.length; i++) {
     scriptTagElems[i].parentNode.removeChild(scriptTagElems[i]);
   }
 
   function cleanAttributes(node) {
-    var i;
-
     if (typeof(node.removeAttribute) === 'undefined') {
       // We can't operate on this node
       return;
     }
 
     // Remove event handler attributes
-    for (i = node.attributes.length-1; i >= 0; i--) {
+    for (let i = node.attributes.length-1; i >= 0; i--) {
       if (node.attributes[i].name.match(/^on/)) {
         node.removeAttribute(node.attributes[i].name);
       }
