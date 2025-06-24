@@ -6,6 +6,8 @@ Change Log
 
 * Updated [highlight.js](https://highlightjs.org/) to v11.11.1. This brings support for a lot more languages and themes.
 
+* Made LaTeX support disabled by default. Because there are [privacy implications](https://github.com/adam-p/markdown-here/blob/master/PRIVACY.md#optional-third-party-latex-image-rendering-service) to using the feature, it should be opt-in.
+
 * Replaced links to our Google Group with links to our [GitHub Discussions](https://github.com/adam-p/markdown-here/discussions).
 
 * Removed support for Postbox, which stopped allowing third-party extensions a while ago. Also removed support for "Inbox by Google", which stopped existing, like, a long time ago.
