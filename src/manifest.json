@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "__MSG_app_name__",
-  "version": "2.15.0",
+  "version": "2.15.1",
   "description": "__MSG_app_slogan__",
   "homepage_url": "https://markdown-here.com",
   "default_locale": "en",
@@ -21,6 +21,7 @@
     {
       "matches": ["http://*/*", "https://*/*"],
       "js": [
+        "common/vendor/dompurify.min.js",
         "common/utils.js",
         "common/common-logic.js",
         "common/jsHtmlToText.js",

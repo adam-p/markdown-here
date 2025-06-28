@@ -23,6 +23,7 @@ if (!backgroundPage) {
   // When loaded via a background page, the support scripts are already
   // present. When loaded via a service worker, we need to import them.
   // (`importScripts` is only available in service workers.)
+  importScripts('../common/vendor/dompurify.min.js');
   importScripts('../common/utils.js');
   importScripts('../common/common-logic.js');
   importScripts('../common/marked.js');

@@ -158,6 +158,26 @@ describe('Utils', function() {
 
       expect($('#test-container').html()).to.equal('<div id="rad" style="color:red">hi</div>');
     });
+
+    // An earlier implementation of Utils.saferSetOuterHTML was vulnerable to allowing
+    // script execution through the on error and onload handlers of an image element.
+    // Unfortunately, on the test page this manifested as a CSP error, so this test never
+    // actually failed, even when the vulnerability was present. This test is a reminder
+    // of that vulnerability, and there should not be any console CSP errors when it is run.
+    it('should not execute img onerror handlers', function() {
+      // Another test showing script execution through different vectors
+      window.imgErrorExecuted = false;
+
+      var maliciousHTML = '<div>before</div><img src="nonexistent.jpg" onerror="window.imgErrorExecuted = true;"><div>after</div>';
+
+      Utils.saferSetOuterHTML($('#test-container').children(':first').get(0), maliciousHTML);
+
+      // The onerror handler should NOT have executed
+      expect(window.imgErrorExecuted).to.be.false;
+
+      // Clean up
+      delete window.imgErrorExecuted;
+    });
   });
 
 

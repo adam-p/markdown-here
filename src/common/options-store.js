@@ -10,7 +10,7 @@
 /*global module:false, chrome:false, Components:false*/
 
 if (typeof(Utils) === 'undefined' && typeof(Components) !== 'undefined') {
-  var scriptLoader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"]
+  const scriptLoader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"]
                                .getService(Components.interfaces.mozIJSSubScriptLoader);
   scriptLoader.loadSubScript('resource://markdown_here_common/utils.js');
 }

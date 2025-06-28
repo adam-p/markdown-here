@@ -14,6 +14,12 @@
 "use strict";
 /*global module:false, chrome:false, safari:false*/
 
+if (typeof(DOMPurify) === 'undefined' &&
+    typeof(safari) === 'undefined' && typeof(chrome) === 'undefined') {
+  const scriptLoader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"]
+                                 .getService(Components.interfaces.mozIJSSubScriptLoader);
+  scriptLoader.loadSubScript('resource://markdown_here_common/vendor/dompurify.min.js');
+}
 
 function consoleLog(logString) {
   if (typeof(console) !== 'undefined') {
@@ -29,26 +35,44 @@ function consoleLog(logString) {
 // TODO: Try to use `insertAdjacentHTML` for the inner and outer HTML functions.
 // https://developer.mozilla.org/en-US/docs/Web/API/Element.insertAdjacentHTML
 
+// Safely parse HTML string into a DocumentFragment without executing scripts
+// Uses DOMPurify to sanitize and parse HTML into a DocumentFragment
+function safelyParseHTML(htmlString, ownerDocument) {
+  ownerDocument = ownerDocument || document;
+
+  // DOMPurify is required for security
+  if (typeof DOMPurify === 'undefined') {
+    throw new Error('DOMPurify is required but not loaded. Cannot safely parse HTML.');
+  }
+
+  // Sanitize and parse HTML into a DocumentFragment
+  const docFrag = DOMPurify.sanitize(htmlString, {
+    // Return a DocumentFragment instead of a string
+    RETURN_DOM_FRAGMENT: true,
+
+    // Specify which document to use for creating the fragment
+    DOCUMENT: ownerDocument
+  });
+
+  return docFrag;
+}
+
 // Assigning a string directly to `element.innerHTML` is potentially dangerous:
 // e.g., the string can contain harmful script elements. (Additionally, Mozilla
 // won't let us pass validation with `innerHTML` assignments in place.)
 // This function provides a safer way to append a HTML string into an element.
 function saferSetInnerHTML(parentElem, htmlString) {
-  // Jump through some hoops to avoid using innerHTML...
+  const docFrag = safelyParseHTML(htmlString, parentElem.ownerDocument);
 
-  var range = parentElem.ownerDocument.createRange();
+  const range = parentElem.ownerDocument.createRange();
   range.selectNodeContents(parentElem);
-
-  var docFrag = range.createContextualFragment(htmlString);
-  docFrag = sanitizeDocumentFragment(docFrag);
-
   range.deleteContents();
   range.insertNode(docFrag);
   range.detach();
 }
 
 
-// Approximating equivalent to assigning to `outerHTML` -- completely replaces
+// Approximately equivalent to assigning to `outerHTML` -- completely replaces
 // the target element with `htmlString`.
 // Note that some caveats apply that also apply to `outerHTML`:
 // - The element must be in the DOM. Otherwise an exception will be thrown.
@@ -56,16 +80,14 @@ function saferSetInnerHTML(parentElem, htmlString) {
 //   Any references to it (such as the one passed into this function) will be
 //   references to the original.
 function saferSetOuterHTML(elem, htmlString) {
-  if (!isElementinDocument(elem)) {
+  if (!isElementInDocument(elem)) {
     throw new Error('Element must be in document');
   }
 
-  var range = elem.ownerDocument.createRange();
+  const docFrag = safelyParseHTML(htmlString, elem.ownerDocument);
+
+  const range = elem.ownerDocument.createRange();
   range.selectNode(elem);
-
-  var docFrag = range.createContextualFragment(htmlString);
-  docFrag = sanitizeDocumentFragment(docFrag);
-
   range.deleteContents();
   range.insertNode(docFrag);
   range.detach();
@@ -214,7 +236,7 @@ function getSelectedElementsInRange(range) {
 }
 
 
-function isElementinDocument(element) {
+function isElementInDocument(element) {
   var doc = element.ownerDocument;
   while (!!(element = element.parentNode)) {
     if (element === doc) {
@@ -1187,6 +1209,7 @@ var Utils = {};
 
 Utils.saferSetInnerHTML = saferSetInnerHTML;
 Utils.saferSetOuterHTML = saferSetOuterHTML;
+Utils.safelyParseHTML = safelyParseHTML;
 Utils.walkDOM = walkDOM;
 Utils.sanitizeDocumentFragment = sanitizeDocumentFragment;
 Utils.rangeIntersectsNode = rangeIntersectsNode;

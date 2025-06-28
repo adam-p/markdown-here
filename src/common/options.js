@@ -134,11 +134,11 @@ function onLoad() {
 
   // Older Thunderbird may try to open this options page in a new ChromeWindow, and it
   // won't work. So in that case we need to tell the user how they can actually open the
-  // options page. This is pretty ungraceful, but few users will encouter it, and fewer as
+  // options page. This is pretty ungraceful, but few users will encounter it, and fewer as
   // time goes on.
   setTimeout(function() {
     if (!optionsGetSuccessful) {
-      alert('It looks like you are running an older version of Thunderird.\nOpen the Markdown Here Options via the message window Tools menu.');
+      alert('It looks like you are running an older version of Thunderbird.\nOpen the Markdown Here Options via the message window Tools menu.');
       window.close();
     }
   }, 500);

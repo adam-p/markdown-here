@@ -47,8 +47,8 @@ var WRAPPER_TITLE_PREFIX = 'MDH:';
 // In Firefox/Thunderbird, Utils won't already exist.
 if (typeof(Utils) === 'undefined' &&
     typeof(safari) === 'undefined' && typeof(chrome) === 'undefined') {
-  var scriptLoader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"]
-                               .getService(Components.interfaces.mozIJSSubScriptLoader);
+  const scriptLoader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"]
+                                 .getService(Components.interfaces.mozIJSSubScriptLoader);
   scriptLoader.loadSubScript('resource://markdown_here_common/utils.js');
 }
 
@@ -215,18 +215,14 @@ function findSignatureStart(startElem) {
  * @returns {Element}
  */
 function replaceRange(range, html) {
-  var documentFragment, newElement;
-
   range.deleteContents();
 
   // Create a DocumentFragment to insert and populate it with HTML
-  documentFragment = range.createContextualFragment(html);
-
-  documentFragment = Utils.sanitizeDocumentFragment(documentFragment);
+  const documentFragment = Utils.safelyParseHTML(html, range.startContainer.ownerDocument);
 
   // After inserting the node contents, the node is empty. So we need to save a
   // reference to the element that we need to return.
-  newElement = documentFragment.firstChild;
+  const newElement = documentFragment.firstChild;
 
   range.insertNode(documentFragment);
 

@@ -103,6 +103,7 @@ var markdown_here = {
     var contextMenu;
 
     // scriptLoader loads stuff into `window`.
+    markdown_here.imports.DOMPurify = window.DOMPurify;
     markdown_here.scriptLoader.loadSubScript('resource://markdown_here_common/utils.js');
     markdown_here.imports.Utils = window.Utils;
     markdown_here.scriptLoader.loadSubScript('resource://markdown_here_common/common-logic.js');
