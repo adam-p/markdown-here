@@ -3,12 +3,11 @@
 [**Visit the website.**](https://markdown-here.com)<br>
 [**Get it for Chrome.**](https://chrome.google.com/webstore/detail/elifhakcjgalahccnjkneoccemfahfoa)<br>
 [**Get it for Firefox.**](https://addons.mozilla.org/firefox/addon/markdown-here/)<br>
-[**Get it for Safari.**](https://s3.amazonaws.com/markdown-here/markdown-here.safariextz)<br>
 [**Get it for Thunderbird.**](https://addons.mozilla.org/thunderbird/addon/markdown-here/)<br>
 [**Get it for Opera.**](https://addons.opera.com/extensions/details/markdown-here/)<br>
 [**Discuss it and ask questions in GitHub Discussions.**](https://github.com/adam-p/markdown-here/discussions)<br>
 
-*Markdown Here* is a Google Chrome, Firefox, Safari, Opera, and Thunderbird extension that lets you write email<sup>&dagger;</sup> in Markdown<sup>&Dagger;</sup> and render them before sending. It also supports syntax highlighting (just specify the language in a fenced code block).
+*Markdown Here* is a Google Chrome, Firefox, Opera, and Thunderbird extension that lets you write email<sup>&dagger;</sup> in Markdown<sup>&Dagger;</sup> and render them before sending. It also supports syntax highlighting (just specify the language in a fenced code block).
 
 Writing email with code in it is pretty tedious. Writing Markdown with code in it is easy. I found myself writing email in Markdown in the GitHub in-browser editor, then copying the preview into email. This is a pretty absurd workflow, so I decided to create a tool to write and render Markdown right in the email.
 
@@ -64,14 +63,6 @@ After installing, make sure to restart Firefox/Thunderbird!
 1. Clone this repo.
 2. Follow the instructions in the MDN ["Your first WebExtension"](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Your_first_WebExtension#installing) article.
 
-### Safari
-
-[Download the extension directly.](https://s3.amazonaws.com/markdown-here/markdown-here.safariextz) When it has finished downloading, double click it to install.
-
-#### Preferences
-
-To get to the Markdown Here preferences, open the Safari preferences and then go to the "Extensions" tab. Then click the "Click me to show Markdown Here options" box.
-
 ### Opera
 
 Note that *Markdown Here* only works with Opera versions 16 and higher (i.e., the ones that are based on Chromium).
@@ -84,8 +75,8 @@ After installing, make sure to reload your webmail or restart Chrome!
 
 Install it, and then…
 
-1. In Chrome/Safari/Opera, *make sure* you reload your web mail page before trying to use Markdown Here.
-2. In Chrome/Firefox/Safari/Opera, log into your Gmail, Hotmail, or Yahoo account and start a new email. In Thunderbird, start a new message.
+1. In Chrome/Opera, *make sure* you reload your web mail page before trying to use Markdown Here.
+2. In Chrome/Firefox/Opera, log into your Gmail, Hotmail, or Yahoo account and start a new email. In Thunderbird, start a new message.
 3. Make sure you're using the rich editor.
    * In Gmail, click the "Rich formatting" link, if it's visible.
    * In Thunderbird, make sure "Compose messages in HTML format" is enabled in your "Account Settings", "Composition & Addressing" pane.
@@ -135,7 +126,7 @@ To revert back to Markdown, just put your cursor anywhere in the block of conver
 
 ### Options
 
-The *Markdown Here* Options page can be accessed via the Chrome, Firefox, Safari, or Thunderbird extensions list. The available options include:
+The *Markdown Here* Options page can be accessed via the Chrome, Firefox, or Thunderbird extensions list. The available options include:
 
 * Styling modifications for the rendered Markdown.
 * Syntax highlighting theme selection and modification.
@@ -183,7 +174,6 @@ cd utils
 node build.js
 ```
 
-
 ### Chrome, Opera, and Firefox (WebExtension) extension
 
 Create a file with a `.zip` extension containing these files and directories:
@@ -194,23 +184,6 @@ common/
 chrome/
 _locales
 ```
-
-### Thunderbird (XUL) extension
-
-Create a file with a `.xpi` extension containing these files and directories:
-
-```
-chrome.manifest
-install.rdf
-common/
-firefox/
-```
-
-### Safari extension
-
-The browser-specific code is located in the [`markdown-here-safari`](https://github.com/adam-p/markdown-here-safari) project.
-
-Use the Safari Extension Builder.
 
 ## Next Steps
 

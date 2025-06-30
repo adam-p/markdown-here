@@ -15,9 +15,9 @@ Syntax highlighting note: Use fenced code blocks and specify the language name. 
 
 Privacy: Markdown Here accesses and modifies web content when you activate it. It can, in theory, access other web content, but does not. It also makes no Internet requests whatsoever. Your data is modified when and where you choose, and does not leave your browser.
 
-Available as a Chrome, Firefox, Safari, Opera, and Thunderbird extension.
+Available as a Chrome, Firefox, Opera, and Thunderbird extension.
 
-This is an open source project. Visit Markdown Here's Github page for full instructions, more information, bug reports, or to contribute.
+This is an open source project. Visit Markdown Here's GitHub page for full instructions, more information, bug reports, or to contribute.
 
 https://markdown-here.com
 https://github.com/adam-p/markdown-here

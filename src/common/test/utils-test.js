@@ -493,20 +493,6 @@ describe('Utils', function() {
     });
   });
 
-  describe('getSafariStringBundle', function() {
-    it('should get the string bundle', function(done) {
-      if (typeof(safari) !== 'undefined') {
-        Utils.getSafariStringBundle(function(data, err) {
-          expect(err).to.not.be.ok;
-          expect(data).to.be.an('object');
-          done();
-        });
-      }
-      else {
-        done();
-      }
-    });
-  });
 
   describe('walkDOM', function() {
     beforeEach(function() {

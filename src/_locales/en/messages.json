@@ -125,7 +125,7 @@
     "message": "<strong>Help support the development of Markdown Here!</strong>"
   },
   "options_page__donate_plea_4": {
-    "message": "You know what makes it easier to keep Markdown Here working on Chrome, Firefox, Thunderbird, Safari, Opera, Gmail, Yahoo, Hotmail, Blogger, Evernote, etc.? <strong>Coffee!</strong>"
+    "message": "You know what makes it easier to keep Markdown Here working on Chrome, Firefox, Thunderbird, Opera, Gmail, Yahoo, Hotmail, Blogger, Evernote, etc.? <strong>Coffee!</strong>"
   },
   "options_page__other_donation_options": {
     "message": "Other donation options",
@@ -273,7 +273,7 @@
     "description": "Label for the checkbox that enables the forgot-to-render feature"
   },
   "options_page__forgot_to_render_1": {
-    "message": "Currently only supported in Gmail and Thunderbird (and Icedove).",
+    "message": "Currently only supported in Gmail and Thunderbird.",
     "description": "Descriptive text referring to the 'forgot-to-render' feature. Tells the user that it's only available for limited platforms."
   },
   "options_page__forgot_to_render_2": {

@@ -19,7 +19,6 @@ var DEFAULTS = {
   'gfm-line-breaks-enabled': true
 };
 
-/*? if(platform!=='thunderbird'){ */
 /*
  * Chrome storage helper. Gets around the synchronized value size limit.
  * Overall quota limits still apply (or less, but we should stay well within).
@@ -254,131 +253,10 @@ var ChromeOptionsStore = {
     });
   }
 };
-/*? } */
 
 
-/*? if(platform==='safari'){ */
-/*
- * When called from the options page, this is effectively a content script, so
- * we'll have to make calls to the background script in that case.
- */
-var SafariOptionsStore = {
-
-  // The options object will be passed to `callback`
-  get: function(callback) {
-    var that = this;
-    this._getPreferences(function(options) {
-      that._fillDefaults(options, callback);
-    });
-  },
-
-  // Store `obj`. `callback` will be called (with no arguments) when complete.
-  set: function(obj, callback) {
-    this._setPreferences(obj, callback);
-  },
-
-  remove: function(arrayOfKeys, callback) {
-    this._removePreferences(arrayOfKeys, callback);
-  },
-
-  _getPreferences: function(callback) {
-    // Only the background script has `safari.extension.settings`.
-    if (typeof(safari.extension.settings) === 'undefined') {
-      // We're going to assume we have Utils and document available here, which
-      // should be the case, since we should be running as a content script.
-      Utils.makeRequestToPrivilegedScript(
-        document,
-        { action: 'get-options' },
-        callback);
-    }
-    else {
-      // Make this actually asynchronous
-      Utils.nextTick(function() {
-        if (callback) callback(safari.extension.settings);
-      });
-    }
-  },
-
-  _setPreferences: function(obj, callback) {
-    // Only the background script has `safari.extension.settings`.
-    if (typeof(safari.extension.settings) === 'undefined') {
-      // We're going to assume we have Utils and document available here, which
-      // should be the case, since we should be running as a content script.
-      Utils.makeRequestToPrivilegedScript(
-        document,
-        { action: 'set-options', options: obj },
-        callback);
-    }
-    else {
-      // Make this actually asynchronous
-      Utils.nextTick(function() {
-        for (var key in obj) {
-          safari.extension.settings[key] = obj[key];
-        }
-
-        if (callback) callback();
-      });
-    }
-  },
-
-  _removePreferences: function(arrayOfKeys, callback) {
-    // Only the background script has `safari.extension.settings`.
-    if (typeof(safari.extension.settings) === 'undefined') {
-      // We're going to assume we have Utils and document available here, which
-      // should be the case, since we should be running as a content script.
-      Utils.makeRequestToPrivilegedScript(
-        document,
-        { action: 'remove-options', arrayOfKeys: arrayOfKeys },
-        callback);
-    }
-    else {
-      // Make this actually asynchronous
-      Utils.nextTick(function() {
-        var i;
-        if (typeof(arrayOfKeys) === 'string') {
-          arrayOfKeys = [arrayOfKeys];
-        }
-
-        for (i = 0; i < arrayOfKeys.length; i++) {
-          delete safari.extension.settings[arrayOfKeys[i]];
-        }
-
-        if (callback) callback();
-      });
-    }
-  },
-
-  // The default values or URLs for our various options.
-  defaults: {
-    'main-css': {'__defaultFromFile__': (typeof(safari) !== 'undefined' ? safari.extension.baseURI : '')+'markdown-here/src/common/default.css', '__dataType__': 'text/css'},
-    'syntax-css': {'__defaultFromFile__': (typeof(safari) !== 'undefined' ? safari.extension.baseURI : '')+'markdown-here/src/common/highlightjs/styles/github.css', '__dataType__': 'text/css'},
-    'math-enabled': DEFAULTS['math-enabled'],
-    'math-value': DEFAULTS['math-value'],
-    'hotkey': DEFAULTS['hotkey'],
-    'forgot-to-render-check-enabled': DEFAULTS['forgot-to-render-check-enabled'],
-    'header-anchors-enabled': DEFAULTS['header-anchors-enabled'],
-    'gfm-line-breaks-enabled': DEFAULTS['gfm-line-breaks-enabled']
-  }
-};
-/*? } */
-
-
-// Choose which OptionsStore engine we should use.
-// (This if-structure is ugly to work around the preprocessor logic.)
-/*? if(platform==='chrome' || platform==='firefox'){ */
-if (typeof(navigator) !== 'undefined'
-    && (navigator.userAgent.indexOf('Chrome') >= 0
-        || navigator.userAgent.indexOf('Firefox') >= 0)) {
-  this.OptionsStore = ChromeOptionsStore;
-}
-/*? } */
-/*? if(platform==='safari'){ */
-if (!this.OptionsStore
-    && typeof(navigator) !== 'undefined'
-    && navigator.userAgent.match(/AppleWebKit.*Version.*Safari/)) {
-  this.OptionsStore = SafariOptionsStore;
-}
-/*? } */
+// Use ChromeOptionsStore for all WebExtensions platforms
+this.OptionsStore = ChromeOptionsStore;
 
 this.OptionsStore._fillDefaults = function(prefsObj, callback) {
   var that = this;

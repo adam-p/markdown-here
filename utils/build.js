@@ -6,10 +6,9 @@
 /* jslint node: true */
 "use strict";
 
-var fs = require('fs');
-var file = require('file');
-var archiver = require('archiver');
-var MetaScript = require('MetaScript');
+const fs = require('fs');
+const file = require('file');
+const archiver = require('archiver');
 
 // TODO: Update Thunderbird build
 
@@ -58,20 +57,11 @@ function fnameMatch(fpath, inputArray) {
 }
 
 
-// Add a file to the Chrome extension zip
+// Add a file to the extension zip
 function addBuildFile(platformName, zip, fullPath, zipPath) {
-  var fileContents;
-
-  // For the Mozilla extensions in particular, we need to do some preprocessing on JavaScript files
-  // in order to exclude code specific to other platforms.
-  if (javascriptFileRegex.test(fullPath)) {
-    fileContents = fs.readFileSync(fullPath);
-    fileContents = MetaScript.transform(fileContents, {platform: platformName});
-    zip.append(fileContents, { name: zipPath });
-  }
-  else if (platformName === CHROME_PLATFORM && manifestJsonFileRegex.test(fullPath)) {
+  if (platformName === CHROME_PLATFORM && manifestJsonFileRegex.test(fullPath)) {
     // Remove the Firefox-specific stuff from manifest.json when building for Chrome.
-    fileContents = fs.readFileSync(fullPath, {encoding: 'utf8'});
+    let fileContents = fs.readFileSync(fullPath, {encoding: 'utf8'});
     fileContents = fileContents.replace(/,"browser_specific_settings":[^{]*{[^{]*{[^}]*}[^}]*}/m, '');
     zip.append(fileContents, { name: zipPath });
   }

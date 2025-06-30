@@ -16,7 +16,7 @@ if (typeof browser === "undefined") {
 
 // We supply a #hash to the background page, so that we know when we're
 // loaded via `background.page` (manifest V2 and Firefox manifest V3) vs
-// `background.service_worker` (manifest V3 in Chrome and Safari).
+// `background.service_worker` (manifest V3 in Chrome).
 var backgroundPage = !!location.hash;
 
 if (!backgroundPage) {

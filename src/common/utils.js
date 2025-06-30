@@ -12,7 +12,7 @@
 ;(function() {
 
 "use strict";
-/*global module:false, chrome:false, safari:false*/
+/*global module:false, chrome:false*/
 
 function consoleLog(logString) {
   if (typeof(console) !== 'undefined') {
@@ -273,22 +273,7 @@ function getLocalURL(url) {
     return url;
   }
 
-  // (This if-structure is ugly to work around the preprocessor logic.)
-  var matched = false;
-  /*? if (platform==='chrome' || platform==='firefox') { */
-  if (typeof(chrome) !== 'undefined') {
-    matched = true;
-    return chrome.runtime.getURL(url);
-  }
-  /*? } */
-  /*? if (platform==='safari') { */
-  if (!matched && typeof(safari) !== 'undefined') {
-    matched = true;
-    return safari.extension.baseURI + 'markdown-here/src' + url;
-  }
-  /*? } */
-
-  throw 'unknown url type: ' + url;
+  return chrome.runtime.getURL(url);
 }
 
 
@@ -369,66 +354,14 @@ function fireMouseClick(elem) {
 var PRIVILEGED_REQUEST_EVENT_NAME = 'markdown-here-request-event';
 
 function makeRequestToPrivilegedScript(doc, requestObj, callback) {
-  // (This if-structure is ugly to work around the preprocessor logic.)
-  var matched = false;
-  /*? if(platform==='chrome' || platform==='firefox'){ */
-  if (typeof(chrome) !== 'undefined') {
-    matched = true;
-    // If `callback` is undefined and we pass it anyway, Chrome complains with this:
-    // Uncaught Error: Invocation of form extension.sendMessage(object, undefined, null) doesn't match definition extension.sendMessage(optional string extensionId, any message, optional function responseCallback)
-    if (callback) {
-      chrome.runtime.sendMessage(requestObj, callback);
-    }
-    else {
-      chrome.runtime.sendMessage(requestObj);
-    }
+  // If `callback` is undefined and we pass it anyway, Chrome complains with this:
+  // Uncaught Error: Invocation of form extension.sendMessage(object, undefined, null) doesn't match definition extension.sendMessage(optional string extensionId, any message, optional function responseCallback)
+  if (callback) {
+    chrome.runtime.sendMessage(requestObj, callback);
   }
-  /*? } */
-  /*? if(platform==='safari'){ */
-  if (!matched && typeof(safari) !== 'undefined') {
-    matched = true;
-    /*
-    Unlike Chrome, Safari doesn't provide a way to pass a callback to a background-
-    script request. Instead the background script sends a separate message to
-    the content script. We'll keep a set of outstanding callbacks to process as
-    the responses come in.
-    */
-
-    // If this is the first call, do some initialization.
-    if (typeof(makeRequestToPrivilegedScript.requestCallbacks) === 'undefined') {
-      makeRequestToPrivilegedScript.requestCallbacks = {};
-
-      // Handle messages received from the background script.
-      var backgroundMessageHandler = function(event) {
-        // Note that this message handler will get triggered by any request sent
-        // from the background script to the content script for a page, and
-        // it'll get triggered once for each frame in the page. So we need to
-        // make very sure that we should be acting on the message.
-        if (event.name === 'request-response') {
-          var responseObj = window.JSON.parse(event.message);
-
-          if (responseObj.requestID &&
-              makeRequestToPrivilegedScript.requestCallbacks[responseObj.requestID]) {
-            // Call the stored callback.
-            makeRequestToPrivilegedScript.requestCallbacks[responseObj.requestID](responseObj.response);
-            // And remove the stored callback.
-            delete makeRequestToPrivilegedScript.requestCallbacks[responseObj.requestID];
-          }
-        }
-      };
-      safari.self.addEventListener('message', backgroundMessageHandler, false);
-    }
-
-    // Store the callback for later use in the response handler.
-    if (callback) {
-      var reqID = Math.random();
-      makeRequestToPrivilegedScript.requestCallbacks[reqID] = callback;
-      requestObj.requestID = reqID;
-    }
-
-    safari.self.tab.dispatchMessage('request', window.JSON.stringify(requestObj));
+  else {
+    chrome.runtime.sendMessage(requestObj);
   }
-  /*? } */
 }
 
 
@@ -558,192 +491,23 @@ This necessitated the addition of `registerStringBundleLoadListener` and
 `triggerStringBundleLoadListeners`, which may be used to ensure that `getMessage`
 calls wait until the loading is complete.
 */
-// TODO: Remove this whole thing, now that everything is WebExtensions. (And Safari is dropped. And if we re-add it, it'll be a whole new thing.)
-
-var g_stringBundleLoadListeners = [];
 
 function registerStringBundleLoadListener(callback) {
-  // (This if-structure is ugly to work around the preprocessor logic.)
-  var matched = false;
-  /*? if(platform==='chrome' || platform==='firefox'){ */
-  if (typeof(chrome) !== 'undefined') {
-    matched = true;
-    // Already loaded
-    Utils.nextTick(callback);
-    return;
-  }
-  /*? } */
-  /*? if(platform==='safari'){ */
-  if (!matched
-      && typeof(g_safariStringBundle) === 'object'
-      && Object.keys(g_safariStringBundle).length > 0) {
-    matched = true;
-    // Already loaded
-    Utils.nextTick(callback);
-    return;
-  }
-  /*? } */
-
-  g_stringBundleLoadListeners.push(callback);
-}
-
-function triggerStringBundleLoadListeners() {
-  var listener;
-  while (g_stringBundleLoadListeners.length > 0) {
-    listener = g_stringBundleLoadListeners.pop();
-    listener();
-  }
+  // Chrome/Firefox always have strings loaded immediately
+  Utils.nextTick(callback);
 }
 
 
 
 
 
-/*? if(platform==='safari'){ */
-// Will only succeed when called from a privileged Safari script.
-// `callback(data, err)` is passed a non-null value for err in case of total
-// failure, which should be interpreted as being called from a non-privileged
-// (content) script.
-// Otherwise `data` will contain the string bundle object.
-function getSafariStringBundle(callback) {
-
-  // Can't use Utils.functionname in this function, since the exports haven't
-  // been set up at the time it's called.
-
-  var stringBundle = {};
-
-  // Return a cached bundle, if we have one
-  if (typeof(g_safariStringBundle) !== 'undefined' &&
-      Object.keys(g_safariStringBundle).length > 0) {
-    nextTickFn(callback)(g_safariStringBundle);
-    return;
-  }
-
-  // Get the English fallback
-  getStringBundle('en', function(data, err) {
-    if (err) {
-      consoleLog('Error getting English string bundle:');
-      consoleLog(err);
-      return callback(null, err);
-    }
-
-    extendBundle(stringBundle, data);
-
-    var locale = window.navigator.language;
-    if (locale.indexOf('en') === 0) {
-      // The locale is English, nothing more to do
-      return callback(stringBundle, null);
-    }
-
-    // Get the actual locale string bundle
-    getStringBundle(locale, function(data, err) {
-      if (err) {
-        // The locale in navigator.language typically looks like "ja-JP", but
-        // MDH's locale typically looks like "ja".
-        locale = locale.split('-')[0];
-        getStringBundle(locale, function(data, err) {
-          if (err) {
-            // Couldn't find it. We'll just have to use the fallback.
-            consoleLog('Markdown Here has no language support for: ' + locale);
-            return callback(stringBundle);
-          }
-
-          extendBundle(stringBundle, data);
-          return callback(stringBundle);
-        });
-      }
-
-      extendBundle(stringBundle, data);
-      return callback(stringBundle);
-    });
-  });
-
-
-  function getStringBundle(locale, callback) {
-    var url = getLocalURL('/_locales/' + locale + '/messages.json');
-    getLocalFile(url, 'json', function(data, err) {
-      if (err) {
-        return callback(null, err);
-      }
-
-      // Chrome's messages.json uses "$" as placeholders and "$$" as an explicit
-      // "$". We're not yet using placeholders, so we'll just convert double to singles.
-      data = data.replace(/\$\$/g, '$');
-
-      return callback(JSON.parse(data));
-    });
-  }
-
-  function extendBundle(intoBundle, fromObj) {
-    var key;
-    for (key in fromObj) {
-      intoBundle[key] = fromObj[key].message;
-    }
-  }
-}
-/*? } */
-
-/*? if(platform==='safari'){ */
-// Load the Safari string bundle
-if (typeof(safari) !== 'undefined') {
-  var g_safariStringBundle = {};
-  // This is effectively checking if we're calling from a privileged script.
-  // We could instead just try getSafariStringBundle() and check the error, but
-  // that's surely less efficient.
-  if (typeof(safari.application) !== 'undefined') {
-    // calling from a privileged script
-    getSafariStringBundle(function(data, err) {
-      if (err) {
-        consoleLog('Markdown Here: privileged script failed to load string bundle: ' + err);
-        return;
-      }
-      g_safariStringBundle = data;
-      triggerStringBundleLoadListeners();
-    });
-  }
-  else {
-    // Call from the privileged script
-    makeRequestToPrivilegedScript(window.document, {action: 'get-string-bundle'}, function(response) {
-      if (response) {
-        g_safariStringBundle = response;
-        triggerStringBundleLoadListeners();
-      }
-      else {
-        consoleLog('Markdown Here: content script failed to get string bundle from privileged script');
-      }
-    });
-  }
-}
-/*? } */
 
 
 // Get the translated string indicated by `messageID`.
 // Note that there's no support for placeholders as yet.
-// Throws exception if message is not found or if the platform doesn't support
-// internationalization (yet).
+// Throws exception if message is not found.
 function getMessage(messageID) {
-  var message = '';
-
-  // (This if-structure is ugly to work around the preprocessor logic.)
-  var matched = false;
-  /*? if (platform==='chrome' || platform==='firefox') { */
-  if (typeof(chrome) !== 'undefined') {
-    matched = true;
-    message = chrome.i18n.getMessage(messageID);
-  }
-  /*? } */
-  /*? if (platform==='safari') { */
-  if (!matched && typeof(safari) !== 'undefined') {
-    matched = true;
-    if (g_safariStringBundle) {
-      message = g_safariStringBundle[messageID];
-    }
-    else {
-      // We don't yet have the string bundle available
-      return '';
-    }
-  }
-  /*? } */
+  var message = chrome.i18n.getMessage(messageID);
 
   if (!message) {
     throw new Error('Could not find message ID: ' + messageID);
@@ -966,9 +730,6 @@ Utils.setFocus = setFocus;
 Utils.getTopURL = getTopURL;
 Utils.nextTick = nextTick;
 Utils.nextTickFn = nextTickFn;
-/*? if(platform==='safari'){ */
-Utils.getSafariStringBundle = getSafariStringBundle;
-/*? } */
 Utils.registerStringBundleLoadListener = registerStringBundleLoadListener;
 Utils.getMessage = getMessage;
 Utils.semverGreaterThan = semverGreaterThan;
