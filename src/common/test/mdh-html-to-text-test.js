@@ -6,7 +6,7 @@
 "use strict";
 /* jshint curly:true, noempty:true, newcap:true, eqeqeq:true, eqnull:true, undef:true, devel:true, browser:true, node:true, evil:false, latedef:false, nonew:true, trailing:false, immed:false, smarttabs:true, expr:true */
 /* global describe, expect, it, before, beforeEach, after, afterEach */
-/* global _, $, MarkdownRender, htmlToText, marked, hljs, Utils, MdhHtmlToText */
+/* global _, MarkdownRender, htmlToText, marked, hljs, Utils, MdhHtmlToText */
 
 // TODO: Test ranges.
 // TODO: Lots more tests.
@@ -19,21 +19,25 @@ describe('MdhHtmlToText', function() {
 
 
   // Wraps the normal HTML-to-text calls
-  var get = function(mdHTML) {
-    var elem = $('<div>').html(mdHTML).appendTo('body');
-    var mdhHtmlToText = new MdhHtmlToText.MdhHtmlToText(elem.get(0));
-    var text = mdhHtmlToText.get();
-    $(elem).remove();
+  const get = function(mdHTML) {
+    const elem = document.createElement('div');
+    Utils.saferSetInnerHTML(elem, mdHTML);
+    document.body.appendChild(elem);
+    const mdhHtmlToText = new MdhHtmlToText.MdhHtmlToText(elem);
+    const text = mdhHtmlToText.get();
+    elem.parentNode.removeChild(elem);
     return text;
   };
 
 
   // Wraps the check-for-unrendered-MD HTML-to-text calls
-  var check = function(mdHTML) {
-    var elem = $('<div>').html(mdHTML).appendTo('body');
-    var mdhHtmlToText = new MdhHtmlToText.MdhHtmlToText(elem.get(0), null, true);
-    var text = mdhHtmlToText.get();
-    $(elem).remove();
+  const check = function(mdHTML) {
+    const elem = document.createElement('div');
+    Utils.saferSetInnerHTML(elem, mdHTML);
+    document.body.appendChild(elem);
+    const mdhHtmlToText = new MdhHtmlToText.MdhHtmlToText(elem, null, true);
+    const text = mdhHtmlToText.get();
+    elem.parentNode.removeChild(elem);
     return text;
   };
 

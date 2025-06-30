@@ -6,7 +6,7 @@
 "use strict";
 /* jshint curly:true, noempty:true, newcap:true, eqeqeq:true, eqnull:true, undef:true, devel:true, browser:true, node:true, evil:false, latedef:false, nonew:true, trailing:false, immed:false, smarttabs:true, expr:true */
 /* global describe, expect, it, before, beforeEach, after, afterEach */
-/* global _, $, MarkdownRender, htmlToText, marked, hljs, Utils, MdhHtmlToText, markdownHere */
+/* global _, MarkdownRender, htmlToText, marked, hljs, Utils, MdhHtmlToText, markdownHere */
 
 // TODO: Lots more tests.
 
@@ -20,8 +20,8 @@ describe('markdownHere', function() {
   });
 
   describe('markdownHere', function() {
-    var userprefs = {};
-    var $testElem = null;
+    let userprefs = {};
+    let testElem = null;
 
     beforeEach(function() {
       userprefs = {
@@ -31,11 +31,15 @@ describe('markdownHere', function() {
         'syntax-css': ''
       };
 
-      $testElem = $('<div contentEditable="true">').appendTo('body');
+      testElem = document.createElement('div');
+      testElem.contentEditable = 'true';
+      document.body.appendChild(testElem);
     });
 
     afterEach(function() {
-      $testElem.remove();
+      if (testElem && testElem.parentNode) {
+        testElem.parentNode.removeChild(testElem);
+      }
     });
 
     var markdownRenderHelper = function(elem, range, callback) {
@@ -48,8 +52,8 @@ describe('markdownHere', function() {
     };
 
     var renderMD = function(mdHTML, renderCompleteCallback) {
-      $testElem.html(mdHTML);
-      $testElem.focus();
+      Utils.saferSetInnerHTML(testElem, mdHTML);
+      testElem.focus();
       renderFocusedElem(renderCompleteCallback);
     };
 
@@ -85,7 +89,7 @@ describe('markdownHere', function() {
       // First render
       renderMD(md, function(elem) {
         // Then unrender
-        $testElem.focus();
+        testElem.focus();
         renderFocusedElem(
           function(elem) {
             expect(elem.innerHTML).to.equal(md);
@@ -103,7 +107,7 @@ describe('markdownHere', function() {
       // First render
       renderMD(fullReplyMD, function(elem) {
         // Then unrender
-        $testElem.focus();
+        testElem.focus();
         renderFocusedElem(
           function(elem) {
             expect(elem.innerHTML.slice(0, replyMD.length)).to.equal(replyMD);

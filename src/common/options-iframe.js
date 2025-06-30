@@ -9,7 +9,7 @@ function onLoad() {
   // to use the button and context menu in the iframe.
   if (typeof(safari) !== 'undefined' || typeof(chrome) !== 'undefined') {
     window.LOAD_MARKDOWN_HERE_CONTENT_SCRIPT = true;
-    var contentscript = document.createElement('script');
+    const contentscript = document.createElement('script');
     if (typeof(safari) !== 'undefined') {
       contentscript.src = '../../../contentscript.js';
     }
@@ -22,9 +22,9 @@ function onLoad() {
 
   // The body of the iframe needs to have a (collapsed) selection range for
   // Markdown Here to work (simulating focus/cursor).
-  var range = document.createRange();
+  const range = document.createRange();
   range.setStart(document.body, 0);
-  var sel = document.getSelection();
+  const sel = document.getSelection();
   sel.removeAllRanges();
   sel.addRange(range);
 
@@ -38,13 +38,14 @@ document.addEventListener('DOMContentLoaded', onLoad, false);
 // Basically copied from options.js
 function localize() {
   Utils.registerStringBundleLoadListener(function localizeHelper() {
-    $('[data-i18n]').each(function() {
-      var messageID = 'options_page__' + $(this).data('i18n');
-      if (this.tagName.toUpperCase() === 'TITLE') {
-        this.innerText = Utils.getMessage(messageID);
+    const elements = document.querySelectorAll('[data-i18n]');
+    elements.forEach(function(element) {
+      const messageID = 'options_page__' + element.dataset.i18n;
+      if (element.tagName.toUpperCase() === 'TITLE') {
+        element.innerText = Utils.getMessage(messageID);
       }
       else {
-        Utils.saferSetInnerHTML(this, Utils.getMessage(messageID));
+        Utils.saferSetInnerHTML(element, Utils.getMessage(messageID));
       }
     });
 
@@ -55,7 +56,9 @@ function localize() {
 
 function notifyIframeLoaded() {
   // Let our owner page know that we've loaded.
-  var e = top.document.createEvent('HTMLEvents');
-  e.initEvent('options-iframe-loaded', true, true);
+  const e = new CustomEvent('options-iframe-loaded', {
+    bubbles: true,
+    cancelable: true
+  });
   top.document.dispatchEvent(e);
 }

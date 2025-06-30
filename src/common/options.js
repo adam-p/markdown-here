@@ -4,8 +4,7 @@
  */
 
 "use strict";
-/* jshint browser:true, jquery:true, sub:true */
-/* eslint-env jquery */
+/* jshint browser:true, sub:true */
 /* global OptionsStore:false, chrome:false, marked:false, markdownHere:false, Utils:false,
    MdhHtmlToText:false */
 
@@ -98,11 +97,13 @@ function onLoad() {
   if (navigator.userAgent.indexOf('Thunderbird') >= 0 ||
       navigator.userAgent.indexOf('Icedove') >= 0 ||
       navigator.userAgent.indexOf('Zotero') >= 0) {
-    $('#tests-link').click(function(event) {
+    const testsLink = document.getElementById('tests-link');
+    testsLink.addEventListener('click', function(event) {
       event.preventDefault();
+      const link = testsLink.querySelector('a');
       Utils.makeRequestToPrivilegedScript(
         document,
-        { action: 'open-tab', url: $('#tests-link a').prop('href') });
+        { action: 'open-tab', url: link.href });
     });
   }
 
@@ -116,7 +117,7 @@ function onLoad() {
     .then(response => {
       if (!response.ok) {
         // The test files aren't present, so hide the button.
-        $('#tests-link').hide();
+        document.getElementById('tests-link').style.display = 'none';
       }
       else {
         // When the file is absent, Firefox still gives a 200 status, but will throw an
@@ -126,7 +127,7 @@ function onLoad() {
     })
     .catch(err => {
       // The test files aren't present, so hide the button.
-      $('#tests-link').hide();
+      document.getElementById('tests-link').style.display = 'none';
     });
 
   // Older Thunderbird may try to open this options page in a new ChromeWindow, and it
@@ -162,13 +163,14 @@ document.addEventListener('options-iframe-loaded', previewIframeLoaded);
 
 function localize() {
   Utils.registerStringBundleLoadListener(function localizeHelper() {
-    $('[data-i18n]').each(function() {
-      var messageID = 'options_page__' + $(this).data('i18n');
-      if (this.tagName.toUpperCase() === 'TITLE') {
-        this.innerText = Utils.getMessage(messageID);
+    const elements = document.querySelectorAll('[data-i18n]');
+    elements.forEach(function(element) {
+      const messageID = 'options_page__' + element.dataset.i18n;
+      if (element.tagName.toUpperCase() === 'TITLE') {
+        element.innerText = Utils.getMessage(messageID);
       }
       else {
-        Utils.saferSetInnerHTML(this, Utils.getMessage(messageID));
+        Utils.saferSetInnerHTML(element, Utils.getMessage(messageID));
       }
     });
 
@@ -177,21 +179,21 @@ function localize() {
     // translated content more complex.
     // TODO: Change to media queries (and so use background-image style).
     if (window.devicePixelRatio === 2) {
-      $('img[src="images/icon16.png"]')
-        .css('width', '16px')
-        .attr('src', 'images/icon32.png');
-      $('img[src="images/icon16-button.png"]')
-        .css('width', '16px')
-        .attr('src', 'images/icon32-button.png');
-      $('img[src="images/icon16-monochrome.png"]')
-        .css('width', '16px')
-        .attr('src', 'images/icon32-monochrome.png');
-      $('img[src="images/icon16-button-monochrome.png"]')
-        .css('width', '16px')
-        .attr('src', 'images/icon32-button-monochrome.png');
-      $('img[src="images/icon16-button-disabled.png"]')
-        .css('width', '16px')
-        .attr('src', 'images/icon32-button-disabled.png');
+      const imageMap = [
+        ['images/icon16.png', 'images/icon32.png'],
+        ['images/icon16-button.png', 'images/icon32-button.png'],
+        ['images/icon16-monochrome.png', 'images/icon32-monochrome.png'],
+        ['images/icon16-button-monochrome.png', 'images/icon32-button-monochrome.png'],
+        ['images/icon16-button-disabled.png', 'images/icon32-button-disabled.png']
+      ];
+
+      imageMap.forEach(function([oldSrc, newSrc]) {
+        const imgs = document.querySelectorAll(`img[src="${oldSrc}"]`);
+        imgs.forEach(function(img) {
+          img.style.width = '16px';
+          img.src = newSrc;
+        });
+      });
     }
   });
 }
@@ -377,20 +379,48 @@ function loadChangelist() {
 
       changes = marked(changes, markedOptions);
 
-      Utils.saferSetInnerHTML($('#changelist').get(0), changes);
+      Utils.saferSetInnerHTML(document.getElementById('changelist'), changes);
 
-      var prevVer = location.search ? location.search.match(/prevVer=([0-9\.]+)/) : null;
+      const prevVer = location.search ? location.search.match(/prevVer=([0-9\.]+)/) : null;
       if (prevVer) {
-        prevVer = prevVer[1]; // capture group
+        const version = prevVer[1]; // capture group
 
-        var prevVerStart = $('#changelist h2').filter(function() { return $(this).text().match(new RegExp('v'+prevVer+'$')); });
-        $('#changelist').find('h1:first')
-          .after('<h2>' + Utils.getMessage('new_changelist_items') + '</h2>')
-          .nextUntil(prevVerStart)
-          .wrapAll('<div class="changelist-new"></div>');
+        const changelist = document.getElementById('changelist');
+        const allH2s = changelist.querySelectorAll('h2');
+        let prevVerStart = null;
+
+        for (const h2 of allH2s) {
+          if (h2.textContent.match(new RegExp('v'+version+'$'))) {
+            prevVerStart = h2;
+            break;
+          }
+        }
+
+        const firstH1 = changelist.querySelector('h1:first-child');
+        if (firstH1) {
+          // Create and insert the new h2
+          const newH2 = document.createElement('h2');
+          newH2.textContent = Utils.getMessage('new_changelist_items');
+          firstH1.insertAdjacentElement('afterend', newH2);
+
+          // Collect elements between newH2 and prevVerStart
+          const wrapper = document.createElement('div');
+          wrapper.className = 'changelist-new';
+
+          let current = newH2.nextElementSibling;
+          while (current && current !== prevVerStart) {
+            const next = current.nextElementSibling;
+            wrapper.appendChild(current);
+            current = next;
+          }
+
+          newH2.insertAdjacentElement('afterend', wrapper);
+        }
 
         // Move the changelist section up in the page
-        $('#changelist-container').insertAfter('#pagehead');
+        const changelistContainer = document.getElementById('changelist-container');
+        const pagehead = document.getElementById('pagehead');
+        pagehead.insertAdjacentElement('afterend', changelistContainer);
       }
     });
 }
@@ -398,23 +428,31 @@ function loadChangelist() {
 // Choose one of the donate pleas to use, and update the donate info so we can
 // A/B test them.
 function showDonatePlea() {
-  var $pleas = $('.donate-plea');
-  var choice = Math.floor(Math.random() * $pleas.length);
-  var $plea = $pleas.eq(choice);
-  var pleaId = $plea.attr('id');
-  var submitType = $plea.data('submit-type');
+  const pleas = document.querySelectorAll('.donate-plea');
+  const choice = Math.floor(Math.random() * pleas.length);
+  const plea = pleas[choice];
+  const pleaId = plea.id;
+  const submitType = plea.dataset.submitType;
 
-  if (submitType === 'paypal-submit-image') {
-    $('#paypal-submit-image').show();
-    $('#paypal-submit-css').hide();
-  }
-  else {
-    $('#paypal-submit-image').hide();
-    $('#paypal-submit-css').show();
+  const paypalSubmitImage = document.getElementById('paypal-submit-image');
+  const paypalSubmitCss = document.getElementById('paypal-submit-css');
+
+  if (paypalSubmitImage && paypalSubmitCss) {
+    if (submitType === 'paypal-submit-image') {
+      paypalSubmitImage.style.display = '';
+      paypalSubmitCss.style.display = 'none';
+    }
+    else {
+      paypalSubmitImage.style.display = 'none';
+      paypalSubmitCss.style.display = '';
+    }
   }
 
-  $plea.removeClass('donate-plea-hidden');
-  $('#donate-button input[name="item_number"]').prop('value', 'options-page-'+pleaId);
+  plea.classList.remove('donate-plea-hidden');
+  const itemNumberInput = document.querySelector('#donate-button input[name="item_number"]');
+  if (itemNumberInput) {
+    itemNumberInput.value = 'options-page-' + pleaId;
+  }
 }
 
 // Reset the math img tag template to default.
@@ -431,10 +469,10 @@ function hotkeyChangeHandler() {
   var regex = new RegExp('^[a-zA-Z0-9]+$');
   var value = hotkeyKey.value;
   if (value.length && !regex.test(value)) {
-    $('#hotkey-key-warning').removeClass('hidden');
+    document.getElementById('hotkey-key-warning').classList.remove('hidden');
   }
   else {
-    $('#hotkey-key-warning').addClass('hidden');
+    document.getElementById('hotkey-key-warning').classList.add('hidden');
   }
 
   // Set any representations of the hotkey to the new value.
@@ -445,27 +483,29 @@ function hotkeyChangeHandler() {
   if (hotkeyAlt.checked) hotkeyPieces.push(Utils.getMessage('options_page__hotkey_alt_key'));
   if (hotkeyKey.value) hotkeyPieces.push(hotkeyKey.value.toString().toUpperCase());
 
-  $('.hotkey-display').each(function() {
-    var $hotkeyElem = $(this);
+  const hotkeyDisplays = document.querySelectorAll('.hotkey-display');
+  hotkeyDisplays.forEach(function(hotkeyElem) {
     if (hotkeyKey.value) {
-      if ($hotkeyElem.parent().hasClass('hotkey-display-wrapper')) {
-        $hotkeyElem.parent().css({display: ''});
+      if (hotkeyElem.parentElement && hotkeyElem.parentElement.classList.contains('hotkey-display-wrapper')) {
+        hotkeyElem.parentElement.style.display = '';
       }
-      $hotkeyElem.css({display: ''});
-      $hotkeyElem.empty();
+      hotkeyElem.style.display = '';
+      hotkeyElem.textContent = '';
 
-      $.each(hotkeyPieces, function(idx, piece) {
+      hotkeyPieces.forEach(function(piece, idx) {
         if (idx > 0) {
-          $hotkeyElem.append(document.createTextNode(Utils.getMessage('options_page__hotkey_plus')));
+          hotkeyElem.appendChild(document.createTextNode(Utils.getMessage('options_page__hotkey_plus')));
         }
-        $('<kbd>').text(piece).appendTo($hotkeyElem);
+        const kbd = document.createElement('kbd');
+        kbd.textContent = piece;
+        hotkeyElem.appendChild(kbd);
       });
     }
     else {
-      if ($hotkeyElem.parent().hasClass('hotkey-display-wrapper')) {
-        $hotkeyElem.parent().css({display: 'none'});
+      if (hotkeyElem.parentElement && hotkeyElem.parentElement.classList.contains('hotkey-display-wrapper')) {
+        hotkeyElem.parentElement.style.display = 'none';
       }
-      $hotkeyElem.css({display: 'none'});
+      hotkeyElem.style.display = 'none';
     }
   });
 }

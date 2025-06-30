@@ -6,15 +6,15 @@
 "use strict";
 /* jshint curly:true, noempty:true, newcap:true, eqeqeq:true, eqnull:true, es5:true, undef:true, devel:true, browser:true, node:true, evil:false, latedef:false, nonew:true, trailing:false, immed:false, smarttabs:true, expr:true */
 /* global describe, expect, it, before, beforeEach, after, afterEach */
-/* global _, $, markdownRender, htmlToText, marked, hljs, Utils */
+/* global _, markdownRender, htmlToText, marked, hljs, Utils */
 
 
 // This function wraps `htmlString` in a `<div>` to make life easier for us.
 // It should affect the testing behaviour, though -- good/bad elements in a
 // `<div>` are still good/bad.
 function createDocFrag(htmlString) {
-  var docFrag = document.createDocumentFragment();
-  var elem = document.createElement('div');
+  const docFrag = document.createDocumentFragment();
+  const elem = document.createElement('div');
   elem.innerHTML = htmlString;
   docFrag.appendChild(elem);
   return docFrag;
@@ -82,43 +82,55 @@ describe('Utils', function() {
   describe('saferSetOuterHTML', function() {
     beforeEach(function() {
       // Our test container element, which will not be modified
-      $('body').append($('<div id="test-container" style="display:none"><div id="test-elem"></div></div>'));
+      const container = document.createElement('div');
+      container.id = 'test-container';
+      container.style.display = 'none';
+      container.innerHTML = '<div id="test-elem"></div>';
+      document.body.appendChild(container);
     });
 
     afterEach(function() {
-      $('#test-container').remove();
+      const container = document.getElementById('test-container');
+      if (container && container.parentNode) {
+        container.parentNode.removeChild(container);
+      }
     });
 
     it('should throw exception if element not in DOM', function() {
-      var testElem = $('<div><b>bye</b></div>').get(0);
+      const testElem = document.createElement('div');
+      testElem.innerHTML = '<b>bye</b>';
 
-      var fn = _.partial(Utils.saferSetOuterHTML, '<p></p>');
+      const fn = _.partial(Utils.saferSetOuterHTML, '<p></p>');
 
       expect(fn).to.throw(Error);
     });
 
     it('should set safe HTML without alteration', function() {
-      Utils.saferSetOuterHTML($('#test-container').children(':first').get(0), '<p>hi</p>');
+      const container = document.getElementById('test-container');
+      Utils.saferSetOuterHTML(container.firstElementChild, '<p>hi</p>');
 
-      expect($('#test-container').html()).to.equal('<p>hi</p>');
+      expect(container.innerHTML).to.equal('<p>hi</p>');
     });
 
     it('should remove <script> elements', function() {
-      Utils.saferSetOuterHTML($('#test-container').children(':first').get(0), '<b>hi</b><script>alert("oops")</script>there<script>alert("derp")</script>');
+      const container = document.getElementById('test-container');
+      Utils.saferSetOuterHTML(container.firstElementChild, '<b>hi</b><script>alert("oops")</script>there<script>alert("derp")</script>');
 
-      expect($('#test-container').html()).to.equal('<b>hi</b>there');
+      expect(container.innerHTML).to.equal('<b>hi</b>there');
     });
 
     it('should not remove safe attributes', function() {
-      Utils.saferSetOuterHTML($('#test-container').children(':first').get(0), '<div id="rad" style="color:red">hi</div>');
+      const container = document.getElementById('test-container');
+      Utils.saferSetOuterHTML(container.firstElementChild, '<div id="rad" style="color:red">hi</div>');
 
-      expect($('#test-container').html()).to.equal('<div id="rad" style="color:red">hi</div>');
+      expect(container.innerHTML).to.equal('<div id="rad" style="color:red">hi</div>');
     });
 
     it('should remove event handler attributes', function() {
-      Utils.saferSetOuterHTML($('#test-container').children(':first').get(0), '<div id="rad" style="color:red" onclick="javascript:alert(\'derp\')">hi</div>');
+      const container = document.getElementById('test-container');
+      Utils.saferSetOuterHTML(container.firstElementChild, '<div id="rad" style="color:red" onclick="javascript:alert(\'derp\')">hi</div>');
 
-      expect($('#test-container').html()).to.equal('<div id="rad" style="color:red">hi</div>');
+      expect(container.innerHTML).to.equal('<div id="rad" style="color:red">hi</div>');
     });
 
     // An earlier implementation of Utils.saferSetOuterHTML was vulnerable to allowing
@@ -132,7 +144,8 @@ describe('Utils', function() {
 
       var maliciousHTML = '<div>before</div><img src="nonexistent.jpg" onerror="window.imgErrorExecuted = true;"><div>after</div>';
 
-      Utils.saferSetOuterHTML($('#test-container').children(':first').get(0), maliciousHTML);
+      const container = document.getElementById('test-container');
+      Utils.saferSetOuterHTML(container.firstElementChild, maliciousHTML);
 
       // The onerror handler should NOT have executed
       expect(window.imgErrorExecuted).to.be.false;
@@ -144,18 +157,20 @@ describe('Utils', function() {
 
 
   describe('getDocumentFragmentHTML', function() {
-    var makeFragment = function(htmlArray) {
-      var docFrag = document.createDocumentFragment();
+    const makeFragment = function(htmlArray) {
+      const docFrag = document.createDocumentFragment();
       htmlArray.forEach(function(html) {
-        docFrag.appendChild($(html).get(0));
+        const template = document.createElement('template');
+        template.innerHTML = html;
+        docFrag.appendChild(template.content.firstElementChild);
       });
 
       return docFrag;
     };
 
-    var makeTextFragment = function(text) {
-      var docFrag = document.createDocumentFragment();
-      var textNode = document.createTextNode(text);
+    const makeTextFragment = function(text) {
+      const docFrag = document.createDocumentFragment();
+      const textNode = document.createTextNode(text);
       docFrag.appendChild(textNode);
       return docFrag;
     };
@@ -187,17 +202,20 @@ describe('Utils', function() {
 
 
   describe('isElementDescendant', function() {
-    var $testOuter;
+    let testOuter;
 
     before(function() {
-      $testOuter = $('<div id="isElementDescendant-0"></div>')
-        .appendTo('body')
-        .append('<div id="isElementDescendant-1"><div id="isElementDescendant-1-1"></div></div>')
-        .append('<div id="isElementDescendant-2"><div id="isElementDescendant-2-1"></div></div>');
+      testOuter = document.createElement('div');
+      testOuter.id = 'isElementDescendant-0';
+      testOuter.innerHTML = '<div id="isElementDescendant-1"><div id="isElementDescendant-1-1"></div></div>' +
+                            '<div id="isElementDescendant-2"><div id="isElementDescendant-2-1"></div></div>';
+      document.body.appendChild(testOuter);
     });
 
     after(function() {
-      $testOuter.remove();
+      if (testOuter && testOuter.parentNode) {
+        testOuter.parentNode.removeChild(testOuter);
+      }
     });
 
     it('should correctly detect descendency', function() {
@@ -335,25 +353,28 @@ describe('Utils', function() {
 
   describe('setFocus', function() {
     it('should set focus into a contenteditable div', function() {
-      var $div = $('<div contenteditable="true">').appendTo('body');
-      expect(document.activeElement).to.not.equal($div.get(0));
+      const div = document.createElement('div');
+      div.contentEditable = 'true';
+      document.body.appendChild(div);
+      expect(document.activeElement).to.not.equal(div);
 
-      Utils.setFocus($div.get(0));
-      expect(document.activeElement).to.equal($div.get(0));
+      Utils.setFocus(div);
+      expect(document.activeElement).to.equal(div);
 
-      $div.remove();
+      div.parentNode.removeChild(div);
     });
 
     it('should set focus into an iframe with contenteditable body', function() {
-      var $iframe = $('<iframe>').appendTo('body');
-      $iframe.get(0).contentDocument.body.contentEditable = true;
-      expect(document.activeElement).to.not.equal($iframe.get(0));
+      const iframe = document.createElement('iframe');
+      document.body.appendChild(iframe);
+      iframe.contentDocument.body.contentEditable = true;
+      expect(document.activeElement).to.not.equal(iframe);
 
-      Utils.setFocus($iframe.get(0).contentDocument.body);
-      expect(document.activeElement).to.equal($iframe.get(0));
-      expect($iframe.get(0).contentDocument.activeElement).to.equal($iframe.get(0).contentDocument.body);
+      Utils.setFocus(iframe.contentDocument.body);
+      expect(document.activeElement).to.equal(iframe);
+      expect(iframe.contentDocument.activeElement).to.equal(iframe.contentDocument.body);
 
-      $iframe.remove();
+      iframe.parentNode.removeChild(iframe);
     });
   });
 
@@ -369,9 +390,10 @@ describe('Utils', function() {
     });
 
     it('should get the URL from an iframe', function() {
-      var $iframe = $('<iframe>').appendTo('body');
-      expect(Utils.getTopURL($iframe.get(0).contentWindow)).to.equal(location.href);
-      $iframe.remove();
+      const iframe = document.createElement('iframe');
+      document.body.appendChild(iframe);
+      expect(Utils.getTopURL(iframe.contentWindow)).to.equal(location.href);
+      iframe.parentNode.removeChild(iframe);
     });
 
     it('should get the hostname', function() {
@@ -488,16 +510,23 @@ describe('Utils', function() {
 
   describe('walkDOM', function() {
     beforeEach(function() {
-      $('body').append($('<div id="test-container" style="display:none"><div id="test-elem"></div></div>'));
+      const container = document.createElement('div');
+      container.id = 'test-container';
+      container.style.display = 'none';
+      container.innerHTML = '<div id="test-elem"></div>';
+      document.body.appendChild(container);
     });
 
     afterEach(function() {
-      $('#test-container').remove();
+      const container = document.getElementById('test-container');
+      if (container && container.parentNode) {
+        container.parentNode.removeChild(container);
+      }
     });
 
     it('should find an element in the DOM', function() {
-      var found = false;
-      Utils.walkDOM($('body')[0], function(node) {
+      let found = false;
+      Utils.walkDOM(document.body, function(node) {
         found = found || node.id === 'test-elem';
       });
       expect(found).to.be.true;
@@ -522,44 +551,52 @@ describe('Utils', function() {
 
   describe('rangeIntersectsNode', function() {
     beforeEach(function() {
-      $('body').append($('<div id="test-container" style="display:none"><div id="test-elem-1"></div><div id="test-elem-2"></div></div>'));
+      const container = document.createElement('div');
+      container.id = 'test-container';
+      container.style.display = 'none';
+      container.innerHTML = '<div id="test-elem-1"></div><div id="test-elem-2"></div>';
+      document.body.appendChild(container);
     });
 
     afterEach(function() {
-      $('#test-container').remove();
+      const container = document.getElementById('test-container');
+      if (container && container.parentNode) {
+        container.parentNode.removeChild(container);
+      }
     });
 
     it('should detect a node in a range', function() {
-      var range = document.createRange();
-      range.selectNode($('#test-container')[0]);
+      const range = document.createRange();
+      const container = document.getElementById('test-container');
+      range.selectNode(container);
 
       // Check the node that is selected.
-      expect(Utils.rangeIntersectsNode(range, $('#test-container')[0])).to.be.true;
+      expect(Utils.rangeIntersectsNode(range, container)).to.be.true;
 
       // Check a node that is within the node that is selected.
-      expect(Utils.rangeIntersectsNode(range, $('#test-elem-2')[0])).to.be.true;
+      expect(Utils.rangeIntersectsNode(range, document.getElementById('test-elem-2'))).to.be.true;
     });
 
     it('should not detect a node not in a range', function() {
-      var range = document.createRange();
-      range.selectNode($('#test-elem-1')[0]);
+      const range = document.createRange();
+      range.selectNode(document.getElementById('test-elem-1'));
 
       // The parent of the selected node *is* intersected.
-      expect(Utils.rangeIntersectsNode(range, $('#test-container')[0])).to.be.true;
+      expect(Utils.rangeIntersectsNode(range, document.getElementById('test-container'))).to.be.true;
 
       // The sibling of the selected node *is not* intersected.
-      expect(Utils.rangeIntersectsNode(range, $('#test-elem-2')[0])).to.be.false;
+      expect(Utils.rangeIntersectsNode(range, document.getElementById('test-elem-2'))).to.be.false;
     });
 
     // I have found that Range.intersectsNode is broken on Chrome. I'm adding
     // test to see if/when it gets fixed.
     // TODO: This test seems flawed. Why would test-elem-2 intersect the range that just contains test-elem-1? Hand-testing suggests that this is working as expected in Chrome and Firefox. Code that works around this probably-nonexistent bug should be reconsidered (especially since Postbox support is dropped).
     it('Range.intersectsNode is broken on Chrome', function() {
-      var range = document.createRange();
-      range.selectNode($('#test-elem-1')[0]);
+      const range = document.createRange();
+      range.selectNode(document.getElementById('test-elem-1'));
 
       if (typeof(window.chrome) !== 'undefined' && navigator.userAgent.indexOf('Chrome') >= 0) {
-        expect(range.intersectsNode($('#test-elem-2')[0])).to.be.true;
+        expect(range.intersectsNode(document.getElementById('test-elem-2'))).to.be.true;
       }
     });
   });

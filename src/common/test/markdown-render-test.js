@@ -6,7 +6,7 @@
 "use strict";
 /* jshint curly:true, noempty:true, newcap:true, eqeqeq:true, eqnull:true, undef:true, devel:true, browser:true, node:true, evil:false, latedef:false, nonew:true, trailing:false, immed:false, smarttabs:true, expr:true */
 /* global describe, expect, it, before, beforeEach, after, afterEach */
-/* global _, $, MarkdownRender, htmlToText, marked, hljs, Utils, MdhHtmlToText */
+/* global _, MarkdownRender, htmlToText, marked, hljs, Utils, MdhHtmlToText */
 
 
 describe('Markdown-Render', function() {
@@ -196,13 +196,15 @@ describe('Markdown-Render', function() {
       };
     });
 
-    var fullRender = function(mdHTML) {
-      var elem = $('<div>').html(mdHTML).appendTo('body');
-      var mdhHtmlToText = new MdhHtmlToText.MdhHtmlToText(elem.get(0));
-      var renderedMarkdown = MarkdownRender.markdownRender(
+    const fullRender = function(mdHTML) {
+      const elem = document.createElement('div');
+      Utils.saferSetInnerHTML(elem, mdHTML);
+      document.body.appendChild(elem);
+      const mdhHtmlToText = new MdhHtmlToText.MdhHtmlToText(elem);
+      let renderedMarkdown = MarkdownRender.markdownRender(
         mdhHtmlToText.get(), userprefs, marked, hljs);
       renderedMarkdown = mdhHtmlToText.postprocess(renderedMarkdown);
-      $(elem).remove();
+      elem.parentNode.removeChild(elem);
       return renderedMarkdown;
     };
 

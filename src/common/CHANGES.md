@@ -6,8 +6,6 @@ Change Log
 
 * Improved HTML sanitization.
 
-* Removed XUL/overlay (i.e., very old Firefox and Thunderbird) support. (No functional change, but 3500 lines removed!)
-
 2025-06-23: v2.15.0
 -------------------
 

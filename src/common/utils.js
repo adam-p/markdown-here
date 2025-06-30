@@ -558,6 +558,7 @@ This necessitated the addition of `registerStringBundleLoadListener` and
 `triggerStringBundleLoadListeners`, which may be used to ensure that `getMessage`
 calls wait until the loading is complete.
 */
+// TODO: Remove this whole thing, now that everything is WebExtensions. (And Safari is dropped. And if we re-add it, it'll be a whole new thing.)
 
 var g_stringBundleLoadListeners = [];
 
