@@ -1,7 +1,7 @@
 Change Log
 ==========
 
-2025-06-xx: v2.15.1
+2025-06-28: v2.15.1
 -------------------
 
 * Improved HTML sanitization.
