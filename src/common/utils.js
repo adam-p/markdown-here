@@ -82,37 +82,6 @@ function saferSetOuterHTML(elem, htmlString) {
 }
 
 
-// Removes potentially harmful elements and attributes from `docFrag`.
-// Returns a sanitized copy.
-function sanitizeDocumentFragment(docFrag) {
-  // Don't modify the original
-  docFrag = docFrag.cloneNode(true);
-
-  let scriptTagElems = docFrag.querySelectorAll('script');
-  for (let i = 0; i < scriptTagElems.length; i++) {
-    scriptTagElems[i].parentNode.removeChild(scriptTagElems[i]);
-  }
-
-  function cleanAttributes(node) {
-    if (typeof(node.removeAttribute) === 'undefined') {
-      // We can't operate on this node
-      return;
-    }
-
-    // Remove event handler attributes
-    for (let i = node.attributes.length-1; i >= 0; i--) {
-      if (node.attributes[i].name.match(/^on/)) {
-        node.removeAttribute(node.attributes[i].name);
-      }
-    }
-  }
-
-  walkDOM(docFrag.firstChild, cleanAttributes);
-
-  return docFrag;
-}
-
-
 // Walk the DOM, executing `func` on each element.
 // From Crockford.
 function walkDOM(node, func) {
@@ -982,7 +951,6 @@ Utils.saferSetInnerHTML = saferSetInnerHTML;
 Utils.saferSetOuterHTML = saferSetOuterHTML;
 Utils.safelyParseHTML = safelyParseHTML;
 Utils.walkDOM = walkDOM;
-Utils.sanitizeDocumentFragment = sanitizeDocumentFragment;
 Utils.rangeIntersectsNode = rangeIntersectsNode;
 Utils.getDocumentFragmentHTML = getDocumentFragmentHTML;
 Utils.isElementDescendant = isElementDescendant;
