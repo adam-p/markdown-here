@@ -435,36 +435,16 @@ function showForgotToRenderPromptAndRespond(composeElem, composeSendButton) {
     }
   };
 
-  // Decide which prompt style to use.
-  if (typeof(composeElem.ownerDocument.defaultView.openDialog) !== 'undefined') {
-    var promptParams = {
-      inn:{
-        promptInfo: Utils.getMessage('forgot_to_render_prompt_info'),
-        promptQuestion: Utils.getMessage('forgot_to_render_prompt_question'),
-        promptBackButton: Utils.getMessage('forgot_to_render_back_button'),
-        promptSendButton: Utils.getMessage('forgot_to_render_send_button') },
-      out:null
-    };
-    composeElem.ownerDocument.defaultView.openDialog(
-      "chrome://markdown_here/content/confirm-prompt.xul",
-      "",
-      "chrome, dialog, modal, centerscreen",
-      promptParams).focus();
-
-    sendOrGoBackToCompose(promptParams.out);
-  }
-  else {
-    Utils.makeRequestToPrivilegedScript(
-      composeElem.ownerDocument,
-      { action: 'get-forgot-to-render-prompt'},
-      function(response) {
-        showHTMLForgotToRenderPrompt(
-          response.html,
-          composeElem,
-          composeSendButton,
-          sendOrGoBackToCompose);
-      });
-  }
+  Utils.makeRequestToPrivilegedScript(
+    composeElem.ownerDocument,
+    { action: 'get-forgot-to-render-prompt'},
+    function(response) {
+      showHTMLForgotToRenderPrompt(
+        response.html,
+        composeElem,
+        composeSendButton,
+        sendOrGoBackToCompose);
+    });
 }
 
 

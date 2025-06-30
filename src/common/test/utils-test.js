@@ -509,33 +509,17 @@ describe('Utils', function() {
     });
   });
 
-  describe('getMoz/SafariStringBundle', function() {
+  describe('getSafariStringBundle', function() {
     it('should get the string bundle', function(done) {
-      if (typeof(chrome) !== 'undefined') {
-        // not applicable
-        done();
-        return;
-      }
-      else if (typeof(safari) !== 'undefined') {
+      if (typeof(safari) !== 'undefined') {
         Utils.getSafariStringBundle(function(data, err) {
           expect(err).to.not.be.ok;
           expect(data).to.be.an('object');
           done();
         });
       }
-      else { // Mozilla
-        var data = Utils.getMozStringBundle();
-        if (data) {
-          expect(data).to.be.an('object');
-          done();
-        }
-        else {
-          // HACK: make a call to the privileged script
-          Utils.makeRequestToPrivilegedScript(document, {action: 'get-string-bundle'}, function(response) {
-            expect(response).to.be.an('object');
-            done();
-          });
-        }
+      else {
+        done();
       }
     });
   });

@@ -11,6 +11,7 @@ var file = require('file');
 var archiver = require('archiver');
 var MetaScript = require('MetaScript');
 
+// TODO: Update Thunderbird build
 
 var BASE_DIR = '..';
 var SRC_DIR = file.path.join(BASE_DIR, 'src');

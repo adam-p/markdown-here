@@ -14,21 +14,9 @@
 "use strict";
 /*global module:false, chrome:false, safari:false*/
 
-if (typeof(DOMPurify) === 'undefined' &&
-    typeof(safari) === 'undefined' && typeof(chrome) === 'undefined') {
-  const scriptLoader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"]
-                                 .getService(Components.interfaces.mozIJSSubScriptLoader);
-  scriptLoader.loadSubScript('resource://markdown_here_common/vendor/dompurify.min.js');
-}
-
 function consoleLog(logString) {
   if (typeof(console) !== 'undefined') {
     console.log(logString);
-  }
-  else {
-    var consoleService = Components.classes['@mozilla.org/consoleservice;1']
-                                   .getService(Components.interfaces.nsIConsoleService);
-    consoleService.logStringMessage(String(logString));
   }
 }
 
@@ -161,6 +149,7 @@ function rangeIntersectsNode(range, node) {
     nodeRange.selectNodeContents(node);
   }
 
+  // TODO: Remove this workaround, as we no longer support Postbox or XUL Mozilla.
   // Workaround for this old Mozilla bug, which is still present in Postbox:
   // https://bugzilla.mozilla.org/show_bug.cgi?id=665279
   var END_TO_START = node.ownerDocument.defaultView.Range.END_TO_START || window.Range.END_TO_START;
@@ -211,7 +200,7 @@ function getSelectedElementsInRange(range) {
           }
       });
 
-    /*? if(platform!=='firefox' && platform!=='thunderbird'){ */
+    /*? if(platform!=='firefox'){ */
     /*
     // This code is probably superior, but TreeWalker is not supported by Postbox.
     // If this ends up getting used, it should probably be moved into walkDOM
@@ -329,34 +318,15 @@ function getLocalURL(url) {
     return safari.extension.baseURI + 'markdown-here/src' + url;
   }
   /*? } */
-  /*? if(platform==='thunderbird'){ */
-  if (!matched) {
-    matched = true;
-    // Mozilla platform.
-    // HACK: The proper URL depends on values in `chrome.manifest`. But we "know"
-    // that there are only a couple of locations we request from, so we're going
-    // to branch depending on the presence of "common".
-
-    var COMMON = '/common/';
-    var CONTENT = '/firefox/chrome/';
-
-    if (url.indexOf(COMMON) === 0) {
-      return 'resource://markdown_here_common/' + url.slice(COMMON.length);
-    }
-    else if (url.indexOf(CONTENT) === 0) {
-      return 'chrome://markdown_here/' + url.slice(CONTENT.length);
-    }
-  }
-  /*? } */
 
   throw 'unknown url type: ' + url;
 }
 
 
-// Makes an asynchrous XHR request for a local file (basically a thin wrapper).
+// Makes an asynchronous XHR request for a local file (basically a thin wrapper).
 // `dataType` must be one of 'text', 'json', or 'base64'.
 // `callback` will be called with the response value, of a type depending on `dataType`.
-// Errors are not expected for local files, and will result in an exception being thrown asynchrously.
+// Errors are not expected for local files, and will result in an exception being thrown asynchronously.
 // TODO: Return a promise instead of using a callback. This will allow returning an error
 // properly, and then this can be used in options.js when checking for the existence of
 // the test file.
@@ -490,41 +460,6 @@ function makeRequestToPrivilegedScript(doc, requestObj, callback) {
     safari.self.tab.dispatchMessage('request', window.JSON.stringify(requestObj));
   }
   /*? } */
-  /*? if(platform==='thunderbird'){ */
-  if (!matched) { // Mozilla/XUL
-    matched = true;
-
-    // See: https://developer.mozilla.org/en-US/docs/Code_snippets/Interaction_between_privileged_and_non-privileged_pages#Chromium-like_messaging.3A_json_request_with_json_callback
-
-    // Make a unique event name to use. (Bad style to modify the input like this...)
-    requestObj.responseEventName = 'markdown-here-response-event-' + Math.floor(Math.random()*1000000);
-
-    var request = doc.createTextNode(JSON.stringify(requestObj));
-
-    var responseHandler = function(event) {
-      var response = null;
-
-      // There may be no response data.
-      if (request.nodeValue) {
-        response = JSON.parse(request.nodeValue);
-      }
-
-      request.parentNode.removeChild(request);
-
-      if (callback) {
-        callback(response);
-      }
-    };
-
-    request.addEventListener(requestObj.responseEventName, responseHandler, false);
-
-    (doc.head || doc.body).appendChild(request);
-
-    var event = doc.createEvent('HTMLEvents');
-    event.initEvent(PRIVILEGED_REQUEST_EVENT_NAME, true, false);
-    request.dispatchEvent(event);
-  }
-  /*? } */
 }
 
 
@@ -622,85 +557,6 @@ function nextTickFn(callback, context) {
 }
 
 
-/*? if(platform==='thunderbird'){ */
-
-/**
- * Returns the stored preference string for the given key.
- * Must only be called from a privileged Mozilla script.
- * @param {nsIPrefBranch} prefsBranch
- * @param {string} key
- * @returns {?string} The preference value. May be null if the preference is not set
- * or is null.
- */
-function getMozStringPref(prefsBranch, key) {
-  try {
-    if (Services.vc.compare(Services.appinfo.platformVersion, '58') < 0) {
-      return prefsBranch.getComplexValue(
-                          key,
-                          Components.interfaces.nsISupportsString).data;
-    }
-
-    return prefsBranch.getStringPref(key, null);
-  }
-  catch(e) {
-    // getComplexValue could have thrown an exception because it didn't find the key. As
-    // with getStringPref, we will default to null.
-    return null;
-  }
-}
-
-/**
- * Get the stored preference object, JSON-parsed, for the given key.
- * Must only be called from a privileged Mozilla script.
- * @param {nsIPrefBranch} prefsBranch
- * @param {string} key
- * @returns {?(object|number|boolean|string)} The preference object (any valid JSON
- * type). May be null if the preference is not set or is null.
- */
-function getMozJsonPref(prefsBranch, key) {
-  try {
-    return JSON.parse(getMozStringPref(prefsBranch, key));
-  }
-  catch(e) {
-    return null;
-  }
-}
-
-/**
- * Store the preference string for the given key.
- * Must only be called from a privileged Mozilla script.
- * @param {nsIPrefBranch} prefsBranch
- * @param {string} key
- * @param {string} value
- */
-function setMozStringPref(prefsBranch, key, value) {
-  var supportString = Components.classes['@mozilla.org/supports-string;1']
-                        .createInstance(Components.interfaces.nsISupportsString);
-
-  if (Services.vc.compare(Services.appinfo.platformVersion, '58') < 0) {
-    supportString.data = value;
-    prefsBranch.setComplexValue(
-                  key,
-                  Components.interfaces.nsISupportsString,
-                  supportString);
-  }
-  else {
-    prefsBranch.setStringPref(key, value);
-  }
-}
-
-/**
- * Store the given object in preferences under the given key.
- * Must only be called from a privileged Mozilla script.
- * @param {nsIPrefBranch} prefsBranch
- * @param {string} key
- * @param {?(object|number|boolean|string)} value
- */
-function setMozJsonPref(prefsBranch, key, value) {
-  setMozStringPref(prefsBranch, key, JSON.stringify(value));
-}
-
-/*? } */
 
 
 /*
@@ -757,16 +613,6 @@ function registerStringBundleLoadListener(callback) {
     return;
   }
   /*? } */
-  /*? if(platform==='thunderbird'){ */
-  if (!matched
-      && typeof(g_mozStringBundle) === 'object'
-      && Object.keys(g_mozStringBundle).length > 0) {
-    matched = true;
-    // Already loaded
-    Utils.nextTick(callback);
-    return;
-  }
-  /*? } */
 
   g_stringBundleLoadListeners.push(callback);
 }
@@ -780,70 +626,7 @@ function triggerStringBundleLoadListeners() {
 }
 
 
-// Must only be called from a privileged Mozilla script
-function getMozStringBundle() {
-  if (typeof(Components) === 'undefined' || typeof(Components.classes) === 'undefined') {
-    return false;
-  }
 
-  // Return a cached bundle, if we have one
-  if (typeof(g_mozStringBundle) !== 'undefined' &&
-      Object.keys(g_mozStringBundle).length > 0) {
-    return g_mozStringBundle;
-  }
-
-  // Adapted from: https://developer.mozilla.org/en-US/docs/Code_snippets/Miscellaneous#Using_string_bundles_from_JavaScript
-  // and: https://developer.mozilla.org/en-US/docs/Using_nsISimpleEnumerator
-
-  var stringBundleObj = {}, stringBundle, stringBundleEnum, property;
-
-  // First load the English fallback strings
-
-  stringBundle = Components.classes["@mozilla.org/intl/stringbundle;1"]
-                        .getService(Components.interfaces.nsIStringBundleService)
-                        // Notice the explicit locale in this path:
-                        .createBundle("resource://markdown_here_locale/en/strings.properties");
-
-  stringBundleEnum = stringBundle.getSimpleEnumeration();
-  while (stringBundleEnum.hasMoreElements()) {
-    property = stringBundleEnum.getNext().QueryInterface(Components.interfaces.nsIPropertyElement);
-    stringBundleObj[property.key] = property.value;
-  }
-
-  // Then load the strings that are overridden for the current locale
-
-  stringBundle = Components.classes["@mozilla.org/intl/stringbundle;1"]
-                        .getService(Components.interfaces.nsIStringBundleService)
-                        .createBundle("chrome://markdown_here/locale/strings.properties");
-
-  stringBundleEnum = stringBundle.getSimpleEnumeration();
-  while (stringBundleEnum.hasMoreElements()) {
-    property = stringBundleEnum.getNext().QueryInterface(Components.interfaces.nsIPropertyElement);
-    stringBundleObj[property.key] = property.value;
-  }
-
-  return stringBundleObj;
-}
-
-/*? if(platform==='thunderbird'){ */
-// Load the Mozilla string bundle
-if (typeof(chrome) === 'undefined' && typeof(safari) === 'undefined') {
-  var g_mozStringBundle = getMozStringBundle();
-
-  if (!g_mozStringBundle || Object.keys(g_mozStringBundle).length === 0) {
-    window.setTimeout(function requestMozStringBundle() {
-      makeRequestToPrivilegedScript(window.document, {action: 'get-string-bundle'}, function(response) {
-        g_mozStringBundle = response;
-        triggerStringBundleLoadListeners();
-      });
-    }, 0);
-  }
-  else {
-    // g_mozStringBundle is filled in
-    triggerStringBundleLoadListeners();
-  }
-}
-/*? } */
 
 
 /*? if(platform==='safari'){ */
@@ -984,18 +767,6 @@ function getMessage(messageID) {
     matched = true;
     if (g_safariStringBundle) {
       message = g_safariStringBundle[messageID];
-    }
-    else {
-      // We don't yet have the string bundle available
-      return '';
-    }
-  }
-  /*? } */
-  /*? if (platform==='thunderbird') { */
-  if (!matched) { // Mozilla
-    matched = true;
-    if (g_mozStringBundle) {
-      message = g_mozStringBundle[messageID];
     }
     else {
       // We don't yet have the string bundle available
@@ -1226,13 +997,6 @@ Utils.setFocus = setFocus;
 Utils.getTopURL = getTopURL;
 Utils.nextTick = nextTick;
 Utils.nextTickFn = nextTickFn;
-/*? if(platform==='thunderbird'){ */
-Utils.getMozStringPref = getMozStringPref;
-Utils.getMozJsonPref = getMozJsonPref;
-Utils.setMozStringPref = setMozStringPref;
-Utils.setMozJsonPref = setMozJsonPref;
-Utils.getMozStringBundle = getMozStringBundle;
-/*? } */
 /*? if(platform==='safari'){ */
 Utils.getSafariStringBundle = getSafariStringBundle;
 /*? } */

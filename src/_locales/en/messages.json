@@ -1,42 +1,23 @@
 {
   "app_name": {
     "message": "Markdown Here",
-    "description": "the name of the extension",
-    "inMozDTD": true
+    "description": "the name of the extension"
   },
   "app_slogan": {
     "message": "Write your email in Markdown, then make it pretty.",
     "description": "shown as subtitle for Markdown Here in the browser extensions list"
   },
-  "toggle_button_text":{
-    "message": "MD Toggle",
-    "description": "Text shown underneath the render toggle button. Make it as short as possible.",
-    "inMozDTD": true
-  },
   "toggle_button_tooltip": {
     "message": "Click to toggle Markdown rendering",
-    "description": "text shown when user hovers mouse over Markdown Toggle button",
-    "inMozDTD": true
+    "description": "text shown when user hovers mouse over Markdown Toggle button"
   },
   "toggle_button_tooltip_disabled": {
     "message": "The selected field is not valid for Markdown rendering",
-    "description": "text shown when user hover mouse over disabled Markdown Toggle button",
-    "inMozDTD": true
+    "description": "text shown when user hover mouse over disabled Markdown Toggle button"
   },
   "context_menu_item": {
     "message": "Markdown Toggle",
-    "description": "Text shown on the context menu.",
-    "inMozDTD": true
-  },
-  "moz_options_dlg_title": {
-    "message": "Markdown Here Options",
-    "description": "In Thunderbird, in order to open the options tab we first have to open a temporary dialog box. This is the title for that box.",
-    "inMozDTD": true
-  },
-  "moz_options_dlg_instruction": {
-    "message": "Click the 'OK' button to open the Markdown Here Options tab",
-    "description": "In Thunderbird, in order to open the options tab we first have to open a temporary dialog box. This is the text in that box telling the user what to do. Please use the same translation for 'OK' that the application uses.",
-    "inMozDTD": true
+    "description": "Text shown on the context menu."
   },
   "invalid_field": {
     "message": "The selected field is not valid for Markdown rendering. Please use a rich editor.",
@@ -63,13 +44,11 @@
   },
   "forgot_to_render_back_button": {
     "message": "Back",
-    "description": "Text on the Back (cancel) button of the prompt that's shown when it's detected that a user may have forgotten to render the Markdown in their email",
-    "inMozDTD": true
+    "description": "Text on the Back (cancel) button of the prompt that's shown when it's detected that a user may have forgotten to render the Markdown in their email"
   },
   "forgot_to_render_send_button": {
     "message": "Send",
-    "description": "Text on the Send (continue) button of the prompt that's shown when it's detected that a user may have forgotten to render the Markdown in their email",
-    "inMozDTD": true
+    "description": "Text on the Send (continue) button of the prompt that's shown when it's detected that a user may have forgotten to render the Markdown in their email"
   },
   "forgot_to_render_prompt_close_hover": {
     "message": "Dismiss this notification",
@@ -100,10 +79,6 @@
   },
   "options_page__basic_usage": {
     "message": "Basic Usage"
-  },
-  "options_page__reload_restart": {
-    "message": "After installing or upgrading, reload your email web page or restart your web browser.",
-    "description": "A step in the basic usage instructions"
   },
   "options_page__start_new_message": {
     "message": "Start a new email message.",
@@ -170,7 +145,7 @@
   },
   "options_page__syntax_highlighting_theme_label": {
     "message": "Theme:",
-    "description": "label for the syntax highlighting theme combox box"
+    "description": "label for the syntax highlighting theme combo box"
   },
   "options_page__preview_title": {
     "message": "Preview",

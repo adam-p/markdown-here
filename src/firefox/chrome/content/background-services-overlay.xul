@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE overlay SYSTEM "chrome://markdown_here/locale/strings.dtd">
-
-<overlay id="markdown_here-options-service-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-
-  <script src="background-services.js" />
-
-</overlay>
