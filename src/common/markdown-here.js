@@ -44,14 +44,6 @@ https://github.com/adam-p/markdown-here/issues/85
 var WRAPPER_TITLE_PREFIX = 'MDH:';
 
 
-// In Firefox/Thunderbird, Utils won't already exist.
-if (typeof(Utils) === 'undefined' &&
-    typeof(safari) === 'undefined' && typeof(chrome) === 'undefined') {
-  const scriptLoader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"]
-                                 .getService(Components.interfaces.mozIJSSubScriptLoader);
-  scriptLoader.loadSubScript('resource://markdown_here_common/utils.js');
-}
-
 // For debugging purposes. An external service is required to log with Firefox.
 var mylog = function() {};
 

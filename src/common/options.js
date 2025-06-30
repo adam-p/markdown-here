@@ -23,9 +23,6 @@ function onLoad() {
 
   localize();
 
-  // Show/hide elements depending on platform
-  showPlatformElements();
-
   // Set up our control references.
   cssEdit = document.getElementById('css-edit');
   cssSyntaxEdit = document.getElementById('css-syntax-edit');
@@ -197,27 +194,6 @@ function localize() {
         .attr('src', 'images/icon32-button-disabled.png');
     }
   });
-}
-
-
-// Shows/hide page elements depending on the current platform.
-// E.g., not all usage instructions apply to all clients.
-function showPlatformElements() {
-  // (This if-structure is ugly to work around the preprocessor logic.)
-  var matched = false;
-  /*? if (platform!=='firefox' && platform!=='thunderbird') { */
-  if (typeof(chrome) !== 'undefined' && typeof(chrome.extension) !== 'undefined') {
-    matched = true;
-    // Webkit-derived platforms
-    $('#need-page-reload').css('display', 'none');
-  }
-  /*? } else { */
-  if (!matched) {
-    matched = true;
-    // Mozilla-derived platforms
-    $('#need-page-reload').css('display', '');
-  }
-  /*? } */
 }
 
 
