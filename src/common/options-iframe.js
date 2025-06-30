@@ -28,20 +28,18 @@ document.addEventListener('DOMContentLoaded', onLoad, false);
 
 // Basically copied from options.js
 function localize() {
-  Utils.registerStringBundleLoadListener(function localizeHelper() {
-    const elements = document.querySelectorAll('[data-i18n]');
-    elements.forEach(function(element) {
-      const messageID = 'options_page__' + element.dataset.i18n;
-      if (element.tagName.toUpperCase() === 'TITLE') {
-        element.innerText = Utils.getMessage(messageID);
-      }
-      else {
-        Utils.saferSetInnerHTML(element, Utils.getMessage(messageID));
-      }
-    });
-
-    notifyIframeLoaded();
+  const elements = document.querySelectorAll('[data-i18n]');
+  elements.forEach(function(element) {
+    const messageID = 'options_page__' + element.dataset.i18n;
+    if (element.tagName.toUpperCase() === 'TITLE') {
+      element.innerText = Utils.getMessage(messageID);
+    }
+    else {
+      Utils.saferSetInnerHTML(element, Utils.getMessage(messageID));
+    }
   });
+
+  notifyIframeLoaded();
 }
 
 

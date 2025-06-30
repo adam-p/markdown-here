@@ -487,13 +487,6 @@ describe('Utils', function() {
     });
   });
 
-  describe('registerStringBundleLoadListener', function() {
-    it('should get called eventually', function(done) {
-      Utils.registerStringBundleLoadListener(done);
-    });
-  });
-
-
   describe('walkDOM', function() {
     beforeEach(function() {
       const container = document.createElement('div');

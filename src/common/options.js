@@ -161,40 +161,38 @@ document.addEventListener('options-iframe-loaded', previewIframeLoaded);
 
 
 function localize() {
-  Utils.registerStringBundleLoadListener(function localizeHelper() {
-    const elements = document.querySelectorAll('[data-i18n]');
-    elements.forEach(function(element) {
-      const messageID = 'options_page__' + element.dataset.i18n;
-      if (element.tagName.toUpperCase() === 'TITLE') {
-        element.innerText = Utils.getMessage(messageID);
-      }
-      else {
-        Utils.saferSetInnerHTML(element, Utils.getMessage(messageID));
-      }
-    });
-
-    // Take this opportunity to show appropriate size images for the pixel
-    // density. This saves us from having to make the `img` tags in the
-    // translated content more complex.
-    // TODO: Change to media queries (and so use background-image style).
-    if (window.devicePixelRatio === 2) {
-      const imageMap = [
-        ['images/icon16.png', 'images/icon32.png'],
-        ['images/icon16-button.png', 'images/icon32-button.png'],
-        ['images/icon16-monochrome.png', 'images/icon32-monochrome.png'],
-        ['images/icon16-button-monochrome.png', 'images/icon32-button-monochrome.png'],
-        ['images/icon16-button-disabled.png', 'images/icon32-button-disabled.png']
-      ];
-
-      imageMap.forEach(function([oldSrc, newSrc]) {
-        const imgs = document.querySelectorAll(`img[src="${oldSrc}"]`);
-        imgs.forEach(function(img) {
-          img.style.width = '16px';
-          img.src = newSrc;
-        });
-      });
+  const elements = document.querySelectorAll('[data-i18n]');
+  elements.forEach(function(element) {
+    const messageID = 'options_page__' + element.dataset.i18n;
+    if (element.tagName.toUpperCase() === 'TITLE') {
+      element.innerText = Utils.getMessage(messageID);
+    }
+    else {
+      Utils.saferSetInnerHTML(element, Utils.getMessage(messageID));
     }
   });
+
+  // Take this opportunity to show appropriate size images for the pixel
+  // density. This saves us from having to make the `img` tags in the
+  // translated content more complex.
+  // TODO: Change to media queries (and so use background-image style).
+  if (window.devicePixelRatio === 2) {
+    const imageMap = [
+      ['images/icon16.png', 'images/icon32.png'],
+      ['images/icon16-button.png', 'images/icon32-button.png'],
+      ['images/icon16-monochrome.png', 'images/icon32-monochrome.png'],
+      ['images/icon16-button-monochrome.png', 'images/icon32-button-monochrome.png'],
+      ['images/icon16-button-disabled.png', 'images/icon32-button-disabled.png']
+    ];
+
+    imageMap.forEach(function([oldSrc, newSrc]) {
+      const imgs = document.querySelectorAll(`img[src="${oldSrc}"]`);
+      imgs.forEach(function(img) {
+        img.style.width = '16px';
+        img.src = newSrc;
+      });
+    });
+  }
 }
 
 

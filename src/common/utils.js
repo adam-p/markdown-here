@@ -458,51 +458,21 @@ function nextTickFn(callback, context) {
   };
 }
 
-
+// Returns true if the semver version string in a is greater than the one in b.
+// If a or b isn't a version string, a simple string comparison is returned.
+// If a or b is falsy, false is returned.
+// From https://stackoverflow.com/a/55466325
+function semverGreaterThan(a, b) {
+  if (!a || !b) {
+    return false;
+  }
+  return a.localeCompare(b, undefined, { numeric: true }) === 1;
+}
 
 
 /*
  * i18n/l10n
  */
-/*
-This is a much bigger hassle than it should be. i18n support is great on Chrome
-(and Opera, and Firefox+WebExtensions), a bit of a hassle on Thunderbird/XUL,
-and basically nonexistent on Safari.
-
-In Chrome, we can use `chrome.i18n.getMessage` to just get the string we want,
-in either content or background scripts, synchronously and with no extra prep
-work.
-
-In Thunderbird, we need to load the `strings.properties` string bundle for both the
-current locale and English (our fallback language) and combine them. This can
-only be done from a privileged script. Then we can use the strings. The loading
-is synchronous for the privileged script, but asynchronous for the unprivileged
-script (because it needs to make a request to the privileged script).
-
-In Safari, we need to read in the JSON files for the current locale and English
-(our fallback language) and combine them. This can only be done from a privileged
-script. Then we can use the strings. The loading is asynchronous for both
-privileged and unprivileged scripts (because async XHR is used for the former
-and a request is made to the privileged script for the latter).
-
-It can happen that attempts to access the strings are made before the loading
-has actually occurred. This has been observed on Safari in the MDH Options page.
-This necessitated the addition of `registerStringBundleLoadListener` and
-`triggerStringBundleLoadListeners`, which may be used to ensure that `getMessage`
-calls wait until the loading is complete.
-*/
-
-function registerStringBundleLoadListener(callback) {
-  // Chrome/Firefox always have strings loaded immediately
-  Utils.nextTick(callback);
-}
-
-
-
-
-
-
-
 // Get the translated string indicated by `messageID`.
 // Note that there's no support for placeholders as yet.
 // Throws exception if message is not found.
@@ -514,17 +484,6 @@ function getMessage(messageID) {
   }
 
   return message;
-}
-
-// Returns true if the semver version string in a is greater than the one in b.
-// If a or b isn't a version string, a simple string comparison is returned.
-// If a or b is falsy, false is returned.
-// From https://stackoverflow.com/a/55466325
-function semverGreaterThan(a, b) {
-  if (!a || !b) {
-    return false;
-  }
-  return a.localeCompare(b, undefined, { numeric: true }) === 1;
 }
 
 
@@ -730,7 +689,6 @@ Utils.setFocus = setFocus;
 Utils.getTopURL = getTopURL;
 Utils.nextTick = nextTick;
 Utils.nextTickFn = nextTickFn;
-Utils.registerStringBundleLoadListener = registerStringBundleLoadListener;
 Utils.getMessage = getMessage;
 Utils.semverGreaterThan = semverGreaterThan;
 Utils.utf8StringToBase64 = utf8StringToBase64;
