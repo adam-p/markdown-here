@@ -83,7 +83,7 @@
     "description": "message that shows when user changes have been saved"
   },
   "options_page__click_toggle": {
-    "message": "メール画面で右クリックし \"Markdown 切り替え\"を選択しましょう。 (またはツールバーの <img src=\"images/icon16.png\"/> ボタンか、 <span class=\"hotkey-display-wrapper\"> <span class=\"hotkey-display\"><kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>M</kbd></span></span> を押す。)",
+    "message": "メール画面で右クリックし \"Markdown 切り替え\"を選択しましょう。 (またはツールバーの <img src=\"images/icon16.png\"/> ボタンか、 <span class=\"hotkey-error-hide\"> <code class=\"hotkey-current\">Alt+Shift+M</code></span></span> を押す。)",
     "description": "A step in the basic usage instructions"
   },
   "options_page__contributing_1": {
@@ -124,9 +124,6 @@
   },
   "options_page__forgot_to_render_3": {
     "message": "もしこれを無効にしたほうがいいと思ったなら、 <em>ぜひ</em> 理由と改善案をお知らせください。 <a href=\"https://groups.google.com/forum/#!forum/markdown-here\" target=\"_blank\">Google Groupに投稿する</a> か <a href=\"https://github.com/adam-p/markdown-here/issues\" target=\"_blank\">Github でIssueを投げ</a> てください。お願いします。"
-  },
-  "options_page__forgot_to_render_4": {
-    "message": "Si cette fonctionnalité ne fonctionne plus pour vous, s'il vous plait faites le nous savoir en créant un post sur le <a href=\"https://groups.google.com/group/markdown-here\" target=\"_blank\">groupe Google \"markdown-here\"</a> ou en créant <a href=\"https://github.com/adam-p/markdown-here/issues\" target=\"_blank\">une issue dans le projet Github</a>. (Le lien avec l'interface web des messageries est fragile et peut parfois se briser.)"
   },
   "options_page__forgot_to_render_label": {
     "message": "<b>\"レンダリング忘れ\" チェックを使う</b>",

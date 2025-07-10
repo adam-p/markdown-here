@@ -55,7 +55,7 @@
     "description": "Text that shows when the user hovers over the 'X' that will close the prompt"
   },
   "upgrade_notification_text": {
-    "message": "Markdown Here updated",
+    "message": "Markdown Here updated!",
     "description": "Text on the notification shown when Markdown Here has been updated"
   },
   "upgrade_notification_changes_tooltip": {
@@ -80,6 +80,10 @@
   "options_page__basic_usage": {
     "message": "Basic Usage"
   },
+  "options_page__pin_extension_button": {
+    "message": "Click the \"Extensions\" button on your toolbar, then pin the Markdown Here button.",
+    "description": "A step in the basic usage instructions. The MDH toolbar button doesn't initially show on the browser toolbar, so the user has to pin it first."
+  },
   "options_page__start_new_message": {
     "message": "Start a new email message.",
     "description": "A step in the basic usage instructions"
@@ -89,7 +93,7 @@
     "description": "A step in the basic usage instructions"
   },
   "options_page__click_toggle": {
-    "message": "Right-click in the email and then click \"Markdown Toggle\". (Or click the <img class=\"text-align\" src=\"images/icon32-button-monochrome.png\"/> button on the toolbar.<span class=\"hotkey-display-wrapper\"> Or press <span class=\"hotkey-display\"><kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>M</kbd></span></span>)",
+    "message": "Right-click in the email and then click \"Markdown Toggle\". (Or click the <img class=\"text-align\" src=\"images/icon32-button-monochrome.png\"/> button on the toolbar.<span class=\"hotkey-error-hide\"> Or press <code class=\"hotkey-current\">Alt+Shift+M</code></span>)",
     "description": "A step in the basic usage instructions"
   },
   "options_page__pretty_cool": {
@@ -101,7 +105,7 @@
     "description": "A section title"
   },
   "options_page__resources_cheatsheet_link": {
-    "message": "If you're new to Markdown, the <a href=\"https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet\" target=\"_blank\">Markdown Here Cheatsheet</a> will make you a prostar."
+    "message": "If you're new to Markdown, the <a href=\"https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet\" target=\"_blank\">Markdown Here Cheatsheet</a> will make you a pro-star."
   },
   "options_page__advanced_usage": {
     "message": "For lots more info and advanced usage, see the <a href=\"https://github.com/adam-p/markdown-here\" target=\"_blank\">Markdown Here project page</a>. You should also explore the options below."
@@ -155,9 +159,9 @@
     "message": "Markdown Toggle",
     "description": "button text for Markdown Toggle button"
   },
-  "options_page__notes_title": {
-    "message": "Notes",
-    "description": "section title"
+  "options_page__optionspage_title": {
+    "message": "Options Page",
+    "description": "sub-section title"
   },
   "options_page__note_options_sync": {
     "message": "Changes are automatically saved and synchronized (if sync is enabled in your browser)."
@@ -224,45 +228,17 @@
     "message": "Hotkey (aka keyboard shortcut)",
     "description": "A section title"
   },
-  "options_page__hotkey_shift_key": {
-    "message": "SHIFT",
-    "description": "label for the Shift key"
+  "options_page__hotkey_chrome_link_intro": {
+    "message": "The MDH hotkey is managed by the browser. It can be edited here:",
+    "description": "Text preceding a link to the Chrome hotkey settings page."
   },
-  "options_page__hotkey_ctrl_key": {
-    "message": "CTRL",
-    "description": "label for the Ctrl key"
+  "options_page__hotkey_current_intro": {
+    "message": "It is currently set to:",
+    "description": "Text preceding the display of the current hotkey (like 'Alt+Shift+M')."
   },
-  "options_page__hotkey_alt_key": {
-    "message": "ALT",
-    "description": "label for the Alt key"
-  },
-  "options_page__hotkey_plus": {
-    "message": "+",
-    "description": "plus sign that connects the hotkey buttons"
-  },
-  "options_page__hotkey_warning": {
-    "message": "Is the key an alphanumeric value?",
-    "description": "warning shown if the user chooses an illegal hotkey value"
-  },
-  "options_page__hotkey_note_1": {
-    "message": "Chrome: You must reload your email web page for the new hotkey setting to take effect.",
-    "description": "Descriptive text explaining some limitations of the 'hotkey' (keyboard shortcut) feature/option."
-  },
-  "options_page__hotkey_note_2": {
-    "message": "Firefox and Thunderbird: You must restart the application for the new hotkey setting to take effect.",
-    "description": "Descriptive text explaining some limitations of the 'hotkey' (keyboard shortcut) feature/option."
-  },
-  "options_page__hotkey_note_3": {
-    "message": "You must use an alphanumeric key for the shortcut (varies by language and keyboard).",
-    "description": "Descriptive text explaining some limitations of the 'hotkey' (keyboard shortcut) feature/option."
-  },
-  "options_page__hotkey_note_4": {
-    "message": "The Windows key and the OS X &#8984; key cannot be used in the shortcut.",
-    "description": "Descriptive text explaining some limitations of the 'hotkey' (keyboard shortcut) feature/option."
-  },
-  "options_page__hotkey_note_5": {
-    "message": "To disable the use of this hotkey, leave the \"key\" text box empty.",
-    "description": "Descriptive text explaining how to disable the 'hotkey' (keyboard shortcut) feature/option."
+  "options_page__no_hotkey_set": {
+    "message": "Conflict! Set a new hotkey/shortcut.",
+    "description": "Warning shown to the user if the Markdown Toggle hotkey is not set or conflicts with another extension's hotkey."
   },
   "options_page__advanced_title": {
     "message": "Advanced and Miscellaneous",
@@ -273,7 +249,7 @@
     "description": "Label for the checkbox that enables the forgot-to-render feature"
   },
   "options_page__forgot_to_render_1": {
-    "message": "Currently only supported in Gmail and Thunderbird.",
+    "message": "Currently only supported in Gmail and Thunderbird. If enabled, expect a prompt asking you to give MDH permission to access mail.google.com.",
     "description": "Descriptive text referring to the 'forgot-to-render' feature. Tells the user that it's only available for limited platforms."
   },
   "options_page__forgot_to_render_2": {

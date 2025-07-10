@@ -23,9 +23,16 @@ function consoleLog(logString) {
 // TODO: Try to use `insertAdjacentHTML` for the inner and outer HTML functions.
 // https://developer.mozilla.org/en-US/docs/Web/API/Element.insertAdjacentHTML
 
-// Safely parse HTML string into a DocumentFragment without executing scripts
-// Uses DOMPurify to sanitize and parse HTML into a DocumentFragment
-function safelyParseHTML(htmlString, ownerDocument) {
+/**
+ * Safely parse an HTML string into a DocumentFragment without executing scripts.
+ * Uses DOMPurify to sanitize and parse HTML into a DocumentFragment.
+ *
+ * @param {string} htmlString - The HTML string to parse and sanitize.
+ * @param {Document} [ownerDocument] - The document to use for creating the fragment. Defaults to the global document.
+ * @param {boolean} [allowStyleTags] - Whether to allow <style> tags in the sanitized output.
+ * @returns {DocumentFragment} The sanitized DocumentFragment.
+ */
+function safelyParseHTML(htmlString, ownerDocument, allowStyleTags=false) {
   ownerDocument = ownerDocument || document;
 
   // DOMPurify is required for security
@@ -33,14 +40,17 @@ function safelyParseHTML(htmlString, ownerDocument) {
     throw new Error('DOMPurify is required but not loaded. Cannot safely parse HTML.');
   }
 
-  // Sanitize and parse HTML into a DocumentFragment
-  const docFrag = DOMPurify.sanitize(htmlString, {
-    // Return a DocumentFragment instead of a string
-    RETURN_DOM_FRAGMENT: true,
+  const domPurifyConfig = {
+    RETURN_DOM_FRAGMENT: true, // Return a DocumentFragment instead of a string
+    DOCUMENT: ownerDocument, // Specify which document to use for creating the fragment
+  };
+  if (allowStyleTags) {
+    domPurifyConfig.ADD_TAGS = ['style']; // Allow <style> tags
+    domPurifyConfig.FORCE_BODY = true; // Ensure <style> tags are processed correctly
+  }
 
-    // Specify which document to use for creating the fragment
-    DOCUMENT: ownerDocument
-  });
+  // Sanitize and parse HTML into a DocumentFragment
+  const docFrag = DOMPurify.sanitize(htmlString, domPurifyConfig);
 
   return docFrag;
 }
@@ -49,8 +59,8 @@ function safelyParseHTML(htmlString, ownerDocument) {
 // e.g., the string can contain harmful script elements. (Additionally, Mozilla
 // won't let us pass validation with `innerHTML` assignments in place.)
 // This function provides a safer way to append a HTML string into an element.
-function saferSetInnerHTML(parentElem, htmlString) {
-  const docFrag = safelyParseHTML(htmlString, parentElem.ownerDocument);
+function saferSetInnerHTML(parentElem, htmlString, allowStyleTags=false) {
+  const docFrag = safelyParseHTML(htmlString, parentElem.ownerDocument, allowStyleTags);
 
   const range = parentElem.ownerDocument.createRange();
   range.selectNodeContents(parentElem);
@@ -67,12 +77,12 @@ function saferSetInnerHTML(parentElem, htmlString) {
 // - The original element has been removed from the DOM, but continues to exist.
 //   Any references to it (such as the one passed into this function) will be
 //   references to the original.
-function saferSetOuterHTML(elem, htmlString) {
+function saferSetOuterHTML(elem, htmlString, allowStyleTags=false) {
   if (!isElementInDocument(elem)) {
     throw new Error('Element must be in document');
   }
 
-  const docFrag = safelyParseHTML(htmlString, elem.ownerDocument);
+  const docFrag = safelyParseHTML(htmlString, elem.ownerDocument, allowStyleTags);
 
   const range = elem.ownerDocument.createRange();
   range.selectNode(elem);

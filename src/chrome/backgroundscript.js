@@ -4,8 +4,9 @@
  */
 
 "use strict";
+
 /*global chrome:false, OptionsStore:false, MarkdownRender:false,
-  marked:false, hljs:false, Utils:false, CommonLogic:false */
+  marked:false, hljs:false, Utils:false, CommonLogic:false, ContentPermissions:false */
 /*jshint devel:true, browser:true*/
 
 if (typeof browser === "undefined") {
@@ -30,6 +31,7 @@ if (!backgroundPage) {
   importScripts('../common/highlightjs/highlight.js');
   importScripts('../common/markdown-render.js');
   importScripts('../common/options-store.js');
+  importScripts('../common/content-permissions.js');
 }
 
 // Note that this file is both the script for a background page _and_ for a service
@@ -75,7 +77,7 @@ function upgradeCheck() {
       OptionsStore.set({ 'last-version': appManifest.version }, function() {
         // This is the very first time the extensions has been run, so show the
         // options page.
-        chrome.tabs.create({ url: chrome.runtime.getURL(optionsURL) });
+        chrome.tabs.create({ url: Utils.getLocalURL(optionsURL) });
       });
     }
     else if (options['last-version'] !== appManifest.version) {
@@ -83,17 +85,22 @@ function upgradeCheck() {
       // the next action, to make sure it doesn't happen every time we start up.
       OptionsStore.set({ 'last-version': appManifest.version }, function() {
         // The extension has been newly updated
-        optionsURL += '?prevVer=' + options['last-version'];
-
-        showUpgradeNotification(chrome.runtime.getURL(optionsURL));
+        chrome.action.setPopup({ popup: Utils.getLocalURL('/chrome/upgrade-notification-popup.html') }, function() {
+          try {
+            chrome.action.openPopup();
+          } catch (e) {
+            // Firefox won't allow us to open a popup programmatically (i.e., in the absence of a user gesture)
+            console.error('Failed to open upgrade notification popup:', e);
+          }
+        });
       });
     }
   });
 }
 
 // Handle context menu clicks.
-chrome.contextMenus.onClicked.addListener(function(info, tab) {
-  chrome.tabs.sendMessage(tab.id, {action: 'context-click'});
+chrome.contextMenus.onClicked.addListener(async function(info, tab) {
+  await handleActionClick(tab, info);
 });
 
 // Handle rendering requests from the content script. Note that incoming messages will
@@ -124,44 +131,6 @@ chrome.runtime.onMessage.addListener(function(request, sender, responseCallback)
     OptionsStore.get(function(prefs) { responseCallback(prefs); });
     return true;
   }
-  else if (request.action === 'show-toggle-button') {
-    if (request.show) {
-      chrome.action.enable(sender.tab.id);
-      chrome.action.setTitle({
-        title: Utils.getMessage('toggle_button_tooltip'),
-        tabId: sender.tab.id });
-      chrome.action.setIcon({
-        path: {
-          "16": Utils.getLocalURL('/common/images/icon16-button-monochrome.png'),
-          "19": Utils.getLocalURL('/common/images/icon19-button-monochrome.png'),
-          "32": Utils.getLocalURL('/common/images/icon32-button-monochrome.png'),
-          "38": Utils.getLocalURL('/common/images/icon38-button-monochrome.png'),
-          "64": Utils.getLocalURL('/common/images/icon64-button-monochrome.png')
-        },
-        tabId: sender.tab.id });
-      return false;
-    }
-    else {
-      chrome.action.disable(sender.tab.id);
-      chrome.action.setTitle({
-        title: Utils.getMessage('toggle_button_tooltip_disabled'),
-        tabId: sender.tab.id });
-      chrome.action.setIcon({
-        path: {
-          "16": Utils.getLocalURL('/common/images/icon16-button-disabled.png'),
-          "19": Utils.getLocalURL('/common/images/icon19-button-disabled.png'),
-          "32": Utils.getLocalURL('/common/images/icon32-button-disabled.png'),
-          "38": Utils.getLocalURL('/common/images/icon38-button-disabled.png'),
-          "64": Utils.getLocalURL('/common/images/icon64-button-disabled.png')
-        },
-        tabId: sender.tab.id });
-      return false;
-    }
-  }
-  else if (request.action === 'upgrade-notification-shown') {
-    clearUpgradeNotification();
-    return false;
-  }
   else if (request.action === 'get-forgot-to-render-prompt') {
     CommonLogic.getForgotToRenderPromptContent(function(html) {
       responseCallback({html: html});
@@ -179,74 +148,116 @@ chrome.runtime.onMessage.addListener(function(request, sender, responseCallback)
     return false;
   }
   else {
-    console.log('unmatched request action', request.action);
     throw 'unmatched request action: ' + request.action;
   }
 });
 
 // Add the browserAction (the button in the browser toolbar) listener.
-chrome.action.onClicked.addListener(function(tab) {
-  chrome.tabs.sendMessage(tab.id, {action: 'button-click', });
+// This also handles the _execute_action keyboard command automatically.
+chrome.action.onClicked.addListener(async function(tab) {
+  await handleActionClick(tab);
 });
 
-
-/*
-Showing an notification after upgrade is complicated by the fact that the
-background script can't communicate with "stale" content scripts. (See https://code.google.com/p/chromium/issues/detail?id=168263)
-So, content scripts need to be reloaded before they can receive the "show
-upgrade notification message". So we're going to keep sending that message from
-the background script until a content script acknowledges it.
-*/
-var showUpgradeNotificationInterval = null;
-function showUpgradeNotification(optionsURL) {
-  // Get the content of notification element
-  CommonLogic.getUpgradeNotification(optionsURL, function(html) {
-    var tabGotTheMessage = function(gotIt) {
-      // From tabs that haven't been reloaded, this will get called with no arguments.
-      if (!gotIt) {
-        return;
+chrome.tabs.onUpdated.addListener(async function(tabId, changeInfo, tab) {
+  // Only proceed when the tab has finished loading and has a valid URL
+  if (changeInfo.status === 'complete' && tab.url) {
+    // Auto-inject scripts for domains where we already have permission.
+    // This allows us to run _before_ the user clicks the button, enabling features
+    // such as the "forgot to render" prompt.
+    try {
+      if (await ContentPermissions.hasPermission(tab.url)) {
+        await Injector.injectScripts(tabId);
       }
+    } catch (e) {
+      // Invalid URL or other error -- just skip
+    }
+  }
+});
 
-      // As soon as any content script gets the message, stop trying
-      // to send it.
-      // NOTE: This could result in under-showing the notification, but that's
-      // better than over-showing it (e.g., issue #109).
-      if (showUpgradeNotificationInterval !== null) {
-        clearInterval(showUpgradeNotificationInterval);
-        showUpgradeNotificationInterval = null;
-      }
-    };
+// Handle a click on the action button or context menu item
+async function handleActionClick(tab, info = undefined) {
+  // Check if the current tab is the options page
+  const optionsPageUrl = Utils.getLocalURL('/common/options.html');
 
-    var askTabsToShowNotification = function() {
-      chrome.tabs.query({windowType: 'normal'}, function(tabs) {
-        for (var i = 0; i < tabs.length; i++) {
-          chrome.tabs.sendMessage(
-            tabs[i].id,
-            { action: 'show-upgrade-notification', html: html },
-            tabGotTheMessage);
-        }
-      });
-    };
-
-    // TODO: This interval won't keep the service worker alive, so if a content script
-    // doesn't reload in about 30 seconds, we'll lose the interval and the notification
-    // won't show.
-    // Maybe use the Alarms API? Maybe restructure this so that it's less hacky?
-    showUpgradeNotificationInterval = setInterval(askTabsToShowNotification, 5000);
-  });
-}
-
-function clearUpgradeNotification() {
-  if (showUpgradeNotificationInterval !== null) {
-    clearInterval(showUpgradeNotificationInterval);
-    showUpgradeNotificationInterval = null;
+  if (tab.url && tab.url.startsWith(optionsPageUrl)) {
+    // For the options page, send a runtime message directly without injection
+    // (because injection won't work on the options page).
+    chrome.tabs.sendMessage(tab.id, {
+      action: 'button-click',
+      info: info
+    });
+    return true;
   }
 
-  chrome.tabs.query({windowType: 'normal'}, function(tabs) {
-    for (var i = 0; i < tabs.length; i++) {
-      chrome.tabs.sendMessage(
-        tabs[i].id,
-        { action: 'clear-upgrade-notification' });
-    }
-  });
+  // For all other pages, proceed with the normal injection flow
+  const injected = await Injector.injectScripts(tab.id);
+
+  if (!injected) {
+    console.error('Failed to inject scripts');
+    return false;
+  }
+
+  // Send the toggle message
+  chrome.tabs.sendMessage(tab.id, {
+    action: 'button-click',
+    info: info
+   });
+
+  return true;
 }
+
+const Injector = {
+  // Scripts to inject in order
+  CONTENT_SCRIPTS: [
+    '/common/vendor/dompurify.min.js',
+    '/common/utils.js',
+    '/common/common-logic.js',
+    '/common/jsHtmlToText.js',
+    '/common/marked.js',
+    '/common/mdh-html-to-text.js',
+    '/common/markdown-here.js',
+    '/chrome/contentscript.js'
+  ],
+
+  // Check if scripts are already injected in a tab and mark that they are. we do these
+  // in one step to minimize the potential for race conditions, where there's an attempt
+  // to inject the scripts multiple times.
+  async checkAndMarkInjected(tabId) {
+    try {
+      const results = await chrome.scripting.executeScript({
+        target: { tabId: tabId },
+        func: () => {const alreadyInjected = window.markdownHereInjected; window.markdownHereInjected = true; return !!alreadyInjected;}
+      });
+      return results && results[0] && results[0].result === true;
+    } catch (e) {
+      // Tab might not be accessible
+      return false;
+    }
+  },
+
+  // Inject content scripts into a tab
+  async injectScripts(tabId) {
+    try {
+      // Check if already injected
+      if (await this.checkAndMarkInjected(tabId)) {
+        return true;
+      }
+
+      // Inject files in order
+      for (const script of this.CONTENT_SCRIPTS) {
+        await chrome.scripting.executeScript({
+          target: { tabId: tabId },
+          files: [script]
+        });
+      }
+
+      return true;
+    } catch (e) {
+      // Note that we're not cleaning up our "injected" flag, nor any of the scripts that
+      // might have been injected before the error occurred. An error shouldn't occur,
+      // and we'll just give up on working in this tab if it does.
+      console.error('Error injecting scripts:', e);
+      return false;
+    }
+  }
+};

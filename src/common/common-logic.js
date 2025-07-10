@@ -31,35 +31,6 @@ function debugLog() {
 
 
 /*
- * Gets the upgrade notification. This must be called from a privileged script.
- */
-function getUpgradeNotification(optionsURL, responseCallback) {
-  debugLog('getUpgradeNotification', 'getting');
-
-  Utils.getLocalFile(
-    Utils.getLocalURL('/common/upgrade-notification.html'),
-    'text',
-    function(html) {
-      // Get the logo image data
-      Utils.getLocalFile(
-        Utils.getLocalURL('/common/images/icon32.png'),
-        'base64',
-        function(logoBase64) {
-          // Do some rough template replacement
-          html = html.replace('{{optionsURL}}', optionsURL)
-                     .replace('{{logoBase64}}', logoBase64)
-                     .replace('{{upgrade_notification_changes_tooltip}}', Utils.getMessage('upgrade_notification_changes_tooltip'))
-                     .replace('{{upgrade_notification_text}}', Utils.getMessage('upgrade_notification_text'))
-                     .replace('{{upgrade_notification_dismiss_tooltip}}', Utils.getMessage('upgrade_notification_dismiss_tooltip'));
-
-          debugLog('getUpgradeNotification', 'got');
-          return responseCallback(html);
-        });
-      });
-}
-
-
-/*
  ******************************************************************************
  Forgot-to-render check
  ******************************************************************************
@@ -128,7 +99,7 @@ var WATCHED_PROPERTY = 'markdownHereForgotToRenderWatched';
 // Returns null if forgot-to-render should not be used here.
 function getForgotToRenderButtonSelector(elem) {
   if (elem.ownerDocument.location.host.indexOf('mail.google.') >= 0) {
-    return '[role="button"][tabindex="1"]';
+    return '[role="button"][tabindex="1"][aria-label][data-tooltip]';
   }
   else if (elem.ownerDocument.location.host.indexOf('fastmail.') >= 0) {
     return '[class~="s-send"]';
@@ -141,7 +112,7 @@ function getForgotToRenderButtonSelector(elem) {
 // This function encapsulates the logic required to prevent accidental sending
 // of email that the user wrote in Markdown but forgot to render.
 function forgotToRenderIntervalCheck(focusedElem, MarkdownHere, MdhHtmlToText, marked, prefs) {
-  if (!prefs['forgot-to-render-check-enabled']) {
+  if (!prefs['forgot-to-render-check-enabled-2']) {
     debugLog('forgotToRenderIntervalCheck', 'pref disabled');
     return;
   }
@@ -456,7 +427,7 @@ function showHTMLForgotToRenderPrompt(html, composeElem, composeSendButton, call
 
   elem = composeSendButton.ownerDocument.createElement('div');
   composeSendButton.ownerDocument.body.appendChild(elem);
-  Utils.saferSetOuterHTML(elem, html);
+  Utils.saferSetOuterHTML(elem, html, true); // allow style tags
 
   // Note that `elem` is no longer valid after we call Utils.saferSetOuterHTML on it.
 
@@ -571,7 +542,6 @@ function showHTMLForgotToRenderPrompt(html, composeElem, composeSendButton, call
 
 // Expose these functions
 var CommonLogic = {};
-CommonLogic.getUpgradeNotification = getUpgradeNotification;
 CommonLogic.getForgotToRenderPromptContent = getForgotToRenderPromptContent;
 CommonLogic.forgotToRenderIntervalCheck = forgotToRenderIntervalCheck;
 CommonLogic.probablyWritingMarkdown = probablyWritingMarkdown;

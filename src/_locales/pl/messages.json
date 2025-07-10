@@ -83,7 +83,7 @@
     "description": "message that shows when user changes have been saved"
   },
   "options_page__click_toggle": {
-    "message": "Kliknij prawym przyciskiem myszy w e-mailu a następnie kliknij \"Przełącz Markdown\". (Albo kliknij przycisk <img src=\"images/icon16.png\"/> w pasku narzędzi.<span class=\"hotkey-display-wrapper\"> Albo naciśnij <span class=\"hotkey-display\"><kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>M</kbd></span></span>)",
+    "message": "Kliknij prawym przyciskiem myszy w e-mailu a następnie kliknij \"Przełącz Markdown\". (Albo kliknij przycisk <img src=\"images/icon16.png\"/> w pasku narzędzi.<span class=\"hotkey-error-hide\"> Albo naciśnij <code class=\"hotkey-current\">Alt+Shift+M</code></span></span>)",
     "description": "A step in the basic usage instructions"
   },
   "options_page__contributing_1": {

@@ -83,7 +83,7 @@
     "description": "message that shows when user changes have been saved"
   },
   "options_page__click_toggle": {
-    "message": "Faites un clic droit dans le courriel puis sélectionnez \"Basculez vers Markdown\". (Ou cliquez sur le bouton <img src=\"images/icon16.png\"/> dans la barre d'outils.<span class=\"hotkey-display-wrapper\"> Ou appuyez sur <span class=\"hotkey-display\"><kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>M</kbd></span></span>)",
+    "message": "Faites un clic droit dans le courriel puis sélectionnez \"Basculez vers Markdown\". (Ou cliquez sur le bouton <img src=\"images/icon16.png\"/> dans la barre d'outils.<span class=\"hotkey-error-hide\"> Ou appuyez sur <code class=\"hotkey-current\">Alt+Shift+M</code></span></span>)",
     "description": "A step in the basic usage instructions"
   },
   "options_page__contributing_1": {

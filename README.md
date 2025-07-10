@@ -90,7 +90,7 @@ Install it, and then…
    ```
    </pre>
 
-5. Right-click in the compose box and choose the "Markdown Toggle" item from the context menu. Or click the button that appears in your address bar. Or use the hotkey (<kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>M</kbd> by default).
+5. Right-click in the compose box and choose the "Markdown Toggle" item from the context menu. Or click the button that appears on your toolbar. Or use the hotkey (<kbd>SHIFT</kbd>+<kbd>ALT</kbd>+<kbd>M</kbd> by default).
 6. You should see your email rendered correctly from Markdown into rich HTML.
 7. Send your awesome email to everyone you know. It will appear to them the same way it looks to you.
 

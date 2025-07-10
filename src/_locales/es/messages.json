@@ -83,7 +83,7 @@
     "description": "message that shows when user changes have been saved"
   },
   "options_page__click_toggle": {
-    "message": "Haz clic con el botón derecho en el correo electrónico y haz clic en \"Markdown Toggle\". (O haz clic en el <img src=\"images/icon16.png\"/> botón en la barra de herramientas.<span class=\"hotkey-display-wrapper\"> O pulsa <span class=\"hotkey-display\"><kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>M</kbd></span></span>)",
+    "message": "Haz clic con el botón derecho en el correo electrónico y haz clic en \"Markdown Toggle\". (O haz clic en el <img src=\"images/icon16.png\"/> botón en la barra de herramientas.<span class=\"hotkey-error-hide\"> O pulsa <code class=\"hotkey-current\">Alt+Shift+M</code></span></span>)",
     "description": "A step in the basic usage instructions"
   },
   "options_page__contributing_1": {
@@ -117,7 +117,7 @@
     "description": "part of the page footer text"
   },
   "options_page__forgot_to_render_1": {
-    "message": "Currently only supported in Gmail and Thunderbird (and Icedove)."
+    "message": "Currently only supported in Gmail and Thunderbird."
   },
   "options_page__forgot_to_render_2": {
     "message": "Cuando envías un correo electrónico, esto comprueba el contenido para ver si parece que escribió en Markdown, pero se te olvidó renderizarlo (es decir, hacer clic en \"Markdown Toggle\") antes de enviar. Esto puede necesitar ser desactivado si interfiere con su capacidad de enviar correo electrónico."

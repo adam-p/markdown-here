@@ -83,7 +83,7 @@
     "description": "message that shows when user changes have been saved"
   },
   "options_page__click_toggle": {
-    "message": "在你的電子郵件上右鍵點擊然後點選\"Markdown切換\". (或者點擊工具列上的<img src=\"images/icon16.png\"/>按鈕。<span class=\"hotkey-display-wrapper\"> 也可以試試快捷鍵 <span class=\"hotkey-display\"><kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>M</kbd></span></span>)",
+    "message": "在你的電子郵件上右鍵點擊然後點選\"Markdown切換\". (或者點擊工具列上的<img src=\"images/icon16.png\"/>按鈕。<span class=\"hotkey-error-hide\"> 也可以試試快捷鍵 <code class=\"hotkey-current\">Alt+Shift+M</code></span></span>)",
     "description": "A step in the basic usage instructions"
   },
   "options_page__contributing_1": {
@@ -124,9 +124,6 @@
   },
   "options_page__forgot_to_render_3": {
     "message": "如果你停用了此選項, <em>請</em>告知我為什麼和如何做更好。<a href=\"https://groups.google.com/forum/#!forum/markdown-here\" target=\"_blank\">在\"markdown-here\" Google Group 中發文</a>或是<a href=\"https://github.com/adam-p/markdown-here/issues\" target=\"_blank\">在Github專案建立issue</a>。謝謝。"
-  },
-  "options_page__forgot_to_render_4": {
-    "message": "Se esta funcionalidade parar de funcionar por você, favor nos deixar sabendo por meio de postar no <a href=\"https://groups.google.com/group/markdown-here\" target=\"_blank\">grupo \"markdown-here\" do Google</a> ou por reportar <a href=\"https://github.com/adam-p/markdown-here/issues\" target=\"_blank\">um bug no projeto de Github</a>. (Integrar com UI web de email quebra fácil e de vez em quando quebra mesmo.)"
   },
   "options_page__forgot_to_render_label": {
     "message": "<b>啟用 \"忘記算繪\" 檢查。</b>",

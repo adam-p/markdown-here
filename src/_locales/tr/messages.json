@@ -82,10 +82,6 @@
     "message": "Değişiklikler kaydedildi",
     "description": "message that shows when user changes have been saved"
   },
-  "options_page__click_toggle": {
-    "message": "E-postanızda sağ tıklayın ve sonra \"Etiketleme Değiştir\" e tıklayın",
-    "description": "A step in the basic usage instructions"
-  },
   "options_page__contributing_1": {
     "message": "<strong>Eğer e-posta içerisinde kod bloğu kullandıysanız, o zaman Markdown Here projesini daha iyiye taşımaya yardımcı olabilirsiniz.</strong> <a href=\"https://github.com/adam-p/markdown-here/blob/master/CONTRIBUTING.md\" target=\"_blank\">CONTRIBUTING.md</a>"
   },
@@ -124,9 +120,6 @@
   },
   "options_page__forgot_to_render_3": {
     "message": "If you find yourself disabling this, <em>please</em> let me know why and how it could be better. Create <a href=\"https://groups.google.com/forum/#!forum/markdown-here\" target=\"_blank\">a post on the \"markdown-here\" Google Group</a> or <a href=\"https://github.com/adam-p/markdown-here/issues\" target=\"_blank\">an issue in the Github project</a>. Thanks."
-  },
-  "options_page__forgot_to_render_4": {
-    "message": "Se esta funcionalidade parar de funcionar por você, favor nos deixar sabendo por meio de postar no <a href=\"https://groups.google.com/group/markdown-here\" target=\"_blank\">grupo \"markdown-here\" do Google</a> ou por reportar <a href=\"https://github.com/adam-p/markdown-here/issues\" target=\"_blank\">um bug no projeto de Github</a>. (Integrar com UI web de email quebra fácil e de vez em quando quebra mesmo.)"
   },
   "options_page__forgot_to_render_label": {
     "message": "<b> \"derlemeyi-unuttum\" kontrolünü etkinleştir.</b>",

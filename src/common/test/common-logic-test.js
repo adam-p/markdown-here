@@ -14,20 +14,6 @@ describe('CommonLogic', function() {
     expect(CommonLogic).to.exist;
   });
 
-  describe('getUpgradeNotification', function() {
-    it('should get the upgrade notification', function(done) {
-      var KNOWN_CONTENT = 'id="markdown-here-upgrade-notification-content"';
-      var TEST_OPTIONS_URL = 'my-test-options-url';
-      var callback = function(data) {
-        expect(data.indexOf(KNOWN_CONTENT)).to.be.greaterThan(-1);
-        expect(data.indexOf(TEST_OPTIONS_URL)).to.be.greaterThan(-1);
-        done();
-      };
-
-      CommonLogic.getUpgradeNotification(TEST_OPTIONS_URL, callback);
-    });
-  });
-
   describe('getForgotToRenderPromptContent', function() {
     it('should get the forgot-to-render prompt', function(done) {
       var KNOWN_CONTENT = 'id="markdown-here-forgot-to-render"';
