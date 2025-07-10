@@ -83,7 +83,7 @@
     "description": "message that shows when user changes have been saved"
   },
   "options_page__click_toggle": {
-    "message": "Clique com o botão direito no e-mail e selecione “Alternar Markdown. (Ou clique no botão <img src=\"images/icon16.png\"/> da barra de ferramentas.<span class=\"hotkey-display-wrapper\"> Ou pressione <span class=\"hotkey-display\"><kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>M</kbd></span></span>)",
+    "message": "Clique com o botão direito no e-mail e selecione “Alternar Markdown. (Ou clique no botão <img src=\"images/icon16.png\"/> da barra de ferramentas.<span class=\"hotkey-error-hide\"> Ou pressione <code class=\"hotkey-current\">Alt+Shift+M</code></span></span>)",
     "description": "A step in the basic usage instructions"
   },
   "options_page__contributing_1": {

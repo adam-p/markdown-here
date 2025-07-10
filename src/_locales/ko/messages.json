@@ -83,7 +83,7 @@
     "description": "message that shows when user changes have been saved"
   },
   "options_page__click_toggle": {
-    "message": "Right-click in the email and then click \"Markdown Toggle\". (Or click the <img src=\"images/icon16.png\"/> button on the toolbar.<span class=\"hotkey-display-wrapper\"> Or press <span class=\"hotkey-display\"><kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>M</kbd></span></span>)",
+    "message": "Right-click in the email and then click \"Markdown Toggle\". (Or click the <img src=\"images/icon16.png\"/> button on the toolbar.<span class=\"hotkey-error-hide\"> Or press <code class=\"hotkey-current\">Alt+Shift+M</code></span></span>)",
     "description": "A step in the basic usage instructions"
   },
   "options_page__contributing_1": {
@@ -243,7 +243,7 @@
     "description": "text on button to reset Primary Styling CSS"
   },
   "options_page__resources_cheatsheet_link": {
-    "message": "If you're new to Markdown, the <a href=\"https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet\" target=\"_blank\">Markdown Here Cheatsheet</a> will make you a prostar."
+    "message": "If you're new to Markdown, the <a href=\"https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet\" target=\"_blank\">Markdown Here Cheatsheet</a> will make you a pro-star."
   },
   "options_page__resources_title": {
     "message": "Resources and Links",

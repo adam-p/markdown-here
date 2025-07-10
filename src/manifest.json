@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "__MSG_app_name__",
-  "version": "2.15.1",
+  "version": "2.16.0",
   "description": "__MSG_app_slogan__",
   "homepage_url": "https://markdown-here.com",
   "default_locale": "en",
@@ -12,26 +12,20 @@
     "128": "common/images/icon128.png",
     "512": "common/images/icon512.png"
   },
-  "permissions": ["contextMenus", "storage"],
+  "permissions": ["activeTab", "contextMenus", "storage", "scripting"],
+  "optional_host_permissions": ["http://*/*", "https://*/*"],
   "background": {
     "page": "chrome/background.html#background-page",
     "service_worker": "chrome/backgroundscript.js"
   },
-  "content_scripts": [
-    {
-      "matches": ["http://*/*", "https://*/*"],
-      "js": [
-        "common/vendor/dompurify.min.js",
-        "common/utils.js",
-        "common/common-logic.js",
-        "common/jsHtmlToText.js",
-        "common/marked.js",
-        "common/mdh-html-to-text.js",
-        "common/markdown-here.js",
-        "chrome/contentscript.js"
-        ]
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Alt+Shift+M",
+        "mac": "Alt+Shift+M"
+      }
     }
-  ],
+  },
   "action": {
     "default_icon": {
       "16": "common/images/icon16-button-monochrome.png",

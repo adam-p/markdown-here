@@ -1,6 +1,19 @@
 Change Log
 ==========
 
+2025-07-10: v2.16.0
+-------------------
+
+* **Reduced permissions!** Previously, when installing you would get a scary warning saying that MDH can "Read and change your data on all websites". It didn't do that, of course, but it was true that it could. Now there's no warning at all, and it only gets permission to act on a page when you click the button (or use the context menu, or the hotkey). This is an important change, but it has resulted in some minor loss of functionality:
+
+    - Previously, the MDH toolbar button would only enable when focus was in a edit element that could theoretically be rendered (`contenteditable`). Now that we're not injecting into every page, we can't do that -- **the toolbar button is always enabled** and must be clicked before MDH is allowed to run anything in the page that can check if the focused element is renderable.
+
+    - The hotkey/shortcut key is now managed by the browser instead of the extension (necessitated because we now can't pre-inject into pages). But hotkeys that use `Ctrl` _and_ `Alt` aren't allowed, so... we have a **new default hotkey: `Shift+Alt+M`**. (If you had a custom hotkey, it's been reset to that. Sorry!) You can change the hotkey by going to `chrome://extensions/shortcuts`
+
+    - You'll need to **re-enable the "forgot-to-render" check option**, if you had enabled it. You'll get a prompt allow access to `mail.google.com`. This will allow MDH to pre-inject code that watches for an attempt to send email that you forgot to render.
+
+* Thanks to everyone who has ever donated! Over the last 12 years there have been about 75 donations. I appreciate the support and encouragement.
+
 2025-06-28: v2.15.1
 -------------------
 
@@ -21,8 +34,8 @@ Change Log
 -------------------
 
 * Fixed [issue #261](https://github.com/adam-p/markdown-here/issues/261): Switched from using the Google Chart API to CodeCogs for the the TeX renderer. Google shut down the API we were using, so it just didn't work anymore.
-  - Take a look at [the wiki](https://github.com/adam-p/markdown-here/wiki/Tips-and-Tricks#tex) for information on using other rendering services.
-  - Some day maybe we'll figure out how to [render locally](https://github.com/adam-p/markdown-here/issues/874).
+    - Take a look at [the wiki](https://github.com/adam-p/markdown-here/wiki/Tips-and-Tricks#tex) for information on using other rendering services.
+    - Some day maybe we'll figure out how to [render locally](https://github.com/adam-p/markdown-here/issues/874).
 
 2024-10-17: v2.14.1
 -------------------
@@ -33,38 +46,38 @@ Change Log
 -------------------
 
 * Fixed [bug #722](https://github.com/adam-p/markdown-here/issues/722): Added support for WebExtensions manifest V3. (If you've seen warnings about the extension lately, this was why.)
-  - Thanks to [Andrew M. MacFie](https://github.com/amacfie) and [Alexander Popov](https://github.com/AlexWayfer).
+    - Thanks to [Andrew M. MacFie](https://github.com/amacfie) and [Alexander Popov](https://github.com/AlexWayfer).
 * Fixed [bug #865](https://github.com/adam-p/markdown-here/issues/865): Add Chrome Store privacy information.
 
 2018-09-30: v2.13.4
 --------------------
 
 * Fixed [bug #524](https://github.com/adam-p/markdown-here/issues/524) and [bug #526](https://github.com/adam-p/markdown-here/issues/526): Due to v2.13.3 fix, Markdown Here didn't work in Thunderbird with a non-English UI.
-  - Thanks to [KSR-Yasuda](https://github.com/KSR-Yasuda), [ensleep](https://github.com/ensleep), [Pedro Silva](https://github.com/pmanu93), [Christophe Meyer](https://github.com/stombi), [littdky](https://github.com/littdky), [Michael Lashkevich](https://github.com/lashkevi), [morsedl](https://github.com/morsedl).
+    - Thanks to [KSR-Yasuda](https://github.com/KSR-Yasuda), [ensleep](https://github.com/ensleep), [Pedro Silva](https://github.com/pmanu93), [Christophe Meyer](https://github.com/stombi), [littdky](https://github.com/littdky), [Michael Lashkevich](https://github.com/lashkevi), [morsedl](https://github.com/morsedl).
 
 
 2018-09-11: v2.13.3
 --------------------
 
 * [Fixed bug #495](https://github.com/adam-p/markdown-here/issues/495): Markdown Here stopped working in Thunderbird version 60 (due to changes in Thunderbird).
-  - Thanks to [dugite-code](https://github.com/dugite-code) for the [PR](https://github.com/adam-p/markdown-here/pull/518) to fix it. Also thanks to: [Marc-Alexandre Espiaut](https://github.com/marespiaut), [Tehmul Ghyara](https://github.com/tehmul), [Pedro Silva](https://github.com/pmanu93), [PackElend](https://github.com/PackElend), [qolii](https://github.com/qolii), [Francisco Pina-Martins](https://github.com/StuntsPT), [evazquez00](https://github.com/evazquez00).
+    - Thanks to [dugite-code](https://github.com/dugite-code) for the [PR](https://github.com/adam-p/markdown-here/pull/518) to fix it. Also thanks to: [Marc-Alexandre Espiaut](https://github.com/marespiaut), [Tehmul Ghyara](https://github.com/tehmul), [Pedro Silva](https://github.com/pmanu93), [PackElend](https://github.com/PackElend), [qolii](https://github.com/qolii), [Francisco Pina-Martins](https://github.com/StuntsPT), [evazquez00](https://github.com/evazquez00).
 
 * [Fixed bug #435](https://github.com/adam-p/markdown-here/issues/435): On some pages, Markdown Here would spew cross-origin exceptions to the console. This was due to MDH trying to determine if a focused iframe-within-an-iframe was renderable.
-  - Thanks to [lincoln-b](https://github.com/lincoln-b) for reporting it.
+    - Thanks to [lincoln-b](https://github.com/lincoln-b) for reporting it.
 
 * [Fixed bug #427](https://github.com/adam-p/markdown-here/issues/427): In Chrome and Firefox (at least for some pages), after rendering the resulting text was selected.
-  - Thanks to [nedchu](https://github.com/nedchu) for reporting it.
+    - Thanks to [nedchu](https://github.com/nedchu) for reporting it.
 
 
 2017-05-26: v2.13.1
 --------------------
 
 * Converted the **Firefox** version of Markdown Here to use the WebExtensions API. This makes MDH compatible with Firefox's new **multiprocess** architecture (aka **Electrolysis**). If you have an older version of MDH installed in Firefox, there will soon be a new release of that version which prompts you to install the new WebExtensions version.
-  - The upgrade for existing Firefox users is a little rocky because the XUL version needs to continue to exist for Thunderbird (and Postbox) users. So the WebExtensions version has to fork.
-  - The Firefox and Chrome code bases are now almost identical, so that's good.
+    - The upgrade for existing Firefox users is a little rocky because the XUL version needs to continue to exist for Thunderbird (and Postbox) users. So the WebExtensions version has to fork.
+    - The Firefox and Chrome code bases are now almost identical, so that's good.
 
 * [Fixed bug# 369](https://github.com/adam-p/markdown-here/issues/369): Clicking Markdown Here's "Options" button in Firefox and Thunderbird (version 48+) causes the client application to hang. (Note that this only applies to the XUL version of the extension.)
-  - Thanks to [Sam Estep](https://github.com/samestep), [r2evans](https://github.com/r2evans), [happyconfident](https://github.com/happyconfident), [Juan Salvador Aleixandre](https://github.com/juaalta), [haililihai](https://github.com/haililihai), [Shi Liang](https://github.com/shiliang-hust), [jjroper](https://github.com/jjroper), [Linxzh](https://github.com/l0o0).
+    - Thanks to [Sam Estep](https://github.com/samestep), [r2evans](https://github.com/r2evans), [happyconfident](https://github.com/happyconfident), [Juan Salvador Aleixandre](https://github.com/juaalta), [haililihai](https://github.com/haililihai), [Shi Liang](https://github.com/shiliang-hust), [jjroper](https://github.com/jjroper), [Linxzh](https://github.com/l0o0).
 
 * Updated jQuery to 3.2.1. This was required to pass Mozilla review.
 
@@ -75,36 +88,36 @@ Change Log
 --------------------
 
 * **New logo!** Created by [Austin Anderson](https://www.angerson.org/) and chosen by the Markdown Here users, our great new logo is finally ready for action.
-  - Much thanks to Austin for his work polishing and tweaking the 60 variants of the logo. He did a lot of work getting things just right.
-  - Thanks to everyone else who submitted a design: [Rafe Goldberg](http://rgd2.co/), [Jack Reis](http://www.ux-jack.com/), [Enrique Esquinas](https://twitter.com/esquinas), [Leon Wilmanns](http://leon-wilmanns.de/). All of their designs were great and I would have been happy for any of them to win.
-  - Seriously, if you haven't seen the other designs, [go check them out](https://markdown-here.com/logo.html). And then check out their portfolios, bookmark them, and contact them the next time you need design work done.
-  - Thanks to all of you who took the time to vote for the new logo.
-  - If you are unhappy with the change to a monochrome browser toolbar and context menu button, [\+1 this issue](https://github.com/adam-p/markdown-here/issues/302).
+    - Much thanks to Austin for his work polishing and tweaking the 60 variants of the logo. He did a lot of work getting things just right.
+    - Thanks to everyone else who submitted a design: [Rafe Goldberg](http://rgd2.co/), [Jack Reis](http://www.ux-jack.com/), [Enrique Esquinas](https://twitter.com/esquinas), [Leon Wilmanns](http://leon-wilmanns.de/). All of their designs were great and I would have been happy for any of them to win.
+    - Seriously, if you haven't seen the other designs, [go check them out](https://markdown-here.com/logo.html). And then check out their portfolios, bookmark them, and contact them the next time you need design work done.
+    - Thanks to all of you who took the time to vote for the new logo.
+    - If you are unhappy with the change to a monochrome browser toolbar and context menu button, [\+1 this issue](https://github.com/adam-p/markdown-here/issues/302).
 
 * [Fixed bug #297](https://github.com/adam-p/markdown-here/issues/297): Unrendering an email that is a reply to an email that was itself rendered with MDH would fail (if the original email were visible, like with Thunderbird or when it's expanded in Gmail).
-  - Thanks to [Dave Tapley](https://github.com/dukedave) for creating a great video that illustrated the problem and how to reproduce it.
-  - Repeatedly triggering this bug could also lead to the next bug...
+    - Thanks to [Dave Tapley](https://github.com/dukedave) for creating a great video that illustrated the problem and how to reproduce it.
+    - Repeatedly triggering this bug could also lead to the next bug...
 
 * [Fixed bug #289](https://github.com/adam-p/markdown-here/issues/289): With forgot-to-render detection enabled, sending a large email could result in MDH causing the mail client to hang.
-  - Thanks to [r2evans](https://github.com/r2evans), [Dave Tapley](https://github.com/dukedave), and [Eugene Fryntov](https://github.com/efryntov) for reporting and helping to diagnose the problem. Also thanks to [georg](https://stackoverflow.com/users/989121/georg) on StackOverflow for helping me to [understand and improve](https://stackoverflow.com/questions/31952381/end-of-string-regex-match-too-slow) the offending regex.
+    - Thanks to [r2evans](https://github.com/r2evans), [Dave Tapley](https://github.com/dukedave), and [Eugene Fryntov](https://github.com/efryntov) for reporting and helping to diagnose the problem. Also thanks to [georg](https://stackoverflow.com/users/989121/georg) on StackOverflow for helping me to [understand and improve](https://stackoverflow.com/questions/31952381/end-of-string-regex-match-too-slow) the offending regex.
 
 * [Fixed bug #283](https://github.com/adam-p/markdown-here/issues/283): Forgot-to-render detection was broken for Google Inbox. Thanks to [Marvin R.](https://github.com/therealmarv).
-  - If you find that the forgot-to-render detection gets broken for the Gmail or Google Inbox web interfaces, please post to the ["markdown-here" Google Group](https://groups.google.com/group/markdown-here) or create [an issue in the Github project](https://github.com/adam-p/markdown-here/issues). The MDH code that hooks into the webmail UI is brittle and might break when Google changes stuff.
+    - If you find that the forgot-to-render detection gets broken for the Gmail or Google Inbox web interfaces, please post to the ["markdown-here" Google Group](https://groups.google.com/group/markdown-here) or create [an issue in the Github project](https://github.com/adam-p/markdown-here/issues). The MDH code that hooks into the webmail UI is brittle and might break when Google changes stuff.
 
 * [Fixed bug #288](https://github.com/adam-p/markdown-here/issues/288): Some character combinations involving a dollar sign in inline code would render incorrectly.
-  - Thanks to [rfulkerson](https://github.com/rfulkerson) for reporting the problem.
+    - Thanks to [rfulkerson](https://github.com/rfulkerson) for reporting the problem.
 
 * Updated and new translations:
-  - French: [BenWayne182](https://crowdin.com/profile/benwayne182)
-  - Spanish: [Darío Hereñú](https://github.com/kant)
-  - Portuguese (Brazilian): [Erich Gubler](https://crowdin.com/profile/erichdongubler)
+    - French: [BenWayne182](https://crowdin.com/profile/benwayne182)
+    - Spanish: [Darío Hereñú](https://github.com/kant)
+    - Portuguese (Brazilian): [Erich Gubler](https://crowdin.com/profile/erichdongubler)
 
 
 2015-05-26: v2.11.9
 -------------------
 
 * [Fixed bug #278](https://github.com/adam-p/markdown-here/issues/278): In the previous release, the `setTimeout` workaround to fix slow Chrome Beta caused Firefox to stop working. For some people. Sometimes. (But not in the unit tests. Ha.)
-  - Thanks to [georgejean](https://github.com/georgejean), [Nathan Wittstock](https://github.com/fardog), [fugo](https://github.com/fugo), [Dheeraj Bhaskar](https://github.com/dheerajbhaskar), and [robred](https://github.com/robred).
+    - Thanks to [georgejean](https://github.com/georgejean), [Nathan Wittstock](https://github.com/fardog), [fugo](https://github.com/fugo), [Dheeraj Bhaskar](https://github.com/dheerajbhaskar), and [robred](https://github.com/robred).
 
 
 2015-05-21: v2.11.8
@@ -119,9 +132,9 @@ Change Log
 * Partially [fixed bug #104](https://github.com/adam-p/markdown-here/issues/104): Pre-rendered links (especially auto-links) in code were getting converted to Markdown when rendering (so you end up with raw Markdown in your code). This is now fixed for backtick-style code (inline and block), but not for indented code blocks.
 
 * Updated translations:
-  - German: [Boris Lewandowski](https://crowdin.com/profile/bl)
-  - Spanish: [J. Ignacio Reta Sabarrós](https://crowdin.com/profile/jirsis)
-  - Italian: [Alessandro Tondo](https://crowdin.com/profile/alextoind)
+    - German: [Boris Lewandowski](https://crowdin.com/profile/bl)
+    - Spanish: [J. Ignacio Reta Sabarrós](https://crowdin.com/profile/jirsis)
+    - Italian: [Alessandro Tondo](https://crowdin.com/profile/alextoind)
 
 
 2015-04-06: v2.11.7
@@ -134,21 +147,21 @@ Change Log
 -------------------
 
 * [Fixed bug #243](https://github.com/adam-p/markdown-here/issues/243): Due to the way paragraphs were styled, there appeared to be a "blank line" inserted at the top when your Markdown-Here-rendered your content. The styling was changed to correct this.
-  - **Note**: In order to get this styling change, you will need to [reset your Primary Styling CSS](https://github.com/adam-p/markdown-here/wiki/Troubleshooting#getting-the-latest-primary-styling-css).
-  - Thanks to [James F McMahon](https://github.com/JamesMcMahon) for reporting the issue.
+    - **Note**: In order to get this styling change, you will need to [reset your Primary Styling CSS](https://github.com/adam-p/markdown-here/wiki/Troubleshooting#getting-the-latest-primary-styling-css).
+    - Thanks to [James F McMahon](https://github.com/JamesMcMahon) for reporting the issue.
 
 * Changed styling of sub-ordered-lists to match Github's: Top level is still numbers, first sub level is Roman letters, second sub level is Roman numerals. Will make your email lists look totally pro.
-  - **Note**: In order to get this styling change, you will need to [reset your Primary Styling CSS](https://github.com/adam-p/markdown-here/wiki/Troubleshooting#getting-the-latest-primary-styling-css).
-  - Thanks to [Andrew Greenberg](https://github.com/wizardwerdna) for [pointing out](https://github.com/adam-p/markdown-here/issues/255) Github's styling, and an unnamed user in a [Google Groups post](https://groups.google.com/forum/#!topic/markdown-here/E-5tSHCAlpg) who also asked about list styling.
+    - **Note**: In order to get this styling change, you will need to [reset your Primary Styling CSS](https://github.com/adam-p/markdown-here/wiki/Troubleshooting#getting-the-latest-primary-styling-css).
+    - Thanks to [Andrew Greenberg](https://github.com/wizardwerdna) for [pointing out](https://github.com/adam-p/markdown-here/issues/255) Github's styling, and an unnamed user in a [Google Groups post](https://groups.google.com/forum/#!topic/markdown-here/E-5tSHCAlpg) who also asked about list styling.
 
 * [Fixed bug #237](https://github.com/adam-p/markdown-here/issues/237): Made Mozilla preferences handling more robust. Helps to deal with non-ANSI characters, synchronization, and corruption.
-  - Thanks to [flying-sheep](https://github.com/flying-sheep) for reporting the corruption problem and helping to diagnose it.
+    - Thanks to [flying-sheep](https://github.com/flying-sheep) for reporting the corruption problem and helping to diagnose it.
 
 * Added and updated translations:
-  - **Italian**: [Andrea Lazzarotto](https://crowdin.com/profile/Lazza)
-  - German: [Boris Lewandowski](https://crowdin.com/profile/bl)
-  - French: [H. Salah Eddine](https://crowdin.com/profile/jamesconception)
-  - Turkish: [Yahya Erturan](https://crowdin.com/profile/yahyaerturan)
+    - **Italian**: [Andrea Lazzarotto](https://crowdin.com/profile/Lazza)
+    - German: [Boris Lewandowski](https://crowdin.com/profile/bl)
+    - French: [H. Salah Eddine](https://crowdin.com/profile/jamesconception)
+    - Turkish: [Yahya Erturan](https://crowdin.com/profile/yahyaerturan)
 
 * And thanks to Erin for looking after Wulfie long enough for me to put this release together.
 
@@ -157,32 +170,32 @@ Change Log
 -------------------
 
 * [Fixed bug #233](https://github.com/adam-p/markdown-here/issues/233): Reference links were broken if the URL part was pre-formatted.
-  - Big thanks to [Meng Wang](https://github.com/wm8120) for finding this bug, fixing it, adding tests, and submitting a [pull request](https://github.com/adam-p/markdown-here/pull/232).
+    - Big thanks to [Meng Wang](https://github.com/wm8120) for finding this bug, fixing it, adding tests, and submitting a [pull request](https://github.com/adam-p/markdown-here/pull/232).
 
 * Added forgot-to-render check support for "Inbox by Google".
 
 * Updated translations:
-  - Chinese Simplified: [Liu Cheng](https://crowdin.com/profile/willowcheng) and [sherkiv](https://crowdin.com/profile/sherkiv).
-  - Chinese Traditional: [BestSteve](https://crowdin.com/profile/BestSteve).
-  - Russian: [Asber](https://crowdin.com/profile/Asber).
+    - Chinese Simplified: [Liu Cheng](https://crowdin.com/profile/willowcheng) and [sherkiv](https://crowdin.com/profile/sherkiv).
+    - Chinese Traditional: [BestSteve](https://crowdin.com/profile/BestSteve).
+    - Russian: [Asber](https://crowdin.com/profile/Asber).
 
 
 2014-11-10: v2.11.3
 -------------------
 
 * **Improved compatibilty with screen readers**. Much thanks to [Sofian Babai](https://twitter.com/sofquipeut) for reporting the problem and helping to solve it. The primary fix target was Windows+Thunderbird+NVDA, but if anyone finds any cases where the fix is incomplete, please describe the scenario in the [Github issue](https://github.com/adam-p/markdown-here/issues/222) for it.
-  - Thanks also to [Sukil Echenique](https://github.com/sukiletxe) for reporting the [original issue](https://github.com/adam-p/markdown-here/issues/185).
+    - Thanks also to [Sukil Echenique](https://github.com/sukiletxe) for reporting the [original issue](https://github.com/adam-p/markdown-here/issues/185).
 
 * [Fixed bug #223](https://github.com/adam-p/markdown-here/issues/223): Keyboard shortcut was not working in Gmail on Firefox.
 
 * Added and updated translations:
-  - **Polish**: [LeahCim](https://crowdin.com/profile/LeahCim).
-  - **Portuguese (Brazilian)**: [Erik Neves](https://crowdin.com/profile/7kire).
-  - **Chinese Traditional**: [Shen-Ta Hsiea](https://github.com/ibmibmibm).
-  - Spanish: [sergiolunagarcia](https://crowdin.com/profile/sergiolunagarcia) and [J. Ignacio Reta Sabarrós](https://crowdin.com/profile/jirsis).
-  - Japanese: [danpansa](https://crowdin.com/profile/danpansa).
-  - Turkish: [trblnc](https://crowdin.com/profile/trblnc).
-  - Chinese Simplified: [Liu Cheng](https://crowdin.com/profile/willowcheng).
+    - **Polish**: [LeahCim](https://crowdin.com/profile/LeahCim).
+    - **Portuguese (Brazilian)**: [Erik Neves](https://crowdin.com/profile/7kire).
+    - **Chinese Traditional**: [Shen-Ta Hsiea](https://github.com/ibmibmibm).
+    - Spanish: [sergiolunagarcia](https://crowdin.com/profile/sergiolunagarcia) and [J. Ignacio Reta Sabarrós](https://crowdin.com/profile/jirsis).
+    - Japanese: [danpansa](https://crowdin.com/profile/danpansa).
+    - Turkish: [trblnc](https://crowdin.com/profile/trblnc).
+    - Chinese Simplified: [Liu Cheng](https://crowdin.com/profile/willowcheng).
 
 * TeX math support is now enabled by default (for new users). ([Issue #213](https://github.com/adam-p/markdown-here/issues/213).)
 
@@ -191,34 +204,34 @@ Change Log
 -------------------
 
 * [Fixed bug #141](https://github.com/adam-p/markdown-here/issues/141): Markdown Here in **Firefox would mysteriously stop working after a while** (aka the "ReferenceError: document is not defined" problem). It turns out that opening and closing a new browser window would trigger the bug.
-  - This also manifested as ["Problem related with Zotero"](https://github.com/adam-p/markdown-here/issues/189) and ["Thunderbird: does not toggle when only the Write window is open"](https://github.com/adam-p/markdown-here/issues/175).
-  - Thanks to everyone who reported this and helped diagnose it: [Ryan Heaton](https://github.com/stoicflame) (who [originally reported the bug](https://groups.google.com/forum/#!topic/markdown-here/ikXFqkP77Ws)), [darickard](https://github.com/darickard), [JacobEvelyn](https://github.com/JacobEvelyn), [Lennaick](https://github.com/lennaick), [Sherwood Botsford](https://plus.google.com/u/0/+SherwoodBotsford), [Cyrus David](https://github.com/vohof), and [iagobozza](https://github.com/iagobozza), who [shared a screencast](https://github.com/adam-p/markdown-here/issues/189) that finally provided a reproduction scenario and allowed us to figure out the bug.
+    - This also manifested as ["Problem related with Zotero"](https://github.com/adam-p/markdown-here/issues/189) and ["Thunderbird: does not toggle when only the Write window is open"](https://github.com/adam-p/markdown-here/issues/175).
+    - Thanks to everyone who reported this and helped diagnose it: [Ryan Heaton](https://github.com/stoicflame) (who [originally reported the bug](https://groups.google.com/forum/#!topic/markdown-here/ikXFqkP77Ws)), [darickard](https://github.com/darickard), [JacobEvelyn](https://github.com/JacobEvelyn), [Lennaick](https://github.com/lennaick), [Sherwood Botsford](https://plus.google.com/u/0/+SherwoodBotsford), [Cyrus David](https://github.com/vohof), and [iagobozza](https://github.com/iagobozza), who [shared a screencast](https://github.com/adam-p/markdown-here/issues/189) that finally provided a reproduction scenario and allowed us to figure out the bug.
 
 * **Added support for "retina"** (high PPI) displays. The Markdown Here icons should now be nice and crisp. Closes [issue #205](https://github.com/adam-p/markdown-here/issues/205).
-  - Caveats:
-    - There doesn't seem to be a way to specify a high-res icon for Chrome's context menu item.
-    - Postbox just doesn't seem to work. I don't think there's a regression, though.
-    - I don't actually own any fancy retina-display computers, so... please create an issue if something is broken.
-    - Thanks to [Alexandru Nedelcu](https://github.com/alexandru) for requesting this.
+    - Caveats:
+      - There doesn't seem to be a way to specify a high-res icon for Chrome's context menu item.
+      - Postbox just doesn't seem to work. I don't think there's a regression, though.
+      - I don't actually own any fancy retina-display computers, so... please create an issue if something is broken.
+      - Thanks to [Alexandru Nedelcu](https://github.com/alexandru) for requesting this.
 
 * [Fixed bug #202](https://github.com/adam-p/markdown-here/issues/202): In Options page, Markdown preview wasn't initially rendering.
 
 * Updated translations.
-  - Spanish: [Oscar del Pozo](https://crowdin.com/profile/oskar7) and [Rafa Couto](https://crowdin.com/profile/rafacouto).
-  - Dutch: [yoroy](https://crowdin.com/profile/yoroy).
-  - French: [nullepart](https://crowdin.com/profile/nullepart).
-  - Chinese: [sherkiv](https://crowdin.com/profile/sherkiv).
+    - Spanish: [Oscar del Pozo](https://crowdin.com/profile/oskar7) and [Rafa Couto](https://crowdin.com/profile/rafacouto).
+    - Dutch: [yoroy](https://crowdin.com/profile/yoroy).
+    - French: [nullepart](https://crowdin.com/profile/nullepart).
+    - Chinese: [sherkiv](https://crowdin.com/profile/sherkiv).
 
 
 2014-08-31: v2.11.1
 -------------------
 
 * [Fixed annoying bug #188](https://github.com/adam-p/markdown-here/issues/188): Keyboard shortcut was not working in Chrome+Gmail.
-  - Thanks to: [Paulo Diovani Gonçalves](https://github.com/paulodiovani), [Edmundo Junior](https://github.com/edmundojr), [Mike Lindegarde](https://github.com/mlindegarde), [Jordi Gerona](https://github.com/jordi9), [Dilek](https://github.com/averagewizard), [Hrusikesh Panda](https://github.com/mrchief), [Clay McKell](https://github.com/kcmckell), [Trey Harris](https://groups.google.com/forum/#!topic/markdown-here/SnQ4fVtQvQQ).
+    - Thanks to: [Paulo Diovani Gonçalves](https://github.com/paulodiovani), [Edmundo Junior](https://github.com/edmundojr), [Mike Lindegarde](https://github.com/mlindegarde), [Jordi Gerona](https://github.com/jordi9), [Dilek](https://github.com/averagewizard), [Hrusikesh Panda](https://github.com/mrchief), [Clay McKell](https://github.com/kcmckell), [Trey Harris](https://groups.google.com/forum/#!topic/markdown-here/SnQ4fVtQvQQ).
 
 * With the help of our hard-working translators, **six new translations** were added. They are: Chinese, French, German, Russian, Spanish, and Turkish.
-  - Thanks to: [Antoine Proulx](https://crowdin.com/profile/magicienap), [ebouchut](https://crowdin.com/profile/ebouchut), [Lennaick](https://crowdin.com/profile/lennaick), [leftaroundabout](https://crowdin.com/profile/leftaroundabout), [Pierre Quillery](https://crowdin.com/profile/dandelionmood), [Ko-Chih Wu](https://crowdin.com/profile/mecca831), [Masahiro Umegaki](https://crowdin.com/profile/ume), [dlkgenc](https://crowdin.com/profile/dlkgenc), [turkish123](https://crowdin.com/profile/turkish123), [sergiolunagarcia](https://crowdin.com/profile/sergiolunagarcia), [Alexis Morelle](https://crowdin.com/profile/almorelle), and my friend and co-worker [Eugene Fryntov](https://crowdin.com/profile/efryntov). (You're all also in the [contributors list](https://github.com/adam-p/markdown-here/blob/master/CONTRIBUTING.md).)
-  - If you'd like to start a new language, add to a not-quite-complete translation, or fix up something, please visit the [Markdown Here translation project on Crowdin](https://crowdin.com/project/markdown-here).
+    - Thanks to: [Antoine Proulx](https://crowdin.com/profile/magicienap), [ebouchut](https://crowdin.com/profile/ebouchut), [Lennaick](https://crowdin.com/profile/lennaick), [leftaroundabout](https://crowdin.com/profile/leftaroundabout), [Pierre Quillery](https://crowdin.com/profile/dandelionmood), [Ko-Chih Wu](https://crowdin.com/profile/mecca831), [Masahiro Umegaki](https://crowdin.com/profile/ume), [dlkgenc](https://crowdin.com/profile/dlkgenc), [turkish123](https://crowdin.com/profile/turkish123), [sergiolunagarcia](https://crowdin.com/profile/sergiolunagarcia), [Alexis Morelle](https://crowdin.com/profile/almorelle), and my friend and co-worker [Eugene Fryntov](https://crowdin.com/profile/efryntov). (You're all also in the [contributors list](https://github.com/adam-p/markdown-here/blob/master/CONTRIBUTING.md).)
+    - If you'd like to start a new language, add to a not-quite-complete translation, or fix up something, please visit the [Markdown Here translation project on Crowdin](https://crowdin.com/project/markdown-here).
 
 * **Updated [Highglight.js](http://highlightjs.org/)**, which is the syntax highlighting library used by Markdown Here.
   * **NOTE**: If your syntax higlighting looks wrong, switch your theme. Your styling might be stale.
@@ -531,7 +544,7 @@ Added support for [**Opera**](http://www.opera.com)! Get it [here](https://addon
 * Fixed bug: Empty line would appear at the top of rendered fenced code blocks that had been pasted.
 
 * Removed feature/fixed bug: Pre-formatted links are no longer left intact. It conflicted with Marked.js's GFM behaviour of turning text that looks like a URL into a link. So if a pre-formatted link was created that used the URL as the text (e.g. `<a href="http://github.com">http://github.com</a>`), the resulting rendering would get messed up (`<a ...><a ...>...</a></a>`).
-  - Let this be a lesson about the perils of frivolous features.
+    - Let this be a lesson about the perils of frivolous features.
 
 2012-07-21: v2.4.0
 ------------------
@@ -540,7 +553,7 @@ Added support for [**Opera**](http://www.opera.com)! Get it [here](https://addon
 
 * Removed feature: Pre-formatted text (colours, italics, bold, etc.) and lists (made using the email client rich edit controls, for example) are no longer left intact. It just caused too many problems and special cases (and would have required more special cases to get working again in Yahoo). Links are left intact.
 
-  - There are still two ways to still get additional formatting:
+    - There are still two ways to still get additional formatting:
       1. Format *after* Markdown-Toggling. Note that any changes -- including formatting -- made to rendered text will be lost if you toggle back to Markdown. So only do your additional formatting after you're happy with the rest.
       2. Add inline HTML with the desired formatting.
          * In your Markdown, you can use `<span>` or `<b>`, etc., to explicitly style your text. For example:
@@ -563,7 +576,7 @@ Added support for [**Opera**](http://www.opera.com)! Get it [here](https://addon
              Here is some <span class="red">*big red*</span> highlighting.
              ```
 
-  - It saddens me to remove out this feature, but I think it's essentially creeping featurism that has a higher bug-danger-cost than it has an actually-useful-benefit. If this feature is/was important to you, please create an issue to let me know.
+    - It saddens me to remove out this feature, but I think it's essentially creeping featurism that has a higher bug-danger-cost than it has an actually-useful-benefit. If this feature is/was important to you, please create an issue to let me know.
 
 2012-06-20: v2.3.1
 ------------------
@@ -580,8 +593,8 @@ Added support for [**Opera**](http://www.opera.com)! Get it [here](https://addon
 * Pre-formatted text (colours, italics, bold, etc.), links, and lists (made using the email client rich edit controls, for example) are now left intact when rendering the Markdown.
 
 * Added ability to convert a reply email in its entirety, rather than using the select-and-convert piecemeal approach.
-  - This doesn't work with Yahoo and Hotmail, because they don't seem to quote the original email.
-  - Resolves issue #14.
+    - This doesn't work with Yahoo and Hotmail, because they don't seem to quote the original email.
+    - Resolves issue #14.
 
 * Some styling changes.
 

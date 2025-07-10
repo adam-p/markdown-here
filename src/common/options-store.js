@@ -10,11 +10,13 @@
 /*global module:false, chrome:false, Components:false*/
 
 // Common defaults
-var DEFAULTS = {
+const DEFAULTS = {
   'math-enabled': false,
   'math-value': '<img src="https://latex.codecogs.com/png.image?\\dpi{120}\\inline&space;{urlmathcode}" alt="{mathcode}">',
-  'hotkey': { shiftKey: false, ctrlKey: true, altKey: true, key: 'M' },
-  'forgot-to-render-check-enabled': false,
+  // When we switched to the new permissions model, we needed users to re-enable the
+  // forgot-to-render check, so that they would be prompted to give permission to access
+  // mail.google.com. So the name of this option changed to force that.
+  'forgot-to-render-check-enabled-2': false,
   'header-anchors-enabled': false,
   'gfm-line-breaks-enabled': true
 };
@@ -120,8 +122,7 @@ var ChromeOptionsStore = {
     'syntax-css': {'__defaultFromFile__': '/common/highlightjs/styles/github.css', '__dataType__': 'text'},
     'math-enabled': DEFAULTS['math-enabled'],
     'math-value': DEFAULTS['math-value'],
-    'hotkey': DEFAULTS['hotkey'],
-    'forgot-to-render-check-enabled': DEFAULTS['forgot-to-render-check-enabled'],
+    'forgot-to-render-check-enabled-2': DEFAULTS['forgot-to-render-check-enabled-2'],
     'header-anchors-enabled': DEFAULTS['header-anchors-enabled'],
     'gfm-line-breaks-enabled': DEFAULTS['gfm-line-breaks-enabled']
   },

@@ -12,13 +12,11 @@
  * Main script file for the options page.
  */
 
-var cssEdit, cssSyntaxEdit, cssSyntaxSelect, rawMarkdownIframe, savedMsg,
-  mathEnable, mathEdit, hotkeyShift, hotkeyCtrl, hotkeyAlt, hotkeyKey,
-  forgotToRenderCheckEnabled, headerAnchorsEnabled, gfmLineBreaksEnabled;
-var loaded = false;
+let cssEdit, cssSyntaxEdit, cssSyntaxSelect, rawMarkdownIframe, savedMsg, mathEnable, mathEdit, forgotToRenderCheckEnabled, headerAnchorsEnabled, gfmLineBreaksEnabled;
+let loaded = false;
 
 function onLoad() {
-  var xhr;
+
 
   localize();
 
@@ -30,13 +28,41 @@ function onLoad() {
   savedMsg = document.getElementById('saved-msg');
   mathEnable = document.getElementById('math-enable');
   mathEdit = document.getElementById('math-edit');
-  hotkeyShift = document.getElementById('hotkey-shift');
-  hotkeyCtrl = document.getElementById('hotkey-ctrl');
-  hotkeyAlt = document.getElementById('hotkey-alt');
-  hotkeyKey = document.getElementById('hotkey-key');
   forgotToRenderCheckEnabled = document.getElementById('forgot-to-render-check-enabled');
   headerAnchorsEnabled = document.getElementById('header-anchors-enabled');
   gfmLineBreaksEnabled = document.getElementById('gfm-line-breaks-enabled');
+
+  rawMarkdownIframe.addEventListener('load', () => renderMarkdown());
+  rawMarkdownIframe.src = Utils.getLocalURL('/common/options-iframe.html');
+
+  forgotToRenderCheckEnabled.addEventListener('click', handleForgotToRenderChange, false);
+
+  document.getElementById('extensions-shortcut-link').addEventListener('click', function(event) {
+    event.preventDefault();
+    chrome.tabs.create({ url: 'chrome://extensions/shortcuts' });
+  });
+
+  // Update the hotkey/shortcut value
+  chrome.commands.getAll().then(commands => {
+    const shortcut = commands[0].shortcut;
+    if (!shortcut) {
+      // No shortcut set, or a conflict (that we lose)
+      document.querySelector('.hotkey-current-error').style.display = '';
+      document.querySelectorAll('.hotkey-error-hide').forEach(el => el.style.display = 'none');
+    }
+    else {
+      document.querySelectorAll('.hotkey-current').forEach(el => el.textContent = shortcut);
+    }
+  });
+
+  // Listen for runtime messages from the background script
+  chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    if (request.action === 'button-click') {
+      // Handle button click from background script by toggling markdown
+      markdownToggle();
+    }
+    return false; // Synchronous response
+  });
 
   //
   // Syntax highlighting styles and selection
@@ -69,14 +95,7 @@ function onLoad() {
     mathEnable.checked = prefs['math-enabled'];
     mathEdit.value = prefs['math-value'];
 
-    hotkeyShift.checked = prefs.hotkey.shiftKey;
-    hotkeyCtrl.checked = prefs.hotkey.ctrlKey;
-    hotkeyAlt.checked = prefs.hotkey.altKey;
-    hotkeyKey.value = prefs.hotkey.key;
-
-    hotkeyChangeHandler();
-
-    forgotToRenderCheckEnabled.checked = prefs['forgot-to-render-check-enabled'];
+    forgotToRenderCheckEnabled.checked = prefs['forgot-to-render-check-enabled-2'];
 
     headerAnchorsEnabled.checked = prefs['header-anchors-enabled'];
 
@@ -145,21 +164,6 @@ function onLoad() {
 document.addEventListener('DOMContentLoaded', onLoad, false);
 
 
-// The Preview <iframe> will let us know when it's loaded, so that we can
-// trigger the rendering of it.
-function previewIframeLoaded() {
-  // Even though the IFrame is loaded, the page DOM might not be, so we don't
-  // yet have a valid state. In that case, set a timer.
-  if (loaded) {
-    renderMarkdown();
-  }
-  else {
-    setTimeout(previewIframeLoaded, 100);
-  }
-}
-document.addEventListener('options-iframe-loaded', previewIframeLoaded);
-
-
 function localize() {
   const elements = document.querySelectorAll('[data-i18n]');
   elements.forEach(function(element) {
@@ -206,7 +210,6 @@ function checkChange() {
   var newOptions =
         cssEdit.value + cssSyntaxEdit.value +
         mathEnable.checked + mathEdit.value +
-        hotkeyShift.checked + hotkeyCtrl.checked + hotkeyAlt.checked + hotkeyKey.value +
         forgotToRenderCheckEnabled.checked + headerAnchorsEnabled.checked +
         gfmLineBreaksEnabled.checked;
 
@@ -231,13 +234,7 @@ function checkChange() {
           'syntax-css': cssSyntaxEdit.value,
           'math-enabled': mathEnable.checked,
           'math-value': mathEdit.value,
-          'hotkey': {
-                      shiftKey: hotkeyShift.checked,
-                      ctrlKey: hotkeyCtrl.checked,
-                      altKey: hotkeyAlt.checked,
-                      key: hotkeyKey.value
-                    },
-          'forgot-to-render-check-enabled': forgotToRenderCheckEnabled.checked,
+          'forgot-to-render-check-enabled-2': forgotToRenderCheckEnabled.checked,
           'header-anchors-enabled': headerAnchorsEnabled.checked,
           'gfm-line-breaks-enabled': gfmLineBreaksEnabled.checked
         },
@@ -458,55 +455,26 @@ function resetMathEdit() {
 }
 document.getElementById('math-reset-button').addEventListener('click', resetMathEdit, false);
 
-// When the user changes the hotkey key, check if it's an alphanumeric value.
-// We only warning and not strictly enforcing because what's considered "alphanumeric"
-// in other languages and/or on other keyboards might be different.
-function hotkeyChangeHandler() {
-  // Check for a valid key value.
-  var regex = new RegExp('^[a-zA-Z0-9]+$');
-  var value = hotkeyKey.value;
-  if (value.length && !regex.test(value)) {
-    document.getElementById('hotkey-key-warning').classList.remove('hidden');
-  }
-  else {
-    document.getElementById('hotkey-key-warning').classList.add('hidden');
-  }
+// Handle forgot-to-render checkbox changes
+async function handleForgotToRenderChange(event) {
+  const isThunderbird = navigator.userAgent.indexOf('Thunderbird') !== -1;
+  const origins = isThunderbird
+    ? ['chrome://messenger/content/messengercompose/*'] // TODO: figure out if this is right -- it's probably not an "origin"
+    : ['https://mail.google.com/'];
 
-  // Set any representations of the hotkey to the new value.
-
-  var hotkeyPieces = [];
-  if (hotkeyShift.checked) hotkeyPieces.push(Utils.getMessage('options_page__hotkey_shift_key'));
-  if (hotkeyCtrl.checked) hotkeyPieces.push(Utils.getMessage('options_page__hotkey_ctrl_key'));
-  if (hotkeyAlt.checked) hotkeyPieces.push(Utils.getMessage('options_page__hotkey_alt_key'));
-  if (hotkeyKey.value) hotkeyPieces.push(hotkeyKey.value.toString().toUpperCase());
-
-  const hotkeyDisplays = document.querySelectorAll('.hotkey-display');
-  hotkeyDisplays.forEach(function(hotkeyElem) {
-    if (hotkeyKey.value) {
-      if (hotkeyElem.parentElement && hotkeyElem.parentElement.classList.contains('hotkey-display-wrapper')) {
-        hotkeyElem.parentElement.style.display = '';
-      }
-      hotkeyElem.style.display = '';
-      hotkeyElem.textContent = '';
-
-      hotkeyPieces.forEach(function(piece, idx) {
-        if (idx > 0) {
-          hotkeyElem.appendChild(document.createTextNode(Utils.getMessage('options_page__hotkey_plus')));
-        }
-        const kbd = document.createElement('kbd');
-        kbd.textContent = piece;
-        hotkeyElem.appendChild(kbd);
-      });
+  if (event.target.checked) {
+    // We're enabling forgot-to-render, so request permissions
+    const granted = await ContentPermissions.requestPermission(origins);
+    if (!granted) {
+      // Permission denied - uncheck the checkbox
+      forgotToRenderCheckEnabled.checked = false;
+      // checkChange will pick up this change and save it
     }
-    else {
-      if (hotkeyElem.parentElement && hotkeyElem.parentElement.classList.contains('hotkey-display-wrapper')) {
-        hotkeyElem.parentElement.style.display = 'none';
-      }
-      hotkeyElem.style.display = 'none';
+  } else {
+    // User is disabling forgot-to-render - remove permissions
+    const removed = await ContentPermissions.removePermissions(origins);
+    if (!removed) {
+      console.error('Failed to remove permissions');
     }
-  });
+  }
 }
-document.getElementById('hotkey-key').addEventListener('keyup', hotkeyChangeHandler, false);
-document.getElementById('hotkey-shift').addEventListener('click', hotkeyChangeHandler, false);
-document.getElementById('hotkey-ctrl').addEventListener('click', hotkeyChangeHandler, false);
-document.getElementById('hotkey-alt').addEventListener('click', hotkeyChangeHandler, false);

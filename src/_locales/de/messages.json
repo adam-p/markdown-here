@@ -83,7 +83,7 @@
     "description": "message that shows when user changes have been saved"
   },
   "options_page__click_toggle": {
-    "message": "Rechtsklick auf die E-Mail, dann \"Markdown An/Aus\". (Alternativ, auf den <img src=\"images/icon16.png\"/>-Knopf in der Werkzeugleiste. <span class=\"hotkey-display-wrapper\">Oder <span class=\"hotkey-display\"><kbd>STRG</kbd>+<kbd>ALT</kbd>+<kbd>M</kbd></span></span>)",
+    "message": "Rechtsklick auf die E-Mail, dann \"Markdown An/Aus\". (Alternativ, auf den <img src=\"images/icon16.png\"/>-Knopf in der Werkzeugleiste. <span class=\"hotkey-error-hide\">Oder <code class=\"hotkey-current\">Alt+Shift+M</code></span></span>)",
     "description": "A step in the basic usage instructions"
   },
   "options_page__contributing_1": {

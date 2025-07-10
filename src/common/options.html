@@ -53,6 +53,15 @@ MIT License : https://adampritchard.mit-license.org/
     font-size: 0.8em;
   }
 
+  ol, ul {
+    padding-left: 1.8em;
+    margin: 0;
+  }
+
+  ul.padded > li {
+    padding-bottom: 0.5em;
+  }
+
   .horiz-groupset {
     height: 400px;
     width: 100%;
@@ -73,7 +82,7 @@ MIT License : https://adampritchard.mit-license.org/
     overflow-y: auto;
   }
 
-  .control-group > * {
+  .control-group > *:not(hr) {
     margin: 5px 0;
   }
 
@@ -103,17 +112,6 @@ MIT License : https://adampritchard.mit-license.org/
 
   .iframe-container {
     background-color: #FFF;
-  }
-
-  #notes {
-  }
-
-  #notes ul {
-    padding-left: 30px;
-  }
-
-  #notes li {
-    padding-bottom: 5px;
   }
 
   #saved-msg {
@@ -208,18 +206,6 @@ MIT License : https://adampritchard.mit-license.org/
     visibility: hidden;
   }
 
-  #changelist li {
-    margin: 0.5em 0;
-  }
-
-  #changelist li p {
-    margin: 0;
-  }
-
-  ol > li {
-    margin-bottom: 0.3em;
-  }
-
   #resources li {
     margin-bottom: 0.3em;
   }
@@ -262,6 +248,11 @@ MIT License : https://adampritchard.mit-license.org/
     border: 0;
     border-top: 1px dashed #945AB7;
     width: 90%;
+  }
+
+  hr.padded {
+    margin-top: 1em;
+    margin-bottom: 1em;
   }
 
   .extra-description {
@@ -343,6 +334,9 @@ MIT License : https://adampritchard.mit-license.org/
       </div>
       <div>
         <ol>
+          <li data-i18n="pin_extension_button">
+            Click the "Extensions" button on your toolbar, then pin the Markdown Here button.
+          </li>
           <li data-i18n="start_new_message">
             Start a new email message.
           </li>
@@ -350,12 +344,23 @@ MIT License : https://adampritchard.mit-license.org/
             Type some Markdown into the email.<br/>Try this: <code>_Hello_ `Markdown` **Here**!</code>
           </li>
           <li data-i18n="click_toggle">
-            Right-click in the email and then click "Markdown Toggle". (Or click the <img class="text-align" src="images/icon32-button-monochrome.png"/> button on the toolbar.<span class="hotkey-display-wrapper"> Or press <span class="hotkey-display"><kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>M</kbd></span></span>)
+            Right-click in the email and then click "Markdown Toggle". (Or click the <img class="text-align" src="images/icon32-button-monochrome.png"/> button on the toolbar.<span class="hotkey-error-hide"> Or press <code class="hotkey-current">Alt+Shift+M</code></span>)
           </li>
           <li data-i18n="pretty_cool">
             The message should now look pretty cool. Send it to your friends!
           </li>
         </ol>
+      </div>
+      <hr class="padded"/>
+      <div class="section-title" data-i18n="optionspage_title">
+        Options Page
+      </div>
+      <div>
+        <ul class="padded">
+          <li data-i18n="note_options_sync">Changes are automatically saved and synchronized (if sync is enabled in your browser).</li>
+          <li data-i18n="note_syntax_styles_after_primary">The syntax highlighting styles are applied after the primary styling, and so take precedence.</li>
+          <li data-i18n="note_default_client_styles">Some email editors and browsers impose their own styles. Those may not be apparent here.</li>
+        </ul>
       </div>
     </div>
 
@@ -366,7 +371,7 @@ MIT License : https://adampritchard.mit-license.org/
       <div>
         <ul>
           <li data-i18n="resources_cheatsheet_link">
-            If you're new to Markdown, the <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet" target="_blank">Markdown Here Cheatsheet</a> will make you a prostar.
+            If you're new to Markdown, the <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet" target="_blank">Markdown Here Cheatsheet</a> will make you a pro-star.
           </li>
           <li data-i18n="advanced_usage">
             For lots more info and advanced usage, see the <a href="https://github.com/adam-p/markdown-here" target="_blank">Markdown Here project page</a>. You should also explore the options below.
@@ -382,7 +387,7 @@ MIT License : https://adampritchard.mit-license.org/
           </li>
         </ul>
 
-        <hr/>
+        <hr class="padded"/>
 
         <div>
           <span class="donate-plea donate-plea-hidden" id="dp1" data-i18n="donate_plea_1">Once you decide Markdown Here is pretty sweet, please help me to buy some flowers for my wife so she's not too upset about how much time I spend working on it. <strong>Thank you!</strong></span>
@@ -454,7 +459,7 @@ MIT License : https://adampritchard.mit-license.org/
           Preview
         </div>
         <div class="stretch iframe-container">
-          <iframe id="rendered-markdown" src="options-iframe.html">
+          <iframe id="rendered-markdown"> <!-- We set the src dynamically -->
             <!-- rendered Markdown preview will appear here -->
           </iframe>
         </div>
@@ -464,23 +469,6 @@ MIT License : https://adampritchard.mit-license.org/
           </button>
         </div>
       </div>
-
-      <div class="control-group">
-        <div class="section-title" data-i18n="notes_title">
-          Notes
-        </div>
-        <div id="notes">
-          <ul>
-            <li data-i18n="note_options_sync">Changes are automatically saved and synchronized (if sync is enabled in your browser).</li>
-            <li data-i18n="note_syntax_styles_after_primary">The syntax highlighting styles are applied after the primary styling, and so take precedence.</li>
-            <li data-i18n="note_default_client_styles">Some email editors and browsers impose their own styles. Those may not be apparent here.</li>
-          </ul>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="horiz-groupset">
 
       <div class="control-group">
         <div class="section-title" data-i18n="tex_math_title">
@@ -498,7 +486,7 @@ MIT License : https://adampritchard.mit-license.org/
           </button>
         </div>
 
-        <div id="notes">
+        <div>
           <p>
             <span data-i18n="tex_math_privacy_heading"><strong>Privacy Issues:</strong></span>
             <ul>
@@ -542,53 +530,8 @@ MIT License : https://adampritchard.mit-license.org/
 
       </div>
 
-      <div class="control-group">
-        <div class="section-title" data-i18n="hotkey_title">
-          Hotkey (aka keyboard shortcut)
-        </div>
-        <div>
-          <input type="checkbox" id="hotkey-shift"/><label for="hotkey-shift" data-i18n="hotkey_shift_key">SHIFT</label>
-          &nbsp;<span data-i18n="hotkey_plus">+</span>&nbsp;
-          <input type="checkbox" id="hotkey-ctrl"/><label for="hotkey-ctrl" data-i18n="hotkey_ctrl_key">CTRL</label>
-          &nbsp;<span data-i18n="hotkey_plus">+</span>&nbsp;
-          <input type="checkbox" id="hotkey-alt"/><label for="hotkey-alt" data-i18n="hotkey_alt_key">ALT</label>
-          &nbsp;<span data-i18n="hotkey_plus">+</span>&nbsp;
-          <input type="text" id="hotkey-key" maxlength="1" placeholder="KEY" style="width: 3em;"/>
-        </div>
-        <div id="hotkey-key-warning" class="warning hidden" data-i18n="hotkey_warning">
-          Is the key an alphanumeric value?
-        </div>
-        <div id="notes">
-          <ul>
-            <li data-i18n="hotkey_note_1">
-              Chrome: You must reload your email web page for the new hotkey setting to take effect.
-            </li>
-            <li data-i18n="hotkey_note_2">
-              Firefox and Thunderbird: You must restart the application for the new hotkey setting to take effect.
-            </li>
-            <li data-i18n="hotkey_note_3">
-              You must use an alphanumeric key for the shortcut (varies by language and keyboard).
-            </li>
-            <li data-i18n="hotkey_note_4">
-              The Windows key and the OS X &#8984; key cannot be used in the shortcut.
-            </li>
-            <li data-i18n="hotkey_note_5">
-              To disable the use of this hotkey, leave the "key" text box empty.
-            </li>
-          </ul>
-        </div>
-      </div>
-
-    </div><!-- /.horiz-groupset -->
-
-  </div><!-- /#options-container -->
-
-  <div id="changelist-container">
-    <div id="changelist">
     </div>
-  </div>
 
-  <div id="extra-options-container">
     <div class="horiz-groupset">
 
       <div class="control-group">
@@ -602,7 +545,7 @@ MIT License : https://adampritchard.mit-license.org/
           </label>
           <div class="extra-description">
             <p data-i18n="forgot_to_render_1">
-              Currently only supported in Gmail and Thunderbird.
+              Currently only supported in Gmail and Thunderbird. If enabled, expect a prompt asking you to give MDH permission to access mail.google.com.
             </p>
             <p data-i18n="forgot_to_render_2">
               When you send an email, this checks the content to see if it looks like you wrote it in Markdown, but forgot to render it (i.e., click "Markdown Toggle") before sending. This may need to be disabled if it interferes with your ability to send email.
@@ -636,6 +579,37 @@ MIT License : https://adampritchard.mit-license.org/
         </div>
         <hr/>
       </div>
+
+      <div class="control-group">
+        <div class="section-title" data-i18n="hotkey_title">
+          Hotkey (aka keyboard shortcut)
+        </div>
+        <p data-i18n="hotkey_chrome_link_intro">
+          The MDH hotkey is managed by the browser. It can be edited here:
+        </p>
+        <p>
+          <code style="padding-left: 2em"><a href="#" id="extensions-shortcut-link">chrome://extensions/shortcuts</a></code>
+        </p>
+        <p data-i18n="hotkey_current_intro" style="margin-top:1em;">
+          It is currently set to:
+        </p>
+        <p>
+          <code class="hotkey-current hotkey-error-hide" style="padding-left: 2em;font-weight:bold">Alt+Shift+M</code>
+          <code data-i18n="no_hotkey_set" class="hotkey-current-error" style="padding-left: 2em;color:red;display:none">Conflict! Set a new hotkey/shortcut.</code>
+        </p>
+      </div>
+
+    </div><!-- /.horiz-groupset -->
+
+  </div><!-- /#options-container -->
+
+  <div id="changelist-container">
+    <div id="changelist">
+    </div>
+  </div>
+
+  <div id="extra-options-container">
+    <div class="horiz-groupset">
 
       <div class="control-group">
         <div class="section-title" data-i18n="contributing_title">
@@ -677,6 +651,7 @@ MIT License : https://adampritchard.mit-license.org/
   <script src="mdh-html-to-text.js"></script>
   <script src="markdown-render.js"></script>
   <script src="markdown-here.js"></script>
+  <script src="content-permissions.js"></script>
 
   <script src="options-store.js"></script>
   <script src="options.js"></script>

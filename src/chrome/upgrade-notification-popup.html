@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      width: 300px;
+      font-family: Tahoma, Helvetica, arial, freesans, clean, sans-serif;
+      font-size: 16px;
+      color: #3E055F;
+    }
+
+    #upgrade-notification-content {
+      background-color: #DFCCEA;
+      padding: 15px;
+      position: relative;
+    }
+
+    #upgrade-notification-link {
+      display: block;
+      color: #3E055F;
+      text-decoration: none;
+      padding-right: 20px; /* Make room for close button */
+    }
+
+    #upgrade-notification-link:hover {
+      cursor: pointer;
+    }
+
+    #upgrade-notification-close {
+      position: absolute;
+      top: 5px;
+      right: 8px;
+      font-size: 20px;
+      line-height: 20px;
+      text-decoration: none;
+      color: #3E055F;
+    }
+
+    #upgrade-notification-close:hover {
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    #upgrade-notification-logo {
+      vertical-align: middle;
+      margin-right: 8px;
+      width: 20px;
+      height: 20px;
+    }
+
+    #upgrade-notification-link:hover #upgrade-notification-text {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div id="upgrade-notification-content">
+    <a id="upgrade-notification-link" href="#">
+      <img id="upgrade-notification-logo" src="../common/images/icon16.png"/>
+      <span id="upgrade-notification-text">Markdown Here updated!</span>
+    </a>
+    <a id="upgrade-notification-close" href="#" title="Dismiss">×</a>
+  </div>
+  <script src="../common/utils.js"></script>
+  <script src="../common/options-store.js"></script>
+  <script src="upgrade-notification-popup.js"></script>
+</body>
+</html>

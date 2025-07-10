@@ -4,8 +4,8 @@
  *   If used, they may not render correctly for people reading the email in
  *   a different browser than the one from which the email was sent.
  * - The use of state-dependent styles (like a:hover) don't work because they
- *   don't match at the time the styles are made explicit. (In email, styles
- *   must be explicitly applied to all elements -- stylesheets get stripped.)
+ *   don't match at the time the styles are inlined. (In email, styles
+ *   must be inlined on all elements -- stylesheets get stripped.)
  */
 
 /* This is the overall wrapper, it should be treated as the `body` section. */
