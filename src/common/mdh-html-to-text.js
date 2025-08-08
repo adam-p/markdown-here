@@ -94,6 +94,12 @@ MdhHtmlToText.prototype._preprocess = function() {
   // to remain intact.
   this.excludeTagBlocks('blockquote', true);
 
+  // Trying to keep current formatting intact (see issue #676)
+  this.preprocessInfo.html = this.preprocessInfo.html.replace(
+    /<(\/)?(b|i|u|strike)>/ig,
+    '&lt;$1$2&gt;'
+  );
+
   // Try to leave intact the line that Gmail adds that says:
   //   On such-a-date, such-a-person <email addy> wrote:
   this.preprocessInfo.html = this.preprocessInfo.html.replace(
