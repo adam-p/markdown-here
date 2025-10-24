@@ -1,4 +1,4 @@
-# ![Markdown Here logo](https://raw.github.com/adam-p/markdown-here/master/src/common/images/icon48.png) Markdown Here
+# ![Markdown Here logo](https://raw.githubusercontent.com/adam-p/markdown-here/master/src/common/images/icon48.png) Markdown Here
 
 [**Visit the website.**](https://markdown-here.com)<br>
 [**Get it for Chrome.**](https://chrome.google.com/webstore/detail/elifhakcjgalahccnjkneoccemfahfoa)<br>
@@ -16,7 +16,7 @@ To discover what can be done with Markdown in *Markdown Here*, check out the [Ma
 <sup>&dagger;: And Google Groups posts, and Blogger posts, and Evernote notes, and Wordpress posts! [See more](#compatibility).</sup><br>
 <sup>&Dagger;: And TeX mathematical formulae!</sup>
 
-![screenshot of conversion](https://raw.github.com/adam-p/markdown-here/master/store-assets/markdown-here-image1.gimp.png)
+![screenshot of conversion](https://raw.githubusercontent.com/adam-p/markdown-here/master/store-assets/markdown-here-image1.gimp.png)
 
 ### Table of Contents
 **[Installation Instructions](#installation-instructions)**<br>
@@ -114,7 +114,7 @@ Sometimes you don't want to convert the entire email; sometimes your email isn't
 
 To revert back to Markdown, just put your cursor anywhere in the block of converted text, right-click, and click the "Markdown Toggle" menu item again. Now it's magically back to the original Markdown.
 
-![screenshot of selection conversion](https://raw.github.com/adam-p/markdown-here/master/store-assets/markdown-here-image2.gimp.png)
+![screenshot of selection conversion](https://raw.githubusercontent.com/adam-p/markdown-here/master/store-assets/markdown-here-image2.gimp.png)
 
 #### Things to know about converting/reverting a selection
 
@@ -221,4 +221,4 @@ Copyright 2015, [Austin Anderson](https://www.angerson.org/). Licensed to Markdo
 
 ---
 
-![Dos Equis man says](https://raw.github.com/adam-p/markdown-here/master/store-assets/dos-equis-MDH.jpg)
+![Dos Equis man says](https://raw.githubusercontent.com/adam-p/markdown-here/master/store-assets/dos-equis-MDH.jpg)

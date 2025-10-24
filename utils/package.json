@@ -4,7 +4,9 @@
   "private": true,
   "dependencies": {
     "archiver": "^7.0.1",
-    "file": "*",
-    "glob": "^7.1.3"
+    "file": "^0.2.2",
+    "glob": "^7.1.3",
+    "markdown-it": "^14.1.0",
+    "metascript": "^1.0.0"
   }
 }
