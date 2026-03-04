@@ -1,7 +1,7 @@
 # ![Markdown Here logo](https://raw.github.com/adam-p/markdown-here/master/src/common/images/icon48.png) Markdown Here
 
 [**Visit the website.**](https://markdown-here.com)<br>
-[**Get it for Chrome.**](https://chrome.google.com/webstore/detail/elifhakcjgalahccnjkneoccemfahfoa)<br>
+[**Get it for Chrome.**](https://chromewebstore.google.com/detail/elifhakcjgalahccnjkneoccemfahfoa)<br>
 [**Get it for Firefox.**](https://addons.mozilla.org/firefox/addon/markdown-here/)<br>
 [**Get it for Thunderbird.**](https://addons.mozilla.org/thunderbird/addon/markdown-here/)<br>
 [**Get it for Opera.**](https://addons.opera.com/extensions/details/markdown-here/)<br>
@@ -33,7 +33,7 @@ To discover what can be done with Markdown in *Markdown Here*, check out the [Ma
 
 #### Chrome Web Store
 
-Go to the [Chrome Web Store page for *Markdown Here*](https://chrome.google.com/webstore/detail/elifhakcjgalahccnjkneoccemfahfoa) and install normally.
+Go to the [Chrome Web Store page for *Markdown Here*](https://chromewebstore.google.com/detail/elifhakcjgalahccnjkneoccemfahfoa) and install normally.
 
 After installing, make sure to reload your webmail or restart Chrome!
 
