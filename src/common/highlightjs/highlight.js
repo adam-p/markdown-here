@@ -13238,7 +13238,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
           end: /$/
         },
         {
-          className: 'addition',
+          className: 'change',
           begin: /^!/,
           end: /$/
         }
